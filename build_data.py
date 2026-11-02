@@ -5,13 +5,14 @@ Multi-Week Data Pipeline for Admission Crack 2026 WebApp
 Reads:
   - Week_01/05_Final_Notes/*.md
   - Week_02/05_Final_Notes/*.md
+  - Week_03/05_Final_Notes/*.md
   - Global_Varsity_Vault.md
 Outputs to admission_webapp/src/data/:
   - weeks.json
-  - slides.json
-  - flashcards.json
-  - quizzes.json (Exact 200 MCQs: 100 Week 01 + 100 Week 02)
-  - vault.json
+  - slides.json (42 slides total: 14 w1 + 14 w2 + 14 w3)
+  - flashcards.json (96 flashcards total: 32 w1 + 32 w2 + 32 w3)
+  - quizzes.json (Exact 300 MCQs: 100 w1 + 100 w2 + 100 w3)
+  - vault.json (36 cross-subject traps, golden triplets, quick math)
 """
 
 import os
@@ -53,6 +54,16 @@ def build_weeks():
             "total_mcqs": 100,
             "total_slides": 14,
             "total_flashcards": 32
+        },
+        {
+            "id": "week_03",
+            "name": "Week 03",
+            "badge": "কাজ-শক্তি, মহাকর্ষ, গুণগত রসায়ন ও দ্রাব্যতা, কণিক ও অসমতা, উদ্ভিদ শারীরতত্ত্ব ও প্রজনন",
+            "description": "উচ্চ গুরুত্বের কোর সিলেবাস: মহাকর্ষীয় ক্ষেত্র ও বিভব, মুক্তিবেগ, বোর পরমাণু মডেল ও কোয়ান্টাম সংখ্যা, Ksp ও আয়ন শনাক্তকরণ, কণিক (পরাবৃত্ত, উপবৃত্ত, অধিবৃত্ত) এবং C3/C4 চক্র ও শ্বসন।",
+            "subjects": ["Physics", "Chemistry", "Higher Math", "Biology"],
+            "total_mcqs": 100,
+            "total_slides": 14,
+            "total_flashcards": 32
         }
     ]
     with open(os.path.join(OUT_DIR, "weeks.json"), "w", encoding="utf-8") as f:
@@ -64,7 +75,7 @@ def build_weeks():
 # -------------------------------------------------------------
 def build_vault():
     triplets = [
-        {"sides": "(3, 4)", "result": "5", "app": "বেগ $v_x=4, v_y=3 \\Rightarrow v=5\\text{ ms}^{-1}$; সরলরেখা $3x+4y+c=0$-এর লম্ব দূরত্বের হর $=5$"},
+        {"sides": "(3, 4)", "result": "5", "app": "বেগ $v_x=4, v_y=3 \\Rightarrow v=5\\text{ ms}^{-1}$; সরলরেখা $3x+4y+c=0$-এর লম্ব দূরত্বের হর $=5$; অনুবন্ধী অধিবৃত্ত $e_1=5/3 \\implies e_2=5/4$"},
         {"sides": "(5, 12)", "result": "13", "app": "সরলরেখা $5x+12y+c=0$-এর হর $=13$; $\\sin\\theta = 5/13 \\Rightarrow \\cos\\theta = 12/13$"},
         {"sides": "(6, 8)", "result": "10", "app": "নদী-নৌকায় $\\sqrt{10^2 - 6^2} = 8\\text{ ms}^{-1}$ (ন্যূনতম দূরত্বে নদী পারাপার)"},
         {"sides": "(8, 15)", "result": "17", "app": "ত্রিভুজ ও ভেক্টর মান নির্ণয়"},
@@ -81,7 +92,14 @@ def build_vault():
         {"type": "pH সুপার শর্টকাট", "item": "[\\text{H}^+] = a \\times 10^{-b}\\text{ M} \\implies \\text{pH} = b - \\log a"},
         {"type": "জটিল সংখ্যার বর্গমূল", "item": "\\sqrt{a \\pm ib} = \\pm(p \\pm iq) \\quad \\text{যেখানে } p \\times q = \\frac{b}{2} \\text{ এবং } p^2 - q^2 = a"},
         {"type": "কৌণিক বেগ rpm", "item": "\\omega = \\frac{2\\pi N}{60} = \\frac{\\pi N}{30}\\text{ rad s}^{-1} \\quad (30\\text{ rpm}=\\pi, 60\\text{ rpm}=2\\pi, 300\\text{ rpm}=10\\pi)"},
-        {"type": "গ্যাস ধ্রুবক RT", "item": "0^\\circ\\text{C}: 22.4\\text{ L atm}; \\; 25^\\circ\\text{C}: 24.46\\text{ L atm}; \\; 27^\\circ\\text{C}: 24.63\\text{ L atm} \\approx 2500\\text{ J}"}
+        {"type": "গ্যাস ধ্রুবক RT", "item": "0^\\circ\\text{C}: 22.4\\text{ L atm}; \\; 25^\\circ\\text{C}: 24.46\\text{ L atm}; \\; 27^\\circ\\text{C}: 24.63\\text{ L atm} \\approx 2500\\text{ J}"},
+        {"type": "মুক্তিবেগ ও কক্ষীয় বেগ", "item": "v_e = \\sqrt{2}v_o \\approx 1.414 v_o \\implies 41.4\\% \\text{ বৃদ্ধি (পৃথিবী } v_e=11.2, v_o=7.92\\text{ km s}^{-1})"},
+        {"type": "শোয়ার্জশিল্ড ব্যাসার্ধ", "item": "R_s = \\frac{2GM}{c^2} \\quad (\\text{পৃথিবী: } \\approx 8.86\\text{ mm} \\approx 0.9\\text{ cm}; \\; \\text{সূর্য: } \\approx 3\\text{ km})"},
+        {"type": "বোর ব্যাসার্ধ ও শক্তি", "item": "r_n = 0.529 n^2\\text{ \\AA}, \\; v_n = \\frac{2.18\\times 10^6}{n}\\text{ m s}^{-1}, \\; E_n = -\\frac{13.6}{n^2}\\text{ eV}"},
+        {"type": "Ksp ও দ্রাব্যতা শর্টকাট", "item": "AB \\to s=\\sqrt{K_{sp}}; \\; AB_2 \\to s=\\sqrt[3]{\\frac{K_{sp}}{4}}; \\; AB_3 \\to s=\\sqrt[4]{\\frac{K_{sp}}{27}}; \\; A_2B_3 \\to s=\\sqrt[5]{\\frac{K_{sp}}{108}}"},
+        {"type": "উপবৃত্তের উৎকেন্দ্রিকতা", "item": "e = \\sqrt{1 - \\frac{\\text{ছোট হর}}{\\text{বড় হর}}} \\quad (\\text{যেমন: } \\frac{x^2}{25}+\\frac{y^2}{16}=1 \\implies e = \\frac{3}{5})"},
+        {"type": "অনুবন্ধী অধিবৃত্ত", "item": "\\frac{1}{e_1^2} + \\frac{1}{e_2^2} = 1 \\quad (\\text{৩-৪-৫ ট্রিপলেট: } e_1=\\frac{5}{3} \\implies e_2=\\frac{5}{4})"},
+        {"type": "পরমমান কেন্দ্র-ব্যাসার্ধ", "item": "a < x < b \\iff |x - m| < r \\quad \\text{যেখানে } m = \\frac{a+b}{2}, \\; r = \\frac{b-a}{2}"}
     ]
 
     magic_fractions = [
@@ -90,7 +108,10 @@ def build_vault():
         {"compound": "\\text{MgCO}_3", "mw": "84", "trick": "1\\text{ kg} \\Rightarrow \\text{STP-তে CO}_2 = \\frac{1000}{84} \\times 22.4 = \\frac{800}{3} \\approx 266.67\\text{ L}"},
         {"compound": "\\text{KClO}_3", "mw": "122.5", "trick": "122.5\\text{ g} = 1\\text{ mol} \\Rightarrow 1.5\\text{ mol O}_2 = 1.5 \\times 22.4 = 33.6\\text{ L}"},
         {"compound": "\\text{K}_2\\text{Cr}_2\\text{O}_7", "mw": "294", "trick": "M = 294 = 3 \\times 98; \\quad 1\\text{ mol} \\equiv 6e^- (\\text{অম্লীয় মাধ্যমে})"},
-        {"compound": "\\text{KMnO}_4", "mw": "158", "trick": "1\\text{ mol} \\equiv 5e^- (\\text{অম্লীয়}), \\equiv 3e^- (\\text{ক্ষারীয়/প্রশম})"}
+        {"compound": "\\text{KMnO}_4", "mw": "158", "trick": "1\\text{ mol} \\equiv 5e^- (\\text{অম্লীয়}), \\equiv 3e^- (\\text{ক্ষারীয়/প্রশম})"},
+        {"compound": "\\text{Ag}_2\\text{CrO}_4", "mw": "332", "trick": "K_{sp} = 4s^3 \\implies 3\\text{টি আয়ন তৈরি হয়}"},
+        {"compound": "\\text{BaSO}_4", "mw": "233", "trick": "গ্রুপ-২ এর মধ্যে সর্বনিম্ন দ্রবণীয় (K_{sp} \\approx 1.1\\times 10^{-10})"},
+        {"compound": "\\text{Ca(OH)}_2", "mw": "74", "trick": "গ্রুপ-২ হাইড্রোক্সাইডের দ্রাব্যতা নিচে বৃদ্ধি পায়"}
     ]
 
     patterns = [
@@ -126,7 +147,19 @@ def build_vault():
         {"code": "MAT-W02-P4", "week": "week_02", "subject": "Higher Math", "title": "ত্রিকোণমিতি ম্যাজিক অভেদ", "formula": "$\\sec\\theta+\\tan\\theta=k \\implies \\sin\\theta=\\frac{k^2-1}{k^2+1}$; $A+B=45^\\circ \\implies (1+\\tan A)(1+\\tan B)=2$"},
         {"code": "BIO-W02-P1", "week": "week_02", "subject": "Biology", "title": "কোষ বিভাজন উপ-ধাপ", "formula": "জাইগোটিন $\\to$ সিন্যাপসিস/বাইভ্যালেন্ট; প্যাকাইটিন $\\to$ কায়াজমা ও ক্রসিং ওভার; অ্যানাফেজ $\\to$ V, L, J, I"},
         {"code": "BIO-W02-P2", "week": "week_02", "subject": "Biology", "title": "হাইড্রা ও ঘাসফড়িং", "formula": "হাইড্রা: ইন্টারস্টিশিয়াল কোষ (পুনরুৎপত্তি), স্টিনোটিল (হিপনোটক্সিন); ঘাসফড়িং: মালপিজিয়ান নালিকা, অ্যাপোজিশন (উজ্জ্বল আলো)"},
-        {"code": "BIO-W02-P3", "week": "week_02", "subject": "Biology", "title": "রুই মাছ ও মানব পরিপাক", "formula": "রুই মাছ: ভেনাস হার্ট (শুধু $\\text{CO}_2$ রক্ত); পাকস্থলী: প্যারাইটাল কোষ $\\to \\text{HCl}$, জাইমোজেনিক $\\to$ পেপসিনোজেন"}
+        {"code": "BIO-W02-P3", "week": "week_02", "subject": "Biology", "title": "রুই মাছ ও মানব পরিপাক", "formula": "রুই মাছ: ভেনাস হার্ট (শুধু $\\text{CO}_2$ রক্ত); পাকস্থলী: প্যারাইটাল কোষ $\\to \\text{HCl}$, জাইমোজেনিক $\\to$ পেপসিনোজেন"},
+        {"code": "PHY-W03-P1", "week": "week_03", "subject": "Physics", "title": "স্প্রিংয়ে অতিরিক্ত কাজ", "formula": "$\\Delta W = \\frac{1}{2}k(x_2^2 - x_1^2)$; কর্তনে $k' = nk \\implies W' = \\frac{1}{n}W$"},
+        {"code": "PHY-W03-P2", "week": "week_03", "subject": "Physics", "title": "শক্তি বণ্টন উচ্চতা", "formula": "$E_k = nE_p \\implies x = \\frac{H}{n+1}$ (ভূমি হতে উচ্চতা)"},
+        {"code": "PHY-W03-P3", "week": "week_03", "subject": "Physics", "title": "উচ্চতা ও গভীরতায় g", "formula": "$g_h = g(1 - \\frac{2h}{R})$ ($h \\ll R$); $g_d = g(1 - \\frac{d}{R})$; কেন্দ্রে $g = 0$"},
+        {"code": "PHY-W03-P4", "week": "week_03", "subject": "Physics", "title": "কার্নো ইঞ্জিনের দক্ষতা", "formula": "$\\eta = 1 - \\frac{T_2}{T_1} = \\frac{W}{Q_1}$; $\\eta=100\\%$ করতে $T_2=0\\text{ K}$"},
+        {"code": "CHE-W03-P1", "week": "week_03", "subject": "Chemistry", "title": "বোর শক্তি ও ব্যাসার্ধ", "formula": "$r_n = 0.529 n^2\\text{ \\AA}$; $E_n = -\\frac{13.6}{n^2}\\text{ eV}$; $v_n = \\frac{v_1}{n}$"},
+        {"code": "CHE-W03-P2", "week": "week_03", "subject": "Chemistry", "title": "রিডবার্গ সমীকরণ ও নোড", "formula": "$\\bar{\\nu} = R_H Z^2 (\\frac{1}{n_1^2} - \\frac{1}{n_2^2})$; মোট নোড $= n-1$, রেডিয়াল $= n-l-1$"},
+        {"code": "CHE-W03-P3", "week": "week_03", "subject": "Chemistry", "title": "দ্রাব্যতা গুণফল ও অধঃক্ষেপণ", "formula": "$K_{ip} > K_{sp} \\implies$ অধঃক্ষেপ পড়বে; $AB_2 \\to K_{sp} = 4s^3$"},
+        {"code": "MAT-W03-P1", "week": "week_03", "subject": "Higher Math", "title": "পরাবৃত্তের শীর্ষবিন্দু", "formula": "$y^2 = 4ax \\to$ লম্ব $4|a|$; শীর্ষ নির্ণয়ে $\\frac{\\partial}{\\partial y}=0$"},
+        {"code": "MAT-W03-P2", "week": "week_03", "subject": "Higher Math", "title": "উপবৃত্তের উৎকেন্দ্রিকতা", "formula": "$e = \\sqrt{1 - \\frac{\\text{ছোট}^2}{\\text{বড়}^2}}$ ($0<e<1$); ফোকাল যোগফল $SP+S'P=2a$"},
+        {"code": "MAT-W03-P3", "week": "week_03", "subject": "Higher Math", "title": "অধিবৃত্ত ও সমপরাবৃত্ত", "formula": "$\\frac{1}{e_1^2} + \\frac{1}{e_2^2} = 1$; সমপরাবৃত্তে $e = \\sqrt{2}$, অসীমমুখী কোণ $90^\\circ$"},
+        {"code": "BIO-W03-P1", "week": "week_03", "subject": "Biology", "title": "C3 বনাম C4 চক্র", "formula": "$\\text{C}_3$: RuBP (৫C) $\\to$ 3-PGA (৩C); $\\text{C}_4$: PEP (৩C) $\\to$ OAA (৪C)"},
+        {"code": "BIO-W03-P2", "week": "week_03", "subject": "Biology", "title": "শ্বসনিক কোশেন্ট RQ ও প্লয়েডি", "formula": "RQ: গ্লুকোজ $=1.0$, ম্যালিক $=1.33$, লিপিড $=0.71$; নগ্নবীজী শস্য $n$, আবৃতবীজী শস্য $3n$"}
     ]
 
     traps = [
@@ -153,7 +186,19 @@ def build_vault():
         {"id": 21, "week": "week_02", "subject": "Higher Math", "trap": "ax^2 + ay^2 + ... বৃত্তে a দিয়ে ভাগ না করে কেন্দ্র ও ব্যাসার্ধ লেখা", "fix": "আগে সমীকরণকে a দিয়ে ভাগ করে x^2 ও y^2-এর সহগ 1 বানিয়ে নেবে।"},
         {"id": 22, "week": "week_02", "subject": "Higher Math", "trap": "৩য় চতুর্ভাগের জটিল সংখ্যার মুখ্য আর্গুমেন্ট pi + alpha দাগানো", "fix": "মুখ্য আর্গুমেন্টের সীমা (-pi, pi], তাই ৩য় চতুর্ভাগে মুখ্য আর্গুমেন্ট -pi + alpha।"},
         {"id": 23, "week": "week_02", "subject": "Biology", "trap": "পিত্তরসে পরিপাক এনজাইম আছে এবং হাইড্রা শর্করা পরিপাক করে ভাবা", "fix": "পিত্তরসে কোনো এনজাইম থাকে না এবং হাইড্রা শ্বেতসার পরিপাক করতে পারে না।"},
-        {"id": 24, "week": "week_02", "subject": "Biology", "trap": "জাইগোটিন ও প্যাকাইটিনের ঘটনা উল্টে ফেলা", "fix": "জাইগোটিনে জোড়া বাঁধে (সিন্যাপসিস/বাইভ্যালেন্ট) এবং প্যাকাইটিনে প্যাঁচ লাগে (ক্রসিং ওভার)।"}
+        {"id": 24, "week": "week_02", "subject": "Biology", "trap": "জাইগোটিন ও প্যাকাইটিনের ঘটনা উল্টে ফেলা", "fix": "জাইগোটিনে জোড়া বাঁধে (সিন্যাপসিস/বাইভ্যালেন্ট) এবং প্যাকাইটিনে প্যাঁচ লাগে (ক্রসিং ওভার)।"},
+        {"id": 25, "week": "week_03", "subject": "Physics", "trap": "স্প্রিংকে কেটে অর্ধেক করলে কাজ দ্বিগুণ হবে ভাবা", "fix": "স্প্রিং কাটলে ধ্রুবক দ্বিগুণ হয় ($k'=2k$), কিন্তু একই প্রসারণ $x$-এ সঞ্চিত কাজ অর্ধেক হয়: $W' = \\frac{1}{2}W_1$।"},
+        {"id": 26, "week": "week_03", "subject": "Physics", "trap": "ফাঁপা গোলকের অভ্যন্তরে প্রাবল্য $E = 0$ দেখে বিভবও শূন্য দাগানো", "fix": "ফাঁপা গোলকের ভেতরে প্রাবল্য শূন্য হলেও বিভব সর্বত্র পৃষ্ঠের বিভবের সমান ও ধ্রুবক ($V = -\\frac{GM}{R}$)।"},
+        {"id": 27, "week": "week_03", "subject": "Physics", "trap": "অভিকর্ষজ ত্বরণ $1/9$ গুণ হলে উচ্চতা $h = 3R$ দাগানো", "fix": "কেন্দ্র থেকে দূরত্ব $3R$, কিন্তু ভূপৃষ্ঠ থেকে উচ্চতা $h = 2R$!"},
+        {"id": 28, "week": "week_03", "subject": "Chemistry", "trap": "রেডিয়াল নোড ও মোট নোড এক মনে করা", "fix": "মোট নোড $= n - 1$, রেডিয়াল নোড $= n - l - 1$, কৌণিক নোড $= l$।"},
+        {"id": 29, "week": "week_03", "subject": "Chemistry", "trap": "Be ও Mg শিখা পরীক্ষায় বর্ণ দেয় ভাবা", "fix": "উচ্চ আয়নীকরণ শক্তির কারণে Be ও Mg কোনো শিখা পরীক্ষা দেয় না এবং উদ্বায়ী ক্লোরাইডে গাঢ় HCl লাগে।"},
+        {"id": 30, "week": "week_03", "subject": "Chemistry", "trap": "গ্রুপ-২ সালফেট ও হাইড্রোক্সাইডের দ্রাব্যতা ক্রম একই ভাবা", "fix": "সালফেটের দ্রাব্যতা নিচে কমে (BeSO4 > ... > BaSO4), কিন্তু হাইড্রোক্সাইডের দ্রাব্যতা বাড়ে (Mg(OH)2 < ... < Ba(OH)2)!"},
+        {"id": 31, "week": "week_03", "subject": "Higher Math", "trap": "উপবৃত্তে $b > a$ হলেও অন্ধভাবে উপকেন্দ্র $(\\pm ae, 0)$ বসানো", "fix": "$b > a$ হলে উপকেন্দ্র y-অক্ষে $(0, \\pm be)$ এবং উপকেন্দ্রিক লম্ব $\\frac{2a^2}{b}$।"},
+        {"id": 32, "week": "week_03", "subject": "Higher Math", "trap": "অধিবৃত্তে কে বড় দেখে আড় অক্ষ নির্ধারণ করা", "fix": "অধিবৃত্তে যে পদের চিহ্ন ধনাত্মক (+), আড় অক্ষ ও উপকেন্দ্র সর্বদা সেই অক্ষ বরাবর থাকে।"},
+        {"id": 33, "week": "week_03", "subject": "Higher Math", "trap": "1/|x - a| >= k অসমতার সমাধানে মধ্যবিন্দু x = a বাদ না দেওয়া", "fix": "হরে |x - a| থাকায় x = a বিন্দুতে অসংজ্ঞায়িত; সমাধান থেকে অবশ্যই {a} বর্জন করতে হবে।"},
+        {"id": 34, "week": "week_03", "subject": "Biology", "trap": "C4 উদ্ভিদে প্রথম CO2 গ্রাহক OAA দাগানো", "fix": "প্রথম CO2 গ্রাহক হলো ৩-কার্বন PEP, আর প্রথম স্থায়ী পদার্থ হলো ৪-কার্বন OAA।"},
+        {"id": 35, "week": "week_03", "subject": "Biology", "trap": "নগ্নবীজী ও আবৃতবীজী উভয়ের শস্যকলাকেই ট্রিপ্লয়েড ভাবা", "fix": "আবৃতবীজীর শস্য নিষেকের পরে গঠিত হয় তাই 3n, কিন্তু নগ্নবীজীর শস্য নিষেকের পূর্বে গঠিত হয় তাই হ্যাপ্লয়েড (n)।"},
+        {"id": 36, "week": "week_03", "subject": "Biology", "trap": "সুক্রোজকে রিডিউসিং শ্যুগার ভাবা", "fix": "সুক্রোজ ও সকল পলিস্যাকারাইড নন-রিডিউসিং শ্যুগার; এবং হিস্টোন প্রোটিন S দশায় সংশ্লেষিত হয়।"}
     ]
 
     vault_data = {
@@ -169,14 +214,13 @@ def build_vault():
     print("✓ vault.json generated successfully.")
 
 # -------------------------------------------------------------
-# 3. QUIZZES PARSER (100 Week 01 + 100 Week 02)
+# 3. QUIZZES PARSER (100 W01 + 100 W02 + 100 W03 = 300 MCQs)
 # -------------------------------------------------------------
 def load_all_quizzes():
-    # Load 100 curated Week 01 MCQs from our vetted dictionary
-    # and 100 Week 02 MCQs parsed directly from Week_02 markdown files!
-    from parse_helpers import get_w1_mcqs, parse_w2_mcqs
+    from parse_helpers import get_w1_mcqs, parse_w2_mcqs, parse_w3_mcqs
     w1_list = get_w1_mcqs()
     w2_list = parse_w2_mcqs()
+    w3_list = parse_w3_mcqs()
 
     all_quizzes = []
     # Week 01
@@ -215,7 +259,25 @@ def load_all_quizzes():
             "trap_insight": q["trap"]
         })
 
-    print(f"Total quizzes compiled: {len(all_quizzes)} (Week 01: {len(w1_list)}, Week 02: {len(w2_list)})")
+    # Week 03
+    for q in w3_list:
+        all_quizzes.append({
+            "id": q["id"],
+            "week_id": "week_03",
+            "subject": q["subject"],
+            "q": q["q"],
+            "question": q["q"],
+            "opts": q["opts"],
+            "options": q["opts"],
+            "ans": q["ans"],
+            "correct_index": q["ans"],
+            "exp": q["exp"],
+            "explanation": q["exp"],
+            "trap": q["trap"],
+            "trap_insight": q["trap"]
+        })
+
+    print(f"Total quizzes compiled: {len(all_quizzes)} (Week 01: {len(w1_list)}, Week 02: {len(w2_list)}, Week 03: {len(w3_list)})")
     with open(os.path.join(OUT_DIR, "quizzes.json"), "w", encoding="utf-8") as f:
         json.dump(all_quizzes, f, ensure_ascii=False, indent=2)
     print("✓ quizzes.json generated successfully.")
@@ -237,7 +299,7 @@ def load_slides_and_flashcards():
     print(f"✓ flashcards.json generated successfully ({len(flashcards)} flashcards).")
 
 def main():
-    print("Executing Multi-Week Data Pipeline for Admission Crack 2026...")
+    print("Executing Multi-Week Data Pipeline for Admission Crack 2026 (W1, W2, W3)...")
     build_weeks()
     build_vault()
     load_all_quizzes()

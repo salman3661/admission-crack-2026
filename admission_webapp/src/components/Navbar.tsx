@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400 pl-2 pr-1 flex items-center gap-1">
                 <Layers className="w-3.5 h-3.5 text-slate-400" /> সপ্তাহ:
               </span>
-              {(['all', 'week_01', 'week_02'] as WeekFilterType[]).map((w) => (
+              {(['all', 'week_01', 'week_02', 'week_03'] as WeekFilterType[]).map((w) => (
                 <button
                   key={w}
                   onClick={() => onSelectWeek(w)}
@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60'
                   }`}
                 >
-                  {w === 'all' ? 'All Weeks' : w === 'week_01' ? 'Week 01' : 'Week 02'}
+                  {w === 'all' ? 'All Weeks' : w === 'week_01' ? 'Week 01' : w === 'week_02' ? 'Week 02' : 'Week 03'}
                 </button>
               ))}
             </div>

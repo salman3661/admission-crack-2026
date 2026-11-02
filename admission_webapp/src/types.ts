@@ -1,5 +1,5 @@
 export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology';
-export type WeekFilterType = 'all' | 'week_01' | 'week_02';
+export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03';
 export type AppMode = 'slides' | 'flashcards' | 'exam' | 'vault';
 
 export interface WeekMeta {
