@@ -23,7 +23,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
         });
         displayMathBlocks.push(rendered);
       } catch {
-        displayMathBlocks.push(`<span class="text-rose-400 font-mono">$$${math}$$</span>`);
+        displayMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$$${math}$$</span>`);
       }
       return `___DISPLAY_MATH_${displayMathBlocks.length - 1}___`;
     });
@@ -38,21 +38,21 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
         });
         inlineMathBlocks.push(rendered);
       } catch {
-        inlineMathBlocks.push(`<span class="text-rose-400 font-mono">$${math}$</span>`);
+        inlineMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$${math}$</span>`);
       }
       return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
     });
 
     // Step 3: Handle markdown formatting
     // Bold **text**
-    text = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-100">$1</strong>');
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-slate-100">$1</strong>');
     
     // Inline code `code`
-    text = text.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-800 text-amber-300 font-mono text-sm border border-slate-700/60">$1</code>');
+    text = text.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-amber-700 dark:text-amber-300 font-mono text-sm border border-slate-300 dark:border-slate-700/60">$1</code>');
 
     // Bullet points (leading • or -)
-    text = text.replace(/^•\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-brand-400 font-bold">•</span><span>$1</span></div>');
-    text = text.replace(/^-\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-cyan-400 font-bold">-</span><span>$1</span></div>');
+    text = text.replace(/^•\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-brand-600 dark:text-brand-400 font-bold">•</span><span>$1</span></div>');
+    text = text.replace(/^-\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-cyan-600 dark:text-cyan-400 font-bold">-</span><span>$1</span></div>');
 
     // Newlines that aren't already wrapped in div
     text = text.replace(/\n(?!(?:<div|<\/div))/g, '<br />');
@@ -67,7 +67,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
   if (block) {
     return (
       <div
-        className={`leading-relaxed text-slate-200 ${className}`}
+        className={`leading-relaxed text-slate-800 dark:text-slate-200 ${className}`}
         dangerouslySetInnerHTML={{ __html: renderedHtml }}
       />
     );
@@ -75,9 +75,8 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
 
   return (
     <span
-      className={`leading-relaxed text-slate-200 ${className}`}
+      className={`leading-relaxed text-slate-800 dark:text-slate-200 ${className}`}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
   );
 };
-

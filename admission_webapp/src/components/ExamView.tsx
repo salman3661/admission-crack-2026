@@ -145,33 +145,33 @@ export const ExamView: React.FC<ExamViewProps> = ({
     return (
       <div className="max-w-2xl mx-auto py-12 px-4 text-center">
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 p-0.5 mx-auto mb-4 shadow-xl shadow-brand-500/20">
-          <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-            <Timer className="w-8 h-8 text-brand-400" />
+          <div className="w-full h-full bg-slate-100 dark:bg-slate-950 rounded-[14px] flex items-center justify-center">
+            <Timer className="w-8 h-8 text-brand-600 dark:text-brand-400" />
           </div>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           ঢাবি 'ক' ইউনিট রিয়েল এক্সাম মোড
         </h2>
-        <p className="text-sm text-slate-400 mt-2 max-w-lg mx-auto">
+        <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 max-w-lg mx-auto">
           ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিটের স্ট্যান্ডার্ড নেগেটিভ মার্কিং (+১.০ সঠিক, -০.২৫ ভুল) এবং প্রতিটি প্রশ্নে ৪৫ সেকেন্ড সময়সীমা সহ বাস্তব পরীক্ষার অনুভূতি।
         </p>
 
         {/* Selected Scope Badge */}
         <div className="flex flex-wrap items-center justify-center gap-2 my-6">
-          <span className="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-semibold">
-            সপ্তাহ: <strong className="text-brand-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
+          <span className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+            সপ্তাহ: <strong className="text-brand-600 dark:text-brand-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
           </span>
-          <span className="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-semibold">
-            বিষয়: <strong className="text-cyan-400">{selectedSubject}</strong>
+          <span className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+            বিষয়: <strong className="text-cyan-600 dark:text-cyan-400">{selectedSubject}</strong>
           </span>
-          <span className="px-3 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 font-semibold">
-            উপলব্ধ প্রশ্ন: <strong className="text-amber-400">{totalAvail}টি</strong>
+          <span className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+            উপলব্ধ প্রশ্ন: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
           </span>
         </div>
 
         {/* Question Count Selection */}
-        <div className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 max-w-md mx-auto mb-8 shadow-xl">
-          <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+        <div className="bg-white dark:bg-slate-900/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 max-w-md mx-auto mb-8 shadow-sm dark:shadow-xl">
+          <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
             প্রশ্নের সংখ্যা নির্বাচন করুন
           </label>
           <div className="grid grid-cols-3 gap-2.5">
@@ -182,7 +182,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 className={`py-2.5 rounded-xl text-sm font-bold border transition-all ${
                   questionCount === cnt
                     ? 'bg-brand-600 text-white border-brand-400 shadow-md shadow-brand-500/25'
-                    : 'bg-slate-800/80 text-slate-300 border-slate-700/60 hover:bg-slate-800'
+                    : 'bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
                 {cnt} টি MCQ
@@ -218,48 +218,48 @@ export const ExamView: React.FC<ExamViewProps> = ({
     return (
       <div className="max-w-4xl mx-auto py-8 px-4">
         {/* Scorecard Hero */}
-        <div className="bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl text-center relative overflow-hidden mb-8">
+        <div className="bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl text-center relative overflow-hidden mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Award className={`w-8 h-8 ${isPassing ? 'text-amber-400' : 'text-slate-500'}`} />
-            <h2 className="text-xl sm:text-2xl font-black text-white">
+            <Award className={`w-8 h-8 ${isPassing ? 'text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-slate-500'}`} />
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
               {isPassing ? 'অভিনন্দন! চমৎকার পারফরম্যান্স' : 'পরীক্ষা সম্পন্ন হয়েছে'}
             </h2>
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             ঢাবি 'ক' ইউনিট স্ট্যান্ডার্ড ফলাফল বিশ্লেষণ (+১.০ সঠিক, -০.২৫ ভুল) • গড় সময়: {avgTimePerQ}s / প্রশ্ন
           </p>
 
           {/* Big Score Display */}
           <div className="my-6">
-            <span className="text-5xl sm:text-6xl font-black tracking-tight bg-gradient-to-r from-brand-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent font-['Outfit']">
+            <span className="text-5xl sm:text-6xl font-black tracking-tight bg-gradient-to-r from-brand-600 via-cyan-600 to-emerald-600 dark:from-brand-400 dark:via-cyan-300 dark:to-emerald-400 bg-clip-text text-transparent font-['Outfit']">
               {totalScore.toFixed(2)}
             </span>
-            <span className="text-lg text-slate-500 font-bold ml-2">/ {maxPossible.toFixed(1)}</span>
+            <span className="text-lg text-slate-400 dark:text-slate-500 font-bold ml-2">/ {maxPossible.toFixed(1)}</span>
           </div>
 
           {/* Metric Stats Pills */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-            <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-              <span className="text-xs text-emerald-300 font-medium">সঠিক উত্তর</span>
-              <div className="text-xl font-bold text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-center">
+              <span className="text-xs text-emerald-800 dark:text-emerald-300 font-medium">সঠিক উত্তর</span>
+              <div className="text-xl font-bold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
                 <CheckCircle2 className="w-4 h-4" /> {correctCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-center">
-              <span className="text-xs text-rose-300 font-medium">ভুল উত্তর (-০.২৫)</span>
-              <div className="text-xl font-bold text-rose-400 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-center">
+              <span className="text-xs text-rose-800 dark:text-rose-300 font-medium">ভুল উত্তর (-০.২৫)</span>
+              <div className="text-xl font-bold text-rose-600 dark:text-rose-400 flex items-center justify-center gap-1 mt-0.5">
                 <XCircle className="w-4 h-4" /> {wrongCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700/60 text-center">
-              <span className="text-xs text-slate-400 font-medium">স্কিপ / ফাঁকা</span>
-              <div className="text-xl font-bold text-slate-300 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-center">
+              <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">স্কিপ / ফাঁকা</span>
+              <div className="text-xl font-bold text-slate-800 dark:text-slate-300 flex items-center justify-center gap-1 mt-0.5">
                 <MinusCircle className="w-4 h-4" /> {skippedCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-center">
-              <span className="text-xs text-brand-300 font-medium">নির্ভুলতা (Accuracy)</span>
-              <div className="text-xl font-bold text-brand-400 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-3 rounded-2xl bg-brand-50 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/20 text-center">
+              <span className="text-xs text-brand-800 dark:text-brand-300 font-medium">নির্ভুলতা (Accuracy)</span>
+              <div className="text-xl font-bold text-brand-600 dark:text-brand-400 flex items-center justify-center gap-1 mt-0.5">
                 <Flame className="w-4 h-4" /> {accuracy}%
               </div>
             </div>
@@ -276,7 +276,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
             </button>
             <button
               onClick={() => setExamStarted(false)}
-              className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition-all"
+              className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent text-sm font-semibold transition-all shadow-sm"
             >
               সেটিংস পরিবর্তন
             </button>
@@ -284,18 +284,20 @@ export const ExamView: React.FC<ExamViewProps> = ({
         </div>
 
         {/* Trap Defense Section Header */}
-        <div className="flex flex-wrap items-center justify-between pb-3 mb-4 border-b border-slate-800 gap-2">
+        <div className="flex flex-wrap items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800 gap-2">
           <div className="flex items-center gap-2">
-            <ShieldAlert className="w-5 h-5 text-amber-400" />
-            <h3 className="text-lg font-bold text-white">
+            <ShieldAlert className="w-5 h-5 text-amber-500 dark:text-amber-400" />
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
               ট্র্যাপ ডিফেন্স রিভিউ (ফাঁদ বিশ্লেষণ ও সলিউশন)
             </h3>
           </div>
-          <div className="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
             <button
               onClick={() => setFilterReview('all')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                filterReview === 'all' ? 'bg-slate-800 text-white' : 'text-slate-400'
+                filterReview === 'all' 
+                  ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm' 
+                  : 'text-slate-600 dark:text-slate-400'
               }`}
             >
               সকল প্রশ্ন ({activeQuestions.length})
@@ -303,7 +305,9 @@ export const ExamView: React.FC<ExamViewProps> = ({
             <button
               onClick={() => setFilterReview('wrong')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                filterReview === 'wrong' ? 'bg-rose-500/20 text-rose-300' : 'text-slate-400'
+                filterReview === 'wrong' 
+                  ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-300 font-bold' 
+                  : 'text-slate-600 dark:text-slate-400'
               }`}
             >
               শুধু ভুল/স্কিপ ({wrongCount + skippedCount})
@@ -324,40 +328,40 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 key={q.id}
                 className={`p-5 rounded-2xl border transition-all ${
                   isCorrect 
-                    ? 'bg-slate-900/60 border-emerald-500/30' 
+                    ? 'bg-white dark:bg-slate-900/60 border-emerald-200 dark:border-emerald-500/30 shadow-sm' 
                     : isSkipped 
-                    ? 'bg-slate-900/60 border-slate-800' 
-                    : 'bg-slate-900/90 border-rose-500/40'
+                    ? 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 shadow-sm' 
+                    : 'bg-white dark:bg-slate-900/90 border-rose-300 dark:border-rose-500/40 shadow-sm'
                 }`}
               >
                 {/* Question Header */}
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                       Q{originalIndex + 1}
                     </span>
-                    <span className="text-xs font-medium px-2 py-0.5 rounded bg-brand-500/10 text-brand-300 border border-brand-500/20">
+                    <span className="text-xs font-medium px-2 py-0.5 rounded bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-500/20">
                       {q.subject}
                     </span>
                   </div>
 
                   {isCorrect ? (
-                    <span className="flex items-center gap-1 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                    <span className="flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-200 dark:border-emerald-500/20">
                       <CheckCircle2 className="w-3.5 h-3.5" /> +১.০ সঠিক
                     </span>
                   ) : isSkipped ? (
-                    <span className="flex items-center gap-1 text-xs font-bold text-slate-400 bg-slate-800 px-2.5 py-1 rounded-lg">
+                    <span className="flex items-center gap-1 text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700">
                       <MinusCircle className="w-3.5 h-3.5" /> ০.০ স্কিপ
                     </span>
                   ) : (
-                    <span className="flex items-center gap-1 text-xs font-bold text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-500/20">
+                    <span className="flex items-center gap-1 text-xs font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-200 dark:border-rose-500/20">
                       <XCircle className="w-3.5 h-3.5" /> -০.২৫ ভুল
                     </span>
                   )}
                 </div>
 
                 {/* Question Body */}
-                <div className="text-base font-semibold text-white mb-4">
+                <div className="text-base font-semibold text-slate-900 dark:text-white mb-4">
                   <MathText content={q.q} />
                 </div>
 
@@ -367,11 +371,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
                     const isSelected = userAns === optIdx;
                     const isRightOpt = q.ans === optIdx;
 
-                    let optStyle = 'bg-slate-800/40 border-slate-700/50 text-slate-300';
+                    let optStyle = 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 text-slate-800 dark:text-slate-300';
                     if (isRightOpt) {
-                      optStyle = 'bg-emerald-500/15 border-emerald-500/60 text-emerald-200 font-semibold';
+                      optStyle = 'bg-emerald-50 dark:bg-emerald-500/15 border-emerald-300 dark:border-emerald-500/60 text-emerald-900 dark:text-emerald-200 font-semibold';
                     } else if (isSelected && !isRightOpt) {
-                      optStyle = 'bg-rose-500/15 border-rose-500/60 text-rose-200';
+                      optStyle = 'bg-rose-50 dark:bg-rose-500/15 border-rose-300 dark:border-rose-500/60 text-rose-900 dark:text-rose-200';
                     }
 
                     return (
@@ -379,7 +383,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                         key={optIdx}
                         className={`p-3 rounded-xl border flex items-center gap-2.5 text-xs sm:text-sm ${optStyle}`}
                       >
-                        <span className="w-5 h-5 rounded-md flex items-center justify-center font-bold text-xs bg-slate-900 border border-slate-700 flex-shrink-0">
+                        <span className="w-5 h-5 rounded-md flex items-center justify-center font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 flex-shrink-0">
                           {String.fromCharCode(65 + optIdx)}
                         </span>
                         <div className="flex-1">
@@ -391,17 +395,17 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 </div>
 
                 {/* Trap Defense Box */}
-                <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 mb-2 flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
-                  <div className="text-xs text-amber-200 leading-relaxed">
-                    <strong className="text-amber-400 block mb-0.5">ফাঁদ বিশ্লেষণ (Trap Insight):</strong>
+                <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl p-3 mb-2 flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 text-amber-500 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+                  <div className="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                    <strong className="text-amber-700 dark:text-amber-400 block mb-0.5 font-bold">ফাঁদ বিশ্লেষণ (Trap Insight):</strong>
                     {q.trap}
                   </div>
                 </div>
 
                 {/* Detailed Solution Box */}
-                <div className="bg-slate-800/50 rounded-xl p-3 text-xs text-slate-300 leading-relaxed border border-slate-700/50">
-                  <strong className="text-brand-300 block mb-0.5">ব্যাখ্যা ও স্ট্যান্ডার্ড সমাধান:</strong>
+                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3 text-xs text-slate-700 dark:text-slate-300 leading-relaxed border border-slate-200 dark:border-slate-700/50">
+                  <strong className="text-brand-700 dark:text-brand-300 block mb-0.5">ব্যাখ্যা ও স্ট্যান্ডার্ড সমাধান:</strong>
                   <MathText content={q.exp} block />
                 </div>
               </div>
@@ -421,21 +425,21 @@ export const ExamView: React.FC<ExamViewProps> = ({
   return (
     <div className="max-w-3xl mx-auto py-6 px-4">
       {/* Top Timer & Header */}
-      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-2.5">
-          <span className="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-slate-900 text-brand-400 border border-slate-800">
+          <span className="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-white dark:bg-slate-900 text-brand-600 dark:text-brand-400 border border-slate-200 dark:border-slate-800 shadow-sm">
             প্রশ্ন: {currentIndex + 1} / {activeQuestions.length}
           </span>
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-slate-900 text-slate-300 border border-slate-800">
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 shadow-sm">
             {currentQ.subject}
           </span>
         </div>
 
         {/* 45-Second Timer Pill */}
-        <div className={`flex items-center gap-2 px-3.5 py-1 rounded-xl border text-sm font-bold font-mono transition-all ${
+        <div className={`flex items-center gap-2 px-3.5 py-1 rounded-xl border text-sm font-bold font-mono transition-all shadow-sm ${
           isTimeCritical 
-            ? 'bg-rose-500/20 border-rose-500/50 text-rose-300 animate-pulse' 
-            : 'bg-slate-900 border-slate-800 text-cyan-300'
+            ? 'bg-rose-50 dark:bg-rose-500/20 border-rose-300 dark:border-rose-500/50 text-rose-700 dark:text-rose-300 animate-pulse' 
+            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-cyan-700 dark:text-cyan-300'
         }`}>
           <Clock className="w-4 h-4" />
           <span>{timeLeft}s</span>
@@ -443,7 +447,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
       </div>
 
       {/* Timer Progress Line */}
-      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden mb-6">
+      <div className="w-full bg-slate-200 dark:bg-slate-900 h-1.5 rounded-full overflow-hidden mb-6">
         <div 
           className={`h-full transition-all duration-1000 ${
             isTimeCritical ? 'bg-rose-500' : 'bg-gradient-to-r from-brand-500 to-cyan-400'
@@ -453,8 +457,8 @@ export const ExamView: React.FC<ExamViewProps> = ({
       </div>
 
       {/* Question Card */}
-      <div className="bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl mb-6">
-        <div className="text-lg sm:text-xl font-bold text-white leading-relaxed mb-6">
+      <div className="bg-white dark:bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-xl mb-6">
+        <div className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed mb-6">
           <MathText content={currentQ.q} />
         </div>
 
@@ -468,14 +472,14 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 onClick={() => handleOptionSelect(optIdx)}
                 className={`w-full p-4 rounded-2xl border text-left flex items-center gap-3.5 transition-all text-sm sm:text-base ${
                   isSelected
-                    ? 'bg-brand-600/20 border-brand-500 text-white shadow-md shadow-brand-500/10'
-                    : 'bg-slate-800/40 border-slate-700/50 text-slate-300 hover:bg-slate-800/80 hover:border-slate-600'
+                    ? 'bg-brand-50 dark:bg-brand-600/20 border-brand-500 text-brand-950 dark:text-white shadow-sm dark:shadow-md dark:shadow-brand-500/10'
+                    : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 text-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600'
                 }`}
               >
                 <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-all ${
                   isSelected 
-                    ? 'bg-brand-500 text-white' 
-                    : 'bg-slate-900 text-slate-400 border border-slate-700'
+                    ? 'bg-brand-600 text-white' 
+                    : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700'
                 }`}>
                   {String.fromCharCode(65 + optIdx)}
                 </span>
@@ -492,13 +496,13 @@ export const ExamView: React.FC<ExamViewProps> = ({
       <div className="flex items-center justify-between gap-3">
         <button
           onClick={() => handleNext(null)}
-          className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800 text-xs sm:text-sm font-semibold transition-all"
+          className="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-semibold shadow-sm transition-all"
         >
           স্কিপ করুন (S)
         </button>
 
-        <span className="hidden sm:inline text-xs text-slate-400">
-          <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">1-4</kbd> বিকল্প নির্বাচন | <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">Enter</kbd> পরবর্তী প্রশ্ন
+        <span className="hidden sm:inline text-xs text-slate-500 dark:text-slate-400">
+          <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">1-4</kbd> বিকল্প নির্বাচন | <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">Enter</kbd> পরবর্তী প্রশ্ন
         </span>
 
         <button

@@ -5,7 +5,9 @@ import {
   Timer, 
   Zap, 
   GraduationCap, 
-  Layers 
+  Layers,
+  Sun,
+  Moon
 } from 'lucide-react';
 import type { AppMode, SubjectType, WeekFilterType } from '../types';
 
@@ -16,6 +18,8 @@ interface NavbarProps {
   onSelectWeek: (week: WeekFilterType) => void;
   selectedSubject: SubjectType;
   onSelectSubject: (subject: SubjectType) => void;
+  theme: 'dark' | 'light';
+  onToggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -25,6 +29,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectWeek,
   selectedSubject,
   onSelectSubject,
+  theme,
+  onToggleTheme,
 }) => {
   const subjects: { label: SubjectType }[] = [
     { label: 'All' },
@@ -38,59 +44,76 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'slides', label: 'স্লাইড ডেক', icon: <Presentation className="w-4 h-4" /> },
     { id: 'flashcards', label: 'স্মার্ট ফ্ল্যাশকার্ড', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'exam', label: 'ঢাবি রিয়েল এক্সাম', icon: <Timer className="w-4 h-4" />, badge: '-0.25' },
-    { id: 'vault', label: 'গ্লোবাল ভল্ট', icon: <Zap className="w-4 h-4 text-amber-400" /> },
+    { id: 'vault', label: 'গ্লোবাল ভল্ট', icon: <Zap className="w-4 h-4 text-amber-500 dark:text-amber-400" /> },
   ];
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/85 border-b border-slate-800/80">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-slate-950/85 border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Branding Row */}
         <div className="flex flex-wrap items-center justify-between py-3 gap-3">
           {/* Logo & Tag */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-600 to-cyan-500 p-0.5 shadow-lg shadow-brand-500/20">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <GraduationCap className="w-5 h-5 text-brand-400" />
+              <div className="w-full h-full bg-white dark:bg-slate-950 rounded-[10px] flex items-center justify-center transition-colors">
+                <GraduationCap className="w-5 h-5 text-brand-600 dark:text-brand-400" />
               </div>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent font-['Outfit']">
-                  Admission Crack <span className="text-brand-400 font-extrabold">2026</span>
+                <h1 className="text-lg font-bold tracking-tight text-slate-900 dark:text-white font-['Outfit']">
+                  Admission Crack <span className="text-brand-600 dark:text-brand-400 font-extrabold">2026</span>
                 </h1>
-                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-brand-500/10 text-brand-300 border border-brand-500/20">
+                <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-500/20">
                   DU Ka & Medical
                 </span>
               </div>
-              <p className="text-xs text-slate-400 font-medium">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 Rank 1–100 Active-Recall Revision Platform
               </p>
             </div>
           </div>
 
-          {/* Week Selector Dropdown / Pills */}
-          <div className="flex items-center gap-2 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-inner">
-            <span className="text-xs font-medium text-slate-400 pl-2 pr-1 flex items-center gap-1">
-              <Layers className="w-3.5 h-3.5 text-slate-400" /> সপ্তাহ:
-            </span>
-            {(['all', 'week_01', 'week_02'] as WeekFilterType[]).map((w) => (
-              <button
-                key={w}
-                onClick={() => onSelectWeek(w)}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                  selectedWeek === w
-                    ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-md shadow-brand-500/25'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
-                }`}
-              >
-                {w === 'all' ? 'All Weeks' : w === 'week_01' ? 'Week 01' : 'Week 02'}
-              </button>
-            ))}
+          {/* Top-Right: Week Selector & Theme Toggle */}
+          <div className="flex items-center gap-2.5">
+            {/* Week Selector Dropdown / Pills */}
+            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shadow-inner transition-colors">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 pl-2 pr-1 flex items-center gap-1">
+                <Layers className="w-3.5 h-3.5 text-slate-400" /> সপ্তাহ:
+              </span>
+              {(['all', 'week_01', 'week_02'] as WeekFilterType[]).map((w) => (
+                <button
+                  key={w}
+                  onClick={() => onSelectWeek(w)}
+                  className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
+                    selectedWeek === w
+                      ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-md shadow-brand-500/25'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-200/80 dark:hover:bg-slate-800/60'
+                  }`}
+                >
+                  {w === 'all' ? 'All Weeks' : w === 'week_01' ? 'Week 01' : 'Week 02'}
+                </button>
+              ))}
+            </div>
+
+            {/* Sun/Moon Theme Toggle Button */}
+            <button
+              onClick={onToggleTheme}
+              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-amber-400 hover:text-slate-900 dark:hover:text-amber-300 border border-slate-200 dark:border-slate-800 transition-all shadow-sm hover:scale-105 active:scale-95"
+              title={theme === 'dark' ? 'লাইট মোড চালু করুন (Switch to Light Mode)' : 'ডার্ক মোড চালু করুন (Switch to Dark Mode)'}
+              aria-label="Toggle Dark/Light Mode"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400 transition-transform duration-300 rotate-0" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700 transition-transform duration-300 rotate-0" />
+              )}
+            </button>
           </div>
         </div>
 
         {/* Navigation & Filter Row */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between pb-3 pt-1 gap-3 border-t border-slate-800/40">
+        <div className="flex flex-col md:flex-row md:items-center justify-between pb-3 pt-1 gap-3 border-t border-slate-200/80 dark:border-slate-800/40">
           {/* Mode Switcher Tabs */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
             {modes.map((mode) => {
@@ -101,8 +124,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => onSelectMode(mode.id)}
                   className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                     active
-                      ? 'bg-slate-800 text-white border border-brand-500/40 shadow-sm shadow-brand-500/10'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900 border border-transparent'
+                      ? 'bg-slate-900 text-white dark:bg-slate-800 dark:text-white border border-slate-700 dark:border-brand-500/40 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 border border-transparent'
                   }`}
                 >
                   <span className={active ? 'text-brand-400' : 'text-slate-500'}>
@@ -110,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </span>
                   <span>{mode.label}</span>
                   {mode.badge && (
-                    <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                    <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-rose-500/15 dark:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30">
                       {mode.badge}
                     </span>
                   )}
@@ -130,8 +153,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onClick={() => onSelectSubject(subj.label)}
                     className={`px-3 py-1 text-xs font-medium rounded-lg transition-all border whitespace-nowrap ${
                       active
-                        ? 'bg-slate-800 text-brand-300 border-brand-500/50 shadow-sm'
-                        : 'bg-slate-900/60 text-slate-400 border-slate-800 hover:bg-slate-800/50 hover:text-slate-200'
+                        ? 'bg-brand-50 text-brand-700 border-brand-500/40 dark:bg-slate-800 dark:text-brand-300 dark:border-brand-500/50 shadow-sm font-semibold'
+                        : 'bg-white dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
                     }`}
                   >
                     {subj.label === 'All' ? 'সব বিষয়' : subj.label}
