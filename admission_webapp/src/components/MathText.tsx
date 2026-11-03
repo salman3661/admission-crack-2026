@@ -21,9 +21,9 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
           displayMode: true,
           throwOnError: false,
         });
-        displayMathBlocks.push(rendered);
+        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1">${rendered}</div>`);
       } catch {
-        displayMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$$${math}$$</span>`);
+        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 text-rose-500 dark:text-rose-400 font-mono">$$${math}$$</div>`);
       }
       return `___DISPLAY_MATH_${displayMathBlocks.length - 1}___`;
     });
@@ -36,7 +36,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
           displayMode: false,
           throwOnError: false,
         });
-        inlineMathBlocks.push(rendered);
+        inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
       } catch {
         inlineMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$${math}$</span>`);
       }

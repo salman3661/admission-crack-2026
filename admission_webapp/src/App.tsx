@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { DecksView } from './components/DecksView';
 import { SlidesView } from './components/SlidesView';
 import { FlashcardsView } from './components/FlashcardsView';
 import { ExamView } from './components/ExamView';
@@ -8,6 +7,7 @@ import { VaultView } from './components/VaultView';
 import { AnalyticsView } from './components/AnalyticsView';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
+import { CategorySwitcher } from './components/CategorySwitcher';
 import { auth, onAuthStateChanged, logoutFirebase } from './lib/firebase';
 
 import slidesData from './data/slides.json';
@@ -28,7 +28,7 @@ import type {
 import { Target, Sparkles, BookOpen, Clock, ShieldCheck } from 'lucide-react';
 
 export function App() {
-  const [currentMode, setCurrentMode] = useState<AppMode>('decks');
+  const [currentMode, setCurrentMode] = useState<AppMode>('slides');
   const [selectedWeek, setSelectedWeek] = useState<WeekFilterType>('all');
   const [selectedSubject, setSelectedSubject] = useState<SubjectType>('All');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -150,22 +150,8 @@ export function App() {
       {/* Main Mode View Area */}
       <main className="flex-1 pb-dock">
         {currentMode === 'decks' && (
-          <DecksView
-            onSelectMode={setCurrentMode}
-            onSelectSubject={setSelectedSubject}
-            selectedWeek={selectedWeek}
-            onSelectWeek={setSelectedWeek}
-            user={user}
-            onOpenAuth={() => setIsAuthModalOpen(true)}
-            totalSlides={slides.length}
-            totalFlashcards={flashcards.length}
-            totalQuizzes={quizzes.length}
-          />
-        )}
-
-        {currentMode === 'exam' && (
-          <ExamView
-            quizzes={quizzes}
+          <SlidesView
+            slides={slides}
             selectedWeek={selectedWeek}
             selectedSubject={selectedSubject}
           />
@@ -188,13 +174,33 @@ export function App() {
         )}
 
         {currentMode === 'vault' && (
-          <VaultView vault={vault} />
+          <VaultView 
+            vault={vault} 
+            selectedWeek={selectedWeek}
+            selectedSubject={selectedSubject}
+          />
+        )}
+
+        {currentMode === 'exam' && (
+          <ExamView
+            quizzes={quizzes}
+            selectedWeek={selectedWeek}
+            selectedSubject={selectedSubject}
+          />
         )}
 
         {currentMode === 'analytics' && (
           <AnalyticsView
             user={user}
             onOpenAuth={() => setIsAuthModalOpen(true)}
+            onSelectMode={setCurrentMode}
+          />
+        )}
+
+        {/* Section-Based Quick Category Switcher */}
+        {currentMode !== 'analytics' && (
+          <CategorySwitcher
+            currentMode={currentMode === 'decks' ? 'slides' : currentMode}
             onSelectMode={setCurrentMode}
           />
         )}

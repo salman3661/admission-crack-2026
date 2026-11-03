@@ -143,32 +143,32 @@ export const ExamView: React.FC<ExamViewProps> = ({
   if (!examStarted) {
     const totalAvail = availableQuestions.length;
     return (
-      <div className="max-w-2xl mx-auto py-4 sm:py-6 px-4 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-3 shadow-lg shadow-[#056839]/20">
-          <div className="w-full h-full bg-white dark:bg-[#131E17] rounded-[14px] flex items-center justify-center">
+      <div className="max-w-xl mx-auto py-4 sm:py-6 px-3 text-center">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-3 shadow-md shadow-[#056839]/20">
+          <div className="w-full h-full bg-white dark:bg-zinc-900 rounded-[14px] flex items-center justify-center">
             <Timer className="w-6 h-6 text-[#056839] dark:text-emerald-400" />
           </div>
         </div>
-        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          ঢাবি 'ক' ইউনিট রিয়েল এক্সাম মোড
+        <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
+          🎯 এক্সাম ক্যাপসুল টেস্ট
         </h2>
 
         {/* Selected Scope Badge */}
-        <div className="flex flex-wrap items-center justify-center gap-2 my-6">
-          <span className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#131E17] border border-slate-200/80 dark:border-[#1E2F24] text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 my-4">
+          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
             সপ্তাহ: <strong className="text-[#056839] dark:text-emerald-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
           </span>
-          <span className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#131E17] border border-slate-200/80 dark:border-[#1E2F24] text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
             বিষয়: <strong className="text-cyan-600 dark:text-cyan-400">{selectedSubject}</strong>
           </span>
-          <span className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#131E17] border border-slate-200/80 dark:border-[#1E2F24] text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
-            উপলব্ধ প্রশ্ন: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
+          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
+            উপলব্ধ: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
           </span>
         </div>
 
-        {/* Question Count Selection */}
-        <div className="bg-white dark:bg-[#131E17] p-6 rounded-3xl border border-slate-200/80 dark:border-[#1E2F24] max-w-md mx-auto mb-8 shadow-sm">
-          <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
+        {/* Question Count Selection Card */}
+        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 max-w-sm mx-auto mb-5 shadow-sm">
+          <label className="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
             প্রশ্নের সংখ্যা নির্বাচন করুন
           </label>
           <div className="grid grid-cols-4 gap-2">
@@ -176,10 +176,10 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <button
                 key={cnt}
                 onClick={() => setQuestionCount(cnt)}
-                className={`py-2.5 rounded-2xl text-xs sm:text-sm font-bold border transition-all ${
+                className={`py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
                   questionCount === cnt
-                    ? 'bg-[#056839] text-white border-[#056839] shadow-md shadow-[#056839]/25 scale-102'
-                    : 'bg-[#F6F8F6] dark:bg-[#1A261F] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#223328] hover:bg-slate-200 dark:hover:bg-[#203026]'
+                    ? 'bg-[#056839] text-white border-[#056839] shadow-sm scale-102'
+                    : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100'
                 }`}
               >
                 {cnt} টি
@@ -192,10 +192,10 @@ export const ExamView: React.FC<ExamViewProps> = ({
         <button
           onClick={() => startExam(questionCount)}
           disabled={totalAvail === 0}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-base shadow-xl shadow-[#056839]/25 transition-all disabled:opacity-40 hover:scale-105 active:scale-95"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#056839]/25 transition-all disabled:opacity-40 active:scale-95"
         >
-          <Play className="w-5 h-5 fill-current" />
-          <span>পরীক্ষা শুরু করুন ({questionCount}টি MCQ)</span>
+          <Play className="w-4 h-4 fill-current" />
+          <span>ক্যাপসুল শুরু করুন ({questionCount}টি MCQ)</span>
         </button>
       </div>
     );
@@ -213,50 +213,50 @@ export const ExamView: React.FC<ExamViewProps> = ({
     });
 
     return (
-      <div className="max-w-4xl mx-auto py-8 px-4">
+      <div className="max-w-3xl mx-auto py-6 px-3 sm:px-4">
         {/* Scorecard Hero */}
-        <div className="bg-white dark:bg-[#131E17] p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-[#1E2F24] shadow-xl text-center relative overflow-hidden mb-8">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Award className={`w-8 h-8 ${isPassing ? 'text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-slate-500'}`} />
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+        <div className="bg-white dark:bg-zinc-900 p-5 sm:p-6 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm text-center relative overflow-hidden mb-6">
+          <div className="flex items-center justify-center gap-2 mb-1.5">
+            <Award className={`w-7 h-7 ${isPassing ? 'text-amber-500' : 'text-zinc-400'}`} />
+            <h2 className="text-lg sm:text-xl font-black text-zinc-900 dark:text-white">
               {isPassing ? 'অভিনন্দন! চমৎকার পারফরম্যান্স' : 'পরীক্ষা সম্পন্ন হয়েছে'}
             </h2>
           </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
             ঢাবি 'ক' ইউনিট স্ট্যান্ডার্ড ফলাফল বিশ্লেষণ (+১.০ সঠিক, -০.২৫ ভুল) • গড় সময়: {avgTimePerQ}s / প্রশ্ন
           </p>
 
           {/* Big Score Display */}
-          <div className="my-6">
-            <span className="text-5xl sm:text-6xl font-black tracking-tight bg-gradient-to-r from-[#056839] via-[#00B09B] to-[#96C93D] bg-clip-text text-transparent font-['Outfit']">
+          <div className="my-4">
+            <span className="text-4xl sm:text-5xl font-black tracking-tight bg-gradient-to-r from-[#056839] via-[#00B09B] to-[#96C93D] bg-clip-text text-transparent font-['Outfit']">
               {totalScore.toFixed(2)}
             </span>
-            <span className="text-lg text-slate-400 dark:text-slate-500 font-bold ml-2">/ {maxPossible.toFixed(1)}</span>
+            <span className="text-base text-zinc-400 font-bold ml-1.5">/ {maxPossible.toFixed(1)}</span>
           </div>
 
           {/* Metric Stats Pills */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-            <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-center">
-              <span className="text-xs text-emerald-800 dark:text-emerald-300 font-medium">সঠিক উত্তর</span>
-              <div className="text-xl font-bold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-xl mx-auto">
+            <div className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 text-center">
+              <span className="text-[11px] text-emerald-800 dark:text-emerald-300 font-medium">সঠিক উত্তর</span>
+              <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
                 <CheckCircle2 className="w-4 h-4" /> {correctCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-center">
-              <span className="text-xs text-rose-800 dark:text-rose-300 font-medium">ভুল উত্তর (-০.২৫)</span>
-              <div className="text-xl font-bold text-rose-600 dark:text-rose-400 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/40 text-center">
+              <span className="text-[11px] text-rose-800 dark:text-rose-300 font-medium">ভুল (-০.২৫)</span>
+              <div className="text-lg font-bold text-rose-600 dark:text-rose-400 flex items-center justify-center gap-1 mt-0.5">
                 <XCircle className="w-4 h-4" /> {wrongCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-[#F6F8F6] dark:bg-[#1A261F] border border-slate-200/80 dark:border-[#24352A] text-center">
-              <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">স্কিপ / ফাঁকা</span>
-              <div className="text-xl font-bold text-slate-800 dark:text-slate-300 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 text-center">
+              <span className="text-[11px] text-zinc-600 dark:text-zinc-400 font-medium">স্কিপ / ফাঁকা</span>
+              <div className="text-lg font-bold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-1 mt-0.5">
                 <MinusCircle className="w-4 h-4" /> {skippedCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-[#056839]/10 dark:bg-[#056839]/20 border border-[#056839]/20 text-center">
-              <span className="text-xs text-[#056839] dark:text-emerald-300 font-medium">নির্ভুলতা (Accuracy)</span>
-              <div className="text-xl font-bold text-[#056839] dark:text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-2.5 rounded-xl bg-[#056839]/10 dark:bg-[#056839]/20 border border-[#056839]/20 text-center">
+              <span className="text-[11px] text-[#056839] dark:text-emerald-300 font-medium">নির্ভুলতা</span>
+              <div className="text-lg font-bold text-[#056839] dark:text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
                 <Flame className="w-4 h-4" /> {accuracy}%
               </div>
             </div>
@@ -420,31 +420,31 @@ export const ExamView: React.FC<ExamViewProps> = ({
   const isTimeCritical = timeLeft <= 10;
 
   return (
-    <div className="max-w-3xl mx-auto py-6 px-4">
+    <div className="max-w-2xl mx-auto py-4 px-3 sm:px-4">
       {/* Top Timer & Header */}
-      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/80 dark:border-[#1E2F24]">
-        <div className="flex items-center gap-2.5">
-          <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-white dark:bg-[#131E17] text-[#056839] dark:text-emerald-400 border border-slate-200/80 dark:border-[#1E2F24] shadow-sm">
-            প্রশ্ন: {currentIndex + 1} / {activeQuestions.length}
+      <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-200/80 dark:border-zinc-800">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-[#056839] dark:text-emerald-400 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+            {currentIndex + 1} / {activeQuestions.length}
           </span>
-          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white dark:bg-[#131E17] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-[#1E2F24] shadow-sm">
+          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-sm">
             {currentQ.subject}
           </span>
         </div>
 
         {/* 45-Second Timer Pill */}
-        <div className={`flex items-center gap-2 px-3.5 py-1 rounded-full border text-sm font-bold font-mono transition-all shadow-sm ${
+        <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold font-mono transition-all shadow-sm ${
           isTimeCritical 
-            ? 'bg-rose-50 dark:bg-rose-500/20 border-rose-300 dark:border-rose-500/50 text-rose-700 dark:text-rose-300 animate-pulse' 
-            : 'bg-white dark:bg-[#131E17] border-slate-200/80 dark:border-[#1E2F24] text-cyan-700 dark:text-cyan-300'
+            ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 animate-pulse' 
+            : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200'
         }`}>
-          <Clock className="w-4 h-4" />
+          <Clock className="w-3.5 h-3.5" />
           <span>{timeLeft}s</span>
         </div>
       </div>
 
       {/* Timer Progress Line */}
-      <div className="w-full bg-slate-200 dark:bg-[#1E2F24] h-2 rounded-full overflow-hidden mb-6">
+      <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-4">
         <div 
           className={`h-full transition-all duration-1000 ${
             isTimeCritical ? 'bg-rose-500' : 'bg-gradient-to-r from-[#00B09B] to-[#96C93D]'
@@ -454,33 +454,33 @@ export const ExamView: React.FC<ExamViewProps> = ({
       </div>
 
       {/* Question Card */}
-      <div className="bg-white dark:bg-[#131E17] rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-[#1E2F24] shadow-sm mb-6">
-        <div className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed mb-6">
+      <div className="bg-white dark:bg-zinc-900 rounded-2xl p-4 sm:p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm mb-4">
+        <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
           <MathText content={currentQ.q} />
         </div>
 
-        {/* Options (Keyboard 1, 2, 3, 4 / A, B, C, D) */}
-        <div className="space-y-3">
+        {/* Options */}
+        <div className="space-y-2.5">
           {currentQ.opts.map((opt, optIdx) => {
             const isSelected = userSelected === optIdx;
             return (
               <button
                 key={optIdx}
                 onClick={() => handleOptionSelect(optIdx)}
-                className={`w-full p-4 rounded-2xl border text-left flex items-center gap-3.5 transition-all text-sm sm:text-base ${
+                className={`w-full p-3 sm:p-3.5 rounded-xl border text-left flex items-center gap-3 transition-all text-xs sm:text-sm ${
                   isSelected
                     ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-sm'
-                    : 'bg-[#F6F8F6] dark:bg-[#1A261F] border-slate-200/80 dark:border-[#223328] text-slate-800 dark:text-slate-300 hover:bg-[#EAEFEA] dark:hover:bg-[#203026]'
+                    : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                 }`}
               >
-                <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-all ${
+                <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-all ${
                   isSelected 
                     ? 'bg-[#056839] text-white shadow-sm' 
-                    : 'bg-white dark:bg-[#131E17] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-[#223328]'
+                    : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700'
                 }`}>
                   {String.fromCharCode(65 + optIdx)}
                 </span>
-                <div className="flex-1 leading-relaxed">
+                <div className="flex-1 leading-relaxed overflow-x-auto no-scrollbar">
                   <MathText content={opt} />
                 </div>
               </button>
