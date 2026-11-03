@@ -17,9 +17,11 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
     text = text.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');
     text = text.replace(/\\\(([\s\S]*?)\\\)/g, '$$$1$$');
 
-    // Auto-wrap bare LaTeX commands if no $ delimiters are present
+    // Auto-wrap if entire string contains bare LaTeX command
     if (!text.includes('$') && /\\[a-zA-Z]+/.test(text)) {
-      text = `$${text}$`;
+      if (!/[\u0980-\u09FF]/.test(text)) {
+        text = `$${text.trim()}$`;
+      }
     }
 
     // Step 1: Replace $$...$$ with block math placeholders
@@ -53,6 +55,25 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
       }
       return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
     });
+
+    // Step 2b: Fallback for any bare LaTeX commands outside $ (e.g. \sqrt, \frac, \log, \pm)
+    if (/\\[a-zA-Z]+/.test(text)) {
+      text = text.replace(/([^\s\u0980-\u09FF]*\\[a-zA-Z]+(?:\{[^{}]*\}|\[[^[\]]*\]|[^\s\u0980-\u09FF])*)/g, (match) => {
+        const trimmed = match.trim();
+        if (!trimmed || !trimmed.includes('\\')) return match;
+        try {
+          const rendered = katex.renderToString(trimmed, {
+            displayMode: false,
+            throwOnError: false,
+            strict: 'ignore',
+          });
+          inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
+          return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
+        } catch {
+          return match;
+        }
+      });
+    }
 
     // Step 3: Handle markdown formatting
     // Bold **text**

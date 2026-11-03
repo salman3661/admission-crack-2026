@@ -187,3 +187,4 @@ export function computeAggregateStats(history: ExamAttemptRecord[]) {
     recentTests,
   };
 }
+
