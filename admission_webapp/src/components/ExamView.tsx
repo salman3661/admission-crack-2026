@@ -174,18 +174,18 @@ export const ExamView: React.FC<ExamViewProps> = ({
           <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
             প্রশ্নের সংখ্যা নির্বাচন করুন
           </label>
-          <div className="grid grid-cols-3 gap-2.5">
-            {[10, 25, Math.min(50, totalAvail)].filter((v, i, a) => a.indexOf(v) === i && v <= totalAvail).map((cnt) => (
+          <div className="grid grid-cols-4 gap-2">
+            {[10, 25, 50, Math.min(100, totalAvail)].filter((v, i, a) => a.indexOf(v) === i && v <= totalAvail).map((cnt) => (
               <button
                 key={cnt}
                 onClick={() => setQuestionCount(cnt)}
-                className={`py-2.5 rounded-2xl text-sm font-bold border transition-all ${
+                className={`py-2.5 rounded-2xl text-xs sm:text-sm font-bold border transition-all ${
                   questionCount === cnt
                     ? 'bg-[#056839] text-white border-[#056839] shadow-md shadow-[#056839]/25 scale-102'
                     : 'bg-[#F6F8F6] dark:bg-[#1A261F] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#223328] hover:bg-slate-200 dark:hover:bg-[#203026]'
                 }`}
               >
-                {cnt} টি MCQ
+                {cnt} টি
               </button>
             ))}
           </div>

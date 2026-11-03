@@ -96,52 +96,40 @@ def parse_w3_mcqs():
         with open(filepath, "r", encoding="utf-8") as f:
             text = f.read()
 
-        m_quiz = re.search(r'৫\.২ ২৫টি হাই-ইল্ড.*?(?=(?:#####|####|###)\s*(?:উত্তরমালা|উত্তর)|\Z)', text, re.S)
-        m_ans = re.search(r'(?:#####|####|###)\s*(?:উত্তরমালা|উত্তর).*', text, re.S)
-
-        if not m_quiz or not m_ans:
+        s8_idx = text.find('৮.২') if '৮.২' in text else text.find('8.2')
+        if s8_idx == -1:
+            s8_idx = text.find('৫.২')
+        if s8_idx == -1:
             continue
 
-        q_block = m_quiz.group(0)
-        ans_block = m_ans.group(0)
+        s8_txt = text[s8_idx:]
+        ans_idx = s8_txt.find('উত্তরমালা')
+        q_block = s8_txt[:ans_idx] if ans_idx != -1 else s8_txt
+        ans_block = s8_txt[ans_idx:] if ans_idx != -1 else ""
 
         ans_dict = {}
-        # Format 1: ১. **(b) ...** — exp
-        ans_items_1 = re.findall(r'([০-৯0-9]+)\.\s*\*\*\(([a-d])\)[^*]*\*\*\s*[—\-:]?\s*(.*?)(?=\n[০-৯0-9]+\.|\Z)', ans_block, re.S)
-        for num_str, letter, exp in ans_items_1:
+        ans_items = re.findall(r'([০-৯0-9]+)\.\s*\*\*\(([a-d])\)[^*]*\*\*\s*[—\-:]?\s*(.*?)(?=\n[০-৯0-9]+\.|\Z)', ans_block, re.S)
+        for num_str, letter, exp in ans_items:
             num = int(num_str.translate(str.maketrans('০১২৩৪৫৬৭৮৯', '0123456789')))
             ans_dict[num] = (letter.lower(), exp.strip())
 
-        # Format 2: | **Q01** | **(b)** | exp |
-        ans_items_2 = re.findall(r'\|\s*\*\*Q([0-9]+)\*\*\s*\|\s*\*\*\(([a-d])\)\*\*\s*\|\s*(.*?)\s*\|', ans_block)
-        for num_str, letter, exp in ans_items_2:
-            num = int(num_str)
-            ans_dict[num] = (letter.lower(), exp.strip())
-
-        raw_qs = re.split(r'\n(?=\*\*(?:Q?[০-৯0-9]+)\.\*\*)', q_block)
-        idx = 1
-        for q_txt in raw_qs:
-            q_match = re.search(r'\*\*(?:Q?[০-৯0-9]+)\.\*\*\s*(.*?)\n\s*\(a\)\s*(.*?)\n\s*\(b\)\s*(.*?)\n\s*\(c\)\s*(.*?)\n\s*\(d\)\s*(.*?)(?=\n\n|\n---|\Z)', q_txt, re.S)
-            if q_match:
-                q_text = q_match.group(1).strip()
-                opts = [q_match.group(2).strip(), q_match.group(3).strip(), q_match.group(4).strip(), q_match.group(5).strip()]
-
-                letter_ans, explanation = ans_dict.get(idx, ('b', 'পাঠ্যবইয়ের প্রমিত ব্যাখ্যা।'))
-                char_to_idx = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
-                corr_idx = char_to_idx.get(letter_ans, 0)
-
-                q_id = f"w3_{subject[:3].lower()}_q{idx:02d}"
-                quizzes.append({
-                    "id": q_id,
-                    "week_id": "week_03",
-                    "subject": subject,
-                    "q": q_text,
-                    "opts": opts,
-                    "ans": corr_idx,
-                    "exp": explanation,
-                    "trap": trap_map.get(subject, "প্রশ্নের নির্দিষ্ট শর্ত বা এককের ফাঁদ এড়িয়ে চলা জরুরি।")
-                })
-                idx += 1
+        qs = re.findall(r'\*\*[০-৯0-9]+\.\*\*\s*(.*?)\s*\(a\)\s*(.*?)\s*\(b\)\s*(.*?)\s*\(c\)\s*(.*?)\s*\(d\)\s*(.*?)(?=\n\s*\*\*[০-৯0-9]+\.\*\*|\n\s*####|\n\s*#####|\n\s*উত্তর|\n\s*উত্তরমালা|\Z)', q_block, re.S)
+        
+        char_to_idx = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
+        for idx, (q_text, opt_a, opt_b, opt_c, opt_d) in enumerate(qs, start=1):
+            letter_ans, explanation = ans_dict.get(idx, ('a', 'পাঠ্যবইয়ের প্রমিত ব্যাখ্যা।'))
+            corr_idx = char_to_idx.get(letter_ans, 0)
+            q_id = f"w3_{subject[:3].lower()}_q{idx:02d}"
+            quizzes.append({
+                "id": q_id,
+                "week_id": "week_03",
+                "subject": subject,
+                "q": q_text.strip(),
+                "opts": [opt_a.strip(), opt_b.strip(), opt_c.strip(), opt_d.strip()],
+                "ans": corr_idx,
+                "exp": explanation,
+                "trap": trap_map.get(subject, "প্রশ্নের নির্দিষ্ট শর্ত বা এককের ফাঁদ এড়িয়ে চলা জরুরি।")
+            })
 
     return quizzes
 
@@ -263,78 +251,6 @@ def get_w1_mcqs():
     ]
 
     return phy + che + mat + bio
-
-def parse_w3_mcqs():
-    subject_files = [
-        ("Physics_Master_Digest.md", "Physics"),
-        ("Chemistry_Master_Digest.md", "Chemistry"),
-        ("H_Math_Master_Digest.md", "Higher Math"),
-        ("Biology_Master_Digest.md", "Biology")
-    ]
-    quizzes = []
-
-    for filename, subject in subject_files:
-        filepath = os.path.join("Week_03", "05_Final_Notes", filename)
-        if not os.path.exists(filepath):
-            continue
-        with open(filepath, "r", encoding="utf-8") as f:
-            text = f.read()
-
-        m_quiz = re.search(r'৫\.২\s*২৫টি.*?(?=(?:#####|####|###)\s*(?:উত্তরমালা|উত্তর)|\Z)', text, re.S)
-        m_ans = re.search(r'(?:#####|####|###)\s*(?:উত্তরমালা|উত্তর).*', text, re.S)
-
-        if not m_quiz or not m_ans:
-            continue
-
-        q_block = m_quiz.group(0)
-        ans_block = m_ans.group(0)
-
-        ans_dict = {}
-        # Pattern 1: list format: ১. **(b)...** — explanation
-        list_items = re.findall(r'([০-৯0-9]+)\.\s*\*\*\(([a-d])\)[^*]*\*\*\s*[—\-:]?\s*(.*?)(?=\n[০-৯0-9]+\.|\Z)', ans_block, re.S)
-        for num_str, letter, exp in list_items:
-            num = int(num_str.translate(str.maketrans('০১২৩৪৫৬৭৮৯', '0123456789')))
-            ans_dict[num] = (letter.lower(), exp.strip())
-
-        # Pattern 2: table format: | **Q01** | **(b)** | explanation |
-        table_items = re.findall(r'\|\s*\*\*Q?0?([0-9]+)\*\*\s*\|\s*\*\*\(([a-d])\)\*\*\s*\|\s*(.*?)\s*\|', ans_block, re.S)
-        for num_str, letter, exp in table_items:
-            num = int(num_str)
-            ans_dict[num] = (letter.lower(), exp.strip())
-
-        raw_qs = re.split(r'\n(?=\*\*(?:[০-৯0-9]+|Q[0-9]+)\.\*\*)', q_block)
-        idx = 1
-        for q_txt in raw_qs:
-            q_match = re.search(r'\*\*(?:[০-৯0-9]+|Q[0-9]+)\.\*\*\s*(.*?)\n\s*\(a\)\s*(.*?)\n\s*\(b\)\s*(.*?)\n\s*\(c\)\s*(.*?)\n\s*\(d\)\s*(.*?)(?=\n\n|\Z)', q_txt, re.S)
-            if q_match:
-                q_text = q_match.group(1).strip()
-                opts = [q_match.group(2).strip(), q_match.group(3).strip(), q_match.group(4).strip(), q_match.group(5).strip()]
-                
-                letter_ans, explanation = ans_dict.get(idx, ('a', 'পাঠ্যবইয়ের প্রমিত ব্যাখ্যা।'))
-                char_to_idx = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
-                corr_idx = char_to_idx.get(letter_ans, 0)
-
-                trap_map = {
-                    "Physics": "অভিকর্ষীয় বিভব ও প্রাবল্যের পার্থক্য, কাজের সংজ্ঞায় অতিরিক্ত কাজের শর্ত বা স্প্রিং কর্তনে ধ্রুবকের ব্যস্তানুপাতিক সম্পর্ক লক্ষ্য রাখা।",
-                    "Chemistry": "আয়ন শনাক্তকরণে বর্ণ ও অধঃক্ষেপের পার্থক্য, কোয়ান্টাম সংখ্যার মান বা দ্রাব্যতা গুণফল ও আয়ন গুণফলের শর্তের ফাঁদ।",
-                    "Higher Math": "উপবৃত্তে a>b বনাম b>a নির্ধারণ, অধিবৃত্তের অক্ষের ধনাত্মক পদ বা পরমমান অসমতায় শূন্য হওয়া বিন্দু বর্জন না করার ফাঁদ।",
-                    "Biology": "C3 বনাম C4 চক্রের প্রাথমিক গ্রাহক ও প্রথম স্থায়ী যৌগ, নগ্নবীজী বনাম আবৃতবীজীর শস্যের প্লয়েডি বা ক্রেবস চক্রের উৎপন্ন অণুর সংখ্যা।"
-                }
-
-                q_id = f"w3_{subject[:3].lower()}_q{idx:02d}"
-                quizzes.append({
-                    "id": q_id,
-                    "week_id": "week_03",
-                    "subject": subject,
-                    "q": q_text,
-                    "opts": opts,
-                    "ans": corr_idx,
-                    "exp": explanation,
-                    "trap": trap_map.get(subject, "প্রশ্নের নির্দিষ্ট শর্ত বা ফাঁদ এড়িয়ে চলা জরুরি।")
-                })
-                idx += 1
-
-    return quizzes
 
 def get_all_slides():
     from build_data_slides import slides_data

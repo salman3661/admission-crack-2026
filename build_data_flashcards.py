@@ -789,4 +789,23 @@ flashcards_data = [
     }
 ]
 
+if __name__ == "__main__":
+    import os
+    import sys
+    import json
+    if sys.stdout.encoding != 'utf-8':
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except Exception:
+            pass
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    OUT_DIR = os.path.join(BASE_DIR, "admission_webapp", "src", "data")
+    os.makedirs(OUT_DIR, exist_ok=True)
+    out_file = os.path.join(OUT_DIR, "flashcards.json")
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(flashcards_data, f, ensure_ascii=False, indent=2)
+    print(f"✓ {len(flashcards_data)} flashcards saved to {out_file} (W1, W2, W3 unconstrained).")
+
+
+
 
