@@ -69,13 +69,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
   ];
 
-  // Level 2: Section / Category Submenu
-  const categories: { id: AppMode; label: string }[] = [
-    { id: 'slides', label: '⚡ কোর ফর্মুলা' },
-    { id: 'flashcards', label: '💡 শর্টকাট ভল্ট' },
-    { id: 'vault', label: '⚠️ ট্র্যাপ ক্যাপসুল' },
-    { id: 'exam', label: '📝 মডেল টেস্ট' },
-  ];
+  // Condition: Only show Weekly filter and Subject pills when inside "প্রশ্নব্যাংক" or "ফর্মুলা ভল্ট" (or "slides")
+  const showFilters = currentMode === 'exam' || currentMode === 'vault' || currentMode === 'slides';
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-white/95 dark:bg-[#0D1410]/95 border-b border-zinc-200/80 dark:border-zinc-800 transition-colors duration-200">
@@ -83,9 +78,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 1. TOP BAR (MINIMALIST) */}
       <div className="max-w-6xl mx-auto px-4 h-13 flex items-center justify-between">
         
-        {/* Logo & 2026 Badge (No dummy text) */}
+        {/* Logo & 2026 Badge (Clicking opens Home Decks) */}
         <div 
-          onClick={() => onSelectMode('slides')}
+          onClick={() => onSelectMode('decks')}
           className="flex items-center gap-2 cursor-pointer group select-none"
         >
           <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#056839] via-[#00B09B] to-[#96C93D] p-0.5 shadow-sm group-hover:scale-105 transition-transform">
@@ -218,78 +213,60 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 2. LEVEL 1: WEEK SELECTOR (HORIZONTAL SLICK PILLS) */}
-      <div className="bg-zinc-50/70 dark:bg-zinc-950/40 border-t border-b border-zinc-200/60 dark:border-zinc-800/60">
-        <div className="max-w-6xl mx-auto px-3 py-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-          <span className="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider shrink-0 mr-1">
-            সপ্তাহ:
-          </span>
-          {weeks.map((w) => {
-            const isActive = selectedWeek === w.id;
-            return (
-              <button
-                key={w.id}
-                onClick={() => onSelectWeek(w.id)}
-                className={`px-3 py-1 text-xs font-bold rounded-full transition-all whitespace-nowrap shrink-0 ${
-                  isActive
-                    ? 'bg-[#056839] text-white shadow-sm scale-[1.02]'
-                    : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                }`}
-              >
-                {w.label}
-              </button>
-            );
-          })}
+      {/* 2. LEVEL 1: WEEK SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ফর্মুলা ভল্ট") */}
+      {showFilters && (
+        <div className="bg-zinc-50/70 dark:bg-zinc-950/40 border-t border-b border-zinc-200/60 dark:border-zinc-800/60 animate-in fade-in duration-150">
+          <div className="max-w-6xl mx-auto px-3 py-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <span className="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider shrink-0 mr-1">
+              সপ্তাহ:
+            </span>
+            {weeks.map((w) => {
+              const isActive = selectedWeek === w.id;
+              return (
+                <button
+                  key={w.id}
+                  onClick={() => onSelectWeek(w.id)}
+                  className={`px-3 py-1 text-xs font-bold rounded-full transition-all whitespace-nowrap shrink-0 ${
+                    isActive
+                      ? 'bg-[#056839] text-white shadow-sm scale-[1.02]'
+                      : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                  }`}
+                >
+                  {w.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* 3. SUBJECT SELECTOR (CLEAN HORIZONTAL SLIDER) */}
-      <div className="bg-white/80 dark:bg-zinc-950/60 border-b border-zinc-200/60 dark:border-zinc-800/60">
-        <div className="max-w-6xl mx-auto px-3 py-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-          <span className="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider shrink-0 mr-1">
-            বিষয়:
-          </span>
-          {subjects.map((subj) => {
-            const isActive = selectedSubject === subj.label;
-            return (
-              <button
-                key={subj.label}
-                onClick={() => onSelectSubject(subj.label)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full transition-all whitespace-nowrap shrink-0 flex items-center gap-1 ${
-                  isActive
-                    ? 'bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/40 font-bold'
-                    : 'bg-zinc-100/80 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-200/60 dark:hover:bg-zinc-800'
-                }`}
-              >
-                <span>{subj.icon}</span>
-                <span>{subj.bn}</span>
-              </button>
-            );
-          })}
+      {/* 3. SUBJECT SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ফর্মুলা ভল্ট") */}
+      {showFilters && (
+        <div className="bg-white/80 dark:bg-zinc-950/60 border-b border-zinc-200/60 dark:border-zinc-800/60 animate-in fade-in duration-150">
+          <div className="max-w-6xl mx-auto px-3 py-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            <span className="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider shrink-0 mr-1">
+              বিষয়:
+            </span>
+            {subjects.map((subj) => {
+              const isActive = selectedSubject === subj.label;
+              return (
+                <button
+                  key={subj.label}
+                  onClick={() => onSelectSubject(subj.label)}
+                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-all whitespace-nowrap shrink-0 flex items-center gap-1 ${
+                    isActive
+                      ? 'bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/40 font-bold'
+                      : 'bg-zinc-100/80 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-200/60 dark:hover:bg-zinc-800'
+                  }`}
+                >
+                  <span>{subj.icon}</span>
+                  <span>{subj.bn}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
-
-      {/* 4. LEVEL 2: SECTION / CATEGORY SUBMENU */}
-      <div className="bg-white dark:bg-zinc-950">
-        <div className="max-w-6xl mx-auto px-3 py-1.5 flex items-center gap-2 overflow-x-auto no-scrollbar">
-          {categories.map((cat) => {
-            const isActive = currentMode === cat.id;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => onSelectMode(cat.id)}
-                className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 ${
-                  isActive
-                    ? 'bg-[#056839] text-white shadow-sm scale-[1.02]'
-                    : 'bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-200/80 dark:hover:bg-zinc-800'
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      )}
 
     </header>
   );

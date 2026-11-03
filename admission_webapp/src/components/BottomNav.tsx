@@ -1,9 +1,9 @@
 import React from 'react';
 import { 
+  Home, 
+  BookOpen, 
   Zap, 
   Layers, 
-  ShieldAlert, 
-  Target, 
   BarChart3 
 } from 'lucide-react';
 import type { AppMode } from '../types';
@@ -19,28 +19,28 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 }) => {
   const navItems: { id: AppMode; label: string; icon: React.ReactNode }[] = [
     {
-      id: 'slides',
-      label: '⚡ ফর্মুলা',
+      id: 'decks',
+      label: '🏠 ডেক',
+      icon: <Home className="w-4 h-4" />,
+    },
+    {
+      id: 'exam',
+      label: '📚 প্রশ্নব্যাংক',
+      icon: <BookOpen className="w-4 h-4" />,
+    },
+    {
+      id: 'vault',
+      label: '⚡ ফর্মুলা ভল্ট',
       icon: <Zap className="w-4 h-4" />,
     },
     {
       id: 'flashcards',
-      label: '💡 শর্টকাট',
+      label: '🗂️ ফ্ল্যাশকার্ড',
       icon: <Layers className="w-4 h-4" />,
     },
     {
-      id: 'vault',
-      label: '⚠️ ট্র্যাপ',
-      icon: <ShieldAlert className="w-4 h-4" />,
-    },
-    {
-      id: 'exam',
-      label: '🎯 এক্সাম',
-      icon: <Target className="w-4 h-4" />,
-    },
-    {
       id: 'analytics',
-      label: '📊 র্যাংক',
+      label: '📊 অ্যানালিটিক্স',
       icon: <BarChart3 className="w-4 h-4" />,
     },
   ];
