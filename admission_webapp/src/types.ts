@@ -1,6 +1,17 @@
 export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology';
 export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03';
-export type AppMode = 'slides' | 'flashcards' | 'exam' | 'vault';
+export type AppMode = 'decks' | 'exam' | 'slides' | 'flashcards' | 'analytics' | 'vault';
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  avatar: string;
+  target: string;
+  streakDays: number;
+  solvedCount: number;
+  accuracy: number;
+  isLoggedIn: boolean;
+}
 
 export interface WeekMeta {
   id: string;

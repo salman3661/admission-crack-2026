@@ -86,22 +86,22 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
       case 'Chemistry': return 'from-amber-500/15 to-orange-500/10 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-500/30';
       case 'Higher Math': return 'from-indigo-500/15 to-violet-500/10 text-indigo-700 dark:text-indigo-400 border-indigo-300 dark:border-indigo-500/30';
       case 'Biology': return 'from-emerald-500/15 to-teal-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-500/30';
-      default: return 'from-brand-500/15 to-blue-500/10 text-brand-700 dark:text-brand-400 border-brand-300 dark:border-brand-500/30';
+      default: return 'from-[#056839]/15 to-[#00B09B]/10 text-[#056839] dark:text-emerald-400 border-[#056839]/30';
     }
   };
 
   return (
     <div 
       ref={containerRef}
-      className={`flex flex-col transition-colors duration-200 ${isFullscreen ? 'bg-slate-50 dark:bg-slate-950 p-6 min-h-screen overflow-y-auto' : 'max-w-6xl mx-auto py-6 px-4'}`}
+      className={`flex flex-col transition-colors duration-200 ${isFullscreen ? 'bg-[#F6F8F6] dark:bg-[#0B110D] p-6 min-h-screen overflow-y-auto' : 'max-w-6xl mx-auto py-6 px-4'}`}
     >
       {/* Top Slide Control Header */}
-      <div className="flex flex-wrap items-center justify-between pb-4 gap-3 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-wrap items-center justify-between pb-4 gap-3 border-b border-slate-200/80 dark:border-[#1E2F24]">
         <div className="flex items-center gap-3">
-          <span className={`px-2.5 py-1 rounded-lg text-xs font-bold border uppercase tracking-wider bg-gradient-to-r ${getSubjectColor(currentSlide.subject)}`}>
+          <span className={`px-3 py-1 rounded-full text-xs font-bold border uppercase tracking-wider bg-gradient-to-r ${getSubjectColor(currentSlide.subject)}`}>
             {currentSlide.subject}
           </span>
-          <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-white dark:bg-[#131E17] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-[#1E2F24]">
             {currentSlide.week_id.replace('_', ' ').toUpperCase()}
           </span>
           <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-wide">
@@ -111,8 +111,8 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
 
         {/* Counter & Action Controls */}
         <div className="flex items-center gap-2">
-          <div className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm">
-            <span className="text-brand-600 dark:text-brand-400 font-bold">{currentIndex + 1}</span> / {filteredSlides.length}
+          <div className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-white dark:bg-[#131E17] px-3 py-1 rounded-full border border-slate-200/80 dark:border-[#1E2F24] shadow-sm">
+            <span className="text-[#056839] dark:text-emerald-400 font-bold">{currentIndex + 1}</span> / {filteredSlides.length}
           </div>
 
           {/* Quick jump select */}
@@ -121,7 +121,7 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
               value={currentIndex}
               onChange={(e) => setCurrentIndex(Number(e.target.value))}
               aria-label="স্লাইড নির্বাচন করুন"
-              className="appearance-none bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-300 text-xs px-2.5 py-1.5 pr-7 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer focus:outline-none shadow-sm"
+              className="appearance-none bg-white dark:bg-[#131E17] text-slate-800 dark:text-slate-300 text-xs px-3 py-1.5 pr-7 rounded-full border border-slate-200/80 dark:border-[#1E2F24] hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer focus:outline-none shadow-sm"
             >
               {filteredSlides.map((s, idx) => (
                 <option key={s.id} value={idx}>
@@ -129,13 +129,13 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
                 </option>
               ))}
             </select>
-            <ListFilter className="w-3.5 h-3.5 text-slate-400 absolute right-2 top-2.5 pointer-events-none" />
+            <ListFilter className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-2.5 pointer-events-none" />
           </div>
 
           {/* Fullscreen Button */}
           <button
             onClick={toggleFullscreen}
-            className="p-1.5 rounded-lg bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 shadow-sm transition-all"
+            className="p-2 rounded-full bg-white dark:bg-[#131E17] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#1A261F] border border-slate-200/80 dark:border-[#1E2F24] shadow-sm transition-all"
             title="ফুলস্ক্রিন মোড (F)"
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -144,9 +144,9 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-slate-200 dark:bg-slate-900 h-1.5 rounded-full overflow-hidden my-3">
+      <div className="w-full bg-slate-200 dark:bg-[#1E2F24] h-2 rounded-full overflow-hidden my-3">
         <div 
-          className="bg-gradient-to-r from-brand-500 via-indigo-500 to-cyan-400 h-full transition-all duration-300"
+          className="bg-gradient-to-r from-[#00B09B] to-[#96C93D] h-full transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / filteredSlides.length) * 100}%` }}
         />
       </div>
@@ -154,10 +154,10 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
       {/* Main Slide Card Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-2">
         {/* Card 1: Core Formula Matrix */}
-        <div className="bg-white dark:bg-slate-900/90 rounded-2xl p-5 border border-cyan-200 dark:border-cyan-500/30 shadow-sm dark:shadow-lg dark:shadow-cyan-950/20 relative overflow-hidden group hover:border-cyan-400 dark:hover:border-cyan-500/50 transition-all">
+        <div className="bg-white dark:bg-[#131E17] rounded-3xl p-5 border border-cyan-200 dark:border-cyan-500/30 shadow-sm relative overflow-hidden group hover:border-cyan-400 dark:hover:border-cyan-500/50 transition-all">
           <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-2 mb-3">
-            <span className="p-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-500/20">
+            <span className="p-1.5 rounded-xl bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-500/20">
               <BookOpen className="w-4 h-4" />
             </span>
             <h3 className="text-sm font-bold text-cyan-800 dark:text-cyan-300 tracking-wide">
@@ -170,10 +170,10 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
         </div>
 
         {/* Card 2: 5-Second Hand Calculation Hacks */}
-        <div className="bg-white dark:bg-slate-900/90 rounded-2xl p-5 border border-amber-200 dark:border-amber-500/30 shadow-sm dark:shadow-lg dark:shadow-amber-950/20 relative overflow-hidden group hover:border-amber-400 dark:hover:border-amber-500/50 transition-all">
+        <div className="bg-white dark:bg-[#131E17] rounded-3xl p-5 border border-amber-200 dark:border-amber-500/30 shadow-sm relative overflow-hidden group hover:border-amber-400 dark:hover:border-amber-500/50 transition-all">
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-2 mb-3">
-            <span className="p-1.5 rounded-lg bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">
+            <span className="p-1.5 rounded-xl bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">
               <Zap className="w-4 h-4" />
             </span>
             <h3 className="text-sm font-bold text-amber-800 dark:text-amber-300 tracking-wide">
@@ -186,14 +186,14 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
         </div>
 
         {/* Card 3: Red Alert Student Traps */}
-        <div className="bg-white dark:bg-slate-900/90 rounded-2xl p-5 border border-rose-200 dark:border-rose-500/30 shadow-sm dark:shadow-lg dark:shadow-rose-950/20 relative overflow-hidden group hover:border-rose-400 dark:hover:border-rose-500/50 transition-all">
+        <div className="bg-white dark:bg-[#131E17] rounded-3xl p-5 border border-rose-200 dark:border-rose-500/30 shadow-sm relative overflow-hidden group hover:border-rose-400 dark:hover:border-rose-500/50 transition-all">
           <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-2 mb-3">
-            <span className="p-1.5 rounded-lg bg-rose-100 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/20">
+            <span className="p-1.5 rounded-xl bg-rose-100 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/20">
               <AlertTriangle className="w-4 h-4" />
             </span>
             <h3 className="text-sm font-bold text-rose-800 dark:text-rose-300 tracking-wide">
-              রেড অ্যালার্ট ট্র্যাপ ও নেগেটিভ মার্কিং ফাঁদ
+              রেড অ্যালার্ট ট্র্যাপ ও নেগেティブ মার্কিং ফাঁদ
             </h3>
           </div>
           <div className="text-sm">
@@ -202,10 +202,10 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
         </div>
 
         {/* Card 4: Last Night Exam Capsule */}
-        <div className="bg-white dark:bg-slate-900/90 rounded-2xl p-5 border border-emerald-200 dark:border-emerald-500/30 shadow-sm dark:shadow-lg dark:shadow-emerald-950/20 relative overflow-hidden group hover:border-emerald-400 dark:hover:border-emerald-500/50 transition-all">
+        <div className="bg-white dark:bg-[#131E17] rounded-3xl p-5 border border-emerald-200 dark:border-emerald-500/30 shadow-sm relative overflow-hidden group hover:border-emerald-400 dark:hover:border-emerald-500/50 transition-all">
           <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-2 mb-3">
-            <span className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
+            <span className="p-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
               <CheckCircle2 className="w-4 h-4" />
             </span>
             <h3 className="text-sm font-bold text-emerald-800 dark:text-emerald-300 tracking-wide">
@@ -219,24 +219,24 @@ export const SlidesView: React.FC<SlidesViewProps> = ({
       </div>
 
       {/* Slide Navigation Footer Bar */}
-      <div className="flex items-center justify-between pt-4 mt-2 border-t border-slate-200 dark:border-slate-800">
+      <div className="flex items-center justify-between pt-4 mt-2 border-t border-slate-200/80 dark:border-[#1E2F24]">
         <button
           onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))}
           disabled={currentIndex === 0}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:pointer-events-none border border-slate-200 dark:border-slate-800 shadow-sm transition-all"
+          className="flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white dark:bg-[#131E17] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#1A261F] disabled:opacity-40 disabled:pointer-events-none border border-slate-200/80 dark:border-[#1E2F24] shadow-sm transition-all"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>পূর্ববর্তী স্লাইড</span>
         </button>
 
         <span className="hidden sm:inline text-xs text-slate-500 dark:text-slate-400 font-medium">
-          কীবোর্ডের <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">←</kbd> ও <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">→</kbd> কী ব্যবহার করুন
+          কীবোর্ডের <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-[#131E17] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#1E2F24]">←</kbd> ও <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-[#131E17] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#1E2F24]">→</kbd> কী ব্যবহার করুন
         </span>
 
         <button
           onClick={() => setCurrentIndex((prev) => Math.min(prev + 1, filteredSlides.length - 1))}
           disabled={currentIndex === filteredSlides.length - 1}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-brand-600 hover:bg-brand-500 text-white disabled:opacity-40 disabled:pointer-events-none shadow-md shadow-brand-500/20 transition-all"
+          className="flex items-center gap-2 px-5 py-2 rounded-full text-xs sm:text-sm font-bold bg-[#056839] hover:bg-[#044e2b] text-white disabled:opacity-40 disabled:pointer-events-none shadow-md shadow-[#056839]/20 transition-all hover:scale-105 active:scale-95"
         >
           <span>পরবর্তী স্লাইড</span>
           <ChevronRight className="w-4 h-4" />

@@ -143,10 +143,10 @@ export const ExamView: React.FC<ExamViewProps> = ({
   if (!examStarted) {
     const totalAvail = availableQuestions.length;
     return (
-      <div className="max-w-2xl mx-auto py-12 px-4 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 p-0.5 mx-auto mb-4 shadow-xl shadow-brand-500/20">
-          <div className="w-full h-full bg-slate-100 dark:bg-slate-950 rounded-[14px] flex items-center justify-center">
-            <Timer className="w-8 h-8 text-brand-600 dark:text-brand-400" />
+      <div className="max-w-2xl mx-auto py-10 px-4 text-center">
+        <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-4 shadow-xl shadow-[#056839]/20">
+          <div className="w-full h-full bg-white dark:bg-[#131E17] rounded-[22px] flex items-center justify-center">
+            <Timer className="w-8 h-8 text-[#056839] dark:text-emerald-400" />
           </div>
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -158,19 +158,19 @@ export const ExamView: React.FC<ExamViewProps> = ({
 
         {/* Selected Scope Badge */}
         <div className="flex flex-wrap items-center justify-center gap-2 my-6">
-          <span className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
-            সপ্তাহ: <strong className="text-brand-600 dark:text-brand-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
+          <span className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#131E17] border border-slate-200/80 dark:border-[#1E2F24] text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+            সপ্তাহ: <strong className="text-[#056839] dark:text-emerald-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
           </span>
-          <span className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+          <span className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#131E17] border border-slate-200/80 dark:border-[#1E2F24] text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
             বিষয়: <strong className="text-cyan-600 dark:text-cyan-400">{selectedSubject}</strong>
           </span>
-          <span className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
+          <span className="px-3.5 py-1.5 rounded-full bg-white dark:bg-[#131E17] border border-slate-200/80 dark:border-[#1E2F24] text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-sm">
             উপলব্ধ প্রশ্ন: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
           </span>
         </div>
 
         {/* Question Count Selection */}
-        <div className="bg-white dark:bg-slate-900/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 max-w-md mx-auto mb-8 shadow-sm dark:shadow-xl">
+        <div className="bg-white dark:bg-[#131E17] p-6 rounded-3xl border border-slate-200/80 dark:border-[#1E2F24] max-w-md mx-auto mb-8 shadow-sm">
           <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
             প্রশ্নের সংখ্যা নির্বাচন করুন
           </label>
@@ -179,10 +179,10 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <button
                 key={cnt}
                 onClick={() => setQuestionCount(cnt)}
-                className={`py-2.5 rounded-xl text-sm font-bold border transition-all ${
+                className={`py-2.5 rounded-2xl text-sm font-bold border transition-all ${
                   questionCount === cnt
-                    ? 'bg-brand-600 text-white border-brand-400 shadow-md shadow-brand-500/25'
-                    : 'bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-800'
+                    ? 'bg-[#056839] text-white border-[#056839] shadow-md shadow-[#056839]/25 scale-102'
+                    : 'bg-[#F6F8F6] dark:bg-[#1A261F] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#223328] hover:bg-slate-200 dark:hover:bg-[#203026]'
                 }`}
               >
                 {cnt} টি MCQ
@@ -195,7 +195,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
         <button
           onClick={() => startExam(questionCount)}
           disabled={totalAvail === 0}
-          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 via-indigo-600 to-cyan-500 hover:opacity-95 text-white font-bold text-base shadow-xl shadow-brand-500/25 transition-all disabled:opacity-40"
+          className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-base shadow-xl shadow-[#056839]/25 transition-all disabled:opacity-40 hover:scale-105 active:scale-95"
         >
           <Play className="w-5 h-5 fill-current" />
           <span>পরীক্ষা শুরু করুন ({questionCount}টি MCQ)</span>
@@ -218,7 +218,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
     return (
       <div className="max-w-4xl mx-auto py-8 px-4">
         {/* Scorecard Hero */}
-        <div className="bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl text-center relative overflow-hidden mb-8">
+        <div className="bg-white dark:bg-[#131E17] p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-[#1E2F24] shadow-xl text-center relative overflow-hidden mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Award className={`w-8 h-8 ${isPassing ? 'text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-slate-500'}`} />
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
@@ -231,7 +231,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
 
           {/* Big Score Display */}
           <div className="my-6">
-            <span className="text-5xl sm:text-6xl font-black tracking-tight bg-gradient-to-r from-brand-600 via-cyan-600 to-emerald-600 dark:from-brand-400 dark:via-cyan-300 dark:to-emerald-400 bg-clip-text text-transparent font-['Outfit']">
+            <span className="text-5xl sm:text-6xl font-black tracking-tight bg-gradient-to-r from-[#056839] via-[#00B09B] to-[#96C93D] bg-clip-text text-transparent font-['Outfit']">
               {totalScore.toFixed(2)}
             </span>
             <span className="text-lg text-slate-400 dark:text-slate-500 font-bold ml-2">/ {maxPossible.toFixed(1)}</span>
@@ -251,15 +251,15 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 <XCircle className="w-4 h-4" /> {wrongCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-center">
+            <div className="p-3 rounded-2xl bg-[#F6F8F6] dark:bg-[#1A261F] border border-slate-200/80 dark:border-[#24352A] text-center">
               <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">স্কিপ / ফাঁকা</span>
               <div className="text-xl font-bold text-slate-800 dark:text-slate-300 flex items-center justify-center gap-1 mt-0.5">
                 <MinusCircle className="w-4 h-4" /> {skippedCount}
               </div>
             </div>
-            <div className="p-3 rounded-2xl bg-brand-50 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/20 text-center">
-              <span className="text-xs text-brand-800 dark:text-brand-300 font-medium">নির্ভুলতা (Accuracy)</span>
-              <div className="text-xl font-bold text-brand-600 dark:text-brand-400 flex items-center justify-center gap-1 mt-0.5">
+            <div className="p-3 rounded-2xl bg-[#056839]/10 dark:bg-[#056839]/20 border border-[#056839]/20 text-center">
+              <span className="text-xs text-[#056839] dark:text-emerald-300 font-medium">নির্ভুলতা (Accuracy)</span>
+              <div className="text-xl font-bold text-[#056839] dark:text-emerald-400 flex items-center justify-center gap-1 mt-0.5">
                 <Flame className="w-4 h-4" /> {accuracy}%
               </div>
             </div>
@@ -269,14 +269,14 @@ export const ExamView: React.FC<ExamViewProps> = ({
           <div className="mt-6 flex justify-center gap-3">
             <button
               onClick={() => startExam(questionCount)}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-sm shadow-md transition-all"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm shadow-md transition-all hover:scale-105 active:scale-95"
             >
               <RotateCcw className="w-4 h-4" />
               <span>পুনরায় পরীক্ষা দিন</span>
             </button>
             <button
               onClick={() => setExamStarted(false)}
-              className="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent text-sm font-semibold transition-all shadow-sm"
+              className="px-5 py-2.5 rounded-full bg-[#F6F8F6] dark:bg-[#1A261F] hover:bg-slate-200 dark:hover:bg-[#203026] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#223328] text-sm font-semibold transition-all shadow-sm"
             >
               সেটিংস পরিবর্তন
             </button>
@@ -425,21 +425,21 @@ export const ExamView: React.FC<ExamViewProps> = ({
   return (
     <div className="max-w-3xl mx-auto py-6 px-4">
       {/* Top Timer & Header */}
-      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/80 dark:border-[#1E2F24]">
         <div className="flex items-center gap-2.5">
-          <span className="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-white dark:bg-slate-900 text-brand-600 dark:text-brand-400 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-white dark:bg-[#131E17] text-[#056839] dark:text-emerald-400 border border-slate-200/80 dark:border-[#1E2F24] shadow-sm">
             প্রশ্ন: {currentIndex + 1} / {activeQuestions.length}
           </span>
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white dark:bg-[#131E17] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-[#1E2F24] shadow-sm">
             {currentQ.subject}
           </span>
         </div>
 
         {/* 45-Second Timer Pill */}
-        <div className={`flex items-center gap-2 px-3.5 py-1 rounded-xl border text-sm font-bold font-mono transition-all shadow-sm ${
+        <div className={`flex items-center gap-2 px-3.5 py-1 rounded-full border text-sm font-bold font-mono transition-all shadow-sm ${
           isTimeCritical 
             ? 'bg-rose-50 dark:bg-rose-500/20 border-rose-300 dark:border-rose-500/50 text-rose-700 dark:text-rose-300 animate-pulse' 
-            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-cyan-700 dark:text-cyan-300'
+            : 'bg-white dark:bg-[#131E17] border-slate-200/80 dark:border-[#1E2F24] text-cyan-700 dark:text-cyan-300'
         }`}>
           <Clock className="w-4 h-4" />
           <span>{timeLeft}s</span>
@@ -447,17 +447,17 @@ export const ExamView: React.FC<ExamViewProps> = ({
       </div>
 
       {/* Timer Progress Line */}
-      <div className="w-full bg-slate-200 dark:bg-slate-900 h-1.5 rounded-full overflow-hidden mb-6">
+      <div className="w-full bg-slate-200 dark:bg-[#1E2F24] h-2 rounded-full overflow-hidden mb-6">
         <div 
           className={`h-full transition-all duration-1000 ${
-            isTimeCritical ? 'bg-rose-500' : 'bg-gradient-to-r from-brand-500 to-cyan-400'
+            isTimeCritical ? 'bg-rose-500' : 'bg-gradient-to-r from-[#00B09B] to-[#96C93D]'
           }`}
           style={{ width: `${timerPercent}%` }}
         />
       </div>
 
       {/* Question Card */}
-      <div className="bg-white dark:bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-xl mb-6">
+      <div className="bg-white dark:bg-[#131E17] rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-[#1E2F24] shadow-sm mb-6">
         <div className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed mb-6">
           <MathText content={currentQ.q} />
         </div>
@@ -472,14 +472,14 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 onClick={() => handleOptionSelect(optIdx)}
                 className={`w-full p-4 rounded-2xl border text-left flex items-center gap-3.5 transition-all text-sm sm:text-base ${
                   isSelected
-                    ? 'bg-brand-50 dark:bg-brand-600/20 border-brand-500 text-brand-950 dark:text-white shadow-sm dark:shadow-md dark:shadow-brand-500/10'
-                    : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 text-slate-800 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600'
+                    ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-sm'
+                    : 'bg-[#F6F8F6] dark:bg-[#1A261F] border-slate-200/80 dark:border-[#223328] text-slate-800 dark:text-slate-300 hover:bg-[#EAEFEA] dark:hover:bg-[#203026]'
                 }`}
               >
                 <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-all ${
                   isSelected 
-                    ? 'bg-brand-600 text-white' 
-                    : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700'
+                    ? 'bg-[#056839] text-white shadow-sm' 
+                    : 'bg-white dark:bg-[#131E17] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-[#223328]'
                 }`}>
                   {String.fromCharCode(65 + optIdx)}
                 </span>
@@ -496,18 +496,18 @@ export const ExamView: React.FC<ExamViewProps> = ({
       <div className="flex items-center justify-between gap-3">
         <button
           onClick={() => handleNext(null)}
-          className="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-semibold shadow-sm transition-all"
+          className="px-4 py-2.5 rounded-full bg-white dark:bg-[#131E17] hover:bg-slate-100 dark:hover:bg-[#1A261F] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 border border-slate-200/80 dark:border-[#1E2F24] text-xs sm:text-sm font-semibold shadow-sm transition-all"
         >
           স্কিপ করুন (S)
         </button>
 
         <span className="hidden sm:inline text-xs text-slate-500 dark:text-slate-400">
-          <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">1-4</kbd> বিকল্প নির্বাচন | <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">Enter</kbd> পরবর্তী প্রশ্ন
+          <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-[#131E17] border border-slate-200 dark:border-[#1E2F24] text-slate-700 dark:text-slate-300">1-4</kbd> বিকল্প নির্বাচন | <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-[#131E17] border border-slate-200 dark:border-[#1E2F24] text-slate-700 dark:text-slate-300">Enter</kbd> পরবর্তী প্রশ্ন
         </span>
 
         <button
           onClick={() => handleNext(userSelected ?? null)}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-brand-500/20 transition-all"
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#056839]/20 transition-all hover:scale-105 active:scale-95"
         >
           <span>{currentIndex + 1 === activeQuestions.length ? 'পরীক্ষা জমা দিন' : 'পরবর্তী প্রশ্ন'}</span>
           <ChevronRight className="w-4 h-4" />
