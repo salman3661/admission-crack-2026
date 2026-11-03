@@ -7,7 +7,6 @@ import {
   LogOut, 
   Mail, 
   ShieldCheck, 
-  ArrowRight,
   GraduationCap,
   Loader2,
   AlertCircle
@@ -30,10 +29,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   onLogin,
   onLogout,
 }) => {
-  const [customName, setCustomName] = useState('');
-  const [customEmail, setCustomEmail] = useState('');
-  const [targetUnit, setTargetUnit] = useState('ঢাকা বিশ্ববিদ্যালয় \'ক\' ইউনিট');
-  const [showCustomForm, setShowCustomForm] = useState(false);
+  const [targetUnit, setTargetUnit] = useState<string>(user.target || "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
@@ -44,77 +40,39 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     setAuthError(null);
     try {
       const fbUser = await loginWithGoogle();
-      onLogin({
-        name: fbUser.displayName || fbUser.email?.split('@')[0] || 'শিক্ষার্থী',
+      const authenticProfile: Partial<UserProfile> = {
+        name: fbUser.displayName || fbUser.email?.split('@')[0] || 'ভর্তিযোদ্ধা',
         email: fbUser.email || '',
         avatar: fbUser.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(fbUser.email || 'student')}`,
         target: targetUnit,
-        streakDays: 1,
-        solvedCount: 0,
-        accuracy: 100,
+        streakDays: user.streakDays > 0 ? user.streakDays : 1,
+        solvedCount: user.solvedCount,
+        accuracy: user.accuracy > 0 ? user.accuracy : 100,
         isLoggedIn: true,
-      });
+      };
+      onLogin(authenticProfile);
       onClose();
     } catch (err: unknown) {
       console.error('Firebase Google Sign-In error:', err);
       const errorObj = err as { code?: string; message?: string };
       if (errorObj?.code === 'auth/popup-closed-by-user') {
-        setAuthError('পপ-আপ উইন্ডো বন্ধ করা হয়েছে। আবার চেষ্টা করুন।');
+        setAuthError('লগইন পপ-আপ উইন্ডো বন্ধ করা হয়েছে। আবার চেষ্টা করুন।');
       } else if (errorObj?.code === 'auth/unauthorized-domain') {
-        setAuthError('এই ডোমেনটি Firebase Authentication এ অনুমোদিত নয়। নিচের ডেমো প্রোফাইল দিয়ে টেস্ট করতে পারেন।');
+        setAuthError('এই ডোমেনটি Firebase Console-এ Authorized Domains হিসেবে যোগ করা প্রয়োজন।');
       } else {
-        setAuthError(errorObj?.message || 'Google সাইন ইন সম্পন্ন করা সম্ভব হয়নি।');
+        setAuthError(errorObj?.message || 'Google সাইন ইন সম্পন্ন করা সম্ভব হয়নি। অনুগ্রহ করে ইন্টারনেট সংযোগ চেক করুন।');
       }
     } finally {
       setIsLoggingIn(false);
     }
   };
 
-  const demoAccounts = [
-    {
-      name: 'হাসিবুল হাসান',
-      email: 'hasibul.du26@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
-      target: 'ঢাকা বিশ্ববিদ্যালয় \'ক\' ইউনিট',
-      streakDays: 5,
-      solvedCount: 142,
-      accuracy: 89,
-    },
-    {
-      name: 'সাদিয়া ইসলাম',
-      email: 'sadia.med26@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80',
-      target: 'মেডিকেল স্পেশাল (DMC টার্গেট)',
-      streakDays: 7,
-      solvedCount: 195,
-      accuracy: 94,
-    },
-    {
-      name: 'রাকিব আহমেদ',
-      email: 'rakib.eng26@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
-      target: 'BUET ও ইঞ্জিনিয়ারিং ক্লাস্টার',
-      streakDays: 4,
-      solvedCount: 118,
-      accuracy: 86,
-    }
+  const units = [
+    "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট",
+    "মেডিকেল (DMC Focus)",
+    "BUET ও ইঞ্জিনিয়ারিং",
+    "জিএসটি (GST) সমন্বিত গুচ্ছ"
   ];
-
-  const handleCustomSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!customEmail) return;
-    onLogin({
-      name: customName || customEmail.split('@')[0],
-      email: customEmail,
-      avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(customEmail)}`,
-      target: targetUnit,
-      streakDays: 1,
-      solvedCount: 25,
-      accuracy: 85,
-      isLoggedIn: true,
-    });
-    onClose();
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
@@ -122,7 +80,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         className="relative w-full max-w-md bg-white dark:bg-[#131E17] rounded-3xl shadow-2xl border border-slate-200/80 dark:border-[#1E2F24] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header decoration */}
+        {/* Top Gradient Highlight */}
         <div className="h-2 bg-gradient-to-r from-[#00B09B] via-[#056839] to-[#96C93D]" />
 
         {/* Close Button */}
@@ -141,7 +99,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative">
                   <img
-                    src={user.avatar}
+                    src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email || 'user')}`}
                     alt={user.name}
                     className="w-16 h-16 rounded-2xl object-cover ring-2 ring-[#056839] shadow-md"
                   />
@@ -149,17 +107,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
                 </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                      {user.name}
-                    </h3>
-                  </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                    <Mail className="w-3.5 h-3.5" /> {user.email}
+                <div className="overflow-hidden">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white truncate">
+                    {user.name}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate">
+                    <Mail className="w-3.5 h-3.5 shrink-0" /> {user.email}
                   </p>
-                  <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20">
-                    <GraduationCap className="w-3 h-3" /> {user.target}
+                  <span className="inline-flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 truncate">
+                    <GraduationCap className="w-3 h-3 shrink-0" /> {user.target}
                   </span>
                 </div>
               </div>
@@ -201,10 +157,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <div className="flex items-center justify-between p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 mb-6 text-xs text-emerald-800 dark:text-emerald-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>Google ক্লাউড সিঙ্ক সচল আছে</span>
+                  <span>Firebase ক্লাউড অথেনটিকেশন অ্যাক্টিভ</span>
                 </div>
                 <span className="font-mono text-[10px] bg-emerald-100 dark:bg-emerald-900/60 px-1.5 py-0.5 rounded text-emerald-700 dark:text-emerald-300">
-                  Active
+                  Verified
                 </span>
               </div>
 
@@ -221,8 +177,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     onLogout();
                     onClose();
                   }}
-                  className="py-2.5 px-3.5 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-900/40 text-rose-600 dark:text-rose-400 font-semibold rounded-xl text-sm transition-colors flex items-center gap-1.5 border border-rose-200 dark:border-rose-900/50"
-                  title="লগআউট"
+                  className="py-2.5 px-4 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-900/40 text-rose-600 dark:text-rose-400 font-semibold rounded-xl text-sm transition-colors flex items-center gap-1.5 border border-rose-200 dark:border-rose-900/50"
+                  title="সাইন আউট"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>লগআউট</span>
@@ -232,8 +188,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           ) : (
             /* Google Sign In View */
             <div>
-              {/* Top Branding & Motivation */}
-              <div className="text-center mb-6">
+              {/* Top Motivation */}
+              <div className="text-center mb-5">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#056839]/10 text-[#056839] dark:text-emerald-400 mb-2">
                   <Sparkles className="w-6 h-6" />
                 </div>
@@ -241,33 +197,55 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   Google দিয়ে সাইন ইন করুন
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs mx-auto">
-                  আপনার পরীক্ষার ফলাফল, নেগেটিভ মার্ক অ্যানালিটিক্স এবং বুকমার্ক ক্লাউডে সংরক্ষণ করুন
+                  রিয়েলটাইম পরীক্ষার মার্কস, নেগেটিভ মার্কিং ট্র্যাকার এবং অ্যানালিটিক্স নিরাপদে ক্লাউডে সংরক্ষণ করুন।
                 </p>
               </div>
 
-              {/* Error notification if any */}
+              {/* Target Unit Selector */}
+              <div className="mb-4">
+                <label className="block text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                  আপনার টার্গেট নির্বাচন করুন:
+                </label>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {units.map((unit) => {
+                    const isSelected = targetUnit === unit;
+                    return (
+                      <button
+                        key={unit}
+                        type="button"
+                        onClick={() => setTargetUnit(unit)}
+                        className={`p-2 rounded-xl text-xs font-semibold border text-left transition-all ${
+                          isSelected
+                            ? 'bg-[#056839] text-white border-[#056839] shadow-sm'
+                            : 'bg-[#F6F8F6] dark:bg-[#17231B] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#223328] hover:border-[#056839]/40'
+                        }`}
+                      >
+                        {unit}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Error Alert */}
               {authError && (
                 <div className="mb-4 p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 flex items-start gap-2.5 text-xs text-rose-700 dark:text-rose-300">
                   <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-500" />
                   <div className="flex-1">
                     <p className="font-semibold">{authError}</p>
-                    <p className="text-[10px] text-rose-600/80 dark:text-rose-400/80 mt-0.5">
-                      Firebase Console Authorized Domains-এ ডোমেন যোগ করা না থাকলে ডেমো প্রোফাইল নির্বাচন করতে পারেন।
-                    </p>
                   </div>
                 </div>
               )}
 
-              {/* Primary Google Login Button */}
+              {/* Primary Google Auth Button */}
               <button
                 onClick={handleGoogleSignIn}
                 disabled={isLoggingIn}
-                className="w-full py-3 px-4 bg-white dark:bg-[#1A261F] hover:bg-slate-50 dark:hover:bg-[#223329] border border-slate-300 dark:border-[#2C4234] rounded-2xl font-semibold text-slate-800 dark:text-white text-sm flex items-center justify-center gap-3 transition-all shadow-sm hover:shadow-md active:scale-[0.99] mb-4 group disabled:opacity-60"
+                className="w-full py-3.5 px-4 bg-white dark:bg-[#1A261F] hover:bg-slate-50 dark:hover:bg-[#223329] border border-slate-300 dark:border-[#2C4234] rounded-2xl font-bold text-slate-800 dark:text-white text-sm flex items-center justify-center gap-3 transition-all shadow-sm hover:shadow-md active:scale-[0.99] mb-4 group disabled:opacity-60"
               >
                 {isLoggingIn ? (
                   <Loader2 className="w-5 h-5 animate-spin text-[#056839]" />
                 ) : (
-                  /* Official Google 'G' Logo SVG */
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
                       fill="#4285F4"
@@ -287,122 +265,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     />
                   </svg>
                 )}
-                <span className="font-['Outfit'] font-bold">
+                <span className="font-['Outfit'] font-bold text-sm">
                   {isLoggingIn ? 'Google এ লগইন হচ্ছে...' : 'Continue with Google'}
                 </span>
               </button>
 
-              {/* One-click Candidate Profiles */}
-              <div className="mb-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="h-px flex-1 bg-slate-200 dark:bg-[#1E2F24]" />
-                  <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-                    অথবা সরাসরি নির্বাচন করুন
-                  </span>
-                  <div className="h-px flex-1 bg-slate-200 dark:bg-[#1E2F24]" />
-                </div>
-
-                <div className="space-y-2">
-                  {demoAccounts.map((account) => (
-                    <button
-                      key={account.email}
-                      onClick={() => {
-                        onLogin({
-                          ...account,
-                          isLoggedIn: true,
-                        });
-                        onClose();
-                      }}
-                      className="w-full p-2.5 rounded-2xl bg-[#F6F8F6] dark:bg-[#17231B] hover:bg-[#EAEFEA] dark:hover:bg-[#203025] border border-slate-200/70 dark:border-[#223327] flex items-center justify-between text-left transition-all group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={account.avatar}
-                          alt={account.name}
-                          className="w-9 h-9 rounded-xl object-cover ring-1 ring-slate-300 dark:ring-slate-700"
-                        />
-                        <div>
-                          <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                            {account.name}
-                            <span className="text-[10px] text-amber-500 font-mono font-normal">
-                              🔥 {account.streakDays}d
-                            </span>
-                          </div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                            {account.target}
-                          </div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-[#056839] group-hover:translate-x-0.5 transition-all" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Custom Google account toggler */}
-              {!showCustomForm ? (
-                <button
-                  onClick={() => setShowCustomForm(true)}
-                  className="w-full py-2 text-center text-xs font-semibold text-[#056839] dark:text-emerald-400 hover:underline"
-                >
-                  + নিজস্ব Google ইমেইল দিয়ে লগইন করুন
-                </button>
-              ) : (
-                <form onSubmit={handleCustomSubmit} className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-[#1E2F24]">
-                  <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
-                      আপনার নাম:
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="যেমন: তানভীর আহমেদ"
-                      value={customName}
-                      onChange={(e) => setCustomName(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#17231B] border border-slate-300 dark:border-[#2A3E31] text-slate-900 dark:text-white focus:outline-none focus:border-[#056839]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
-                      Google Gmail ঠিকানা:
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="example@gmail.com"
-                      value={customEmail}
-                      onChange={(e) => setCustomEmail(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#17231B] border border-slate-300 dark:border-[#2A3E31] text-slate-900 dark:text-white focus:outline-none focus:border-[#056839]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
-                      টার্গেট ইউনিট:
-                    </label>
-                    <select
-                      value={targetUnit}
-                      onChange={(e) => setTargetUnit(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-xl bg-white dark:bg-[#17231B] border border-slate-300 dark:border-[#2A3E31] text-slate-900 dark:text-white focus:outline-none focus:border-[#056839]"
-                    >
-                      <option value="ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট">ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট</option>
-                      <option value="মেডিকেল (DMC Focus)">মেডিকেল (DMC Focus)</option>
-                      <option value="BUET ও ইঞ্জিনিয়ারিং">BUET ও ইঞ্জিনিয়ারিং</option>
-                      <option value="জিএসটি (GST) সমন্বিত গুচ্ছ">জিএসটি (GST) সমন্বিত গুচ্ছ</option>
-                    </select>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full py-2.5 bg-[#056839] hover:bg-[#044e2b] text-white text-xs font-bold rounded-xl transition-colors shadow-sm"
-                  >
-                    সাইন ইন সম্পন্ন করুন
-                  </button>
-                </form>
-              )}
-
               {/* Security Note */}
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-[#1E2F24] text-center">
-                <p className="text-[10px] text-slate-400 dark:text-slate-500 flex items-center justify-center gap-1">
+              <div className="pt-2 text-center">
+                <p className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center justify-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                  Google OAuth সিকিউর লগইন • কোনো পাসওয়ার্ড সংরক্ষিত হয় না
+                  Firebase OAuth 2.0 • সরাসরি অফিসিয়াল Google একাউন্ট দিয়ে সুরক্ষিত
                 </p>
               </div>
             </div>

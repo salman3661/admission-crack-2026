@@ -143,18 +143,15 @@ export const ExamView: React.FC<ExamViewProps> = ({
   if (!examStarted) {
     const totalAvail = availableQuestions.length;
     return (
-      <div className="max-w-2xl mx-auto py-10 px-4 text-center">
-        <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-4 shadow-xl shadow-[#056839]/20">
-          <div className="w-full h-full bg-white dark:bg-[#131E17] rounded-[22px] flex items-center justify-center">
-            <Timer className="w-8 h-8 text-[#056839] dark:text-emerald-400" />
+      <div className="max-w-2xl mx-auto py-4 sm:py-6 px-4 text-center">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-3 shadow-lg shadow-[#056839]/20">
+          <div className="w-full h-full bg-white dark:bg-[#131E17] rounded-[14px] flex items-center justify-center">
+            <Timer className="w-6 h-6 text-[#056839] dark:text-emerald-400" />
           </div>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           ঢাবি 'ক' ইউনিট রিয়েল এক্সাম মোড
         </h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 max-w-lg mx-auto">
-          ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিটের স্ট্যান্ডার্ড নেগেটিভ মার্কিং (+১.০ সঠিক, -০.২৫ ভুল) এবং প্রতিটি প্রশ্নে ৪৫ সেকেন্ড সময়সীমা সহ বাস্তব পরীক্ষার অনুভূতি।
-        </p>
 
         {/* Selected Scope Badge */}
         <div className="flex flex-wrap items-center justify-center gap-2 my-6">

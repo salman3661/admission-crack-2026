@@ -64,16 +64,16 @@ export function App() {
         // fallback
       }
     }
-    // Default active candidate profile
+    // Default guest profile
     return {
-      name: 'হাসিবুল হাসান',
-      email: 'hasibul.du26@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
+      name: '',
+      email: '',
+      avatar: '',
       target: "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট",
-      streakDays: 5,
-      solvedCount: 142,
-      accuracy: 89,
-      isLoggedIn: true,
+      streakDays: 0,
+      solvedCount: 0,
+      accuracy: 0,
+      isLoggedIn: false,
     };
   });
 
@@ -84,9 +84,9 @@ export function App() {
         setUser((prev) => {
           const updated: UserProfile = {
             ...prev,
-            name: firebaseUser.displayName || prev.name || 'শিক্ষার্থী',
-            email: firebaseUser.email || prev.email || '',
-            avatar: firebaseUser.photoURL || prev.avatar,
+            name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'শিক্ষার্থী',
+            email: firebaseUser.email || '',
+            avatar: firebaseUser.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(firebaseUser.email || 'user')}`,
             isLoggedIn: true,
           };
           localStorage.setItem('admission_user', JSON.stringify(updated));
@@ -111,11 +111,17 @@ export function App() {
     } catch (e) {
       console.warn('Firebase logout notice:', e);
     }
-    setUser((prev) => {
-      const updated = { ...prev, isLoggedIn: false };
-      localStorage.setItem('admission_user', JSON.stringify(updated));
-      return updated;
+    setUser({
+      name: '',
+      email: '',
+      avatar: '',
+      target: "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট",
+      streakDays: 0,
+      solvedCount: 0,
+      accuracy: 0,
+      isLoggedIn: false,
     });
+    localStorage.removeItem('admission_user');
   };
 
   const slides = slidesData as SlideItem[];
@@ -138,6 +144,7 @@ export function App() {
         onToggleTheme={toggleTheme}
         user={user}
         onOpenAuth={() => setIsAuthModalOpen(true)}
+        onLogout={handleLogout}
       />
 
       {/* Main Mode View Area */}

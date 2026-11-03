@@ -66,9 +66,6 @@ export const DecksView: React.FC<DecksViewProps> = ({
               <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {user.isLoggedIn ? `স্বাগতম, ${user.name}!` : 'স্বাগতম, ভর্তিযোদ্ধা!'} আজ তোমার টার্গেট DU 'Ka' ও মেডিকেল ক্র্যাক
               </h1>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-2xl leading-relaxed">
-                ক্যালকুলেটর-বিহীন শর্টকাট, -0.25 নেগেটিভ মার্কিং প্র্যাকটিস ও ১০০% এক্সপেক্টেড প্রশ্নের আধুনিক স্মার্ট ডেক।
-              </p>
             </div>
 
             {/* Quick user status or Google sign-in trigger */}
@@ -117,7 +114,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
           [ মডেল টেস্ট ]  [ ভার্সিটি ক্লাস্টার ]  [ ট্র্যাপ ও শর্টকাট ভল্ট ]
           Active pills get solid deep green/emerald background (bg-[#056839] text-white). */}
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
           <button
             onClick={() => setActiveSegment('all')}
             className={`px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm ${

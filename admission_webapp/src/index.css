@@ -80,6 +80,15 @@
   background: rgba(5, 104, 57, 0.5);
 }
 
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Mobile safe area support for bottom dock */
 .pb-dock {
   padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));

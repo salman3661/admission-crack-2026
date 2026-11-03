@@ -99,7 +99,7 @@ export const VaultView: React.FC<VaultViewProps> = ({ vault }) => {
       {/* 3. CHORCHA PILL FILTERS & TABS:
           Replace flat text links with rounded pill segment controls:
           Active pills get solid deep green/emerald background (bg-[#056839] text-white). */}
-      <div className="flex items-center justify-center gap-1.5 overflow-x-auto pb-4 mb-6 scrollbar-none border-b border-slate-200/80 dark:border-[#1E2F24]">
+      <div className="flex items-center justify-center gap-1.5 overflow-x-auto pb-4 mb-6 no-scrollbar border-b border-slate-200/80 dark:border-[#1E2F24]">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
