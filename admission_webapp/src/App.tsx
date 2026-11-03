@@ -8,6 +8,7 @@ import { VaultView } from './components/VaultView';
 import { AnalyticsView } from './components/AnalyticsView';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
+import { auth, onAuthStateChanged, logoutFirebase } from './lib/firebase';
 
 import slidesData from './data/slides.json';
 import flashcardsData from './data/flashcards.json';
@@ -76,6 +77,26 @@ export function App() {
     };
   });
 
+  // Listen to Firebase Auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser((prev) => {
+          const updated: UserProfile = {
+            ...prev,
+            name: firebaseUser.displayName || prev.name || 'শিক্ষার্থী',
+            email: firebaseUser.email || prev.email || '',
+            avatar: firebaseUser.photoURL || prev.avatar,
+            isLoggedIn: true,
+          };
+          localStorage.setItem('admission_user', JSON.stringify(updated));
+          return updated;
+        });
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const handleLogin = (profile: Partial<UserProfile>) => {
     setUser((prev) => {
       const updated = { ...prev, ...profile, isLoggedIn: true };
@@ -84,7 +105,12 @@ export function App() {
     });
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await logoutFirebase();
+    } catch (e) {
+      console.warn('Firebase logout notice:', e);
+    }
     setUser((prev) => {
       const updated = { ...prev, isLoggedIn: false };
       localStorage.setItem('admission_user', JSON.stringify(updated));
