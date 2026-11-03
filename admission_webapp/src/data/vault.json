@@ -44,104 +44,104 @@
   "quick_math": [
     {
       "type": "বর্গমূল",
-      "item": "\\sqrt{2} \\approx 1.414, \\sqrt{3} \\approx 1.732, \\sqrt{5} \\approx 2.236, \\sqrt{10} \\approx \\pi \\approx 3.16"
+      "item": "$\\sqrt{2} \\approx 1.414, \\; \\sqrt{3} \\approx 1.732, \\; \\sqrt{5} \\approx 2.236, \\; \\sqrt{10} \\approx \\pi \\approx 3.16$"
     },
     {
       "type": "অমসৃণ বর্গমূল সূত্র",
-      "item": "\\sqrt{N^2 \\pm d} \\approx N \\pm \\frac{d}{2N} \\quad (\\text{যেমন: } \\sqrt{45} = \\sqrt{36+9} \\approx 6 + \\frac{9}{12} = 6.75)"
+      "item": "$\\sqrt{N^2 \\pm d} \\approx N \\pm \\frac{d}{2N} \\quad (\\text{যেমন: } \\sqrt{45} = \\sqrt{36+9} \\approx 6 + \\frac{9}{12} = 6.75)$"
     },
     {
       "type": "লগারিদম (pH)",
-      "item": "\\log 2 \\approx 0.30, \\log 3 \\approx 0.48, \\log 5 \\approx 0.70, \\log 7 \\approx 0.85"
+      "item": "$\\log 2 \\approx 0.30, \\; \\log 3 \\approx 0.48, \\; \\log 5 \\approx 0.70, \\; \\log 7 \\approx 0.85$"
     },
     {
       "type": "pH সুপার শর্টকাট",
-      "item": "[\\text{H}^+] = a \\times 10^{-b}\\text{ M} \\implies \\text{pH} = b - \\log a"
+      "item": "$[\\text{H}^+] = a \\times 10^{-b}\\text{ M} \\implies \\text{pH} = b - \\log a$"
     },
     {
       "type": "জটিল সংখ্যার বর্গমূল",
-      "item": "\\sqrt{a \\pm ib} = \\pm(p \\pm iq) \\quad \\text{যেখানে } p \\times q = \\frac{b}{2} \\text{ এবং } p^2 - q^2 = a"
+      "item": "$\\sqrt{a \\pm ib} = \\pm(p \\pm iq) \\quad \\text{যেখানে } p \\times q = \\frac{b}{2} \\text{ এবং } p^2 - q^2 = a$"
     },
     {
       "type": "কৌণিক বেগ rpm",
-      "item": "\\omega = \\frac{2\\pi N}{60} = \\frac{\\pi N}{30}\\text{ rad s}^{-1} \\quad (30\\text{ rpm}=\\pi, 60\\text{ rpm}=2\\pi, 300\\text{ rpm}=10\\pi)"
+      "item": "$\\omega = \\frac{2\\pi N}{60} = \\frac{\\pi N}{30}\\text{ rad s}^{-1} \\quad (30\\text{ rpm}=\\pi, \\; 60\\text{ rpm}=2\\pi, \\; 300\\text{ rpm}=10\\pi)$"
     },
     {
       "type": "গ্যাস ধ্রুবক RT",
-      "item": "0^\\circ\\text{C}: 22.4\\text{ L atm}; \\; 25^\\circ\\text{C}: 24.46\\text{ L atm}; \\; 27^\\circ\\text{C}: 24.63\\text{ L atm} \\approx 2500\\text{ J}"
+      "item": "$0^\\circ\\text{C}: 22.4\\text{ L atm}; \\; 25^\\circ\\text{C}: 24.46\\text{ L atm}; \\; 27^\\circ\\text{C}: 24.63\\text{ L atm} \\approx 2500\\text{ J}$"
     },
     {
       "type": "মুক্তিবেগ ও কক্ষীয় বেগ",
-      "item": "v_e = \\sqrt{2}v_o \\approx 1.414 v_o \\implies 41.4\\% \\text{ বৃদ্ধি (পৃথিবী } v_e=11.2, v_o=7.92\\text{ km s}^{-1})"
+      "item": "$v_e = \\sqrt{2}v_o \\approx 1.414 v_o \\implies 41.4\\% \\text{ বৃদ্ধি (পৃথিবী } v_e=11.2, \\; v_o=7.92\\text{ km s}^{-1})$"
     },
     {
       "type": "শোয়ার্জশিল্ড ব্যাসার্ধ",
-      "item": "R_s = \\frac{2GM}{c^2} \\quad (\\text{পৃথিবী: } \\approx 8.86\\text{ mm} \\approx 0.9\\text{ cm}; \\; \\text{সূর্য: } \\approx 3\\text{ km})"
+      "item": "$R_s = \\frac{2GM}{c^2} \\quad (\\text{পৃথিবী: } \\approx 8.86\\text{ mm} \\approx 0.9\\text{ cm}; \\; \\text{সূর্য: } \\approx 3\\text{ km})$"
     },
     {
       "type": "বোর ব্যাসার্ধ ও শক্তি",
-      "item": "r_n = 0.529 n^2\\text{ \\AA}, \\; v_n = \\frac{2.18\\times 10^6}{n}\\text{ m s}^{-1}, \\; E_n = -\\frac{13.6}{n^2}\\text{ eV}"
+      "item": "$r_n = 0.529 n^2\\text{ \\AA}, \\; v_n = \\frac{2.18\\times 10^6}{n}\\text{ m s}^{-1}, \\; E_n = -\\frac{13.6}{n^2}\\text{ eV}$"
     },
     {
       "type": "Ksp ও দ্রাব্যতা শর্টকাট",
-      "item": "AB \\to s=\\sqrt{K_{sp}}; \\; AB_2 \\to s=\\sqrt[3]{\\frac{K_{sp}}{4}}; \\; AB_3 \\to s=\\sqrt[4]{\\frac{K_{sp}}{27}}; \\; A_2B_3 \\to s=\\sqrt[5]{\\frac{K_{sp}}{108}}"
+      "item": "$AB \\to s=\\sqrt{K_{sp}}; \\; AB_2 \\to s=\\sqrt[3]{\\frac{K_{sp}}{4}}; \\; AB_3 \\to s=\\sqrt[4]{\\frac{K_{sp}}{27}}; \\; A_2B_3 \\to s=\\sqrt[5]{\\frac{K_{sp}}{108}}$"
     },
     {
       "type": "উপবৃত্তের উৎকেন্দ্রিকতা",
-      "item": "e = \\sqrt{1 - \\frac{\\text{ছোট হর}}{\\text{বড় হর}}} \\quad (\\text{যেমন: } \\frac{x^2}{25}+\\frac{y^2}{16}=1 \\implies e = \\frac{3}{5})"
+      "item": "$e = \\sqrt{1 - \\frac{\\text{ছোট হর}}{\\text{বড় হর}}} \\quad (\\text{যেমন: } \\frac{x^2}{25}+\\frac{y^2}{16}=1 \\implies e = \\frac{3}{5})$"
     },
     {
       "type": "অনুবন্ধী অধিবৃত্ত",
-      "item": "\\frac{1}{e_1^2} + \\frac{1}{e_2^2} = 1 \\quad (\\text{৩-৪-৫ ট্রিপলেট: } e_1=\\frac{5}{3} \\implies e_2=\\frac{5}{4})"
+      "item": "$\\frac{1}{e_1^2} + \\frac{1}{e_2^2} = 1 \\quad (\\text{৩-৪-৫ ট্রিপলেট: } e_1=\\frac{5}{3} \\implies e_2=\\frac{5}{4})$"
     },
     {
       "type": "পরমমান কেন্দ্র-ব্যাসার্ধ",
-      "item": "a < x < b \\iff |x - m| < r \\quad \\text{যেখানে } m = \\frac{a+b}{2}, \\; r = \\frac{b-a}{2}"
+      "item": "$a < x < b \\iff |x - m| < r \\quad \\text{যেখানে } m = \\frac{a+b}{2}, \\; r = \\frac{b-a}{2}$"
     }
   ],
   "magic_fractions": [
     {
-      "compound": "\\text{Na}_2\\text{CO}_3",
+      "compound": "$\\text{Na}_2\\text{CO}_3$",
       "mw": "106",
-      "trick": "13.25\\text{ g} = \\frac{1}{8}\\text{ mol} = 0.125\\text{ mol}; \\quad 26.5\\text{ g} = \\frac{1}{4}\\text{ mol} = 0.25\\text{ mol}"
+      "trick": "$13.25\\text{ g} = \\frac{1}{8}\\text{ mol} = 0.125\\text{ mol}; \\quad 26.5\\text{ g} = \\frac{1}{4}\\text{ mol} = 0.25\\text{ mol}$"
     },
     {
-      "compound": "\\text{CaCO}_3",
+      "compound": "$\\text{CaCO}_3$",
       "mw": "100",
-      "trick": "444.44\\text{ g} \\text{ নমুনায় } 90\\% \\text{ বিশুদ্ধতা } \\Rightarrow 400\\text{ g} = 4\\text{ mol}"
+      "trick": "$444.44\\text{ g} \\text{ নমুনায় } 90\\% \\text{ বিশুদ্ধতা } \\Rightarrow 400\\text{ g} = 4\\text{ mol}$"
     },
     {
-      "compound": "\\text{MgCO}_3",
+      "compound": "$\\text{MgCO}_3$",
       "mw": "84",
-      "trick": "1\\text{ kg} \\Rightarrow \\text{STP-তে CO}_2 = \\frac{1000}{84} \\times 22.4 = \\frac{800}{3} \\approx 266.67\\text{ L}"
+      "trick": "$1\\text{ kg} \\Rightarrow \\text{STP-তে CO}_2 = \\frac{1000}{84} \\times 22.4 = \\frac{800}{3} \\approx 266.67\\text{ L}$"
     },
     {
-      "compound": "\\text{KClO}_3",
+      "compound": "$\\text{KClO}_3$",
       "mw": "122.5",
-      "trick": "122.5\\text{ g} = 1\\text{ mol} \\Rightarrow 1.5\\text{ mol O}_2 = 1.5 \\times 22.4 = 33.6\\text{ L}"
+      "trick": "$122.5\\text{ g} = 1\\text{ mol} \\Rightarrow 1.5\\text{ mol O}_2 = 1.5 \\times 22.4 = 33.6\\text{ L}$"
     },
     {
-      "compound": "\\text{K}_2\\text{Cr}_2\\text{O}_7",
+      "compound": "$\\text{K}_2\\text{Cr}_2\\text{O}_7$",
       "mw": "294",
-      "trick": "M = 294 = 3 \\times 98; \\quad 1\\text{ mol} \\equiv 6e^- (\\text{অম্লীয় মাধ্যমে})"
+      "trick": "$M = 294 = 3 \\times 98; \\quad 1\\text{ mol} \\equiv 6e^- (\\text{অম্লীয় মাধ্যমে})$"
     },
     {
-      "compound": "\\text{KMnO}_4",
+      "compound": "$\\text{KMnO}_4$",
       "mw": "158",
-      "trick": "1\\text{ mol} \\equiv 5e^- (\\text{অম্লীয়}), \\equiv 3e^- (\\text{ক্ষারীয়/প্রশম})"
+      "trick": "$1\\text{ mol} \\equiv 5e^- (\\text{অম্লীয়}), \\equiv 3e^- (\\text{ক্ষারীয়/প্রশম})$"
     },
     {
-      "compound": "\\text{Ag}_2\\text{CrO}_4",
+      "compound": "$\\text{Ag}_2\\text{CrO}_4$",
       "mw": "332",
-      "trick": "K_{sp} = 4s^3 \\implies 3\\text{টি আয়ন তৈরি হয়}"
+      "trick": "$K_{sp} = 4s^3 \\implies 3\\text{টি আয়ন তৈরি হয়}$"
     },
     {
-      "compound": "\\text{BaSO}_4",
+      "compound": "$\\text{BaSO}_4$",
       "mw": "233",
-      "trick": "গ্রুপ-২ এর মধ্যে সর্বনিম্ন দ্রবণীয় (K_{sp} \\approx 1.1\\times 10^{-10})"
+      "trick": "গ্রুপ-২ এর মধ্যে সর্বনিম্ন দ্রবণীয় ($K_{sp} \\approx 1.1\\times 10^{-10}$)"
     },
     {
-      "compound": "\\text{Ca(OH)}_2",
+      "compound": "$\\text{Ca(OH)}_2$",
       "mw": "74",
       "trick": "গ্রুপ-২ হাইড্রোক্সাইডের দ্রাব্যতা নিচে বৃদ্ধি পায়"
     }

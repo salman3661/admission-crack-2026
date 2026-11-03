@@ -72,9 +72,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   // Level 2: Section / Category Submenu
   const categories: { id: AppMode; label: string }[] = [
     { id: 'slides', label: '⚡ কোর ফর্মুলা' },
-    { id: 'flashcards', label: '💡 শর্টকাট' },
-    { id: 'vault', label: '⚠️ ট্র্যাপ ভল্ট' },
-    { id: 'exam', label: '🎯 এক্সাম ক্যাপসুল' },
+    { id: 'flashcards', label: '💡 শর্টকাট ভল্ট' },
+    { id: 'vault', label: '⚠️ ট্র্যাপ ক্যাপসুল' },
+    { id: 'exam', label: '📝 মডেল টেস্ট' },
   ];
 
   return (

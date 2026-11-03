@@ -13,6 +13,15 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
 
     let text = content;
 
+    // Normalize standard LaTeX wrappers \[ \] and \( \)
+    text = text.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');
+    text = text.replace(/\\\(([\s\S]*?)\\\)/g, '$$$1$$');
+
+    // Auto-wrap bare LaTeX commands if no $ delimiters are present
+    if (!text.includes('$') && /\\[a-zA-Z]+/.test(text)) {
+      text = `$${text}$`;
+    }
+
     // Step 1: Replace $$...$$ with block math placeholders
     const displayMathBlocks: string[] = [];
     text = text.replace(/\$\$(.*?)\$\$/gs, (_, math) => {
@@ -20,6 +29,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
         const rendered = katex.renderToString(math.trim(), {
           displayMode: true,
           throwOnError: false,
+          strict: 'ignore',
         });
         displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1">${rendered}</div>`);
       } catch {
@@ -35,6 +45,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
         const rendered = katex.renderToString(math.trim(), {
           displayMode: false,
           throwOnError: false,
+          strict: 'ignore',
         });
         inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
       } catch {

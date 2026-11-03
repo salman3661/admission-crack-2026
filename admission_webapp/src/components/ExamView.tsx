@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Timer, 
   AlertCircle, 
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import type { QuizQuestion, SubjectType, WeekFilterType } from '../types';
 import { MathText } from './MathText';
+import { saveExamAttempt, type ExamAttemptRecord } from '../lib/analytics';
 
 interface ExamViewProps {
   quizzes: QuizQuestion[];
@@ -44,6 +45,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
   const [timeSpent, setTimeSpent] = useState<{ [qIndex: number]: number }>({});
   const [timeLeft, setTimeLeft] = useState(45);
   const [filterReview, setFilterReview] = useState<'all' | 'wrong'>('all');
+  const hasSavedRef = useRef<boolean>(false);
 
   // Start exam session
   const startExam = (count: number) => {
@@ -55,9 +57,63 @@ export const ExamView: React.FC<ExamViewProps> = ({
     setSelectedAnswers({});
     setTimeSpent({});
     setTimeLeft(45);
+    hasSavedRef.current = false;
     setExamStarted(true);
     setExamFinished(false);
   };
+
+  // Record completed exam attempt to localStorage
+  useEffect(() => {
+    if (!examFinished || hasSavedRef.current || activeQuestions.length === 0) return;
+    hasSavedRef.current = true;
+
+    let correct = 0;
+    let wrong = 0;
+    let skipped = 0;
+    const subjectCounts: { [subject: string]: { total: number; correct: number } } = {};
+
+    activeQuestions.forEach((q, idx) => {
+      const ans = selectedAnswers[idx];
+      const subj = q.subject || 'General';
+      if (!subjectCounts[subj]) {
+        subjectCounts[subj] = { total: 0, correct: 0 };
+      }
+      if (ans === undefined || ans === null) {
+        skipped++;
+      } else if (ans === q.ans) {
+        correct++;
+        subjectCounts[subj].total += 1;
+        subjectCounts[subj].correct += 1;
+      } else {
+        wrong++;
+        subjectCounts[subj].total += 1;
+      }
+    });
+
+    const score = correct * 1.0 - wrong * 0.25;
+    const maxScore = activeQuestions.length * 1.0;
+    const acc = correct + wrong > 0 ? Math.round((correct / (correct + wrong)) * 100) : 0;
+    const totalSecs = Object.values(timeSpent).reduce((a, b) => a + b, 0);
+    const avgSecs = activeQuestions.length > 0 ? Math.round(totalSecs / activeQuestions.length) : 0;
+
+    const record: ExamAttemptRecord = {
+      id: Date.now().toString(),
+      timestamp: Date.now(),
+      dateStr: new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }),
+      title: `${selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()} • ${selectedSubject === 'All' ? 'সব বিষয়' : selectedSubject} টেস্ট`,
+      totalQuestions: activeQuestions.length,
+      correctCount: correct,
+      wrongCount: wrong,
+      skippedCount: skipped,
+      totalScore: score,
+      maxPossible: maxScore,
+      accuracy: acc,
+      avgTimePerQ: avgSecs,
+      subjectCounts,
+    };
+
+    saveExamAttempt(record);
+  }, [examFinished, activeQuestions, selectedAnswers, timeSpent, selectedWeek, selectedSubject]);
 
   // Timer countdown
   useEffect(() => {
