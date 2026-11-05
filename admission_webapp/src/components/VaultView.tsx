@@ -6,11 +6,12 @@ import {
   ShieldAlert, 
   Sparkles, 
   X,
-  ChevronDown,
-  ChevronUp,
   BookOpen,
-  Zap
+  Zap,
+  SlidersHorizontal,
+  Layers
 } from 'lucide-react';
+import katex from 'katex';
 import type { VaultData, VaultEntry, SubjectType, WeekFilterType } from '../types';
 import { MathText } from './MathText';
 
@@ -20,90 +21,262 @@ interface VaultViewProps {
   selectedSubject?: SubjectType;
 }
 
+type ActiveWeek = 'all' | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 type ActiveSubject = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
 type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap';
 
-const SUBJECT_OPTIONS: { id: ActiveSubject; label: string; icon: string }[] = [
-  { id: 'All', label: 'সব বিষয়', icon: '🌟' },
-  { id: 'Physics', label: 'পদার্থবিজ্ঞান', icon: '⚛️' },
-  { id: 'Chemistry', label: 'রসায়ন', icon: '🧪' },
-  { id: 'Higher Math', label: 'উচ্চতর গণিত', icon: '📐' },
-  { id: 'Biology', label: 'জীববিজ্ঞান', icon: '🧬' },
-  { id: 'English', label: 'ইংরেজি', icon: '🇬🇧' },
-  { id: 'GK', label: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+const WEEK_TABS: { id: ActiveWeek; label: string; weekNum?: number }[] = [
+  { id: 'all', label: 'সব সপ্তাহ' },
+  { id: 1, label: 'Week 01', weekNum: 1 },
+  { id: 2, label: 'Week 02', weekNum: 2 },
+  { id: 3, label: 'Week 03', weekNum: 3 },
+  { id: 4, label: 'Week 04', weekNum: 4 },
+  { id: 5, label: 'Week 05', weekNum: 5 },
+  { id: 6, label: 'Week 06', weekNum: 6 },
+  { id: 7, label: 'Week 07', weekNum: 7 },
 ];
+
+const SUBJECT_OPTIONS: { id: ActiveSubject; label: string; icon: string; colorClass: string; activeClass: string }[] = [
+  { 
+    id: 'All', 
+    label: 'সব বিষয়', 
+    icon: '📚',
+    colorClass: 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900/60',
+    activeClass: 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 border-transparent shadow-sm'
+  },
+  { 
+    id: 'Physics', 
+    label: 'পদার্থবিজ্ঞান', 
+    icon: '⚡',
+    colorClass: 'border-indigo-200 dark:border-indigo-900/60 text-indigo-700 dark:text-indigo-400 bg-indigo-50/60 dark:bg-indigo-950/20',
+    activeClass: 'bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-600/30'
+  },
+  { 
+    id: 'Chemistry', 
+    label: 'রসায়ন', 
+    icon: '🧪',
+    colorClass: 'border-teal-200 dark:border-teal-900/60 text-teal-700 dark:text-teal-400 bg-teal-50/60 dark:bg-teal-950/20',
+    activeClass: 'bg-teal-600 text-white border-teal-600 shadow-sm shadow-teal-600/30'
+  },
+  { 
+    id: 'Higher Math', 
+    label: 'উচ্চতর গণিত', 
+    icon: '📐',
+    colorClass: 'border-purple-200 dark:border-purple-900/60 text-purple-700 dark:text-purple-400 bg-purple-50/60 dark:bg-purple-950/20',
+    activeClass: 'bg-purple-600 text-white border-purple-600 shadow-sm shadow-purple-600/30'
+  },
+  { 
+    id: 'Biology', 
+    label: 'জীববিজ্ঞান', 
+    icon: '🧬',
+    colorClass: 'border-emerald-200 dark:border-emerald-900/60 text-emerald-700 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/20',
+    activeClass: 'bg-[#056839] text-white border-[#056839] shadow-sm shadow-emerald-700/30'
+  },
+  { 
+    id: 'English', 
+    label: 'English', 
+    icon: '📖',
+    colorClass: 'border-sky-200 dark:border-sky-900/60 text-sky-700 dark:text-sky-400 bg-sky-50/60 dark:bg-sky-950/20',
+    activeClass: 'bg-sky-600 text-white border-sky-600 shadow-sm shadow-sky-600/30'
+  },
+  { 
+    id: 'GK', 
+    label: 'সাধারণ জ্ঞান', 
+    icon: '🇧🇩',
+    colorClass: 'border-amber-200 dark:border-amber-900/60 text-amber-700 dark:text-amber-400 bg-amber-50/60 dark:bg-amber-950/20',
+    activeClass: 'bg-amber-600 text-white border-amber-600 shadow-sm shadow-amber-600/30'
+  },
+];
+
+function weekFilterToActive(filter?: WeekFilterType): ActiveWeek {
+  if (!filter || filter === 'all') return 'all';
+  const match = filter.match(/week_0?(\d+)/);
+  if (match) {
+    const num = parseInt(match[1], 10);
+    if (num >= 1 && num <= 7) return num as ActiveWeek;
+  }
+  return 'all';
+}
+
+/** High-contrast KaTeX formula box with built-in copy and error protection */
+const FormulaBox: React.FC<{
+  formula: string;
+  onCopy: () => void;
+  isCopied: boolean;
+}> = ({ formula, onCopy, isCopied }) => {
+  const renderedHtml = useMemo(() => {
+    let clean = formula.trim();
+    if (clean.startsWith('$$') && clean.endsWith('$$')) {
+      clean = clean.slice(2, -2).trim();
+    } else if (clean.startsWith('$') && clean.endsWith('$')) {
+      clean = clean.slice(1, -1).trim();
+    }
+
+    // Auto-fix missing backslashes & unicode subscripts
+    clean = clean.replace(/(?<!\\)\btimes\b/g, '\\times');
+    clean = clean.replace(/(?<!\\)\bimplies\b/g, '\\implies');
+    clean = clean.replace(/(?<!\\)\bapprox\b/g, '\\approx');
+    clean = clean.replace(/\\textm\b|(?<!\\)\btextm\b/g, '\\text{m}');
+    clean = clean.replace(/_\{([^\x00-\x7F]+)\}/g, '_{\\text{$1}}');
+    clean = clean.replace(/\^\{([^\x00-\x7F]+)\}/g, '^{\\text{$1}}');
+
+    try {
+      return katex.renderToString(clean, {
+        displayMode: true,
+        throwOnError: false,
+        strict: 'ignore',
+      });
+    } catch {
+      return `<div class="font-mono text-rose-400 text-xs">${clean}</div>`;
+    }
+  }, [formula]);
+
+  return (
+    <div className="relative group bg-slate-900 dark:bg-slate-950 border border-slate-800 dark:border-slate-800/80 rounded-xl p-3 sm:p-4 my-3 overflow-x-auto no-scrollbar shadow-inner text-center">
+      <div 
+        className="text-white text-sm sm:text-base inline-block max-w-full overflow-x-auto no-scrollbar py-1"
+        dangerouslySetInnerHTML={{ __html: renderedHtml }}
+      />
+      <button
+        type="button"
+        onClick={onCopy}
+        className="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white transition-all opacity-80 group-hover:opacity-100 flex items-center gap-1 text-[11px] font-mono cursor-pointer shadow-xs active:scale-95"
+        title="সূত্র কপি করুন"
+      >
+        {isCopied ? (
+          <>
+            <Check className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="text-emerald-400 font-bold hidden sm:inline">কপি হয়েছে</span>
+          </>
+        ) : (
+          <>
+            <Copy className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">কপি</span>
+          </>
+        )}
+      </button>
+    </div>
+  );
+};
 
 export const VaultView: React.FC<VaultViewProps> = ({ 
   vault, 
-  selectedWeek: _selectedWeek = 'all', 
-  selectedSubject: propSubject = 'All' 
+  selectedWeek: propWeek, 
+  selectedSubject: propSubject 
 }) => {
-  void _selectedWeek;
-  const [searchQuery, setSearchQuery] = useState('');
+  const [activeWeek, setActiveWeek] = useState<ActiveWeek>(() => weekFilterToActive(propWeek));
   const [activeSubject, setActiveSubject] = useState<ActiveSubject>(
-    propSubject !== 'All' ? propSubject : 'All'
+    propSubject && propSubject !== 'All' ? propSubject : 'All'
   );
+  const [selectedChapter, setSelectedChapter] = useState<string>('all');
+  const [selectedCardType, setSelectedCardType] = useState<ActiveCardType>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [showQuickToolsModal, setShowQuickToolsModal] = useState(false);
+  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w4_bridge' | 'w5_bridge' | 'w6_bridge' | 'w7_matrix'>('triplets');
+  const [displayLimit, setDisplayLimit] = useState(24);
+  const chapterScrollRef = useRef<HTMLDivElement | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  // Sync with propSubject changes when navigating from Decks or Navbar
+  // Sync with prop changes from parent
   useEffect(() => {
-    if (propSubject) {
+    if (propWeek !== undefined) {
+      setActiveWeek(weekFilterToActive(propWeek));
+      setSelectedChapter('all');
+    }
+  }, [propWeek]);
+
+  useEffect(() => {
+    if (propSubject !== undefined) {
       setActiveSubject(propSubject);
       setSelectedChapter('all');
     }
   }, [propSubject]);
-  const [selectedChapter, setSelectedChapter] = useState<string>('all');
-  const [selectedCardType, setSelectedCardType] = useState<ActiveCardType>('all');
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({});
-  const [showQuickTools, setShowQuickTools] = useState(true);
-  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w4_bridge' | 'w5_bridge' | 'w6_bridge' | 'w7_matrix'>('w4_bridge');
-  const [displayLimit, setDisplayLimit] = useState(20);
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+  // Reset display limit when filters change
+  useEffect(() => {
+    setDisplayLimit(24);
+  }, [activeWeek, activeSubject, selectedChapter, selectedCardType, searchQuery]);
+
+  // Close Quick Tools Modal on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showQuickToolsModal) {
+        setShowQuickToolsModal(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showQuickToolsModal]);
 
   const entries: VaultEntry[] = useMemo(() => vault.entries || [], [vault.entries]);
 
-  const totalChaptersCount = useMemo(() => {
-    const set = new Set(entries.map((e) => e.chapter).filter(Boolean));
-    return set.size;
+  // Week-level item counts
+  const weekCounts = useMemo(() => {
+    const counts: Record<string | number, number> = { all: entries.length };
+    entries.forEach((e) => {
+      const w = e.week;
+      if (w !== undefined) {
+        counts[w] = (counts[w] || 0) + 1;
+      }
+    });
+    return counts;
   }, [entries]);
 
-  const copyToClipboard = (id: string, text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
+  // Entries filtered by Active Week
+  const weekScopedEntries = useMemo(() => {
+    if (activeWeek === 'all') return entries;
+    return entries.filter((e) => e.week === activeWeek);
+  }, [entries, activeWeek]);
 
-  const handleSubjectChange = (subject: ActiveSubject) => {
-    setActiveSubject(subject);
-    setSelectedChapter('all');
-  };
+  // Subject-level counts for the active week
+  const subjectCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: weekScopedEntries.length };
+    weekScopedEntries.forEach((e) => {
+      counts[e.subject] = (counts[e.subject] || 0) + 1;
+    });
+    return counts;
+  }, [weekScopedEntries]);
 
-  // Derive available chapters based on selected subject
+  // Entries filtered by Active Week AND Active Subject
+  const subjectScopedEntries = useMemo(() => {
+    if (activeSubject === 'All') return weekScopedEntries;
+    return weekScopedEntries.filter((e) => e.subject === activeSubject);
+  }, [weekScopedEntries, activeSubject]);
+
+  // Available chapters dynamically derived based on active week and active subject
   const availableChapters = useMemo(() => {
-    const relevant = activeSubject === 'All'
-      ? entries
-      : entries.filter((e) => e.subject === activeSubject);
-    
     const chapterMap = new Map<string, number>();
-    relevant.forEach((e) => {
-      const count = chapterMap.get(e.chapter) || 0;
-      chapterMap.set(e.chapter, count + 1);
+    subjectScopedEntries.forEach((e) => {
+      if (e.chapter) {
+        chapterMap.set(e.chapter, (chapterMap.get(e.chapter) || 0) + 1);
+      }
     });
 
-    return Array.from(chapterMap.entries()).map(([chapter, count]) => ({
-      name: chapter,
-      count
-    }));
-  }, [entries, activeSubject]);
+    return Array.from(chapterMap.entries())
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'bn'));
+  }, [subjectScopedEntries]);
 
-  // Filter entries based on Subject, Chapter, Card Type, and Search Query
+  // Card type counts under current week, subject, and chapter
+  const typeCounts = useMemo(() => {
+    const base = selectedChapter === 'all'
+      ? subjectScopedEntries
+      : subjectScopedEntries.filter((e) => e.chapter === selectedChapter);
+
+    return {
+      all: base.length,
+      core_formula: base.filter((e) => e.type === 'core_formula').length,
+      shortcut: base.filter((e) => e.type === 'shortcut').length,
+      trap: base.filter((e) => e.type === 'trap').length,
+    };
+  }, [subjectScopedEntries, selectedChapter]);
+
+  // Final filtered entries
   const filteredEntries = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
 
-    return entries.filter((item) => {
-      // Subject filter
-      if (activeSubject !== 'All' && item.subject !== activeSubject) return false;
-
+    return subjectScopedEntries.filter((item) => {
       // Chapter filter
       if (selectedChapter !== 'all' && item.chapter !== selectedChapter) return false;
 
@@ -118,7 +291,8 @@ export const VaultView: React.FC<VaultViewProps> = ({
         const inHack = item.hack?.toLowerCase().includes(q) ?? false;
         const inTrap = item.trap?.toLowerCase().includes(q) ?? false;
         const inChapter = item.chapter?.toLowerCase().includes(q) ?? false;
-        const inTags = item.tags ? item.tags.some((t) => t.toLowerCase().includes(q)) : false;
+        const inTags = item.tags?.some((t) => t.toLowerCase().includes(q)) ?? false;
+
         if (!inTitle && !inFormula && !inConcept && !inHack && !inTrap && !inChapter && !inTags) {
           return false;
         }
@@ -126,140 +300,94 @@ export const VaultView: React.FC<VaultViewProps> = ({
 
       return true;
     });
-  }, [entries, activeSubject, selectedChapter, selectedCardType, searchQuery]);
+  }, [subjectScopedEntries, selectedChapter, selectedCardType, searchQuery]);
 
-  // Reset display limit on filter/search change
-  useEffect(() => {
-    setDisplayLimit(20);
-  }, [searchQuery, activeSubject, selectedChapter, selectedCardType]);
+  const copyToClipboard = (id: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
 
-  // Infinite scroll trigger
-  useEffect(() => {
-    if (!sentinelRef.current) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setDisplayLimit((prev) => {
-            if (prev < filteredEntries.length) return prev + 20;
-            return prev;
-          });
-        }
-      },
-      { rootMargin: '200px' }
-    );
-    observer.observe(sentinelRef.current);
-    return () => observer.disconnect();
-  }, [filteredEntries.length]);
+  const handleWeekChange = (w: ActiveWeek) => {
+    setActiveWeek(w);
+    setSelectedChapter('all');
+  };
 
-  // Sliced entries for mobile DOM performance (shows full when filtered)
-  const displayedEntries = useMemo(() => {
-    if (selectedChapter !== 'all' || selectedCardType !== 'all' || searchQuery) {
-      return filteredEntries;
-    }
-    return filteredEntries.slice(0, displayLimit);
-  }, [filteredEntries, displayLimit, selectedChapter, selectedCardType, searchQuery]);
+  const handleSubjectChange = (sub: ActiveSubject) => {
+    setActiveSubject(sub);
+    setSelectedChapter('all');
+  };
 
-  // Group sliced entries by chapter
+  // Group filtered entries by chapter
   const groupedByChapter = useMemo(() => {
     const map = new Map<string, VaultEntry[]>();
-    displayedEntries.forEach((item) => {
-      const list = map.get(item.chapter) || [];
-      list.push(item);
-      map.set(item.chapter, list);
+    filteredEntries.forEach((entry) => {
+      const list = map.get(entry.chapter) || [];
+      list.push(entry);
+      map.set(entry.chapter, list);
     });
     return map;
-  }, [displayedEntries]);
-
-  // Counts for Card Types
-  const typeCounts = useMemo(() => {
-    const subjectScoped = activeSubject === 'All'
-      ? entries
-      : entries.filter((e) => e.subject === activeSubject);
-    const chapterScoped = selectedChapter === 'all'
-      ? subjectScoped
-      : subjectScoped.filter((e) => e.chapter === selectedChapter);
-
-    return {
-      all: chapterScoped.length,
-      core_formula: chapterScoped.filter((e) => e.type === 'core_formula').length,
-      shortcut: chapterScoped.filter((e) => e.type === 'shortcut').length,
-      trap: chapterScoped.filter((e) => e.type === 'trap').length,
-    };
-  }, [entries, activeSubject, selectedChapter]);
-
-  const toggleChapter = (chapter: string) => {
-    setExpandedChapters((prev) => ({
-      ...prev,
-      [chapter]: prev[chapter] === undefined ? false : !prev[chapter]
-    }));
-  };
-
-  const isChapterExpanded = (chapter: string) => {
-    if (selectedChapter !== 'all' && selectedChapter === chapter) return true;
-    return expandedChapters[chapter] !== false; // Default to expanded
-  };
+  }, [filteredEntries]);
 
   // Legacy quick tools filter
-  const q = searchQuery.toLowerCase().trim();
+  const qTool = searchQuery.toLowerCase().trim();
   const filteredTriplets = (vault.triplets || []).filter((t) => 
-    (!q || t.sides.toLowerCase().includes(q) || t.result.toLowerCase().includes(q) || t.app.toLowerCase().includes(q))
+    (!qTool || t.sides.toLowerCase().includes(qTool) || t.result.toLowerCase().includes(qTool) || t.app.toLowerCase().includes(qTool))
   );
   const filteredQuickMath = (vault.quick_math || []).filter((m) =>
-    (!q || m.type.toLowerCase().includes(q) || m.item.toLowerCase().includes(q))
+    (!qTool || m.type.toLowerCase().includes(qTool) || m.item.toLowerCase().includes(qTool))
   );
   const filteredFractions = (vault.magic_fractions || []).filter((f) =>
-    (!q || f.compound.toLowerCase().includes(q) || f.mw.toLowerCase().includes(q) || f.trick.toLowerCase().includes(q))
+    (!qTool || f.compound.toLowerCase().includes(qTool) || f.mw.toLowerCase().includes(qTool) || f.trick.toLowerCase().includes(qTool))
   );
 
   return (
-    <div className="max-w-5xl mx-auto py-5 px-3 sm:px-5">
+    <div className="max-w-6xl mx-auto py-5 px-3 sm:px-6">
       
-      {/* 1. HEADER & SEARCH */}
-      <div className="mb-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+      {/* 1. APP-LIKE HEADER */}
+      <div className="mb-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-[#056839] dark:text-emerald-400" />
-                অ্যাডমিশন ফর্মুলা ও ট্র্যাপ ভল্ট
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span className="px-3 py-1 rounded-full text-[11px] font-extrabold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#056839] dark:text-emerald-400" />
+                মাস্টার অ্যাডমিশন ভল্ট
               </span>
-              <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400">
-                {entries.length}টি এন্ট্রি • {totalChaptersCount}টি অধ্যায়
+              <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                {entries.length}টি হাই-ইল্ড সূত্র ও ট্র্যাপ • ৭টি সপ্তাহ
               </span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
-              চ্যাপ্টারওয়াইজ ফর্মুলা, হ্যাক ও নেগেটিভ মার্কিং ট্র্যাপ
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+              চ্যাপ্টারওয়াইজ সূত্র, ৫-সেকেন্ড হ্যাক ও ট্র্যাপ ম্যাট্রিক্স
             </h1>
           </div>
 
-          {/* Quick Tools Toggle Button */}
+          {/* Quick Tools Launch Button */}
           <button
-            onClick={() => setShowQuickTools(!showQuickTools)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border shrink-0 ${
-              showQuickTools
-                ? 'bg-amber-500 text-white border-amber-600 shadow-sm'
-                : 'bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-            }`}
+            type="button"
+            onClick={() => setShowQuickToolsModal(true)}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white shadow-sm shadow-amber-500/25 transition-all cursor-pointer shrink-0 active:scale-95"
           >
-            <Zap className="w-3.5 h-3.5" />
-            <span>স্পেশাল টুলস (Triplets & Roots)</span>
+            <Zap className="w-4 h-4 fill-current" />
+            <span>স্পেশাল কুইক টুলস (Triplets & Logs)</span>
           </button>
         </div>
 
-        {/* Real-time Search Bar */}
-        <div className="relative mb-4">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-3.5 pointer-events-none" />
+        {/* Real-time Search Input */}
+        <div className="relative">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="সূত্র, শর্টকাট, অধ্যায় বা ট্র্যাপ দিয়ে সাথে সাথে খুঁজুন (e.g. লব্ধি, pH, দ্বিপদী, ট্রিপলেট)..."
-            className="w-full bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 rounded-2xl pl-10 pr-9 py-2.5 text-xs sm:text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-[#056839] focus:ring-2 focus:ring-[#056839]/20 transition-all shadow-sm"
+            placeholder="সূত্র, শর্টকাট, অধ্যায় বা ট্র্যাপ খুঁজুন (যেমন: লব্ধি, pH, দ্বিপদী, ত্রিকোণমিতি, কণিক)..."
+            className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl pl-10 pr-9 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-[#056839] focus:ring-2 focus:ring-[#056839]/20 transition-all shadow-xs"
           />
           {searchQuery && (
             <button
+              type="button"
               onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-3 text-zinc-400 hover:text-zinc-700 dark:hover:text-white transition-colors"
+              className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors cursor-pointer"
               title="মুছে ফেলুন"
             >
               <X className="w-4 h-4" />
@@ -267,31 +395,82 @@ export const VaultView: React.FC<VaultViewProps> = ({
           )}
         </div>
 
-        {/* 2. SUBJECT FILTER PILLS */}
-        <div className="mb-3">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-2">
-            বিষয় নির্বাচন করুন
+        {/* 2. LEVEL 1: WEEKLY SELECTOR TABS */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1">
+              <Layers className="w-3 h-3" /> সপ্তাহ নির্বাচন (Weekly Hierarchy)
+            </span>
+            {activeWeek !== 'all' && (
+              <button
+                type="button"
+                onClick={() => handleWeekChange('all')}
+                className="text-[11px] font-bold text-[#056839] dark:text-emerald-400 hover:underline cursor-pointer"
+              >
+                সব সপ্তাহ দেখুন
+              </button>
+            )}
           </div>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth pb-1 -mx-1 px-1">
+            {WEEK_TABS.map((w) => {
+              const isActive = activeWeek === w.id;
+              const count = weekCounts[w.id] || 0;
+              return (
+                <button
+                  key={w.id}
+                  type="button"
+                  onClick={() => handleWeekChange(w.id)}
+                  className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shrink-0 transition-all cursor-pointer active:scale-95 border ${
+                    isActive
+                      ? 'bg-[#056839] text-white border-[#056839] shadow-sm shadow-emerald-700/30'
+                      : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <span>{w.label}</span>
+                  <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                    isActive 
+                      ? 'bg-white/20 text-white' 
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 3. LEVEL 2A: SUBJECT FILTER CHIPS */}
+        <div className="space-y-1.5">
+          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1">
+            <SlidersHorizontal className="w-3 h-3" /> বিষয় নির্বাচন (Subject Filter)
+          </div>
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth pb-1 -mx-1 px-1">
             {SUBJECT_OPTIONS.map((sub) => {
               const isActive = activeSubject === sub.id;
-              const subCount = sub.id === 'All' 
-                ? entries.length 
-                : entries.filter((e) => e.subject === sub.id).length;
+              const subCount = subjectCounts[sub.id] || 0;
+
+              // Hide subject if it has 0 entries in the current week (unless it's 'All')
+              if (sub.id !== 'All' && subCount === 0) return null;
+
               return (
                 <button
                   key={sub.id}
+                  type="button"
                   onClick={() => handleSubjectChange(sub.id)}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap shrink-0 shadow-xs cursor-pointer ${
+                  className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shrink-0 transition-all cursor-pointer active:scale-95 border ${
                     isActive
-                      ? 'bg-[#056839] text-white scale-[1.02] ring-2 ring-[#056839]/30'
-                      : 'bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? sub.activeClass
+                      : `${sub.colorClass} hover:opacity-90`
                   }`}
                 >
                   <span>{sub.icon}</span>
                   <span>{sub.label}</span>
-                  <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+                  <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                    isActive
+                      ? 'bg-white/25 text-white'
+                      : 'bg-black/5 dark:bg-white/10'
                   }`}>
                     {subCount}
                   </span>
@@ -301,42 +480,63 @@ export const VaultView: React.FC<VaultViewProps> = ({
           </div>
         </div>
 
-        {/* 3. CHAPTER SELECTOR PILLS */}
+        {/* 4. LEVEL 2B: CHAPTER SWIPEABLE CHIPS */}
         {availableChapters.length > 0 && (
-          <div className="mb-3">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-2">
-              অধ্যায় ফিল্টার ({availableChapters.length}টি অধ্যায়)
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between text-[11px] font-bold text-slate-400 dark:text-slate-500">
+              <span className="uppercase tracking-wider flex items-center gap-1">
+                <BookOpen className="w-3 h-3" /> অধ্যায় নির্বাচন ({availableChapters.length}টি অধ্যায়)
+              </span>
+              {selectedChapter !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedChapter('all')}
+                  className="text-[#056839] dark:text-emerald-400 hover:underline cursor-pointer"
+                >
+                  সব অধ্যায় দেখুন
+                </button>
+              )}
             </div>
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+
+            <div 
+              ref={chapterScrollRef}
+              className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth pb-1.5 -mx-1 px-1"
+            >
               <button
+                type="button"
                 onClick={() => setSelectedChapter('all')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer active:scale-95 border ${
                   selectedChapter === 'all'
-                    ? 'bg-emerald-600 text-white font-bold shadow-xs'
-                    : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                    ? 'bg-[#056839] text-white border-[#056839] shadow-sm shadow-emerald-700/30'
+                    : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
                 <span>সব অধ্যায়</span>
-                <span className="text-[10px] font-mono opacity-80">
-                  ({typeCounts.all})
+                <span className={`ml-1.5 text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                  selectedChapter === 'all' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                }`}>
+                  {subjectScopedEntries.length}
                 </span>
               </button>
 
-              {availableChapters.map((chap) => {
-                const isActive = selectedChapter === chap.name;
+              {availableChapters.map((ch) => {
+                const isActive = selectedChapter === ch.name;
                 return (
                   <button
-                    key={chap.name}
-                    onClick={() => setSelectedChapter(chap.name)}
-                    className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs whitespace-nowrap shrink-0 transition-all cursor-pointer ${
+                    key={ch.name}
+                    type="button"
+                    onClick={() => setSelectedChapter(ch.name)}
+                    className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold shrink-0 transition-all cursor-pointer active:scale-95 border flex items-center gap-2 ${
                       isActive
-                        ? 'bg-emerald-600 text-white font-bold shadow-xs'
-                        : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm shadow-emerald-600/30 font-bold'
+                        : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`}
                   >
-                    <span>{chap.name}</span>
-                    <span className="text-[10px] font-mono opacity-70">
-                      ({chap.count})
+                    <span>{ch.name}</span>
+                    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                      isActive ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                    }`}>
+                      {ch.count}
                     </span>
                   </button>
                 );
@@ -345,496 +545,121 @@ export const VaultView: React.FC<VaultViewProps> = ({
           </div>
         )}
 
-        {/* 4. CARD TYPE TABS */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 border-b border-zinc-200/70 dark:border-zinc-800/80 pt-1">
+        {/* 5. CARD DISPLAY TYPE SEGMENTED BAR */}
+        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-x-auto no-scrollbar">
           <button
+            type="button"
             onClick={() => setSelectedCardType('all')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`min-h-[40px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 ${
               selectedCardType === 'all'
-                ? 'border-[#056839] text-[#056839] dark:text-emerald-400 bg-[#056839]/5'
-                : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+                ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <span>🌐 সব ধরণ</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <span>সব ধরন</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-slate-200/70 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">
               {typeCounts.all}
             </span>
           </button>
 
           <button
+            type="button"
             onClick={() => setSelectedCardType('core_formula')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`min-h-[40px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 ${
               selectedCardType === 'core_formula'
-                ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/20'
-                : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+                ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400'
             }`}
           >
             <span>📐 কোর সূত্রাবলী</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300">
               {typeCounts.core_formula}
             </span>
           </button>
 
           <button
+            type="button"
             onClick={() => setSelectedCardType('shortcut')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`min-h-[40px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 ${
               selectedCardType === 'shortcut'
-                ? 'border-amber-500 text-amber-600 dark:text-amber-400 bg-amber-50/50 dark:bg-amber-950/20'
-                : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+                ? 'bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400'
             }`}
           >
-            <span>⚡ নো-ক্যালকুলেটর শর্টকাট</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <span>⚡ নো-ক্যালকুলেটর হ্যাক</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">
               {typeCounts.shortcut}
             </span>
           </button>
 
           <button
+            type="button"
             onClick={() => setSelectedCardType('trap')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border-b-2 cursor-pointer ${
+            className={`min-h-[40px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 ${
               selectedCardType === 'trap'
-                ? 'border-rose-600 text-rose-600 dark:text-rose-400 bg-rose-50/50 dark:bg-rose-950/20'
-                : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+                ? 'bg-white dark:bg-slate-800 text-rose-600 dark:text-rose-400 shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400'
             }`}
           >
-            <span>⚠️ ট্র্যাপ এলার্ট</span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <span>⚠️ ট্র্যাপ অ্যালার্ট</span>
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300">
               {typeCounts.trap}
             </span>
           </button>
         </div>
       </div>
 
-      {/* 5. SPECIAL QUICK TOOLS SECTION (Triplets, Roots & Fractions) */}
-      {showQuickTools && (
-        <div className="mb-6 p-4 rounded-3xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 shadow-sm animate-fadeIn">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-              <h3 className="text-sm font-bold text-amber-900 dark:text-amber-200">
-                স্পেশাল কুইক টুলস ও নো-ক্যালকুলেটর টেবিল
-              </h3>
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setQuickToolTab('triplets')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'triplets'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                📐 পিথাগোরিয়ান ট্রিপলেট ({filteredTriplets.length})
-              </button>
-              <button
-                onClick={() => setQuickToolTab('quick_math')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'quick_math'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                ⚡ রুট ও লগ হ্যাক ({filteredQuickMath.length})
-              </button>
-              <button
-                onClick={() => setQuickToolTab('fractions')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'fractions'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                🧪 স্টয়কিওমেট্রি ফ্র্যাকশন ({filteredFractions.length})
-              </button>
-              <button
-                onClick={() => setQuickToolTab('w4_bridge')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'w4_bridge'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                🎯 Week 04 ব্রিজ
-              </button>
-              <button
-                onClick={() => setQuickToolTab('w5_bridge')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'w5_bridge'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                🔮 Week 05 ব্রিজ
-              </button>
-              <button
-                onClick={() => setQuickToolTab('w6_bridge')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'w6_bridge'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                🚀 Week 06 ব্রিজ
-              </button>
-              <button
-                onClick={() => setQuickToolTab('w7_matrix')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
-                  quickToolTab === 'w7_matrix'
-                    ? 'bg-amber-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                }`}
-              >
-                👑 Week 07 ট্রাই-স্ট্রিম ব্রিজ
-              </button>
-            </div>
-          </div>
-
-          {quickToolTab === 'triplets' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
-              {filteredTriplets.map((item, idx) => (
-                <div key={idx} className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-mono font-bold text-xs text-cyan-700 dark:text-cyan-400">{item.sides}</span>
-                      <span className="px-2 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-950/30 text-cyan-700 dark:text-cyan-400 text-[10px] font-mono font-bold">
-                        মান: {item.result}
-                      </span>
-                    </div>
-                    <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                      <MathText content={item.app} />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {quickToolTab === 'quick_math' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-              {filteredQuickMath.map((item, idx) => (
-                <div key={idx} className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs flex items-center justify-between gap-2">
-                  <div className="flex-1 text-xs font-medium text-zinc-800 dark:text-zinc-200">
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-400 mr-1.5">
-                      {item.type}
-                    </span>
-                    <MathText content={item.item} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {quickToolTab === 'fractions' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              {filteredFractions.map((item, idx) => (
-                <div key={idx} className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-bold text-xs text-emerald-700 dark:text-emerald-400">
-                      <MathText content={item.compound} />
-                    </span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
-                      M = {item.mw}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                    <MathText content={item.trick} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {quickToolTab === 'w4_bridge' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">হ্রদের বুদ্বুদ ও গভীরতা শর্টকাট</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">বয়েল নো-ক্যালক</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="ব্যাস $n$ গুণ হলে আয়তন $n^3$ গুণ হয়:<br />$h = (n^3 - 1) \\times 10.33\\text{ m}$<br />ব্যাস দ্বিগুণ ($n=2$) $\\implies h = 7 \\times 10.33 \\approx 72.3\\text{ m}$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">সাবানের বুদ্বুদ vs পানির ফোঁটা</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">পৃষ্ঠটান ট্র্যাপ</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="সাবানের বুদ্বুদে ২টি মুক্ত পৃষ্ঠ:<br />$\\Delta P_{\\text{soap}} = \\frac{4T}{R}$<br />পানির ফোঁটায় ১টি মুক্ত পৃষ্ঠ:<br />$\\Delta P_{\\text{drop}} = \\frac{2T}{R} \\implies \\frac{\\Delta P_1}{\\Delta P_2} = 2$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">ফাজানের পোলারায়ন নীতি</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সমযোজী বনাম আয়নিক</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="ক্যাটায়ন চার্জ $\\uparrow$ ও আকার $\\downarrow \\implies$ পোলারায়ন $\\uparrow$<br />সমযোজী বৈশিষ্ট্য বৃদ্ধি $\\implies$ গলনাঙ্ক ও দ্রাব্যতা হ্রাস<br />গলনাঙ্ক: $NaCl > MgCl_2 > AlCl_3 > SiCl_4$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">বহুভুজের কর্ণ ও হ্যান্ডশেক</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সমাবেশ শর্টকাট</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="কর্ণ সংখ্যা: $d = \\frac{n(n-3)}{2} = ^{n}C_2 - n$<br />১২ বাহুর বহুভুজে: $\\frac{12 \\times 9}{2} = 54$<br />$n$ জনের হ্যান্ডশেক: $^{n}C_2 = \\frac{n(n-1)}{2}$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">বিস্তার পরিমাপ মূল ও মাপনী</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">পরিমিত ব্যবধান</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$y = a + bx \\implies \\sigma_y = |b|\\sigma_x$<br />মূল (যোগ/বিয়োগ) থেকে সম্পূর্ণ স্বাধীন<br />প্রথম $n$ স্বাভাবিক সংখ্যার ভেদাঙ্ক: $\\sigma^2 = \\frac{n^2 - 1}{12}$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">মেন্ডেলীয় ব্যতিক্রম রেশিও</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">জিনতত্ত্ব ম্যাট্রিক্স</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="অসম্পূর্ণ প্রকটতা: $1 : 2 : 1$<br />লিথাল জিন: $2 : 1$ (ভ্রূণাবস্থায় মৃত্যু)<br />পরিপূরক জিন ও মূক-বধিরতা: $9 : 7$<br />প্রকট এপিস্ট্যাসিস: $13 : 3$" />
-                </div>
-              </div>
-            </div>
-          )}
-
-          {quickToolTab === 'w5_bridge' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">SHM শক্তি বন্টন গোল্ডেন রুল</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড রুল</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$E_k = E_p \\implies x = \\pm \\frac{A}{\\sqrt{2}} \\approx \\pm 0.707A$<br />$E_k = 3E_p \\implies x = \\pm \\frac{A}{2}$<br />$E_p = 3E_k \\implies x = \\pm \\frac{\\sqrt{3}}{2}A \\approx \\pm 0.866A$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">শব্দের বেগ ও পরম তাপমাত্রা</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">কেলভিন স্কেল ট্রিক</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$\\frac{v_1}{v_2} = \\sqrt{\\frac{T_1}{T_2}}$<br />বেগ দ্বিগুণ ($v_2 = 2v_1$) হলে:<br />$T_2 = 4 T_1 = 4 \\times 273\\text{ K} = 1092\\text{ K} = 819^\\circ\\text{C}$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">খোলা বনাম বন্ধ অর্গান নল</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">২:১ কম্পাঙ্ক</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$f_{\\text{open}} = \\frac{v}{2L}, \\quad f_{\\text{closed}} = \\frac{v}{4L}$<br />$f_{\\text{open}} : f_{\\text{closed}} = 2 : 1$<br />খোলা নলে সকল হারমোনিক, বন্ধ নলে শুধু বিজোড়।" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">ফ্যারাডের বিদ্যুৎ ও STP আয়তন</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">ফ্যারাডে শর্টকাট</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$1\\text{ F} = 96500\\text{ C} \\implies 1\\text{ mol } e^-$<br />ক্যাথোডে $H_2$: $1\\text{ F} \\implies 11.2\\text{ L}$<br />অ্যানোডে $O_2$: $1\\text{ F} \\implies 5.6\\text{ L}$ ($O_2$ তে $4\\text{ F}$ লাগে)" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">বহুপদীর মূলের রূপান্তর ট্রিক</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সহগ অদলবদল</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$ax^2 + bx + c = 0$ এর মূল $\\alpha, \\beta$<br />বিপরীত মূল: $cx^2 + bx + a = 0$<br />বিপরীত চিহ্ন: $ax^2 - bx + c = 0$<br />$\\frac{1}{\\alpha} + \\frac{1}{\\beta} = -\\frac{b}{c}$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">সিলোম ও রেচন অঙ্গ ম্যাট্রিক্স</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">৩-স্তরীয় ছক</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="অ্যাসিলোমেট: পরিফেরা, নিডারিয়া, প্লাটিহেলমিনথিস<br />সিউডোসিলোমেট: নেমাটোডা (গোলকৃমি), রটিফেরা<br />রেচন: প্লাটিহেলমিনথিস = শিখা কোষ; অ্যানেলিডা = নেফ্রিডিয়া" />
-                </div>
-              </div>
-            </div>
-          )}
-
-          {quickToolTab === 'w6_bridge' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">ত্রিকোণমিতিক সিরিজ & নেস্টেড কোসাইন</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড রুল</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ = \\frac{1}{8}$<br />$\\tan 20^\\circ \\tan 40^\\circ \\tan 80^\\circ = \\sqrt{3}$<br />$\\sqrt{2+\\sqrt{2+\\dots+\\sqrt{2(1+\\cos\\theta)}}} = 2\\cos\\left(\\frac{\\theta}{2^n}\\right)$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">সোয়ার্জশিল্ড কৃষ্ণগহ্বর ব্যাসার্ধ</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সৌরভর শর্টকাট</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$R_s \\approx 3 \\times \\frac{\\text{নক্ষত্রের ভর}}{2 \\times 10^{30}}\\text{ km}$<br />$9 \\times 10^{45}\\text{ kg} \\implies 1.35 \\times 10^{19}\\text{ m}$<br />চন্দ্রশেখর সীমা $= 1.4 M_\\odot$, ব্ল্যাক হোল $> 3 M_\\odot$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">এন্ট্রপি ও রুদ্ধতাপীয় অনুপাত</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">মান ও চিহ্ন</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$\\sqrt{2}T$ থেকে $T$ এ নামলে: $\\Delta S = -0.3465 ms$<br />$T$ থেকে $\\sqrt{2}T$ এ উঠলে: $\\Delta S = +0.3465 ms$<br />রুদ্ধতাপীয়: $T_2 = T_1(V_1/V_2)^{\\gamma-1}, P_2 = P_1(V_1/V_2)^\\gamma$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">বাস্তব গ্যাস সংকোচনশীলতা (Z)</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">চাপের প্রভাব</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="নিম্নচাপে: $Z = 1 - \\frac{a}{VRT}$ ($Z < 1$)<br />উচ্চচাপে: $Z = 1 + \\frac{Pb}{RT}$ ($Z > 1$)<br />$\\text{H}_2, \\text{He}$ এর ক্ষেত্রে সর্বদা $Z > 1$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">গ্রাহামের ব্যাপন ও ধোঁয়ার অবস্থান</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">গতি অনুপাত</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$\\frac{r_{\\text{H}_2}}{r_{\\text{HC}}} = \\sqrt{M/2} = \\sqrt{14} \\implies \\text{C}_2\\text{H}_4 (n=2)$<br />$\\sqrt{21} \\implies \\text{C}_3\\text{H}_6 (n=3)$<br />$\\text{NH}_3 + \\text{HCl}$: ধোঁয়া তৈরি হয় $\\text{HCl}$ এর কাছে!" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">রেচন ও পরিপাক গুরুত্বপূর্ণ মান</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">MAT স্পেশাল</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="GFR $= 125\\text{ mL/min}$ | রক্ত সঞ্চালন $= 1200\\text{ mL/min}$<br />কর্টিক্যাল নেফ্রন $= 85\\%$ | পরিস্রাবণ চাপ $= 25\\text{ mmHg}$<br />খাদ্যসার শোষণ $= $ জেজুনাম (৯০%) | ইউরিয়া চক্র $= $ অরনিথিন চক্র" />
-                </div>
-              </div>
-            </div>
-          )}
-
-          {quickToolTab === 'w7_matrix' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">তড়িৎ প্রাবল্য নাল পয়েন্ট</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">রুট অনুপাত</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$+q_1$ ও $+q_2$ এর শূন্য প্রাবল্য বিন্দু:<br />$x_1 = \\frac{\\sqrt{q_1}}{\\sqrt{q_1} + \\sqrt{q_2}} d$<br />$+4q$ ও $+q$ এর জন্য $x = \\frac{2}{3}d$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">ফটোইলেকট্রন ও eV হ্যাক</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১২৪০০ ফর্মুলা</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$E = \\frac{12400}{\\lambda(\\text{\\AA})}\\text{ eV}$<br />নিবৃত্তি বিভব $V_s$ এর ভোল্ট মান সংখ্যাগতভাবে $K_{\\max}(\\text{eV})$ এর সমান!" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">কার্বোক্যাটায়ন বনাম কার্বানায়ন</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">বিপরীত ক্রম</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="ক্যাটায়ন ও রেডিক্যাল: $3^\\circ > 2^\\circ > 1^\\circ > \\text{CH}_3^+$<br />কার্বানায়ন: $\\text{CH}_3^- > 1^\\circ > 2^\\circ > 3^\\circ$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">ক্যালকুলাস কোসাইন লিমিট</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড হ্যাক</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$\\lim_{x\\to 0}\\frac{1-\\cos ax}{x^2} = \\frac{a^2}{2}$<br />$\\lim_{x\\to 0}\\frac{\\cos ax - \\cos bx}{x^2} = \\frac{b^2 - a^2}{2}$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">করোটিক স্নায়ুর প্রকৃতি</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১২ স্নায়ু রুল</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="সংবেদী: ১, ২, ৮<br />মিশ্র: ৫, ৭, ৯, ১০<br />মোটর/চেষ্টিয়: ৩, ৪, ৬, ১১, ১২<br />চোখের পেশি: $[SO_4 LR_6]_3$" />
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">রক্তের গ্লুকোজ ও ক্যালসিয়াম</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">হরমোন জোড়</span>
-                </div>
-                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="গ্লুকোজ কমায়: ইনসুলিন (গ্লাইকোজেনেসিস)<br />গ্লুকোজ বাড়ায়: গ্লুকাগন (গ্লাইকোজেনোলাইসিস)<br />ক্যালসিয়াম বাড়ায়: প্যারাথরমোন (PTH)<br />ক্যালসিয়াম কমায়: ক্যালসিটোনিন" />
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* 6. MAIN CONTENT: CHAPTER ACCORDION / LIST */}
+      {/* 6. MAIN CONTENT AREA */}
       {filteredEntries.length === 0 ? (
-        <div className="py-16 text-center max-w-md mx-auto px-4 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-          <BookOpen className="w-10 h-10 text-zinc-400 dark:text-zinc-600 mx-auto mb-2 animate-bounce" />
-          <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-200">কোনো সূত্র বা ট্র্যাপ পাওয়া যায়নি</h3>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 mb-4">
-            আপনার ফিল্টার বা সার্চ কীওয়ার্ডের সাথে মিলছে না। ফিল্টার পরিবর্তন করে আবার চেষ্টা করুন।
+        <div className="py-16 text-center max-w-md mx-auto px-4 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+          <BookOpen className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3 animate-pulse" />
+          <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">কোনো সূত্র বা ট্র্যাপ পাওয়া যায়নি</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-5">
+            আপনার ফিল্টার বা সার্চ কীওয়ার্ডের সাথে মিলছে না। ফিল্টার রিসেট করে আবার চেষ্টা করুন।
           </p>
           <button
+            type="button"
             onClick={() => {
               setSearchQuery('');
+              setActiveWeek('all');
               setActiveSubject('All');
               setSelectedChapter('all');
               setSelectedCardType('all');
             }}
-            className="px-4 py-2 rounded-xl bg-[#056839] text-white text-xs font-bold hover:bg-[#044e2b] transition-all shadow-xs"
+            className="px-5 py-2.5 rounded-xl bg-[#056839] text-white text-xs sm:text-sm font-bold hover:bg-[#044e2b] transition-all shadow-xs cursor-pointer active:scale-95"
           >
-            ফিল্টার রিসেট করুন
+            সব ফিল্টার রিসেট করুন
           </button>
         </div>
       ) : (
         <div className="space-y-6">
-          {/* Active Filter Bar & Card Counter */}
-          <div className="bg-white dark:bg-zinc-900 px-4 py-3 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between gap-3 flex-wrap shadow-xs">
-            <div className="flex items-center gap-2 flex-wrap text-xs font-semibold text-zinc-600 dark:text-zinc-400">
-              <span>ফিল্টার করা মোট কার্ড:</span>
+          {/* Active Filter Summary Bar */}
+          <div className="bg-white dark:bg-slate-900 px-4 py-3 rounded-2xl border border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-3 flex-wrap shadow-xs">
+            <div className="flex items-center gap-2 flex-wrap text-xs font-semibold text-slate-600 dark:text-slate-400">
+              <span>মোট কার্ড:</span>
               <span className="font-extrabold text-[#056839] dark:text-emerald-400 font-mono text-sm">
                 {filteredEntries.length}টি
               </span>
-              {selectedChapter !== 'all' && (
+              
+              {activeWeek !== 'all' && (
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#056839] dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 text-[11px] font-bold flex items-center gap-1">
-                  <span>অধ্যায়:</span> {selectedChapter}
+                  <span>Week 0{activeWeek}</span>
                   <button 
+                    type="button"
+                    onClick={() => handleWeekChange('all')} 
+                    className="ml-1 hover:text-rose-600 cursor-pointer text-xs"
+                    title="সপ্তাহ ফিল্টার মুছুন"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              {selectedChapter !== 'all' && (
+                <span className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 text-[11px] font-bold flex items-center gap-1">
+                  <span>{selectedChapter}</span>
+                  <button 
+                    type="button"
                     onClick={() => setSelectedChapter('all')} 
                     className="ml-1 hover:text-rose-600 cursor-pointer text-xs"
                     title="অধ্যায় ফিল্টার মুছুন"
@@ -843,11 +668,12 @@ export const VaultView: React.FC<VaultViewProps> = ({
                   </button>
                 </span>
               )}
+
               {selectedCardType !== 'all' && (
                 <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-[11px] font-bold flex items-center gap-1">
-                  <span>ধরণ:</span> 
-                  {selectedCardType === 'core_formula' ? 'কোর সূত্রাবলী' : selectedCardType === 'shortcut' ? 'নো-ক্যালকুলেটর শর্টকাট' : 'ট্র্যাপ এলার্ট'}
+                  <span>{selectedCardType === 'core_formula' ? 'কোর সূত্রাবলী' : selectedCardType === 'shortcut' ? 'নো-ক্যালকুলেটর হ্যাক' : 'ট্র্যাপ অ্যালার্ট'}</span>
                   <button 
+                    type="button"
                     onClick={() => setSelectedCardType('all')} 
                     className="ml-1 hover:text-rose-600 cursor-pointer text-xs"
                     title="ধরণ ফিল্টার মুছুন"
@@ -858,9 +684,11 @@ export const VaultView: React.FC<VaultViewProps> = ({
               )}
             </div>
 
-            {(selectedChapter !== 'all' || selectedCardType !== 'all' || activeSubject !== 'All' || searchQuery) && (
+            {(activeWeek !== 'all' || selectedChapter !== 'all' || selectedCardType !== 'all' || activeSubject !== 'All' || searchQuery) && (
               <button
+                type="button"
                 onClick={() => {
+                  setActiveWeek('all');
                   setSelectedChapter('all');
                   setSelectedCardType('all');
                   setActiveSubject('All');
@@ -872,202 +700,446 @@ export const VaultView: React.FC<VaultViewProps> = ({
               </button>
             )}
           </div>
-          {Array.from(groupedByChapter.entries()).map(([chapterName, chapterEntries]) => {
-            const isExpanded = isChapterExpanded(chapterName);
-            const chapterSubject = chapterEntries[0]?.subject || activeSubject;
+
+          {/* Grouped Chapter Sections */}
+          {Array.from(groupedByChapter.entries()).map(([chapterName, chapterItems]) => {
+            const visibleItems = chapterItems.slice(0, displayLimit);
+            if (visibleItems.length === 0) return null;
 
             return (
-              <div 
-                key={chapterName}
-                className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm overflow-hidden transition-all"
-              >
-                {/* Chapter Header / Accordion Trigger */}
-                <div 
-                  onClick={() => toggleChapter(chapterName)}
-                  className="p-4 sm:p-5 flex items-center justify-between cursor-pointer hover:bg-zinc-50/70 dark:hover:bg-zinc-800/40 border-b border-zinc-100 dark:border-zinc-800/80 transition-colors select-none"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm shrink-0">
-                      {chapterSubject === 'Physics' ? '⚛️' : chapterSubject === 'Chemistry' ? '🧪' : chapterSubject === 'Higher Math' ? '📐' : chapterSubject === 'Biology' ? '🧬' : chapterSubject === 'English' ? '🇬🇧' : '🇧🇩'}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h2 className="text-sm sm:text-base font-extrabold text-zinc-900 dark:text-white">
-                          {chapterName}
-                        </h2>
-                        <span className="text-[11px] font-semibold text-zinc-400">
-                          ({chapterEntries.length}টি কার্ড)
-                        </span>
-                      </div>
-                      <div className="text-[11px] text-zinc-500 dark:text-zinc-400 flex items-center gap-2 mt-0.5">
-                        <span>{chapterSubject}</span>
-                        <span>•</span>
-                        <span>
-                          {chapterEntries.filter(e => e.type === 'core_formula').length} সূত্র
-                        </span>
-                        <span>•</span>
-                        <span>
-                          {chapterEntries.filter(e => e.type === 'shortcut').length} শর্টকাট
-                        </span>
-                        <span>•</span>
-                        <span className="text-rose-500 font-medium">
-                          {chapterEntries.filter(e => e.type === 'trap').length} ট্র্যাপ
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
+              <div key={chapterName} className="space-y-3.5">
+                {/* Chapter Section Title */}
+                <div className="flex items-center justify-between pb-1.5 border-b border-slate-200/80 dark:border-slate-800">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold text-zinc-400 hidden sm:inline">
-                      {isExpanded ? 'সংকুচিত করুন' : 'বিস্তৃত করুন'}
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#056839] dark:bg-emerald-400" />
+                    <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+                      {chapterName}
+                    </h2>
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                      {chapterItems.length}টি
                     </span>
-                    <div className="p-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
-                      {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                    </div>
                   </div>
                 </div>
 
-                {/* Chapter Cards Grid */}
-                {isExpanded && (
-                  <div className="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {chapterEntries.map((item) => {
-                      const isTrap = item.type === 'trap';
-                      const isShortcut = item.type === 'shortcut';
-                      const isCopied = copiedId === item.id;
+                {/* Cards Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {visibleItems.map((item) => {
+                    const isCopied = copiedId === item.id;
+                    const cardTypeBadge = item.type === 'core_formula'
+                      ? { label: '📐 কোর সূত্রাবলী', class: 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800' }
+                      : item.type === 'shortcut'
+                      ? { label: '⚡ নো-ক্যালকুলেটর হ্যাক', class: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800' }
+                      : { label: '⚠️ ট্র্যাপ অ্যালার্ট', class: 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800' };
 
-                      return (
-                        <div
-                          key={item.id}
-                          className={`rounded-2xl p-4 sm:p-5 border transition-all flex flex-col justify-between shadow-xs hover:shadow-md ${
-                            isTrap
-                              ? 'bg-rose-50/20 dark:bg-rose-950/10 border-rose-200/80 dark:border-rose-900/30'
-                              : isShortcut
-                              ? 'bg-amber-50/15 dark:bg-amber-950/10 border-amber-200/70 dark:border-amber-900/30'
-                              : 'bg-white dark:bg-zinc-900/90 border-zinc-200/80 dark:border-zinc-800'
-                          }`}
-                        >
-                          <div>
-                            {/* Card Top: Badges + Copy */}
-                            <div className="flex items-center justify-between mb-2.5 gap-2">
-                              <div className="flex items-center gap-1.5 flex-wrap">
-                                {item.type === 'core_formula' && (
-                                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 flex items-center gap-1">
-                                    <span>📐</span> কোর সূত্র
-                                  </span>
-                                )}
-                                {item.type === 'shortcut' && (
-                                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 flex items-center gap-1">
-                                    <Zap className="w-3 h-3 text-amber-500" /> ৫-সেকেন্ড হ্যাক
-                                  </span>
-                                )}
-                                {item.type === 'trap' && (
-                                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20 flex items-center gap-1">
-                                    <ShieldAlert className="w-3 h-3 text-rose-500" /> নেগেটিভ ট্র্যাপ
-                                  </span>
-                                )}
-                                <span className="text-[10px] font-medium text-zinc-400">
-                                  #{item.id}
-                                </span>
-                              </div>
-
-                              <button
-                                onClick={() => copyToClipboard(item.id, `${item.title}\n${item.formula}\n${item.concept}`)}
-                                className="flex items-center gap-1 text-[11px] font-medium text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                                title="কপি করুন"
-                              >
-                                {isCopied ? (
-                                  <span className="flex items-center gap-1 text-emerald-600 font-bold">
-                                    <Check className="w-3.5 h-3.5" /> কপি হয়েছে
-                                  </span>
-                                ) : (
-                                  <span className="flex items-center gap-1">
-                                    <Copy className="w-3.5 h-3.5" /> কপি
-                                  </span>
-                                )}
-                              </button>
+                    return (
+                      <div 
+                        key={item.id}
+                        className="bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/60 rounded-2xl shadow-xs hover:shadow-md transition-all p-4 sm:p-5 flex flex-col justify-between"
+                      >
+                        <div>
+                          {/* Card Top Meta Badges */}
+                          <div className="flex items-center justify-between gap-2 mb-2.5 flex-wrap">
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300">
+                                Week 0{item.week}
+                              </span>
+                              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300">
+                                {item.subject}
+                              </span>
                             </div>
-
-                            {/* Card Title */}
-                            <h3 className="text-sm font-extrabold text-zinc-900 dark:text-white mb-2 leading-snug">
-                              {item.title}
-                            </h3>
-
-                            {/* Formula Box (High-priority display with Crisp Solid White Math Contrast) */}
-                            {item.formula && (
-                              <div className="my-3 bg-zinc-950 dark:bg-black text-white border border-zinc-800 p-4 rounded-2xl font-mono text-xs sm:text-sm overflow-x-auto no-scrollbar shadow-inner formula-container math-renderer">
-                                <MathText content={item.formula} block className="text-white" />
-                              </div>
-                            )}
-
-                            {/* Core Concept Box */}
-                            {item.concept && (
-                              <div className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed mb-2.5">
-                                <strong className="text-zinc-900 dark:text-white font-bold block mb-0.5">
-                                  💡 মূল ধারণা:
-                                </strong>
-                                <MathText content={item.concept} />
-                              </div>
-                            )}
-
-                            {/* Shortcut / 5-Second Hack Box */}
-                            {item.hack && (
-                              <div className="bg-amber-500/10 dark:bg-amber-950/30 p-2.5 rounded-xl border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200 leading-relaxed mb-2 overflow-x-auto no-scrollbar">
-                                <strong className="text-amber-700 dark:text-amber-400 font-bold flex items-center gap-1 mb-0.5">
-                                  <Zap className="w-3 h-3 text-amber-500" /> ৫-সেকেন্ড হ্যাক:
-                                </strong>
-                                <MathText content={item.hack} />
-                              </div>
-                            )}
-
-                            {/* Negative Marking Trap Box */}
-                            {item.trap && (
-                              <div className="bg-rose-500/10 dark:bg-rose-950/30 p-2.5 rounded-xl border border-rose-500/20 text-xs text-rose-900 dark:text-rose-200 leading-relaxed mb-2 overflow-x-auto no-scrollbar">
-                                <strong className="text-rose-700 dark:text-rose-400 font-bold flex items-center gap-1 mb-0.5">
-                                  <ShieldAlert className="w-3.5 h-3.5 text-rose-500" /> যেখানে ভুল হয় (Trap Alert):
-                                </strong>
-                                <MathText content={item.trap} />
-                              </div>
-                            )}
+                            <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border ${cardTypeBadge.class}`}>
+                              {cardTypeBadge.label}
+                            </span>
                           </div>
 
-                          {/* Card Footer: Tags */}
-                          {item.tags && item.tags.length > 0 && (
-                            <div className="flex items-center gap-1.5 flex-wrap pt-2.5 mt-2 border-t border-zinc-100 dark:border-zinc-800/80">
-                              {item.tags.map((tag, tIdx) => (
-                                <span
-                                  key={tIdx}
-                                  onClick={() => setSearchQuery(tag)}
-                                  className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-white cursor-pointer transition-colors"
-                                >
-                                  #{tag}
-                                </span>
-                              ))}
+                          {/* Card Title */}
+                          <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white mb-2 leading-snug">
+                            {item.title}
+                          </h3>
+
+                          {/* KaTeX High-Contrast Formula Box */}
+                          {item.formula && (
+                            <FormulaBox
+                              formula={item.formula}
+                              onCopy={() => copyToClipboard(item.id, item.formula)}
+                              isCopied={isCopied}
+                            />
+                          )}
+
+                          {/* Core Concept Box */}
+                          {item.concept && (
+                            <div className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+                              <strong className="text-slate-900 dark:text-white font-bold block mb-1">
+                                💡 মূল ধারণা:
+                              </strong>
+                              <MathText content={item.concept} />
+                            </div>
+                          )}
+
+                          {/* Shortcut / Speed Hack Box */}
+                          {item.hack && (
+                            <div className="bg-emerald-500/10 dark:bg-emerald-950/30 p-3 rounded-xl border border-emerald-500/20 text-xs text-emerald-950 dark:text-emerald-200 leading-relaxed mb-2.5 overflow-x-auto no-scrollbar">
+                              <strong className="text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-1 mb-1">
+                                <Zap className="w-3.5 h-3.5 text-emerald-500 fill-current" /> ৫-সেকেন্ড নো-ক্যালকুলেটর হ্যাক:
+                              </strong>
+                              <MathText content={item.hack} />
+                            </div>
+                          )}
+
+                          {/* Negative Marking Trap Box */}
+                          {item.trap && (
+                            <div className="bg-rose-500/10 dark:bg-rose-950/30 p-3 rounded-xl border border-rose-500/25 text-xs text-rose-950 dark:text-rose-200 leading-relaxed mb-2 overflow-x-auto no-scrollbar">
+                              <strong className="text-rose-700 dark:text-rose-400 font-bold flex items-center gap-1.5 mb-1">
+                                <ShieldAlert className="w-4 h-4 text-rose-500 shrink-0" /> ⚠️ সতর্কতা / যেখানে ভুল হয় (Trap Alert):
+                              </strong>
+                              <MathText content={item.trap} />
                             </div>
                           )}
                         </div>
-                      );
-                    })}
-                  </div>
-                )}
+
+                        {/* Card Tags Footer */}
+                        {item.tags && item.tags.length > 0 && (
+                          <div className="flex items-center gap-1.5 flex-wrap pt-3 mt-2 border-t border-slate-100 dark:border-slate-700/60">
+                            {item.tags.map((tag, tIdx) => (
+                              <button
+                                key={tIdx}
+                                type="button"
+                                onClick={() => setSearchQuery(tag)}
+                                className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700/60 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white cursor-pointer transition-colors"
+                              >
+                                #{tag}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}
 
-          {/* Smooth Pagination / Lazy Loading Trigger for Mobile Instant Performance */}
+          {/* Smooth Pagination / Load More Button */}
           {filteredEntries.length > displayLimit && (
             <div className="pt-4 pb-2 text-center">
               <button
-                onClick={() => setDisplayLimit((prev) => prev + 20)}
-                className="w-full py-3.5 px-4 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-slate-800 text-sm font-bold text-[#056839] dark:text-emerald-400 hover:bg-slate-50 dark:hover:bg-zinc-800 shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.99]"
+                type="button"
+                onClick={() => setDisplayLimit((prev) => prev + 24)}
+                className="w-full py-3.5 px-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-bold text-[#056839] dark:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 shadow-xs flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.99]"
               >
-                <span>আরও ২০টি কার্ড লোড করুন ▾</span>
-                <span className="text-xs text-zinc-400 font-mono">({Math.min(displayLimit, filteredEntries.length)} / {filteredEntries.length} প্রদর্শিত)</span>
+                <span>আরও ২৪টি কার্ড দেখুন ▾</span>
+                <span className="text-xs text-slate-400 font-mono">
+                  ({Math.min(displayLimit, filteredEntries.length)} / {filteredEntries.length} প্রদর্শিত)
+                </span>
               </button>
             </div>
           )}
 
-          {/* Sentinel for infinite scroll trigger */}
+          {/* Sentinel for auto scroll trigger */}
           <div ref={sentinelRef} className="h-4 w-full" />
+        </div>
+      )}
+
+      {/* 7. SPECIAL QUICK TOOLS MODAL / BOTTOM SHEET */}
+      {showQuickToolsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-xs animate-fadeIn">
+          <div 
+            className="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden animate-slideUp"
+            role="dialog"
+            aria-modal="true"
+          >
+            {/* Modal Header */}
+            <div className="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 bg-amber-500/10 dark:bg-amber-950/20">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-amber-500 text-white shadow-xs">
+                  <Zap className="w-5 h-5 fill-current" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+                    স্পেশাল কুইক টুলস ও নো-ক্যালকুলেটর ভল্ট
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    ভর্তি পরীক্ষায় ক্যালকুলেটর ছাড়া চোখের পলকে সমস্যা সমাধানের চার্ট
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowQuickToolsModal(false)}
+                className="p-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors cursor-pointer"
+                title="বন্ধ করুন (ESC)"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Tabs */}
+            <div className="p-3 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2 overflow-x-auto no-scrollbar bg-slate-50 dark:bg-slate-900/50">
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('triplets')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'triplets'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                📐 পিথাগোরিয়ান ট্রিপলেট ({filteredTriplets.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('quick_math')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'quick_math'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                ⚡ রুট ও লগ হ্যাক ({filteredQuickMath.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('fractions')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'fractions'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                🧪 স্টয়কিওমেট্রি ফ্র্যাকশন ({filteredFractions.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('w4_bridge')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'w4_bridge'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                🎯 Week 04 ব্রিজ
+              </button>
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('w5_bridge')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'w5_bridge'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                🔮 Week 05 ব্রিজ
+              </button>
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('w6_bridge')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'w6_bridge'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                🚀 Week 06 ব্রিজ
+              </button>
+              <button
+                type="button"
+                onClick={() => setQuickToolTab('w7_matrix')}
+                className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+                  quickToolTab === 'w7_matrix'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                👑 Week 07 ব্রিজ
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[60vh] space-y-4">
+              {quickToolTab === 'triplets' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {filteredTriplets.map((item, idx) => (
+                    <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="font-mono font-bold text-sm text-sky-700 dark:text-sky-400">{item.sides}</span>
+                          <span className="px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 text-[11px] font-mono font-bold">
+                            মান: {item.result}
+                          </span>
+                        </div>
+                        <div className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                          <MathText content={item.app} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {quickToolTab === 'quick_math' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {filteredQuickMath.map((item, idx) => (
+                    <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60 flex items-center justify-between gap-3">
+                      <div className="flex-1 text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-400 mr-2">
+                          {item.type}
+                        </span>
+                        <MathText content={item.item} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {quickToolTab === 'fractions' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {filteredFractions.map((item, idx) => (
+                    <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="font-bold text-xs sm:text-sm text-teal-700 dark:text-teal-400">
+                          <MathText content={item.compound} />
+                        </span>
+                        <span className="font-mono text-xs px-2 py-0.5 rounded bg-slate-200/80 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold">
+                          M: {item.mw}
+                        </span>
+                      </div>
+                      <div className="text-xs text-slate-600 dark:text-slate-300">
+                        <MathText content={item.trick} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {quickToolTab === 'w4_bridge' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">হ্রদের গভীরতা হ্যাক (বুদ্বুদ)</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">১০.৩৩ মিটার</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="ব্যাস বা ব্যাসার্ধ $n$ গুণ হলে: $h = (n^3 - 1) \times 10.33\text{ m}$<br />আয়তন $n$ গুণ হলে: $h = (n - 1) \times 10.33\text{ m}$" />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-teal-600 dark:text-teal-400">সংকরায়ন দ্রুত গণনা</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">H মান</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="$H = \frac{1}{2}(V + M - C + A)$<br />$H=2 \implies sp, \quad H=3 \implies sp^2, \quad H=4 \implies sp^3, \quad H=5 \implies sp^3d$" />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-purple-600 dark:text-purple-400">কর্ণের সংখ্যা ও হাত মেলানো</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">nCr হ্যাক</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="কর্ণের সংখ্যা: $\frac{n(n-3)}{2}$ (১২ বাহুর কর্ণ = ৫৪টি)<br />করমর্দন সংখ্যা: $\frac{n(n-1)}{2}$ (১০ জনের করমর্দন = ৪৫টি)" />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">মেন্ডেলের ব্যতিক্রম অনুপাত</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">জিনতত্ত্ব</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="পরিপূরক জিন: ৯:৭<br />এপিস্ট্যাসিস (প্রকট): ১২:৩:১<br />এপিস্ট্যাসিস (দ্বৈত প্রচ্ছন্ন): ৯:৭<br />লিথাল জিন: ২:১" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {quickToolTab === 'w5_bridge' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">সরল ছন্দিত গতিতে শক্তি</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">সরণ x</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="$E_k = E_p \implies x = \pm \frac{A}{\sqrt{2}}$<br />$E_k = 3E_p \implies x = \pm \frac{A}{2}$<br />$E_p = 3E_k \implies x = \pm \frac{\sqrt{3}}{2}A$" />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-teal-600 dark:text-teal-400">ফ্যারাডের মানসিক গণনা</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">৯৬৫০০ কুলম্ব</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="$1\text{ F} = 96500\text{ C} \implies \text{দেয় } \frac{\text{মোলার ভর}}{\text{যোজ্যতা}}\text{ গ্রাম}$<br />$1\text{ F} \implies \text{Al}: 9\text{ g}, \quad \text{Cu}: 31.75\text{ g}, \quad \text{Ag}: 108\text{ g}$" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {quickToolTab === 'w6_bridge' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">ত্রুটিপূর্ণ থার্মোমিটার হ্যাক</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">অনুপাত</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="$\frac{X - \text{ice}}{\text{steam} - \text{ice}} = \frac{C}{100}$<br />বরফ $4^\circ\text{C}$, বাষ্প $96^\circ\text{C}$ হলে ৫০ পাঠের সঠিক মান ঠিক $50^\circ\text{C}$!" />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-purple-600 dark:text-purple-400">লব হরের অন্তরক ইন্টিগ্রেশন</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">১ সেকেন্ড</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="$\int \frac{f'(x)}{f(x)} dx = \ln|f(x)| + c$<br />$\int \frac{f'(x)}{\sqrt{f(x)}} dx = 2\sqrt{f(x)} + c$" />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {quickToolTab === 'w7_matrix' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">ফটোইলেক্ট্রিক ১২৪০০ ফর্মুলা</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">eV মান</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="$E = \frac{12400}{\lambda(\text{\AA})}\text{ eV}$<br />নিবৃত্তি বিভব $V_s$ এর ভোল্ট মান সংখ্যাগতভাবে $K_{\max}(\text{eV})$ এর সমান!" />
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 border border-slate-200/80 dark:border-slate-700/60">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-xs text-teal-600 dark:text-teal-400">কার্বোক্যাটায়ন স্থায়িত্ব ক্রম</span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">জৈব রসায়ন</span>
+                    </div>
+                    <div className="text-xs text-slate-600 dark:text-slate-300">
+                      <MathText content="ক্যাটায়ন ও মুক্ত মূলক: $3^\circ > 2^\circ > 1^\circ > \text{CH}_3^+$<br />কার্বানায়ন: $\text{CH}_3^- > 1^\circ > 2^\circ > 3^\circ$" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-3.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowQuickToolsModal(false)}
+                className="px-4 py-2 rounded-xl bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
+              >
+                বন্ধ করুন
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
