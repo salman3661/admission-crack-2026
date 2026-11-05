@@ -63,6 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'week_01', label: '1️⃣ Week 01' },
     { id: 'week_02', label: '2️⃣ Week 02' },
     { id: 'week_03', label: '3️⃣ Week 03' },
+    { id: 'week_05', label: '5️⃣ Week 05' },
     { id: 'week_06', label: '6️⃣ Week 06' },
     { id: 'week_07', label: '7️⃣ Week 07' },
   ];

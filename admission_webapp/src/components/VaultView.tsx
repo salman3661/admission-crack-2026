@@ -56,7 +56,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({});
   const [showQuickTools, setShowQuickTools] = useState(true);
-  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w6_bridge' | 'w7_matrix'>('w7_matrix');
+  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w5_bridge' | 'w6_bridge' | 'w7_matrix'>('w5_bridge');
   const [displayLimit, setDisplayLimit] = useState(20);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -447,6 +447,16 @@ export const VaultView: React.FC<VaultViewProps> = ({
                 🧪 স্টয়কিওমেট্রি ফ্র্যাকশন ({filteredFractions.length})
               </button>
               <button
+                onClick={() => setQuickToolTab('w5_bridge')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
+                  quickToolTab === 'w5_bridge'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                }`}
+              >
+                🔮 Week 05 ব্রিজ
+              </button>
+              <button
                 onClick={() => setQuickToolTab('w6_bridge')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
                   quickToolTab === 'w6_bridge'
@@ -521,6 +531,70 @@ export const VaultView: React.FC<VaultViewProps> = ({
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {quickToolTab === 'w5_bridge' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">SHM শক্তি বন্টন গোল্ডেন রুল</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড রুল</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$E_k = E_p \\implies x = \\pm \\frac{A}{\\sqrt{2}} \\approx \\pm 0.707A$<br />$E_k = 3E_p \\implies x = \\pm \\frac{A}{2}$<br />$E_p = 3E_k \\implies x = \\pm \\frac{\\sqrt{3}}{2}A \\approx \\pm 0.866A$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">শব্দের বেগ ও পরম তাপমাত্রা</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">কেলভিন স্কেল ট্রিক</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$\\frac{v_1}{v_2} = \\sqrt{\\frac{T_1}{T_2}}$<br />বেগ দ্বিগুণ ($v_2 = 2v_1$) হলে:<br />$T_2 = 4 T_1 = 4 \\times 273\\text{ K} = 1092\\text{ K} = 819^\\circ\\text{C}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">খোলা বনাম বন্ধ অর্গান নল</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">২:১ কম্পাঙ্ক</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$f_{\\text{open}} = \\frac{v}{2L}, \\quad f_{\\text{closed}} = \\frac{v}{4L}$<br />$f_{\\text{open}} : f_{\\text{closed}} = 2 : 1$<br />খোলা নলে সকল হারমোনিক, বন্ধ নলে শুধু বিজোড়।" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">ফ্যারাডের বিদ্যুৎ ও STP আয়তন</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">ফ্যারাডে শর্টকাট</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$1\\text{ F} = 96500\\text{ C} \\implies 1\\text{ mol } e^-$<br />ক্যাথোডে $H_2$: $1\\text{ F} \\implies 11.2\\text{ L}$<br />অ্যানোডে $O_2$: $1\\text{ F} \\implies 5.6\\text{ L}$ ($O_2$ তে $4\\text{ F}$ লাগে)" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">বহুপদীর মূলের রূপান্তর ট্রিক</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সহগ অদলবদল</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$ax^2 + bx + c = 0$ এর মূল $\\alpha, \\beta$<br />বিপরীত মূল: $cx^2 + bx + a = 0$<br />বিপরীত চিহ্ন: $ax^2 - bx + c = 0$<br />$\\frac{1}{\\alpha} + \\frac{1}{\\beta} = -\\frac{b}{c}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">সিলোম ও রেচন অঙ্গ ম্যাট্রিক্স</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">৩-স্তরীয় ছক</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="অ্যাসিলোমেট: পরিফেরা, নিডারিয়া, প্লাটিহেলমিনথিস<br />সিউডোসিলোমেট: নেমাটোডা (গোলকৃমি), রটিফেরা<br />রেচন: প্লাটিহেলমিনথিস = শিখা কোষ; অ্যানেলিডা = নেফ্রিডিয়া" />
+                </div>
+              </div>
             </div>
           )}
 

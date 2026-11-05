@@ -1,6 +1,6 @@
 export type TrackType = 'medical' | 'varsity';
 export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
-export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03' | 'week_06' | 'week_07';
+export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03' | 'week_05' | 'week_06' | 'week_07';
 export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault';
 
 export interface UserProfile {

@@ -32,9 +32,9 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
     return predictorSets.filter((s) => s.track === activeTrack);
   }, [predictorSets, activeTrack]);
 
-  // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'week_06' | 'week_07' | 'sets'
+  // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'week_05' | 'week_06' | 'week_07' | 'sets'
   const [activeTab, setActiveTab] = useState<'weekly' | 'sets'>('weekly');
-  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_06' | 'week_07'>('week_01');
+  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_05' | 'week_06' | 'week_07'>('week_05');
   const [currentSlotIndex, setCurrentSlotIndex] = useState<number>(0);
   const pageSize = 12; // 10 to 15 questions per slot page
 
@@ -318,6 +318,22 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
               >
                 <span>⚡</span>
                 <span>Week 3: Trap & Speed Special</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('weekly');
+                  setSelectedWeekTab('week_05');
+                  setCurrentSlotIndex(0);
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 shadow-xs ${
+                  activeTab === 'weekly' && selectedWeekTab === 'week_05'
+                    ? 'bg-[#056839] text-white ring-2 ring-[#056839]/30 scale-[1.02]'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                <span>🔮</span>
+                <span>Week 5: 80/20 Multi-Stream</span>
               </button>
 
               <button
@@ -861,6 +877,8 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                     ? '🔥 Week 2: DU Repeat Vault'
                     : selectedWeekTab === 'week_03'
                     ? '⚡ Week 3: Trap & Speed Special'
+                    : selectedWeekTab === 'week_05'
+                    ? '🔮 Week 5: 80/20 Multi-Stream Pattern'
                     : selectedWeekTab === 'week_06'
                     ? '🚀 Week 6: 80/20 Multi-Stream'
                     : '👑 Week 7: Tri-Stream Pattern'}
@@ -1084,6 +1102,10 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                       setCurrentSlotIndex(0);
                       window.scrollTo({ top: 220, behavior: 'smooth' });
                     } else if (selectedWeekTab === 'week_03') {
+                      setSelectedWeekTab('week_05');
+                      setCurrentSlotIndex(0);
+                      window.scrollTo({ top: 220, behavior: 'smooth' });
+                    } else if (selectedWeekTab === 'week_05') {
                       setSelectedWeekTab('week_06');
                       setCurrentSlotIndex(0);
                       window.scrollTo({ top: 220, behavior: 'smooth' });

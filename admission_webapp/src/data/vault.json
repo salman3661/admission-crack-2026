@@ -4731,6 +4731,147 @@
         "প্যাভলভ",
         "Core Formula"
       ]
+    },
+    {
+      "id": "v_w5_shm_energy",
+      "subject": "Physics",
+      "chapter": "Periodic Motion & SHM",
+      "type": "speed_hack",
+      "title": "SHM গতিশক্তি ও বিভবশক্তি অবস্থান অনুপাত",
+      "formula": "x = \\pm \\frac{A}{\\sqrt{n+1}} \\quad (E_k = n E_p)",
+      "concept": "সরল ছন্দিত স্পন্দনে মোট শক্তি $E = \\frac{1}{2}kA^2$ ধ্রুব থাকে। যখন $E_k = E_p$, তখন $\\frac{1}{2}k(A^2 - x^2) = \\frac{1}{2}kx^2 \\implies x = \\pm \\frac{A}{\\sqrt{2}} \\approx \\pm 0.707A$।",
+      "hack": "১ সেকেন্ড গোল্ডেন মান: $E_k = E_p \\implies x = \\pm \\frac{A}{\\sqrt{2}}$। $E_k = 3E_p \\implies x = \\pm \\frac{A}{2}$। $E_p = 3E_k \\implies x = \\pm \\frac{\\sqrt{3}}{2}A \\approx \\pm 0.866A$।",
+      "trap": "প্রশ্নে 'সাম্যাবস্থা হতে দূরত্ব' নাকি 'বিস্তার অবস্থান হতে দূরত্ব' চেয়েছে লক্ষ্য করুন। বিস্তার অবস্থান থেকে দূরত্ব হলে $(A - x)$ হবে।",
+      "tags": [
+        "SHM",
+        "energy",
+        "kinetic_energy",
+        "potential_energy",
+        "amplitude",
+        "spring"
+      ]
+    },
+    {
+      "id": "v_w5_sound_speed",
+      "subject": "Physics",
+      "chapter": "Waves & Sound",
+      "type": "speed_hack",
+      "title": "শব্দের বেগ ও তাপমাত্রা অনুপাত শর্টকাট",
+      "formula": "\\frac{v_1}{v_2} = \\sqrt{\\frac{T_1}{T_2}} \\quad (T \\text{ in Kelvin})",
+      "concept": "গ্যাসে শব্দের বেগ পরম তাপমাত্রার বর্গমূলের সমানুপাতিক ($v \\propto \\sqrt{T}$)। তাপমাত্রা ৪ গুণ হলে বেগ দ্বিগুণ হয়।",
+      "hack": "কোন তাপমাত্রায় শব্দের বেগ $0^\\circ\\text{C}$ এর বেগের দ্বিগুণ হবে? $v_2 = 2v_1 \\implies T_2 = 4 T_1 = 4 \\times 273\\text{ K} = 1092\\text{ K} = 819^\\circ\\text{C}$।",
+      "trap": "কেলভিন তাপমাত্রাকে সরাসরি সেলসিয়াসে গুণ করা মারাত্মক ভুল ($273 \\times 4$ কেলভিন হবে, সেলসিয়াস নয়)।",
+      "tags": [
+        "sound",
+        "waves",
+        "temperature",
+        "laplace",
+        "velocity"
+      ]
+    },
+    {
+      "id": "v_w5_organ_pipe",
+      "subject": "Physics",
+      "chapter": "Waves & Sound",
+      "type": "core_formula",
+      "title": "খোলা ও বন্ধ অর্গান নলের কম্পাঙ্ক অনুপাত",
+      "formula": "f_{\\text{open}} = \\frac{v}{2L}, \\quad f_{\\text{closed}} = \\frac{v}{4L} \\implies f_{\\text{open}} : f_{\\text{closed}} = 2 : 1",
+      "concept": "একই দৈর্ঘ্যের খোলা নলের মূল সুরের কম্পাঙ্ক বন্ধ নলের দ্বিগুণ। খোলা নলে সকল হারমোনিক ($1, 2, 3, \\dots$) থাকে, বন্ধ নলে কেবল বিজোড় হারমোনিক ($1, 3, 5, \\dots$) উপস্থিত থাকে।",
+      "hack": "খোলা নলের সুর বন্ধ নলের চেয়ে বেশি সুমিষ্ট কারণ এতে জোড় ও বিজোড় উভয় হারমোনিকই উৎপন্ন হয়।",
+      "trap": "বন্ধ নলের ২য় হারমোনিক অনুপস্থিত; ৩য় হারমোনিকই হলো ১ম উপসুর (1st Overtone)।",
+      "tags": [
+        "organ_pipe",
+        "waves",
+        "harmonics",
+        "overtones",
+        "frequency"
+      ]
+    },
+    {
+      "id": "v_w5_faraday_mental",
+      "subject": "Chemistry",
+      "chapter": "Electrochemistry",
+      "type": "speed_hack",
+      "title": "ফ্যারাডের সূত্র ও এসটিপিতে গ্যাস আয়তন হ্যাক",
+      "formula": "W = \\frac{M I t}{z F}, \\quad 1\\text{ F} = 96500\\text{ C}",
+      "concept": "যেকোনো মৌলের ১ মোল জমা করতে $z\\text{ Faraday}$ বিদ্যুৎ লাগে ($z$ = যোজ্যতা)। $1\\text{ F}$ চার্জে ক্যাথোডে $11.2\\text{ L } H_2$ গ্যাস এবং অ্যানোডে $5.6\\text{ L } O_2$ গ্যাস বিমুক্ত হয় (STP-তে)।",
+      "hack": "$Al^{3+} + 3e^- \\to Al$ এর ১ মোল ($27\\text{ g}$) জমা করতে $3\\text{ F}$ বিদ্যুৎ প্রয়োজন। ১ ফ্যারাডে দিলে জমা হবে $\\frac{27}{3} = 9\\text{ g}$।",
+      "trap": "অক্সিজেনের যোজনী ২ কিন্তু অক্সিজেন অণু $O_2$ তৈরি হতে ৪টি ইলেকট্রন প্রয়োজন ($2O^{2-} \\to O_2 + 4e^-$), তাই ১ মোল $O_2$ তে $4\\text{ F}$ লাগে।",
+      "tags": [
+        "faraday",
+        "electrochemistry",
+        "stp_volume",
+        "equivalent_weight"
+      ]
+    },
+    {
+      "id": "v_w5_nernst_daniell",
+      "subject": "Chemistry",
+      "chapter": "Electrochemistry",
+      "type": "core_formula",
+      "title": "ড্যানিয়েল কোষে নার্নস্ট সমীকরণ ১০x দ্রুত মান",
+      "formula": "E = E^\\circ - \\frac{0.0592}{2}\\log\\frac{[\\text{Zn}^{2+}]}{[\\text{Cu}^{2+}]}",
+      "concept": "প্রমিত ড্যানিয়েল কোষের $E^\\circ = 1.10\\text{ V}$। যদি অ্যানোড ঘনমাত্রা $[\text{Zn}^{2+}]$ ১০ গুণ কমে, তবে কোষ বিভব $+0.0296\\text{ V}$ বৃদ্ধি পেয়ে $1.1296\\text{ V}$ হয়।",
+      "hack": "অ্যানোড লবণের ঘনমাত্রা কমলে এবং ক্যাথোড লবণের ঘনমাত্রা বাড়লে কোষের ইএমএফ বাড়ে। সাম্যাবস্থায় $E_{\\text{cell}} = 0$ এবং $E^\\circ = \\frac{0.0592}{n}\\log K_c$।",
+      "trap": "লগ এর ভেতরের অনুপাত উল্টে ফেলা: অ্যানোড উপরে, ক্যাথোড নিচে ($[\\text{Anode}]/[\\text{Cathode}]$)।",
+      "tags": [
+        "nernst",
+        "daniell_cell",
+        "emf",
+        "equilibrium_constant"
+      ]
+    },
+    {
+      "id": "v_w5_poly_roots_hack",
+      "subject": "Higher Math",
+      "chapter": "Polynomials & Equations",
+      "type": "speed_hack",
+      "title": "বহুপদীর মূলের রূপান্তর ও প্রতিসাম্য অনুপাত",
+      "formula": "ax^2 + bx + c = 0 \\implies \\alpha + \\beta = -\\frac{b}{a}, \\quad \\alpha\\beta = \\frac{c}{a}",
+      "concept": "মূলদ্বয়ের বিপরীত মূল ($1/\\alpha, 1/\\beta$) বিশিষ্ট সমীকরণ পেতে $x$ এর স্থলে $1/x$ বসাও: $cx^2 + bx + a = 0$ (সহগ অদলবদল)। মূলদ্বয় বিপরীত চিহ্নযুক্ত ($-\\alpha, -\\beta$) হলে $ax^2 - bx + c = 0$।",
+      "hack": "মূলের যোগফল ও গুণফল দিয়ে: $\\frac{1}{\\alpha} + \\frac{1}{\\beta} = \\frac{\\alpha+\\beta}{\\alpha\\beta} = -\\frac{b}{c}$ (সরাসরি ১ সেকেন্ডে)।",
+      "trap": "দ্বিঘাত সমীকরণের সর্বোচ্চ/সর্বনিম্ন মান নির্ণয়ে $x = -\\frac{b}{2a}$ তে মানটি ঘটে, চরম মান $c - \\frac{b^2}{4a}$।",
+      "tags": [
+        "polynomials",
+        "roots",
+        "quadratic",
+        "symmetric_roots"
+      ]
+    },
+    {
+      "id": "v_w5_binomial_independent",
+      "subject": "Higher Math",
+      "chapter": "Binomial Expansion",
+      "type": "speed_hack",
+      "title": "দ্বিপদী বিস্তৃতিতে x-বর্জিত পদের অবস্থান ট্রিক",
+      "formula": "r = \\frac{n \\cdot p}{p + q} \\quad \\text{for } \\left(a x^p + \\frac{b}{x^q}\\right)^n",
+      "concept": "সাধারণ পদ নির্ণয়ের দীর্ঘ হিসাব না করে সরাসরি $r = \\frac{np}{p+q}$ সূত্রে $r$ এর মান বের করা যায়। পদটি হবে $(r+1)$ তম পদ।",
+      "hack": "সহগসমূহের সমষ্টি পেতে চলকগুলোর মান ১ বসিয়ে দাও: $(a + bx)^n$ এর সহগ সমষ্টি $(a + b)^n$।",
+      "trap": "যদি $r$ ভগ্নাংশ আসে, তবে ওই বিস্তৃতিতে কোনো $x$-বর্জিত পদ বিদ্যমান থাকে না।",
+      "tags": [
+        "binomial",
+        "independent_term",
+        "series",
+        "coefficients"
+      ]
+    },
+    {
+      "id": "v_w5_bio_coelom_rule",
+      "subject": "Biology",
+      "chapter": "Animal Diversity & Classification",
+      "type": "concept_trap",
+      "title": "সিলোম ও রেচন অঙ্গ ট্রাই-স্ট্রিম ম্যাট্রিক্স",
+      "formula": "\\text{Acoelomate} \\to \\text{Pseudocoelomate} \\to \\text{Eucoelomate}",
+      "concept": "অ্যাসিলোমেট: পরিফেরা, নিডারিয়া, প্লাটিহেলমিনথিস। সিউডোসিলোমেট: নেমাটোডা (গোলকৃমি), রটিফেরা। ইউসিলোমেট: মলাস্কা, অ্যানেলিডা, আর্থ্রোপোডা, একাইনোডার্মাটা, কর্ডাটা।",
+      "hack": "রেচন অঙ্গ: প্লাটিহেলমিনথিস = শিখা কোষ; অ্যানেলিডা = নেফ্রিডিয়া; আর্থ্রোপোডা = ম্যালপিজিয়ান নালিকা; মলাস্কা = বোজানাসের অঙ্গ।",
+      "trap": "নেমাটোডাতে ছদ্ম-সিলোম থাকে, তাই পেরিটোনিয়াম পর্দা অনুপস্থিত। চ্যাপ্টাকৃমিতে মেসেনকাইম দিয়ে পূর্ণ থাকায় কোনো সিলোমই নেই।",
+      "tags": [
+        "coelom",
+        "flame_cell",
+        "nematoda",
+        "platyhelminthes",
+        "classification"
+      ]
     }
   ],
   "triplets": [
