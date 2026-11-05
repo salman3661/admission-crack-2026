@@ -17,7 +17,8 @@
         "সামান্তরিক",
         "alpha",
         "theta"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_02",
@@ -35,7 +36,8 @@
         "ডট গুণন",
         "ক্রস গুণন",
         "কোণ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_03",
@@ -53,7 +55,8 @@
         "magnitude",
         "অভিক্ষেপ",
         "মান"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_04",
@@ -71,7 +74,8 @@
         "নদী-নৌকা",
         "পারাপার",
         "ন্যূনতম দূরত্ব"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_05",
@@ -79,7 +83,7 @@
       "chapter": "Vector",
       "type": "trap",
       "title": "সামান্তরিকের ক্ষেত্রফলে বাহু বনাম কর্ণ",
-      "formula": "\\text{Area}_{বাহু} = |\\vec{A} \\times \\vec{B}|, \\quad \\text{Area}_{কর্ণ} = \\frac{1}{2}|\\vec{d}_1 \\times \\vec{d}_2|",
+      "formula": "\\text{Area}_{\\text{বাহু}} = |\\vec{A} \\times \\vec{B}|, \\quad \\text{Area}_{\\text{কর্ণ}} = \\frac{1}{2}|\\vec{d}_1 \\times \\vec{d}_2|",
       "concept": "সামান্তরিকের দুটি সন্নিহিত বাহু ভেক্টর দ্বারা প্রকাশ করলে সরাসরি ক্রস গুণন, কিন্তু কর্ণদ্বয় দিলে হাফ গুণ করতে হয়।",
       "hack": "ত্রিভুজের ক্ষেত্রফল সর্বদা \\frac{1}{2}|\\vec{A}\\times\\vec{B}|; আর সামান্তরিকের কর্ণ বললে আগে 1/2 লিখে ক্রস গুণন করুন।",
       "trap": "প্রশ্নে বাহু বলা আছে নাকি কর্ণ বলা আছে তা আন্ডারলাইন না করে অনেকেই হাফ ছেড়ে দিয়ে সম্পূর্ণ ভুল উত্তর দাগায়।",
@@ -90,7 +94,8 @@
         "কর্ণ",
         "বাহু",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_06",
@@ -108,7 +113,8 @@
         "সলিনয়ডাল",
         "অঘূর্ণনশীল",
         "ভেক্টর ক্যালকুলাস"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_07",
@@ -125,7 +131,8 @@
         "component",
         "অভিক্ষেপ",
         "উপাংশ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_vec_08",
@@ -142,7 +149,8 @@
         "umbrella",
         "আপেক্ষিক বেগ",
         "ছাতা"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_01",
@@ -161,7 +169,8 @@
         "পাল্লা",
         "উচ্চতা",
         "প্রাস"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_02",
@@ -179,7 +188,8 @@
         "n-th second",
         "দূরত্ব",
         "অনুপাত"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_03",
@@ -196,7 +206,8 @@
         "equations",
         "acceleration",
         "সমত্বরণ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_04",
@@ -213,7 +224,8 @@
         "maximum height",
         "উচ্চতা",
         "পতন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_05",
@@ -230,7 +242,8 @@
         "acceleration",
         "ত্বরণ",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_06",
@@ -247,7 +260,8 @@
         "same range",
         "পাল্লা",
         "প্রাস"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_07",
@@ -264,7 +278,8 @@
         "angular velocity",
         "কৌণিক বেগ",
         "rpm"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_dyn_08",
@@ -281,7 +296,8 @@
         "rpm",
         "ঘূর্ণন সংখ্যা",
         "মন্দন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_phy_we_01",
@@ -299,7 +315,8 @@
         "কাজ",
         "গতিশক্তি",
         "কাজ-শক্তি উপপাদ্য"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_02",
@@ -317,7 +334,8 @@
         "ভরবেগ",
         "গতিশক্তি",
         "শতকরা বৃদ্ধি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_03",
@@ -334,7 +352,8 @@
         "kinetic energy",
         "উচ্চতা",
         "বিভবশক্তি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_04",
@@ -353,7 +372,8 @@
         "কুয়া",
         "পাম্পের ক্ষমতা",
         "ভরকেন্দ্র"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_05",
@@ -370,7 +390,8 @@
         "potential energy",
         "স্প্রিং",
         "বিভবশক্তি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_06",
@@ -388,7 +409,8 @@
         "গুলি",
         "তক্তা",
         "ভেদ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_07",
@@ -406,7 +428,8 @@
         "কর্মদক্ষতা",
         "ক্ষমতা",
         "HP"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_we_08",
@@ -423,7 +446,8 @@
         "kinetic energy",
         "জড়তার ভ্রামক",
         "ঘূর্ণন গতিশক্তি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_phy_grav_01",
@@ -441,7 +465,8 @@
         "মহাকর্ষ",
         "অভিকর্ষজ ত্বরণ",
         "ঘনত্ব"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_02",
@@ -459,7 +484,8 @@
         "উচ্চতা",
         "গভীরতা",
         "অভিকর্ষজ ত্বরণ"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_03",
@@ -476,7 +502,8 @@
         "orbital velocity",
         "মুক্তিবেগ",
         "কক্ষীয় বেগ"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_04",
@@ -494,7 +521,8 @@
         "orbit",
         "কেপলারের সূত্র",
         "পর্যায়কাল"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_05",
@@ -513,7 +541,8 @@
         "বিভব",
         "ফাঁপা গোলক",
         "trap"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_06",
@@ -530,7 +559,8 @@
         "black hole",
         "শোয়ার্জশিল্ড",
         "কৃষ্ণ বিবর"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_07",
@@ -547,7 +577,8 @@
         "energy",
         "উপগ্রহ",
         "শক্তি বণ্টন"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_grav_08",
@@ -564,12 +595,13 @@
         "satellite",
         "ভূ-স্থির উপগ্রহ",
         "পর্যায়কাল"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_phy_sp_01",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "core_formula",
       "title": "ইয়ং-এর গুণাঙ্ক ও সঞ্চিত শক্তি",
       "formula": "Y = \\frac{FL}{A\\Delta L} = \\frac{FL}{\\pi r^2 l}, \\quad W = \\frac{1}{2}F l = \\frac{1}{2}\\frac{Y A l^2}{L}, \\quad u = \\frac{1}{2} \\times \\text{পীড়ন} \\times \\text{বিকৃতি}",
@@ -582,12 +614,13 @@
         "ইয়ং-এর গুণাঙ্ক",
         "পীড়ন",
         "বিকৃতি"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_02",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "shortcut",
       "title": "তারকে টেনে দৈর্ঘ্য n গুণ বৃদ্ধি করলে রোধ ও বিকৃতি",
       "formula": "R' = n^2 R, \\quad \\Delta L = (n - 1)L",
@@ -600,12 +633,13 @@
         "resistance",
         "বিকৃতি",
         "রোধ"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_03",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "core_formula",
       "title": "পৃষ্ঠটান, পৃষ্ঠশক্তি ও সাবানের বুদবুদ",
       "formula": "T = \\frac{F}{L} = \\frac{W}{\\Delta A}, \\quad \\Delta P_{\\text{water droplet}} = \\frac{2T}{R}, \\quad \\Delta P_{\\text{soap bubble}} = \\frac{4T}{R}",
@@ -618,12 +652,13 @@
         "পৃষ্ঠটান",
         "পৃষ্ঠশক্তি",
         "বুদবুদ"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_04",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "shortcut",
       "title": "nটি ক্ষুদ্র ফোঁটা মিলে একটি বড় ফোঁটা গঠন",
       "formula": "R = n^{1/3}r, \\quad W_{released} = 4\\pi T R^2 (n^{1/3} - 1)",
@@ -635,12 +670,13 @@
         "coalescence",
         "পৃষ্ঠশক্তি",
         "ফোঁটা"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_05",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "core_formula",
       "title": "সান্দ্রতা বল ও স্টোকসের সূত্র",
       "formula": "F = -\\eta A \\frac{dv}{dx}, \\quad F_v = 6\\pi\\eta r v_t, \\quad v_t = \\frac{2r^2(\\rho - \\sigma)g}{9\\eta}",
@@ -653,12 +689,13 @@
         "terminal velocity",
         "সান্দ্রতা",
         "প্রান্তিক বেগ"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_06",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "trap",
       "title": "পয়সনের অনুপাতের তাত্ত্বিক ও ব্যবহারিক সীমা",
       "formula": "\\sigma = -\\frac{\\Delta r / r}{\\Delta L / L}, \\quad -1 \\le \\sigma \\le 0.5 \\; (\\text{তাত্ত্বিক}), \\quad 0 \\le \\sigma \\le 0.5 \\; (\\text{ব্যবহারিক})",
@@ -671,12 +708,13 @@
         "পয়সনের অনুপাত",
         "সীমা",
         "trap"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_07",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "shortcut",
       "title": "কৈশিক নলে তরলের আরোহণ উচ্চতা",
       "formula": "h = \\frac{2T\\cos\\theta}{r\\rho g}",
@@ -688,12 +726,13 @@
         "surface tension",
         "কৈশিক নল",
         "আরোহণ উচ্চতা"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_sp_08",
       "subject": "Physics",
-      "chapter": "Structural Properties",
+      "chapter": "Structural Properties of Matter",
       "type": "core_formula",
       "title": "সান্দ্রতা গুণাঙ্কের একক ও মাত্রা",
       "formula": "[\\eta] = [M L^{-1} T^{-1}], \\quad \\text{SI Unit} = \\text{N s m}^{-2} = \\text{Pa s} = \\text{kg m}^{-1}\\text{s}^{-1}",
@@ -705,12 +744,13 @@
         "dimension",
         "একক ও মাত্রা",
         "সান্দ্রতা গুণাঙ্ক"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_wav_01",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "core_formula",
       "title": "অগ্রগামী তরঙ্গের প্রমিত সমীকরণ ও দশা পার্থক্য",
       "formula": "y = A\\sin\\left(\\frac{2\\pi}{\\lambda}(vt - x)\\right) = A\\sin(\\omega t - kx), \\quad \\Delta\\delta = \\frac{2\\pi}{\\lambda}\\Delta x = \\frac{2\\pi}{T}\\Delta t",
@@ -723,12 +763,13 @@
         "অগ্রগামী তরঙ্গ",
         "দশা পার্থক্য",
         "তরঙ্গ বেগ"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_02",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "shortcut",
       "title": "টানযুক্ত তারের আড় তরঙ্গের বেগ ও কম্পাঙ্ক",
       "formula": "v = \\sqrt{\\frac{T}{\\mu}}, \\quad f = \\frac{1}{2L}\\sqrt{\\frac{T}{\\mu}} \\quad (\\mu = m/L = \\pi r^2 \\rho)",
@@ -741,12 +782,13 @@
         "আড় তরঙ্গ",
         "কম্পাঙ্ক",
         "টান"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_03",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "core_formula",
       "title": "স্থির তরঙ্গের নিস্পন্দ ও সুস্পন্দ বিন্দু",
       "formula": "y = 2A\\cos(kx)\\sin(\\omega t), \\quad \\text{দূরত্ব} = \\frac{\\lambda}{2} \\; (N\\text{ to } N), \\quad \\frac{\\lambda}{4} \\; (N\\text{ to } A)",
@@ -759,12 +801,13 @@
         "antinode",
         "স্থির তরঙ্গ",
         "নিস্পন্দ বিন্দু"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_04",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "shortcut",
       "title": "বীট (Beat) ও সুরশলাকার অজানা কম্পাঙ্ক",
       "formula": "f_{beat} = |f_1 - f_2|",
@@ -777,12 +820,13 @@
         "বীট",
         "সুরশলাকা",
         "কম্পাঙ্ক"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_05",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "core_formula",
       "title": "খোলা নল বনাম বন্ধ নলের মূল সুর",
       "formula": "f_{\\text{open}} = \\frac{v}{2L} \\; (1:2:3:4), \\quad f_{\\text{closed}} = \\frac{v}{4L} \\; (1:3:5:7)",
@@ -795,12 +839,13 @@
         "খোলা নল",
         "বন্ধ নল",
         "হারমোনিক"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_06",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "shortcut",
       "title": "ডপলার প্রভাব (Doppler Effect) এক নজরে",
       "formula": "f' = \\left(\\frac{v \\pm v_o}{v \\mp v_s}\\right)f",
@@ -812,12 +857,13 @@
         "apparent frequency",
         "ডপলার প্রভাব",
         "আপাত কম্পাঙ্ক"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_07",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "core_formula",
       "title": "শব্দের তীব্রতা ও তীব্রতা লেভেল (ডেসিবেল)",
       "formula": "I = 2\\pi^2 f^2 A^2 \\rho v, \\quad \\beta = 10\\log_{10}\\left(\\frac{I}{I_0}\\right) \\text{ dB} \\quad (I_0 = 10^{-12} \\text{ W m}^{-2})",
@@ -829,12 +875,13 @@
         "decibel",
         "ডেসিবেল",
         "তীব্রতা লেভেল"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_wav_08",
       "subject": "Physics",
-      "chapter": "Waves",
+      "chapter": "Waves & Sound",
       "type": "trap",
       "title": "শব্দের বেগের ওপর তাপমাত্রা ও আর্দ্রতার প্রভাব",
       "formula": "v \\propto \\sqrt{T} \\implies \\frac{v_1}{v_2} = \\sqrt{\\frac{T_1}{T_2}}, \\quad v_t \\approx v_0 + 0.61 t",
@@ -848,12 +895,13 @@
         "শব্দের বেগ",
         "চাপের প্রভাব",
         "trap"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_phy_gas_01",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "core_formula",
       "title": "আদর্শ গ্যাস সমীকরণ ও সার্বজনীন গ্যাস ধ্রুবক",
       "formula": "PV = nRT = \\frac{m}{M}RT = N k_B T, \\quad R = 8.314 \\text{ J mol}^{-1}\\text{K}^{-1} = 0.0821 \\text{ L atm mol}^{-1}\\text{K}^{-1}",
@@ -866,12 +914,13 @@
         "PV=nRT",
         "আদর্শ গ্যাস",
         "বোল্টজম্যান"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_02",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "shortcut",
       "title": "বুদবুদ হ্রদের তলদেশ থেকে উপরিপৃষ্ঠে উঠা",
       "formula": "h = (n - 1) \\times 10.33 \\text{ m} \\approx (n - 1) \\times 10.2 \\text{ m}",
@@ -884,12 +933,13 @@
         "বুদবুদ",
         "হ্রদের গভীরতা",
         "বয়েলের সূত্র"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_03",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "core_formula",
       "title": "RMS বেগ ও গতিশক্তি",
       "formula": "c_{rms} = \\sqrt{\\frac{3RT}{M}} = \\sqrt{\\frac{3P}{\\rho}}, \\quad E_k = \\frac{3}{2}nRT = \\frac{3}{2}k_B T \\; (\\text{প্রতি অণু})",
@@ -901,12 +951,13 @@
         "kinetic energy",
         "গ্যাসের গতিশক্তি",
         "RMS বেগ"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_04",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "shortcut",
       "title": "স্বাধীনতার মাত্রা ও মোলার তাপধারণ ক্ষমতা",
       "formula": "C_v = \\frac{f}{2}R, \\quad C_p = \\left(\\frac{f}{2} + 1\\right)R, \\quad \\gamma = \\frac{C_p}{C_v} = 1 + \\frac{2}{f}",
@@ -919,12 +970,13 @@
         "Cp",
         "Cv",
         "স্বাধীনতার মাত্রা"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_05",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "core_formula",
       "title": "আপেক্ষিক আর্দ্রতা ও গ্লেইশারের সূত্র",
       "formula": "RH = \\frac{f}{F} \\times 100\\%, \\quad \\theta = \\theta_1 - G(\\theta_1 - \\theta_2)",
@@ -936,12 +988,13 @@
         "Glaisher",
         "শিশিরাঙ্ক",
         "আপেক্ষিক আর্দ্রতা"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_06",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "shortcut",
       "title": "গ্রাহামের গ্যাস ব্যাপন সূত্র শর্টকাট",
       "formula": "\\frac{r_1}{r_2} = \\sqrt{\\frac{M_2}{M_1}} = \\sqrt{\\frac{d_2}{d_1}} = \\frac{t_2}{t_1}",
@@ -953,12 +1006,13 @@
         "diffusion",
         "ব্যাপন হার",
         "আণবিক ভর"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_07",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "trap",
       "title": "বাস্তব গ্যাসের আদর্শ আচরণ করার শর্ত",
       "formula": "\\text{উচ্চ তাপমাত্রা (High } T) \\quad \\text{ও} \\quad \\text{নিম্ন চাপ (Low } P)",
@@ -971,12 +1025,13 @@
         "বাস্তব গ্যাস",
         "ভ্যান ডার ওয়ালস",
         "trap"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_phy_gas_08",
       "subject": "Physics",
-      "chapter": "Ideal Gas",
+      "chapter": "Ideal Gas & Kinetic Theory",
       "type": "core_formula",
       "title": "গ্যাসের গড় মুক্ত পথ",
       "formula": "\\lambda = \\frac{1}{\\sqrt{2}\\pi n d^2} \\; (\\text{ক্লসিয়াস/ম্যাক্সওয়েল})",
@@ -988,7 +1043,8 @@
         "গড় মুক্ত পথ",
         "সংঘর্ষ",
         "ব্যাসার্ধ"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_che_qa_01",
@@ -1007,7 +1063,8 @@
         "বোর মডেল",
         "ব্যাসার্ধ",
         "শক্তি"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_02",
@@ -1025,7 +1082,8 @@
         "বর্ণালি",
         "বামার",
         "লাইম্যান"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_03",
@@ -1043,7 +1101,8 @@
         "কোয়ান্টাম সংখ্যা",
         "নোড",
         "রেডিয়াল নোড"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_04",
@@ -1060,7 +1119,8 @@
         "solubility",
         "দ্রাব্যতা গুণফল",
         "অধঃক্ষেপণ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_05",
@@ -1079,7 +1139,8 @@
         "শিখা পরীক্ষা",
         "উদ্বায়ী ক্লোরাইড",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_06",
@@ -1096,7 +1157,8 @@
         "cation test",
         "নেসলার বিকারক",
         "আয়ন শনাক্তকরণ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_07",
@@ -1113,7 +1175,8 @@
         "Rf value",
         "ক্রোমাটোগ্রাফি",
         "স্থির মাধ্যম"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_qa_08",
@@ -1130,7 +1193,8 @@
         "solubility",
         "সম-আয়ন প্রভাব",
         "দ্রাব্যতা হ্রাস"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_che_pp_01",
@@ -1149,7 +1213,8 @@
         "হ্যালোজেন",
         "ব্যতিক্রম",
         "trap"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_02",
@@ -1166,7 +1231,8 @@
         "stability",
         "আয়নিকরণ শক্তি",
         "ব্যতিক্রম"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_03",
@@ -1183,7 +1249,8 @@
         "VSEPR",
         "সংকরায়ন",
         "আণবিক জ্যামিতি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_04",
@@ -1201,7 +1268,8 @@
         "ফাজানের নীতি",
         "গলনাঙ্ক",
         "সমযোজী"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_05",
@@ -1218,7 +1286,8 @@
         "lone pair",
         "বন্ধন কোণ",
         "বিকর্ষণ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_06",
@@ -1236,7 +1305,8 @@
         "জটিল আয়ন",
         "সংকরায়ন",
         "trap"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_07",
@@ -1253,7 +1323,8 @@
         "paramagnetic",
         "চৌম্বক ভ্রামক",
         "বোর ম্যাগনেটন"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_pp_08",
@@ -1271,7 +1342,8 @@
         "অক্সাইড",
         "উভধর্মী",
         "প্রশম"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_01",
@@ -1289,7 +1361,8 @@
         "equilibrium",
         "সাম্যধ্রুবক",
         "মোল সংখ্যা"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_02",
@@ -1306,7 +1379,8 @@
         "logarithm",
         "লগারিদম",
         "pH নির্ণয়"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_03",
@@ -1323,7 +1397,8 @@
         "Henderson",
         "বাফার দ্রবণ",
         "রক্তের বাফার"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_04",
@@ -1340,7 +1415,8 @@
         "weak acid",
         "লঘুতা সূত্র",
         "বিয়োজন মাত্রা"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_05",
@@ -1359,7 +1435,8 @@
         "লা শাতেলিয়ার নীতি",
         "সাম্যধ্রুবক",
         "trap"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_06",
@@ -1376,7 +1453,8 @@
         "heat",
         "প্রশমন তাপ",
         "ব্যতিক্রম"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_07",
@@ -1394,7 +1472,8 @@
         "নির্দেশক",
         "টাইট্রেশন",
         "pH range"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_cc_08",
@@ -1411,12 +1490,13 @@
         "ionic product of water",
         "পানির আয়নিক গুণফল",
         "তাপমাত্রা"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_che_ob_01",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "core_formula",
       "title": "জৈব যৌগের সংকরায়ন ও বন্ধন কোণ",
       "formula": "\\text{একক বন্ধন: } sp^3 \\; (109.5^\\circ), \\quad \\text{দ্বিবন্ধন: } sp^2 \\; (120^\\circ), \\quad \\text{ত্রিবন্ধন: } sp \\; (180^\\circ)",
@@ -1429,12 +1509,13 @@
         "সংকরায়ন",
         "বেনজিন",
         "সিগমা বন্ধন"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_02",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "shortcut",
       "title": "জ্যামিতিক সমাণুতার শর্ত ও সিস-ট্রান্স",
       "formula": "abC = Cab \\quad \\text{বা} \\quad abC = Ccd \\quad (a \\neq b, c \\neq d)",
@@ -1446,12 +1527,13 @@
         "cis-trans",
         "জ্যামিতিক সমাণুতা",
         "সিস-ট্রান্স"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_03",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "core_formula",
       "title": "আলোক সমাণুতা ও কাইরাল কার্বন",
       "formula": "\\text{সম্ভাব্য আলোক সমাণু সংখ্যা} = 2^n \\quad (n = \\text{অপ্রতিসম কাইরাল কার্বন সংখ্যা})",
@@ -1464,12 +1546,13 @@
         "আলোক সমাণুতা",
         "কাইরাল কার্বন",
         "মেসো যৌগ"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_04",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "shortcut",
       "title": "হাকেল নিয়ম ও অ্যারোমেটিসিটি (4n + 2)",
       "formula": "\\text{হাকেল পাই ইলেকট্রন} = 4n + 2 \\quad (n = 0, 1, 2, 3, \\dots)",
@@ -1481,12 +1564,13 @@
         "aromaticity",
         "হাকেল নিয়ম",
         "অ্যারোমেটিক"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_05",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "trap",
       "title": "কার্বোক্যাটায়নের স্থায়িত্বের ক্রম (3° > 2° > 1°)",
       "formula": "3^\\circ > 2^\\circ > 1^\\circ > \\text{মিথাইল} \\; (\\text{কার্বোক্যাটায়ন ও মুক্ত মূলক}), \\quad 1^\\circ > 2^\\circ > 3^\\circ \\; (\\text{কার্বানায়ন})",
@@ -1500,12 +1584,13 @@
         "স্থায়িত্ব",
         "SN1",
         "SN2"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_06",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "shortcut",
       "title": "বেনজিন বলয়ে অর্থো-প্যারা বনাম মেটা নির্দেশক",
       "formula": "\\text{অর্থো-প্যারা: } -\\text{OH}, -\\text{NH}_2, -\\text{R}, -\\text{X}; \\quad \\text{মেটা: } -\\text{NO}_2, -\\text{COOH}, -\\text{CHO}, -\\text{CN}",
@@ -1518,12 +1603,13 @@
         "meta",
         "অর্থো-প্যারা",
         "মেটা নির্দেশক"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_07",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "core_formula",
       "title": "মারকনিকভের নীতি ও অ্যান্টি-মারকনিকভ (পার-অক্সাইড ফল)",
       "formula": "\\text{মারকনিকভ: 'তেলে মাথায় তেল দেওয়া'} \\implies \\text{H যুক্ত হবে বেশি H বিশিষ্ট কার্বনে}",
@@ -1535,12 +1621,13 @@
         "peroxide effect",
         "মারকনিকভের নীতি",
         "খারাশের নীতি"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ob_08",
       "subject": "Chemistry",
-      "chapter": "Organic Basics",
+      "chapter": "জৈব রসায়ন",
       "type": "shortcut",
       "title": "টটোমারিজম ও কিটো-ইনল সমাণুতা",
       "formula": "\\text{কিটো রূপ } (-CH_2-CO-) \\rightleftharpoons \\text{ইনল রূপ } (-CH=C(OH)-)",
@@ -1552,7 +1639,8 @@
         "keto-enol",
         "টটোমারিজম",
         "কিটো-ইনল"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_che_ec_01",
@@ -1571,7 +1659,8 @@
         "বায়ুমণ্ডল",
         "ওজোনস্তর",
         "ল্যাপস রেট"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_che_ec_02",
@@ -1589,7 +1678,8 @@
         "COD",
         "water pollution",
         "পানির বিশুদ্ধতা"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_che_ec_03",
@@ -1606,7 +1696,8 @@
         "global warming",
         "GWP",
         "গ্রিনহাউস গ্যাস"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_che_ec_04",
@@ -1623,7 +1714,8 @@
         "ozone depletion",
         "ওজোন ক্ষয়",
         "মুক্ত মূলক"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_che_ec_05",
@@ -1641,7 +1733,8 @@
         "এসিড বৃষ্টি",
         "SO2",
         "trap"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_che_ec_06",
@@ -1659,7 +1752,8 @@
         "Itai-Itai",
         "ভারী ধাতু",
         "মিনামাটা"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_che_ec_07",
@@ -1676,7 +1770,8 @@
         "base",
         "লুইস এসিড",
         "লুইস ক্ষার"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_mat_01",
@@ -1693,7 +1788,8 @@
         "order",
         "ম্যাট্রিক্স গুণন",
         "ক্রম"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_02",
@@ -1710,7 +1806,8 @@
         "singular",
         "বিপরীত ম্যাট্রিক্স",
         "ব্যতিক্রমী"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_03",
@@ -1727,7 +1824,8 @@
         "scalar multiplication",
         "নির্ণায়ক",
         "স্কেলার গুণ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_04",
@@ -1744,7 +1842,8 @@
         "Vandermonde",
         "নির্ণায়ক মান শূন্য",
         "চক্রক্রমিক"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_05",
@@ -1761,7 +1860,8 @@
         "skew-symmetric",
         "প্রতিসম",
         "বিপ্রতিসম"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_06",
@@ -1778,7 +1878,8 @@
         "linear equations",
         "ক্র্যামারের নিয়ম",
         "সহগ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_07",
@@ -1795,7 +1896,8 @@
         "principal diagonal",
         "ট্রেস",
         "মুখ্য কর্ণ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_mat_08",
@@ -1812,7 +1914,8 @@
         "idempotent",
         "সমঘাতি",
         "অভেদঘাতি"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_01",
@@ -1829,7 +1932,8 @@
         "straight line",
         "লম্ব দূরত্ব",
         "সরলরেখা"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_02",
@@ -1846,7 +1950,8 @@
         "perpendicular line",
         "সমান্তরাল রেখা",
         "সোয়াপ রুল"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_03",
@@ -1863,7 +1968,8 @@
         "constants",
         "দূরত্ব",
         "সমান্তরাল"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_04",
@@ -1880,7 +1986,8 @@
         "area",
         "ক্ষেত্রফল",
         "ছেদিতাংশ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_05",
@@ -1898,7 +2005,8 @@
         "ঢাল",
         "মধ্যবর্তী কোণ",
         "লম্ব শর্ত"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_06",
@@ -1915,7 +2023,8 @@
         "line equation",
         "মধ্যবিন্দু",
         "সরলরেখা"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_07",
@@ -1932,7 +2041,8 @@
         "internal division",
         "ভরকেন্দ্র",
         "অন্তর্বিভক্ত"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_sl_08",
@@ -1949,7 +2059,8 @@
         "foot of perpendicular",
         "প্রতিবিম্ব",
         "পাদবিন্দু"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_mat_cir_01",
@@ -1968,7 +2079,8 @@
         "বৃত্ত",
         "কেন্দ্র",
         "ব্যাসার্ধ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_02",
@@ -1985,7 +2097,8 @@
         "intercept",
         "অক্ষ স্পর্শ",
         "খণ্ডিতাংশ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_03",
@@ -2001,7 +2114,8 @@
         "tangent condition",
         "circle",
         "স্পর্শকের শর্ত"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_04",
@@ -2017,7 +2131,8 @@
         "tangent length",
         "S1",
         "স্পর্শকের দৈর্ঘ্য"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_05",
@@ -2033,7 +2148,8 @@
         "diameter endpoints",
         "circle",
         "ব্যাসের প্রান্তবিন্দু"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_06",
@@ -2050,7 +2166,8 @@
         "radical axis",
         "সাধারণ জ্যা",
         "সাধারণ স্পর্শক"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_07",
@@ -2066,7 +2183,8 @@
         "chord length",
         "perpendicular",
         "জ্যা-এর দৈর্ঘ্য"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_cir_08",
@@ -2083,7 +2201,8 @@
         "tangents count",
         "বহিঃস্পর্শ",
         "অন্তঃস্পর্শ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_con_01",
@@ -2102,7 +2221,8 @@
         "পরাবৃত্ত",
         "উপবৃত্ত",
         "অধিবৃত্ত"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_02",
@@ -2121,7 +2241,8 @@
         "পরাবৃত্ত",
         "উপকেন্দ্র",
         "নিয়ামক"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_03",
@@ -2138,7 +2259,8 @@
         "shortcut",
         "উপবৃত্ত",
         "উৎকেন্দ্রিকতা"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_04",
@@ -2155,7 +2277,8 @@
         "focal sum",
         "উপকেন্দ্রিক লম্ব",
         "বৃহৎ অক্ষ"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_05",
@@ -2172,7 +2295,8 @@
         "eccentricity",
         "অধিবৃত্ত",
         "আড় অক্ষ"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_06",
@@ -2188,7 +2312,8 @@
         "conjugate hyperbola",
         "triplet",
         "অনুবন্ধী অধিবৃত্ত"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_07",
@@ -2204,7 +2329,8 @@
         "asymptotes",
         "hyperbola",
         "অসীমটোট"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_08",
@@ -2221,7 +2347,8 @@
         "locus",
         "নিয়ামক বৃত্ত",
         "লম্ব স্পর্শক"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_09",
@@ -2237,7 +2364,8 @@
         "conic tangents",
         "condition",
         "স্পর্শকের শর্ত"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_con_10",
@@ -2253,7 +2381,8 @@
         "latus rectum shortcut",
         "focus-directrix",
         "উপকেন্দ্রিক লম্ব"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_01",
@@ -2272,7 +2401,8 @@
         "মুখ্য আর্গুমেন্ট",
         "চতুর্ভাগ",
         "trap"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_02",
@@ -2289,7 +2419,8 @@
         "complex number",
         "বর্গমূল",
         "শর্টকাট"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_03",
@@ -2306,7 +2437,8 @@
         "omega",
         "ঘনমূল",
         "ওমেগা"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_04",
@@ -2323,7 +2455,8 @@
         "hack",
         "ধারা",
         "ওমেগা"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_05",
@@ -2340,7 +2473,8 @@
         "Euler formula",
         "ডি ময়ভার",
         "অয়লার"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_06",
@@ -2357,7 +2491,8 @@
         "circle",
         "perpendicular bisector",
         "সঞ্চারপথ"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_07",
@@ -2374,7 +2509,8 @@
         "properties",
         "অনুবন্ধী",
         "i এর ঘাত"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_cn_08",
@@ -2390,12 +2526,13 @@
         "simplification",
         "shortcut",
         "সরল মান"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_mat_poly_01",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "core_formula",
       "title": "দ্বিঘাত সমীকরণের মূল ও নিশ্চয়ক (Discriminant)",
       "formula": "ax^2 + bx + c = 0 \\implies x = \\frac{-b \\pm \\sqrt{D}}{2a}, \\quad D = b^2 - 4ac",
@@ -2407,12 +2544,13 @@
         "discriminant",
         "নিশ্চয়ক",
         "মূলের প্রকৃতি"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_02",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "core_formula",
       "title": "মূল ও সহগের সম্পর্ক (ভিয়েতার সূত্র)",
       "formula": "\\alpha + \\beta = -\\frac{b}{a}, \\quad \\alpha\\beta = \\frac{c}{a}, \\quad x^2 - (\\alpha + \\beta)x + \\alpha\\beta = 0",
@@ -2424,12 +2562,13 @@
         "roots coefficients",
         "মূল ও সহগ",
         "ভিয়েতা"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_03",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "shortcut",
       "title": "মূল উল্টে যাওয়া ও চিহ্ন পরিবর্তনের সমীকরণ",
       "formula": "\\text{মূলদ্বয় } 1/\\alpha, 1/\\beta \\implies cx^2 + bx + a = 0; \\quad \\text{মূলদ্বয় } -\\alpha, -\\beta \\implies ax^2 - bx + c = 0",
@@ -2441,12 +2580,13 @@
         "reciprocal roots",
         "মূলের রূপান্তর",
         "বিপরীত মূল"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_04",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "shortcut",
       "title": "একটি মূল অপরটির n গুণ হলে শর্ত",
       "formula": "n b^2 = (n + 1)^2 a c",
@@ -2457,12 +2597,13 @@
         "roots ratio",
         "shortcut",
         "মূলের অনুপাত"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_05",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "core_formula",
       "title": "সাধারণ মূল থাকার শর্ত (Common Root)",
       "formula": "(c_1 a_2 - c_2 a_1)^2 = (a_1 b_2 - a_2 b_1)(b_1 c_2 - b_2 c_1)",
@@ -2473,12 +2614,13 @@
         "common root",
         "সাধারণ মূল",
         "শর্ত"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_06",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "shortcut",
       "title": "অনুবন্ধী মূল উপপাদ্য",
       "formula": "\\text{একটি মূল } p + \\sqrt{q} \\implies \\text{অপর মূল } p - \\sqrt{q}; \\quad \\text{একটি মূল } p + iq \\implies \\text{অপর মূল } p - iq",
@@ -2489,12 +2631,13 @@
         "conjugate roots",
         "complex root",
         "অনুবন্ধী মূল"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_07",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "core_formula",
       "title": "ভাগশেষ উপপাদ্য ও উৎপাদক উপপাদ্য",
       "formula": "P(x) \\div (x - a) \\implies \\text{ভাগশেষ } R = P(a); \\quad P(a) = 0 \\iff (x - a) \\text{ একটি উৎপাদক}",
@@ -2505,12 +2648,13 @@
         "remainder theorem",
         "factor theorem",
         "ভাগশেষ উপপাদ্য"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_poly_08",
       "subject": "Higher Math",
-      "chapter": "Polynomials",
+      "chapter": "Polynomials & Equations",
       "type": "shortcut",
       "title": "দ্বিঘাত রাশির সর্বোচ্চ ও সর্বনিম্ন মান",
       "formula": "y = ax^2 + bx + c \\implies x = -\\frac{b}{2a} \\text{ বিন্দুতে } y_{ext} = c - \\frac{b^2}{4a} = \\frac{4ac - b^2}{4a}",
@@ -2522,7 +2666,8 @@
         "quadratic",
         "সর্বোচ্চ মান",
         "সর্বনিম্ন মান"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_mat_tri_01",
@@ -2539,7 +2684,8 @@
         "addition formula",
         "যৌগিক কোণ",
         "ত্রিকোণমিতি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_02",
@@ -2555,7 +2701,8 @@
         "trig identity",
         "sec tan shortcut",
         "ম্যাজিক অভেদ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_03",
@@ -2571,7 +2718,8 @@
         "double angle",
         "multiple angle",
         "গুণিতক কোণ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_04",
@@ -2588,7 +2736,8 @@
         "trig extrema",
         "চরম মান",
         "সর্বোচ্চ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_05",
@@ -2604,7 +2753,8 @@
         "inverse trig",
         "tan inverse",
         "বিপরীত ত্রিকোণমিতি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_06",
@@ -2620,7 +2770,8 @@
         "general solution",
         "trig equations",
         "সাধারণ সমাধান"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_07",
@@ -2637,7 +2788,8 @@
         "cosine rule",
         "সাইন সূত্র",
         "কোসাইন সূত্র"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_tri_08",
@@ -2653,7 +2805,8 @@
         "trig product hack",
         "special angles",
         "গুণফল হ্যাক"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_mat_calc_01",
@@ -2670,7 +2823,8 @@
         "differentiation",
         "অন্তরীকরণ",
         "মৌলিক সূত্র"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_02",
@@ -2687,7 +2841,8 @@
         "limits",
         "লা হসপিটাল",
         "লিমিট"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_03",
@@ -2703,7 +2858,8 @@
         "Euler limit",
         "exponential limit",
         "অয়লার লিমিট"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_04",
@@ -2720,7 +2876,8 @@
         "critical point",
         "গুরুমান",
         "লঘুমান"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_05",
@@ -2736,7 +2893,8 @@
         "implicit differentiation",
         "partial derivative",
         "অব্যক্ত ফাংশন"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_06",
@@ -2753,7 +2911,8 @@
         "f'/f",
         "যৌগিকীকরণ",
         "লগারিদম"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_07",
@@ -2769,7 +2928,8 @@
         "e^x integration",
         "shortcut",
         "ইন্টিগ্রেশন হ্যাক"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_08",
@@ -2786,7 +2946,8 @@
         "definite integral",
         "ক্ষেত্রফল",
         "আবদ্ধ অঞ্চল"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_09",
@@ -2802,7 +2963,8 @@
         "Wallis formula",
         "definite integration",
         "ওয়ালিসের সূত্র"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_mat_calc_10",
@@ -2819,7 +2981,8 @@
         "ILATE",
         "খণ্ডিত যোগজ",
         "ইউ ভি সূত্র"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_cs_01",
@@ -2836,7 +2999,8 @@
         "cell membrane",
         "ফসফোলিপিড",
         "ফ্লুইড মোজাইক"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_02",
@@ -2853,7 +3017,8 @@
         "organelles",
         "রাইবোসোম",
         "পর্দাবিহীন"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_03",
@@ -2871,7 +3036,8 @@
         "70S",
         "80S",
         "সাবইউনিট"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_04",
@@ -2889,7 +3055,8 @@
         "Chargaff",
         "শারগাফের নিয়ম",
         "trap"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_05",
@@ -2906,7 +3073,8 @@
         "transcription",
         "translation",
         "সেন্ট্রাল ডগমা"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_06",
@@ -2923,7 +3091,8 @@
         "autophagy",
         "লাইসোজোম",
         "অটোফ্যাগি"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_07",
@@ -2941,7 +3110,8 @@
         "S phase",
         "কোষচক্র",
         "ইন্টারফেজ"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_cs_08",
@@ -2959,12 +3129,13 @@
         "synapsis",
         "মিয়োসিস",
         "ক্রসিং ওভার"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_bio_gen_01",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "core_formula",
       "title": "মেন্ডেলের সূত্রের আদর্শ ফিনোটাইপিক অনুপাত",
       "formula": "\\text{১ম সূত্র (মনোহাইব্রিড): } 3 : 1, \\quad \\text{২য় সূত্র (ডাইহাইব্রিড): } 9 : 3 : 3 : 1",
@@ -2976,12 +3147,13 @@
         "phenotype ratio",
         "টেস্ট ক্রস",
         "মেন্ডেলের সূত্র"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_02",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "shortcut",
       "title": "মেন্ডেলের ১ম সূত্রের ব্যতিক্রমী অনুপাত",
       "formula": "\\text{অসম্পূর্ণ প্রকটতা: } 1:2:1; \\quad \\text{সমপ্রকটতা: } 1:2:1; \\quad \\text{লিথাল জিন: } 2:1",
@@ -2993,12 +3165,13 @@
         "lethal gene",
         "অসম্পূর্ণ প্রকটতা",
         "লিথাল জিন"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_03",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "shortcut",
       "title": "মেন্ডেলের ২য় সূত্রের ব্যতিক্রমী অনুপাত ছক",
       "formula": "\\text{পরিপূরক জিন: } 9:7; \\quad \\text{প্রকট এপিস্ট্যাসিস: } 13:3; \\quad \\text{দ্বৈত প্রচ্ছন্ন: } 9:7; \\quad \\text{প্রকট বাধা: } 12:3:1",
@@ -3010,12 +3183,13 @@
         "complementary genes",
         "এপিস্ট্যাসিস",
         "পরিপূরক জিন"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_04",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "core_formula",
       "title": "সেক্স-লিংকড ইনহেরিটেন্স ও ক্রিস-ক্রস উত্তরাধিকার",
       "formula": "\\text{পিতা থেকে কন্যারা পায় এবং কন্যারা পরবর্তীতে তাদের পুত্রদের প্রদান করে}",
@@ -3029,12 +3203,13 @@
         "বর্ণান্ধতা",
         "হিমোফিলিয়া",
         "ক্রিস-ক্রস"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_05",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "trap",
       "title": "Rh ফ্যাক্টর ও এরিথ্রোব্লাস্টোসিস ফিটালিস",
       "formula": "\\text{পিতা } Rh^+ + \\text{মাতা } Rh^- \\implies \\text{২য় সন্তান আক্রান্ত (Erythroblastosis Fetalis)}",
@@ -3047,12 +3222,13 @@
         "Rh ফ্যাক্টর",
         "রক্তের গ্রুপ",
         "trap"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_06",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "core_formula",
       "title": "ABO রক্তের গ্রুপ ও অ্যান্টিজেন-অ্যান্টিবডি",
       "formula": "\\text{গ্রুপ A (অ্যান্টিজেন A, অ্যান্টিবডি b); গ্রুপ B (অ্যান্টিজেন B, অ্যান্টিবডি a); গ্রুপ AB (উভয় অ্যান্টিজেন, কোনো অ্যান্টিবডি নেই); গ্রুপ O (কোনো অ্যান্টিজেন নেই)}",
@@ -3064,12 +3240,13 @@
         "ABO",
         "antigen antibody",
         "সর্বজনীন দাতা"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_07",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "shortcut",
       "title": "ক্রোমোজোমীয় অস্বাভাবিকতা ও সিন্ড্রোম",
       "formula": "\\text{ডাউন সিন্ড্রোম: ২১নং ট্রাইসোমি (৪৭); টার্নার: 45,X0; ক্লাইনফেল্টার: 47,XXY; এডওয়ার্ড: ১৮নং ট্রাইসোমি}",
@@ -3081,12 +3258,13 @@
         "Down syndrome",
         "Turner",
         "সিন্ড্রোম"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_gen_08",
       "subject": "Biology",
-      "chapter": "Genetics",
+      "chapter": "Genetics & Evolution",
       "type": "core_formula",
       "title": "হার্ডি-ওয়াইনবার্গ সাম্যাবস্থা (Hardy-Weinberg Equilibrium)",
       "formula": "p + q = 1, \\quad p^2 + 2pq + q^2 = 1",
@@ -3098,7 +3276,8 @@
         "population genetics",
         "হার্ডি-ওয়াইনবার্গ",
         "অ্যালিল ফ্রিকোয়েন্সি"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_bio_pp_01",
@@ -3116,7 +3295,8 @@
         "photosynthesis",
         "RuBisCO",
         "ক্রাঞ্জ অ্যানাটমি"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_02",
@@ -3133,7 +3313,8 @@
         "respiratory quotient",
         "শ্বসনিক কোশেন্ট",
         "গ্লুকোজ"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_03",
@@ -3150,7 +3331,8 @@
         "ATP calculation",
         "গ্লাইকোলাইসিস",
         "ক্রেবস চক্র"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_04",
@@ -3167,7 +3349,8 @@
         "macronutrients",
         "ম্যাক্রো উপাদান",
         "ক্লোরোফিল"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_05",
@@ -3185,7 +3368,8 @@
         "Ca2+",
         "আয়ন শোষণ",
         "trap"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_06",
@@ -3202,7 +3386,8 @@
         "potassium pump",
         "পত্ররন্ধ্র",
         "প্রস্বেদন"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_07",
@@ -3219,7 +3404,8 @@
         "water",
         "oxygen source",
         "ফোটোলাইসিস"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_pp_08",
@@ -3236,7 +3422,8 @@
         "PS-I",
         "PS-II",
         "ফটোফসফোরাইলেশন"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v_bio_dig_01",
@@ -3253,7 +3440,8 @@
         "milk teeth",
         "দাঁতের সংকেত",
         "দুধদাঁত"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_02",
@@ -3271,7 +3459,8 @@
         "HCl",
         "প্যারাইটাল কোষ",
         "পেপসিনোজেন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_03",
@@ -3289,7 +3478,8 @@
         "পিত্তরস",
         "ইমালসিফিকেশন",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_04",
@@ -3307,7 +3497,8 @@
         "amylase",
         "অগ্ন্যাশয় রস",
         "ট্রিপসিন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_05",
@@ -3325,7 +3516,8 @@
         "villi",
         "ল্যাকটিয়েল",
         "কাইলোমাইক্রন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_06",
@@ -3343,7 +3535,8 @@
         "urea cycle",
         "যকৃত",
         "অনিথিন চক্র"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_07",
@@ -3361,7 +3554,8 @@
         "CCK",
         "সিক্রেটিন",
         "গ্যাস্ট্রিন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_dig_08",
@@ -3378,7 +3572,8 @@
         "appendix",
         "বৃহদান্ত্র",
         "অ্যাপেন্ডিক্স"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_01",
@@ -3395,7 +3590,8 @@
         "plasma",
         "রক্তরস",
         "প্লাজমা প্রোটিন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_02",
@@ -3413,7 +3609,8 @@
         "RBC",
         "WBC",
         "আয়ুষ্কাল"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_03",
@@ -3431,7 +3628,8 @@
         "tricuspid",
         "কপাটিকা",
         "মাইট্রাল"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_04",
@@ -3449,7 +3647,8 @@
         "AVN",
         "হৃদস্পন্দন সঞ্চালন",
         "মায়োজেনিক"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_05",
@@ -3467,7 +3666,8 @@
         "diastole",
         "LUB DUB",
         "হৃদচক্র"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_06",
@@ -3485,7 +3685,8 @@
         "QRS complex",
         "ইসিজি",
         "ডিপোলারাইজেশন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_07",
@@ -3502,7 +3703,8 @@
         "artery vein exception",
         "পালমোনারি ধমনি",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_cir_08",
@@ -3519,7 +3721,8 @@
         "artery vs vein",
         "রক্তনালি",
         "কপাটিকা"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_bio_exc_01",
@@ -3537,7 +3740,8 @@
         "glomerulus",
         "নেফ্রন",
         "গ্লোমেরুলাস"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_02",
@@ -3554,7 +3758,8 @@
         "filtration rate",
         "মূত্র উৎপাদন",
         "পুনঃশোষণ"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_03",
@@ -3572,7 +3777,8 @@
         "creatinine",
         "মূত্র",
         "ক্রিয়েটিনিন"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_04",
@@ -3589,7 +3795,8 @@
         "counter current",
         "হেনলির লুপ",
         "কাউন্টার কারেন্ট"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_05",
@@ -3606,7 +3813,8 @@
         "aldosterone",
         "hormonal control",
         "ডায়াবেটিস ইনসিপিডাস"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_06",
@@ -3623,7 +3831,8 @@
         "liver vs kidney",
         "ইউরিয়া",
         "trap"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_07",
@@ -3640,7 +3849,8 @@
         "lithotripsy",
         "ক্যালসিয়াম অক্সালেট",
         "লিথোট্রিপসি"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_bio_exc_08",
@@ -3657,7 +3867,8 @@
         "hemodialysis",
         "ডায়ালাইসিস",
         "সেলোফেন"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_eng_prep_01",
@@ -3674,7 +3885,8 @@
         "die of",
         "die from",
         "die for"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_02",
@@ -3690,7 +3902,8 @@
         "blind to",
         "blind of",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_03",
@@ -3706,7 +3919,8 @@
         "angry with",
         "angry at",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_04",
@@ -3722,7 +3936,8 @@
         "latin comparatives",
         "preferable to",
         "junior to"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_05",
@@ -3738,7 +3953,8 @@
         "part from",
         "part with",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_06",
@@ -3754,7 +3970,8 @@
         "cope with",
         "common error",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_07",
@@ -3770,7 +3987,8 @@
         "accused of",
         "charged with",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_08",
@@ -3785,7 +4003,8 @@
       "tags": [
         "abide by",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_09",
@@ -3801,7 +4020,8 @@
         "good at",
         "weak in",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_10",
@@ -3816,7 +4036,8 @@
       "tags": [
         "congratulate on",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_11",
@@ -3832,7 +4053,8 @@
         "prefer to",
         "preposition",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_prep_12",
@@ -3848,7 +4070,8 @@
         "prevent from",
         "gerund",
         "preposition"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_eng_voc_01",
@@ -3866,7 +4089,8 @@
         "fatal",
         "synonym",
         "antonym"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_02",
@@ -3882,7 +4106,8 @@
         "vocab",
         "benign",
         "malignant"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_03",
@@ -3898,7 +4123,8 @@
         "vocab",
         "ephemeral",
         "transient"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_04",
@@ -3914,7 +4140,8 @@
         "vocab",
         "gregarious",
         "sociable"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_05",
@@ -3930,7 +4157,8 @@
         "vocab",
         "lucid",
         "clear"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_06",
@@ -3947,7 +4175,8 @@
         "novice",
         "beginner",
         "tyro"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_07",
@@ -3963,7 +4192,8 @@
         "vocab",
         "ubiquitous",
         "omnipresent"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_08",
@@ -3979,7 +4209,8 @@
         "vocab",
         "resilient",
         "adaptable"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_09",
@@ -3996,7 +4227,8 @@
         "zenith",
         "nadir",
         "apex"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_eng_voc_10",
@@ -4012,7 +4244,8 @@
         "vocab",
         "obliterate",
         "annihilate"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v_gk_lib_01",
@@ -4030,7 +4263,8 @@
         "সেক্টর",
         "মুক্তিযুদ্ধ",
         "ঢাকা সেক্টর"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_02",
@@ -4047,7 +4281,8 @@
         "naval commando",
         "অপারেশন জ্যাকপট",
         "সেক্টর ১০"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_03",
@@ -4064,7 +4299,8 @@
         "Khademul Bashar",
         "বিমানবাহিনী",
         "সেক্টর ৬"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_04",
@@ -4081,7 +4317,8 @@
         "K force",
         "S force",
         "ব্রিগেড ফোর্স"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_05",
@@ -4098,7 +4335,8 @@
         "armed forces",
         "বীরশ্রেষ্ঠ",
         "বাহিনী বিভাজন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_06",
@@ -4114,7 +4352,8 @@
         "first and last",
         "Bir Sreshtho",
         "শহীদ বীরশ্রেষ্ঠ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_07",
@@ -4131,7 +4370,8 @@
         "Air Force",
         "মতিউর রহমান",
         "টি-৩৩"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_08",
@@ -4149,7 +4389,8 @@
         "BNS Palash",
         "রুহুল আমিন",
         "বিএনএস পলাশ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_09",
@@ -4166,7 +4407,8 @@
         "youngest",
         "হামিদুর রহমান",
         "সর্বকনিষ্ঠ বীরশ্রেষ্ঠ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_10",
@@ -4184,7 +4426,8 @@
         "বীরউত্তম",
         "বীরপ্রতীক",
         "ওডারল্যান্ড"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_11",
@@ -4201,7 +4444,8 @@
         "17 April",
         "মুজিবনগর সরকার",
         "তাজউদ্দীন আহমদ"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_12",
@@ -4219,7 +4463,8 @@
         "Fundamental Rights",
         "সংবিধান",
         "মৌলিক অধিকার"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_13",
@@ -4236,7 +4481,8 @@
         "genocide",
         "অপারেশন সার্চলাইট",
         "গণহত্যা দিবস"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_14",
@@ -4253,7 +4499,8 @@
         "George Harrison",
         "কনসার্ট ফর বাংলাদেশ",
         "জর্জ হ্যারিসন"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_15",
@@ -4272,7 +4519,8 @@
         "স্বীকৃতি প্রদানকারী দেশ",
         "ভুটান",
         "trap"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v_gk_lib_16",
@@ -4290,7 +4538,8 @@
         "আত্মসমর্পণ",
         "বিজয় দিবস",
         "নিয়াজী"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v-w6-phy-01",
@@ -4306,7 +4555,8 @@
         "Thermometry",
         "Faulty Thermometer",
         "Scale Conversion"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v-w6-phy-02",
@@ -4322,12 +4572,13 @@
         "SHM",
         "Spring Cut",
         "Time Period"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v-w6-phy-03",
       "subject": "Physics",
-      "chapter": "Modern Physics",
+      "chapter": "আধুনিক পদার্থবিজ্ঞান",
       "type": "core_formula",
       "title": "তেজস্ক্রিয় ক্ষয় সূত্র, অর্ধায়ু ও গড় আয়ু ম্যাট্রিক্স",
       "formula": "$$N = N_0\\left(\\frac{1}{2}\\right)^{t/T_{1/2}}, \\quad T_{1/2} = \\frac{0.693}{\\lambda}, \\quad \\tau = \\frac{1}{\\lambda} = 1.443 T_{1/2}$$",
@@ -4338,7 +4589,8 @@
         "Radioactivity",
         "Half Life",
         "Mean Life"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v-w6-che-01",
@@ -4354,7 +4606,8 @@
         "van der Waals",
         "Real Gas",
         "Deviation"
-      ]
+      ],
+      "week": 3
     },
     {
       "id": "v-w6-che-02",
@@ -4370,7 +4623,8 @@
         "Nernst Equation",
         "EMF",
         "Daniel Cell"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v-w6-mat-01",
@@ -4386,7 +4640,8 @@
         "Trigonometry",
         "Speed Hack",
         "Product Series"
-      ]
+      ],
+      "week": 2
     },
     {
       "id": "v-w6-mat-02",
@@ -4402,7 +4657,8 @@
         "Binomial",
         "Constant Term",
         "Power Hack"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v-w6-bio-01",
@@ -4418,7 +4674,8 @@
         "Digestion",
         "Enzymes",
         "Liver"
-      ]
+      ],
+      "week": 1
     },
     {
       "id": "v-w6-bio-02",
@@ -4434,7 +4691,8 @@
         "Excretion",
         "Nephron",
         "Filtration Pressure"
-      ]
+      ],
+      "week": 6
     },
     {
       "id": "v_w5_shm_energy",
@@ -4453,7 +4711,8 @@
         "potential_energy",
         "amplitude",
         "spring"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_sound_speed",
@@ -4471,7 +4730,8 @@
         "temperature",
         "laplace",
         "velocity"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_organ_pipe",
@@ -4489,7 +4749,8 @@
         "harmonics",
         "overtones",
         "frequency"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_faraday_mental",
@@ -4506,7 +4767,8 @@
         "electrochemistry",
         "stp_volume",
         "equivalent_weight"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_nernst_daniell",
@@ -4523,7 +4785,8 @@
         "daniell_cell",
         "emf",
         "equilibrium_constant"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_poly_roots_hack",
@@ -4540,7 +4803,8 @@
         "roots",
         "quadratic",
         "symmetric_roots"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_binomial_independent",
@@ -4557,7 +4821,8 @@
         "independent_term",
         "series",
         "coefficients"
-      ]
+      ],
+      "week": 5
     },
     {
       "id": "v_w5_bio_coelom_rule",
@@ -4575,7 +4840,8 @@
         "nematoda",
         "platyhelminthes",
         "classification"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-phy-01",
@@ -4593,7 +4859,8 @@
         "Young Modulus",
         "DU Repeat",
         "Formula"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-phy-02",
@@ -4610,7 +4877,8 @@
         "Gas Laws",
         "Lake Depth",
         "Speed Hack"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-phy-03",
@@ -4627,7 +4895,8 @@
         "Surface Tension",
         "Pressure",
         "Formula"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-chem-01",
@@ -4644,7 +4913,8 @@
         "Chemical Bonding",
         "Fajans Rule",
         "DU Repeat"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-chem-02",
@@ -4661,7 +4931,8 @@
         "Hybridization",
         "VSEPR",
         "Engineering Bridge"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-chem-03",
@@ -4678,7 +4949,8 @@
         "Periodic Table",
         "Exceptions",
         "Trap Alert"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-math-01",
@@ -4695,7 +4967,8 @@
         "Combinations",
         "Geometry",
         "Speed Hack"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-math-02",
@@ -4712,7 +4985,8 @@
         "Permutations",
         "Circular",
         "DU Repeat"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-math-03",
@@ -4729,7 +5003,8 @@
         "Statistics",
         "Dispersion",
         "Engineering Bridge"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-bio-01",
@@ -4746,7 +5021,8 @@
         "Zoology",
         "Coelom",
         "DU-MAT Repeat"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-bio-02",
@@ -4763,7 +5039,8 @@
         "Genetics",
         "Mendel",
         "Formula"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v-w4-bio-03",
@@ -4780,7 +5057,8 @@
         "Malaria",
         "Schizogony",
         "Medical Line"
-      ]
+      ],
+      "week": 4
     },
     {
       "id": "v_w7_phy_coulomb_ratio",
@@ -4797,7 +5075,8 @@
         "তড়িৎ প্রাবল্য",
         "Speed Hack",
         "DU Hotspot"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_phy_sphere_potential",
@@ -4814,7 +5093,8 @@
         "বিভব",
         "গোলক",
         "Trap Alert"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_phy_capacitor_dielectric",
@@ -4831,7 +5111,8 @@
         "ধারক",
         "ডাই-ইলেকট্রিক",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_phy_relativity_triplets",
@@ -4847,7 +5128,8 @@
         "আধুনিক পদার্থবিজ্ঞান",
         "আপেক্ষিকতা",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_phy_photoelectric_ev",
@@ -4863,7 +5145,8 @@
         "আধুনিক পদার্থবিজ্ঞান",
         "আলোকতড়িৎ ক্রিয়া",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_phy_schwarzschild_radius",
@@ -4879,7 +5162,8 @@
         "আধুনিক পদার্থবিজ্ঞান",
         "ব্ল্যাকহোল",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_che_priority_ladder",
@@ -4896,7 +5180,8 @@
         "IUPAC",
         "কার্যকরী মূলক",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_che_carbocation_series",
@@ -4913,7 +5198,8 @@
         "ইন্টারমিডিয়েট",
         "কার্বোক্যাটায়ন",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_che_isomer_count_hack",
@@ -4929,7 +5215,8 @@
         "জৈব রসায়ন",
         "সমাণুতা",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_che_alkyne_acidity",
@@ -4946,7 +5233,8 @@
         "অ্যালকাইন",
         "অম্লধর্মিতা",
         "Trap Alert"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_mat_trig_limit_hack",
@@ -4962,7 +5250,8 @@
         "অন্তরীকরণ",
         "লিমিট",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_mat_exp_limit_hack",
@@ -4978,7 +5267,8 @@
         "অন্তরীকরণ",
         "লিমিট",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_mat_extrema_rule",
@@ -4994,7 +5284,8 @@
         "অন্তরীকরণ",
         "গুরুমান ও লঘুমান",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_mat_infinite_radical",
@@ -5010,7 +5301,8 @@
         "অন্তরীকরণ",
         "অন্তরক সহগ",
         "Speed Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_bio_cranial_mnemonics",
@@ -5026,7 +5318,8 @@
         "সমন্বয় ও নিয়ন্ত্রণ",
         "করোটিক স্নায়ু",
         "Biology Hack"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_bio_photoreceptor_matrix",
@@ -5042,7 +5335,8 @@
         "সমন্বয় ও নিয়ন্ত্রণ",
         "চক্ষু শারীরতত্ত্ব",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_bio_endocrine_glucose_axis",
@@ -5059,7 +5353,8 @@
         "অন্তঃক্ষরা গ্রন্থি",
         "হরমোন",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_bio_behavior_triad",
@@ -5076,7 +5371,8 @@
         "FAP",
         "প্যাভলভ",
         "Core Formula"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_phy_metal_slab_capacitor",
@@ -5093,7 +5389,8 @@
         "ধারকত্ব",
         "Speed Hack",
         "Udvash Verified"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_mat_negative_infinity_limit",
@@ -5110,7 +5407,8 @@
         "লিমিট",
         "Trap Alert",
         "Udvash Verified"
-      ]
+      ],
+      "week": 7
     },
     {
       "id": "v_w7_bio_ear_ossicles_headcount",
@@ -5127,6 +5425,588 @@
         "কর্ণ",
         "Trap Alert",
         "Udvash Verified"
+      ],
+      "week": 7
+    },
+    {
+      "id": "v_w4_chem_fajan_polarization",
+      "week": 4,
+      "subject": "Chemistry",
+      "chapter": "Periodic Properties & Chemical Bonding",
+      "type": "shortcut",
+      "title": "ফাজানের নীতি ও পোলারায়ন ক্রম শর্টকাট",
+      "formula": "$$\\text{পোলারায়ন} \\propto \\frac{\\text{ক্যাটায়নের চার্জ}}{\\text{ক্যাটায়নের ব্যাসার্ধ}} \\times \\text{অ্যানায়নের ব্যাসার্ধ}$$",
+      "concept": "ক্যাটায়নের আকার যত ছোট এবং অ্যানায়নের আকার যত বড়, সমযোজী বৈশিষ্ট্য তত বাড়ে। গলনাঙ্ক ও স্ফুটনাঙ্ক তত হ্রাস পায়।",
+      "hack": "জলে দ্রাব্যতা হ্যাক: সমযোজী চরিত্র বেশি হলে জলে কম দ্রবণীয়। যেমন $\\text{AgF} > \\text{AgCl} > \\text{AgBr} > \\text{AgI}$ (AgI হলুদ ও অদ্রবণীয়)।",
+      "trap": "ক্যাটায়নের চার্জ সমান হলে সিউডো নিষ্ক্রিয় গ্যাস ইলেকট্রন বিন্যাস ($18e^-$) যুক্ত ক্যাটায়নের ($\\text{Cu}^+, \\text{Ag}^+$) পোলারায়ন ক্ষমতা সাধারণ নিষ্ক্রিয় গ্যাস ($8e^-$) অপেক্ষা অনেক বেশি।",
+      "tags": [
+        "ফাজানের নীতি",
+        "পোলারায়ন",
+        "সমযোজী ধর্ম",
+        "DU Repeat"
+      ]
+    },
+    {
+      "id": "v_w4_chem_h_bond_boiling",
+      "week": 4,
+      "subject": "Chemistry",
+      "chapter": "Periodic Properties & Chemical Bonding",
+      "type": "core_formula",
+      "title": "হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিক ক্রম",
+      "formula": "$$\\text{B.P.}: \\text{H}_2\\text{O} (100^\\circ\\text{C}) > \\text{HF} (19.5^\\circ\\text{C}) > \\text{NH}_3 (-33^\\circ\\text{C})$$",
+      "concept": "F এর তড়িতৃণাত্মকতা বেশি হলেও $\\text{H}_2\\text{O}$ প্রতি অণুতে ৪টি হাইড্রোজেন বন্ধন তৈরি করে, যেখানে $\\text{HF}$ গড়ে ২টি তৈরি করে।",
+      "hack": "গ্রুপ-16 হাইড্রাইডের স্ফুটনাঙ্ক ক্রম: $\\text{H}_2\\text{O} > \\text{H}_2\\text{Te} > \\text{H}_2\\text{Se} > \\text{H}_2\\text{S}$ ($\\text{H}_2\\text{S}$ কক্ষ তাপমাত্রায় গ্যাস, জল তরল)।",
+      "trap": "হাইড্রোজেন বন্ধনের শক্তির ক্রম: $\\text{H}\\cdots\\text{F} > \\text{H}\\cdots\\text{O} > \\text{H}\\cdots\\text{N}$; কিন্তু স্ফুটনাঙ্কে জল সবার উপরে কারণ বন্ধনের মোট সংখ্যা বেশি।",
+      "tags": [
+        "হাইড্রোজেন বন্ধন",
+        "স্ফুটনাঙ্ক",
+        "H2O vs HF"
+      ]
+    },
+    {
+      "id": "v_w4_math_circular_perm",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Permutations & Combinations",
+      "type": "core_formula",
+      "title": "বৃত্তাকার বিন্যাস ও মুক্তার মালা হ্যাক",
+      "formula": "$$P_{\\text{circular}} = (n-1)!, \\quad P_{\\text{necklace}} = \\frac{(n-1)!}{2}$$",
+      "concept": "ঘড়ির কাঁটার দিক ও বিপরীত দিক আলাদা হলে $(n-1)!$; ফুলের তোড়া বা মুক্তার মালার ক্ষেত্রে উল্টানো যায় বলে $\\frac{(n-1)!}{2}$।",
+      "hack": "$n$ জন গোল হয়ে বসলে $(n-1)!$; যদি নির্দিষ্ট দুজন সর্বদা পাশাপাশি বসে তবে $2 \\times (n-2)!$।",
+      "trap": "ফুলের মালা বা মুক্তার মালায় ২ দিয়ে ভাগ করতে ভুলে যাওয়া কমন ট্র্যাপ।",
+      "tags": [
+        "বিন্যাস",
+        "বৃত্তাকার বিন্যাস",
+        "মুক্তার মালা",
+        "DU Direct"
+      ]
+    },
+    {
+      "id": "v_w4_math_polygon_diagonals",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Permutations & Combinations",
+      "type": "shortcut",
+      "title": "বহুভুজের কর্ণের সংখ্যা ও হাত মেলানো",
+      "formula": "$$\\text{কর্ণের সংখ্যা} = {}^nC_2 - n = \\frac{n(n-3)}{2}, \\quad \\text{করমর্দন} = {}^nC_2 = \\frac{n(n-1)}{2}$$",
+      "concept": "$n$ বাহুবিশিষ্ট বহুভুজের $n$টি কৌণিক বিন্দু থেকে ২টি করে বিন্দু সংযোগে মোট রেখা ${}^nC_2$, তার মধ্য থেকে $n$টি বাহু বাদ দিলে কর্ণের সংখ্যা পাওয়া যায়।",
+      "hack": "অষ্টভুজের কর্ণ: $\\frac{8 \\times 5}{2} = 20$। ১০ জনের করমর্দন: $\\frac{10 \\times 9}{2} = 45$।",
+      "trap": "কর্ণ চাইলে ${}^nC_2$ দাগানো ট্র্যাপ; বাহুর সংখ্যা $n$ বিয়োগ করতে হবে।",
+      "tags": [
+        "কর্ণের সংখ্যা",
+        "করমর্দন",
+        "Speed Hack"
+      ]
+    },
+    {
+      "id": "v_w4_math_repeat_letter_arrange",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Permutations & Combinations",
+      "type": "core_formula",
+      "title": "পুনরাবৃত্ত বর্ণ বিশিষ্ট শব্দের বিন্যাস সংখ্যা",
+      "formula": "$$\\text{মোট বিন্যাস} = \\frac{n!}{p! \\times q! \\times r!}$$",
+      "concept": "$n$টি বর্ণের মধ্যে $p$টি এক রকম, $q$টি দ্বিতীয় রকম হলে মোট বিন্যাস সংখ্যা।",
+      "hack": "ENGINEERING: মোট ১১টি (E=3, N=3, G=2, I=2) $\\implies \\frac{11!}{3! \\times 3! \\times 2! \\times 2!} = 277200$। স্বরবর্ণ সর্বদা একত্রে: স্বরবর্ণগুলোকে একটি বর্ণ ধর।",
+      "trap": "স্বরবর্ণের স্থান পরিবর্তন না করে বিন্যাস বললে স্বরবর্ণের বিন্যাস গুণ করা যাবে না।",
+      "tags": [
+        "শব্দের বিন্যাস",
+        "ENGINEERING",
+        "MAT Repeat"
+      ]
+    },
+    {
+      "id": "v_w4_math_sd_shift_scale",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Measures of Dispersion & Probability",
+      "type": "shortcut",
+      "title": "পরিমিত ব্যবধান ও ভেদাঙ্কের মূল ও মাপনী ধর্ম",
+      "formula": "$$y = a + bx \\implies \\sigma_y = |b|\\sigma_x, \\quad \\text{Var}(y) = b^2 \\text{Var}(x)$$",
+      "concept": "পরিমিত ব্যবধান ও ভেদাঙ্ক মূল (যোগ-বিয়োগ) থেকে মুক্ত, কেবল মাপনী (গুণ-ভাগ) এর উপর নির্ভরশীল।",
+      "hack": "প্রতিটি মানের সাথে ১০ যোগ করলে $\\sigma$ অপরিবর্তিত থাকে। প্রতিটি মানকে ২ দিয়ে গুণ করলে $\\sigma$ দ্বিগুণ ও ভেদাঙ্ক ৪ গুণ হয়।",
+      "trap": "ঋণাত্মক সংখ্যা দিয়ে গুণ করলেও পরিমিত ব্যবধান সর্বদা ধনাত্মক ($\\sigma_y = |-3| \\times \\sigma_x$); মাইনাস চিহ্ন দেওয়া নেগেটিভ মার্কিং ট্র্যাপ।",
+      "tags": [
+        "ভেদাঙ্ক",
+        "পরিমিত ব্যবধান",
+        "মূল ও মাপনী"
+      ]
+    },
+    {
+      "id": "v_w4_math_dice_sum_pyramid",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Measures of Dispersion & Probability",
+      "type": "shortcut",
+      "title": "দুটি ছক্কার যোগফলের সম্ভাবনা পিরামিড হ্যাক",
+      "formula": "$$P(\\text{Sum} = S) = \\frac{6 - |S - 7|}{36}$$",
+      "concept": "দুটি ছক্কা একত্রে নিক্ষেপ করলে যোগফল ২ থেকে ১২ পর্যন্ত হতে পারে। মোট ফলাফল ৩৬।",
+      "hack": "যোগফল ৭ হওয়ার সম্ভাবনা সর্বোচ্চ: $\\frac{6 - |7-7|}{36} = \\frac{6}{36} = \\frac{1}{6}$। যোগফল ৯: $\\frac{6 - |9-7|}{36} = \\frac{4}{36} = \\frac{1}{9}$।",
+      "trap": "যোগফল ৮ পাওয়ার সম্ভাবনা: ৪/৩৬ দাগানো ভুল, সঠিক হলো ৫/৩৬।",
+      "tags": [
+        "ছক্কার সম্ভাবনা",
+        "পিরামিড হ্যাক",
+        "DU Hotspot"
+      ]
+    },
+    {
+      "id": "v_w4_math_card_probability",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Measures of Dispersion & Probability",
+      "type": "trap",
+      "title": "তাসের প্যাকেটের টেক্কা ও হরতন নির্বাচনের ফাঁদ",
+      "formula": "$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$",
+      "concept": "৫২টি তাসের প্যাকেট থেকে একটি তাস টানলে তা টেক্কা (Ace) বা হরতন (Heart) হওয়ার সম্ভাবনা।",
+      "hack": "টেক্কা ৪টি, হরতন ১৩টি, হরতনের টেক্কা ১টি: $P = \\frac{4}{52} + \\frac{13}{52} - \\frac{1}{52} = \\frac{16}{52} = \\frac{4}{13}$।",
+      "trap": "সাধারণ ট্র্যাপ: $4/52 + 13/52 = 17/52$ দাগানো (হরতনের টেক্কা দুইবার গোনা হয়েছে)।",
+      "tags": [
+        "তাসের সম্ভাবনা",
+        "বর্জনশীল বনাম অবর্জনশীল"
+      ]
+    },
+    {
+      "id": "v_w4_math_coeff_variation",
+      "week": 4,
+      "subject": "Higher Math",
+      "chapter": "Measures of Dispersion & Probability",
+      "type": "core_formula",
+      "title": "বিভেদাঙ্ক (Coefficient of Variation - CV)",
+      "formula": "$$CV = \\frac{\\sigma}{\\bar{x}} \\times 100\\%$$",
+      "concept": "দুটি তথ্যের মধ্যে কোনটি বেশি সুষম বা ধারাবাহিক তা তুলনা করতে $CV$ ব্যবহার করা হয়।",
+      "hack": "যার $CV$ কম, সে তত বেশি সুষম, নির্ভরযোগ্য ও ধারাবাহিক।",
+      "trap": "$CV$ বেশি হলে বেশি ভালো ভাবা ভুল; $CV$ বেশি মানে তথ্যের বিক্ষিপ্ততা বেশি (অস্থির)।",
+      "tags": [
+        "বিভেদাঙ্ক",
+        "CV",
+        "ধারাবাহিকতা"
+      ]
+    },
+    {
+      "id": "v_w4_bio_symmetry_germ",
+      "week": 4,
+      "subject": "Biology",
+      "chapter": "Animal Diversity & Classification",
+      "type": "core_formula",
+      "title": "প্রতিসাম্য ও ভ্রূণস্তরের ৯টি পর্বের ম্যাট্রিক্স",
+      "formula": "$$\\text{দ্বিস্তরী: নিডারিয়া}, \\quad \\text{অরিয়: হাইড্রা, জেলিফিশ}, \\quad \\text{পঞ্চ-অরিয়: একাইনোডার্মাটা}$$",
+      "concept": "পরিফেরা কোষীয় মাত্রার। নিডারিয়া দ্বিস্তরী (এক্টোডার্ম ও এন্ডোডার্ম, মাঝে মেস Mesoglea)। প্লাটিহেলমিনথিস থেকে কর্ডাটা সবাই ত্রিস্তরী।",
+      "hack": "একাইনোডার্মাটার পূর্ণাঙ্গ প্রাণী পঞ্চ-অরিয় কিন্তু লার্ভা দ্বিপার্শ্বীয় প্রতিসম!",
+      "trap": "হাইড্রা দ্বিস্তরী কিন্তু প্লাটিহেলমিনথিস ত্রিস্তরী এবং অ্যাসিলোমেট (সিলোম নেই)।",
+      "tags": [
+        "প্রতিসাম্য",
+        "ভ্রূণস্তর",
+        "MAT Direct Line"
+      ]
+    },
+    {
+      "id": "v_w4_bio_water_vascular_system",
+      "week": 4,
+      "subject": "Biology",
+      "chapter": "Animal Diversity & Classification",
+      "type": "trap",
+      "title": "নালী তন্ত্র (Canal) বনাম পানি সংবহন তন্ত্র (Water Vascular) ফাঁদ",
+      "formula": "$$\\text{নালী তন্ত্র: পরিফেরা (Porifera)}, \\quad \\text{পানি সংবহন তন্ত্র: একাইনোডার্মাটা (Echinodermata)}$$",
+      "concept": "পরিফেরায় নালী তন্ত্র ও অস্টিয়া-অস্কুলাম থাকে। একাইনোডার্মাটায় টিউব ফিট (নালিকা পদ) ও পানি সংবহন তন্ত্র থাকে।",
+      "hack": "টিউব ফিট বা নালিকা পদ কার চলন অঙ্গ? একাইনোডার্মাটা (তারা মাছ)। শিখা কোষ কার রেচন অঙ্গ? প্লাটিহেলমিনথিস।",
+      "trap": "Canal System আর Water Vascular System নাম কাছাকাছি হওয়ায় পরীক্ষায় উল্টো দাগানো সবচেয়ে কমন ট্র্যাপ!",
+      "tags": [
+        "Canal System",
+        "Water Vascular",
+        "মেডিকেল ফাঁদ"
+      ]
+    },
+    {
+      "id": "v_w5_phy_pendulum_length",
+      "week": 5,
+      "subject": "Physics",
+      "chapter": "Periodic Motion & SHM",
+      "type": "core_formula",
+      "title": "সরল দোলকের দোলনকাল ও কার্যকারী দৈর্ঘ্য সম্পর্ক",
+      "formula": "$$T = 2\\pi \\sqrt{\\frac{L}{g}} \\implies \\frac{T_1}{T_2} = \\sqrt{\\frac{L_1}{L_2}}$$",
+      "concept": "দোলনকাল কার্যকারী দৈর্ঘ্যের বর্গমূলের সমানুপাতিক এবং অভিকর্ষজ ত্বরণের বর্গমূলের ব্যস্তানুপাতিক।",
+      "hack": "দৈর্ঘ্য ৪ গুণ করলে দোলনকাল দ্বিগুণ। দোলনকাল দ্বিগুণ করতে দৈর্ঘ্য ৪ গুণ করতে হবে। দৈর্ঘ্য ১% বাড়ালে দোলনকাল ০.৫% বাড়ে।",
+      "trap": "বব ফাঁপা করে পানি ভরলে দোলনকাল প্রথমে বাড়ে (ভারকেন্দ্র নিচে নামে), পানি সম্পূর্ণ পড়ে গেলে আবার পূর্বের মানে ফিরে আসে।",
+      "tags": [
+        "সরল দোলক",
+        "কার্যকারী দৈর্ঘ্য",
+        "বব ফাঁপা ট্র্যাপ"
+      ]
+    },
+    {
+      "id": "v_w5_phy_spring_combination",
+      "week": 5,
+      "subject": "Physics",
+      "chapter": "Periodic Motion & SHM",
+      "type": "shortcut",
+      "title": "স্প্রিং এর শ্রেণী ও সমান্তরাল সমবায় হ্যাক",
+      "formula": "$$k_s = \\frac{k_1 k_2}{k_1 + k_2}, \\quad k_p = k_1 + k_2, \\quad T \\propto \\frac{1}{\\sqrt{k}}$$",
+      "concept": "দুটি সমান স্প্রিং সমান্তরালে জুড়লে $k_p = 2k \\implies T_p = \\frac{T}{\\sqrt{2}}$। শ্রেণীতে জুড়লে $k_s = k/2 \\implies T_s = \\sqrt{2}T$।",
+      "hack": "স্প্রিংকে $n$ টুকরো কাটলে প্রতিটি টুকরোর স্প্রিং ধ্রুবক $n$ গুণ বাড়ে ($k' = n k$); ফলে দোলনকাল $\\frac{1}{\\sqrt{n}}$ গুণ হয়।",
+      "trap": "স্প্রিং কেটে ছোট করলে শক্ত হয় ($k$ বাড়ে), অনেকেই ভাবে ছোট হলে $k$ কমবে।",
+      "tags": [
+        "স্প্রিং সমবায়",
+        "স্প্রিং কর্তন",
+        "DU Hotspot"
+      ]
+    },
+    {
+      "id": "v_w5_phy_second_pendulum",
+      "week": 5,
+      "subject": "Physics",
+      "chapter": "Periodic Motion & SHM",
+      "type": "trap",
+      "title": "সেকেন্ড দোলকের কার্যকারী দৈর্ঘ্য ও পাহাড়ে সময় হারানো",
+      "formula": "$$T = 2\\text{ s}, \\quad L = \\frac{g}{\\pi^2} \\approx \\frac{9.8}{9.8696} \\approx 0.993\\text{ m} \\approx 99.3\\text{ cm}$$",
+      "concept": "যে সরল দোলকের অর্ধ দোলনকাল ১ সেকেন্ড (পূর্ণ দোলনকাল ২ সেকেন্ড) তাকে সেকেন্ড দোলক বলে।",
+      "hack": "পাহাড়ে দৈনিক $n$ সেকেন্ড ধীরে চললে বা সময় হারালে উচ্চতা: $h = \\frac{n}{86400 - n} R \\approx \\frac{n}{86400} R$।",
+      "trap": "অর্ধ দোলনকাল ১ সেকেন্ড, পূর্ণ দোলনকাল ২ সেকেন্ড! প্রশ্নে অর্ধদোলনকাল চাইলে ১ দাগাতে হবে।",
+      "tags": [
+        "সেকেন্ড দোলক",
+        "পাহাড়ের উচ্চতা",
+        "সময় হারানো"
+      ]
+    },
+    {
+      "id": "v_w5_che_emf_calculation",
+      "week": 5,
+      "subject": "Chemistry",
+      "chapter": "Electrochemistry",
+      "type": "core_formula",
+      "title": "গ্যালভানিক কোষের প্রমাণ তড়িচ্চালক বল ($E^\\circ_{\\text{cell}}$)",
+      "formula": "$$E^\\circ_{\\text{cell}} = E^\\circ_{\\text{oxi}}(\\text{anode}) + E^\\circ_{\\text{red}}(\\text{cathode}) = E^\\circ_{\\text{red}}(\\text{cathode}) - E^\\circ_{\\text{red}}(\\text{anode})$$",
+      "concept": "যেটির বিজারণ বিভব বেশি সেটি ক্যাথোড (বিজারণ ঘটবে), যেটির কম সেটি অ্যানোড (জারণ ঘটবে)। কোষ বিক্রিয়া স্বতঃস্ফূর্ত হওয়ার শর্ত $E_{\\text{cell}} > 0$ এবং $\\Delta G < 0$।",
+      "hack": "ড্যানিয়েল কোষ: $\\text{Zn} + \\text{Cu}^{2+} \\to \\text{Zn}^{2+} + \\text{Cu} \\implies E^\\circ = 0.76 + 0.34 = 1.10\\text{ V}$।",
+      "trap": "বিজারণ বিভবকে ২ বা ৩ দিয়ে গুণ করা যাবে না! $E^\\circ$ একটি ইনটেনসিভ প্রপার্টি (ভর-অপেক্ষহীন)।",
+      "tags": [
+        "গ্যালভানিক কোষ",
+        "E_cell",
+        "ড্যানিয়েল কোষ"
+      ]
+    },
+    {
+      "id": "v_w5_che_reactivity_series",
+      "week": 5,
+      "subject": "Chemistry",
+      "chapter": "Electrochemistry",
+      "type": "shortcut",
+      "title": "তড়িৎ রাসায়নিক সক্রিয়তা সিরিজ ও পাত্রে রাখার নিয়ম",
+      "formula": "$$\\text{K} > \\text{Na} > \\text{Ca} > \\text{Mg} > \\text{Al} > \\text{Zn} > \\text{Fe} > \\text{Pb} > [\\text{H}] > \\text{Cu} > \\text{Ag} > \\text{Au}$$",
+      "concept": "সিরিজের উপরের ধাতু নিচের ধাতুকে তার লবণ থেকে প্রতিস্থাপিত করতে পারে। উপরের ধাতুর তৈরি পাত্রে নিচের ধাতুর দ্রবণ রাখা যাবে না।",
+      "hack": "ছন্দ: 'কে না ক্যা মেগাইভার এল যেন ফিরে পাবে হায় কুলাঙ্গার আজি পেটাবে আমায়'। জিঙ্কের পাত্রে কপার সালফেট রাখা যাবে না (পাত্র ফুটো হয়ে যাবে)।",
+      "trap": "কপারের পাত্রে জিঙ্ক সালফেট রাখা যাবে কি? হ্যাঁ, যাবে! কারণ কপার কম সক্রিয়, প্রতিস্থাপন হবে না।",
+      "tags": [
+        "সক্রিয়তা সিরিজ",
+        "পাত্রে দ্রবণ সংরক্ষণ",
+        "মেডিকেল ছন্দ"
+      ]
+    },
+    {
+      "id": "v_w5_mat_middle_term",
+      "week": 5,
+      "subject": "Higher Math",
+      "chapter": "Binomial Expansion",
+      "type": "core_formula",
+      "title": "দ্বিপদী বিস্তৃতির মধ্যপদ (Middle Term) নির্ণয়",
+      "formula": "$$n \\text{ জোড় হলে মধ্যপদ } \\left(\\frac{n}{2} + 1\\right)\\text{-তম পদ: } T_{\\frac{n}{2}+1} = {}^nC_{\\frac{n}{2}} a^{\\frac{n}{2}} x^{\\frac{n}{2}}$$",
+      "concept": "$n$ জোড় হলে মধ্যপদ ১টি। $n$ বিজোড় হলে মধ্যপদ ২টি: $\\frac{n+1}{2}$-তম এবং $\\frac{n+3}{2}$-তম।",
+      "hack": "$(x + 1/x)^{2n}$ এর বিস্তৃতিতে মধ্যপদ সর্বদা $x$-বর্জিত পদ এবং এর মান ${}^{2n}C_n$!",
+      "trap": "মধ্যপদ কোনটি চাওয়া হয়েছে (পদ নম্বর) নাকি মধ্যপদের মান চাওয়া হয়েছে লক্ষ্য করুন।",
+      "tags": [
+        "দ্বিপদী বিস্তৃতি",
+        "মধ্যপদ",
+        "x-বর্জিত পদ"
+      ]
+    },
+    {
+      "id": "v_w5_mat_coeff_sum",
+      "week": 5,
+      "subject": "Higher Math",
+      "chapter": "Binomial Expansion",
+      "type": "shortcut",
+      "title": "সহগ সমূহের সমষ্টি নির্ণয়ের ১-সেকেন্ড ট্রিক",
+      "formula": "$$\\sum \\text{সহগ} \\implies \\text{চলকগুলোর স্থানে } 1 \\text{ বসিয়ে দাও!}$$",
+      "concept": "$(ax + by)^n$ এর সকল সহগের যোগফল নির্ণয় করতে $x=1, y=1$ বসাও $\\implies (a+b)^n$।",
+      "hack": "$(2x - 3y)^{10}$ এর সকল সহগের সমষ্টি: $(2(1) - 3(1))^{10} = (-1)^{10} = 1$! কোনো বিস্তৃতি করার প্রয়োজন নেই।",
+      "trap": "সহগ যোগ করার সময় ধ্রুবক পদ বাদ দেওয়া যাবে না; সরাসরি চলক $= 1$ বসাতে হবে।",
+      "tags": [
+        "সহগ সমষ্টি",
+        "১ সেকেন্ড ট্রিক",
+        "DU Math"
+      ]
+    },
+    {
+      "id": "v_w6_phy_carnot_efficiency",
+      "week": 6,
+      "subject": "Physics",
+      "chapter": "Heat & Thermodynamics",
+      "type": "core_formula",
+      "title": "কার্নো ইঞ্জিনের দক্ষতা ও ১০০% হওয়ার অসম্ভব শর্ত",
+      "formula": "$$\\eta = 1 - \\frac{T_2}{T_1} = \\frac{T_1 - T_2}{T_1} = \\frac{Q_1 - Q_2}{Q_1}$$",
+      "concept": "$T_1$ উৎসের পরম তাপমাত্রা এবং $T_2$ গ্রাহকের পরম তাপমাত্রা (উভয়ই কেলভিনে)।",
+      "hack": "দক্ষতা দ্বিগুণ করতে হলে উৎসের তাপমাত্রা বাড়ানোর চেয়ে গ্রাহকের তাপমাত্রা একই পরিমাণ কমানো বেশি ফলপ্রসূ।",
+      "trap": "তাপমাত্রার মান সেলসিয়াসে বসালে শূন্য পাবে! অবশ্যই কেলভিন ($+273$) এ রূপান্তর করতে হবে।",
+      "tags": [
+        "কার্নো ইঞ্জিন",
+        "দক্ষতা",
+        "কেলভিন ট্র্যাপ"
+      ]
+    },
+    {
+      "id": "v_w6_phy_first_law",
+      "week": 6,
+      "subject": "Physics",
+      "chapter": "Heat & Thermodynamics",
+      "type": "core_formula",
+      "title": "তাপগতিবিদ্যার ১ম সূত্র ও প্রক্রিয়াসমূহ",
+      "formula": "$$dQ = dU + dW, \\quad dW = P dV$$",
+      "concept": "সমোষ্ণ প্রক্রিয়া: $dT = 0 \\implies dU = 0 \\implies dQ = dW$। রুদ্ধতাপীয় প্রক্রিয়া: $dQ = 0 \\implies dU = -dW$।",
+      "hack": "রুদ্ধতাপীয় প্রসারণে গ্যাস নিজে কাজ করে ($dW > 0$), ফলে অন্তঃস্থ শক্তি কমে ($dU < 0$) এবং গ্যাস শীতল হয়।",
+      "trap": "সমআয়তন প্রক্রিয়ায় কাজ $dW = 0$ ($dV=0$); সমস্ত তাপ অন্তঃস্থ শক্তি বাড়ায় ($dQ = dU$)।",
+      "tags": [
+        "১ম সূত্র",
+        "সমোষ্ণ বনাম রুদ্ধতাপীয়",
+        "dU"
+      ]
+    },
+    {
+      "id": "v_w6_phy_adiabatic_gamma",
+      "week": 6,
+      "subject": "Physics",
+      "chapter": "Heat & Thermodynamics",
+      "type": "shortcut",
+      "title": "গ্যাসের আপেক্ষিক তাপদ্বয়ের অনুপাত $\\gamma$ মান ম্যাট্রিক্স",
+      "formula": "$$\\gamma = \\frac{C_p}{C_v} = 1 + \\frac{2}{f}; \\quad \\text{একপরমাণুক: } 1.67, \\; \\text{দ্বিপারমাণবিক: } 1.40, \\; \\text{বহুপরমাণুক: } 1.33$$",
+      "concept": "একপরমাণুক (He, Ne, Ar): $f=3, \\gamma = 5/3 \\approx 1.67$। দ্বিপারমাণবিক ($O_2, N_2, \\text{বায়ু}$): $f=5, \\gamma = 7/5 = 1.40$।",
+      "hack": "রুদ্ধতাপীয় বক্ররেখা সমোষ্ণ বক্ররেখার চেয়ে $\\gamma$ গুণ বেশি খাড়া ($\\text{Slope}_{\\text{adia}} = \\gamma \\times \\text{Slope}_{\\text{iso}}$)।",
+      "trap": "বাতাসে শব্দের প্রসারণ একটি রুদ্ধতাপীয় প্রক্রিয়া (ল্যাপলাসের সংশোধন); নিউটন সমোষ্ণ ধরে ভুল করেছিলেন।",
+      "tags": [
+        "gamma",
+        "ল্যাপলাস সংশোধন",
+        "রুদ্ধতাপীয় ঢাল"
+      ]
+    },
+    {
+      "id": "v_w6_phy_isobaric_work",
+      "week": 6,
+      "subject": "Physics",
+      "chapter": "Heat & Thermodynamics",
+      "type": "shortcut",
+      "title": "সমচাপ প্রক্রিয়ায় কৃতকাজ ও গ্যাস প্রসারণ",
+      "formula": "$$W = P(V_2 - V_1) = nR(T_2 - T_1) = nR\\Delta T$$",
+      "concept": "চাপ স্থির থাকলে কাজের মান সরাসরি $P\\Delta V$ বা $nR\\Delta T$।",
+      "hack": "১ মোল আদর্শ গ্যাসের তাপমাত্রা $1^\\circ\\text{C}$ বা $1\\text{ K}$ বাড়ালে কৃতকাজ সরাসরি $R = 8.314\\text{ J}$।",
+      "trap": "মুক্ত প্রসারণে (Free expansion into vacuum) বাহ্যিক চাপ $P_{ext} = 0 \\implies W = 0$।",
+      "tags": [
+        "সমচাপ কৃতকাজ",
+        "P delta V",
+        "Speed Hack"
+      ]
+    },
+    {
+      "id": "v_w7_phy_capacitor_energy",
+      "week": 7,
+      "subject": "Physics",
+      "chapter": "স্থির তড়িৎ",
+      "type": "core_formula",
+      "title": "ধারকে সঞ্চিত শক্তি ও ব্যাটারি বিচ্ছিন্ন বনাম সংযুক্ত ফাঁদ",
+      "formula": "$$U = \\frac{1}{2}CV^2 = \\frac{Q^2}{2C} = \\frac{1}{2}QV$$",
+      "concept": "ধারকের পাতদ্বয়ের মধ্যবর্তী তড়িৎ ক্ষেত্রে শক্তি সঞ্চিত থাকে।",
+      "hack": "ব্যাটারি সংযুক্ত অবস্থায় ডাই-ইলেকট্রিক ঢুকালে বিভব $V$ স্থির থাকে $\\implies U \\propto C$ বাড়ে। ব্যাটারি বিচ্ছিন্ন অবস্থায় ঢুকালে চার্জ $Q$ স্থির থাকে $\\implies U \\propto 1/C$ কমে!",
+      "trap": "ব্যাটারি লাগানো নাকি খোলা তা লক্ষ্য না করে সূত্রের $V$ স্থির ধরা সবচেয়ে মারাত্মক ভর্তি পরীক্ষার ফাঁদ।",
+      "tags": [
+        "ধারকের সঞ্চিত শক্তি",
+        "ব্যাটারি বিচ্ছিন্ন ফাঁদ",
+        "DU Top Repeat"
+      ]
+    },
+    {
+      "id": "v_w7_phy_parallel_plate_cap",
+      "week": 7,
+      "subject": "Physics",
+      "chapter": "স্থির তড়িৎ",
+      "type": "core_formula",
+      "title": "সমান্তরাল পাত ধারকের ধারকত্ব",
+      "formula": "$$C = \\frac{\\varepsilon_0 \\kappa A}{d}$$",
+      "concept": "পাতদ্বয়ের ক্ষেত্রফল $A$ বাড়ালে বা দূরত্ব $d$ কমালে ধারকত্ব বাড়ে। ডাই-ইলেকট্রিক ধ্রুবক $\\kappa$ বিশিষ্ট মাধ্যম রাখলে ধারকত্ব $\\kappa$ গুণ বৃদ্ধি পায়।",
+      "hack": "দূরত্ব অর্ধেক করলে ধারকত্ব দ্বিগুণ ($d \\to d/2 \\implies C \\to 2C$)।",
+      "trap": "বাতাসের ডাই-ইলেকট্রিক ধ্রুবক $\\kappa = 1$; ধাতুর ডাই-ইলেকট্রিক ধ্রুবক $\\kappa = \\infty$ (অসীম)।",
+      "tags": [
+        "ধারকত্ব",
+        "সমান্তরাল পাত",
+        "ধাতুর পরাবৈদ্যুতিক ধ্রুবক"
+      ]
+    },
+    {
+      "id": "v_w7_phy_de_broglie",
+      "week": 7,
+      "subject": "Physics",
+      "chapter": "আধুনিক পদার্থবিজ্ঞান",
+      "type": "core_formula",
+      "title": "দ্য ব্রগলি তরঙ্গদৈর্ঘ্য ও গতিশক্তি সম্পর্ক",
+      "formula": "$$\\lambda = \\frac{h}{p} = \\frac{h}{\\sqrt{2mE_k}} = \\frac{h}{\\sqrt{2mqV}}$$",
+      "concept": "গতিশীল প্রতিটি কণার সাথে একটি তরঙ্গ জড়িত থাকে। ইলেকট্রনের ক্ষেত্রে $V$ ভোল্ট বিভব পার্থক্যে ত্বরান্বিত হলে $\\lambda = \\frac{12.27}{\\sqrt{V}}\\text{ \\AA}$।",
+      "hack": "গতিশক্তি ৪ গুণ বৃদ্ধি পেলে দ্য ব্রগলি তরঙ্গদৈর্ঘ্য অর্ধেক ($\\frac{1}{2}$) হবে।",
+      "trap": "ফোটনের ভরবেগ $p = \\frac{h}{\\lambda} = \\frac{E}{c}$; ফোটনের স্থির ভর শূন্য কিন্তু গতিশীল ভর $m = \\frac{h}{c\\lambda}$।",
+      "tags": [
+        "দ্য ব্রগলি",
+        "তরঙ্গদৈর্ঘ্য",
+        "ইলেকট্রন ভোল্ট"
+      ]
+    },
+    {
+      "id": "v_w7_mat_implicit_diff",
+      "week": 7,
+      "subject": "Higher Math",
+      "chapter": "অন্তরীকরণ",
+      "type": "shortcut",
+      "title": "অব্যক্ত ফাংশনের দ্রুত অন্তরীকরণ শর্টকাট",
+      "formula": "$$\\frac{dy}{dx} = -\\frac{f_x}{f_y} = -\\frac{x\\text{-এর সাপেক্ষে আংশিক অন্তরক (y ধ্রুবক)}}{y\\text{-এর সাপেক্ষে আংশিক অন্তরক (x ধ্রুবক)}}$$",
+      "concept": "যেসব সমীকরণে $y$ কে সহজে $x$ এর মাধ্যমে পৃথক করা যায় না তাদের অব্যক্ত ফাংশন (Implicit Function) বলে।",
+      "hack": "$x^3 + y^3 - 3axy = 0 \\implies \\frac{dy}{dx} = -\\frac{3x^2 - 3ay}{3y^2 - 3ax} = -\\frac{x^2 - ay}{y^2 - ax}$ (মাত্র ৩ সেকেন্ডে উত্তর)।",
+      "trap": "সামনে মাইনাস চিহ্ন দিতে ভুলে যাওয়া সবচেয়ে বড় ভুল।",
+      "tags": [
+        "অব্যক্ত ফাংশন",
+        "আংশিক অন্তরীকরণ",
+        "Speed Hack"
+      ]
+    },
+    {
+      "id": "v_w7_bio_rods_cones",
+      "week": 7,
+      "subject": "Biology",
+      "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
+      "type": "core_formula",
+      "title": "চোখের রড বনাম কোন কোষের তুলনামূলক ম্যাট্রিক্স",
+      "formula": "$$\\text{রড কোষ}: \\text{রডপসিন (ভিটামিন A)}, \\text{ অনুজ্জ্বল আলো}; \\quad \\text{কোন কোষ}: \\text{আইওডপসিন}, \\text{ উজ্জ্বল আলো ও বর্ণ}$$",
+      "concept": "রেটিনায় রড কোষ থাকে প্রায় ১২ কোটি ৫০ লাখ, কোন কোষ থাকে প্রায় ৭০ লাখ। ফোভিয়া সেন্ট্রালিসে কেবল কোন কোষ থাকে।",
+      "hack": "C for Cone = C for Color! ফোভিয়া সেন্ট্রালিস বা পীত বিন্দুতে সবচেয়ে স্পষ্ট প্রতিবিম্ব সৃষ্টি হয়।",
+      "trap": "রাতকানা রোগ হয় রড কোষের ত্রুটিতে (ভিটামিন A এর অভাবে রডপসিন তৈরি হয় না); বর্ণান্ধতা হয় কোন কোষের ত্রুটিতে।",
+      "tags": [
+        "রড বনাম কোন",
+        "রেটিনা",
+        "ফোভিয়া সেন্ট্রালিস"
+      ]
+    },
+    {
+      "id": "v_w7_bio_reflex_arc",
+      "week": 7,
+      "subject": "Biology",
+      "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
+      "type": "core_formula",
+      "title": "প্রতিবর্ত চাপের ৫টি অংশের অনুক্রম",
+      "formula": "$$\\text{গ্রাহক অঙ্গ} \\to \\text{সংবেদী নিউরন} \\to \\text{স্নায়ু কেন্দ্র (সুষুম্নাকাণ্ড)} \\to \\text{মোটর নিউরন} \\to \\text{সাড়াদাতা অঙ্গ (পেশি/গ্রন্থি)}$$",
+      "concept": "প্রতিবর্ত ক্রিয়া অনৈচ্ছিক এবং সুষুম্নাকাণ্ড দ্বারা নিয়ন্ত্রিত হয় (মস্তিষ্কের তাৎক্ষণিক প্রয়োজন হয় না)।",
+      "hack": "হাঁটুর ঝাঁকুনি (Knee-jerk reflex) একটি সরল মনোসাইন্যাপটিক প্রতিবর্ত ক্রিয়া।",
+      "trap": "সংবেদী নিউরনের ডেনড্রাইট গ্রাহক থেকে স্পাইনাল কর্ডের ডরসাল রুটে সংকেত নিয়ে যায়, মোটর নিউরন ভেন্ট্রাল রুট দিয়ে পেশিতে আসে।",
+      "tags": [
+        "প্রতিবর্ত চাপ",
+        "Reflex Arc",
+        "MAT Direct Line"
+      ]
+    },
+    {
+      "id": "v_w7_bio_fap_sign_stimulus",
+      "week": 7,
+      "subject": "Biology",
+      "chapter": "প্রাণীর আচরণ",
+      "type": "core_formula",
+      "title": "সহজাত আচরণ (FAP) ও সংকেত উদ্দীপক (Sign Stimulus)",
+      "formula": "$$\\text{FAP} = \\text{নির্দিষ্ট উদ্দীপনা (Sign Stimulus)} \\to \\text{সহজাত অনমনীয় আচরণ ক্রম}$$",
+      "concept": "টিনবার্জেনের তিন কাঁটাযুক্ত স্টিকলব্যাক পুরুষ মাছের লাল পেট দেখলে আক্রমণাত্মক আচরণ একটি ধ্রুপদী FAP।",
+      "hack": "FAP জন্মগত, প্রজাতির সকল সদস্যে একই রকম, একবার শুরু হলে বাধা দিলেও শেষ পর্যন্ত চলে।",
+      "trap": "FAP শেখা আচরণ নয়! এটি বংশগতভাবে প্রোগ্রাম করা।",
+      "tags": [
+        "FAP",
+        "টিনবার্জেন",
+        "স্টিকলব্যাক",
+        "সহজাত আচরণ"
+      ]
+    },
+    {
+      "id": "v_w7_bio_conditioning",
+      "week": 7,
+      "subject": "Biology",
+      "chapter": "প্রাণীর আচরণ",
+      "type": "core_formula",
+      "title": "প্যাভলভের ধ্রুপদী বনাম স্কিনারের অপারেন্ট সাপেক্ষীকরণ",
+      "formula": "$$\\text{Classical (Pavlov)}: \\text{ঘণ্টাধ্বনি} + \\text{খাবার} \\to \\text{লালাক্ষরণ}; \\quad \\text{Operant (Skinner)}: \\text{লিভারে চাপ} \\to \\text{পুরস্কার}$$",
+      "concept": "প্যাভলভের পরীক্ষায় উদ্দীপক প্রতিক্রিয়ার পূর্বে আসে; স্কিনারের পরীক্ষায় আচরণ সম্পাদন করার পর ফলাফল (পুরস্কার/শাস্তি) আসে।",
+      "hack": "প্যাভলভ = কুকুর ও লালাক্ষরণ; স্কিনার = ইঁদুর/পায়রা ও লিভার বক্স।",
+      "trap": "অনপেক্ষ উদ্দীপক হলো খাবার, সাপেক্ষ উদ্দীপক হলো ঘণ্টাধ্বনি!",
+      "tags": [
+        "প্যাভলভ",
+        "স্কিনার",
+        "কন্ডিশনিং"
+      ]
+    },
+    {
+      "id": "v_w7_bio_altruism_hamilton",
+      "week": 7,
+      "subject": "Biology",
+      "chapter": "প্রাণীর আচরণ",
+      "type": "shortcut",
+      "title": "পরার্থপরতা ও হ্যামিল্টনের নীতি ($rB > C$)",
+      "formula": "$$rB > C \\implies \\text{পরার্থপর আচরণ বিবর্তনে টিকবে}$$",
+      "concept": "নিজের ক্ষতি করে অন্যের উপকারে এগিয়ে আসাকে পরার্থপরতা বলে। $r$ = আত্মীয়তার মাত্রা, $B$ = প্রাপকের সুবিধা, $C$ = দানকারীর ক্ষতি।",
+      "hack": "মৌমাছির বন্ধ্যা শ্রমিকদের রানী ও লার্ভার সেবা করা কিন-সিলেকশন (Kin Selection) এর উৎকৃষ্ট উদাহরণ।",
+      "trap": "শ্রমিক মৌমাছিরা নিজেরা বংশবৃদ্ধি করে না, তবু কেন কাজ করে? কারণ রানীর সাথে তাদের জিনগত সাদৃশ্য ৭৫% ($r=0.75$)!",
+      "tags": [
+        "পরার্থপরতা",
+        "হ্যামিল্টনের নীতি",
+        "কিন সিলেকশন"
+      ]
+    },
+    {
+      "id": "v_w7_bio_taxis_vs_kinesis",
+      "week": 7,
+      "subject": "Biology",
+      "chapter": "প্রাণীর আচরণ",
+      "type": "trap",
+      "title": "ট্যাক্সিস (Taxis) বনাম কাইনেসিস (Kinesis) পার্থক্য",
+      "formula": "$$\\text{Taxis}: \\text{নির্দিষ্ট দিকমুখী চলন}; \\quad \\text{Kinesis}: \\text{দিকহীন গতিবেগের পরিবর্তন}$$",
+      "concept": "আলোর দিকে পতঙ্গের উড়ে যাওয়া পজিটিভ ফটোট্যাক্সিস। তেলাপোকার আলো দেখে যেকোনো দিকে এলোমেলো দৌড়ানো ফটোকাইনেসিস।",
+      "hack": "দিক নির্দেশ থাকলে ট্যাক্সিস (পজিটিভ বা নেগেটিভ); দিক ছাড়া কেবল ছটফটানি বা স্পিড বাড়লে কাইনেসিস।",
+      "trap": "ইউগ্লিনার আলোর দিকে যাওয়া ট্যাক্সিস, কিন্তু উকুনের আর্দ্রতায় এলোমেলো ছোটাছুটি কাইনেসিস।",
+      "tags": [
+        "ট্যাক্সিস",
+        "কাইনেসিস",
+        "মেডিকেল ভর্তি পরীক্ষা"
+      ]
+    },
+    {
+      "id": "v_w5_mat_general_term",
+      "week": 5,
+      "subject": "Higher Math",
+      "chapter": "Binomial Expansion",
+      "type": "core_formula",
+      "title": "দ্বিপদী বিস্তৃতির সাধারণ পদ $T_{r+1}$ সূত্র",
+      "formula": "$$T_{r+1} = {}^nC_r x^{n-r} a^r$$",
+      "concept": "$(x + a)^n$ এর বিস্তৃতিতে $(r+1)$-তম পদটি হলো সাধারণ পদ।",
+      "hack": "$x$ এর নির্দিষ্ট ঘাত (যেমন $x^3$) এর সহগ নির্ণয় করতে $n-r = 3 \\implies r = n-3$ বের করে এক লাইনে মান বের করা যায়।",
+      "trap": "$r$-তম পদ বের করতে বললে সূত্রে $r-1$ বসাতে হবে; $T_{r+1}$ হলো $(r+1)$-তম পদ।",
+      "tags": [
+        "দ্বিপদী বিস্তৃতি",
+        "সাধারণ পদ",
+        "x এর ঘাত"
+      ]
+    },
+    {
+      "id": "v_w7_phy_lorentz_factor",
+      "week": 7,
+      "subject": "Physics",
+      "chapter": "আধুনিক পদার্থবিজ্ঞান",
+      "type": "shortcut",
+      "title": "আপেক্ষিকতার লরেন্টজ ফ্যাক্টর $\\gamma$ ও পিথাগোরিয়ান ট্রিপলেট হ্যাক",
+      "formula": "$$\\gamma = \\frac{1}{\\sqrt{1 - v^2/c^2}}, \\quad L = L_0 \\sqrt{1 - v^2/c^2}, \\quad t = \\frac{t_0}{\\sqrt{1 - v^2/c^2}}, \\quad m = \\frac{m_0}{\\sqrt{1 - v^2/c^2}}$$",
+      "concept": "গতিশীল অবস্থায় দৈর্ঘ্য সংকুচিত হয়, সময় দীর্ঘায়িত (কাল দীর্ঘায়ন) হয় এবং গতিশীল ভর বৃদ্ধি পায়।",
+      "hack": "০.৬c এবং ০.৮c গোল্ডেন ট্রিপলেট: $v = 0.6c \\implies \\sqrt{1-v^2/c^2} = 0.8$; $v = 0.8c \\implies \\sqrt{1-v^2/c^2} = 0.6$! ক্যালকুলেটর ছাড়া ১ সেকেন্ডে উত্তর।",
+      "trap": "স্থির ভর $m_0$ সবচেয়ে ছোট; গতিশীল ভর $m$ সর্বদা স্থির ভরের চেয়ে বড় ($m > m_0$)।",
+      "tags": [
+        "লরেন্টজ ফ্যাক্টর",
+        "কাল দীর্ঘায়ন",
+        "দৈর্ঘ্য সংকোচন",
+        "Speed Hack"
       ]
     }
   ],
