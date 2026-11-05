@@ -179,3 +179,29 @@
   color: #ffffff !important;
   opacity: 1 !important;
 }
+
+
+/* Universal Dark Theme KaTeX Contrast */
+.dark .katex,
+.dark .katex *,
+.dark .katex-display,
+.dark .katex-display * {
+  color: #ffffff !important;
+}
+
+.dark .katex .frac-line {
+  border-bottom-color: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+.dark .katex .sqrt-sign,
+.dark .katex .sqrt-line {
+  border-color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.dark .katex svg,
+.dark .katex svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}

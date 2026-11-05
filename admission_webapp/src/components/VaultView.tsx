@@ -56,7 +56,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({});
   const [showQuickTools, setShowQuickTools] = useState(true);
-  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions'>('triplets');
+  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w6_bridge'>('triplets');
   const [displayLimit, setDisplayLimit] = useState(20);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -441,6 +441,16 @@ export const VaultView: React.FC<VaultViewProps> = ({
               >
                 🧪 স্টয়কিওমেট্রি ফ্র্যাকশন ({filteredFractions.length})
               </button>
+              <button
+                onClick={() => setQuickToolTab('w6_bridge')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
+                  quickToolTab === 'w6_bridge'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                }`}
+              >
+                🚀 Week 06 নো-ক্যালকুলেটর ব্রিজ
+              </button>
             </div>
           </div>
 
@@ -496,6 +506,70 @@ export const VaultView: React.FC<VaultViewProps> = ({
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {quickToolTab === 'w6_bridge' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">ত্রিকোণমিতিক সিরিজ</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড রুল</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ = \\frac{1}{8}$<br />$\\sin 20^\\circ \\sin 40^\\circ \\sin 80^\\circ = \\frac{\\sqrt{3}}{8}$<br />$\\tan 20^\\circ \\tan 40^\\circ \\tan 80^\\circ = \\sqrt{3}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">স্প্রিং কাটার হ্যাক</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">দোলনকাল অনুপাত</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="স্প্রিং কেটে $n$ টুকরো করলে:<br />$k' = n k$<br />$T' = \\frac{T}{\\sqrt{n}}$ (৪ টুকরোয় $T/2$)" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">নার্নস্ট ড্যানিয়েল কোষ</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১০x পরিবর্তন</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$[\\text{Zn}^{2+}]$ ১০ গুণ হ্রাস পেলে:<br />$\\Delta E = +\\frac{0.0592}{2} = +0.0296\\text{ V}$<br />$E_{\\text{cell}} = 1.10 + 0.0296 = 1.1296\\text{ V}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">দ্বিপদী x-বর্জিত পদ</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">ঘাত শর্টকাট</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$(x^p + k/x^q)^n$ এ পদ অবস্থান:<br />$r = \\frac{np}{p + q}$<br />পদটি হবে $(r+1)$ তম পদ।" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">তেজস্ক্রিয় ক্ষয় বাইনারি</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">পাওয়ার হিসাব</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="১৫/১৬ অংশ ক্ষয়প্রাপ্ত $\\implies$<br />অবশিষ্ট $\\frac{1}{16} = (1/2)^4$<br />মোট সময় $t = 4 \\times T_{1/2}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">আপেক্ষিকতা বেগ মান</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">স্থির মান</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="ভর দ্বিগুণ ($m = 2m_0$) বা দৈর্ঘ্য অর্ধেক ($L = L_0/2$) হলে কণার বেগ:<br />$v = \\frac{\\sqrt{3}}{2}c \\approx 0.866c$" />
+                </div>
+              </div>
             </div>
           )}
         </div>

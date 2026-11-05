@@ -4291,6 +4291,150 @@
         "বিজয় দিবস",
         "নিয়াজী"
       ]
+    },
+    {
+      "id": "v-w6-phy-01",
+      "subject": "Physics",
+      "chapter": "Heat & Thermodynamics",
+      "type": "core_formula",
+      "title": "ত্রুটিপূর্ণ থার্মোমিটার ও তাপমাত্রিক স্কেলিং",
+      "formula": "$$\\frac{X - \\text{ice}}{\\text{steam} - \\text{ice}} = \\frac{C}{100} = \\frac{F - 32}{180} = \\frac{K - 273.15}{100}$$",
+      "concept": "যেকোনো থার্মোমিটারে তাপমাত্রিক ধর্ম $X$-এর সাপেক্ষে সেলসিয়াস নির্ণয়ে মৌলিক ব্যবধান $(\\text{steam} - \\text{ice})$ দ্বারা ভাগ হয়।",
+      "hack": "যদি বরফ বিন্দু $4^\\circ\\text{C}$ ও বাষ্প বিন্দু $96^\\circ\\text{C}$ হয়, মৌলিক ব্যবধান $92$। $50^\\circ$ পাঠে লব $46$, সুতরাং লব/হর সরাসরি $1/2 = 50^\\circ\\text{C}$!",
+      "trap": "হর-লবের বিয়োগফল না করে হরে সরাসরি ১০০ বসানো যাবে না।",
+      "tags": [
+        "Thermometry",
+        "Faulty Thermometer",
+        "Scale Conversion"
+      ]
+    },
+    {
+      "id": "v-w6-phy-02",
+      "subject": "Physics",
+      "chapter": "Periodic Motion & SHM",
+      "type": "shortcut",
+      "title": "স্প্রিং কাটার গোল্ডেন রুল ও দোলনকাল অনুপাত",
+      "formula": "$$k' = n k \\implies T' = \\frac{T}{\\sqrt{n}}$$",
+      "concept": "একটি স্প্রিং কেটে সমান $n$ টুকরো করলে প্রতিটি অংশের দৈর্ঘ্য কমে $1/n$ অংশ হয় এবং স্প্রিং ধ্রুবক $n$ গুণ বৃদ্ধি পায়।",
+      "hack": "স্প্রিং ৪ টুকরো করলে $k$ হবে ৪ গুণ এবং দোলনকাল হবে অর্ধেক ($T/2$)। মুখে মুখে হিসাব!",
+      "trap": "স্প্রিং কাটলে দুর্বল হয় ভেবে $k$ কমানোর বিভ্রান্তি।",
+      "tags": [
+        "SHM",
+        "Spring Cut",
+        "Time Period"
+      ]
+    },
+    {
+      "id": "v-w6-phy-03",
+      "subject": "Physics",
+      "chapter": "Modern Physics",
+      "type": "core_formula",
+      "title": "তেজস্ক্রিয় ক্ষয় সূত্র, অর্ধায়ু ও গড় আয়ু ম্যাট্রিক্স",
+      "formula": "$$N = N_0\\left(\\frac{1}{2}\\right)^{t/T_{1/2}}, \\quad T_{1/2} = \\frac{0.693}{\\lambda}, \\quad \\tau = \\frac{1}{\\lambda} = 1.443 T_{1/2}$$",
+      "concept": "তেজস্ক্রিয় ক্ষয় একটি প্রথম ক্রমের বিক্রিয়া। $n$ অর্ধায়ু পর অবশিষ্ট থাকে $1/2^n$ অংশ।",
+      "hack": "১৫/১৬ অংশ ক্ষয় মানে অবশিষ্ট ১/১৬ অংশ = $(1/2)^4$। অতিবাহিত সময় ঠিক ৪টি অর্ধায়ু!",
+      "trap": "গড় আয়ু চাইলে অর্ধায়ু বের করেই দাগিয়ে ফেলা।",
+      "tags": [
+        "Radioactivity",
+        "Half Life",
+        "Mean Life"
+      ]
+    },
+    {
+      "id": "v-w6-che-01",
+      "subject": "Chemistry",
+      "chapter": "Environmental Chem",
+      "type": "core_formula",
+      "title": "ভ্যান ডার ওয়ালস সমীকরণ ও বাস্তব গ্যাসের বিচ্যুতি",
+      "formula": "$$\\left(P + \\frac{an^2}{V^2}\\right)(V - nb) = nRT$$",
+      "concept": "ধ্রুবক $a$ হলো আন্তঃআণবিক আকর্ষণ বল ($[a] = \\text{atm}\\cdot\\text{L}^2\\cdot\\text{mol}^{-2}$) এবং $b$ হলো কার্যকর আণবিক আয়তন ($b = 4 \\times N_A v_m$)।",
+      "hack": "যে গ্যাসের $a$ যত বেশি (পোলার, যেমন $\\text{NH}_3$), তা তত সহজে তরল হয় এবং আদর্শ আচরণ থেকে সবচেয়ে বেশি বিচ্যুত হয়।",
+      "trap": "$a$ কে আয়তন আর $b$ কে চাপ সংশোধন উল্টো মনে করা।",
+      "tags": [
+        "van der Waals",
+        "Real Gas",
+        "Deviation"
+      ]
+    },
+    {
+      "id": "v-w6-che-02",
+      "subject": "Chemistry",
+      "chapter": "Electrochemistry",
+      "type": "shortcut",
+      "title": "নার্নস্ট সমীকরণ ও ড্যানিয়েল কোষ শর্টকাট",
+      "formula": "$$E_{\\text{cell}} = E^\\circ_{\\text{cell}} - \\frac{0.0592}{n}\\log\\frac{[\\text{Anode}]^x}{[\\text{Cathode}]^y}$$",
+      "concept": "ড্যানিয়েল কোষে $E^\\circ_{\\text{cell}} = +0.34 - (-0.76) = +1.10\\text{ V}$। $n = 2$।",
+      "hack": "অ্যানোডের ঘনমাত্রা ১০ গুণ কমলে কোষ বিভব $0.0592 / 2 = +0.0296\\text{ V}$ বৃদ্ধি পায়!",
+      "trap": "সূত্রের মাইনাস আর বিজারণ বিভবের মাইনাস চিহ্নের গরমিল।",
+      "tags": [
+        "Nernst Equation",
+        "EMF",
+        "Daniel Cell"
+      ]
+    },
+    {
+      "id": "v-w6-mat-01",
+      "subject": "Higher Math",
+      "chapter": "Trigonometry",
+      "type": "shortcut",
+      "title": "গুণোত্তর ত্রিকোণমিতিক সিরিজ গোল্ডেন ট্রায়ো",
+      "formula": "$$\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ = \\frac{1}{8}, \\quad \\sin 20^\\circ \\sin 40^\\circ \\sin 80^\\circ = \\frac{\\sqrt{3}}{8}, \\quad \\tan 20^\\circ \\tan 40^\\circ \\tan 80^\\circ = \\sqrt{3}$$",
+      "concept": "সূত্র: $\\cos\\theta\\cos(60-\\theta)\\cos(60+\\theta) = \\frac{1}{4}\\cos 3\\theta$ এবং $\\sin\\theta\\sin(60-\\theta)\\sin(60+\\theta) = \\frac{1}{4}\\sin 3\\theta$।",
+      "hack": "ঢাবিতে ২০, ৪০, ৮০ ডিগ্রি সিরিজ সরাসরি আসে; কস হলে ১/৮, সাইন হলে রুট(৩)/৮, ট্যান হলে রুট(৩)। ১ সেকেন্ডে উত্তর!",
+      "trap": "কস সিরিজের উত্তরে রুট(৩) যুক্ত করা।",
+      "tags": [
+        "Trigonometry",
+        "Speed Hack",
+        "Product Series"
+      ]
+    },
+    {
+      "id": "v-w6-mat-02",
+      "subject": "Higher Math",
+      "chapter": "Binomial Expansion",
+      "type": "shortcut",
+      "title": "দ্বিপদী বিস্তৃতিতে x-বর্জিত পদ নির্ণয়ের সুপার হ্যাক",
+      "formula": "$$\\left(x^p + \\frac{k}{x^q}\\right)^n \\implies r = \\frac{np}{p + q}$$",
+      "concept": "$x$-বর্জিত পদের জন্য $x$-এর ঘাত শূন্য হতে হয়। পদটি হবে $(r+1)$ তম পদ।",
+      "hack": "$(x^2 + 1/x)^9$ এ $r = (9 \\times 2) / (2 + 1) = 18/3 = 6$। পদটি ৭ম পদ এবং মান $\\binom{9}{6} = 84$!",
+      "trap": "$r$ বের করে পদ সংখ্যা দাগানো ($r+1$ হবে পদ সংখ্যা)।",
+      "tags": [
+        "Binomial",
+        "Constant Term",
+        "Power Hack"
+      ]
+    },
+    {
+      "id": "v-w6-bio-01",
+      "subject": "Biology",
+      "chapter": "Human Physiology (Digestion)",
+      "type": "core_formula",
+      "title": "পাকস্থলী ও অগ্ন্যাশয় পরিপাক উৎসেচক ক্যাসকেড",
+      "formula": "$$\\text{Pepsinogen} \\xrightarrow{\\text{HCl}} \\text{Pepsin}, \\quad \\text{Trypsinogen} \\xrightarrow{\\text{Enterokinase}} \\text{Trypsin}$$",
+      "concept": "পাকস্থলীর প্যারাইটাল/অক্সিন্টিক কোষ HCl ক্ষরণ করে এবং পেপটিক কোষ পেপসিনোজেন ক্ষরণ করে।",
+      "hack": "পিত্তরসে কোনো পাচক এনজাইম থাকে না; এটি কেবল ক্ষারীয় মাধ্যম সৃষ্টি ও ইমালসিফিকেশন করে।",
+      "trap": "ইউরিয়া বৃক্কে তৈরি হয় ভাবা (ইউরিয়া তৈরি হয় যকৃতে, নিষ্কাশিত হয় বৃক্কে)।",
+      "tags": [
+        "Digestion",
+        "Enzymes",
+        "Liver"
+      ]
+    },
+    {
+      "id": "v-w6-bio-02",
+      "subject": "Biology",
+      "chapter": "Human Physiology (Excretion)",
+      "type": "core_formula",
+      "title": "নেফ্রন আল্ট্রাফিল্ট্রেশন ও হরমোন নিয়ন্ত্রণ ম্যাট্রিক্স",
+      "formula": "$$EFP = P_G - (P_B + P_{CO}) \\approx 60 - (18 + 32) = 10\\text{ mmHg}$$",
+      "concept": "কার্যকরী ফিল্ট্রেশন চাপ প্রায় ১০-১৫ mmHg। GFR হলো ১২৫ mL/min (দিনে ১৮০ লিটার)।",
+      "hack": "ADH পানি পুনঃশোষণ বাড়ায় (অভাবে ডায়াবেটিস ইনসিপিডাস); অ্যালডোস্টেরন সোডিয়াম পুনঃশোষণ বাড়ায়।",
+      "trap": "ডায়াবেটিস মেলিটাস (ইনসুলিন) আর ইনসিপিডাস (ADH) গুলিয়ে ফেলা।",
+      "tags": [
+        "Excretion",
+        "Nephron",
+        "Filtration Pressure"
+      ]
     }
   ],
   "triplets": [

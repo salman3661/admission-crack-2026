@@ -49,5 +49,22 @@
     "total_mcqs": 120,
     "total_slides": 14,
     "total_flashcards": 70
+  },
+  {
+    "id": "week_06",
+    "name": "Week 06",
+    "badge": "তাপ ও পর্যায়বৃত্ত গতি, পরিবেশ ও তড়িৎ রসায়ন, ত্রিকোণমিতি ও দ্বিপদী, পরিপাক ও রেচন",
+    "description": "৮০/২০ হাই-ইল্ড মাল্টি-স্ট্রিম কোর: তাপগতিবিদ্যা ও SHM, ভ্যান ডার ওয়ালস ও নার্নস্ট সমীকরণ, ত্রিকোণমিতিক রূপান্তর ও দ্বিপদী বিস্তৃতি, মানব শারীরতত্ত্ব ও অণুজীব।",
+    "subjects": [
+      "Physics",
+      "Chemistry",
+      "Higher Math",
+      "Biology",
+      "English",
+      "GK"
+    ],
+    "total_mcqs": 96,
+    "total_slides": 16,
+    "total_flashcards": 60
   }
 ]

@@ -32,9 +32,9 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
     return predictorSets.filter((s) => s.track === activeTrack);
   }, [predictorSets, activeTrack]);
 
-  // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'sets'
+  // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'week_06' | 'sets'
   const [activeTab, setActiveTab] = useState<'weekly' | 'sets'>('weekly');
-  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03'>('week_01');
+  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_06'>('week_01');
   const [currentSlotIndex, setCurrentSlotIndex] = useState<number>(0);
   const pageSize = 12; // 10 to 15 questions per slot page
 
@@ -76,6 +76,12 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
     }
     if (text.includes('লিমিট') || text.includes('ল’হসপিটাল') || text.includes('l\'hopital') || text.includes('ইন্টিগ্রেশন') || text.includes('যোগজ') || text.includes('অন্তরীকরণ') || text.includes('e^x')) {
       return '⚡ ঢাবি হটস্পট: লিমিট ও ইন্টিগ্রেশন শর্টকাট';
+    }
+    if (text.includes('নার্নস্ট') || text.includes('কোষ বিভব') || text.includes('ফ্যারাডে') || text.includes('তড়িৎদ্বার')) {
+      return '⚡ ঢাবি হটস্পট: তড়িৎ রসায়ন ও নার্নস্ট সমীকরণ';
+    }
+    if (text.includes('দোলনকাল') || text.includes('স্প্রিং') || text.includes('অর্ধায়ু') || text.includes('তেজস্ক্রিয়')) {
+      return '⚡ ইঞ্জিনিয়ারিং ব্রিজ: SHM ও তেজস্ক্রিয়তা স্পিড হ্যাক';
     }
     return null;
   };
@@ -312,6 +318,22 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
               >
                 <span>⚡</span>
                 <span>Week 3: Trap & Speed Special</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('weekly');
+                  setSelectedWeekTab('week_06');
+                  setCurrentSlotIndex(0);
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 shadow-xs ${
+                  activeTab === 'weekly' && selectedWeekTab === 'week_06'
+                    ? 'bg-[#056839] text-white ring-2 ring-[#056839]/30 scale-[1.02]'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                <span>🚀</span>
+                <span>Week 6: 80/20 Multi-Stream</span>
               </button>
 
               <button
