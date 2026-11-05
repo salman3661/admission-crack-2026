@@ -137,6 +137,7 @@ export type VaultCardType = 'core_formula' | 'shortcut' | 'trap';
 
 export interface VaultEntry {
   id: string;
+  week?: number;
   subject: string;
   chapter: string;
   type: VaultCardType;

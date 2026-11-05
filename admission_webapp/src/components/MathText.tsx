@@ -19,6 +19,16 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     text = text.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');
     text = text.replace(/\\\(([\s\S]*?)\\\)/g, '$$$1$$');
 
+    // Auto-fix literal missing backslashes for common math symbols
+    text = text.replace(/(?<!\\)\btimes\b/g, '\\times');
+    text = text.replace(/(?<!\\)\bimplies\b/g, '\\implies');
+    text = text.replace(/(?<!\\)\bapprox\b/g, '\\approx');
+    text = text.replace(/\\textm\b|(?<!\\)\btextm\b/g, '\\text{m}');
+
+    // Protect Unicode inside subscripts/superscripts
+    text = text.replace(/_\{([^\x00-\x7F]+)\}/g, '_{\\text{$1}}');
+    text = text.replace(/\^\{([^\x00-\x7F]+)\}/g, '^{\\text{$1}}');
+
     // Auto-wrap if entire string contains bare LaTeX command
     if (!text.includes('$') && /\\[a-zA-Z]+/.test(text)) {
       if (!/[\u0980-\u09FF]/.test(text)) {
@@ -96,7 +106,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     text = text.replace(/___INLINE_MATH_(\d+)___/g, (_, idx) => inlineMathBlocks[parseInt(idx)]);
 
     return text;
-  }, [content]);
+  }, [content, propText]);
 
   if (block) {
     return (
