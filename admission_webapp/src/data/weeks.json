@@ -8,11 +8,13 @@
       "Physics",
       "Chemistry",
       "Higher Math",
-      "Biology"
+      "Biology",
+      "English",
+      "GK"
     ],
-    "total_mcqs": 100,
+    "total_mcqs": 115,
     "total_slides": 14,
-    "total_flashcards": 32
+    "total_flashcards": 65
   },
   {
     "id": "week_02",
@@ -23,11 +25,13 @@
       "Physics",
       "Chemistry",
       "Higher Math",
-      "Biology"
+      "Biology",
+      "English",
+      "GK"
     ],
-    "total_mcqs": 100,
+    "total_mcqs": 115,
     "total_slides": 14,
-    "total_flashcards": 32
+    "total_flashcards": 65
   },
   {
     "id": "week_03",
@@ -38,10 +42,12 @@
       "Physics",
       "Chemistry",
       "Higher Math",
-      "Biology"
+      "Biology",
+      "English",
+      "GK"
     ],
-    "total_mcqs": 100,
+    "total_mcqs": 120,
     "total_slides": 14,
-    "total_flashcards": 32
+    "total_flashcards": 70
   }
 ]

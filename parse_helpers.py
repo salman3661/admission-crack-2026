@@ -8,6 +8,19 @@ slides, and flashcards with 100% data integrity.
 import os
 import re
 
+def strip_markdown_artifacts(text: str) -> str:
+    if not text:
+        return ""
+    text = re.sub(r'\t(?=ext)', r'\\t', text)
+    # Strip raw markdown artifacts (###, ---, - - -, trailing delimiters)
+    text = re.sub(r'[\r\n]+\s*(?:###|---|---\s*###|- - -)\s*$', '', text)
+    text = re.sub(r'^\s*(?:###|---|---\s*###|- - -)\s*[\r\n]+', '', text)
+    text = re.sub(r'\s*---\s*###\s*', '', text)
+    text = re.sub(r'\s*###\s*$', '', text)
+    text = re.sub(r'\s*- - -\s*$', '', text)
+    text = re.sub(r'\s*---\s*$', '', text)
+    return text.strip()
+
 def parse_w2_mcqs():
     subject_files = [
         ("Physics_Master_Digest.md", "Physics"),
@@ -44,10 +57,16 @@ def parse_w2_mcqs():
         for q_txt in raw_qs:
             q_match = re.search(r'\*\*[০-৯0-9]+\.\*\*\s*(.*?)\n\s*\(a\)\s*(.*?)\n\s*\(b\)\s*(.*?)\n\s*\(c\)\s*(.*?)\n\s*\(d\)\s*(.*?)(?=\n\n|\Z)', q_txt, re.S)
             if q_match:
-                q_text = q_match.group(1).strip()
-                opts = [q_match.group(2).strip(), q_match.group(3).strip(), q_match.group(4).strip(), q_match.group(5).strip()]
+                q_text = strip_markdown_artifacts(q_match.group(1).strip())
+                opts = [
+                    strip_markdown_artifacts(q_match.group(2).strip()),
+                    strip_markdown_artifacts(q_match.group(3).strip()),
+                    strip_markdown_artifacts(q_match.group(4).strip()),
+                    strip_markdown_artifacts(q_match.group(5).strip())
+                ]
                 
                 letter_ans, explanation = ans_dict.get(idx, ('a', 'পাঠ্যবইয়ের প্রমিত ব্যাখ্যা।'))
+                explanation = strip_markdown_artifacts(explanation)
                 char_to_idx = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
                 corr_idx = char_to_idx.get(letter_ans, 0)
 
@@ -124,10 +143,15 @@ def parse_w3_mcqs():
                 "id": q_id,
                 "week_id": "week_03",
                 "subject": subject,
-                "q": q_text.strip(),
-                "opts": [opt_a.strip(), opt_b.strip(), opt_c.strip(), opt_d.strip()],
+                "q": strip_markdown_artifacts(q_text.strip()),
+                "opts": [
+                    strip_markdown_artifacts(opt_a.strip()),
+                    strip_markdown_artifacts(opt_b.strip()),
+                    strip_markdown_artifacts(opt_c.strip()),
+                    strip_markdown_artifacts(opt_d.strip())
+                ],
                 "ans": corr_idx,
-                "exp": explanation,
+                "exp": strip_markdown_artifacts(explanation),
                 "trap": trap_map.get(subject, "প্রশ্নের নির্দিষ্ট শর্ত বা এককের ফাঁদ এড়িয়ে চলা জরুরি।")
             })
 

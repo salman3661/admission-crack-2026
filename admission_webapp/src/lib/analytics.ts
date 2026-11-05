@@ -1,3 +1,5 @@
+import type { TrackType } from '../types';
+
 export interface SubjectStats {
   name: string;
   bn: string;
@@ -64,8 +66,23 @@ export function clearExamHistory(): void {
   }
 }
 
-export function computeAggregateStats(history: ExamAttemptRecord[]) {
+export function computeAggregateStats(history: ExamAttemptRecord[], track: TrackType = 'varsity') {
   const attemptedCount = history.length;
+
+  const subjectsConfig = track === 'medical'
+    ? [
+        { name: 'Biology', bn: 'জীববিজ্ঞান', color: 'bg-emerald-500' },
+        { name: 'Chemistry', bn: 'রসায়ন', color: 'bg-amber-500' },
+        { name: 'Physics', bn: 'পদার্থবিজ্ঞান', color: 'bg-cyan-500' },
+        { name: 'English', bn: 'ইংরেজি', color: 'bg-blue-500' },
+        { name: 'GK', bn: 'সাধারণ জ্ঞান', color: 'bg-purple-500' },
+      ]
+    : [
+        { name: 'Physics', bn: 'পদার্থবিজ্ঞান', color: 'bg-cyan-500' },
+        { name: 'Chemistry', bn: 'রসায়ন', color: 'bg-amber-500' },
+        { name: 'Higher Math', bn: 'উচ্চতর গণিত', color: 'bg-rose-500' },
+        { name: 'Biology', bn: 'জীববিজ্ঞান', color: 'bg-emerald-500' },
+      ];
 
   if (attemptedCount === 0) {
     return {
@@ -76,12 +93,15 @@ export function computeAggregateStats(history: ExamAttemptRecord[]) {
       overallAccuracy: '০%',
       accuracyNum: 0,
       avgTime: '--',
-      subjects: [
-        { name: 'Physics', bn: 'পদার্থবিজ্ঞান', solved: 0, correct: 0, accuracy: 0, color: 'bg-cyan-500', status: 'পরীক্ষা বাকি' as const },
-        { name: 'Chemistry', bn: 'রসায়ন', solved: 0, correct: 0, accuracy: 0, color: 'bg-amber-500', status: 'পরীক্ষা বাকি' as const },
-        { name: 'Higher Math', bn: 'উচ্চতর গণিত', solved: 0, correct: 0, accuracy: 0, color: 'bg-rose-500', status: 'পরীক্ষা বাকি' as const },
-        { name: 'Biology', bn: 'জীববিজ্ঞান', solved: 0, correct: 0, accuracy: 0, color: 'bg-emerald-500', status: 'পরীক্ষা বাকি' as const },
-      ],
+      subjects: subjectsConfig.map((cfg) => ({
+        name: cfg.name,
+        bn: cfg.bn,
+        solved: 0,
+        correct: 0,
+        accuracy: 0,
+        color: cfg.color,
+        status: 'পরীক্ষা বাকি' as const,
+      })),
       recentTests: [],
     };
   }
@@ -90,12 +110,10 @@ export function computeAggregateStats(history: ExamAttemptRecord[]) {
   let totalCorrect = 0;
   let totalTimeSum = 0;
 
-  const subjectMap: Record<string, { total: number; correct: number }> = {
-    Physics: { total: 0, correct: 0 },
-    Chemistry: { total: 0, correct: 0 },
-    'Higher Math': { total: 0, correct: 0 },
-    Biology: { total: 0, correct: 0 },
-  };
+  const subjectMap: Record<string, { total: number; correct: number }> = {};
+  subjectsConfig.forEach((cfg) => {
+    subjectMap[cfg.name] = { total: 0, correct: 0 };
+  });
 
   history.forEach((h) => {
     const answeredInThis = h.correctCount + h.wrongCount;
@@ -122,24 +140,31 @@ export function computeAggregateStats(history: ExamAttemptRecord[]) {
 
   // Dynamic merit rank estimation
   let predictedRank = '--';
-  if (accuracyNum >= 90) {
-    predictedRank = '#25 - #75';
-  } else if (accuracyNum >= 80) {
-    predictedRank = '#80 - #250';
-  } else if (accuracyNum >= 70) {
-    predictedRank = '#260 - #650';
-  } else if (accuracyNum >= 55) {
-    predictedRank = '#700 - #1800';
+  if (track === 'medical') {
+    if (accuracyNum >= 90) {
+      predictedRank = 'DMC / শীর্ষ মেডিকেল (#1 - #120)';
+    } else if (accuracyNum >= 80) {
+      predictedRank = 'শীর্ষ ৫ মেডিকেল (#125 - #550)';
+    } else if (accuracyNum >= 70) {
+      predictedRank = 'সরকারি মেডিকেল (#600 - #2200)';
+    } else if (accuracyNum >= 55) {
+      predictedRank = 'বিএমডিসি মেরিট ওয়েটিং';
+    } else {
+      predictedRank = 'পুনঃপ্রস্তুতি প্রয়োজন';
+    }
   } else {
-    predictedRank = '#2000+';
+    if (accuracyNum >= 90) {
+      predictedRank = 'ঢাবি শীর্ষ (#25 - #75)';
+    } else if (accuracyNum >= 80) {
+      predictedRank = "ঢাবি 'ক' মেরিট (#80 - #250)";
+    } else if (accuracyNum >= 70) {
+      predictedRank = "ঢাবি চয়েস লিস্ট (#260 - #650)";
+    } else if (accuracyNum >= 55) {
+      predictedRank = "ভার্সিটি গুচ্ছ মেরিট (#700 - #1800)";
+    } else {
+      predictedRank = '#2000+';
+    }
   }
-
-  const subjectsConfig = [
-    { name: 'Physics', bn: 'পদার্থবিজ্ঞান', color: 'bg-cyan-500' },
-    { name: 'Chemistry', bn: 'রসায়ন', color: 'bg-amber-500' },
-    { name: 'Higher Math', bn: 'উচ্চতর গণিত', color: 'bg-rose-500' },
-    { name: 'Biology', bn: 'জীববিজ্ঞান', color: 'bg-emerald-500' },
-  ];
 
   const subjects: SubjectStats[] = subjectsConfig.map((cfg) => {
     const data = subjectMap[cfg.name] || { total: 0, correct: 0 };

@@ -1,0 +1,14 @@
+# Ignore non-webapp files for Vercel
+*.pdf
+Week_*
+Monthly_*
+__pycache__
+*.py
+*.bat
+*.cmd
+*.ps1
+DU_Ka_Question_Bank.pdf
+Global_Varsity_Vault.md
+node_modules
+admission_webapp/node_modules
+

@@ -17,3 +17,15 @@ Thumbs.db
 __pycache__/
 *.pyc
 
+# Secrets & Environment variables
+.env
+*.env
+*.env.*
+*.db
+python.cmd
+python.ps1
+
+# Independent repos
+media_fetch_bot/
+
+

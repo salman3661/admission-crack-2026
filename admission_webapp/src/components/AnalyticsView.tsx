@@ -12,19 +12,21 @@ import {
   Sparkles,
   HelpCircle
 } from 'lucide-react';
-import type { AppMode, UserProfile } from '../types';
+import type { AppMode, UserProfile, TrackType } from '../types';
 import { getExamHistory, computeAggregateStats, clearExamHistory, type ExamAttemptRecord } from '../lib/analytics';
 
 interface AnalyticsViewProps {
   user: UserProfile;
   onOpenAuth: () => void;
   onSelectMode: (mode: AppMode) => void;
+  activeTrack?: TrackType;
 }
 
 export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   user,
   onOpenAuth,
   onSelectMode,
+  activeTrack = 'varsity',
 }) => {
   const [history, setHistory] = useState<ExamAttemptRecord[]>([]);
 
@@ -32,7 +34,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
     setHistory(getExamHistory());
   }, []);
 
-  const stats = computeAggregateStats(history);
+  const stats = computeAggregateStats(history, activeTrack);
   const isZeroState = stats.attemptedCount === 0;
 
   const handleResetHistory = () => {
@@ -84,13 +86,11 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
 
       {/* Hero Stats Card - Vibrant Chorcha Green Gradient */}
       <div className="bg-gradient-to-r from-[#056839] via-[#00B09B] to-[#96C93D] rounded-3xl p-5 sm:p-6 text-white shadow-xl mb-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-
         <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
           {/* Predicted Merit */}
-          <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15">
+          <div className="p-3 rounded-2xl bg-white/15 border border-white/20">
             <div className="text-white/80 text-xs font-semibold mb-1 flex items-center gap-1">
-              <Award className="w-4 h-4" /> অনুমিত ঢাবি মেরিট
+              <Award className="w-4 h-4" /> {activeTrack === 'medical' ? 'অনুমিত মেডিকেল মেরিট' : 'অনুমিত ঢাবি মেরিট'}
             </div>
             <div className="text-lg sm:text-2xl font-black font-['Outfit']">
               {stats.predictedRank}
@@ -101,7 +101,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
           </div>
 
           {/* Solved Count */}
-          <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15">
+          <div className="p-3 rounded-2xl bg-white/15 border border-white/20">
             <div className="text-white/80 text-xs font-semibold mb-1 flex items-center gap-1">
               <CheckCircle2 className="w-4 h-4" /> মোট সমাধান
             </div>
@@ -112,7 +112,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
           </div>
 
           {/* Overall Accuracy */}
-          <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15">
+          <div className="p-3 rounded-2xl bg-white/15 border border-white/20">
             <div className="text-white/80 text-xs font-semibold mb-1 flex items-center gap-1">
               <Target className="w-4 h-4" /> সার্বিক নির্ভুলতা
             </div>
@@ -123,7 +123,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
           </div>
 
           {/* Average Time */}
-          <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15">
+          <div className="p-3 rounded-2xl bg-white/15 border border-white/20">
             <div className="text-white/80 text-xs font-semibold mb-1 flex items-center gap-1">
               <Clock className="w-4 h-4" /> গড় সময়
             </div>

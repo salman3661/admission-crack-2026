@@ -46,10 +46,12 @@
 /* 3D Card Flip Utilities */
 .perspective-1000 {
   perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .transform-style-3d {
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 .backface-hidden {
@@ -59,6 +61,7 @@
 
 .rotate-y-180 {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 /* Custom Scrollbar */
@@ -100,9 +103,79 @@
   color: inherit;
 }
 
+.katex, .katex-display, .katex * {
+  color: inherit !important;
+}
+
 .katex-display {
   margin: 0.5em 0;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.25em 0;
+}
+
+/* =========================================================================
+   DARK FORMULA CONTAINER & MATH-RENDERER HIGH-CONTRAST SOLID WHITE
+   Forces all LaTeX/MathJax text, fractions, sub/superscripts & vector hats
+   to render in solid crisp white (#ffffff) against dark backgrounds.
+   ========================================================================= */
+.formula-container,
+.formula-container *,
+.formula-container .katex,
+.formula-container .katex *,
+.formula-container .katex-display,
+.formula-container .katex-display *,
+.math-renderer,
+.math-renderer *,
+.math-renderer .katex,
+.math-renderer .katex *,
+.math-renderer .katex-display,
+.math-renderer .katex-display * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: transparent;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Sharp Fraction Lines & Square Root Bars */
+.formula-container .katex .frac-line,
+.math-renderer .katex .frac-line {
+  border-bottom-color: #ffffff !important;
+  background-color: #ffffff !important;
+  height: 1.5px !important;
+}
+
+.formula-container .katex .sqrt-sign,
+.formula-container .katex .sqrt-line,
+.math-renderer .katex .sqrt-sign,
+.math-renderer .katex .sqrt-line {
+  border-color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Sharp Vector Arrows (\vec{a}) and Unit Vector Hats (\hat{i}, \hat{j}, \hat{k}) */
+.formula-container .katex svg,
+.formula-container .katex svg path,
+.math-renderer .katex svg,
+.math-renderer .katex svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  stroke-width: 0.5px !important;
+}
+
+/* Subscripts and Superscripts Crisp Font Rendering */
+.formula-container .katex .msupsub,
+.formula-container .katex .vlist-t,
+.formula-container .katex .vlist-r,
+.formula-container .katex .accent,
+.formula-container .katex .accent-body,
+.formula-container .katex .accent-vec,
+.math-renderer .katex .msupsub,
+.math-renderer .katex .vlist-t,
+.math-renderer .katex .vlist-r,
+.math-renderer .katex .accent,
+.math-renderer .katex .accent-body,
+.math-renderer .katex .accent-vec {
+  color: #ffffff !important;
+  opacity: 1 !important;
 }

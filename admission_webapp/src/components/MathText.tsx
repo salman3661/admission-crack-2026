@@ -2,16 +2,18 @@ import React, { useMemo } from 'react';
 import katex from 'katex';
 
 interface MathTextProps {
-  content: string;
+  content?: string;
+  text?: string;
   className?: string;
   block?: boolean;
 }
 
-export const MathText: React.FC<MathTextProps> = ({ content, className = '', block = false }) => {
+export const MathText: React.FC<MathTextProps> = ({ content, text: propText, className = '', block = false }) => {
   const renderedHtml = useMemo(() => {
-    if (!content) return '';
+    const rawContent = content ?? propText ?? '';
+    if (!rawContent) return '';
 
-    let text = content;
+    let text = rawContent;
 
     // Normalize standard LaTeX wrappers \[ \] and \( \)
     text = text.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');
@@ -33,9 +35,9 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
           throwOnError: false,
           strict: 'ignore',
         });
-        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1">${rendered}</div>`);
+        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1">${rendered}</div>`);
       } catch {
-        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 text-rose-500 dark:text-rose-400 font-mono">$$${math}$$</div>`);
+        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1 text-rose-500 dark:text-rose-400 font-mono">$$${math}$$</div>`);
       }
       return `___DISPLAY_MATH_${displayMathBlocks.length - 1}___`;
     });
@@ -99,7 +101,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
   if (block) {
     return (
       <div
-        className={`leading-relaxed text-slate-800 dark:text-slate-200 ${className}`}
+        className={`leading-relaxed ${className || 'text-inherit'}`}
         dangerouslySetInnerHTML={{ __html: renderedHtml }}
       />
     );
@@ -107,7 +109,7 @@ export const MathText: React.FC<MathTextProps> = ({ content, className = '', blo
 
   return (
     <span
-      className={`leading-relaxed text-slate-800 dark:text-slate-200 ${className}`}
+      className={`leading-relaxed ${className || 'text-inherit'}`}
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
     />
   );

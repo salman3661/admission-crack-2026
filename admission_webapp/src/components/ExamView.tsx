@@ -11,8 +11,13 @@ import {
   Clock, 
   ChevronRight, 
   ShieldAlert, 
-  Play 
+  Play,
+  HelpCircle,
+  Zap,
+  Sparkles,
+  Check
 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import type { QuizQuestion, SubjectType, WeekFilterType } from '../types';
 import { MathText } from './MathText';
 import { saveExamAttempt, type ExamAttemptRecord } from '../lib/analytics';
@@ -23,48 +28,197 @@ interface ExamViewProps {
   selectedSubject: SubjectType;
 }
 
+interface MasteryQueueItem {
+  question: QuizQuestion;
+  consecutiveCorrect: number; // 0, 1, or 2 (mastered)
+  attempts: number;
+  wrongCount: number;
+  unsureCount: number;
+  status: 'learning' | 'mastered';
+}
+
 export const ExamView: React.FC<ExamViewProps> = ({
   quizzes,
   selectedWeek,
   selectedSubject,
 }) => {
-  // Filter questions
+  // Filter questions by week and subject
   const availableQuestions = quizzes.filter((q) => {
     const matchWeek = selectedWeek === 'all' || q.week_id === selectedWeek;
     const matchSubject = selectedSubject === 'All' || q.subject === selectedSubject;
     return matchWeek && matchSubject;
   });
 
-  const [examStarted, setExamStarted] = useState(false);
-  const [examFinished, setExamFinished] = useState(false);
+  // Practice Mode: 'timed' (Timed Capsule Exam) or 'mastery' (বারবার প্র্যাকটিস - Mastery Re-test)
+  const [practiceMode, setPracticeMode] = useState<'mastery' | 'timed'>('mastery');
+
+  // Shared state
+  const [sessionStarted, setSessionStarted] = useState(false);
+  const [sessionFinished, setSessionFinished] = useState(false);
   const [questionCount, setQuestionCount] = useState<number>(25);
 
-  const [activeQuestions, setActiveQuestions] = useState<QuizQuestion[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // -------------------------------------------------------------
+  // TIMED EXAM STATE
+  // -------------------------------------------------------------
+  const [timedQuestions, setTimedQuestions] = useState<QuizQuestion[]>([]);
+  const [timedIndex, setTimedIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [qIndex: number]: number | null }>({});
   const [timeSpent, setTimeSpent] = useState<{ [qIndex: number]: number }>({});
   const [timeLeft, setTimeLeft] = useState(45);
   const [filterReview, setFilterReview] = useState<'all' | 'wrong'>('all');
   const hasSavedRef = useRef<boolean>(false);
 
-  // Start exam session
-  const startExam = (count: number) => {
-    // Shuffle and pick `count`
-    const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
-    const chosen = shuffled.slice(0, Math.min(count, shuffled.length));
-    setActiveQuestions(chosen);
-    setCurrentIndex(0);
-    setSelectedAnswers({});
-    setTimeSpent({});
-    setTimeLeft(45);
-    hasSavedRef.current = false;
-    setExamStarted(true);
-    setExamFinished(false);
+  // -------------------------------------------------------------
+  // MASTERY RE-TEST STATE ("বারবার প্র্যাকটিস")
+  // -------------------------------------------------------------
+  const [masteryPool, setMasteryPool] = useState<MasteryQueueItem[]>([]);
+  const [activeQueueIndices, setActiveQueueIndices] = useState<number[]>([]);
+  const [currentQueuePos, setCurrentQueuePos] = useState<number>(0);
+  const [masteryFeedback, setMasteryFeedback] = useState<{
+    type: 'correct' | 'wrong' | 'unsure';
+    userChoice: number | null;
+    message: string;
+  } | null>(null);
+  const [autoAdvance, setAutoAdvance] = useState(true);
+  const [totalRoundsAnswered, setTotalRoundsAnswered] = useState(0);
+  const autoAdvanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Parse origin tag and clean question body
+  const parseQuestionData = (q: QuizQuestion) => {
+    let origin = q.origin;
+    let cleanText = q.q;
+    if (!origin) {
+      const match = q.q.match(/^\[(.*?)\]\s*(.*)$/s);
+      if (match) {
+        origin = match[1];
+        cleanText = match[2];
+      } else {
+        origin = "DU Core";
+      }
+    } else {
+      cleanText = cleanText.replace(/^\[(.*?)\]\s*/, '');
+    }
+    return { origin, cleanText };
   };
 
-  // Record completed exam attempt to localStorage
+  // Color style for origin badge
+  const getOriginBadgeStyle = (origin: string) => {
+    if (origin.includes('DU')) {
+      return 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800';
+    } else if (origin.includes('MAT') || origin.includes('DAT') || origin.includes('Medical')) {
+      return 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800';
+    } else if (origin.includes('RU') || origin.includes('JU') || origin.includes('CU') || origin.includes('GST')) {
+      return 'bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800';
+    } else if (origin.includes('BCS') || origin.includes('1971') || origin.includes('Liberation War') || origin.includes('Core GK')) {
+      return 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800';
+    }
+    return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
+  };
+
+  const getHotspotBadge = (q: QuizQuestion): string | null => {
+    const text = `${q.q} ${q.exp || ''} ${q.trap || ''} ${q.trap_insight || ''}`;
+    if (/বর্তনী|তুল্য\s*রোধ|সার্কিট|অ্যাম্পিয়ার|রোধের\s*মান|হুইটস্টোন|তড়িচ্চালক/.test(text)) {
+      return '⚡ ঢাবি হটস্পট: বর্তনী ও রোধের ম্যাথ';
+    }
+    if (/কার্বোক্যাটায়ন|ইলেকট্রোফাইল|নিউক্লিওফাইল|জৈব বিক্রিয়া|মারকনিকভ|বেনজিন|SN1|SN2|অ্যালকিন|ফ্রি\s*রেডিকেল/.test(text)) {
+      return '⚡ ঢাবি হটস্পট: জৈব বিক্রিয়া মেকানিজম';
+    }
+    if (/লিমিট|ইন্টিগ্রেশন|ল['’]হপিটাল|\\lim|\\int|L['’]Hopital|যোজিত ফল/.test(text)) {
+      return '⚡ ঢাবি হটস্পট: লিমিট ও ইন্টিগ্রেশন শর্টকাট';
+    }
+    return null;
+  };
+
+  const applyMiltonGoldenOrder = () => {
+    const orderMap: Record<string, number> = {
+      'Biology': 1,
+      'Chemistry': 2,
+      'Physics': 3,
+      'Higher Math': 4,
+    };
+    const oldList = timedQuestions;
+    const reordered = [...oldList].sort((a, b) => {
+      const orderA = orderMap[a.subject] || 99;
+      const orderB = orderMap[b.subject] || 99;
+      return orderA - orderB;
+    });
+    const newAnswers: { [qIndex: number]: number | null } = {};
+    const newSpent: { [qIndex: number]: number } = {};
+    reordered.forEach((newQ, newIdx) => {
+      const oldIdx = oldList.findIndex((q) => q.id === newQ.id);
+      if (oldIdx !== -1 && selectedAnswers[oldIdx] !== undefined) {
+        newAnswers[newIdx] = selectedAnswers[oldIdx];
+      }
+      if (oldIdx !== -1 && timeSpent[oldIdx] !== undefined) {
+        newSpent[newIdx] = timeSpent[oldIdx];
+      }
+    });
+    setTimedQuestions(reordered);
+    setSelectedAnswers(newAnswers);
+    setTimeSpent(newSpent);
+    setTimedIndex(0);
+  };
+
+  // -------------------------------------------------------------
+  // START SESSIONS
+  // -------------------------------------------------------------
+  const handleStartSession = (count: number) => {
+    const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
+    const chosen = shuffled.slice(0, Math.min(count, shuffled.length));
+
+    if (practiceMode === 'mastery') {
+      const pool: MasteryQueueItem[] = chosen.map((q) => ({
+        question: q,
+        consecutiveCorrect: 0,
+        attempts: 0,
+        wrongCount: 0,
+        unsureCount: 0,
+        status: 'learning',
+      }));
+      setMasteryPool(pool);
+      // Active queue contains indices into pool
+      setActiveQueueIndices(pool.map((_, i) => i));
+      setCurrentQueuePos(0);
+      setMasteryFeedback(null);
+      setTotalRoundsAnswered(0);
+    } else {
+      setTimedQuestions(chosen);
+      setTimedIndex(0);
+      setSelectedAnswers({});
+      setTimeSpent({});
+      setTimeLeft(45);
+      hasSavedRef.current = false;
+    }
+
+    setSessionStarted(true);
+    setSessionFinished(false);
+  };
+
+  // -------------------------------------------------------------
+  // TIMED EXAM COUNTDOWN & AUTO-SKIP
+  // -------------------------------------------------------------
   useEffect(() => {
-    if (!examFinished || hasSavedRef.current || activeQuestions.length === 0) return;
+    if (!sessionStarted || sessionFinished || practiceMode !== 'timed') return;
+
+    if (timeLeft <= 0) {
+      handleTimedNext(null); // Auto-skip on timeout
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+      setTimeSpent((prev) => ({
+        ...prev,
+        [timedIndex]: (prev[timedIndex] || 0) + 1,
+      }));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [sessionStarted, sessionFinished, timeLeft, timedIndex, practiceMode]);
+
+  // Record completed timed exam to analytics
+  useEffect(() => {
+    if (!sessionFinished || hasSavedRef.current || timedQuestions.length === 0 || practiceMode !== 'timed') return;
     hasSavedRef.current = true;
 
     let correct = 0;
@@ -72,7 +226,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
     let skipped = 0;
     const subjectCounts: { [subject: string]: { total: number; correct: number } } = {};
 
-    activeQuestions.forEach((q, idx) => {
+    timedQuestions.forEach((q, idx) => {
       const ans = selectedAnswers[idx];
       const subj = q.subject || 'General';
       if (!subjectCounts[subj]) {
@@ -91,17 +245,17 @@ export const ExamView: React.FC<ExamViewProps> = ({
     });
 
     const score = correct * 1.0 - wrong * 0.25;
-    const maxScore = activeQuestions.length * 1.0;
+    const maxScore = timedQuestions.length * 1.0;
     const acc = correct + wrong > 0 ? Math.round((correct / (correct + wrong)) * 100) : 0;
     const totalSecs = Object.values(timeSpent).reduce((a, b) => a + b, 0);
-    const avgSecs = activeQuestions.length > 0 ? Math.round(totalSecs / activeQuestions.length) : 0;
+    const avgSecs = timedQuestions.length > 0 ? Math.round(totalSecs / timedQuestions.length) : 0;
 
     const record: ExamAttemptRecord = {
       id: Date.now().toString(),
       timestamp: Date.now(),
       dateStr: new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }),
       title: `${selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()} • ${selectedSubject === 'All' ? 'সব বিষয়' : selectedSubject} টেস্ট`,
-      totalQuestions: activeQuestions.length,
+      totalQuestions: timedQuestions.length,
       correctCount: correct,
       wrongCount: wrong,
       skippedCount: skipped,
@@ -113,154 +267,418 @@ export const ExamView: React.FC<ExamViewProps> = ({
     };
 
     saveExamAttempt(record);
-  }, [examFinished, activeQuestions, selectedAnswers, timeSpent, selectedWeek, selectedSubject]);
+  }, [sessionFinished, timedQuestions, selectedAnswers, timeSpent, selectedWeek, selectedSubject, practiceMode]);
 
-  // Timer countdown
-  useEffect(() => {
-    if (!examStarted || examFinished) return;
+  const handleTimedOptionSelect = (optionIndex: number) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [timedIndex]: optionIndex,
+    }));
+  };
 
-    if (timeLeft <= 0) {
-      handleNext(null); // Auto-skip on timeout
+  const handleTimedNext = (finalAnswer: number | null) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [timedIndex]: finalAnswer,
+    }));
+
+    if (timedIndex + 1 < timedQuestions.length) {
+      setTimedIndex((prev) => prev + 1);
+      setTimeLeft(45);
+    } else {
+      setSessionFinished(true);
+    }
+  };
+
+  // -------------------------------------------------------------
+  // MASTERY DRILL LOGIC (LEITNER 2-STRIKE MASTERY ENGINE)
+  // -------------------------------------------------------------
+  const currentPoolIdx = activeQueueIndices[currentQueuePos];
+  const currentMasteryItem = currentPoolIdx !== undefined ? masteryPool[currentPoolIdx] : null;
+
+  const handleMasteryAnswer = (userChoice: number | null, isUnsure: boolean = false) => {
+    if (!currentMasteryItem || masteryFeedback) return;
+
+    if (autoAdvanceTimerRef.current) {
+      clearTimeout(autoAdvanceTimerRef.current);
+      autoAdvanceTimerRef.current = null;
+    }
+
+    const q = currentMasteryItem.question;
+    const isCorrect = !isUnsure && userChoice !== null && userChoice === q.ans;
+    setTotalRoundsAnswered((prev) => prev + 1);
+
+    // Copy pool
+    const newPool = [...masteryPool];
+    const item = { ...newPool[currentPoolIdx] };
+    item.attempts += 1;
+
+    let feedbackMsg = '';
+    let feedbackType: 'correct' | 'wrong' | 'unsure' = 'wrong';
+
+    if (isUnsure) {
+      item.unsureCount += 1;
+      item.consecutiveCorrect = 0; // Reset streak
+      feedbackType = 'unsure';
+      feedbackMsg = '⚠️ সংশয় চিহ্নিত: সঠিক উত্তর দেখে নাও। প্রশ্নটি কিউতে রইল (পরপর ২ বার সঠিক করতে হবে)!';
+    } else if (isCorrect) {
+      item.consecutiveCorrect += 1;
+      feedbackType = 'correct';
+
+      if (item.consecutiveCorrect >= 2) {
+        item.status = 'mastered';
+        feedbackMsg = '🎉 মাস্টারড! পরপর ২ বার সঠিক উত্তর হয়েছে! 🏆';
+        try {
+          confetti({ particleCount: 35, spread: 50, origin: { y: 0.7 } });
+        } catch {
+          // ignore
+        }
+      } else {
+        feedbackMsg = '✅ সঠিক উত্তর! আর ১ বার সঠিক করলে প্রশ্নটি মাস্টারড হবে।';
+      }
+    } else {
+      item.wrongCount += 1;
+      item.consecutiveCorrect = 0; // Reset streak
+      feedbackType = 'wrong';
+      feedbackMsg = '❌ ভুল উত্তর! সমাধানটি শিখে নাও। প্রশ্নটি কিউতে রইল (পরপর ২ বার সঠিক করতে হবে)!';
+    }
+
+    newPool[currentPoolIdx] = item;
+    setMasteryPool(newPool);
+
+    setMasteryFeedback({
+      type: feedbackType,
+      userChoice,
+      message: feedbackMsg,
+    });
+
+    // Auto-advance if enabled and answer is correct
+    if (autoAdvance && isCorrect) {
+      autoAdvanceTimerRef.current = setTimeout(() => {
+        handleMasteryNext(newPool);
+      }, 500);
+    }
+  };
+
+  const handleMasteryNext = (overridePool?: MasteryQueueItem[]) => {
+    if (autoAdvanceTimerRef.current) {
+      clearTimeout(autoAdvanceTimerRef.current);
+      autoAdvanceTimerRef.current = null;
+    }
+
+    const activePool = overridePool || masteryPool;
+    setMasteryFeedback(null);
+
+    // Remaining unmastered indices in pool
+    const unmastered = activePool
+      .map((item, idx) => (item.status === 'learning' ? idx : -1))
+      .filter((idx) => idx !== -1);
+
+    if (unmastered.length === 0) {
+      // All mastered!
+      setSessionFinished(true);
+      try {
+        confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+      } catch {
+        // ignore
+      }
       return;
     }
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-      setTimeSpent((prev) => ({
-        ...prev,
-        [currentIndex]: (prev[currentIndex] || 0) + 1,
-      }));
-    }, 1000);
+    // Advance queue: if current item wasn't mastered, keep it in rotation
+    let nextPos = currentQueuePos + 1;
+    if (nextPos >= activeQueueIndices.length) {
+      // Re-shuffle remaining unmastered indices for next rotation cycle
+      const reRotated = [...unmastered].sort(() => Math.random() - 0.5);
+      setActiveQueueIndices(reRotated);
+      setCurrentQueuePos(0);
+    } else {
+      // Check if current position is still valid or unmastered
+      if (activePool[activeQueueIndices[nextPos]]?.status === 'mastered') {
+        // Find next unmastered in queue
+        const remainingInCurrentQueue = activeQueueIndices
+          .slice(nextPos)
+          .filter((idx) => activePool[idx]?.status === 'learning');
+        if (remainingInCurrentQueue.length > 0) {
+          const nextIdx = remainingInCurrentQueue[0];
+          setCurrentQueuePos(activeQueueIndices.indexOf(nextIdx));
+        } else {
+          setActiveQueueIndices([...unmastered].sort(() => Math.random() - 0.5));
+          setCurrentQueuePos(0);
+        }
+      } else {
+        setCurrentQueuePos(nextPos);
+      }
+    }
+  };
 
-    return () => clearInterval(timer);
-  }, [examStarted, examFinished, timeLeft, currentIndex]);
-
-  // Keyboard shortcuts during exam
+  // -------------------------------------------------------------
+  // FAST RECALL KEYBOARD SHORTCUTS
+  // -------------------------------------------------------------
   useEffect(() => {
-    if (!examStarted || examFinished) return;
+    if (!sessionStarted || sessionFinished) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (['1', 'a', 'A'].includes(e.key)) handleOptionSelect(0);
-      else if (['2', 'b', 'B'].includes(e.key)) handleOptionSelect(1);
-      else if (['3', 'c', 'C'].includes(e.key)) handleOptionSelect(2);
-      else if (['4', 'd', 'D'].includes(e.key)) handleOptionSelect(3);
-      else if (e.key === 'Enter') handleNext(selectedAnswers[currentIndex] ?? null);
-      else if (['s', 'S'].includes(e.key)) handleNext(null);
+      // Option choices 1-4 or A-D
+      if (['1', 'a', 'A'].includes(e.key)) {
+        if (practiceMode === 'mastery') handleMasteryAnswer(0);
+        else handleTimedOptionSelect(0);
+      } else if (['2', 'b', 'B'].includes(e.key)) {
+        if (practiceMode === 'mastery') handleMasteryAnswer(1);
+        else handleTimedOptionSelect(1);
+      } else if (['3', 'c', 'C'].includes(e.key)) {
+        if (practiceMode === 'mastery') handleMasteryAnswer(2);
+        else handleTimedOptionSelect(2);
+      } else if (['4', 'd', 'D'].includes(e.key)) {
+        if (practiceMode === 'mastery') handleMasteryAnswer(3);
+        else handleTimedOptionSelect(3);
+      } else if (['u', 'U'].includes(e.key)) {
+        if (practiceMode === 'mastery') handleMasteryAnswer(null, true);
+      } else if (e.key === 'Enter' || e.code === 'Space') {
+        if (practiceMode === 'mastery') {
+          if (masteryFeedback) {
+            e.preventDefault();
+            handleMasteryNext();
+          }
+        } else {
+          handleTimedNext(selectedAnswers[timedIndex] ?? null);
+        }
+      } else if (['s', 'S'].includes(e.key)) {
+        if (practiceMode === 'timed') {
+          handleTimedNext(null);
+        }
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [examStarted, examFinished, currentIndex, selectedAnswers]);
+  }, [
+    sessionStarted, 
+    sessionFinished, 
+    practiceMode, 
+    timedIndex, 
+    selectedAnswers, 
+    currentMasteryItem, 
+    masteryFeedback, 
+    currentQueuePos, 
+    activeQueueIndices
+  ]);
 
-  const handleOptionSelect = (optionIndex: number) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [currentIndex]: optionIndex,
-    }));
-  };
-
-  const handleNext = (finalAnswer: number | null) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [currentIndex]: finalAnswer,
-    }));
-
-    if (currentIndex + 1 < activeQuestions.length) {
-      setCurrentIndex((prev) => prev + 1);
-      setTimeLeft(45);
-    } else {
-      setExamFinished(true);
-    }
-  };
-
-  // Score Calculation
-  let correctCount = 0;
-  let wrongCount = 0;
-  let skippedCount = 0;
-
-  activeQuestions.forEach((q, idx) => {
-    const ans = selectedAnswers[idx];
-    if (ans === undefined || ans === null) {
-      skippedCount++;
-    } else if (ans === q.ans) {
-      correctCount++;
-    } else {
-      wrongCount++;
-    }
-  });
-
-  const totalScore = correctCount * 1.0 - wrongCount * 0.25;
-  const maxPossible = activeQuestions.length * 1.0;
-  const accuracy = correctCount + wrongCount > 0 ? Math.round((correctCount / (correctCount + wrongCount)) * 100) : 0;
-  const totalSeconds = Object.values(timeSpent).reduce((a, b) => a + b, 0);
-  const avgTimePerQ = activeQuestions.length > 0 ? Math.round(totalSeconds / activeQuestions.length) : 0;
-
-  // Screen 1: Start Screen
-  if (!examStarted) {
+  // -------------------------------------------------------------
+  // SCREEN 1: START SCREEN (MODE PICKER & QUESTION COUNT)
+  // -------------------------------------------------------------
+  if (!sessionStarted) {
     const totalAvail = availableQuestions.length;
     return (
-      <div className="max-w-xl mx-auto py-4 sm:py-6 px-3 text-center">
+      <div className="max-w-2xl mx-auto py-5 px-3 sm:px-4 text-center">
+        {/* Animated Badge Icon */}
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-3 shadow-md shadow-[#056839]/20">
           <div className="w-full h-full bg-white dark:bg-zinc-900 rounded-[14px] flex items-center justify-center">
-            <Timer className="w-6 h-6 text-[#056839] dark:text-emerald-400" />
+            {practiceMode === 'mastery' ? (
+              <RotateCcw className="w-6 h-6 text-[#056839] dark:text-emerald-400 animate-spin-slow" />
+            ) : (
+              <Timer className="w-6 h-6 text-[#056839] dark:text-emerald-400" />
+            )}
           </div>
         </div>
-        <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
-          🎯 এক্সাম ক্যাপসুল টেস্ট
-        </h2>
 
-        {/* Selected Scope Badge */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 my-4">
-          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
+        <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
+          বাংলাদেশ এডমিশন কোর প্রশ্নব্যাংক (DU, Medical, Varsity PYQ)
+        </h2>
+        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-lg mx-auto">
+          বিগত ১৫-২০ বছরের ঢাবি, মেডিকেল ও ভার্সিটির পুনরাবৃত্ত প্রশ্ন এবং পাঠ্যবইয়ের হাই-ইল্ড মান।
+        </p>
+
+        {/* Selected Scope Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-1.5 my-3.5">
+          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-xs">
             সপ্তাহ: <strong className="text-[#056839] dark:text-emerald-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
           </span>
-          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
+          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-xs">
             বিষয়: <strong className="text-cyan-600 dark:text-cyan-400">{selectedSubject}</strong>
           </span>
-          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
-            উপলব্ধ: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
+          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-xs">
+            উপলব্ধ প্রশ্ন: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
           </span>
+        </div>
+
+        {/* MODE SELECTOR TOGGLE */}
+        <div className="bg-zinc-100 dark:bg-zinc-800/80 p-1.5 rounded-2xl max-w-md mx-auto mb-5 border border-zinc-200 dark:border-zinc-700/80 grid grid-cols-2 gap-1 shadow-inner">
+          <button
+            onClick={() => setPracticeMode('mastery')}
+            className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
+              practiceMode === 'mastery'
+                ? 'bg-[#056839] text-white shadow-md'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span>বারবার প্র্যাকটিস (Mastery)</span>
+          </button>
+          <button
+            onClick={() => setPracticeMode('timed')}
+            className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
+              practiceMode === 'timed'
+                ? 'bg-[#056839] text-white shadow-md'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+            }`}
+          >
+            <Timer className="w-4 h-4" />
+            <span>টাইমড টেস্ট (৪৫ সে)</span>
+          </button>
+        </div>
+
+        {/* MODE HIGHLIGHT NOTE */}
+        <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-2xl p-3.5 max-w-md mx-auto mb-5 text-left text-xs leading-relaxed">
+          {practiceMode === 'mastery' ? (
+            <div className="flex items-start gap-2.5 text-emerald-900 dark:text-emerald-200">
+              <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+              <div>
+                <strong className="block font-bold mb-0.5">মাস্টারি রি-টেস্ট ড্রিল রুল:</strong>
+                যেকোনো প্রশ্ন ভুল হলে বা <kbd className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 font-mono font-bold">Unsure</kbd> চাপলে সেটি কিউতে থাকবে। পরপর <strong>২ বার সঠিক</strong> উত্তর না দেওয়া পর্যন্ত প্রশ্নটি ঘুরতে থাকবে।
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-start gap-2.5 text-zinc-700 dark:text-zinc-300">
+              <Clock className="w-4 h-4 text-[#056839] dark:text-emerald-400 mt-0.5 shrink-0" />
+              <div>
+                <strong className="block font-bold mb-0.5">ঢাবি/মেডিকেল টাইমড এক্সাম রুল:</strong>
+                প্রতি প্রশ্নে ৪৫ সেকেন্ড সময়, সঠিক উত্তরে +১.০ এবং ভুল উত্তরে -০.২৫ নেগেটিভ মার্কিং। শেষে পূর্ণাঙ্গ ট্র্যাপ ডিফেন্স রিপোর্ট।
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Question Count Selection Card */}
-        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 max-w-sm mx-auto mb-5 shadow-sm">
+        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 max-w-md mx-auto mb-5 shadow-xs">
           <label className="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
-            প্রশ্নের সংখ্যা নির্বাচন করুন
+            অনুশীলনের জন্য প্রশ্নের সংখ্যা নির্বাচন করুন
           </label>
           <div className="grid grid-cols-4 gap-2">
-            {[10, 25, 50, Math.min(100, totalAvail)].filter((v, i, a) => a.indexOf(v) === i && v <= totalAvail).map((cnt) => (
-              <button
-                key={cnt}
-                onClick={() => setQuestionCount(cnt)}
-                className={`py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
-                  questionCount === cnt
-                    ? 'bg-[#056839] text-white border-[#056839] shadow-sm scale-102'
-                    : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100'
-                }`}
-              >
-                {cnt} টি
-              </button>
-            ))}
+            {[10, 25, 50, Math.min(100, totalAvail), totalAvail]
+              .filter((v, i, a) => a.indexOf(v) === i && v <= totalAvail && v > 0)
+              .map((cnt) => (
+                <button
+                  key={cnt}
+                  onClick={() => setQuestionCount(cnt)}
+                  className={`py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
+                    questionCount === cnt
+                      ? 'bg-[#056839] text-white border-[#056839] shadow-xs scale-102'
+                      : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                  }`}
+                >
+                  {cnt === totalAvail ? `সকল (${cnt})` : `${cnt} টি`}
+                </button>
+              ))}
           </div>
         </div>
 
-        {/* Start Button */}
+        {/* Launch Button */}
         <button
-          onClick={() => startExam(questionCount)}
+          onClick={() => handleStartSession(questionCount)}
           disabled={totalAvail === 0}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#056839]/25 transition-all disabled:opacity-40 active:scale-95"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#056839]/25 transition-all disabled:opacity-40 active:scale-95 cursor-pointer"
         >
           <Play className="w-4 h-4 fill-current" />
-          <span>ক্যাপসুল শুরু করুন ({questionCount}টি MCQ)</span>
+          <span>{practiceMode === 'mastery' ? 'বারবার প্র্যাকটিস শুরু করুন' : 'টাইমড টেস্ট শুরু করুন'} ({Math.min(questionCount, totalAvail)}টি MCQ)</span>
         </button>
       </div>
     );
   }
 
-  // Screen 2: Finished Exam Scorecard & Trap Defense
-  if (examFinished) {
+  // -------------------------------------------------------------
+  // SCREEN 2A: FINISHED MASTERY SESSION SUMMARY
+  // -------------------------------------------------------------
+  if (sessionFinished && practiceMode === 'mastery') {
+    const totalMastered = masteryPool.filter((i) => i.status === 'mastered').length;
+    const totalWrongs = masteryPool.reduce((acc, i) => acc + i.wrongCount, 0);
+    const totalUnsures = masteryPool.reduce((acc, i) => acc + i.unsureCount, 0);
+
+    return (
+      <div className="max-w-2xl mx-auto py-8 px-3 sm:px-4 text-center">
+        <div className="bg-white dark:bg-zinc-900 p-6 sm:p-8 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm relative overflow-hidden">
+          <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto mb-3 shadow-xs">
+            <Award className="w-8 h-8" />
+          </div>
+
+          <h2 className="text-2xl font-black text-zinc-900 dark:text-white">
+            🎉 মিশন সফল! সকল প্রশ্ন ১০০% মাস্টারড!
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+            নির্বাচিত {totalMastered}টি প্রশ্নই তুমি পরপর ২ বার নির্ভুল উত্তর দিয়ে আয়ত্ত করেছো।
+          </p>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 my-6 max-w-lg mx-auto">
+            <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 text-center">
+              <span className="text-[11px] text-emerald-800 dark:text-emerald-300 font-semibold">মাস্টারড প্রশ্ন</span>
+              <div className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-0.5">
+                {totalMastered} / {masteryPool.length}
+              </div>
+            </div>
+            <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 text-center">
+              <span className="text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold">মোট ড্রিল রাউন্ড</span>
+              <div className="text-xl font-black text-zinc-800 dark:text-zinc-200 mt-0.5">
+                {totalRoundsAnswered} বার
+              </div>
+            </div>
+            <div className="p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/40 text-center">
+              <span className="text-[11px] text-rose-800 dark:text-rose-300 font-semibold">রি-টেস্টে ভুল</span>
+              <div className="text-xl font-black text-rose-600 dark:text-rose-400 mt-0.5">
+                {totalWrongs}
+              </div>
+            </div>
+            <div className="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/40 text-center">
+              <span className="text-[11px] text-amber-800 dark:text-amber-300 font-semibold">সংশয় চিহ্নিত</span>
+              <div className="text-xl font-black text-amber-600 dark:text-amber-400 mt-0.5">
+                {totalUnsures}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-3">
+            <button
+              onClick={() => handleStartSession(questionCount)}
+              className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" />
+              <span>আবার অনুশীলন করুন</span>
+            </button>
+            <button
+              onClick={() => setSessionStarted(false)}
+              className="px-5 py-3 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 text-sm font-semibold transition-all hover:bg-zinc-200 cursor-pointer"
+            >
+              সেটিংস পরিবর্তন
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // -------------------------------------------------------------
+  // SCREEN 2B: FINISHED TIMED EXAM SCORECARD & TRAP DEFENSE
+  // -------------------------------------------------------------
+  if (sessionFinished && practiceMode === 'timed') {
+    let correctCount = 0;
+    let wrongCount = 0;
+    let skippedCount = 0;
+
+    timedQuestions.forEach((q, idx) => {
+      const ans = selectedAnswers[idx];
+      if (ans === undefined || ans === null) skippedCount++;
+      else if (ans === q.ans) correctCount++;
+      else wrongCount++;
+    });
+
+    const totalScore = correctCount * 1.0 - wrongCount * 0.25;
+    const maxPossible = timedQuestions.length * 1.0;
     const isPassing = totalScore >= maxPossible * 0.4;
-    const reviewList = activeQuestions.filter((q, idx) => {
+    const accuracy = correctCount + wrongCount > 0 ? Math.round((correctCount / (correctCount + wrongCount)) * 100) : 0;
+    const totalSeconds = Object.values(timeSpent).reduce((a, b) => a + b, 0);
+    const avgTimePerQ = timedQuestions.length > 0 ? Math.round(totalSeconds / timedQuestions.length) : 0;
+
+    const reviewList = timedQuestions.filter((q, idx) => {
       if (filterReview === 'wrong') {
         const userAns = selectedAnswers[idx];
         return userAns === null || userAns === undefined || userAns !== q.ans;
@@ -271,11 +689,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
     return (
       <div className="max-w-3xl mx-auto py-6 px-3 sm:px-4">
         {/* Scorecard Hero */}
-        <div className="bg-white dark:bg-zinc-900 p-5 sm:p-6 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm text-center relative overflow-hidden mb-6">
+        <div className="bg-white dark:bg-zinc-900 p-5 sm:p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm text-center relative overflow-hidden mb-6">
           <div className="flex items-center justify-center gap-2 mb-1.5">
             <Award className={`w-7 h-7 ${isPassing ? 'text-amber-500' : 'text-zinc-400'}`} />
             <h2 className="text-lg sm:text-xl font-black text-zinc-900 dark:text-white">
-              {isPassing ? 'অভিনন্দন! চমৎকার পারফরম্যান্স' : 'পরীক্ষা সম্পন্ন হয়েছে'}
+              {isPassing ? 'অভিনন্দন! চমৎকার প্রস্তুতি' : 'টাইমড টেস্ট সম্পন্ন হয়েছে'}
             </h2>
           </div>
           <p className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -318,49 +736,48 @@ export const ExamView: React.FC<ExamViewProps> = ({
             </div>
           </div>
 
-          {/* Retake Button */}
           <div className="mt-6 flex justify-center gap-3">
             <button
-              onClick={() => startExam(questionCount)}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm shadow-md transition-all hover:scale-105 active:scale-95"
+              onClick={() => handleStartSession(questionCount)}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               <span>পুনরায় পরীক্ষা দিন</span>
             </button>
             <button
-              onClick={() => setExamStarted(false)}
-              className="px-5 py-2.5 rounded-full bg-[#F6F8F6] dark:bg-[#1A261F] hover:bg-slate-200 dark:hover:bg-[#203026] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#223328] text-sm font-semibold transition-all shadow-sm"
+              onClick={() => setSessionStarted(false)}
+              className="px-5 py-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 text-sm font-semibold transition-all hover:bg-zinc-200 cursor-pointer"
             >
               সেটিংস পরিবর্তন
             </button>
           </div>
         </div>
 
-        {/* Trap Defense Section Header */}
-        <div className="flex flex-wrap items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800 gap-2">
+        {/* Trap Defense Section */}
+        <div className="flex flex-wrap items-center justify-between pb-3 mb-4 border-b border-zinc-200 dark:border-zinc-800 gap-2">
           <div className="flex items-center gap-2">
             <ShieldAlert className="w-5 h-5 text-amber-500 dark:text-amber-400" />
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
               ট্র্যাপ ডিফেন্স রিভিউ (ফাঁদ বিশ্লেষণ ও সলিউশন)
             </h3>
           </div>
-          <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-900 p-1 rounded-xl border border-zinc-200 dark:border-zinc-800">
             <button
               onClick={() => setFilterReview('all')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
                 filterReview === 'all' 
-                  ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm' 
-                  : 'text-slate-600 dark:text-slate-400'
+                  ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-xs' 
+                  : 'text-zinc-600 dark:text-zinc-400'
               }`}
             >
-              সকল প্রশ্ন ({activeQuestions.length})
+              সকল প্রশ্ন ({timedQuestions.length})
             </button>
             <button
               onClick={() => setFilterReview('wrong')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
                 filterReview === 'wrong' 
                   ? 'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-300 font-bold' 
-                  : 'text-slate-600 dark:text-slate-400'
+                  : 'text-zinc-600 dark:text-zinc-400'
               }`}
             >
               শুধু ভুল/স্কিপ ({wrongCount + skippedCount})
@@ -371,60 +788,61 @@ export const ExamView: React.FC<ExamViewProps> = ({
         {/* Review Questions List */}
         <div className="space-y-4">
           {reviewList.map((q) => {
-            const originalIndex = activeQuestions.indexOf(q);
+            const originalIndex = timedQuestions.indexOf(q);
             const userAns = selectedAnswers[originalIndex];
             const isCorrect = userAns === q.ans;
             const isSkipped = userAns === undefined || userAns === null;
+            const { origin, cleanText } = parseQuestionData(q);
 
             return (
               <div 
                 key={q.id}
-                className={`p-5 rounded-2xl border transition-all ${
+                className={`p-4 sm:p-5 rounded-2xl border transition-all ${
                   isCorrect 
-                    ? 'bg-white dark:bg-slate-900/60 border-emerald-200 dark:border-emerald-500/30 shadow-sm' 
+                    ? 'bg-white dark:bg-zinc-900/60 border-emerald-200 dark:border-emerald-500/30 shadow-xs' 
                     : isSkipped 
-                    ? 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 shadow-sm' 
-                    : 'bg-white dark:bg-slate-900/90 border-rose-300 dark:border-rose-500/40 shadow-sm'
+                    ? 'bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-zinc-800 shadow-xs' 
+                    : 'bg-white dark:bg-zinc-900/90 border-rose-300 dark:border-rose-500/40 shadow-xs'
                 }`}
               >
-                {/* Question Header */}
-                <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex items-start justify-between gap-3 mb-2.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
                       Q{originalIndex + 1}
                     </span>
-                    <span className="text-xs font-medium px-2 py-0.5 rounded bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-500/20">
+                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${getOriginBadgeStyle(origin)}`}>
+                      📍 {origin}
+                    </span>
+                    <span className="text-xs font-medium px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
                       {q.subject}
                     </span>
                   </div>
 
                   {isCorrect ? (
-                    <span className="flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-200 dark:border-emerald-500/20">
+                    <span className="flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-200 dark:border-emerald-500/20">
                       <CheckCircle2 className="w-3.5 h-3.5" /> +১.০ সঠিক
                     </span>
                   ) : isSkipped ? (
-                    <span className="flex items-center gap-1 text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700">
+                    <span className="flex items-center gap-1 text-xs font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-lg border border-zinc-200 dark:border-zinc-700">
                       <MinusCircle className="w-3.5 h-3.5" /> ০.০ স্কিপ
                     </span>
                   ) : (
-                    <span className="flex items-center gap-1 text-xs font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-200 dark:border-rose-500/20">
+                    <span className="flex items-center gap-1 text-xs font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 px-2 py-0.5 rounded-lg border border-rose-200 dark:border-rose-500/20">
                       <XCircle className="w-3.5 h-3.5" /> -০.২৫ ভুল
                     </span>
                   )}
                 </div>
 
-                {/* Question Body */}
-                <div className="text-base font-semibold text-slate-900 dark:text-white mb-4">
-                  <MathText content={q.q} />
+                <div className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-white mb-3">
+                  <MathText content={cleanText} />
                 </div>
 
-                {/* Options Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                   {q.opts.map((opt, optIdx) => {
                     const isSelected = userAns === optIdx;
                     const isRightOpt = q.ans === optIdx;
 
-                    let optStyle = 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/50 text-slate-800 dark:text-slate-300';
+                    let optStyle = 'bg-zinc-50 dark:bg-zinc-800/40 border-zinc-200 dark:border-zinc-700/50 text-zinc-800 dark:text-zinc-300';
                     if (isRightOpt) {
                       optStyle = 'bg-emerald-50 dark:bg-emerald-500/15 border-emerald-300 dark:border-emerald-500/60 text-emerald-900 dark:text-emerald-200 font-semibold';
                     } else if (isSelected && !isRightOpt) {
@@ -434,9 +852,9 @@ export const ExamView: React.FC<ExamViewProps> = ({
                     return (
                       <div
                         key={optIdx}
-                        className={`p-3 rounded-xl border flex items-center gap-2.5 text-xs sm:text-sm ${optStyle}`}
+                        className={`p-2.5 rounded-xl border flex items-center gap-2.5 text-xs sm:text-sm ${optStyle}`}
                       >
-                        <span className="w-5 h-5 rounded-md flex items-center justify-center font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 flex-shrink-0">
+                        <span className="w-5 h-5 rounded-md flex items-center justify-center font-bold text-xs bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 shrink-0">
                           {String.fromCharCode(65 + optIdx)}
                         </span>
                         <div className="flex-1">
@@ -447,18 +865,25 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   })}
                 </div>
 
-                {/* Trap Defense Box */}
-                <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl p-3 mb-2 flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-amber-500 dark:text-amber-400 mt-0.5 flex-shrink-0" />
-                  <div className="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
-                    <strong className="text-amber-700 dark:text-amber-400 block mb-0.5 font-bold">ফাঁদ বিশ্লেষণ (Trap Insight):</strong>
-                    {q.trap}
-                  </div>
-                </div>
+                {/* Trap Defense Section (Strict Conditional Rendering) */}
+                {(() => {
+                  const trapAlert = (q.trap_alert || q.trap || '').trim();
+                  const isBoilerplate = trapAlert.includes('পিত্তরসে কোনো পরিপাক এনজাইম থাকে না') && 
+                    (!q.q.includes('পিত্ত') && !q.q.includes('যকৃৎ') && !q.q.includes('bile'));
+                  if (!trapAlert || isBoilerplate) return null;
+                  return (
+                    <div className="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl p-2.5 mb-2 flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-amber-500 dark:text-amber-400 mt-0.5 shrink-0" />
+                      <div className="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                        <strong className="text-amber-700 dark:text-amber-400 font-bold mr-1">ফাঁদ বিশ্লেষণ:</strong>
+                        {trapAlert}
+                      </div>
+                    </div>
+                  );
+                })()}
 
-                {/* Detailed Solution Box */}
-                <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3 text-xs text-slate-700 dark:text-slate-300 leading-relaxed border border-slate-200 dark:border-slate-700/50">
-                  <strong className="text-brand-700 dark:text-brand-300 block mb-0.5">ব্যাখ্যা ও স্ট্যান্ডার্ড সমাধান:</strong>
+                <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-2.5 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/50">
+                  <strong className="text-[#056839] dark:text-emerald-400 block mb-0.5">স্ট্যান্ডার্ড সমাধান ও ব্যাখ্যা:</strong>
                   <MathText content={q.exp} block />
                 </div>
               </div>
@@ -469,27 +894,277 @@ export const ExamView: React.FC<ExamViewProps> = ({
     );
   }
 
-  // Screen 3: Live Active Exam Question
-  const currentQ = activeQuestions[currentIndex];
-  const userSelected = selectedAnswers[currentIndex];
+  // -------------------------------------------------------------
+  // SCREEN 3A: ACTIVE MASTERY DRILL QUESTION
+  // -------------------------------------------------------------
+  if (practiceMode === 'mastery' && currentMasteryItem) {
+    const q = currentMasteryItem.question;
+    const { origin, cleanText } = parseQuestionData(q);
+    const consecutive = currentMasteryItem.consecutiveCorrect;
+    const masteredCount = masteryPool.filter((i) => i.status === 'mastered').length;
+    const remainingUnmastered = masteryPool.length - masteredCount;
+    const progressPercent = Math.round((masteredCount / masteryPool.length) * 100);
+
+    return (
+      <div className="max-w-2xl mx-auto py-3 px-3 sm:px-4">
+        {/* Top Sticky Recall Bar */}
+        <div className="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-xs mb-3 flex items-center justify-between gap-3">
+          {/* Left: Mastered progress */}
+          <div className="flex items-center gap-2">
+            <span className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs">
+              <Zap className="w-4 h-4" />
+            </span>
+            <div className="text-left">
+              <div className="text-xs font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
+                <span>মাস্টারড: {masteredCount} / {masteryPool.length}</span>
+                <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">({progressPercent}%)</span>
+              </div>
+              <div className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                বাকি কিউ: {remainingUnmastered}টি • ড্রিল রাউন্ড: #{totalRoundsAnswered + 1}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Auto Advance Toggle & Question Mastery Dots */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setAutoAdvance(!autoAdvance)}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
+                autoAdvance 
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700' 
+                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-700'
+              }`}
+              title="সঠিক উত্তর হলে ৩৫০ মিলিসেকেন্ডে অটোমেটিক পরের প্রশ্নে যাবে"
+            >
+              ⚡ ফাস্ট মোড: {autoAdvance ? 'ON' : 'OFF'}
+            </button>
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-3">
+          <div 
+            className="h-full bg-gradient-to-r from-[#00B09B] to-[#96C93D] transition-all duration-300"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+
+        {/* Question Card (Compact Fast-Recall layout) */}
+        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-4 sm:p-5 border border-zinc-200/80 dark:border-zinc-800 shadow-sm mb-3">
+          {/* Card Origin & Status Header */}
+          <div className="flex items-center justify-between gap-2 mb-2.5">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(origin)}`}>
+                📍 {origin}
+              </span>
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 font-medium">
+                {q.subject}
+              </span>
+              {q.yield_stars && (
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 font-bold">
+                  {'⭐️'.repeat(q.yield_stars)}
+                </span>
+              )}
+            </div>
+
+            {/* Mastery 2-Check Dots */}
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-xs font-bold">
+              <span className="text-zinc-500 dark:text-zinc-400 text-[11px]">মাস্টারি:</span>
+              <div className="flex items-center gap-1">
+                <span className={`w-3 h-3 rounded-full border flex items-center justify-center transition-all ${
+                  consecutive >= 1 
+                    ? 'bg-emerald-500 border-emerald-500 text-white' 
+                    : 'bg-transparent border-zinc-300 dark:border-zinc-600'
+                }`}>
+                  {consecutive >= 1 && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                </span>
+                <span className={`w-3 h-3 rounded-full border flex items-center justify-center transition-all ${
+                  consecutive >= 2 
+                    ? 'bg-emerald-500 border-emerald-500 text-white' 
+                    : 'bg-transparent border-zinc-300 dark:border-zinc-600'
+                }`}>
+                  {consecutive >= 2 && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                </span>
+              </div>
+              <span className="text-[11px] text-zinc-500 font-mono">({consecutive}/2)</span>
+            </div>
+          </div>
+
+          {/* Recurring Hotspot Badge */}
+          {(() => {
+            const badge = getHotspotBadge(q);
+            if (!badge) return null;
+            return (
+              <div className="mb-2.5">
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shadow-xs">
+                  <Zap className="w-3.5 h-3.5 text-amber-500" />
+                  {badge}
+                </span>
+              </div>
+            );
+          })()}
+
+          {/* Question Text */}
+          <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
+            <MathText content={cleanText} />
+          </div>
+
+          {/* Options (Fast Click / Keyboard 1-4) */}
+          <div className="space-y-2">
+            {q.opts.map((opt, optIdx) => {
+              const isSelected = masteryFeedback?.userChoice === optIdx;
+              const isCorrectAnswer = q.ans === optIdx;
+
+              let style = 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800';
+
+              if (masteryFeedback) {
+                if (isCorrectAnswer) {
+                  style = 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-900 dark:text-emerald-200 font-bold';
+                } else if (isSelected && !isCorrectAnswer) {
+                  style = 'bg-rose-50 dark:bg-rose-950/40 border-rose-500 text-rose-900 dark:text-rose-200 font-bold';
+                } else {
+                  style = 'bg-zinc-50/50 dark:bg-zinc-800/30 border-zinc-200/50 dark:border-zinc-800/50 opacity-60';
+                }
+              }
+
+              return (
+                <button
+                  key={optIdx}
+                  onClick={() => handleMasteryAnswer(optIdx)}
+                  disabled={masteryFeedback !== null}
+                  className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all text-xs sm:text-sm cursor-pointer ${style}`}
+                >
+                  <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
+                    masteryFeedback && isCorrectAnswer
+                      ? 'bg-emerald-500 text-white'
+                      : masteryFeedback && isSelected
+                      ? 'bg-rose-500 text-white'
+                      : 'bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700'
+                  }`}>
+                    {String.fromCharCode(65 + optIdx)}
+                  </span>
+                  <div className="flex-1 leading-relaxed overflow-x-auto no-scrollbar">
+                    <MathText content={opt} />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Feedback & Solution Popup inside card when answered */}
+          {masteryFeedback && (
+            <div className="mt-3.5 pt-3 border-t border-zinc-200 dark:border-zinc-800 space-y-2 animate-in fade-in duration-200">
+              {/* Status Message */}
+              <div className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-between ${
+                masteryFeedback.type === 'correct'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200'
+                  : masteryFeedback.type === 'unsure'
+                  ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200'
+                  : 'bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200'
+              }`}>
+                <span>{masteryFeedback.message}</span>
+                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-white dark:bg-zinc-900 border">
+                  Space / Enter ⏎
+                </span>
+              </div>
+
+              {/* Trap Insight (Strict Conditional Rendering) */}
+              {(() => {
+                const currentTrap = (q.trap_alert || q.trap || '').trim();
+                const isBoilerplate = currentTrap.includes('পিত্তরসে কোনো পরিপাক এনজাইম থাকে না') && 
+                  (!q.q.includes('পিত্ত') && !q.q.includes('যকৃৎ') && !q.q.includes('bile'));
+                if (!currentTrap || isBoilerplate) return null;
+                return (
+                  <div className="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 rounded-xl p-2.5 text-xs leading-relaxed text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-amber-700 dark:text-amber-400 font-bold mr-1">ফাঁদ বিশ্লেষণ:</strong>
+                      {currentTrap}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Detailed Explanation */}
+              <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-2.5 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/60">
+                <strong className="text-[#056839] dark:text-emerald-400 block mb-0.5 font-bold">স্ট্যান্ডার্ড সমাধান:</strong>
+                <MathText content={q.exp} block />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Action Bottom Bar */}
+        <div className="flex items-center justify-between gap-2.5">
+          {/* Unsure / Doubt Button */}
+          <button
+            onClick={() => handleMasteryAnswer(null, true)}
+            disabled={masteryFeedback !== null}
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700/60 text-xs sm:text-sm font-bold shadow-xs transition-all disabled:opacity-40 cursor-pointer"
+            title="সংশয় চিহ্নিত করলে প্রশ্নটি কিউতে থাকবে যাতে ২ বার নির্ভুল উত্তর দেওয়া যায়"
+          >
+            <HelpCircle className="w-4 h-4" />
+            <span>সংশয় / Unsure (U)</span>
+          </button>
+
+          {/* Micro Helper */}
+          <span className="hidden sm:inline text-xs text-zinc-400 font-mono">
+            <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">1-4</kbd> বিকল্প | <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">U</kbd> সংশয় | <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Space</kbd> পরবর্তী
+          </span>
+
+          {/* Next Button */}
+          <button
+            onClick={() => handleMasteryNext()}
+            disabled={masteryFeedback === null}
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#056839]/20 transition-all disabled:opacity-40 active:scale-95 cursor-pointer"
+          >
+            <span>পরবর্তী প্রশ্ন</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // -------------------------------------------------------------
+  // SCREEN 3B: ACTIVE TIMED EXAM QUESTION
+  // -------------------------------------------------------------
+  const currentTimedQ = timedQuestions[timedIndex];
+  const userSelected = selectedAnswers[timedIndex];
   const timerPercent = (timeLeft / 45) * 100;
   const isTimeCritical = timeLeft <= 10;
+  const { origin: timedOrigin, cleanText: timedCleanText } = currentTimedQ ? parseQuestionData(currentTimedQ) : { origin: "DU Core", cleanText: "" };
+  const timedHotspot = currentTimedQ ? getHotspotBadge(currentTimedQ) : null;
 
   return (
-    <div className="max-w-2xl mx-auto py-4 px-3 sm:px-4">
+    <div className="max-w-2xl mx-auto py-3 px-3 sm:px-4">
+      {/* Milton Khandokar Golden Order 1-Click Action */}
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <button
+          onClick={applyMiltonGoldenOrder}
+          title="বায়োলজি ➔ রসায়ন ➔ পদার্থ ➔ গণিত ক্রমানুসারে সাজান"
+          className="w-full py-1.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-[11px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
+        >
+          <span>⚡ মিল্টন স্যারের গোল্ডেন অর্ডার: বায়োলজি ➔ রসায়ন ➔ পদার্থ ➔ গণিত</span>
+        </button>
+      </div>
+
       {/* Top Timer & Header */}
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-zinc-200/80 dark:border-zinc-800">
+      <div className="flex items-center justify-between pb-3 mb-2.5 border-b border-zinc-200/80 dark:border-zinc-800">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-[#056839] dark:text-emerald-400 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            {currentIndex + 1} / {activeQuestions.length}
+          <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-[#056839] dark:text-emerald-400 border border-zinc-200 dark:border-zinc-800 shadow-xs">
+            {timedIndex + 1} / {timedQuestions.length}
           </span>
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            {currentQ.subject}
+          <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>
+            📍 {timedOrigin}
+          </span>
+          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-xs">
+            {currentTimedQ.subject}
           </span>
         </div>
 
         {/* 45-Second Timer Pill */}
-        <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold font-mono transition-all shadow-sm ${
+        <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold font-mono transition-all shadow-xs ${
           isTimeCritical 
             ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 animate-pulse' 
             : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200'
@@ -500,7 +1175,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
       </div>
 
       {/* Timer Progress Line */}
-      <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-4">
+      <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-3">
         <div 
           className={`h-full transition-all duration-1000 ${
             isTimeCritical ? 'bg-rose-500' : 'bg-gradient-to-r from-[#00B09B] to-[#96C93D]'
@@ -510,28 +1185,33 @@ export const ExamView: React.FC<ExamViewProps> = ({
       </div>
 
       {/* Question Card */}
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl p-4 sm:p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm mb-4">
+      <div className="bg-white dark:bg-zinc-900 rounded-3xl p-4 sm:p-5 border border-zinc-200/80 dark:border-zinc-800 shadow-sm mb-3">
+        {timedHotspot && (
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 text-xs font-bold mb-2.5 shadow-xs">
+            <span>{timedHotspot}</span>
+          </div>
+        )}
         <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
-          <MathText content={currentQ.q} />
+          <MathText content={timedCleanText} />
         </div>
 
         {/* Options */}
-        <div className="space-y-2.5">
-          {currentQ.opts.map((opt, optIdx) => {
+        <div className="space-y-2">
+          {currentTimedQ.opts.map((opt, optIdx) => {
             const isSelected = userSelected === optIdx;
             return (
               <button
                 key={optIdx}
-                onClick={() => handleOptionSelect(optIdx)}
-                className={`w-full p-3 sm:p-3.5 rounded-xl border text-left flex items-center gap-3 transition-all text-xs sm:text-sm ${
+                onClick={() => handleTimedOptionSelect(optIdx)}
+                className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all text-xs sm:text-sm cursor-pointer ${
                   isSelected
-                    ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-sm'
+                    ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-xs'
                     : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                 }`}
               >
-                <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-all ${
+                <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
                   isSelected 
-                    ? 'bg-[#056839] text-white shadow-sm' 
+                    ? 'bg-[#056839] text-white shadow-xs' 
                     : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700'
                 }`}>
                   {String.fromCharCode(65 + optIdx)}
@@ -548,21 +1228,21 @@ export const ExamView: React.FC<ExamViewProps> = ({
       {/* Action Footer */}
       <div className="flex items-center justify-between gap-3">
         <button
-          onClick={() => handleNext(null)}
-          className="px-4 py-2.5 rounded-full bg-white dark:bg-[#131E17] hover:bg-slate-100 dark:hover:bg-[#1A261F] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 border border-slate-200/80 dark:border-[#1E2F24] text-xs sm:text-sm font-semibold shadow-sm transition-all"
+          onClick={() => handleTimedNext(null)}
+          className="px-4 py-2.5 rounded-full bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm font-semibold shadow-xs transition-all cursor-pointer"
         >
           স্কিপ করুন (S)
         </button>
 
-        <span className="hidden sm:inline text-xs text-slate-500 dark:text-slate-400">
-          <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-[#131E17] border border-slate-200 dark:border-[#1E2F24] text-slate-700 dark:text-slate-300">1-4</kbd> বিকল্প নির্বাচন | <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-[#131E17] border border-slate-200 dark:border-[#1E2F24] text-slate-700 dark:text-slate-300">Enter</kbd> পরবর্তী প্রশ্ন
+        <span className="hidden sm:inline text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+          <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700">1-4</kbd> বিকল্প | <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700">Enter</kbd> পরবর্তী প্রশ্ন
         </span>
 
         <button
-          onClick={() => handleNext(userSelected ?? null)}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#056839]/20 transition-all hover:scale-105 active:scale-95"
+          onClick={() => handleTimedNext(userSelected ?? null)}
+          className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#056839]/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
         >
-          <span>{currentIndex + 1 === activeQuestions.length ? 'পরীক্ষা জমা দিন' : 'পরবর্তী প্রশ্ন'}</span>
+          <span>{timedIndex + 1 === timedQuestions.length ? 'পরীক্ষা জমা দিন' : 'পরবর্তী প্রশ্ন'}</span>
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>

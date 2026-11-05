@@ -1,6 +1,7 @@
-export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology';
+export type TrackType = 'medical' | 'varsity';
+export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
 export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03';
-export type AppMode = 'decks' | 'exam' | 'slides' | 'flashcards' | 'analytics' | 'vault';
+export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault';
 
 export interface UserProfile {
   name: string;
@@ -37,22 +38,66 @@ export interface SlideItem {
 
 export interface FlashcardItem {
   id: string;
+  deck_id?: string;
+  deck_title?: string;
   week_id: string;
   subject: string;
   topic: string;
   front: string;
   back: string;
+  concept?: string;
+  hack?: string;
+  trap?: string;
 }
 
 export interface QuizQuestion {
   id: string;
   week_id: string;
   subject: string;
+  chapter?: string;
+  tag?: string;
+  track?: TrackType;
   q: string;
+  question?: string;
   opts: string[];
+  options?: string[];
   ans: number;
+  correct_index?: number;
   exp: string;
+  explanation?: string;
   trap: string;
+  trap_alert?: string;
+  trap_insight?: string;
+  origin?: string;
+  yield_stars?: number;
+  probability?: string;
+  intelligence_type?: string;
+  source_book?: string;
+}
+
+export interface PredictorWrittenProblem {
+  subject: string;
+  problem: string;
+  marks: number;
+  solution: string;
+  rubric?: string;
+}
+
+export interface PredictorSet {
+  id: string;
+  title: string;
+  track: TrackType;
+  duration_minutes: number;
+  total_marks: number;
+  negative_marking: number;
+  badge: string;
+  description: string;
+  syllabus_scope?: string;
+  subjects: string[];
+  target_mcqs: number;
+  written_included?: boolean;
+  written_problems?: PredictorWrittenProblem[];
+  questions?: QuizQuestion[];
 }
 
 export interface TripletItem {
@@ -88,10 +133,26 @@ export interface TrapItem {
   fix: string;
 }
 
+export type VaultCardType = 'core_formula' | 'shortcut' | 'trap';
+
+export interface VaultEntry {
+  id: string;
+  subject: string;
+  chapter: string;
+  type: VaultCardType;
+  title: string;
+  formula: string;
+  concept: string;
+  hack?: string;
+  trap?: string;
+  tags?: string[];
+}
+
 export interface VaultData {
-  triplets: TripletItem[];
-  quick_math: QuickMathItem[];
-  magic_fractions: MagicFractionItem[];
-  patterns: FormulaPatternItem[];
-  traps: TrapItem[];
+  entries?: VaultEntry[];
+  triplets?: TripletItem[];
+  quick_math?: QuickMathItem[];
+  magic_fractions?: MagicFractionItem[];
+  patterns?: FormulaPatternItem[];
+  traps?: TrapItem[];
 }

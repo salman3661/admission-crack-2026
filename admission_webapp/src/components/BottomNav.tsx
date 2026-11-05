@@ -3,8 +3,8 @@ import {
   Home, 
   BookOpen, 
   Zap, 
-  Layers, 
-  BarChart3 
+  BarChart3,
+  Sparkles
 } from 'lucide-react';
 import type { AppMode } from '../types';
 
@@ -29,14 +29,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       icon: <BookOpen className="w-4 h-4" />,
     },
     {
-      id: 'vault',
-      label: '⚡ ফর্মুলা ভল্ট',
-      icon: <Zap className="w-4 h-4" />,
+      id: 'predictor',
+      label: '🔮 প্রেডিকশন',
+      icon: <Sparkles className="w-4 h-4" />,
     },
     {
-      id: 'flashcards',
-      label: '🗂️ ফ্ল্যাশকার্ড',
-      icon: <Layers className="w-4 h-4" />,
+      id: 'vault',
+      label: '⚡ ভল্ট',
+      icon: <Zap className="w-4 h-4" />,
     },
     {
       id: 'analytics',
@@ -48,7 +48,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   return (
     <nav className="fixed bottom-0 inset-x-0 z-40 pointer-events-none pb-safe">
       <div className="pointer-events-auto max-w-md mx-auto sm:mb-2">
-        <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border-t sm:border border-zinc-200/90 dark:border-zinc-800 sm:rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)] px-1.5 py-1 flex items-center justify-around transition-all">
+        <div className="backdrop-blur-none md:backdrop-blur-xl bg-white dark:bg-slate-900 border-t sm:border border-slate-200 dark:border-slate-800 sm:rounded-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.4)] px-1.5 py-1 flex items-center justify-around transition-all">
           {navItems.map((item) => {
             const isActive = currentMode === item.id;
             

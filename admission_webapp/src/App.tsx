@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Navbar } from './components/Navbar';
 import { DecksView } from './components/DecksView';
 import { SlidesView } from './components/SlidesView';
@@ -6,6 +6,7 @@ import { FlashcardsView } from './components/FlashcardsView';
 import { ExamView } from './components/ExamView';
 import { VaultView } from './components/VaultView';
 import { AnalyticsView } from './components/AnalyticsView';
+import { PredictorView } from './components/PredictorView';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
 import { CategorySwitcher } from './components/CategorySwitcher';
@@ -13,7 +14,9 @@ import { auth, onAuthStateChanged, logoutFirebase } from './lib/firebase';
 
 import slidesData from './data/slides.json';
 import flashcardsData from './data/flashcards.json';
-import quizzesData from './data/quizzes.json';
+import medicalBankData from './data/medical_bank.json';
+import varsityBankData from './data/varsity_bank.json';
+import predictorSetsData from './data/predictor_sets.json';
 import vaultData from './data/vault.json';
 
 import type { 
@@ -24,15 +27,80 @@ import type {
   FlashcardItem, 
   QuizQuestion, 
   VaultData as VaultDataType,
-  UserProfile 
+  UserProfile,
+  TrackType,
+  PredictorSet
 } from './types';
 import { Target, Sparkles, BookOpen, Clock, ShieldCheck } from 'lucide-react';
 
 export function App() {
-  const [currentMode, setCurrentMode] = useState<AppMode>('decks');
+  // URL Hash Synchronized Mode Routing (SPA 0ms speed + Real Browser URLs & Phone Back-Button support)
+  const getInitialMode = (): AppMode => {
+    try {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor'];
+      if (validModes.includes(hash as AppMode)) {
+        return hash as AppMode;
+      }
+    } catch {
+      // fallback
+    }
+    return 'decks';
+  };
+
+  const [currentMode, setCurrentMode] = useState<AppMode>(getInitialMode);
+
+  // Sync mode changes to browser URL hash without page reload
+  const handleSelectMode = (mode: AppMode) => {
+    setCurrentMode(mode);
+    try {
+      if (window.location.hash.replace('#', '') !== mode) {
+        window.history.pushState(null, '', `#${mode}`);
+      }
+    } catch {
+      // fallback
+    }
+  };
+
+  // Listen to browser Back / Forward navigation (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      try {
+        const hash = window.location.hash.replace('#', '').toLowerCase();
+        const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor'];
+        if (validModes.includes(hash as AppMode)) {
+          setCurrentMode(hash as AppMode);
+        } else {
+          setCurrentMode('decks');
+        }
+      } catch {
+        setCurrentMode('decks');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const [selectedWeek, setSelectedWeek] = useState<WeekFilterType>('all');
   const [selectedSubject, setSelectedSubject] = useState<SubjectType>('All');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  // Active Track Isolation: 'varsity' (Varsity 'Ka') vs 'medical' (Medical MAT)
+  const [activeTrack, setActiveTrack] = useState<TrackType>(() => {
+    const saved = localStorage.getItem('admission_track');
+    if (saved === 'medical' || saved === 'varsity') return saved;
+    return 'varsity';
+  });
+
+  const handleSelectTrack = (track: TrackType) => {
+    setActiveTrack(track);
+    localStorage.setItem('admission_track', track);
+    setSelectedSubject('All');
+    setUser((prev) => ({
+      ...prev,
+      target: track === 'medical' ? 'মেডিকেল ভর্তি পরীক্ষা (MAT)' : "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট",
+    }));
+  };
   
   // Theme state: defaults to light for the ultra-clean Chorcha look, with toggleable dark mode
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -127,16 +195,26 @@ export function App() {
 
   const slides = slidesData as SlideItem[];
   const flashcards = flashcardsData as FlashcardItem[];
-  const quizzes = quizzesData as QuizQuestion[];
   const vault = vaultData as VaultDataType;
 
+  // Strict Track Question Isolation (Medical vs Varsity 'Ka')
+  const currentQuizzes = useMemo(() => {
+    return (activeTrack === 'medical' ? medicalBankData : varsityBankData) as QuizQuestion[];
+  }, [activeTrack]);
+
+  // Combined predictor sets
+  const allPredictorSets = useMemo(() => {
+    const data = predictorSetsData as { varsity_sets: PredictorSet[]; medical_sets: PredictorSet[] };
+    return [...(data.varsity_sets || []), ...(data.medical_sets || [])];
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#F6F8F6] dark:bg-[#0B110D] text-slate-800 dark:text-slate-100 flex flex-col font-['Hind_Siliguri'] antialiased transition-colors duration-200">
+    <div className="min-h-screen overflow-x-hidden bg-[#F6F8F6] dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-['Hind_Siliguri'] antialiased transition-colors duration-200">
       
-      {/* Top Navbar with Chorcha Pill Controls, Google Login, & Dark/Light Toggle */}
+      {/* Top Navbar with Chorcha Pill Controls, Track Switcher, Google Login, & Dark/Light Toggle */}
       <Navbar
         currentMode={currentMode}
-        onSelectMode={setCurrentMode}
+        onSelectMode={handleSelectMode}
         selectedWeek={selectedWeek}
         onSelectWeek={setSelectedWeek}
         selectedSubject={selectedSubject}
@@ -146,13 +224,15 @@ export function App() {
         user={user}
         onOpenAuth={() => setIsAuthModalOpen(true)}
         onLogout={handleLogout}
+        activeTrack={activeTrack}
+        onSelectTrack={handleSelectTrack}
       />
 
       {/* Main Mode View Area */}
-      <main className="flex-1 pb-dock">
+      <main className="flex-1 overflow-x-hidden pb-28">
         {currentMode === 'decks' && (
           <DecksView
-            onSelectMode={setCurrentMode}
+            onSelectMode={handleSelectMode}
             onSelectSubject={setSelectedSubject}
             selectedWeek={selectedWeek}
             onSelectWeek={setSelectedWeek}
@@ -160,15 +240,26 @@ export function App() {
             onOpenAuth={() => setIsAuthModalOpen(true)}
             totalSlides={slides.length}
             totalFlashcards={flashcards.length}
-            totalQuizzes={quizzes.length}
+            totalQuizzes={currentQuizzes.length}
+            activeTrack={activeTrack}
+            onSelectTrack={handleSelectTrack}
           />
         )}
 
         {currentMode === 'exam' && (
           <ExamView
-            quizzes={quizzes}
+            quizzes={currentQuizzes}
             selectedWeek={selectedWeek}
             selectedSubject={selectedSubject}
+          />
+        )}
+
+        {currentMode === 'predictor' && (
+          <PredictorView
+            activeTrack={activeTrack}
+            questions={currentQuizzes}
+            predictorSets={allPredictorSets}
+            onSelectTrack={handleSelectTrack}
           />
         )}
 
@@ -200,7 +291,8 @@ export function App() {
           <AnalyticsView
             user={user}
             onOpenAuth={() => setIsAuthModalOpen(true)}
-            onSelectMode={setCurrentMode}
+            onSelectMode={handleSelectMode}
+            activeTrack={activeTrack}
           />
         )}
 
@@ -208,7 +300,7 @@ export function App() {
         {(currentMode === 'slides' || currentMode === 'vault') && (
           <CategorySwitcher
             currentMode={currentMode}
-            onSelectMode={setCurrentMode}
+            onSelectMode={handleSelectMode}
           />
         )}
       </main>
@@ -231,7 +323,7 @@ export function App() {
               <Sparkles className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" /> {flashcards.length} ফ্ল্যাশকার্ড
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {quizzes.length} রিয়েল MCQ
+              <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {currentQuizzes.length} রিয়েল MCQ
             </span>
           </div>
 
@@ -247,7 +339,7 @@ export function App() {
           [ 🏠 ডেক ]  [ 📚 প্রশ্নব্যাংক ]  [ ⚡ এক্সপেক্টেড ]  [ 🃏 কার্ডস ]  [ 📊 অ্যানালিটিক্স ] */}
       <BottomNav
         currentMode={currentMode}
-        onSelectMode={setCurrentMode}
+        onSelectMode={handleSelectMode}
       />
 
       {/* Google Authentication & Profile Modal */}
