@@ -53,6 +53,7 @@ export interface FlashcardItem {
 export interface QuizQuestion {
   id: string;
   week_id: string;
+  week?: number | string;
   subject: string;
   chapter?: string;
   tag?: string;
@@ -98,6 +99,9 @@ export interface PredictorSet {
   written_included?: boolean;
   written_problems?: PredictorWrittenProblem[];
   questions?: QuizQuestion[];
+  question_ids?: string[];
+  week?: number | string;
+  week_id?: string;
 }
 
 export interface TripletItem {

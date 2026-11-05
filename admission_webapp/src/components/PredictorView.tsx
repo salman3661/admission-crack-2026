@@ -28,7 +28,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 }) => {
   // Sets filtered by track
   const currentSets = useMemo(() => {
-    return predictorSets.filter((s) => s.track === activeTrack);
+    return predictorSets.filter((s) => (s.track || '').toLowerCase() === activeTrack.toLowerCase());
   }, [predictorSets, activeTrack]);
 
   // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'sets'
@@ -121,8 +121,21 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
   // Questions filtered strictly for the active weekly tab
   const currentWeekQuestions = useMemo(() => {
     return questions.filter((q) => {
-      const matchTrack = !q.track || q.track === activeTrack;
-      const matchWeek = q.week_id === selectedWeekTab;
+      const qTrack = (q.track || '').toLowerCase();
+      const aTrack = activeTrack.toLowerCase();
+      const matchTrack = !q.track || qTrack === aTrack;
+
+      const qWeekId = (q.week_id || '').toLowerCase();
+      const qWeek = q.week !== undefined && q.week !== null ? String(q.week).toLowerCase() : '';
+      const selWeek = selectedWeekTab.toLowerCase();
+      const selWeekNum = selectedWeekTab.replace('week_0', '').replace('week_', '');
+
+      const matchWeek = 
+        qWeekId === selWeek || 
+        qWeek === selWeek || 
+        qWeek === selWeekNum ||
+        (typeof q.week === 'number' && selWeek === `week_${String(q.week).padStart(2, '0')}`);
+
       const matchStar = selectedStar === 'all' || (q.yield_stars || 4) === selectedStar;
       const matchSubject = selectedSubject === 'All' || q.subject === selectedSubject;
       return matchTrack && matchWeek && matchStar && matchSubject;
@@ -170,13 +183,37 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
     let chosen: QuizQuestion[] = [];
     if (set.questions && set.questions.length > 0) {
       chosen = [...set.questions];
-    } else {
-      let pool = questions.filter((q) => !q.track || q.track === activeTrack);
+    } else if (set.question_ids && set.question_ids.length > 0) {
+      const qMap = new Map(questions.map((q) => [q.id, q]));
+      chosen = set.question_ids
+        .map((qid) => qMap.get(qid))
+        .filter((q): q is QuizQuestion => Boolean(q));
+    }
+
+    if (chosen.length === 0) {
+      let pool = questions.filter((q) => {
+        const qTrack = (q.track || '').toLowerCase();
+        const aTrack = activeTrack.toLowerCase();
+        const matchTrack = !q.track || qTrack === aTrack;
+
+        if (set.week_id || set.week) {
+          const selWeek = (set.week_id || '').toLowerCase();
+          const selWeekNum = set.week !== undefined ? String(set.week) : '';
+          const qWeekId = (q.week_id || '').toLowerCase();
+          const qWeek = q.week !== undefined && q.week !== null ? String(q.week).toLowerCase() : '';
+          const matchWeek = 
+            (selWeek && (qWeekId === selWeek || qWeek === selWeek)) ||
+            (selWeekNum && (qWeek === selWeekNum || qWeekId.endsWith(selWeekNum.padStart(2, '0'))));
+          if (!matchWeek) return false;
+        }
+        return matchTrack;
+      });
+
       if (set.subjects && set.subjects.length > 0) {
         pool = pool.filter((q) => set.subjects.includes(q.subject));
       }
       const shuffled = [...pool].sort(() => 0.5 - Math.random());
-      const count = Math.min(set.target_mcqs, shuffled.length);
+      const count = Math.min(set.target_mcqs || pool.length, pool.length);
       chosen = shuffled.slice(0, count);
     }
 
@@ -913,6 +950,8 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                     ? '🔥 Week 2: DU Repeat Vault'
                     : selectedWeekTab === 'week_03'
                     ? '⚡ Week 3: Trap & Speed Special'
+                    : selectedWeekTab === 'week_04'
+                    ? '🎯 Week 4: 80/20 Multi-Stream'
                     : selectedWeekTab === 'week_05'
                     ? '🔮 Week 5: 80/20 Multi-Stream Pattern'
                     : selectedWeekTab === 'week_06'
@@ -973,7 +1012,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                     {selectedSubject === 'Physics' ? '⚛️' : selectedSubject === 'Chemistry' ? '🧪' : selectedSubject === 'Higher Math' ? '📐' : selectedSubject === 'Biology' ? '🧬' : '🎯'}
                   </span>
                   <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
-                    {selectedWeekTab.toUpperCase()} {selectedSubject === 'All' ? 'Varsity Core' : selectedSubject} Slot-{toBn(currentSlotIndex + 1)}
+                    {selectedWeekTab.toUpperCase()} {selectedSubject === 'All' ? (activeTrack === 'medical' ? 'Medical Core' : 'Varsity Core') : selectedSubject} Slot-{toBn(currentSlotIndex + 1)}
                   </h3>
                 </div>
 
@@ -999,15 +1038,17 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                   onClick={() => {
                     const fakeSet: PredictorSet = {
                       id: `slot_${selectedWeekTab}_${currentSlotIndex}`,
-                      title: `${selectedWeekTab.toUpperCase()} ${selectedSubject} Slot-${toBn(currentSlotIndex + 1)}`,
+                      title: `${selectedWeekTab.toUpperCase()} ${selectedSubject === 'All' ? (activeTrack === 'medical' ? 'Medical Core' : 'Varsity Core') : selectedSubject} Slot-${toBn(currentSlotIndex + 1)}`,
                       badge: '✨ 80/20 High Yield',
                       duration_minutes: 15,
                       target_mcqs: slotQuestions.length,
                       total_marks: slotQuestions.length,
                       negative_marking: 0.25,
-                      subjects: [selectedSubject === 'All' ? 'Physics' : selectedSubject],
+                      subjects: [selectedSubject === 'All' ? (activeTrack === 'medical' ? 'Biology' : 'Physics') : selectedSubject],
                       track: activeTrack,
                       description: '১২টি হাই-ইল্ড ফোকাসড প্রশ্ন প্র্যাকটিস ড্রিল',
+                      questions: slotQuestions,
+                      question_ids: slotQuestions.map((q) => q.id),
                     };
                     handleStartSetExam(fakeSet);
                   }}
@@ -1021,15 +1062,17 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                   onClick={() => {
                     const fakeSet: PredictorSet = {
                       id: `timed_slot_${selectedWeekTab}_${currentSlotIndex}`,
-                      title: `${selectedWeekTab.toUpperCase()} ${selectedSubject} Slot-${toBn(currentSlotIndex + 1)} (Timed)`,
+                      title: `${selectedWeekTab.toUpperCase()} ${selectedSubject === 'All' ? (activeTrack === 'medical' ? 'Medical Core' : 'Varsity Core') : selectedSubject} Slot-${toBn(currentSlotIndex + 1)} (Timed)`,
                       badge: '⏱️ Timed Test',
                       duration_minutes: 15,
                       target_mcqs: slotQuestions.length,
                       total_marks: slotQuestions.length,
                       negative_marking: 0.25,
-                      subjects: [selectedSubject === 'All' ? 'Physics' : selectedSubject],
+                      subjects: [selectedSubject === 'All' ? (activeTrack === 'medical' ? 'Biology' : 'Physics') : selectedSubject],
                       track: activeTrack,
                       description: 'টাইমড টেস্ট ক্যাপসুল',
+                      questions: slotQuestions,
+                      question_ids: slotQuestions.map((q) => q.id),
                     };
                     handleStartSetExam(fakeSet);
                   }}
