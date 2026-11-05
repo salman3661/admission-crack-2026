@@ -4872,6 +4872,211 @@
         "platyhelminthes",
         "classification"
       ]
+    },
+    {
+      "id": "v-w4-phy-01",
+      "subject": "Physics",
+      "chapter": "Structural Properties of Matter",
+      "type": "core_formula",
+      "title": "ইয়ং এর গুণাঙ্ক ও সঞ্চিত স্থিতিশক্তি",
+      "formula": "$$Y = \\frac{FL}{A\\Delta L} = \\frac{mgL}{\\pi r^2 \\Delta L},\\quad u = \\frac{1}{2}\\sigma \\epsilon = \\frac{1}{2}Y\\left(\\frac{\\Delta L}{L}\\right)^2$$",
+      "concept": "ইয়ং-এর গুণাঙ্ক উপাদানের বৈশিষ্ট্য। তার টেনে লম্বা বা মোটা করলেও উপাদান একই থাকলে $Y$ সম্পূর্ণ অপরিবর্তিত থাকে।",
+      "hack": "তার টেনে দৈর্ঘ্য $n$ গুণ করলে ব্যাসার্ধ $1/\\sqrt{n}$ হয় এবং একক আয়তনে কাজ $n^2$ গুণ বৃদ্ধি পায়!",
+      "trap": "ব্যাসার্ধ বা ক্ষেত্রফল বৃদ্ধি করলে $Y$ পরিবর্তিত হবে মনে করা মারাত্মক ভুল।",
+      "tags": [
+        "Physics",
+        "Elasticity",
+        "Young Modulus",
+        "DU Repeat",
+        "Formula"
+      ]
+    },
+    {
+      "id": "v-w4-phy-02",
+      "subject": "Physics",
+      "chapter": "Ideal Gas & Kinetic Theory",
+      "type": "shortcut",
+      "title": "হ্রদের বুদ্বুদ ও গভীরতা শর্টকাট",
+      "formula": "$$h = (n^3 - 1)h_0 = (n^3 - 1)\\frac{P_0}{\\rho g} \\approx (n^3 - 1) \\times 10.33\\text{ m}$$",
+      "concept": "হ্রদের তলদেশ হতে উপরে উঠলে চাপ কমে বুদ্বুদ প্রসারিত হয়। বয়েলের সূত্রমতে $P_1 V_1 = P_0 V_0$।",
+      "hack": "যদি বুদ্বুদের 'ব্যাস' বা 'ব্যাসার্ধ' $n$ গুণ হয়, আয়তন $n^3$ গুণ হবে; সরাসরি $h = (n^3 - 1) \\times 10.33\\text{ m}$ বসিয়ে দাও (ব্যাস দ্বিগুণ হলে $h = 7 \\times 10.33 = 72.3\\text{ m}$)।",
+      "trap": "প্রশ্নে 'ব্যাস' দ্বিগুণ বলেছে নাকি 'আয়তন' দ্বিগুণ বলেছে সাবধানে দেখুন। আয়তন দ্বিগুণ বললে কেবল $(n-1)h_0 = 10.33\\text{ m}$ হবে।",
+      "tags": [
+        "Physics",
+        "Gas Laws",
+        "Lake Depth",
+        "Speed Hack"
+      ]
+    },
+    {
+      "id": "v-w4-phy-03",
+      "subject": "Physics",
+      "chapter": "Structural Properties of Matter",
+      "type": "core_formula",
+      "title": "পৃষ্ঠটান ও সাবানের বুদ্বুদের অতিরিক্ত চাপ",
+      "formula": "$$\\Delta P_{\\text{soap}} = \\frac{4T}{R},\\quad \\Delta P_{\\text{water drop}} = \\frac{2T}{R}$$",
+      "concept": "সাবানের বুদ্বুদের অভ্যন্তরে বায়ু থাকায় এর দুটি মুক্ত পৃষ্ঠ থাকে (বহিঃস্থ ও অভ্যন্তরীণ), তাই চাপ দ্বিগুণ ($4T/R$)। পানির ফোঁটায় মুক্ত পৃষ্ঠ মাত্র একটি ($2T/R$)।",
+      "hack": "বুদ্বুদের ব্যাসার্ধ অর্ধেক করা হলে ভেতরের অতিরিক্ত চাপ সাথে সাথে দ্বিগুণ হয়ে যাবে।",
+      "trap": "সাবানের বুদ্বুদে ভুল করে $2T/R$ বসিয়ে হিসাব করা যাবে না।",
+      "tags": [
+        "Physics",
+        "Surface Tension",
+        "Pressure",
+        "Formula"
+      ]
+    },
+    {
+      "id": "v-w4-chem-01",
+      "subject": "Chemistry",
+      "chapter": "Periodic Properties & Chemical Bonding",
+      "type": "core_formula",
+      "title": "ফাজানের নীতি ও পোলারায়ন শর্টকাট",
+      "formula": "$$\\text{Covalent Character} \\propto \\frac{\\text{Cation Charge}}{\\text{Cation Radius}} \\times \\text{Anion Radius} \\times (d/f \\text{ electrons})$$",
+      "concept": "ক্যাটায়নের আকার যত ছোট ও চার্জ যত বেশি হবে এবং অ্যানায়নের আকার যত বড় হবে, পোলারায়ন তত বেশি ঘটবে $\\implies$ সমযোজী বৈশিষ্ট্য বৃদ্ধি পাবে $\\implies$ গলনাঙ্ক ও পানিতে দ্রাব্যতা হ্রাস পাবে।",
+      "hack": "গলনাঙ্কের ক্রম: $NaCl > MgCl_2 > AlCl_3 > SiCl_4$; সমযোজী বৈশিষ্ট্যের ক্রম: $LiCl > NaCl > KCl$।",
+      "trap": "পোলারায়ন বৃদ্ধি পেলে আয়নিক বৈশিষ্ট্য বাড়ে ভাবা ভুল; পোলারায়নে সমযোজী বৈশিষ্ট্য বাড়ে।",
+      "tags": [
+        "Chemistry",
+        "Chemical Bonding",
+        "Fajans Rule",
+        "DU Repeat"
+      ]
+    },
+    {
+      "id": "v-w4-chem-02",
+      "subject": "Chemistry",
+      "chapter": "Periodic Properties & Chemical Bonding",
+      "type": "shortcut",
+      "title": "সংকরায়ন ও বন্ধন কোণ (VSEPR)",
+      "formula": "$$H = \\frac{1}{2}(V + M - C + A), \\quad \\text{Angle}: CH_4 (109.5^\\circ) > NH_3 (107^\\circ) > H_2O (104.5^\\circ)$$",
+      "concept": "প্রতিটি লোন পেয়ার ইলেকট্রন বন্ধন কোণকে প্রায় $2.5^\\circ$ চাপিয়ে দেয় ($lp-lp > lp-bp > bp-bp$)।",
+      "hack": "$XeF_4$: $H = \\frac{1}{2}(8 + 4) = 6 \\implies sp^3d^2$ (২টি লোন পেয়ার থাকায় আকৃতি সমতলীয় বর্গাকার)। $SF_4$: $sp^3d$ (১টি লোন পেয়ার থাকায় আকৃতি সী-স)।",
+      "trap": "সংকরায়ন একই ($sp^3$) দেখে সবার বন্ধন কোণ সমান মনে করা।",
+      "tags": [
+        "Chemistry",
+        "Hybridization",
+        "VSEPR",
+        "Engineering Bridge"
+      ]
+    },
+    {
+      "id": "v-w4-chem-03",
+      "subject": "Chemistry",
+      "chapter": "Periodic Properties & Chemical Bonding",
+      "type": "trap",
+      "title": "আয়নীকরণ শক্তি ও ইলেকট্রন আসক্তির ব্যতিক্রম ম্যাট্রিক্স",
+      "formula": "$$\\text{IE}_1: N > O, \\quad Be > B; \\quad \\text{EA}: Cl > F > Br > I; \\quad \\text{EN}: F > O > Cl \\approx N$$",
+      "concept": "অর্ধপূর্ণ ও পূর্ণ অরবিটালের উচ্চ স্থিতিশীলতার কারণে নাইট্রোজেন অক্সিজেনের চেয়ে বেশি এবং বেরিলিয়াম বোরনের চেয়ে বেশি আয়নীকরণ শক্তি প্রদর্শন করে। ক্ষুদ্র আকারের বিকর্ষণে ফ্লোরিনের চেয়ে ক্লোরিনের ইলেকট্রন আসক্তি বেশি।",
+      "hack": "তড়িৎ ঋণাত্মকতা শীর্ষে F ($4.0$), কিন্তু ইলেকট্রন আসক্তিতে শীর্ষে Cl ($-349\\text{ kJ/mol}$)।",
+      "trap": "ইলেকট্রন আসক্তিতেও ফ্লোরিন বেশি মনে করে ভুল অপশন দাগানো।",
+      "tags": [
+        "Chemistry",
+        "Periodic Table",
+        "Exceptions",
+        "Trap Alert"
+      ]
+    },
+    {
+      "id": "v-w4-math-01",
+      "subject": "Higher Math",
+      "chapter": "Permutations & Combinations",
+      "type": "shortcut",
+      "title": "বহুভুজের কর্ণের সংখ্যা ও হ্যান্ডশেক ফর্মুলা",
+      "formula": "$$\\text{Diagonals } d = \\frac{n(n-3)}{2} = ^{n}C_2 - n, \\quad \\text{Handshakes } H = ^{n}C_2 = \\frac{n(n-1)}{2}$$",
+      "concept": "বহুভুজের যেকোনো দুটি শীর্ষবিন্দু যোগ করলে মোট $^{n}C_2$ রেখা পাওয়া যায়, যার $n$টি হল বহিঃস্থ বাহু। বাকিগুলো কর্ণ।",
+      "hack": "১২ বাহু বিশিষ্ট বহুভুজের কর্ণ: $\\frac{12 \\times 9}{2} = 54$! কোনো ক্যালকুলেটর দরকার নেই।",
+      "trap": "বাহুর সংখ্যা $n$ বিয়োগ না করে কেবল $^{n}C_2$ বের করে রেখে দেওয়া।",
+      "tags": [
+        "Higher Math",
+        "Combinations",
+        "Geometry",
+        "Speed Hack"
+      ]
+    },
+    {
+      "id": "v-w4-math-02",
+      "subject": "Higher Math",
+      "chapter": "Permutations & Combinations",
+      "type": "core_formula",
+      "title": "প্যাসকেলের সূত্র ও বৃত্তাকার বিন্যাস",
+      "formula": "$$^{n}C_r + ^{n}C_{r-1} = ^{n+1}C_r, \\quad \\text{Table}: (n-1)!, \\quad \\text{Necklace}: \\frac{(n-1)!}{2}$$",
+      "concept": "গোল টেবিলে বসার ক্ষেত্রে একটি স্থান নির্দিষ্ট করতে হয় বিধায় $(n-1)!$। কিন্তু মালা বা গলার হারের ক্ষেত্রে ক্লকওয়াইজ ও অ্যান্টি-ক্লকওয়াইজ উভয় দিক উল্টালে অভিন্ন, তাই ২ দ্বারা ভাগ হয়।",
+      "hack": "$^{20}C_{10} + ^{20}C_9 = ^{21}C_{10}$! সরাসরি ১ সেকেন্ডে উত্তর বের করা যায়।",
+      "trap": "মুক্তার মালার ক্ষেত্রে ২ দিয়ে ভাগ করতে ভুলে যাওয়া।",
+      "tags": [
+        "Higher Math",
+        "Permutations",
+        "Circular",
+        "DU Repeat"
+      ]
+    },
+    {
+      "id": "v-w4-math-03",
+      "subject": "Higher Math",
+      "chapter": "Measures of Dispersion & Probability",
+      "type": "shortcut",
+      "title": "পরিমিত ব্যবধান ও ভেদাঙ্কের রূপান্তর ধর্ম",
+      "formula": "$$y = a + bx \\implies \\sigma_y = |b|\\sigma_x, \\quad \\sigma_y^2 = b^2 \\sigma_x^2, \\quad \\sigma^2_{\\text{first } n} = \\frac{n^2 - 1}{12}$$",
+      "concept": "বিস্তার পরিমাপকসমূহ মূল (Origin - যোগ বা বিয়োগ) থেকে সম্পূর্ণ স্বাধীন, কেবলমাত্র মাপনীর (Scale - গুণ বা ভাগ) ওপর নির্ভরশীল।",
+      "hack": "যদি $y = 10 - 4x$ হয় এবং $\\sigma_x = 3$ হয়, তবে $\\sigma_y = |-4| \\times 3 = 12$! ঋণাত্মক চিহ্ন বর্জন করতে হবে।",
+      "trap": "ঋণাত্মক ঢাল দেখে পরিমিত ব্যবধানও ঋণাত্মক দাগিয়ে ফেলা (পরিমিত ব্যবধান সর্বদা অঋণাত্মক)।",
+      "tags": [
+        "Higher Math",
+        "Statistics",
+        "Dispersion",
+        "Engineering Bridge"
+      ]
+    },
+    {
+      "id": "v-w4-bio-01",
+      "subject": "Biology",
+      "chapter": "Animal Diversity & Classification",
+      "type": "trap",
+      "title": "সিলোমের প্রকারভেদ ও উদাহরণ ম্যাট্রিক্স",
+      "formula": "$$\\text{Acoelomate: Platyhelminthes} \\; | \\; \\text{Pseudocoelomate: Nematoda, Rotifera} \\; | \\; \\text{Eucoelomate: Annelida to Chordata}$$",
+      "concept": "ভ্রূণীয় মেসোডার্ম উদ্ভূত পেরিটোনিয়াম পর্দা দ্বারা পরিবেষ্টিত প্রকৃত দেহগহ্বরকে সিলোম বলে।",
+      "hack": "গোলকৃমি (Nematoda) অপ্রকৃত সিলোম বা সিউডোসিলোমেট; চ্যাপ্টাকৃমি (Platyhelminthes) সিলোমহীন বা অ্যাসিলোমেট।",
+      "trap": "প্লাটিহেলমিনথিস ও নেমাটোডার সিলোম প্রকার গুলিয়ে ফেলা ভর্তি পরীক্ষার সর্বাধিক কমন ট্র্যাপ।",
+      "tags": [
+        "Biology",
+        "Zoology",
+        "Coelom",
+        "DU-MAT Repeat"
+      ]
+    },
+    {
+      "id": "v-w4-bio-02",
+      "subject": "Biology",
+      "chapter": "Genetics & Evolution",
+      "type": "core_formula",
+      "title": "মেন্ডেলীয় ব্যতিক্রমের গোল্ডেন রেশিও চার্ট",
+      "formula": "$$\\text{Incomplete: } 1:2:1 \\; | \\; \\text{Lethal: } 2:1 \\; | \\; \\text{Complementary: } 9:7 \\; | \\; \\text{Dominant Epistasis: } 13:3$$",
+      "concept": "মেন্ডেলের ১ম সূত্রের ব্যতিক্রম: অসম্পূর্ণ প্রকটতা ($1:2:1$), সমপ্রকটতা ($1:2:1$), লিথাল জিন ($2:1$)। ২য় সূত্রের ব্যতিক্রম: পরিপূরক জিন ($9:7$), প্রকট এপিস্ট্যাসিস ($13:3$), দ্বৈত প্রচ্ছন্ন এপিস্ট্যাসিস ($9:7$)।",
+      "hack": "মিষ্টি মটরের পরিপূরক জিন এবং মানুষের জন্মগত মূক-বধিরতা উভয়েরই অনুপাত $9:7$!",
+      "trap": "প্রকট এপিস্ট্যাসিস ($13:3$) ও দ্বৈত প্রচ্ছন্ন এপিস্ট্যাসিস ($9:7$) এর উদাহরণ গুলিয়ে ফেলা।",
+      "tags": [
+        "Biology",
+        "Genetics",
+        "Mendel",
+        "Formula"
+      ]
+    },
+    {
+      "id": "v-w4-bio-03",
+      "subject": "Biology",
+      "chapter": "Animal Diversity & Classification",
+      "type": "shortcut",
+      "title": "ম্যালেরিয়া সাইকেল ও জ্বরের মেকানিজম",
+      "formula": "$$\\text{Infection: Sporozoite} \\to \\text{Liver: Hepatic Schizogony} \\to \\text{RBC: Erythrocytic (Hemozoin released } \\to \\text{Fever)}$$",
+      "concept": "মানবদেহে ম্যালেরিয়ার অযৌন চক্র (সাইজোগনি) এবং স্ত্রী অ্যানোফিলিস মশকীদেহে যৌন চক্র (স্পোরোগনি) ঘটে।",
+      "hack": "কাঁপুনি দিয়ে জ্বর কেবল তখনই আসে যখন আরবিসি ফেটে গিয়ে বিষাক্ত 'হিমোজয়েন' রক্তরসে মুক্ত হয়।",
+      "trap": "যকৃৎ সাইজোগনিতে জ্বর আসে মনে করা সম্পূর্ণ ভুল।",
+      "tags": [
+        "Biology",
+        "Malaria",
+        "Schizogony",
+        "Medical Line"
+      ]
     }
   ],
   "triplets": [

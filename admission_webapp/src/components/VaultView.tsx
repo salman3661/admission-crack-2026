@@ -56,7 +56,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({});
   const [showQuickTools, setShowQuickTools] = useState(true);
-  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w5_bridge' | 'w6_bridge' | 'w7_matrix'>('w5_bridge');
+  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w4_bridge' | 'w5_bridge' | 'w6_bridge' | 'w7_matrix'>('w4_bridge');
   const [displayLimit, setDisplayLimit] = useState(20);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -447,6 +447,16 @@ export const VaultView: React.FC<VaultViewProps> = ({
                 🧪 স্টয়কিওমেট্রি ফ্র্যাকশন ({filteredFractions.length})
               </button>
               <button
+                onClick={() => setQuickToolTab('w4_bridge')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
+                  quickToolTab === 'w4_bridge'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                }`}
+              >
+                🎯 Week 04 ব্রিজ
+              </button>
+              <button
                 onClick={() => setQuickToolTab('w5_bridge')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
                   quickToolTab === 'w5_bridge'
@@ -531,6 +541,70 @@ export const VaultView: React.FC<VaultViewProps> = ({
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {quickToolTab === 'w4_bridge' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">হ্রদের বুদ্বুদ ও গভীরতা শর্টকাট</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">বয়েল নো-ক্যালক</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="ব্যাস $n$ গুণ হলে আয়তন $n^3$ গুণ হয়:<br />$h = (n^3 - 1) \\times 10.33\\text{ m}$<br />ব্যাস দ্বিগুণ ($n=2$) $\\implies h = 7 \\times 10.33 \\approx 72.3\\text{ m}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">সাবানের বুদ্বুদ vs পানির ফোঁটা</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">পৃষ্ঠটান ট্র্যাপ</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="সাবানের বুদ্বুদে ২টি মুক্ত পৃষ্ঠ:<br />$\\Delta P_{\\text{soap}} = \\frac{4T}{R}$<br />পানির ফোঁটায় ১টি মুক্ত পৃষ্ঠ:<br />$\\Delta P_{\\text{drop}} = \\frac{2T}{R} \\implies \\frac{\\Delta P_1}{\\Delta P_2} = 2$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">ফাজানের পোলারায়ন নীতি</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সমযোজী বনাম আয়নিক</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="ক্যাটায়ন চার্জ $\\uparrow$ ও আকার $\\downarrow \\implies$ পোলারায়ন $\\uparrow$<br />সমযোজী বৈশিষ্ট্য বৃদ্ধি $\\implies$ গলনাঙ্ক ও দ্রাব্যতা হ্রাস<br />গলনাঙ্ক: $NaCl > MgCl_2 > AlCl_3 > SiCl_4$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">বহুভুজের কর্ণ ও হ্যান্ডশেক</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সমাবেশ শর্টকাট</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="কর্ণ সংখ্যা: $d = \\frac{n(n-3)}{2} = ^{n}C_2 - n$<br />১২ বাহুর বহুভুজে: $\\frac{12 \\times 9}{2} = 54$<br />$n$ জনের হ্যান্ডশেক: $^{n}C_2 = \\frac{n(n-1)}{2}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">বিস্তার পরিমাপ মূল ও মাপনী</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">পরিমিত ব্যবধান</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$y = a + bx \\implies \\sigma_y = |b|\\sigma_x$<br />মূল (যোগ/বিয়োগ) থেকে সম্পূর্ণ স্বাধীন<br />প্রথম $n$ স্বাভাবিক সংখ্যার ভেদাঙ্ক: $\\sigma^2 = \\frac{n^2 - 1}{12}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">মেন্ডেলীয় ব্যতিক্রম রেশিও</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">জিনতত্ত্ব ম্যাট্রিক্স</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="অসম্পূর্ণ প্রকটতা: $1 : 2 : 1$<br />লিথাল জিন: $2 : 1$ (ভ্রূণাবস্থায় মৃত্যু)<br />পরিপূরক জিন ও মূক-বধিরতা: $9 : 7$<br />প্রকট এপিস্ট্যাসিস: $13 : 3$" />
+                </div>
+              </div>
             </div>
           )}
 
