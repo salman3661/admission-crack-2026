@@ -32,7 +32,7 @@ interface VaultViewProps {
 
 type ActiveWeek = 'all' | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 type ActiveSubject = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
-type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap';
+type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap' | 'quick_tools';
 
 const WEEK_TABS: { id: ActiveWeek; label: string; weekNum?: number }[] = [
   { id: 'all', label: 'সব সপ্তাহ' },
@@ -273,13 +273,16 @@ export const VaultView: React.FC<VaultViewProps> = ({
       ? subjectScopedEntries
       : subjectScopedEntries.filter((e) => e.chapter === selectedChapter);
 
+    const qToolsCount = (vault.triplets?.length || 0) + (vault.quick_math?.length || 0) + (vault.magic_fractions?.length || 0);
+
     return {
       all: base.length,
       core_formula: base.filter((e) => e.type === 'core_formula').length,
       shortcut: base.filter((e) => e.type === 'shortcut').length,
       trap: base.filter((e) => e.type === 'trap').length,
+      quick_tools: qToolsCount,
     };
-  }, [subjectScopedEntries, selectedChapter]);
+  }, [subjectScopedEntries, selectedChapter, vault]);
 
   // Final filtered entries
   const filteredEntries = useMemo(() => {
@@ -290,7 +293,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
       if (selectedChapter !== 'all' && item.chapter !== selectedChapter) return false;
 
       // Card Type filter
-      if (selectedCardType !== 'all' && item.type !== selectedCardType) return false;
+      if (selectedCardType !== 'all' && selectedCardType !== 'quick_tools' && item.type !== selectedCardType) return false;
 
       // Search Query filter
       if (q) {
@@ -350,6 +353,234 @@ export const VaultView: React.FC<VaultViewProps> = ({
     (!qTool || f.compound.toLowerCase().includes(qTool) || f.mw.toLowerCase().includes(qTool) || f.trick.toLowerCase().includes(qTool))
   );
 
+  // Dedicated Interactive Quick Tools View (Triplets, Roots, Log, Fractions, Bridge Hacks)
+  const renderQuickToolsView = () => (
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-5 animate-in fade-in duration-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200/80 dark:border-slate-800/80">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/25">
+            <Zap className="w-5 h-5 fill-current" />
+          </div>
+          <div>
+            <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
+              ⚡ স্পেশাল কুইক রেফারেন্স টেবিল ও নো-ক্যালকুলেটর ভল্ট
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              ভর্তি পরীক্ষায় ক্যালকুলেটর ছাড়া চোখের পলকে সমস্যা সমাধানের চার্ট ও শর্টকাট ম্যাট্রিক্স
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => setSelectedCardType('all')}
+          className="text-xs font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white underline cursor-pointer shrink-0 self-start sm:self-auto"
+        >
+          অধ্যায় সূত্রে ফিরে যান
+        </button>
+      </div>
+
+      {/* Sub-tool navigation tabs */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+        {[
+          { id: 'triplets' as const, label: `📐 পিথাগোরিয়ান ট্রিপলেট (${filteredTriplets.length})` },
+          { id: 'quick_math' as const, label: `⚡ রুট ও লগ হ্যাক (${filteredQuickMath.length})` },
+          { id: 'fractions' as const, label: `🧪 স্টয়কিওমেট্রি ফ্র্যাকশন (${filteredFractions.length})` },
+          { id: 'w4_bridge' as const, label: '🎯 Week 04 ব্রিজ' },
+          { id: 'w5_bridge' as const, label: '🔮 Week 05 ব্রিজ' },
+          { id: 'w6_bridge' as const, label: '🚀 Week 06 ব্রিজ' },
+          { id: 'w7_matrix' as const, label: '👑 Week 07 ব্রিজ' },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setQuickToolTab(tab.id)}
+            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0 transition-all cursor-pointer ${
+              quickToolTab === tab.id
+                ? 'bg-amber-600 text-white shadow-xs'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Quick Tools Content */}
+      <div className="space-y-4 pt-1">
+        {quickToolTab === 'triplets' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {filteredTriplets.map((item, idx) => (
+              <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-mono font-bold text-sm text-sky-700 dark:text-sky-400">{item.sides}</span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 text-[11px] font-mono font-bold">
+                      মান: {item.result}
+                    </span>
+                  </div>
+                  <div className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <MathText content={item.app} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {quickToolTab === 'quick_math' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {filteredQuickMath.map((item, idx) => (
+              <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60 flex items-center justify-between gap-3">
+                <div className="flex-1 text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-400 mr-2">
+                    {item.type}
+                  </span>
+                  <MathText content={item.item} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {quickToolTab === 'fractions' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {filteredFractions.map((item, idx) => (
+              <div key={idx} className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-bold text-xs sm:text-sm text-teal-700 dark:text-teal-400">
+                    <MathText content={item.compound} />
+                  </span>
+                  <span className="font-mono text-xs px-2.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold">
+                    M: {item.mw}
+                  </span>
+                </div>
+                <div className="text-xs text-slate-600 dark:text-slate-300">
+                  <MathText content={item.trick} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {quickToolTab === 'w4_bridge' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">হ্রদের গভীরতা হ্যাক (বুদ্বুদ)</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">১০.৩৩ মিটার</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="ব্যাস বা ব্যাসার্ধ $n$ গুণ হলে: $h = (n^3 - 1) \times 10.33\text{ m}$<br />আয়তন $n$ গুণ হলে: $h = (n - 1) \times 10.33\text{ m}$" />
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-teal-600 dark:text-teal-400">সংকরায়ন দ্রুত গণনা</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">H মান</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="$H = \frac{1}{2}(V + M - C + A)$<br />$H=2 \implies sp, \quad H=3 \implies sp^2, \quad H=4 \implies sp^3, \quad H=5 \implies sp^3d$" />
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-purple-600 dark:text-purple-400">কর্ণের সংখ্যা ও হাত মেলানো</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">nCr হ্যাক</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="কর্ণের সংখ্যা: $\frac{n(n-3)}{2}$ (১২ বাহুর কর্ণ = ৫৪টি)<br />করমর্দন সংখ্যা: $\frac{n(n-1)}{2}$ (১০ জনের করমর্দন = ৪৫টি)" />
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">মেন্ডেলের ব্যতিক্রম অনুপাত</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">জিনতত্ত্ব</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="পরিপূরক জিন: ৯:৭<br />এপিস্ট্যাসিস (প্রকট): ১২:৩:১<br />এপিস্ট্যাসিস (দ্বৈত প্রচ্ছন্ন): ৯:৭<br />লিথাল জিন: ২:১" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {quickToolTab === 'w5_bridge' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">সরল ছন্দিত গতিতে শক্তি</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">সরণ x</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="$E_k = E_p \implies x = \pm \frac{A}{\sqrt{2}}$<br />$E_k = 3E_p \implies x = \pm \frac{A}{2}$<br />$E_p = 3E_k \implies x = \pm \frac{\sqrt{3}}{2}A$" />
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-teal-600 dark:text-teal-400">ফ্যারাডের মানসিক গণনা</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">৯৬৫০০ কুলম্ব</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="$1\text{ F} = 96500\text{ C} \implies \text{দেয় } \frac{\text{মোলার ভর}}{\text{যোজ্যতা}}\text{ গ্রাম}$<br />$1\text{ F} \implies \text{Al}: 9\text{ g}, \quad \text{Cu}: 31.75\text{ g}, \quad \text{Ag}: 108\text{ g}$" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {quickToolTab === 'w6_bridge' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">ত্রুটিপূর্ণ থার্মোমিটার হ্যাক</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">অনুপাত</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="$\frac{X - \text{ice}}{\text{steam} - \text{ice}} = \frac{C}{100}$<br />বরফ $4^\circ\text{C}$, বাষ্প $96^\circ\text{C}$ হলে ৫০ পাঠের সঠিক মান ঠিক $50^\circ\text{C}$!" />
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-purple-600 dark:text-purple-400">লব হরের অন্তরক ইন্টিগ্রেশন</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">১ সেকেন্ড</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="$\int \frac{f'(x)}{f(x)} dx = \ln|f(x)| + c$<br />$\int \frac{f'(x)}{\sqrt{f(x)}} dx = 2\sqrt{f(x)} + c$" />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {quickToolTab === 'w7_matrix' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-indigo-600 dark:text-indigo-400">ফটোইলেক্ট্রিক ১২৪০০ ফর্মুলা</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">eV মান</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="$E = \frac{12400}{\lambda(\text{\AA})}\text{ eV}$<br />নিবৃত্তি বিভব $V_s$ এর ভোল্ট মান সংখ্যাগতভাবে $K_{\max}(\text{eV})$ এর সমান!" />
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-700/60">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="font-bold text-xs text-teal-600 dark:text-teal-400">কার্বোক্যাটায়ন স্থায়িত্ব ক্রম</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300">জৈব রসায়ন</span>
+              </div>
+              <div className="text-xs text-slate-600 dark:text-slate-300">
+                <MathText content="ক্যাটায়ন ও মুক্ত মূলক: $3^\circ > 2^\circ > 1^\circ > \text{CH}_3^+$<br />কার্বানায়ন: $\text{CH}_3^- > 1^\circ > 2^\circ > 3^\circ$" />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <div className="max-w-6xl mx-auto py-5 px-3 sm:px-6">
       
@@ -374,11 +605,22 @@ export const VaultView: React.FC<VaultViewProps> = ({
           {/* Quick Tools Launch Button */}
           <button
             type="button"
-            onClick={() => setShowQuickToolsModal(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white shadow-sm shadow-amber-500/25 transition-all cursor-pointer shrink-0 active:scale-95"
+            onClick={() => {
+              if (selectedCardType === 'quick_tools') {
+                setSelectedCardType('all');
+              } else {
+                setSelectedCardType('quick_tools');
+                window.scrollTo({ top: 160, behavior: 'smooth' });
+              }
+            }}
+            className={`flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 active:scale-95 ${
+              selectedCardType === 'quick_tools'
+                ? 'bg-amber-600 text-white ring-2 ring-amber-400 shadow-sm'
+                : 'bg-amber-500 hover:bg-amber-600 text-white shadow-sm shadow-amber-500/25'
+            }`}
           >
             <Zap className="w-4 h-4 fill-current" />
-            <span>স্পেশাল কুইক টুলস (Triplets & Logs)</span>
+            <span>{selectedCardType === 'quick_tools' ? '✓ কুইক টেবিল খোলা আছে' : 'স্পেশাল টুলস (Triplets & Roots)'}</span>
           </button>
         </div>
 
@@ -615,30 +857,76 @@ export const VaultView: React.FC<VaultViewProps> = ({
               {typeCounts.trap}
             </span>
           </button>
+
+          <button
+            type="button"
+            onClick={() => setSelectedCardType('quick_tools')}
+            className={`min-h-[40px] flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shrink-0 ${
+              selectedCardType === 'quick_tools'
+                ? 'bg-amber-500 text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400'
+            }`}
+          >
+            <Zap className="w-3.5 h-3.5 fill-current" />
+            <span>⚡ কুইক রেফারেন্স টেবিল</span>
+            <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+              selectedCardType === 'quick_tools'
+                ? 'bg-white/20 text-white'
+                : 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200'
+            }`}>
+              {typeCounts.quick_tools}
+            </span>
+          </button>
         </div>
       </div>
 
       {/* 6. MAIN CONTENT AREA */}
-      {filteredEntries.length === 0 ? (
-        <div className="py-16 text-center max-w-md mx-auto px-4 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs">
+      {selectedCardType === 'quick_tools' ? (
+        renderQuickToolsView()
+      ) : filteredEntries.length === 0 ? (
+        <div className="py-14 sm:py-16 text-center max-w-md mx-auto px-4 bg-white/80 dark:bg-slate-900/80 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xs backdrop-blur-md">
           <BookOpen className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3 animate-pulse" />
-          <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">কোনো সূত্র বা ট্র্যাপ পাওয়া যায়নি</h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-5">
-            আপনার ফিল্টার বা সার্চ কীওয়ার্ডের সাথে মিলছে না। ফিল্টার রিসেট করে আবার চেষ্টা করুন।
+          <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">
+            {selectedChapter !== 'all' ? `"${selectedChapter}" অধ্যায়ে কোনো সূত্র বা ট্র্যাপ পাওয়া যায়নি` : 'কোনো সূত্র বা ট্র্যাপ পাওয়া যায়নি'}
+          </h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-5 leading-relaxed">
+            {selectedChapter !== 'all'
+              ? 'এই অধ্যায়ের জন্য নির্বাচিত ধরনের কোনো কার্ড নেই। "সব ধরন" নির্বাচন করুন অথবা অন্য অধ্যায় বেছে নিন।'
+              : 'আপনার ফিল্টার বা সার্চ কীওয়ার্ডের সাথে মিলছে না। ফিল্টার রিসেট করে আবার চেষ্টা করুন।'}
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              setSearchQuery('');
-              setActiveWeek('all');
-              setActiveSubject('All');
-              setSelectedChapter('all');
-              setSelectedCardType('all');
-            }}
-            className="px-5 py-2.5 rounded-xl bg-[#056839] text-white text-xs sm:text-sm font-bold hover:bg-[#044e2b] transition-all shadow-xs cursor-pointer active:scale-95"
-          >
-            সব ফিল্টার রিসেট করুন
-          </button>
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {selectedCardType !== 'all' && (
+              <button
+                type="button"
+                onClick={() => setSelectedCardType('all')}
+                className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs sm:text-sm font-bold hover:bg-emerald-700 transition-all shadow-xs cursor-pointer active:scale-95"
+              >
+                সব ধরন দেখুন
+              </button>
+            )}
+            {selectedChapter !== 'all' && (
+              <button
+                type="button"
+                onClick={() => setSelectedChapter('all')}
+                className="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-bold hover:bg-indigo-700 transition-all shadow-xs cursor-pointer active:scale-95"
+              >
+                সব অধ্যায় দেখুন
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery('');
+                setActiveWeek('all');
+                setActiveSubject('All');
+                setSelectedChapter('all');
+                setSelectedCardType('all');
+              }}
+              className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all shadow-xs cursor-pointer active:scale-95"
+            >
+              সব ফিল্টার রিসেট
+            </button>
+          </div>
         </div>
       ) : (
         <div className="space-y-6">
