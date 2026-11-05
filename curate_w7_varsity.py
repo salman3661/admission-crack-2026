@@ -3,6 +3,7 @@
 """
 curate_w7_varsity.py
 Week 07 Varsity Ka Core (Primary Spine) & DU Written Special (Target 2026-2027)
+Strictly synchronized with 'W-07 Varsity (Udvash).pdf' Weekly Solution Sheet.
 - 48 MCQs: 12 Physics, 12 Chemistry, 12 Higher Math, 12 Biology (exact 4 slots of 12)
 - 16 Written Problems: 4 Physics, 4 Chemistry, 4 Higher Math, 4 Biology with rubrics
 - Zero boilerplate trap alerts, authentic chapter-specific pitfalls, valid KaTeX.
@@ -13,6 +14,7 @@ def get_varsity_questions():
 
     # ==========================================
     # PHYSICS (12 MCQs) - Chapters: স্থির তড়িৎ, আধুনিক পদার্থবিজ্ঞান
+    # Source: W-07 Varsity (Udvash).pdf
     # ==========================================
     phy_mcqs = [
         {
@@ -22,67 +24,67 @@ def get_varsity_questions():
             "chapter": "স্থির তড়িৎ",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '22-23 Speed Hack",
-            "q": "$+4q$ এবং $+q$ মানের দুটি বিন্দু চার্জ পরস্পরের থেকে $d$ দূরত্বে অবস্থিত। এদের সংযোগ রেখার কোন বিন্দুতে লব্ধি তড়িৎ প্রাবল্য শূন্য ($E=0$) হবে?",
+            "origin": "W-07 Weekly Exam Set-B Q09",
+            "q": "একটি সমান্তরাল পাত ধারকের পাত-দূরত্ব $d$ এবং ধারকত্ব $C$। পাত দুটির ঠিক মাঝখানে $\\frac{d}{4}$ পুরুত্ববিশিষ্ট একটি ধাতব পাত স্থাপন করা হলে, ধারকটির নতুন ধারকত্ব কত হবে?",
             "opts": [
-                "$+4q$ হতে $\\frac{2}{3}d$ দূরত্বে",
-                "$+4q$ হতে $\\frac{1}{3}d$ দূরত্বে",
-                "$+q$ হতে $\\frac{2}{3}d$ দূরত্বে",
-                "$+4q$ হতে $\\frac{1}{2}d$ দূরত্বে"
+                "$\\frac{4}{3}C$",
+                "$\\frac{3}{4}C$",
+                "$\\frac{5}{4}C$",
+                "$2C$"
             ],
             "ans": 0,
-            "exp": "চার্জদ্বয় সমধর্মী হওয়ায় লব্ধি প্রাবল্য শূন্য হবে এদের মধ্যবর্তী সংযোগ রেখায়। শর্টকাট অনুপাত: $q_1$ থেকে দূরত্ব $x_1 = \\frac{\\sqrt{q_1}}{\\sqrt{q_1} + \\sqrt{q_2}} d = \\frac{\\sqrt{4}}{\\sqrt{4} + \\sqrt{1}} d = \\frac{2}{2 + 1} d = \\frac{2}{3}d$। অর্থাৎ $+4q$ হতে $\\frac{2}{3}d$ (বা $+q$ হতে $\\frac{1}{3}d$) দূরত্বে।",
-            "trap_alert": "দূরত্বটি কোন চার্জ হতে চাওয়া হয়েছে ($+4q$ নাকি $+q$) তা লক্ষ্য না করে দ্রুত $\\frac{1}{3}d$ দাগিয়ে ফেলা।",
+            "exp": "ধাতব পাতের পরাবৈদ্যুতিক ধ্রুবক $\\kappa = \\infty$। $t$ পুরুত্বের ধাতব পাত স্থাপন করলে নতুন ধারকত্ব $C' = \\frac{\\epsilon_0 A}{d - t + \\frac{t}{\\kappa}} = \\frac{\\epsilon_0 A}{d - \\frac{d}{4} + 0} = \\frac{\\epsilon_0 A}{\\frac{3d}{4}} = \\frac{4}{3}\\frac{\\epsilon_0 A}{d} = \\frac{4}{3}C$।",
+            "trap_alert": "ধাতব পাতের $\\kappa = \\infty$ মনে না রেখে ডাই-ইলেকট্রিকের মতো ধারকত্ব বহুগুণ বৃদ্ধি না ধরে সরাসরি পাত দূরত্ব কমে $3d/4$ হওয়ায় ধারকত্ব $4C/3$ হয়—এই শর্টকাট মিস করা।",
             "yield_stars": 5,
-            "probability": "99% DU Core",
-            "intelligence_type": "Null Point Field Ratio",
-            "source_book": "ইসহাক স্যার / তপন স্যার"
+            "probability": "99% DU Hotspot",
+            "intelligence_type": "Capacitor Metallic Insertion Hack",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_02",
             "week_id": "week_07",
             "subject": "Physics",
-            "chapter": "স্থির তড়িৎ",
+            "chapter": "আধুনিক পদার্থবিজ্ঞান",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '20-21 Repeat",
-            "q": "একটি বিন্দু চার্জ $Q$-কে কেন্দ্র করে $r$ ব্যাসার্ধের একটি বৃত্তাকার সমবিভব তলে একটি পরীক্ষণ চার্জ $q_0$-কে একবার সম্পূর্ণ ঘুরিয়ে আনতে কৃতকাজের মান কত?",
+            "origin": "W-07 Weekly Exam Set-A Q08",
+            "q": "$m_0$ স্থির ভরের একটি কণার গতিশীল ভর $m$। কণাটির গতিশক্তি যদি স্থির অবস্থার শক্তির $3$ গুণ হয়, তবে গতিশীল ভর ও নিশ্চল ভরের সঠিক সম্পর্ক কোনটি?",
             "opts": [
-                "$0$",
-                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{Q q_0}{r}$",
-                "$2\\pi r \\cdot \\frac{Q q_0}{4\\pi\\epsilon_0 r^2}$",
-                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{Q q_0}{r^2}$"
+                "$m = 4m_0$",
+                "$m = 3m_0$",
+                "$m = 2m_0$",
+                "$m = \\sqrt{10}m_0$"
             ],
             "ans": 0,
-            "exp": "সমবিভব তলের প্রতিটি বিন্দুতে বিভব সমান ($V_A = V_B$), ফলে বিভব পার্থক্য $\\Delta V = 0$। কৃতকাজ $W = q_0 \\Delta V = q_0 \\times 0 = 0$। এছাড়াও তড়িৎ বল একটি সংরক্ষণশীল বল, তাই যেকোনো বদ্ধ পথে মোট কৃতকাজ সর্বদা শূন্য।",
-            "trap_alert": "বৃত্তের পরিধি $2\\pi r$ দিয়ে বলকে গুণ করে কাজ বের করার বৃথা চেষ্টা করা।",
+            "exp": "মোট আপেক্ষিক শক্তি $E = E_k + E_0$। এখানে গতিশক্তি $E_k = 3E_0$। সুতরাং মোট শক্তি $E = 3E_0 + E_0 = 4E_0 \\implies mc^2 = 4m_0 c^2 \\implies m = 4m_0$।",
+            "trap_alert": "গতিশক্তি ৩ গুণ দেখে সরাসরি গতিশীল ভরও ৩ গুণ ($m = 3m_0$) মনে করা; মোট শক্তি ও গতিশক্তির পার্থক্য খেয়াল না করা।",
             "yield_stars": 5,
-            "probability": "98% DU Repeat",
-            "intelligence_type": "Equipotential Work Concept",
-            "source_book": "ইসহাক স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Relativistic Total Energy Mass Relation",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_03",
             "week_id": "week_07",
             "subject": "Physics",
             "chapter": "স্থির তড়িৎ",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '19-20 Repeat",
-            "q": "$R$ ব্যাসার্ধের একটি ফাঁপা পরিবাহী গোলককে $+Q$ চার্জে আহিত করা হলো। গোলকের কেন্দ্র হতে $r = \\frac{R}{2}$ দূরত্বে তড়িৎ বিভব কত?",
+            "origin": "W-07 Weekly Exam Set-C Q09",
+            "q": "একটি ধারকের ধারকত্বের মান অপর একটি ধারকের মানের অর্ধেক। ধারক দুটি সমান্তরাল সমবায়ে যুক্ত থাকাকালীন তুল্য ধারকত্ব, শ্রেণি সমবায়ে থাকাকালীন তুল্য ধারকত্বের কত গুণ হবে?",
             "opts": [
-                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R}$",
-                "$0$",
-                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{2Q}{R}$",
-                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{4Q}{R}$"
+                "$4.5$ গুণ",
+                "$2.0$ গুণ",
+                "$3.0$ গুণ",
+                "$9.0$ গুণ"
             ],
             "ans": 0,
-            "exp": "চার্জিত পরিবাহী গোলকের অভ্যন্তরে কোনো চার্জ থাকে না, ফলে অভ্যন্তরে সর্বত্র তড়িৎ প্রাবল্য $E = 0$। যেহেতু $E = -\\frac{dV}{dr} = 0$, তাই গোলকের কেন্দ্র হতে পৃষ্ঠ পর্যন্ত বিভব সর্বত্র ধ্রুবক এবং পৃষ্ঠের বিভবের সমান ($V_{\\text{inside}} = V_{\\text{surface}} = \\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R}$)।",
-            "trap_alert": "অভ্যন্তরে প্রাবল্য শূন্য ($E=0$) দেখে বিভবও শূন্য ($V=0$) ধরে নেওয়া সবচেয়ে মারাত্মক ফাঁদ।",
+            "exp": "ধরি ধারক দুটির মান $C$ এবং $2C$। সমান্তরাল সমবায়ে তুল্য ধারকত্ব $C_p = C + 2C = 3C$। শ্রেণি সমবায়ে তুল্য ধারকত্ব $C_s = \\frac{C \\times 2C}{C + 2C} = \\frac{2}{3}C$। অনুপাত $\\frac{C_p}{C_s} = \\frac{3C}{\\frac{2}{3}C} = \\frac{9}{2} = 4.5$ গুণ।",
+            "trap_alert": "অনুপাত উল্টে দিয়ে $C_s / C_p = 2/9$ বা ধারক দ্বিগুণ দেখে সরাসরি ৪ গুণ দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Spherical Conductor Potential",
-            "source_book": "তপন স্যার"
+            "probability": "97% Speed Hack",
+            "intelligence_type": "Capacitor Combination Ratio Hack",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_04",
@@ -91,67 +93,67 @@ def get_varsity_questions():
             "chapter": "স্থির তড়িৎ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '23-24 Concept",
-            "q": "একটি সমান্তরাল পাত ধারককে ব্যাটারির সাথে যুক্ত করে আহিত করার পর ব্যাটারি বিচ্ছিন্ন করা হলো। এরপর পাতদ্বয়ের মাঝে $\\kappa = 4$ ডাই-ইলেকট্রিক ধ্রুবকের মাধ্যম প্রবেশ করালে সঞ্চিত শক্তির কী পরিবর্তন ঘটবে?",
+            "origin": "W-07 Daily Exam P-07 Set-A Q03",
+            "q": "একটি তড়িৎ দ্বিমেরুর অক্ষের উপর রাখা একটি আধানের ওপর $F$ বল প্রযুক্ত হয়। দ্বিমেরুর কেন্দ্র হতে উক্ত আধানের দূরত্ব দ্বিগুণ করা হলে, আধানটির ওপর প্রযুক্ত বল কত হবে?",
             "opts": [
-                "পূর্বের শক্তির $\\frac{1}{4}$ গুণ হবে",
-                "পূর্বের শক্তির $4$ গুণ হবে",
-                "অপরিবর্তিত থাকবে",
-                "পূর্বের শক্তির $16$ গুণ হবে"
+                "$\\frac{F}{8}$",
+                "$\\frac{F}{4}$",
+                "$\\frac{F}{2}$",
+                "$8F$"
             ],
             "ans": 0,
-            "exp": "ব্যাটারি বিচ্ছিন্ন করায় চার্জ $Q$ ধ্রুবক থাকে ($Q' = Q$)। ডাই-ইলেকট্রিক প্রবেশ করালে নতুন ধারকত্ব $C' = \\kappa C = 4C$। সঞ্চিত শক্তি $U = \\frac{Q^2}{2C}$। সুতরাং নতুন সঞ্চিত শক্তি $U' = \\frac{Q^2}{2(4C)} = \\frac{1}{4} U$।",
-            "trap_alert": "ব্যাটারি যুক্ত থাকা ($V$ ধ্রুবক, যেখানে $U' = 4U$) এবং ব্যাটারি বিচ্ছিন্ন থাকার ($Q$ ধ্রুবক, যেখানে $U' = U/4$) শর্তের পার্থক্য ভুলে যাওয়া।",
+            "exp": "তড়িৎ দ্বিমেরুর অক্ষীয় রেখায় প্রাবল্য $E \\propto \\frac{1}{r^3}$, ফলে প্রযুক্ত বল $F = qE \\propto \\frac{1}{r^3}$। দূরত্ব $r' = 2r$ হলে বল $F' = \\frac{F}{2^3} = \\frac{F}{8}$।",
+            "trap_alert": "কুলম্বের সাধারণ বিন্দু চার্জের ব্যস্তানুপাতিক বর্গ সূত্র ($F \\propto 1/r^2$) প্রয়োগ করে $F/4$ দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "96% DU Hotspot",
-            "intelligence_type": "Capacitor Dielectric Energy Shift",
-            "source_book": "ইসহাক স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Dipole Force Inverse Cube Law",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_05",
             "week_id": "week_07",
             "subject": "Physics",
             "chapter": "স্থির তড়িৎ",
-            "tag": "Speed Hack",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "CKRUET '22-23 Speed Hack",
-            "q": "একই আকার ও $V$ বিভবের $64$ টি পারদ ফোঁটা একত্রিত হয়ে একটি বৃহৎ ফোঁটায় পরিণত হলে বৃহৎ ফোঁটাটির বিভব কত গুণ বৃদ্ধি পাবে?",
+            "origin": "W-07 Daily Exam P-07 Set-A Q04",
+            "q": "$R$ ব্যাসার্ধের একটি ফাঁপা গোলাকৃতি পরিবাহীর পৃষ্ঠে $+Q$ চার্জ দেওয়া হলো। গোলকের কেন্দ্র হতে $(R - 2)$ একক দূরত্বে কোনো বিন্দুর তড়িৎ বিভব কত? [যেখানে $R > 2$]",
             "opts": [
-                "$16$ গুণ",
-                "$4$ গুণ",
-                "$64$ গুণ",
-                "$8$ গুণ"
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R}$",
+                "$0$",
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R - 2}$",
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{(R - 2)^2}$"
             ],
             "ans": 0,
-            "exp": "$n$ টি ফোঁটা একত্রিত হলে আয়তন সংরক্ষণ নীতি অনুসারে: $R = n^{1/3} r = 64^{1/3} r = 4r$। মোট চার্জ $Q = n q = 64q$। নতুন বিভব $V' = \\frac{Q}{C'} = \\frac{n q}{n^{1/3} C} = n^{2/3} V = (64)^{2/3} V = (4^3)^{2/3} V = 4^2 V = 16V$।",
-            "trap_alert": "বিভবের ক্ষেত্রে $n^{2/3}$ এর বদলে ধারকত্বের $n^{1/3}$ ($4$ গুণ) বা চার্জের $n$ ($64$ গুণ) উত্তর দাগানো।",
+            "exp": "চার্জিত পরিবাহী গোলকের অভ্যন্তরে প্রাবল্য শূন্য ($E = -\\frac{dV}{dr} = 0$), ফলে পৃষ্ঠ হতে কেন্দ্র পর্যন্ত সর্বত্র তড়িৎ বিভব সমান ও ধ্রুবক থাকে। যেহেতু $(R - 2) < R$, বিন্দুটি গোলকের অভ্যন্তরে অবস্থিত। অতএব বিভব $V = V_{\\text{surface}} = \\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R}$।",
+            "trap_alert": "দূরত্বের জায়গায় সরাসরি $(R-2)$ বসিয়ে $\\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R-2}$ দাগানো অথবা অভ্যন্তরে প্রাবল্য শূন্য দেখে বিভবও শূন্য দাগানো।",
             "yield_stars": 5,
-            "probability": "97% Speed Hack",
-            "intelligence_type": "Coalescing Droplets Scaling",
-            "source_book": "গিয়াসউদ্দিন স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Spherical Conductor Interior Potential",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_06",
             "week_id": "week_07",
             "subject": "Physics",
-            "chapter": "আধুনিক পদার্থবিজ্ঞান",
-            "tag": "Speed Hack",
+            "chapter": "স্থির তড়িৎ",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Repeat",
-            "q": "একটি স্থির কণার ভর $m_0$। কণাটি কত বেগে গতিশীল হলে এর গতিশীল ভর নিশ্চল ভরের দ্বিগুণ ($m = 2m_0$) হবে?",
+            "origin": "W-07 Daily Exam P-07 Set-A Q05",
+            "q": "তড়িৎ দ্বিমেরুর দিকের সাথে $60^\\circ$ কোণে দ্বিমেরু অক্ষের মধ্যবিন্দু হতে $r$ দূরত্বে অবস্থিত কোনো বিন্দুতে তড়িৎ প্রাবল্যের মান কত?",
             "opts": [
-                "$\\frac{\\sqrt{3}}{2}c \\approx 0.866c$",
-                "$\\frac{1}{2}c = 0.5c$",
-                "$\\frac{1}{\\sqrt{2}}c \\approx 0.707c$",
-                "$\\frac{\\sqrt{5}}{3}c$"
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{7}p}{2r^3}$",
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{3}p}{r^3}$",
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{p}{r^3}$",
+                "$\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{7}p}{r^3}$"
             ],
             "ans": 0,
-            "exp": "আপেক্ষিকতার ভর বৃদ্ধির সূত্র: $m = \\frac{m_0}{\\sqrt{1 - v^2/c^2}} = 2m_0 \\implies \\sqrt{1 - v^2/c^2} = \\frac{1}{2} \\implies 1 - \\frac{v^2}{c^2} = \\frac{1}{4} \\implies \\frac{v^2}{c^2} = \\frac{3}{4} \\implies v = \\frac{\\sqrt{3}}{2}c \\approx 0.866c$।",
-            "trap_alert": "ভর দ্বিগুণ দেখে বেগও আলোর বেগের অর্ধেক ($0.5c$) মনে করা।",
+            "exp": "দ্বিমেরুর যেকোনো বিন্দুতে প্রাবল্য: $E = \\frac{1}{4\\pi\\epsilon_0}\\frac{p}{r^3}\\sqrt{1 + 3\\cos^2\\theta}$। $\\theta = 60^\\circ$ হলে $\\cos 60^\\circ = \\frac{1}{2}$, ফলে $\\sqrt{1 + 3\\left(\\frac{1}{2}\\right)^2} = \\sqrt{1 + \\frac{3}{4}} = \\sqrt{\\frac{7}{4}} = \\frac{\\sqrt{7}}{2}$। অতএব $E = \\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{7}p}{2r^3}$।",
+            "trap_alert": "রুটের ভেতর $1 + 3\\cos^2\\theta$ এর ৩ দিয়ে গুণ করতে ভুলে গিয়ে $\\sqrt{1 + 1/4} = \\sqrt{5}/2$ দাগানো।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Relativistic Mass Ratio",
-            "source_book": "ইসহাক স্যার"
+            "probability": "96% DU Core",
+            "intelligence_type": "Arbitrary Angle Dipole Field",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_07",
@@ -160,21 +162,21 @@ def get_varsity_questions():
             "chapter": "আধুনিক পদার্থবিজ্ঞান",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '18-19 Repeat",
-            "q": "একটি $1\\text{ m}$ দৈর্ঘ্যের স্কেল তার দৈর্ঘ্য বরাবর $0.6c$ বেগে গতিশীল হলে একজন স্থির পর্যবেক্ষকের নিকট এর আপাত দৈর্ঘ্য কত হবে?",
+            "origin": "W-07 Daily Exam P-07 Set-A Q19",
+            "q": "যদি একটি প্রোটনের গতিশক্তি তার নিশ্চল ভরশক্তি $m_0 c^2$ এর সমান হয়, তবে প্রোটনটির ভরবেগের মান কত হবে?",
             "opts": [
-                "$80\\text{ cm}$",
-                "$60\\text{ cm}$",
-                "$100\\text{ cm}$",
-                "$40\\text{ cm}$"
+                "$\\sqrt{3}m_0 c$",
+                "$2m_0 c$",
+                "$\\sqrt{2}m_0 c$",
+                "$m_0 c$"
             ],
             "ans": 0,
-            "exp": "দৈর্ঘ্য সংকোচন সূত্র: $L = L_0 \\sqrt{1 - v^2/c^2} = 1 \\times \\sqrt{1 - (0.6)^2} = \\sqrt{1 - 0.36} = \\sqrt{0.64} = 0.8\\text{ m} = 80\\text{ cm}$। (ম্যাজিক ট্রিপলেট: $0.6c$ বেগে ফ্যাক্টর সর্বদা $0.8$ এবং $0.8c$ বেগে ফ্যাক্টর সর্বদা $0.6$)।",
-            "trap_alert": "মিটারে $0.8$ বের করে অপশনে সেন্টিমিটার খেয়াল না করা অথবা লম্বভাবে গতিশীলের ক্ষেত্রে দৈর্ঘ্য অপরিবর্তিত থাকার নিয়ম গুলিয়ে ফেলা।",
+            "exp": "মোট শক্তি $E = E_k + E_0 = m_0 c^2 + m_0 c^2 = 2m_0 c^2$। আবার আইনস্টাইনের ভর-শক্তি-ভরবেগ সম্পর্ক: $E^2 = p^2 c^2 + E_0^2 \\implies (2m_0 c^2)^2 = p^2 c^2 + (m_0 c^2)^2 \\implies 4m_0^2 c^4 = p^2 c^2 + m_0^2 c^4 \\implies p^2 c^2 = 3m_0^2 c^4 \\implies p = \\sqrt{3}m_0 c$।",
+            "trap_alert": "$p = mv$ দিয়ে ক্লাসিক্যাল গতিশক্তি $E_k = \\frac{p^2}{2m}$ এর ভুল সূত্রে গিয়ে $p = \\sqrt{2}m_0 c$ দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "98% DU Core",
-            "intelligence_type": "Length Contraction Triplet",
-            "source_book": "তপন স্যার"
+            "probability": "98% Speed Hack",
+            "intelligence_type": "Relativistic Momentum-Energy Triplet",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_08",
@@ -183,21 +185,21 @@ def get_varsity_questions():
             "chapter": "আধুনিক পদার্থবিজ্ঞান",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '23-24 Conceptual",
-            "q": "একটি ধাতব পাতে নির্দিষ্ট তরঙ্গদৈর্ঘ্যের আলো ফেলে নিবৃত্তি বিভব $V_s$ পাওয়া গেল। আপতিত আলোর তরঙ্গদৈর্ঘ্য অর্ধেক করা হলে নতুন নিবৃত্তি বিভব $V_s'$ এর মান কীরূপ হবে?",
+            "origin": "W-07 Weekly Exam Set-A Q07",
+            "q": "একজন নভোচারী $22$ বছর বয়সে $1.8 \\times 10^8\\text{ ms}^{-1}$ বেগে গতিশীল একটি নভোযানে চড়ে মহাকাশ ভ্রমণে গেলেন। পৃথিবীর হিসাবে তিনি $25$ বছর মহাকাশে কাটিয়ে ফিরে এলেন। পৃথিবীতে ফিরে আসার পর নভোচারীর বর্তমান বয়স কত বছর?",
             "opts": [
-                "$V_s' > 2V_s$ (দ্বিগুণের চেয়ে বেশি)",
-                "$V_s' = 2V_s$ (ঠিক দ্বিগুণ)",
-                "$V_s' < 2V_s$ (দ্বিগুণের চেয়ে কম)",
-                "$V_s' = V_s$ (অপরিবর্তিত)"
+                "$42$ বছর",
+                "$47$ বছর",
+                "$37$ বছর",
+                "$40$ বছর"
             ],
             "ans": 0,
-            "exp": "আইনস্টাইনের আলোকতড়িৎ সমীকরণ: $eV_s = \\frac{hc}{\\lambda} - W_0 \\implies \\frac{hc}{\\lambda} = eV_s + W_0$। তরঙ্গদৈর্ঘ্য $\\lambda' = \\frac{\\lambda}{2}$ হলে: $eV_s' = \\frac{hc}{\\lambda/2} - W_0 = 2\\frac{hc}{\\lambda} - W_0 = 2(eV_s + W_0) - W_0 = 2eV_s + W_0$। যেহেতু কার্যপেক্ষক $W_0 > 0$, তাই $eV_s' > 2eV_s \\implies V_s' > 2V_s$।",
-            "trap_alert": "তরঙ্গদৈর্ঘ্য অর্ধেক হলে ফোটনের শক্তি দ্বিগুণ হয় ঠিকই, কিন্তু বিয়োগফল $W_0$ এর কারণে নিবৃত্তি বিভব ঠিক দ্বিগুণ নয় বরং দ্বিগুণের চেয়ে বেশি হয়।",
+            "exp": "নভোচারীর নিজস্ব সময় (প্রকৃত কাল) $t_0 = t \\sqrt{1 - \\frac{v^2}{c^2}} = 25 \\times \\sqrt{1 - \\left(\\frac{1.8 \\times 10^8}{3 \\times 10^8}\\right)^2} = 25 \\times \\sqrt{1 - (0.6)^2} = 25 \\times 0.8 = 20\\text{ বছর}$। নভোচারীর বর্তমান বয়স $= 22 + 20 = 42\\text{ বছর}$।",
+            "trap_alert": "পৃথিবীর ২৫ বছরকে সরাসরি ২২ এর সাথে যোগ করে ৪৭ বছর দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "96% Analytical Trap",
-            "intelligence_type": "Photoelectric Stopping Potential Non-linearity",
-            "source_book": "ইসহাক স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Time Dilation Age Calculation",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_09",
@@ -206,21 +208,21 @@ def get_varsity_questions():
             "chapter": "আধুনিক পদার্থবিজ্ঞান",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "CKRUET '21-22 Speed Hack",
-            "q": "$100\\text{ V}$ বিভব পার্থক্যে ত্বরান্বিত একটি ইলেকট্রনের ডি-ব্রগলি তরঙ্গদৈর্ঘ্য কত?",
+            "origin": "W-07 Weekly Exam Set-A Q10",
+            "q": "$5000\\text{ \\AA}$ তরঙ্গদৈর্ঘ্যের একটি দৃশ্যমান আলোকরশ্মির একটি ফোটনের শক্তি ইলেকট্রন-ভোল্ট ($\\text{eV}$) এককে কত?",
             "opts": [
-                "$1.23\\text{ \\AA}$ ($0.123\\text{ nm}$)",
-                "$0.123\\text{ \\AA}$",
-                "$12.3\\text{ \\AA}$",
-                "$1.23\\text{ pm}$"
+                "$2.48\\text{ eV}$",
+                "$1.24\\text{ eV}$",
+                "$3.10\\text{ eV}$",
+                "$4.96\\text{ eV}$"
             ],
             "ans": 0,
-            "exp": "ইলেকট্রনের ডি-ব্রগলি তরঙ্গদৈর্ঘ্যের জন্য স্ট্যান্ডার্ড স্পিড হ্যাক: $\\lambda = \\frac{1.227}{\\sqrt{V}}\\text{ nm} = \\sqrt{\\frac{150}{V}}\\text{ \\AA}$। $V = 100\\text{ V}$ বসালে: $\\lambda = \\frac{1.227}{\\sqrt{100}}\\text{ nm} = \\frac{1.227}{10}\\text{ nm} = 0.1227\\text{ nm} = 1.227\\text{ \\AA} \\approx 1.23\\text{ \\AA}$।",
-            "trap_alert": "অ্যানগোস্ট্রম ($\\text{\\AA}$) এবং ন্যানোমিটার ($\\text{nm}$) এককের দশমিক স্থান পরিবর্তন নিয়ে ভুল হওয়া।",
+            "exp": "উদভাস ম্যাজিক শর্টকাট: $E(\\text{eV}) = \\frac{12400}{\\lambda(\\text{\\AA})} = \\frac{12400}{5000} = \\frac{124}{50} = 2.48\\text{ eV}$। (ম্যানুয়াল ক্যালকুলেটর ছাড়া মাত্র ৫ সেকেন্ডের হ্যাক!)",
+            "trap_alert": "$\\frac{hc}{\\lambda}$ সূত্রে $h = 6.63 \\times 10^{-34}$ এবং $c = 3 \\times 10^8$ বসিয়ে জুলে নিয়ে আবার $1.6 \\times 10^{-19}$ দিয়ে ভাগ করার সময় দশমিকের হিসাবে ভুল করা।",
             "yield_stars": 5,
-            "probability": "97% Speed Hack",
-            "intelligence_type": "Electron De Broglie Voltage Formula",
-            "source_book": "ইসহাক স্যার"
+            "probability": "99% Speed Hack",
+            "intelligence_type": "Photon Energy Fast eV Conversion",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_10",
@@ -229,72 +231,73 @@ def get_varsity_questions():
             "chapter": "আধুনিক পদার্থবিজ্ঞান",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Repeat",
-            "q": "একটি তেজস্ক্রিয় মৌলের অর্ধায়ু $4\\text{ দিন}$। $16\\text{ দিন}$ পর উক্ত নমুনার কত অংশ ক্ষয়প্রাপ্ত হবে?",
+            "origin": "W-07 Daily Exam P-07 Set-A Q02",
+            "q": "লরেঞ্জ রূপান্তরে দুইটি বুলেট ট্রেন পরস্পরের বিপরীত দিকে প্রতিটি $300\\text{ km h}^{-1}$ সুষম বেগে অতিক্রম করছে। একটি ট্রেনের সাপেক্ষে অন্য ট্রেনে অবস্থিত ঘড়ির সময়ের আপেক্ষিক পার্থক্য কত হবে?",
             "opts": [
-                "$\\frac{15}{16}$ অংশ",
-                "$\\frac{1}{16}$ অংশ",
-                "$\\frac{7}{8}$ অংশ",
-                "$\\frac{3}{4}$ অংশ"
+                "$0\\text{ s}$",
+                "$1\\text{ s}$",
+                "$\\infty$",
+                "$0.5\\text{ s}$"
             ],
             "ans": 0,
-            "exp": "অর্ধায়ুর সংখ্যা $n = \\frac{t}{T_{1/2}} = \\frac{16}{4} = 4$। $4$ টি অর্ধায়ু পর অবশিষ্ট থাকে $N = N_0 \\left(\\frac{1}{2}\\right)^4 = \\frac{N_0}{16}$ (অর্থাৎ $\\frac{1}{16}$ অংশ অবশিষ্ট)। সুতরাং ক্ষয়প্রাপ্ত অংশ $= 1 - \\frac{1}{16} = \\frac{15}{16}$ অংশ।",
-            "trap_alert": "প্রশ্নে 'কত অংশ অবশিষ্ট থাকবে' নাকি 'কত অংশ ক্ষয়প্রাপ্ত হবে' চাওয়া হয়েছে তা ভালো করে না দেখে $\\frac{1}{16}$ দাগিয়ে ফেলা।",
-            "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Decay Fraction Pitfall",
-            "source_book": "তপন স্যার"
+            "exp": "$300\\text{ km h}^{-1}$ বেগ আলোর বেগের ($c = 3 \\times 10^8\\text{ ms}^{-1}$) তুলনায় অত্যন্ত নগণ্য ($v \\ll c$)। ফলে আপেক্ষিকতার প্রভাব $\\sqrt{1 - v^2/c^2} \\approx 1$। ট্রেনদ্বয়ের ঘড়ির সময়ের মধ্যে কোনো পরিমাপযোগ্য পার্থক্য হবে না, অর্থাৎ পার্থক্য $0\\text{ s}$।",
+            "trap_alert": "বিশেষ আপেক্ষিকতার কাল দীর্ঘায়ন সূত্র জোর করে প্রয়োগ করতে গিয়ে হিসাব জটিল করা; সাধারণ পার্থিব বেগে আপেক্ষিকতার প্রভাব শূন্য।",
+            "yield_stars": 4,
+            "probability": "95% DU Concept",
+            "intelligence_type": "Classical Limit of Relativity",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_11",
             "week_id": "week_07",
             "subject": "Physics",
-            "chapter": "আধুনিক পদার্থবিজ্ঞান",
+            "chapter": "স্থির তড়িৎ",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '22-23 Speed Hack",
-            "q": "সূর্যের ভরের দেড়গুণ ($1.5 M_\\odot \\approx 3 \\times 10^{30}\\text{ kg}$) একটি নক্ষত্র ব্ল্যাকহোলে পরিণত হলে এর সোয়ার্জশিল্ড ব্যাসার্ধ (ইভেন্ট হরাইজন) কত হবে?",
+            "origin": "W-07 Daily Exam P-07 Set-A Q08",
+            "q": "একটি সমান্তরাল পাত ধারকের পাতদ্বয়ের মধ্যবর্তী দূরত্ব $d = 1 \\times 10^{-3}\\text{ m}$। এই ধারকের ধারকত্ব $2\\text{ F}$ হলে প্রতি পাতের ক্ষেত্রফল কত হতে হবে? [বায়ু মাধ্যমের ভেদনযোগ্যতা $\\epsilon_0 = 8.85 \\times 10^{-12}\\text{ C}^2\\text{ N}^{-1}\\text{ m}^{-2}$]",
             "opts": [
-                "$4.5\\text{ km}$ ($4500\\text{ m}$)",
-                "$3.0\\text{ km}$",
-                "$9.0\\text{ km}$",
-                "$1.5\\text{ km}$"
+                "$2.25 \\times 10^8\\text{ m}^2$",
+                "$4.50 \\times 10^8\\text{ m}^2$",
+                "$1.13 \\times 10^8\\text{ m}^2$",
+                "$2.25 \\times 10^5\\text{ m}^2$"
             ],
             "ans": 0,
-            "exp": "সোয়ার্জশিল্ড ব্যাসার্ধ $R_s = \\frac{2GM}{c^2}$। ১ সৌর ভরের জন্য $R_{s,\\odot} \\approx 3\\text{ km}$। সুতরাং শর্টকাট: $R_s = 3\\text{ km} \\times \\left(\\frac{M}{M_\\odot}\\right) = 3\\text{ km} \\times 1.5 = 4.5\\text{ km} = 4500\\text{ m}$।",
-            "trap_alert": "সোয়ার্জশিল্ড ব্যাসার্ধের বদলে ব্যাস ($9.0\\text{ km}$) দাগানো অথবা একক কিমি বনাম মিটারে বিভ্রান্ত হওয়া।",
-            "yield_stars": 4,
-            "probability": "94% Speed Hack",
-            "intelligence_type": "Schwarzschild Radius Speed Hack",
-            "source_book": "ইসহাক স্যার"
+            "exp": "ধারকত্ব $C = \\frac{\\epsilon_0 A}{d} \\implies A = \\frac{C \\cdot d}{\\epsilon_0} = \\frac{2 \\times 10^{-3}}{8.85 \\times 10^{-12}} \\approx \\frac{2}{8.88} \\times 10^9 \\approx 0.225 \\times 10^9 = 2.25 \\times 10^8\\text{ m}^2$। (এটি প্রমাণ করে যে ১ ফ্যারাড বা ২ ফ্যারাডের বাস্তব ধারক পাত তৈরি করা অসম্ভব বিশাল ক্ষেত্রফল দাবি করে!)",
+            "trap_alert": "ঘাত হিসাবের সময় $10^{-3} / 10^{-12} = 10^9$ এর জায়গায় $10^{-15}$ লিখে ফেলা।",
+            "yield_stars": 5,
+            "probability": "96% DU Direct",
+            "intelligence_type": "Capacitor Area Dimensional Analysis",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_phy_12",
             "week_id": "week_07",
             "subject": "Physics",
             "chapter": "আধুনিক পদার্থবিজ্ঞান",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '17-18 Direct",
-            "q": "যুগল সৃষ্টি (Pair Production) প্রক্রিয়ায় একটি ফোটন হতে একটি ইলেকট্রন ও একটি পজিট্রন সৃষ্টি হতে আপতিত ফোটনের ন্যূনতম শক্তি কত হতে হবে?",
+            "origin": "W-07 Daily Exam P-07 Set-B Q15",
+            "q": "কোনো ধাতব পৃষ্ঠে আপতিত ফোটনের শক্তি কার্যপেক্ষকের দ্বিগুণ ($E_1 = 2W_0$)। আপতিত আলোর তরঙ্গদৈর্ঘ্য কত গুণ করলে দ্রুততম ফটো-ইলেকট্রনের গতিশক্তি দ্বিগুণ হবে?",
             "opts": [
-                "$1.02\\text{ MeV}$",
-                "$0.51\\text{ MeV}$",
-                "$2.04\\text{ MeV}$",
-                "$0.25\\text{ MeV}$"
+                "$\\frac{2}{3}$ গুণ",
+                "$\\frac{1}{2}$ গুণ",
+                "$\\frac{3}{4}$ গুণ",
+                "$2$ গুণ"
             ],
             "ans": 0,
-            "exp": "একটি ইলেকট্রন বা পজিট্রনের নিশ্চল ভরশক্তি $E_0 = m_0 c^2 = 0.511\\text{ MeV}$। যুগল সৃষ্টিতে ইলেকট্রন ও পজিট্রন জোড় তৈরি হতে ন্যূনতম শক্তি $E_{\\min} = 2 m_0 c^2 = 2 \\times 0.511\\text{ MeV} \\approx 1.02\\text{ MeV}$।",
-            "trap_alert": None,
+            "exp": "আইনস্টাইনের আলোকতড়িৎ সমীকরণ: $E_1 = W_0 + E_{k1} \\implies 2W_0 = W_0 + E_{k1} \\implies E_{k1} = W_0$। গতিশক্তি দ্বিগুণ করতে হলে $E_{k2} = 2E_{k1} = 2W_0$। তখন প্রয়োজনীয় ফোটন শক্তি $E_2 = W_0 + E_{k2} = W_0 + 2W_0 = 3W_0$। তরঙ্গদৈর্ঘ্যের অনুপাত: $\\frac{\\lambda_2}{\\lambda_1} = \\frac{E_1}{E_2} = \\frac{2W_0}{3W_0} = \\frac{2}{3}$। অর্থাৎ তরঙ্গদৈর্ঘ্য $\\frac{2}{3}$ গুণ করতে হবে।",
+            "trap_alert": "গতিশক্তি দ্বিগুণ দেখে তরঙ্গদৈর্ঘ্য অর্ধেক ($\\frac{1}{2}$) মনে করা; কার্যপেক্ষক যোগ থাকার সম্পর্কটি ভুলে যাওয়া।",
             "yield_stars": 5,
-            "probability": "97% DU Repeat",
-            "intelligence_type": "Pair Production Threshold Energy",
-            "source_book": "ইসহাক স্যার"
+            "probability": "98% Speed Hack",
+            "intelligence_type": "Photoelectric Wavelength-Kinetic Energy Ratio",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         }
     ]
 
     # ==========================================
-    # CHEMISTRY (12 MCQs) - Chapters: জৈব রসায়ন
+    # CHEMISTRY (12 MCQs) - Chapter: জৈব রসায়ন
+    # Source: W-07 Varsity (Udvash).pdf
     # ==========================================
     che_mcqs = [
         {
@@ -304,44 +307,44 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Repeat",
-            "q": "$\\text{CH}_3-\\text{CH}(\\text{OH})-\\text{CH}_2-\\text{COOH}$ যৌগটির সঠিক IUPAC নাম কোনটি?",
+            "origin": "W-07 Daily Exam C-07 Set-A Q19",
+            "q": "মুক্ত শিকল কাঠামোরুক্ত গ্লুকোজ ($\\text{C}_6\\text{H}_{12}\\text{O}_6$) অণুতে কতটি সেকেন্ডারি ($2^\\circ$) অ্যালকোহলীয় মূলক ($-\\text{CH(OH)}-$ ) বিদ্যমান?",
             "opts": [
-                "৩-হাইড্রোক্সিবিউটানয়িক এসিড",
-                "২-হাইড্রোক্সিবিউটানয়িক এসিড",
-                "৩-হাইড্রোক্সিবিউটানল",
-                "বিউটান-৩-অল-১-ওয়িক এসিড"
+                "$4$ টি",
+                "$5$ টি",
+                "$1$ টি",
+                "$3$ টি"
             ],
             "ans": 0,
-            "exp": "কার্যকরী মূলকের অগ্রগণ্যতার ক্রমানুসারে $-\\text{COOH} > -\\text{OH}$। তাই $-\\text{COOH}$ এর কার্বনকে ১ নম্বর ধরে শিকল গণনা শুরু করতে হবে: $\\overset{4}{\\text{C}}\\text{H}_3-\\overset{3}{\\text{C}}\\text{H}(\\text{OH})-\\overset{2}{\\text{C}}\\text{H}_2-\\overset{1}{\\text{C}}\\text{OOH}$। ৩-নম্বরে হাইড্রক্সিল প্রতিস্থাপক থাকায় সঠিক নাম ৩-হাইড্রোক্সিবিউটানয়িক এসিড।",
-            "trap_alert": "$-\\text{OH}$ এর দিক থেকে নাম্বারিং করে '২-হাইড্রোক্সিবিউটানয়িক এসিড' দাগিয়ে ফেলা।",
+            "exp": "ডি-গ্লুকোজের মুক্ত শিকল কাঠামো: $\\text{CHO}-\\overset{2}{\\text{C}}\\text{H(OH)}-\\overset{3}{\\text{C}}\\text{H(OH)}-\\overset{4}{\\text{C}}\\text{H(OH)}-\\overset{5}{\\text{C}}\\text{H(OH)}-\\overset{6}{\\text{C}}\\text{H}_2\\text{OH}$। এখানে ২, ৩, ৪ এবং ৫ নম্বর কার্বন মোট ৪টি সেকেন্ডারি ($2^\\circ$) অ্যালকোহল মূলক; ৬ নম্বর কার্বনের $-\\text{CH}_2\\text{OH}$ হলো ১টি প্রাইমারি ($1^\\circ$) অ্যালকোহল মূলক এবং ১ নম্বর কার্বনে অ্যালডিহাইড মূলক। মোট হাইড্রক্সিল মূলক ৫টি, কিন্তু সেকেন্ডারি ৪টি।",
+            "trap_alert": "গ্লুকোজে মোট ৫টি $-\\text{OH}$ মূলক দেখে ৫টি দাগিয়ে ফেলা; প্রশ্নে সুস্পষ্টভাবে 'সেকেন্ডারি অ্যালকোহলীয় গ্রুপ' চাওয়া হয়েছে।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "IUPAC Priority Rules",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "99% DU Hotspot",
+            "intelligence_type": "Glucose Polyol Functional Group Count",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_02",
             "week_id": "week_07",
             "subject": "Chemistry",
             "chapter": "জৈব রসায়ন",
-            "tag": "Speed Hack",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '19-20 Repeat",
-            "q": "পেনটেন ($\\text{C}_5\\text{H}_{12}$) অ্যালকেনের সম্ভাব্য শিকল সমাণু (Chain Isomers) সংখ্যা কতটি?",
+            "origin": "W-07 Daily Exam C-07 Set-A Q01",
+            "q": "নিচের কোন জৈব যৌগটিতে দুইটি কাইরাল বা অপ্রতিসম কার্বন কেন্দ্র বিদ্যমান?",
             "opts": [
-                "$3$ টি",
-                "$5$ টি",
-                "$2$ টি",
-                "$4$ টি"
+                "বিউটেন-২, ৩-ডাইঅল",
+                "২-হাইড্রক্সিপ্রোপানয়িক এসিড",
+                "২-মিথাইলপ্রোপেন-২-অল",
+                "বিউটান-২-অল"
             ],
             "ans": 0,
-            "exp": "$\\text{C}_5\\text{H}_{12}$ এর সমাণু ৩টি: ১. $n$-পেনটেন (সরল শিকল), ২. আইসোপেনটেন বা ২-মিথাইলবিউটেন, ৩. নিওপেনটেন বা ২,২-ডাইমিথাইলপ্রোপেন। (অ্যালকেন সমাণু সংখ্যা হ্যাক: বিউটেন=২, পেনটেন=৩, হেক্সেন=৫, হেপ্টেন=৯)।",
-            "trap_alert": "হেক্সেনের সমাণু ($5$ টি) এর সাথে পেনটেনের সমাণু ($3$ টি) গুলিয়ে ফেলা।",
+            "exp": "বিউটেন-২,৩-ডাইঅলের গাঠনিক সংকেত: $\\text{CH}_3-\\overset{*}{\\text{C}}\\text{H(OH)}-\\overset{*}{\\text{C}}\\text{H(OH)}-\\text{CH}_3$। ২ ও ৩ নম্বর কার্বন দুটির প্রতিটির সাথে ৪টি ভিন্ন মূলক ($-\\text{H}, -\\text{OH}, -\\text{CH}_3, -\\text{CH(OH)CH}_3$) যুক্ত থাকায় এতে ২টি কাইরাল কেন্দ্র আছে। বাকি অপশনগুলোতে ১টি বা ০টি কাইরাল কার্বন রয়েছে।",
+            "trap_alert": "বিউটান-২-অল এ মাত্র ১টি কাইরাল কেন্দ্র থাকে, কিন্তু নামের সাদৃশ্যে ভুল হতে পারে।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Alkane Isomer Counting Hack",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Chiral Center Identification",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_03",
@@ -350,67 +353,67 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '22-23 Repeat",
-            "q": "নিচের কোন যৌগটি আলোক সমাণুতা (Optical Isomerism) প্রদর্শন করে?",
+            "origin": "W-07 Daily Exam C-07 Set-A Q03",
+            "q": "IUPAC পদ্ধতি অনুসারে $\\text{CF}_3\\text{CHBrCl}$ চেতনা-নাশক হ্যালোথেন যৌগটির সঠিক নাম কোনটি?",
             "opts": [
-                "ল্যাকটিক এসিড ($\\text{CH}_3-\\text{CH(OH)}-\\text{COOH}$)",
-                "ইথানল ($\\text{CH}_3-\\text{CH}_2-\\text{OH}$)",
-                "প্রোপান-২-অল ($\\text{CH}_3-\\text{CH(OH)}-\\text{CH}_3$)",
-                "অ্যাসিটিক এসিড ($\\text{CH}_3-\\text{COOH}$)"
+                "২-ব্রোমো-২-ক্লোরো-১,১,১-ট্রাইফ্লোরোইথেন",
+                "১,১,১-ট্রাইফ্লোরো-২-ব্রোমো-২-ক্লোরোইথেন",
+                "২-ক্লোরো-২-ব্রোমো-১,১,১-ট্রাইফ্লোরোইথেন",
+                "১-ব্রোমো-১-ক্লোরো-২,২,২-ট্রাইফ্লোরোইথেন"
             ],
             "ans": 0,
-            "exp": "আলোক সমাণুতার প্রধান শর্ত অণুতে কাইরাল বা অপ্রতিসম কার্বন কেন্দ্র থাকা। ল্যাকটিক এসিডের কেন্দ্রীয় কার্বনে চারটি ভিন্ন মূলক যুক্ত: $-\\text{H}, -\\text{OH}, -\\text{CH}_3, -\\text{COOH}$। প্রোপান-২-অল এ দুটি $-\\text{CH}_3$ একই হওয়ায় তা অকাইরাল।",
-            "trap_alert": "প্রোপান-২-অল এ $-\\text{OH}$ থাকা সত্ত্বেও সমধর্মী দুটি মিথাইল মূলক থাকায় এটি কাইরাল নয়—এই সূক্ষ্ম পার্থক্য মিস করা।",
+            "exp": "কার্বন শিকলে নাম্বারিং এর ক্ষেত্রে সর্বনিম্ন অবস্থানের সমষ্টি নিয়ম: $\\text{CF}_3$ যুক্ত কার্বনকে ১ নম্বর ধরলে প্রতিস্থাপকের অবস্থান হয় $1, 1, 1, 2, 2$ (সমষ্টি = ৭); কিন্তু উল্টো দিক থেকে ধরলে হতো $1, 1, 2, 2, 2$ (সমষ্টি = ৮)। তাই $\\text{CF}_3$ হলো ১ নম্বর কার্বন। এরপর বর্ণানুক্রমিক অগ্রগণ্যতা (Alphabetical order): Bromo > Chloro > Fluoro। সুতরাং নাম: ২-ব্রোমো-২-ক্লোরো-১,১,১-ট্রাইফ্লোরোইথেন।",
+            "trap_alert": "বর্ণানুক্রমিকভাবে ব্রোমো ১ নম্বরে হতে হবে ভেবে ভুল দিক থেকে নাম্বারিং করা।",
             "yield_stars": 5,
             "probability": "99% DU Hotspot",
-            "intelligence_type": "Chiral Center Detection",
-            "source_book": "হাজারী-নাগ স্যার"
+            "intelligence_type": "Halothane IUPAC Numbering Sum Rule",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_04",
             "week_id": "week_07",
             "subject": "Chemistry",
             "chapter": "জৈব রসায়ন",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '23-24 Core",
-            "q": "নিচের কোন যৌগটিতে জ্যামিতিক সমাণুতা (Cis-Trans) দেখা যায়?",
+            "origin": "W-07 Daily Exam C-07 Set-A Q04",
+            "q": "$\\text{C}_4\\text{H}_8\\text{O}$ গাঠনিক সংকেত দ্বারা কতটি সমাণু অ্যালডিহাইড গঠন করা সম্ভব?",
             "opts": [
-                "বাট-২-ইন ($\\text{CH}_3-\\text{CH}=\\text{CH}-\\text{CH}_3$)",
-                "বাট-১-ইন ($\\text{CH}_3-\\text{CH}_2-\\text{CH}=\\text{CH}_2$)",
-                "প্রোপিন ($\\text{CH}_3-\\text{CH}=\\text{CH}_2$)",
-                "২-মিথাইলপ্রোপিন ($(\\text{CH}_3)_2\\text{C}=\\text{CH}_2$)"
+                "$2$ টি",
+                "$3$ টি",
+                "$4$ টি",
+                "$1$ টি"
             ],
             "ans": 0,
-            "exp": "জ্যামিতিক সমাণুতার অপরিহার্য শর্ত: দ্বিবন্ধনযুক্ত কার্বনদ্বয়ের প্রতিটিতে দুটি ভিন্ন পরমাণু বা মূলক থাকতে হবে ($ab\\text{C}=\\text{C}ab$)। বাট-১-ইন এবং প্রোপিনে প্রান্তীয় কার্বনে দুটি একই হাইড্রোজেন ($=\\text{CH}_2$) থাকায় এরা সিস্ট্রান্স দিতে পারে না। বাট-২-ইন এ প্রতিটি দ্বিবন্ধনযুক্ত কার্বনে $-\\text{H}$ ও $-\\text{CH}_3$ থাকায় সিস্ট্রান্স সমাণুতা দেখা যায়।",
-            "trap_alert": "কার্বন-কার্বন দ্বিবন্ধন থাকলেই অন্ধভাবে জ্যামিতিক সমাণুতা ধরে নেওয়া, প্রান্তীয় কার্বনে দুটি হাইড্রোজেন ($=\\text{CH}_2$) খেয়াল না করা।",
+            "exp": "$\\text{C}_4\\text{H}_8\\text{O}$ এর অ্যালডিহাইড সমাণু হতে হলে $-\\text{CHO}$ মূলক আবশ্যক। অবশিষ্ট অ্যালকাইল মূলক $\\text{C}_3\\text{H}_7$ (প্রোপাইল মূলক) যা ২ভাবে যুক্ত হতে পারে: ১. $n$-প্রোপাইলযুক্ত সরল শিকল: বিউটান্যাল ($\\text{CH}_3-\\text{CH}_2-\\text{CH}_2-\\text{CHO}$); ২. আইসো-প্রোপাইলযুক্ত শাখা শিকল: ২-মিথাইলপ্রোপান্যাল ($\\text{CH}_3-\\text{CH(CH}_3)-\\text{CHO}$)। সুতরাং অ্যালডিহাইড সমাণু মোট ২টি।",
+            "trap_alert": "কিটোন সমাণু (বিউটানোন) বা ইনল সমাণু অন্তর্ভুক্ত করে ৩ বা ৪টি দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Geometrical Isomerism Criteria",
-            "source_book": "সঞ্জিত কুমার গুহ"
+            "probability": "98% Speed Hack",
+            "intelligence_type": "Aldehyde Isomer Enumeration Hack",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_05",
             "week_id": "week_07",
             "subject": "Chemistry",
             "chapter": "জৈব রসায়ন",
-            "tag": "Speed Hack",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '20-21 Repeat",
-            "q": "কার্বোক্যাটায়নসমূহের স্থায়িত্বের সঠিক নিম্নক্রম কোনটি?",
+            "origin": "W-07 Daily Exam C-07 Set-A Q18",
+            "q": "But-1-ene-3-yne জৈব যৌগটিতে উপস্থিত সিগমা ($\\sigma$) এবং পাই ($\\pi$) বন্ধনের সংখ্যা যথাক্রমে কতটি?",
             "opts": [
-                "$3^\\circ > 2^\\circ > 1^\\circ > \\text{CH}_3^+$",
-                "$\\text{CH}_3^+ > 1^\\circ > 2^\\circ > 3^\\circ$",
-                "$2^\\circ > 3^\\circ > 1^\\circ > \\text{CH}_3^+$",
-                "$3^\\circ > 1^\\circ > 2^\\circ > \\text{CH}_3^+$"
+                "$7\\sigma$ এবং $3\\pi$",
+                "$5\\sigma$ এবং $5\\pi$",
+                "$8\\sigma$ এবং $2\\pi$",
+                "$6\\sigma$ এবং $4\\pi$"
             ],
             "ans": 0,
-            "exp": "অ্যালকাইল মূলকের ইলেকট্রন প্রদানকারী $+I$ আবেশীয় প্রভাব এবং হাইপারকনজুগেশনের কারণে কার্বোক্যাটায়নের ধনাত্মক চার্জ প্রশমিত হয়ে স্থায়িত্ব বৃদ্ধি পায়। ৩ ডিগ্রি ক্যাটায়নে ৩টি মিথাইল মূলকের সর্বাধিক হাইপারকনজুগেশন ঘটে। স্থায়িত্ব ক্রম: $3^\\circ > 2^\\circ > 1^\\circ > \\text{CH}_3^+$।",
-            "trap_alert": "কার্বোক্যাটায়নের স্থায়িত্বের সাথে কার্বানায়নের স্থায়িত্ব ক্রম ($1^\\circ > 2^\\circ > 3^\\circ$) উল্টে ফেলা।",
+            "exp": "যৌগটির সম্পূর্ণ গাঠনিক সংকেত: $\\text{H}_2\\text{C}=\\text{CH}-\\text{C}\\equiv\\text{CH}$। একক বন্ধনে ১টি $\\sigma$, দ্বিবন্ধনে ১টি $\\sigma$ ও ১টি $\\pi$, ত্রিবন্ধনে ১টি $\\sigma$ ও ২টি $\\pi$। $\\text{C}-\\text{H}$ বন্ধন মোট ৪টি (সবগুলো $\\sigma$); $\\text{C}-\\text{C}$ বন্ধন ৩টি (সবগুলো $\\sigma$)। মোট $\\sigma = 4 + 3 = 7$ টি। মোট $\\pi = 1(\\text{দ্বিবন্ধন}) + 2(\\text{ত্রিবন্ধন}) = 3$ টি।",
+            "trap_alert": "$\\text{C}-\\text{H}$ একক বন্ধনগুলোকে সিগমা বন্ধন গণনার সময় বাদ দিয়ে শুধু কার্বন-কার্বন ৩টি সিগমা গুনে ভুল করা।",
             "yield_stars": 5,
-            "probability": "99% DU Core",
-            "intelligence_type": "Carbocation Stability Series",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Enyne Sigma Pi Bond Inventory",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_06",
@@ -419,21 +422,21 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Repeat",
-            "q": "নিচের কোনটি প্রশম ইলেকট্রোফাইল (Neutral Electrophile)?",
+            "origin": "W-07 Weekly Exam Set-A Q24",
+            "q": "সম্পৃক্ত মনো-অ্যামাইড সমগোত্রীয় শ্রেণীর সাধারণ আণবিক সংকেত কোনটি?",
             "opts": [
-                "$\\text{AlCl}_3$",
-                "$\\text{H}_3\\text{O}^+$",
-                "$\\text{NH}_4^+$",
-                "$\\text{NH}_3$"
+                "$\\text{C}_n\\text{H}_{2n+1}\\text{CONH}_2$",
+                "$\\text{C}_n\\text{H}_{2n}\\text{CONH}_2$",
+                "$\\text{C}_n\\text{H}_{2n-1}\\text{CONH}_2$",
+                "$\\text{C}_n\\text{H}_{2n+2}\\text{NH}_2$"
             ],
             "ans": 0,
-            "exp": "$\\text{AlCl}_3$ এবং $\\text{BF}_3$ এর কেন্দ্রীয় পরমাণুর অষ্টক অপূর্ণ থাকে (৬টি যোজ্য ইলেকট্রন), ফলে এরা প্রশম হয়েও মুক্তজোড় ইলেকট্রন গ্রহণ করতে পারে (লুইস এসিড = ইলেকট্রোফাইল)। $\\text{H}_3\\text{O}^+$ এবং $\\text{NH}_4^+$ এ ধনাত্মক চার্জ থাকলেও এদের অষ্টক সম্পূর্ণ এবং অতিরিক্ত ইলেকট্রন গ্রহণের ফাঁকা অরবিটাল না থাকায় এরা ইলেকট্রোফাইল নয়। $\\text{NH}_3$ একটি নিউক্লিওফাইল।",
-            "trap_alert": "ধনাত্মক চার্জ দেখে $\\text{NH}_4^+$ বা $\\text{H}_3\\text{O}^+$ কে ইলেকট্রোফাইল ভেবে ভুল করা।",
+            "exp": "অ্যামাইডের কার্যকরী মূলক $-\\text{CONH}_2$ অ্যালকাইল মূলকের ($\\text{R}- = \\text{C}_n\\text{H}_{2n+1}$) সাথে যুক্ত থাকে। যেমন: ফরমামাইড ($n=0: \\text{HCONH}_2$), অ্যাসিটামাইড বা ইথানামাইড ($n=1: \\text{CH}_3\\text{CONH}_2$)।",
+            "trap_alert": "অ্যামিন ($\\text{C}_n\\text{H}_{2n+1}\\text{NH}_2$) এবং অ্যামাইডের সাধারণ সংকেত গুলিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "98% DU Core",
-            "intelligence_type": "Electrophile Identity Pitfall",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "97% DU Direct",
+            "intelligence_type": "Amide Homologous Formula Check",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_07",
@@ -442,21 +445,21 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '19-20 Speed Hack",
-            "q": "কার্বন-কার্বন বন্ধন দূরত্বের সঠিক ক্রম কোনটি?",
+            "origin": "W-07 Weekly Exam Set-A Q18",
+            "q": "$\\text{C}_7\\text{H}_9\\text{N}$ আণবিক সংকেত দ্বারা মোট কতটি অ্যারোমেটিক অ্যামিন সমাণু গঠন করা সম্ভব?",
             "opts": [
-                "$\\text{C}-\\text{C} (0.154\\text{ nm}) > \\text{C}_{\\text{benzene}} (0.139\\text{ nm}) > \\text{C}=\\text{C} (0.134\\text{ nm}) > \\text{C}\\equiv\\text{C} (0.120\\text{ nm})$",
-                "$\\text{C}\\equiv\\text{C} > \\text{C}=\\text{C} > \\text{C}_{\\text{benzene}} > \\text{C}-\\text{C}$",
-                "$\\text{C}-\\text{C} > \\text{C}=\\text{C} > \\text{C}_{\\text{benzene}} > \\text{C}\\equiv\\text{C}$",
-                "$\\text{C}_{\\text{benzene}} > \\text{C}-\\text{C} > \\text{C}=\\text{C} > \\text{C}\\equiv\\text{C}$"
+                "$5$ টি",
+                "$4$ টি",
+                "$3$ টি",
+                "$6$ টি"
             ],
             "ans": 0,
-            "exp": "বন্ধন সংখ্যা ও $s$-চরিত্র বাড়লে বন্ধন দৈর্ঘ্য হ্রাস পায়: ইথেন একক বন্ধন ($0.154\\text{ nm}$) > বেনজিনের রেজোন্যান্স বন্ধন ($0.139\\text{ nm}$) > ইথিন দ্বিবন্ধন ($0.134\\text{ nm}$) > ইথাইন ত্রিবন্ধন ($0.120\\text{ nm}$)।",
-            "trap_alert": "বেনজিনের বন্ধন দৈর্ঘ্য দ্বিবন্ধনের চেয়েও ছোট মনে করা অথবা একক ও দ্বিবন্ধনের মাঝামাঝি মান ($0.139\\text{ nm}$) ভুলে যাওয়া।",
+            "exp": "$\\text{C}_7\\text{H}_9\\text{N}$ এর অ্যারোমেটিক সমাণুসমূহ: ১. অর্থো-টলুইডিন ($o$-methylaniline); ২. মেটা-টলুইডিন ($m$-methylaniline); ৩. প্যারা-টলুইডিন ($p$-methylaniline); ৪. বেনজাইল অ্যামিন ($\\text{C}_6\\text{H}_5\\text{CH}_2\\text{NH}_2$); ৫. $N$-মিথাইল অ্যানিলিন ($\\text{C}_6\\text{H}_5\\text{NHCH}_3$, সেকেন্ডারি অ্যারোমেটিক অ্যামিন)। মোট ৫টি।",
+            "trap_alert": "সেকেন্ডারি অ্যামিন ($N$-মিথাইল অ্যানিলিন) অথবা পার্শ্বশিকল অ্যামিন (বেনজাইল অ্যামিন) গণনা করতে ভুলে গিয়ে ৩ বা ৪ দাগানো।",
             "yield_stars": 5,
-            "probability": "98% DU Repeat",
-            "intelligence_type": "Bond Length Resonance Order",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "99% Speed Hack",
+            "intelligence_type": "Aromatic Amine Isomer Census",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_08",
@@ -465,21 +468,21 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '18-19 Repeat",
-            "q": "প্রোপানোন এবং প্রোপ-১-ইন-২-অল এর মধ্যে কোন ধরণের সমাণুতা বিদ্যমান?",
+            "origin": "W-07 Weekly Exam Set-A Q29",
+            "q": "অ্যাসিটোফেনন ($\\text{C}_6\\text{H}_5-\\text{CO}-\\text{CH}_3$) যৌগের ক্ষেত্রে কিটো-ইনল টটোমারিজমের মাধ্যমে উৎপন্ন ইনল সমাণুটি কোনটি?",
             "opts": [
-                "টটোমারিজম (গতিশীল কার্যকরী মূলক সমাণুতা)",
-                "মেটামারিজম",
-                "অবস্থান সমাণুতা",
-                "জ্যামিতিক সমাণুতা"
+                "$\\text{C}_6\\text{H}_5-\\text{C(OH)}=\\text{CH}_2$",
+                "$\\text{C}_6\\text{H}_5-\\text{CH}_2-\\text{CHO}$",
+                "$\\text{C}_6\\text{H}_5-\\text{CH}=\\text{CH}-\\text{OH}$",
+                "$\\text{C}_6\\text{H}_5-\\text{CO}-\\text{CH}_2\\text{OH}$"
             ],
             "ans": 0,
-            "exp": "কিটো ও ইনোল রূপ পরস্পরের সাথে গতিশীল সাম্যাবস্থায় থাকে: $\\text{CH}_3-\\text{CO}-\\text{CH}_3 \\rightleftharpoons \\text{CH}_3-\\text{C(OH)}=\\text{CH}_2$। হাইড্রোজেন পরমাণু ও পাই বন্ধনের স্থানান্তরের ফলে এই ধরণের গতিশীল কার্যকরী মূলক সমাণুতাকে টটোমারিজম বলে।",
-            "trap_alert": "টটোমারিজমকে মেটামারিজম বা সাধারণ কার্যকরী মূলক সমাণুতার সাথে গুলিয়ে ফেলা।",
+            "exp": "টটোমারিজমে কার্বনিল কার্বনের পাশের $\\alpha$-কার্বন থেকে একটি হাইড্রোজেন অক্সিজেন পরমাণুতে স্থানান্তরিত হয় এবং $\\alpha$-কার্বন ও কার্বনিল কার্বনের মাঝে দ্বিবন্ধন তৈরি হয়: $\\text{C}_6\\text{H}_5-\\overset{\\text{O}}{\\underset{||}{\\text{C}}}-\\text{CH}_3 \\rightleftharpoons \\text{C}_6\\text{H}_5-\\overset{\\text{OH}}{\\underset{|}{\\text{C}}}=\\text{CH}_2$।",
+            "trap_alert": "বেনজিন বলয় হতে হাইড্রোজেন সরিয়ে অ্যালডিহাইড ($\\text{C}_6\\text{H}_5\\text{CH}_2\\text{CHO}$) তৈরি হবে ভেবে অপশন (b) দাগানো।",
             "yield_stars": 5,
-            "probability": "97% DU Repeat",
-            "intelligence_type": "Tautomerism Equilibrium",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Acetophenone Enolization Equilibrium",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_09",
@@ -488,21 +491,21 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '22-23 Speed Hack",
-            "q": "একটি অপ্রতিসম জৈব যৌগে $2$ টি ভিন্ন কাইরাল কার্বন পরমাণু থাকলে এর স্টেরিও সমাণু সংখ্যা কতটি হবে?",
+            "origin": "W-07 Weekly Exam Set-A Q30 ও Set-B Q30",
+            "q": "গ্লুকোজ অণুর মুক্ত শিকল গঠনে কোন চারটি কার্বন পরমাণু অপ্রতিসম (কাইরাল) এবং গ্লুকোজের মোট সম্ভাব্য স্টেরিও সমাণু সংখ্যা কত?",
             "opts": [
-                "$4$ টি",
-                "$2$ টি",
-                "$3$ টি",
-                "$8$ টি"
+                "২, ৩, ৪, ৫ এবং $16$ টি",
+                "১, ২, ৩, ৪ এবং $16$ টি",
+                "২, ৩, ৪, ৫ এবং $8$ টি",
+                "৩, ৪, ৫, ৬ এবং $32$ টি"
             ],
             "ans": 0,
-            "exp": "ভিন্ন বা অসদৃশ কাইরাল কার্বনের ক্ষেত্রে ভ্যান্ট হফ সূত্র: স্টেরিও সমাণু সংখ্যা $= 2^n = 2^2 = 4$ টি (যার মধ্যে ২ জোড়া এনানশিওমার থাকে)। যদি কাইরাল কার্বন দুটি সদৃশ হতো (যেমন টারটারিক এসিড), তবে মেসো যৌগের কারণে সমাণু হতো $2^{n-1} + 2^{(n/2)-1} = 2 + 1 = 3$ টি।",
-            "trap_alert": "টারটারিক এসিডের মেসো সমাণুতার নিয়ম ($3$ টি) সাধারণ অসদৃশ কাইরাল যৌগের উপর প্রয়োগ করা।",
-            "yield_stars": 4,
-            "probability": "95% Speed Hack",
-            "intelligence_type": "Stereoisomer Formula Shortcut",
-            "source_book": "হাজারী-নাগ স্যার"
+            "exp": "গ্লুকোজের ১ নম্বর কার্বন অ্যালডিহাইড ($sp^2$) এবং ৬ নম্বর কার্বন $-\\text{CH}_2\\text{OH}$ (২টি H একই) অকাইরাল। অভ্যন্তরীণ কার্বন ২, ৩, ৪, ৫ এর প্রতিটি ভিন্ন ৪টি মূলক ধারণ করায় অপ্রতিসম ($n=4$)। ভ্যান্ট হফ সমীকরণ অনুসারে স্টেরিও সমাণু সংখ্যা $= 2^n = 2^4 = 16$ টি।",
+            "trap_alert": "$n=4$ পেয়ে $2 \\times 4 = 8$ হিসাব করা অথবা ১ নম্বর কার্বনকেও কাইরাল ধরে ফেলা।",
+            "yield_stars": 5,
+            "probability": "99% Speed Hack",
+            "intelligence_type": "Glucose Stereocenter Calculation",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_10",
@@ -511,21 +514,21 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Core",
-            "q": "নিচের কোন হাইড্রোকার্বনটি টলেন বিকারকের সাথে বিক্রিয়ায় ধাতব সিলভার বা সাদা অধঃক্ষেপ তৈরি করে?",
+            "origin": "W-07 Weekly Exam Set-A Q28 ও Set-B Q28",
+            "q": "সিস-সমাণুর সাথে তুলনা করলে ট্রান্স-সমাণুর ভৌত ধর্মের ক্ষেত্রে নিচের কোনটি সঠিক?",
             "opts": [
-                "অ্যাসিটিলিন ($\\text{CH}\\equiv\\text{CH}$)",
-                "ইথিলিন ($\\text{CH}_2=\\text{CH}_2$)",
-                "বিউট-২-আইন ($\\text{CH}_3-\\text{C}\\equiv\\text{C}-\\text{CH}_3$)",
-                "বেনজিন ($\\text{C}_6\\text{H}_6$)"
+                "পানিতে দ্রাব্যতা কম এবং গলনাঙ্ক বেশি",
+                "পানিতে দ্রাব্যতা বেশি এবং গলনাঙ্ক কম",
+                "উভয় সমাণুর গলনাঙ্ক ও দ্রাব্যতা সম্পূর্ণ সমান",
+                "পানিতে দ্রাব্যতা বেশি এবং স্ফুটনাঙ্ক বেশি"
             ],
             "ans": 0,
-            "exp": "প্রান্তীয় অ্যালকাইন (১-অ্যালকাইন) এ ত্রিবন্ধনযুক্ত কার্বনে $sp$ সংকরায়ন থাকায় এর $s$-চরিত্র ৫০% এবং তীব্র ইলেকট্রনাকর্ষী হয়। ফলে এর প্রান্তীয় হাইড্রোজেন পরমাণু অম্লধর্মী এবং ডাইঅ্যামিন সিলভার নাইট্রেট (টলেন বিকারক) দ্রবণের সাথে বিক্রিয়া করে সিলভার অ্যালকানাইড ($\\text{AgC}\\equiv\\text{CAg}\\downarrow$) এর সাদা অধঃক্ষেপ ফেলে। বিউট-২-আইন এ কোনো অম্লীয় হাইড্রোজেন নেই।",
-            "trap_alert": "বিউট-২-আইন বা ইথিলিন দেখে ট্রিপল বন্ড আছে ভেবে বিউট-২-আইন দাগানো; প্রান্তীয় ট্রিপল বন্ড (অম্লীয় হাইড্রোজেন) আবশ্যক।",
+            "exp": "ট্রান্স-সমাণু প্রতিসম (Symmetrical) হওয়ায় এর ডাইপোল মোমেন্ট কম বা শূন্য, ফলে পোলার দ্রাবক পানিতে দ্রাব্যতা কম। কিন্তু প্রতিসমতার কারণে ক্রিস্টাল ল্যাটিসে অণুগুলো অত্যন্ত দৃঢ়ভাবে সন্নিবেশিত থাকে, ফলে ট্রান্স-সমাণুর গলনাঙ্ক সিস-সমাণু অপেক্ষা বেশি এবং অভ্যন্তরীণ শক্তি কম।",
+            "trap_alert": "দ্রাব্যতা ও গলনাঙ্ক উভয়ই বাড়বে বা কমবে ভেবে বিভ্রান্ত হওয়া; দ্রাব্যতা কম কিন্তু গলনাঙ্ক বেশি।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Terminal Alkyne Acidity Test",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Cis Trans Physical Property Paradox",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_11",
@@ -534,49 +537,50 @@ def get_varsity_questions():
             "chapter": "জৈব রসায়ন",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '17-18 Repeat",
-            "q": "ডাই-ইথাইল ইথার ($\\text{C}_2\\text{H}_5-\\text{O}-\\text{C}_2\\text{H}_5$) এবং মিথাইল প্রোপাইল ইথার ($\\text{CH}_3-\\text{O}-\\text{C}_3\\text{H}_7$) এর মধ্যকার সমাণুতার ধরন কোনটি?",
+            "origin": "W-07 Daily Exam C-07 Set-B Q17",
+            "q": "জৈব যৌগের নামকরণের ক্ষেত্রে কার্যকরী মূলকের অগ্রাধিকারের সঠিক ক্রম কোনটি?",
             "opts": [
-                "মেটামারিজম",
-                "অবস্থান সমাণুতা",
-                "টটোমারিজম",
-                "চেইন সমাণুতা"
+                "$-\\text{COOH} > -\\text{SO}_3\\text{H} > -\\text{COX} > -\\text{CONH}_2$",
+                "$-\\text{SO}_3\\text{H} > -\\text{COOH} > -\\text{CONH}_2 > -\\text{COX}$",
+                "$-\\text{COOH} > -\\text{CONH}_2 > -\\text{SO}_3\\text{H} > -\\text{COX}$",
+                "$-\\text{COX} > -\\text{COOH} > -\\text{SO}_3\\text{H} > -\\text{CONH}_2$"
             ],
             "ans": 0,
-            "exp": "একই সমগোত্রীয় শ্রেণীর দ্বি-যোজী কার্যকরী মূলকের (যেমন: $-\\text{O}-, -\\text{CO}-, -\\text{NH}-$) উভয় পাশে কার্বন শিকলের অসম বণ্টনের কারণে সৃষ্ট সমাণুতাকে মেটামারিজম বলে।",
-            "trap_alert": "কার্যকরী মূলক এক দেখে সাধারণ অবস্থান সমাণুতা ভেবে ভুল করা।",
+            "exp": "IUPAC অগ্রাধিকার ক্রমের সুপার ট্রিক: কার্বক্সিলিক এসিড ($-\\text{COOH}$) > সালফোনিক এসিড ($-\\text{SO}_3\\text{H}$) > এসিড হ্যালাইড ($-\\text{COX}$) > এসিড অ্যামাইড ($-\\text{CONH}_2$) > নাইট্রাইল ($-\\text{CN}$) > অ্যালডিহাইড ($-\\text{CHO}$) > কিটোন ($>\\text{CO}$) > অ্যালকোহল ($-\\text{OH}$)।",
+            "trap_alert": "$-\\text{SO}_3\\text{H}$ কে এসিড হিসেবে $-\\text{COOH}$ এর আগে স্থান দিয়ে অপশন (b) দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "96% DU Repeat",
-            "intelligence_type": "Metamerism Classification",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Functional Group Priority Ladder",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_che_12",
             "week_id": "week_07",
             "subject": "Chemistry",
             "chapter": "জৈব রসায়ন",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '20-21 Direct",
-            "q": "সূর্যালোকের অতিবেগুনি (UV) রশ্মির উপস্থিতিতে ক্লোরিন অণুর সমভাঙ্গন (Homolytic Fission) ঘটলে কোনটি উৎপন্ন হয়?",
+            "origin": "W-07 Weekly Exam Set-D Q23",
+            "q": "সাইক্লোহেক্সানোন ($\\text{Cyclohexanone}$) অণুতে সর্বমোট কতটি সিগমা ($\\sigma$) বন্ধন উপস্থিত রয়েছে?",
             "opts": [
-                "ক্লোরিন মুক্ত মূলক ($\\text{Cl}^\\bullet$)",
-                "ক্লোরাইড অ্যানায়ন ($\\text{Cl}^-$)",
-                "ক্লোরোনিয়াম ক্যাটায়ন ($\\text{Cl}^+$)",
-                "কার্বোক্যাটায়ন"
+                "$17$ টি",
+                "$16$ টি",
+                "$18$ টি",
+                "$12$ টি"
             ],
             "ans": 0,
-            "exp": "সমযোজী বন্ধনের উভয় পরমাণু একটি করে ইলেকট্রন নিজের দিকে টেনে নিয়ে পৃথক হলে যে বিজোড় ইলেকট্রনযুক্ত অত্যন্ত সক্রিয় কণা সৃষ্টি হয় তাকে মুক্ত মূলক (Free Radical) বলে: $\\text{Cl}-\\text{Cl} \\xrightarrow{h\\nu} 2\\text{Cl}^\\bullet$।",
-            "trap_alert": None,
+            "exp": "সাইক্লোহেক্সানোনের আণবিক সংকেত $\\text{C}_6\\text{H}_{10}\\text{O}$। বলয়ে ৬টি কার্বনের মাঝে ৬টি $\\text{C}-\\text{C}$ সিগমা বন্ধন। ৫টি $-\\text{CH}_2-$ কার্বনে মোট $5 \\times 2 = 10$ টি $\\text{C}-\\text{H}$ সিগমা বন্ধন। কার্বনিল গ্রুপে $\\text{C}=\\text{O}$ এর মধ্যে ১টি সিগমা ($\\sigma$) ও ১টি পাই ($\\pi$) বন্ধন। মোট $\\sigma = 6 + 10 + 1 = 17$ টি।",
+            "trap_alert": "সাইক্লোহেক্সেনের ১৮টি সিগমার সাথে মিলিয়ে ফেলা বা কার্বনিলের সিগমা বাদ দিয়ে ১৬ দাগানো।",
             "yield_stars": 5,
-            "probability": "98% DU Direct",
-            "intelligence_type": "Homolytic Cleavage Radicals",
-            "source_book": "হাজারী-নাগ স্যার"
+            "probability": "97% Speed Hack",
+            "intelligence_type": "Cyclic Ketone Sigma Bond Count",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         }
     ]
 
     # ==========================================
-    # HIGHER MATH (12 MCQs) - Chapters: অন্তরীকরণ
+    # HIGHER MATH (12 MCQs) - Chapter: অন্তরীকরণ
+    # Source: W-07 Varsity (Udvash).pdf
     # ==========================================
     mat_mcqs = [
         {
@@ -586,44 +590,44 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '21-22 Speed Hack",
-            "q": "মান নির্ণয় কর: $\\lim_{x\\to 0} \\frac{1 - \\cos 6x}{x^2}$",
+            "origin": "W-07 Weekly Exam Set-C Q36",
+            "q": "মান নির্ণয় কর: $\\lim_{x\\to -\\infty} \\frac{\\sqrt{x^2 + 2x}}{-x}$",
             "opts": [
-                "$18$",
-                "$36$",
-                "$3$",
-                "$\\frac{1}{18}$"
+                "$1$",
+                "$-1$",
+                "$\\infty$",
+                "$0$"
             ],
             "ans": 0,
-            "exp": "স্ট্যান্ডার্ড লিমিট শর্টকাট: $\\lim_{x\\to 0} \\frac{1 - \\cos ax}{x^2} = \\frac{a^2}{2}$। এখানে $a = 6$, সুতরাং মান $= \\frac{6^2}{2} = \\frac{36}{2} = 18$। (লা'হসপিটাল দিয়েও: $\\lim_{x\\to 0} \\frac{6\\sin 6x}{2x} = \\frac{6 \\times 6}{2} = 18$)।",
-            "trap_alert": "সহগ $a$ কে বর্গ করতে ভুলে গিয়ে $\\frac{6}{2} = 3$ দাগানো অথবা ২ দিয়ে ভাগ করতে ভুলে গিয়ে $36$ দাগানো।",
+            "exp": "যখন $x \\to -\\infty$, তখন $x < 0$। আমরা জানি বাস্তব সংখ্যার ক্ষেত্রে $\\sqrt{x^2} = |x|$। যেহেতু $x$ ঋণাত্মক, $|x| = -x$। লবে: $\\sqrt{x^2 + 2x} = \\sqrt{x^2\\left(1 + \\frac{2}{x}\\right)} = |x|\\sqrt{1 + \\frac{2}{x}} = -x\\sqrt{1 + \\frac{2}{x}}$। সুতরাং $\\lim_{x\\to -\\infty} \\frac{-x\\sqrt{1 + \\frac{2}{x}}}{-x} = \\lim_{x\\to -\\infty} \\sqrt{1 + \\frac{2}{x}} = \\sqrt{1 + 0} = 1$।",
+            "trap_alert": "$\\sqrt{x^2} = x$ লিখে লবকে $x$ ধরে হরের $-x$ দিয়ে ভাগ করে উত্তর $-1$ দাগিয়ে ফেলা—এটি ভর্তি পরীক্ষার সবচেয়ে মারাত্মক চিহ্নের ফাঁদ!",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Cosine Limit Speed Formula",
-            "source_book": "এস ইউ আহাম্মদ"
+            "probability": "99% DU Hotspot",
+            "intelligence_type": "Negative Infinity Absolute Value Root Trap",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_02",
             "week_id": "week_07",
             "subject": "Higher Math",
             "chapter": "অন্তরীকরণ",
-            "tag": "Speed Hack",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '22-23 Speed Hack",
-            "q": "মান নির্ণয় কর: $\\lim_{x\\to 0} \\frac{\\sin 5x}{\\ln(1 + 2x)}$",
+            "origin": "W-07 Daily Exam M-07 Set-A Q01",
+            "q": "মান নির্ণয় কর: $\\lim_{x\\to 0} \\frac{e^x}{x}$",
             "opts": [
-                "$\\frac{5}{2} = 2.5$",
-                "$\\frac{2}{5} = 0.4$",
-                "$10$",
-                "$1$"
+                "লিমিটের অস্তিত্ব নেই",
+                "$1$",
+                "$0$",
+                "$\\infty$"
             ],
             "ans": 0,
-            "exp": "এটি $\\frac{0}{0}$ আকার। লা'হসপিটাল প্রয়োগ করে: লবের অন্তরক $5\\cos 5x$ এবং হরের অন্তরক $\\frac{2}{1+2x}$। $x \\to 0$ বসালে: $\\frac{5\\cos 0}{\\frac{2}{1+0}} = \\frac{5 \\times 1}{2} = \\frac{5}{2} = 2.5$।",
-            "trap_alert": "লব ও হরের অনুপাত উল্টে দিয়ে $\\frac{2}{5}$ দাগিয়ে ফেলা।",
+            "exp": "বামপার্শ্বীয় সীমা (L.H.L): $\\lim_{x\\to 0^-} \\frac{e^x}{x} = \\frac{e^0}{0^-} = \\frac{1}{-0} = -\\infty$। ডানপার্শ্বীয় সীমা (R.H.L): $\\lim_{x\\to 0^+} \\frac{e^x}{x} = \\frac{e^0}{0^+} = \\frac{1}{+0} = +\\infty$। যেহেতু L.H.L $\\neq$ R.H.L, তাই $x=0$ বিন্দুতে ফাংশনটির লিমিটের কোনো অস্তিত্ব নেই।",
+            "trap_alert": "সরাসরি $x=0$ বসিয়ে $e^0/0 = 1/0 = \\infty$ দাগানো অথবা লা'হসপিটাল প্রয়োগের চেষ্টা করা (যা $\\frac{0}{0}$ আকার ছাড়া প্রয়োগ করা অবৈধ)।",
             "yield_stars": 5,
-            "probability": "98% Speed Hack",
-            "intelligence_type": "L'Hopital Direct Derivative",
-            "source_book": "অসীম সাহা স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "One-Sided Limit Asymmetry",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_03",
@@ -632,21 +636,21 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '19-20 Speed Hack",
-            "q": "মান নির্ণয় কর: $\\lim_{x\\to \\infty} \\left(\\frac{x + 3}{x - 1}\\right)^x$",
+            "origin": "W-07 Daily Exam M-07 Set-A Q15",
+            "q": "মান নির্ণয় কর: $\\lim_{x\\to 0} \\frac{(e^x - 1)\\tan^2 x}{x^3}$",
             "opts": [
-                "$e^4$",
-                "$e^2$",
-                "$e^3$",
-                "$1$"
+                "$1$",
+                "$0$",
+                "$\\frac{1}{2}$",
+                "$2$"
             ],
             "ans": 0,
-            "exp": "সরাসরি গোল্ডেন শর্টকাট: $\\lim_{x\\to \\infty} \\left(\\frac{x + a}{x + b}\\right)^{cx + d} = e^{c(a - b)}$। এখানে $a = 3, b = -1, c = 1$। সুতরাং উত্তর $= e^{1 \\times (3 - (-1))} = e^{3 + 1} = e^4$।",
-            "trap_alert": "$b = -1$ এর ঋণাত্মক চিহ্ন খেয়াল না করে $3 - 1 = 2$ ধরে $e^2$ দাগিয়ে ফেলা।",
+            "exp": "স্ট্যান্ডার্ড লিমিট সূত্রে ভাঙালে: $\\lim_{x\\to 0} \\left(\\frac{e^x - 1}{x}\\right) \\times \\lim_{x\\to 0} \\left(\\frac{\\tan x}{x}\\right)^2 = 1 \\times (1)^2 = 1$।",
+            "trap_alert": "লা'হসপিটাল তিনবার প্রয়োগ করতে গিয়ে বিশালাকার অন্তরীকরণে সময় নষ্ট করা; আদর্শ লিমিট গুণফল হিসেবে ভাবলে মাত্র ২ সেকেন্ডে সমাধান হয়।",
             "yield_stars": 5,
-            "probability": "99% Speed Hack",
-            "intelligence_type": "Infinity Base Exponential Hack",
-            "source_book": "কেতাবউদ্দিন স্যার"
+            "probability": "98% Speed Hack",
+            "intelligence_type": "Standard Limit Factorization",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_04",
@@ -655,67 +659,67 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '20-21 Repeat",
-            "q": "$y = x^3 - 3x^2 + 2$ বক্ররেখার কোন বিন্দুগুলোতে অঙ্কিত স্পর্শক $x$-অক্ষের সমান্তরাল?",
+            "origin": "W-07 Daily Exam M-07 Set-A Q14",
+            "q": "ফাংশন $f(x) = e^x - x$ এর লঘুমান (Minimum Value) কত?",
             "opts": [
-                "$(0, 2)$ এবং $(2, -2)$",
-                "$(0, 0)$ এবং $(2, 2)$",
-                "$(1, 0)$ এবং $(-1, 4)$",
-                "$(2, 0)$ এবং $(0, -2)$"
+                "$1$",
+                "$0$",
+                "$-1$",
+                "$e$"
             ],
             "ans": 0,
-            "exp": "স্পর্শক $x$-অক্ষের সমান্তরাল হওয়ার শর্ত: $\\frac{dy}{dx} = 0$। বক্ররেখার অন্তরক: $\\frac{dy}{dx} = 3x^2 - 6x = 3x(x - 2) = 0 \\implies x = 0$ অথবা $x = 2$। যখন $x = 0$, তখন $y = 0 - 0 + 2 = 2 \\implies (0, 2)$। যখন $x = 2$, তখন $y = 2^3 - 3(2^2) + 2 = 8 - 12 + 2 = -2 \\implies (2, -2)$।",
-            "trap_alert": "$x = 0$ এবং $x = 2$ বের করে সরাসরি $(0, 2)$ এবং $(2, 0)$ অপশন দাগানো, কোটি $y$ এর সঠিক মান সমীকরণ থেকে হিসাব না করা।",
+            "exp": "চরম মানের জন্য $f'(x) = 0 \\implies e^x - 1 = 0 \\implies e^x = 1 = e^0 \\implies x = 0$। দ্বিতীয় অন্তরক: $f''(x) = e^x \\implies f''(0) = e^0 = 1 > 0$। সুতরাং $x = 0$ বিন্দুতে ফাংশনটির লঘুমান বিদ্যমান এবং লঘুমান $f(0) = e^0 - 0 = 1 - 0 = 1$।",
+            "trap_alert": "$x = 0$ বের করে সরাসরি উত্তর শূন্য ($0$) দাগিয়ে ফেলা; প্রশ্নে ভুজের মান নয়, ফাংশনের লঘুমান $f(0)$ চাওয়া হয়েছে।",
             "yield_stars": 5,
             "probability": "99% DU Repeat",
-            "intelligence_type": "Horizontal Tangent Stationary Points",
-            "source_book": "এস ইউ আহাম্মদ"
+            "intelligence_type": "Exponential Function Extrema",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_05",
             "week_id": "week_07",
             "subject": "Higher Math",
             "chapter": "অন্তরীকরণ",
-            "tag": "Speed Hack",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '22-23 Speed Hack",
-            "q": "ফাংশন $f(x) = \\sin x + \\cos x$ এর সর্বোচ্চ মান (Maximum Value) কত?",
+            "origin": "W-07 Daily Exam M-07 Set-B Q10",
+            "q": "$y = x(3 - x^2)$ বক্ররেখার স্পর্শক $x$-অক্ষের সমান্তরাল হলে $x$ এর মান কত?",
             "opts": [
-                "$\\sqrt{2}$",
-                "$2$",
-                "$1$",
-                "$\\frac{1}{\\sqrt{2}}$"
+                "$\\pm 1$",
+                "$0$",
+                "$\\pm \\sqrt{3}$",
+                "$\\pm 3$"
             ],
             "ans": 0,
-            "exp": "$a\\sin x + b\\cos x$ আকারের ফাংশনের সর্বোচ্চ মান সর্বদা $\\sqrt{a^2 + b^2}$ এবং সর্বনিম্ন মান $-\\sqrt{a^2 + b^2}$। এখানে $a = 1, b = 1$, সুতরাং সর্বোচ্চ মান $= \\sqrt{1^2 + 1^2} = \\sqrt{2}$।",
-            "trap_alert": "ত্রিকোণমিতিক সাইন ও কস এর সর্বোচ্চ মান ১+১=২ ভেবে ২ দাগানো।",
+            "exp": "সমীকরণ $y = 3x - x^3$। অন্তরীকরণ করলে স্পর্শকের ঢাল: $\\frac{dy}{dx} = 3 - 3x^2$। স্পর্শক $x$-অক্ষের সমান্তরাল হওয়ার শর্ত: $\\frac{dy}{dx} = 0 \\implies 3 - 3x^2 = 0 \\implies 3x^2 = 3 \\implies x^2 = 1 \\implies x = \\pm 1$।",
+            "trap_alert": "$y = 0$ ধরে $x(3 - x^2) = 0 \\implies x = 0, \\pm\\sqrt{3}$ বের করে ছেদবিন্দুর মান দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "98% DU Repeat",
-            "intelligence_type": "Trigonometric Extrema Formula",
-            "source_book": "কেতাবউদ্দিন স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Horizontal Tangent Point Abscissa",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_06",
             "week_id": "week_07",
             "subject": "Higher Math",
             "chapter": "অন্তরীকরণ",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '23-24 Core",
-            "q": "$y = x^x$ হলে $x$-এর সাপেক্ষে এর অন্তরক সহগ $\\frac{dy}{dx}$ কত?",
+            "origin": "W-07 Weekly Exam Set-B Q31",
+            "q": "যদি $y = \\tan^{-1}\\left(\\frac{p + qx}{q - px}\\right)$ হয়, তবে $\\frac{dy}{dx}$ এর মান কত?",
             "opts": [
-                "$x^x(1 + \\ln x)$",
-                "$x \\cdot x^{x-1} = x^x$",
-                "$x^x \\ln x$",
-                "$x^{x-1}$"
+                "$\\frac{1}{1 + x^2}$",
+                "$\\frac{q}{q^2 + p^2 x^2}$",
+                "$\\frac{p}{1 + x^2}$",
+                "$0$"
             ],
             "ans": 0,
-            "exp": "লগারিদমীয় অন্তরীকরণ: $\\ln y = x \\ln x$। উভয়পক্ষে অন্তরীকরণ করে: $\\frac{1}{y}\\frac{dy}{dx} = x \\cdot \\frac{1}{x} + \\ln x \\cdot 1 = 1 + \\ln x \\implies \\frac{dy}{dx} = y(1 + \\ln x) = x^x(1 + \\ln x)$।",
-            "trap_alert": "চলকের ওপর চলক ঘাত থাকলে সাধারণ বীজগণিতীয় ঘাত সূত্র ($n x^{n-1}$) প্রয়োগ করে $x^x$ লিখে ফেলা।",
+            "exp": "লব ও হরকে $q$ দ্বারা ভাগ করে: $y = \\tan^{-1}\\left(\\frac{\\frac{p}{q} + x}{1 - \\frac{p}{q}x}\\right)$। ত্রিকোণমিতিক বিপরীত সূত্র: $\\tan^{-1}\\left(\\frac{a + b}{1 - ab}\\right) = \\tan^{-1} a + \\tan^{-1} b$। অতএব $y = \\tan^{-1}\\left(\\frac{p}{q}\\right) + \\tan^{-1} x$। যেহেতু $\\tan^{-1}(p/q)$ সম্পূর্ণ ধ্রুবক, $\\frac{dy}{dx} = 0 + \\frac{1}{1 + x^2} = \\frac{1}{1 + x^2}$।",
+            "trap_alert": "বিশাল ইউ/ভি অন্তরীকরণ করতে যাওয়া; সূত্রে ফেললে ধ্রুবক অংশটি শূন্য হয়ে সরাসরি $\\frac{1}{1+x^2}$ আসে।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Logarithmic Differentiation",
-            "source_book": "অসীম সাহা স্যার"
+            "probability": "99% Speed Hack",
+            "intelligence_type": "Inverse Trig Linear Substitution Hack",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_07",
@@ -724,67 +728,67 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '20-21 Repeat",
-            "q": "$x = \\frac{\\pi}{4}$ বিন্দুতে $y = \\sin x$ এবং $y = \\cos x$ বক্ররেখাদ্বয়ের মধ্যবর্তী কোণ $\\theta$ কত?",
+            "origin": "W-07 Weekly Exam Set-B Q34",
+            "q": "ফাংশন $y = x^2(1 - x)$ এর সর্বোচ্চ মান (Maximum Value) কত?",
             "opts": [
-                "$\\tan^{-1}(2\\sqrt{2})$",
-                "$\\frac{\\pi}{4} = 45^\\circ$",
-                "$\\frac{\\pi}{2} = 90^\\circ$",
-                "$\\tan^{-1}(\\sqrt{2})$"
+                "$\\frac{4}{27}$",
+                "$\\frac{2}{3}$",
+                "$\\frac{1}{27}$",
+                "$\\frac{2}{9}$"
             ],
             "ans": 0,
-            "exp": "$x = \\pi/4$ বিন্দুতে ১ম বক্ররেখার ঢাল $m_1 = \\cos(\\pi/4) = \\frac{1}{\\sqrt{2}}$। ২য় বক্ররেখার ঢাল $m_2 = -\\sin(\\pi/4) = -\\frac{1}{\\sqrt{2}}$। স্পর্শকদ্বয়ের মধ্যবর্তী কোণ: $\\tan\\theta = \\left|\\frac{m_1 - m_2}{1 + m_1 m_2}\\right| = \\left|\\frac{\\frac{1}{\\sqrt{2}} - (-\\frac{1}{\\sqrt{2}})}{1 + (\\frac{1}{\\sqrt{2}})(-\\frac{1}{\\sqrt{2}})}\\right| = \\frac{\\sqrt{2}}{1 - 1/2} = \\frac{\\sqrt{2}}{1/2} = 2\\sqrt{2} \\implies \\theta = \\tan^{-1}(2\\sqrt{2})$।",
-            "trap_alert": "$m_1 m_2 = -1/2 \\neq -1$, সুতরাং বক্ররেখাদ্বয় লম্ব নয়; অন্ধভাবে $90^\\circ$ বা $45^\\circ$ দাগানো।",
+            "exp": "সমীকরণ $y = x^2 - x^3$। ১ম অন্তরক: $\\frac{dy}{dx} = 2x - 3x^2 = x(2 - 3x) = 0 \\implies x = 0$ অথবা $x = \\frac{2}{3}$। ২য় অন্তরক: $\\frac{d^2 y}{dx^2} = 2 - 6x$। $x = \\frac{2}{3}$ এ $\\frac{d^2 y}{dx^2} = 2 - 4 = -2 < 0$, তাই এখানে সর্বোচ্চ মান বিদ্যমান। সর্বোচ্চ মান $y = \\left(\\frac{2}{3}\\right)^2 \\left(1 - \\frac{2}{3}\\right) = \\frac{4}{9} \\times \\frac{1}{3} = \\frac{4}{27}$।",
+            "trap_alert": "চরম বিন্দুর ভুজ $x = 2/3$ দাগিয়ে ফেলা; কোটি তথা ফাংশনের মান $\\frac{4}{27}$ বের করতে হবে।",
             "yield_stars": 5,
-            "probability": "96% DU Repeat",
-            "intelligence_type": "Curve Intersection Angle Formula",
-            "source_book": "এস ইউ আহাম্মদ"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Cubic Polynomial Global Extrema",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_08",
             "week_id": "week_07",
             "subject": "Higher Math",
             "chapter": "অন্তরীকরণ",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '18-19 Repeat",
-            "q": "পরাবৃত্ত $y^2 = 4ax$ এর $(at^2, 2at)$ বিন্দুতে অঙ্কিত অভিলম্বের সমীকরণ কোনটি?",
+            "origin": "W-07 Daily Exam M-07 Set-A Q07 ও Weekly Set-B Q38",
+            "q": "ধাতুর তৈরি একটি বৃত্তাকার থালার ব্যাসার্ধ তাপ প্রয়োগের ফলে প্রতি সেকেন্ডে $0.25\\text{ cm}$ হারে বাড়ে। যখন থালাটির ব্যাসার্ধ $7\\text{ cm}$, তখন এর ক্ষেত্রফল বৃদ্ধির হার প্রতি সেকেন্ডে কত বর্গ সেন্টিমিটার?",
             "opts": [
-                "$y + tx = 2at + at^3$",
-                "$ty = x + at^2$",
-                "$y - tx = 2at - at^3$",
-                "$tx + y = 2at$"
+                "$10.99\\text{ cm}^2/\\text{s} \\approx 11$",
+                "$3.50\\text{ cm}^2/\\text{s}$",
+                "$5.50\\text{ cm}^2/\\text{s}$",
+                "$22.00\\text{ cm}^2/\\text{s}$"
             ],
             "ans": 0,
-            "exp": "$2y \\frac{dy}{dx} = 4a \\implies \\frac{dy}{dx} = \\frac{2a}{y}$। $(at^2, 2at)$ বিন্দুতে স্পর্শকের ঢাল $m = \\frac{2a}{2at} = \\frac{1}{t}$। অতএব অভিলম্বের ঢাল $m_{\\text{norm}} = -t$। অভিলম্বের সমীকরণ: $y - 2at = -t(x - at^2) \\implies y - 2at = -tx + at^3 \\implies y + tx = 2at + at^3$।",
-            "trap_alert": "স্পর্শকের সমীকরণ ($ty = x + at^2$) এবং অভিলম্বের সমীকরণের মধ্যে গুলিয়ে ফেলা।",
+            "exp": "ক্ষেত্রফল $A = \\pi r^2$। সময়ের সাপেক্ষে অন্তরীকরণ: $\\frac{dA}{dt} = 2\\pi r \\frac{dr}{dt}$। মান বসিয়ে: $\\frac{dA}{dt} = 2 \\times \\frac{22}{7} \\times 7 \\times 0.25 = 44 \\times \\frac{1}{4} = 11\\text{ cm}^2/\\text{s}$ (বা $10.99\\text{ cm}^2/\\text{s}$)।",
+            "trap_alert": "চেইন রুলে সময়ের সাপেক্ষে $\\frac{dr}{dt}$ গুণ করতে ভুলে শুধু $2\\pi r$ হিসাব করা।",
             "yield_stars": 5,
-            "probability": "97% DU Repeat",
-            "intelligence_type": "Parametric Normal Equation",
-            "source_book": "কেতাবউদ্দিন স্যার"
+            "probability": "98% Speed Hack",
+            "intelligence_type": "Rate of Change Thermal Expansion",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_09",
             "week_id": "week_07",
             "subject": "Higher Math",
             "chapter": "অন্তরীকরণ",
-            "tag": "Speed Hack",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Speed Hack",
-            "q": "মান নির্ণয় কর: $\\lim_{x\\to 0} \\frac{e^{3x} - e^{-3x}}{\\sin 2x}$",
+            "origin": "W-07 Daily Exam M-07 Set-A Q06",
+            "q": "যদি $y = \\sqrt{x - \\sqrt{x - \\sqrt{x - \\dots \\infty}}}$ হয়, তবে $\\frac{dy}{dx}$ এর মান কত?",
             "opts": [
-                "$3$",
-                "$0$",
-                "$\\frac{3}{2}$",
-                "$6$"
+                "$\\frac{1}{2y + 1}$",
+                "$\\frac{1}{2y - 1}$",
+                "$\\frac{-1}{2y + 1}$",
+                "$\\frac{1}{1 - 2y}$"
             ],
             "ans": 0,
-            "exp": "লা'হসপিটাল প্রয়োগ করে: লবের অন্তরক $\\frac{d}{dx}(e^{3x} - e^{-3x}) = 3e^{3x} - (-3e^{-3x}) = 3e^{3x} + 3e^{-3x}$। হরের অন্তরক $\\frac{d}{dx}(\\sin 2x) = 2\\cos 2x$। $x = 0$ বসালে: $\\frac{3(1) + 3(1)}{2(1)} = \\frac{6}{2} = 3$।",
-            "trap_alert": "লবে অন্তরীকরণের সময় $e^{-3x}$ এর চেইন রুলে ঋণাত্মক চিহ্ন $(-3)$ এসে $+3$ হয়—এখানে চিহ্ন ভুল করে লবে $3 - 3 = 0$ ধরে উত্তর শূন্য দাগানো।",
+            "exp": "অনন্ত ধারার সমীকরণ: $y = \\sqrt{x - y} \\implies y^2 = x - y \\implies y^2 + y = x$। উভয়পক্ষে $x$-এর সাপেক্ষে অন্তরীকরণ করে: $2y\\frac{dy}{dx} + \\frac{dy}{dx} = 1 \\implies (2y + 1)\\frac{dy}{dx} = 1 \\implies \\frac{dy}{dx} = \\frac{1}{2y + 1}$।",
+            "trap_alert": "যোগবোধক অসীম ধারার সূত্র ($\\frac{1}{2y-1}$) মুখস্থ থেকে বিয়োগবোধক রাশিতে প্রয়োগ করে $2y-1$ দাগিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "99% Speed Hack",
-            "intelligence_type": "Exponential Limit Sign Trap",
-            "source_book": "অসীম সাহা স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Infinite Radical Series Sign Reversal",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_10",
@@ -793,21 +797,21 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '22-23 Core",
-            "q": "একটি বৃত্তের ক্ষেত্রফলের পরিবর্তনের হার তার ব্যাসার্ধের সাপেক্ষে কত হবে, যখন ব্যাসার্ধ $r = 5\\text{ cm}$?",
+            "origin": "W-07 Weekly Exam Set-A Q40 ও Set-D Q40",
+            "q": "যদি $y = \\log_x a$ হয়, তবে $\\frac{dy}{dx}$ এর মান কোনটি হবে?",
             "opts": [
-                "$10\\pi\\text{ cm}^2/\\text{cm}$",
-                "$25\\pi\\text{ cm}^2/\\text{cm}$",
-                "$5\\pi\\text{ cm}^2/\\text{cm}$",
-                "$20\\pi\\text{ cm}^2/\\text{cm}$"
+                "$-\\frac{\\ln a}{x(\\ln x)^2}$",
+                "$\\frac{1}{x\\ln a}$",
+                "$\\frac{\\ln a}{x}$",
+                "$-\\frac{1}{x(\\ln x)^2}$"
             ],
             "ans": 0,
-            "exp": "ক্ষেত্রফল $A = \\pi r^2$। ব্যাসার্ধ $r$-এর সাপেক্ষে অন্তরীকরণ করলে: $\\frac{dA}{dr} = \\frac{d}{dr}(\\pi r^2) = 2\\pi r$। $r = 5\\text{ cm}$ বসালে: $\\frac{dA}{dr} = 2\\pi \\times 5 = 10\\pi\\text{ cm}^2/\\text{cm}$।",
-            "trap_alert": "সময়ের সাপেক্ষে পরিবর্তনের হার ভেবে $\\frac{dr}{dt}$ খুঁজতে গিয়ে সময় নষ্ট করা অথবা $\\pi r^2 = 25\\pi$ দাগানো।",
+            "exp": "ভিত্তি পরিবর্তন সূত্র: $y = \\frac{\\ln a}{\\ln x} = (\\ln a)(\\ln x)^{-1}$। অন্তরীকরণ করলে: $\\frac{dy}{dx} = (\\ln a) \\cdot (-1)(\\ln x)^{-2} \\cdot \\frac{d}{dx}(\\ln x) = -(\\ln a)(\\ln x)^{-2} \\cdot \\frac{1}{x} = -\\frac{\\ln a}{x(\\ln x)^2}$।",
+            "trap_alert": "$\\log_a x$ এর সাধারণ অন্তরক ($\\frac{1}{x\\ln a}$) এর সাথে ভিত্তি ও আর্গুমেন্ট অদলবদল হওয়া $\\log_x a$ গুলিয়ে ফেলা।",
             "yield_stars": 5,
             "probability": "98% DU Repeat",
-            "intelligence_type": "Derivative Rate of Change",
-            "source_book": "এস ইউ আহাম্মদ"
+            "intelligence_type": "Logarithmic Base Inversion Differentiation",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_11",
@@ -816,21 +820,21 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '20-21 Speed Hack",
-            "q": "যদি $y = \\sqrt{\\sin x + \\sqrt{\\sin x + \\sqrt{\\sin x + \\dots \\infty}}}$ হয়, তবে $\\frac{dy}{dx}$ এর মান কত?",
+            "origin": "W-07 Daily Exam M-07 Set-A Q05",
+            "q": "$\\cos x$ এর সাপেক্ষে $\\sin x$ এর অন্তরক সহগ $\\frac{d}{d(\\cos x)}(\\sin x)$ কত?",
             "opts": [
-                "$\\frac{\\cos x}{2y - 1}$",
-                "$\\frac{\\cos x}{2y + 1}$",
-                "$\\frac{-\\cos x}{2y - 1}$",
-                "$\\frac{\\sin x}{2y - 1}$"
+                "$-\\cot x$",
+                "$\\cot x$",
+                "$-\\tan x$",
+                "$\\tan x$"
             ],
             "ans": 0,
-            "exp": "অনন্ত ধারার শর্টকাট: $y = \\sqrt{f(x) + y} \\implies y^2 - y = f(x)$। অন্তরীকরণ করলে: $(2y - 1)\\frac{dy}{dx} = f'(x) \\implies \\frac{dy}{dx} = \\frac{f'(x)}{2y - 1}$। এখানে $f(x) = \\sin x$, তাই $f'(x) = \\cos x$। সুতরাং উত্তর $\\frac{\\cos x}{2y - 1}$।",
-            "trap_alert": "হরের চিহ্নে $2y - 1$ এর জায়গায় $2y + 1$ দাগিয়ে ফেলা।",
+            "exp": "প্যারামেট্রিক অন্তরীকরণের নিয়মানুসারে: $\\frac{d(\\sin x)}{d(\\cos x)} = \\frac{\\frac{d}{dx}(\\sin x)}{\\frac{d}{dx}(\\cos x)} = \\frac{\\cos x}{-\\sin x} = -\\cot x$।",
+            "trap_alert": "হরের অন্তরকে $\\frac{d}{dx}(\\cos x) = -\\sin x$ এর মাইনাস চিহ্ন ভুলে গিয়ে $+\\cot x$ দাগানো।",
             "yield_stars": 5,
-            "probability": "99% Speed Hack",
-            "intelligence_type": "Infinite Radical Derivative Hack",
-            "source_book": "কেতাবউদ্দিন স্যার"
+            "probability": "98% Speed Hack",
+            "intelligence_type": "Parametric Relative Derivative",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_mat_12",
@@ -839,96 +843,97 @@ def get_varsity_questions():
             "chapter": "অন্তরীকরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '19-20 Direct",
-            "q": "ব্যবধি $[1, 3]$ এ $f(x) = x^2 - 4x + 3$ ফাংশনটির জন্য রোলের উপপাদ্য (Rolle's Theorem) সিদ্ধকারী $c$ এর মান কত?",
+            "origin": "W-07 Weekly Exam Set-D Q33",
+            "q": "কোনো একটি গতিশীল কণার সরণের সমীকরণ $s = (3t^3 - 2t + 4)\\text{ m}$ হলে, $t = 2\\text{ s}$ পর কণাটির ত্বরণ কত হবে?",
             "opts": [
-                "$2$",
-                "$1.5$",
-                "$2.5$",
-                "$0$"
+                "$36\\text{ ms}^{-2}$",
+                "$34\\text{ ms}^{-2}$",
+                "$18\\text{ ms}^{-2}$",
+                "$72\\text{ ms}^{-2}$"
             ],
             "ans": 0,
-            "exp": "রোলের শর্ত: $f(1) = 1 - 4 + 3 = 0$ এবং $f(3) = 9 - 12 + 3 = 0$, অর্থাৎ $f(1) = f(3)$। রোলের উপপাদ্য অনুসারে এমন একটি $c \\in (1, 3)$ থাকবে যেখানে $f'(c) = 0$। $f'(x) = 2x - 4 \\implies 2c - 4 = 0 \\implies c = 2 \\in (1, 3)$।",
-            "trap_alert": None,
+            "exp": "বেগ $v = \\frac{ds}{dt} = 9t^2 - 2\\text{ ms}^{-1}$। ত্বরণ $a = \\frac{dv}{dt} = \\frac{d}{dt}(9t^2 - 2) = 18t\\text{ ms}^{-2}$। $t = 2\\text{ s}$ সময়ে ত্বরণ $a(2) = 18(2) = 36\\text{ ms}^{-2}$।",
+            "trap_alert": "একবার অন্তরীকরণ করে বেগের সূত্রে ($9(2)^2 - 2 = 34$) মান বসিয়ে বেগ দাগানো।",
             "yield_stars": 5,
-            "probability": "97% DU Direct",
-            "intelligence_type": "Rolle's Theorem Point Calculation",
-            "source_book": "এস ইউ আহাম্মদ"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Kinematics Double Derivative Acceleration",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         }
     ]
 
     # ==========================================
-    # BIOLOGY (12 MCQs) - Chapters: মানব শারীরতত্ত্ব (সমন্বয় ও নিয়ন্ত্রণ), প্রাণীর আচরণ
+    # BIOLOGY (12 MCQs) - Chapters: সমন্বয় ও নিয়ন্ত্রণ, প্রাণীর আচরণ
+    # Source: W-07 Varsity (Udvash).pdf
     # ==========================================
     bio_mcqs = [
         {
             "id": "w7_var_bio_01",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
+            "chapter": "প্রাণীর আচরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Repeat",
-            "q": "অক্ষিগোলকের সুপিরিয়র অবলিক (Superior oblique) পেশির সঞ্চালন নিয়ন্ত্রণ করে কোন করোটিক স্নায়ু?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q18 ও Set-D Q59",
+            "q": "মৌমাছির সামাজিক জীবনে কোন আচরণগত বৈশিষ্ট্যটি অত্যন্ত সুস্পষ্ট ও গুরুত্বপূর্ণ যেখানে কর্মী মৌমাছি নিজের জীবন বলিদান দিয়ে কলোনি রক্ষা করে?",
             "opts": [
-                "৪র্থ - ট্রকলিয়ার (Trochlear)",
-                "৩য় - অকুলোমোটর (Oculomotor)",
-                "৬ষ্ঠ - অ্যাবডুসেন্স (Abducens)",
-                "২য় - অপটিক (Optic)"
+                "পরার্থপরতা (Altruism)",
+                "অনুকরণ (Imprinting)",
+                "অভ্যাসগত শিখন (Habituation)",
+                "অনুবন্ধন (Conditioning)"
             ],
             "ans": 0,
-            "exp": "চোখের ৬টি বহিরাক্ষি পেশির মধ্যে সুপিরিয়র অবলিক পেশি নিয়ন্ত্রণ করে ৪র্থ করোটিক স্নায়ু ট্রকলিয়ার ($SO_4$)। ল্যাটেরাল রেকটাস নিয়ন্ত্রণ করে ৬ষ্ঠ স্নায়ু অ্যাবডুসেন্স ($LR_6$)। বাকি ৪টি পেশি নিয়ন্ত্রণ করে ৩য় স্নায়ু অকুলোমোটর ($[SO_4 LR_6]_3$ সূত্র)।",
-            "trap_alert": "চোখের সাধারণ পেশি চালনাকারী ৩য় স্নায়ু অকুলোমোটর বা ৬ষ্ঠ অ্যাবডুসেন্সের সাথে সুপিরিয়র অবলিকের ট্রকলিয়ার গুলিয়ে ফেলা।",
+            "exp": "অ্যালটুইজম বা পরার্থপরতা হলো এমন একটি আচরণ যেখানে কোনো জীব নিজের প্রজনন ও জীবনের ঝুঁকি নিয়ে দলের অন্য সদস্যদের বেঁচে থাকা ও বংশবৃদ্ধিতে সহায়তা করে। মৌমাছির চাকে বন্ধ্যা কর্মী মৌমাছিরা রাণী ও ড্রোনদের সেবা এবং চাকে আক্রমণকারী শত্রুকে হুল ফুটিয়ে নিজে মৃত্যুবরণ করে যা খাঁটি পরার্থপরতার উদাহরণ।",
+            "trap_alert": None,
             "yield_stars": 5,
             "probability": "99% DU Repeat",
-            "intelligence_type": "Cranial Nerve Eye Muscle Rule",
-            "source_book": "গাজী আজমল স্যার"
+            "intelligence_type": "Altruistic Social Behavior Paradigm",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_02",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
+            "chapter": "প্রাণীর আচরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '22-23 Repeat",
-            "q": "মানব মস্তিষ্কের কোন অংশ হৃদস্পন্দন, রক্তচাপ, শ্বাসক্রিয়া ও গলধঃকরণ নিয়ন্ত্রণ করে?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q19",
+            "q": "প্রাণীর সহজাত আচরণের অন্তর্ভুক্ত এফএপি (Fixed Action Pattern - FAP) কেন্দ্রিক আচরণ নিচের কোনটি নয়?",
             "opts": [
-                "মেডুলা অবলংগাটা (Medulla oblongata)",
-                "সেরিবেলাম (Cerebellum)",
-                "থ্যালামাস (Thalamus)",
-                "হাইপোথ্যালামাস (Hypothalamus)"
+                "শিখন বা অভ্যাস (Learning)",
+                "পাখির বাসা তৈরি",
+                "যুগলবন্দি ও যৌন মিলন",
+                "শীতের পরিযান (Migration)"
             ],
             "ans": 0,
-            "exp": "পশ্চাৎ মস্তিষ্কের মেডুলা অবলংগাটা হলো মানবদেহের স্বয়ংক্রিয় জীবন রক্ষাকারী কেন্দ্র; এটি হৃদস্পন্দন, রক্তচাপ, শ্বাস-প্রশ্বাস, লালাক্ষরণ, বমি ও গলধঃকরণ নিয়ন্ত্রণ করে। সেরিবেলাম দেহের ভারসাম্য রক্ষা করে এবং হাইপোথ্যালামাস দেহের তাপমাত্রা, ক্ষুধা ও তৃষ্ণা নিয়ন্ত্রণ করে।",
-            "trap_alert": "দেহের তাপমাত্রা ও তৃষ্ণা নিয়ন্ত্রক হাইপোথ্যালামাসের সাথে শ্বাসক্রিয়া নিয়ন্ত্রক মেডুলা অবলংগাটা গুলিয়ে ফেলা।",
+            "exp": "FAP একটি সম্পূর্ণ বংশগত, জিন-নিয়ন্ত্রিত এবং ছাঁচসম্মত (Stereotyped) আচরণ যা প্রাণী জন্মগতভাবে প্রাপ্ত হয় (যেমন: বাবুই পাখির জটিল বাসা তৈরি, পরিযান, স্টিকলব্যাকের লাল পেট দেখে আক্রমণ)। শিখন (Learning) অভিজ্ঞতা ও অনুশীলনের মাধ্যমে অর্জিত হয়, এটি কোনো FAP নয়।",
+            "trap_alert": "পরিযান বা বাসা তৈরিতে কৌশল দেখে এগুলোকে শিখন মনে করা; প্রকৃতপক্ষে এগুলো জন্মগত FAP।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Brainstem Vital Center Matrix",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Innate FAP vs Learned Plasticity",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_03",
             "week_id": "week_07",
             "subject": "Biology",
             "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '20-21 Repeat",
-            "q": "চোখের রেটিনার রড কোষে বিদ্যমান রোডপসিন (Rhodopsin) রঞ্জক কোন প্রোটিন ও ভিটামিনের সমন্বয়ে গঠিত?",
+            "origin": "W-07 Weekly Exam Set-D Q53",
+            "q": "একজন পূর্ণাঙ্গ সুস্থ মানবদেহে উভয় কর্ণের মধ্যকর্ণ অংশে মোট কয়টি ক্ষুদ্র অস্থি (Ear Ossicles) বিদ্যমান থাকে?",
             "opts": [
-                "স্কটোপসিন প্রোটিন ও রেটিনিন (ভিটামিন-এ এর অ্যালডিহাইড)",
-                "আয়োডপসিন প্রোটিন ও ভিটামিন-সি",
-                "ক্যারোটিনয়েড ও ভিটামিন-ডি",
-                "অপসিন প্রোটিন ও ভিটামিন-ই"
+                "$6$ টি",
+                "$3$ টি",
+                "$2$ টি",
+                "$8$ টি"
             ],
             "ans": 0,
-            "exp": "রড কোষে থাকে রোডপসিন যা অপসিন (স্কটোপসিন) প্রোটিন এবং ভিটামিন-এ এর অ্যালডিহাইড রেটিনিন (Retinal/Retinene) দ্বারা গঠিত। ভিটামিন-এ এর অভাবে রোডপসিন সংশ্লেষ ব্যাহত হওয়ায় রাতকানা (Nyctalopia) রোগ হয়। কোন কোষে থাকে আয়োডপসিন ও ফটোসিন।",
-            "trap_alert": "কোন কোষের আয়োডপসিন এবং রড কোষের রোডপসিন এর নাম ও উপাদানে উল্টাপাল্টা করা।",
+            "exp": "প্রতিটি কানের মধ্যকর্ণে ৩টি করে ক্ষুদ্রাস্থি থাকে: ম্যালিয়াস (Malleus), ইনকাস (Incus) ও স্টেপিস (Stapes)। যেহেতু মানুষের কর্ণ দুইটি (ডান ও বাম), তাই মানবদেহে মোট মধ্যকর্ণের অস্থির সংখ্যা $= 3 \\times 2 = 6$ টি।",
+            "trap_alert": "প্রতি কানের ৩টি অস্থি মনে রেখে দ্রুত অপশনে ৩ দাগিয়ে ফেলা; প্রশ্নে পুরো মানবদেহে মোট অস্থির সংখ্যা চাওয়া হয়েছে।",
             "yield_stars": 5,
-            "probability": "99% DU Repeat",
-            "intelligence_type": "Photoreceptor Biochemistry",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "99% Speed Hack",
+            "intelligence_type": "Bilateral Ear Ossicle Headcount",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_04",
@@ -937,21 +942,21 @@ def get_varsity_questions():
             "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '23-24 Core",
-            "q": "মধ্যকর্ণের কোন ক্ষুদ্রতম অস্থিটি সরাসরি অন্তঃকর্ণের ফেনেস্ট্রা ওভালিসের (ডিম্বাকার গবাক্ষ) সাথে যুক্ত থাকে?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q13",
+            "q": "অন্তঃকর্ণের ককলিয়া নালীর কোন প্রকোষ্ঠটি এন্ডোলিম্ফ (Endolymph) নামক বিশেষ তরল দ্বারা পূর্ণ থাকে?",
             "opts": [
-                "স্টেপিস (Stapes)",
-                "ম্যালিয়াস (Malleus)",
-                "ইনকাস (Incus)",
-                "ককলিয়া (Cochlea)"
+                "স্কালা মিডিয়া",
+                "স্কালা ভেস্টিবুলি",
+                "স্কালা টিম্প্যানি",
+                "ভেস্টিবুলার অ্যাপারেটাস"
             ],
             "ans": 0,
-            "exp": "মধ্যকর্ণের তিনটি ক্ষুদ্র অস্থির ক্রম: ম্যালিয়াস $\\to$ ইনকাস $\\to$ স্টেপিস (শর্টকাট: MIS)। ম্যালিয়াস টিম্প্যানিক পর্দার সাথে যুক্ত থাকে এবং স্টেপিস (মানবদেহের ক্ষুদ্রতম অস্থি) ফেনেস্ট্রা ওভালিসের গায়ে যুক্ত থেকে শব্দতরঙ্গ ২০ গুণ বিবর্ধিত করে অন্তঃকর্ণের পেরিলিম্ফে পাঠায়।",
-            "trap_alert": "টিম্প্যানিক পর্দায় যুক্ত ম্যালিয়াস এবং ফেনেস্ট্রা ওভালিসে যুক্ত স্টেপিস এর অবস্থান গুলিয়ে ফেলা।",
+            "exp": "ককলিয়া তিনটি সমান্তরাল প্রকোষ্ঠে বিভক্ত: উপরের স্কালা ভেস্টিবুলি এবং নিচের স্কালা টিম্প্যানি—উভয়েই পেরিলিম্ফ তরলে পূর্ণ থাকে। মাঝখানের প্রকোষ্ঠটি স্কালা মিডিয়া (ককলিয়ার নালী) যা সম্পূর্ণ এন্ডোলিম্ফ তরলে পূর্ণ এবং এর ব্যাসিলার পর্দার ওপর শ্রবণ সংবেদী 'অর্গান অব কর্টি' অবস্থিত।",
+            "trap_alert": "স্কালা ভেস্টিবুলি বা টিম্প্যানিকে এন্ডোলিম্ফে পূর্ণ মনে করা; কেবল স্কালা মিডিয়াতে এন্ডোলিম্ফ থাকে।",
             "yield_stars": 5,
-            "probability": "98% DU Repeat",
-            "intelligence_type": "Ear Ossicles Sequence",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Cochlea Labyrinth Compartment Fluid",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_05",
@@ -960,21 +965,21 @@ def get_varsity_questions():
             "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '19-20 Repeat",
-            "q": "পিটুইটারি গ্রন্থির পশ্চাৎ খণ্ড (নিউরোহাইপোফাইসিস) হতে নিঃসৃত হয় কোন হরমোনদ্বয়?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q05 ও Weekly Set-B Q48",
+            "q": "মানবদেহের জৈব ঘড়ি (Circadian Rhythm), দেহের তাপমাত্রা, ক্ষুধা, তৃষ্ণা এবং রাগ-ক্ষোভ নিয়ন্ত্রণ করে মস্তিষ্কের কোন অংশ?",
             "opts": [
-                "অক্সিটোসিন ও ভেসোপ্রেসিন (ADH)",
-                "ACTH ও TSH",
-                "গ্রোথ হরমোন (GH) ও প্রোল্যাকটিন",
-                "FSH ও LH"
+                "হাইপোথ্যালামাস (Hypothalamus)",
+                "থ্যালামাস (Thalamus)",
+                "সেরিবেলাম (Cerebellum)",
+                "মেডুলা অবলংগাটা"
             ],
             "ans": 0,
-            "exp": "অক্সিটোসিন এবং অ্যান্টিডাইইউরেটিক হরমোন (ADH বা ভেসোপ্রেসিন) হাইপোথ্যালামাসের নিউরোসিক্রেটরি কোষে তৈরি হয় এবং পিটুইটারির পশ্চাৎ খণ্ডে জমা থেকে রক্তে নিঃসৃত হয়। ACTH, TSH, GH, FSH, LH পিটুইটারির অগ্র খণ্ড (অ্যাডেনোহাইপোফাইসিস) হতে নিঃসৃত হয়।",
-            "trap_alert": "অগ্র পিটুইটারি ও পশ্চাৎ পিটুইটারির হরমোন তালিকার মধ্যে বিভ্রান্তি।",
+            "exp": "অগ্রমস্তিষ্কের ডায়েনসেফালনে অবস্থিত হাইপোথ্যালামাস হলো স্বয়ংক্রিয় স্নায়ুতন্ত্র ও এন্ডোক্রাইন সিস্টেমের সমন্বয়কারী মাস্টার কেন্দ্র; এটি দেহের তাপমাত্রা নিয়ন্ত্রণ (থার্মোস্ট্যাট), ক্ষুধা, তৃষ্ণা, আবেগ এবং ২৪ ঘণ্টার জৈব ছন্দ (Biological Clock) নিয়ন্ত্রণ করে।",
+            "trap_alert": "সংবেদনশীল রিলে স্টেশন থ্যালামাসের সাথে হাইপোথ্যালামাসের কাজের বিভ্রান্তি।",
             "yield_stars": 5,
             "probability": "99% DU Repeat",
-            "intelligence_type": "Pituitary Hormone Secretion Origin",
-            "source_book": "গাজী আজমল স্যার"
+            "intelligence_type": "Hypothalamus Homeostatic Center",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_06",
@@ -983,159 +988,159 @@ def get_varsity_questions():
             "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Repeat",
-            "q": "অগ্ন্যাশয়ের আইলেটস অব ল্যাঙ্গারহ্যান্সের বিটা ($\\beta$) কোষ থেকে নিঃসৃত ইনসুলিন কোন প্রক্রিয়ায় রক্তে গ্লুকোজের মাত্রা কমায়?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q06",
+            "q": "মানবদেহে ১২ জোড়া করোটিক স্নায়ুর মধ্যে ৭ম করোটিক স্নায়ুর (VII) সঠিক নাম কোনটি?",
             "opts": [
-                "গ্লাইকোজেনেসিস (গ্লুকোজ হতে গ্লাইকোজেন তৈরি)",
-                "গ্লাইকোজেনোলাইসিস (গ্লাইকোজেন ভেঙে গ্লুকোজ তৈরি)",
-                "গ্লুকোনিওজেনেসিস (অশর্করা হতে গ্লুকোজ তৈরি)",
-                "লাইপোলাইসিস"
+                "ফেসিয়াল স্নায়ু (Facial nerve)",
+                "ট্রাইজেমিনাল স্নায়ু (Trigeminal)",
+                "অকুলোমোটর স্নায়ু (Oculomotor)",
+                "গ্লসোফ্যারিঞ্জিয়াল স্নায়ু (Glossopharyngeal)"
             ],
             "ans": 0,
-            "exp": "ইনসুলিন যকৃত ও পেশিকোষে গ্লাইকোজেনেসিস প্রক্রিয়ায় অতিরিক্ত গ্লুকোজকে গ্লাইকোজেনে রূপান্তর করে জমা রাখে এবং কোষে গ্লুকোজ প্রবেশ ত্বরান্বিত করে। বিপরীতে আলফা কোষ নিঃসৃত গ্লুকাগন গ্লাইকোজেনোলাইসিস ঘটিয়ে রক্তে গ্লুকোজ বাড়ায়।",
-            "trap_alert": "গ্লাইকোজেনেসিস (ইনসুলিন) এবং গ্লাইকোজেনোলাইসিস (গ্লুকাগন) এর বিপরীতমুখী ক্রিয়া বিপরীতভাবে দাগানো।",
+            "exp": "৭ম করোটিক স্নায়ু হলো ফেসিয়াল স্নায়ু যা একটি মিশ্র স্নায়ু। এটি মুখমণ্ডলের পেশি সঞ্চালন, স্বাদ গ্রহণ এবং লালাগ্রন্থির ক্ষরণ নিয়ন্ত্রণ করে। ৫ম হলো ট্রাইজেমিনাল, ৯ম হলো গ্লসোফ্যারিঞ্জিয়াল।",
+            "trap_alert": "৫ম (ট্রাইজেমিনাল) এবং ৭ম (ফেসিয়াল) এর ক্রম উল্টে ফেলা।",
             "yield_stars": 5,
             "probability": "99% DU Repeat",
-            "intelligence_type": "Endocrine Blood Sugar Regulation",
-            "source_book": "গাজী আজমল স্যার"
+            "intelligence_type": "Cranial Nerve VII Identity",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_07",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "প্রাণীর আচরণ",
+            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '22-23 Core",
-            "q": "প্রাণীর সহজাত আচরণের অন্তর্ভুক্ত এফএপি (Fixed Action Pattern - FAP) এর মূল বৈশিষ্ট্য কোনটি?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q09",
+            "q": "চোখের অক্ষিগোলকের অভ্যন্তরীণ চাপ বজায় রাখতে এবং আকৃতি গোলাকার রাখতে কোন স্বচ্ছ তরল মাধ্যমটি মূল ভূমিকা পালন করে?",
             "opts": [
-                "নির্দিষ্ট সাইন স্টিমুলাস (Sign stimulus) দ্বারা উদ্দীপিত ও অপরিবর্তনীয়",
-                "বারবার অনুশীলনের মাধ্যমে ব্যক্তি-নির্দিষ্টভাবে অর্জিত",
-                "অনভ্যাসের ফলে সহজেই বিলুপ্ত হয়",
-                "মস্তিষ্কের উন্নত সেরিব্রাল কর্টেক্স দ্বারা নিয়ন্ত্রিত"
+                "ভিট্রিয়াস হিউমার (Vitreous humor)",
+                "অ্যাকুয়াস হিউমার (Aqueous humor)",
+                "কোরয়েড (Choroid)",
+                "সিলিয়ারি বডি"
             ],
             "ans": 0,
-            "exp": "FAP হলো জিন নিয়ন্ত্রিত সহজাত স্টিরিওটাইপড আচরণ যা একটি নির্দিষ্ট উদ্দীপক (Sign stimulus) দ্বারা শুরু হলে প্রাণী তা না থেমে শেষ পর্যন্ত সম্পন্ন করে (যেমন: নিকো টিনবার্জেনের তিন কাঁটাযুক্ত পুরুষ স্টিকলব্যাক মাছের লাল পেট দেখে আক্রমণাত্মক আচরণ)।",
-            "trap_alert": "সহজাত আচরণ FAP কে অর্জিত বা কন্ডিশনিং আচরণের সাথে মিলিয়ে ফেলা।",
+            "exp": "লেন্স ও রেটিনার মধ্যবর্তী পেছনের বৃহৎ প্রকোষ্ঠে অবস্থিত জেলির মতো স্বচ্ছ ভিট্রিয়াস হিউমার অক্ষিগোলকের অভ্যন্তরীণ হাইড্রোস্ট্যাটিক চাপ রক্ষা করে এবং অক্ষিগোলককে চুপসে যাওয়া থেকে রক্ষা করে গোলাকার আকৃতি ধরে রাখে। লেন্স ও কর্নিয়ার মাঝে থাকে অ্যাকুয়াস হিউমার যা পুষ্টি যোগায়।",
+            "trap_alert": "সামনের অ্যাকুয়াস হিউমারের সাথে পেছনের ভিট্রিয়াস হিউমারের কাজের পার্থক্য মিস করা।",
             "yield_stars": 5,
-            "probability": "97% DU Core",
-            "intelligence_type": "FAP Innate Behavior Hallmarks",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Ocular Vitreous Hydrodynamics",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_08",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "প্রাণীর আচরণ",
+            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '20-21 Repeat",
-            "q": "আইভান প্যাভলভের সাপেক্ষ প্রতিবর্ত ক্রিয়ার পরীক্ষায় 'ঘণ্টাধ্বনি' কী হিসেবে কাজ করে?",
+            "origin": "W-07 Daily Exam Bio-07 Set-A Q14",
+            "q": "রক্তে ক্যালসিয়াম ও ফসফেটের ভারসাম্য রক্ষায় প্যারাথাইরয়েড গ্রন্থি নিঃসৃত প্যারাথরমোনের প্রধান কাজ কোনটি?",
             "opts": [
-                "অনুবন্ধিত উদ্দীপক (Conditioned Stimulus - CS)",
-                "অননুবন্ধিত উদ্দীপক (Unconditioned Stimulus - UCS)",
-                "অনুবন্ধিত সাড়া (Conditioned Response - CR)",
-                "অননুবন্ধিত সাড়া (Unconditioned Response - UCR)"
+                "রক্তে ক্যালসিয়াম বৃদ্ধি এবং বৃক্কে ফসফেটের রেচন হার বৃদ্ধি করা",
+                "রক্তে ক্যালসিয়াম হ্রাস এবং ফসফেট বৃদ্ধি করা",
+                "রক্তে ক্যালসিয়াম ও ফসফেট উভয়ই হ্রাস করা",
+                "অস্থিতে ক্যালসিয়াম জমা রাখা"
             ],
             "ans": 0,
-            "exp": "প্যাভলভের পরীক্ষায় খাদ্য হলো অননুবন্ধিত স্বাভাবিক উদ্দীপক (UCS), খাদ্য দেখে লালাক্ষরণ অননুবন্ধিত স্বাভাবিক সাড়া (UCR)। ঘণ্টার শব্দ কৃত্রিম বা অনুবন্ধিত উদ্দীপক (CS) এবং ঘণ্টার শব্দ শুনেই লালাক্ষরণ হলো অনুবন্ধিত সাড়া (CR)।",
-            "trap_alert": "ঘণ্টার শব্দকে অননুবন্ধিত উদ্দীপক (UCS) ভেবে ভুল করা।",
+            "exp": "প্যারাথাইরয়েড গ্রন্থির প্যারাথরমোন (PTH বা কোলিপের হরমোন) অস্থি ক্ষয় করে এবং বৃক্কীয় নালিকায় ক্যালসিয়ামের পুনঃশোষণ বাড়িয়ে রক্তে $\\text{Ca}^{2+}$ বাড়ায়, একইসাথে বৃক্কে ফসফেটের রেচন বৃদ্ধি করে রক্তে ফসফেটের মাত্রা কমায়। বিপরীত কাজটি করে থাইরয়েড নিঃসৃত ক্যালসিটোনিন।",
+            "trap_alert": "ক্যালসিটোনিনের কাজের সাথে প্যারাথরমোনের কাজ গুলিয়ে ফেলা।",
             "yield_stars": 5,
             "probability": "98% DU Repeat",
-            "intelligence_type": "Pavlov Classical Conditioning Mapping",
-            "source_book": "গাজী আজমল স্যার"
+            "intelligence_type": "Parathormone Mineral Homeostasis",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_09",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "প্রাণীর আচরণ",
+            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '19-20 Direct",
-            "q": "ফসলের ক্ষেতে স্থাপিত কাকতাড়ুয়াকে ক্ষতিকর নয় জেনে প্রথম দিকে ভয় পেলেও পরবর্তীতে পাখি কর্তৃক অবজ্ঞা করার আচরণ কোন ধরনের শিখন?",
+            "origin": "W-07 Weekly Exam Set-A Q58",
+            "q": "মানবদেহের প্রতিবর্ত ক্রিয়া (Reflex Action) সম্পর্কে নিম্নের কোন বিবৃতিটি সঠিক?",
             "opts": [
-                "অভ্যাসগত আচরণ (Habituation)",
-                "অনুবন্ধন (Conditioning)",
-                "অন্তর্দৃষ্টি (Insight learning)",
-                "অনুকরণ (Imprinting)"
+                "এটি জন্মগত, অনপেক্ষ, অনিচ্ছাকৃত এবং শিক্ষালব্ধ নয়",
+                "এটি মস্তিষ্কের সেরেব্রাল কর্টেক্স দ্বারা নিয়ন্ত্রিত ঐচ্ছিক ক্রিয়া",
+                "এটি সম্পূর্ণরূপে অনুশীলন ও স্মৃতিশক্তির উপর নির্ভরশীল",
+                "এতে কোনো সংবেদী ও মোটর স্নায়ুর প্রয়োজন হয় না"
             ],
             "ans": 0,
-            "exp": "কোনো উদ্দীপক বারবার উপস্থাপিত হলেও তার দ্বারা কোনো ক্ষতি বা পুরস্কার না ঘটলে প্রাণী ধীরে ধীরে সাড়া প্রদান বন্ধ করে দেয়। এটি সবচেয়ে সরল শিখন আচরণ যার নাম হ্যাবিচুয়েশন বা অভ্যাসগত আচরণ।",
-            "trap_alert": None,
+            "exp": "অনপেক্ষ প্রতিবর্ত ক্রিয়া (যেমন গরম বস্তুতে হাত পড়লে দ্রুত হাত টানা, হাঁচি, চোখের পলক ফেলা) সহজাত, জন্মগত, দ্রুতগামী এবং সুষুম্নাকাণ্ড দ্বারা সরাসরি নিয়ন্ত্রিত। এর জন্য কোনো পূর্ব অভিজ্ঞতার প্রয়োজন নেই।",
+            "trap_alert": "প্যাভলভের সাপেক্ষ প্রতিবর্ত ক্রিয়ার সাথে জন্মগত অনপেক্ষ প্রতিবর্তের বৈশিষ্ট্য গুলিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "98% DU Direct",
-            "intelligence_type": "Habituation Behavior Paradigm",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "99% DU Repeat",
+            "intelligence_type": "Reflex Action Inherent Modality",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_10",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
-            "tag": "Speed Hack",
+            "chapter": "প্রাণীর আচরণ",
+            "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '21-22 Speed Hack",
-            "q": "১২ জোড়া করোটিক স্নায়ুর মধ্যে কোনগুলো সম্পূর্ণ 'মিশ্র স্নায়ু' (Mixed Nerves)?",
+            "origin": "W-07 Weekly Exam Set-A Q59",
+            "q": "প্রজনন ঋতুতে স্ত্রী মাছকে আকর্ষণ করার জন্য এবং ডিম ছাড়ার বাসা নির্দেশ করতে 'জিগ-জ্যাগ নৃত্য' (Zig-zag dance) প্রদর্শন করে কোন প্রাণী?",
             "opts": [
-                "৫ম (Trigeminal), ৭ম (Facial), ৯ম (Glossopharyngeal), ১০ম (Vagus)",
-                "১ম (Olfactory), ২য় (Optic), ৮ম (Auditory)",
-                "৩য় (Oculomotor), ৪র্থ (Trochlear), ৬ষ্ঠ (Abducens)",
-                "১১শ (Spinal Accessory), ১২শ (Hypoglossal)"
+                "তিন কাঁটাযুক্ত পুরুষ স্টিকলব্যাক মাছ",
+                "কর্মী মৌমাছি (Apis mellifera)",
+                "ময়ূর",
+                "শিম্পাঞ্জি"
             ],
             "ans": 0,
-            "exp": "করোটিক স্নায়ুর প্রকৃতির সুপার স্পিড হ্যাক: সংবেদী স্নায়ু = ১, ২, ৮ (Olfactory, Optic, Auditory)। চেষ্টিয়/মোটর স্নায়ু = ৩, ৪, ৬, ১১, ১২। মিশ্র স্নায়ু = ৫, ৭, ৯, ১০ (Trigeminal, Facial, Glossopharyngeal, Vagus)।",
-            "trap_alert": "৮ম অডিটরি স্নায়ুকে মিশ্র স্নায়ুর সাথে মিলিয়ে ফেলা; এটি সম্পূর্ণ সংবেদী স্নায়ু।",
+            "exp": "নোবেলজয়ী বিজ্ঞানী নিকো টিনবার্জেনের গবেষণায় দেখা যায়, প্রজনন ঋতুতে পুরুষ তিন কাঁটাযুক্ত স্টিকলব্যাকের পেট লাল বর্ণ ধারণ করে এবং স্ত্রী মাছের রূপালী চকচকে উদর দেখে পুরুষ মাছটি জিগ-জ্যাগ নৃত্য প্রদর্শন করে স্ত্রীকে বাসার দিকে পথ দেখায়।",
+            "trap_alert": "মৌমাছির ওয়াগল নৃত্য (Waggle dance - খাদ্য উৎসের সংকেত) এর সাথে স্টিকলব্যাকের জিগ-জ্যাগ নৃত্যের বিভ্রান্তি।",
             "yield_stars": 5,
-            "probability": "99% Speed Hack",
-            "intelligence_type": "Cranial Nerve Modality Matrix",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "98% DU Repeat",
+            "intelligence_type": "Stickleback Zig-Zag Courtship Ethology",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_11",
             "week_id": "week_07",
             "subject": "Biology",
-            "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
+            "chapter": "প্রাণীর আচরণ",
             "tag": "DU Repeat",
             "track": "varsity",
-            "origin": "DU '18-19 Repeat",
-            "q": "শ্রবণের প্রধান গ্রাহক অঙ্গ 'অর্গান অব কর্টি' (Organ of Corti) অন্তঃকর্ণের ককলিয়ার কোন নালীর উপর অবস্থিত?",
+            "origin": "W-07 Weekly Exam Set-B Q57 ও Set-D Q57",
+            "q": "কোনো দিকনির্দেশক উদ্দীপকের সাথে নির্দিষ্ট কোণ বজায় রেখে প্রাণীর দিকমুখিতা পরিবর্তনকে কী বলা হয় (যেমন: সূর্যের অবস্থানের সাথে কোণ করে পিঁপড়ার খাদ্য সংগ্রহ)?",
             "opts": [
-                "স্কালা মিডিয়া (ককলিয়ার নালী)",
-                "স্কালা ভেস্টিবুলি",
-                "স্কালা টিম্প্যানি",
-                "অর্ধবৃত্তাকার নালী"
+                "মেনোট্যাক্সিস (Menotaxis)",
+                "ক্লিনোট্যাক্সিস (Klinotaxis)",
+                "ট্রপোট্যাক্সিস (Tropotaxis)",
+                "টেলোট্যাক্সিস (Telotaxis)"
             ],
             "ans": 0,
-            "exp": "ককলিয়ার কেন্দ্রীয় নালী হলো স্কালা মিডিয়া যা এন্ডোলিম্ফ তরলে পূর্ণ। স্কালা মিডিয়ার মেমব্রেনা ব্যাসিলারিসের উপর শ্রবণ সংবেদী লোমযুক্ত কোষ সমন্বিত অর্গান অব কর্টি অবস্থিত। স্কালা ভেস্টিবুলি ও টিম্প্যানিতে পেরিলিম্ফ থাকে।",
-            "trap_alert": "স্কালা মিডিয়ার সাথে স্কালা ভেস্টিবুলি বা টিম্প্যানি গুলিয়ে ফেলা।",
+            "exp": "মেনোট্যাক্সিস হলো এমন এক ধরনের ট্যাক্সিস যেখানে প্রাণী উদ্দীপকের উৎসের দিকে বা বিপরীতে সরাসরি না গিয়ে উদ্দীপকের সাথে একটি ধ্রুবক কোণ (Constant angle) বা লাইট কম্পাস বজায় রেখে গমন করে (যেমন: সূর্যের অবস্থানের সাপেক্ষে পিঁপড়া ও মৌমাছির দিক নির্ণয়)।",
+            "trap_alert": "সরাসরি আলোর দিকে গমনকারী পজিটিভ ফটোট্যাক্সিসের সাথে কোণ বজায় রাখা মেনোট্যাক্সিস গুলিয়ে ফেলা।",
             "yield_stars": 5,
             "probability": "97% DU Repeat",
-            "intelligence_type": "Cochlea Hearing Organ Anatomy",
-            "source_book": "গাজী আজমল স্যার"
+            "intelligence_type": "Menotaxis Constant Compass Orientation",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         },
         {
             "id": "w7_var_bio_12",
             "week_id": "week_07",
             "subject": "Biology",
             "chapter": "সমন্বয় ও নিয়ন্ত্রণ",
-            "tag": "DU Repeat",
+            "tag": "Speed Hack",
             "track": "varsity",
-            "origin": "DU '20-21 Direct",
-            "q": "জরুরি অবস্থায় বা বিপদের মুখোমুখি হলে মানবদেহে 'Fight or Flight' প্রতিক্রিয়া শুরু করতে কোন অন্তঃক্ষরা গ্রন্থি থেকে অ্যাড্রেনালিন নিঃসৃত হয়?",
+            "origin": "W-07 Daily Exam Bio-07 Set-B Q04",
+            "q": "মায়েলিনযুক্ত স্নায়ুতন্তুতে রণভিয়ারের পর্বগুলোর (Nodes of Ranvier) মধ্য দিয়ে অ্যাকশন পটেনশিয়াল দ্রুতগতিতে লাফিয়ে লাফিয়ে পরিবহনকে কী বলা হয়?",
             "opts": [
-                "অ্যাড্রেনাল মেডুলা",
-                "অ্যাড্রেনাল কর্টেক্স",
-                "থাইরয়েড গ্রন্থি",
-                "প্যারাথাইরয়েড গ্রন্থি"
+                "সলটেটরি পরিবহন (Saltatory conduction)",
+                "ক্রমাগত পরিবহন (Continuous conduction)",
+                "সিন্যাপটিক বিলম্ব",
+                "রিফ্র্যাক্টরি পিরিয়ড"
             ],
             "ans": 0,
-            "exp": "অ্যাড্রেনাল (সুপ্রারেনাল) গ্রন্থির ভেতরের অংশ মেডুলা হতে সংকটকালীন হরমোন অ্যাড্রেনালিন (এপিনেফ্রিন) ও নর-অ্যাড্রেনালিন নিঃসৃত হয় যা হৃদস্পন্দন ও রক্তচাপ দ্রুত বাড়িয়ে জরুরি পরিস্থিতি মোকাবেলায় দেহকে প্রস্তুত করে। অ্যাড্রেনাল কর্টেক্স হতে কর্টিসোল ও অ্যালডোস্টেরন নিঃসৃত হয়।",
-            "trap_alert": None,
+            "exp": "মায়েলিন সিথ একটি চমৎকার বৈদ্যুতিক অন্তরক। ফলে অ্যাক্সনে আয়ন বিনিময় কেবল মায়েলিনবিহীন রনভিয়ারের পর্বে ঘটে। ফলে উদ্দীপনা এক পর্ব থেকে অন্য পর্বে লাফিয়ে লাফিয়ে অত্যন্ত দ্রুতগতিতে (১০০-১২০ মি/সেকেন্ড বেগে) পরিবাহিত হয় যাকে সলটেটরি পরিবহন বলে।",
+            "trap_alert": "মায়েলিনবিহীন স্নায়ুতন্তুর অবিচ্ছিন্ন পরিবহন (Continuous conduction) এর সাথে গুলিয়ে ফেলা।",
             "yield_stars": 5,
-            "probability": "98% DU Direct",
-            "intelligence_type": "Adrenal Emergency Axis",
-            "source_book": "গাজী আজমল স্যার"
+            "probability": "99% Speed Hack",
+            "intelligence_type": "Saltatory Nerve Conduction Mechanism",
+            "source_book": "W-07 Varsity (Udvash).pdf"
         }
     ]
 
@@ -1157,140 +1162,140 @@ def get_varsity_questions():
 
 def get_du_written_problems():
     problems = [
-        # PHYSICS (4)
+        # PHYSICS (4) - Source: W-07 Varsity (Udvash).pdf Written Solutions
         {
             "subject": "Physics",
             "tag": "DU Written Special",
-            "problem": "$10\\text{ cm}$ ব্যাসার্ধবিশিষ্ট একটি ফাঁপা ধাতব গোলকে $+20\\text{ nC}$ চার্জ দেওয়া হলো। (ক) গোলকের কেন্দ্র থেকে $5\\text{ cm}$, $10\\text{ cm}$ এবং $20\\text{ cm}$ দূরত্বে তড়িৎ বিভবের মান কত? (খ) কেন্দ্র থেকে $5\\text{ cm}$ দূরত্বে তড়িৎ প্রাবল্যের মান কত? [ধরি $\\frac{1}{4\\pi\\epsilon_0} = 9 \\times 10^9\\text{ N m}^2\\text{ C}^{-2}$]",
-            "marks": 3.5,
-            "solution": "(ক) গোলকের পৃষ্ঠের ব্যাসার্ধ $R = 10\\text{ cm} = 0.1\\text{ m}$। পৃষ্ঠের বিভব $V_{\\text{surf}} = \\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R} = 9 \\times 10^9 \\times \\frac{20 \\times 10^{-9}}{0.1} = \\frac{180}{0.1} = 1800\\text{ V}$। যেহেতু পরিবাহী গোলকের অভ্যন্তর সমবিভব সম্পন্ন, কেন্দ্র থেকে $5\\text{ cm}$ দূরত্বে বিভব $V = V_{\\text{surf}} = 1800\\text{ V}$। পৃষ্ঠে ($10\\text{ cm}$) বিভব $V = 1800\\text{ V}$। বহিঃস্থ বিন্দু $r = 20\\text{ cm} = 0.2\\text{ m}$ এ বিভব $V = \\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{r} = 9 \\times 10^9 \\times \\frac{20 \\times 10^{-9}}{0.2} = 900\\text{ V}$। (খ) পরিবাহীর অভ্যন্তরে কোনো মুক্ত চার্জ না থাকায় কেন্দ্র থেকে $5\\text{ cm}$ দূরত্বে তড়িৎ প্রাবল্য $E = 0\\text{ N/C}$।",
-            "rubric": "অভ্যন্তরে ও পৃষ্ঠের বিভব নির্ণয় ($1800\\text{ V}$): ১.৫ | বাইরের বিন্দুর বিভব ($900\\text{ V}$): ১.০ | অভ্যন্তরে প্রাবল্য শূন্য ($E=0$) যুক্তি সহ: ১.০"
-        },
-        {
-            "subject": "Physics",
-            "tag": "DU Written Special",
-            "problem": "একটি সমান্তরাল পাত ধারকের প্রতি পাতের ক্ষেত্রফল $0.02\\text{ m}^2$ এবং পাতদ্বয়ের মধ্যবর্তী দূরত্ব $1\\text{ mm}$। পাতদ্বয়ের মধ্যবর্তী স্থান $\\kappa = 4$ পরাবৈদ্যুতিক ধ্রুবকের মাধ্যম দ্বারা পূর্ণ করে $100\\text{ V}$ ব্যাটারির সাথে যুক্ত করা হলো। ধারকটিতে সঞ্চিত শক্তির পরিমাণ এবং প্রতি একক আয়তনে সঞ্চিত শক্তির মান নির্ণয় কর। [$\\epsilon_0 = 8.854 \\times 10^{-12}\\text{ C}^2\\text{ N}^{-1}\\text{ m}^{-2}$]",
+            "problem": "একটি মুক্ত মৌলিক কণার গড় আয়ুষ্কাল $1 \\times 10^{-4}\\text{ s}$। কণাটি $0.88c$ সুষম বেগে গতিশীল হলে গবেষণাগারে অবস্থিত পর্যবেক্ষকের সাপেক্ষে কণাটির গড় আয়ুষ্কাল কত নির্ণয় কর।",
             "marks": 2.5,
-            "solution": "ধারকত্ব $C = \\frac{\\kappa \\epsilon_0 A}{d} = \\frac{4 \\times 8.854 \\times 10^{-12} \\times 0.02}{10^{-3}} = 4 \\times 8.854 \\times 10^{-12} \\times 20 = 7.083 \\times 10^{-10}\\text{ F}$। সঞ্চিত শক্তি $U = \\frac{1}{2} C V^2 = \\frac{1}{2} \\times 7.083 \\times 10^{-10} \\times (100)^2 = 3.54 \\times 10^{-6}\\text{ J}$। আয়তন $v = A \\cdot d = 0.02 \\times 10^{-3} = 2 \\times 10^{-5}\\text{ m}^3$। একক আয়তনে শক্তি $u = \\frac{U}{v} = \\frac{3.54 \\times 10^{-6}}{2 \\times 10^{-5}} = 0.177\\text{ J/m}^3$।",
-            "rubric": "ধারকত্ব $C$ নির্ণয়: ১.০ | মোট শক্তি $U$: ১.০ | শক্তি ঘনত্ব $u$: ০.৫"
+            "solution": "কাল দীর্ঘায়ন সূত্রানুসারে: $t = \\frac{t_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}$। এখানে স্থির অবস্থায় গড় আয়ুষ্কাল $t_0 = 1 \\times 10^{-4}\\text{ s}$, বেগ $v = 0.88c$। মান বসিয়ে পাই: $t = \\frac{1 \\times 10^{-4}}{\\sqrt{1 - (0.88)^2}} = \\frac{1 \\times 10^{-4}}{\\sqrt{1 - 0.7744}} = \\frac{1 \\times 10^{-4}}{\\sqrt{0.2256}} \\approx \\frac{1 \\times 10^{-4}}{0.475} = 2.105 \\times 10^{-4}\\text{ s}$। অর্থাৎ গতিশীল কণার গড় আয়ুষ্কাল প্রায় $2.1 \\times 10^{-4}\\text{ s}$।",
+            "rubric": "কাল দীর্ঘায়ন সূত্র ও মান প্রতিস্থাপন: ১.০ | বর্গমূল ও দশমিক হিসাব: ১.০ | এককসহ সঠিক উত্তর ($2.1 \\times 10^{-4}\\text{ s}$): ০.৫"
         },
         {
             "subject": "Physics",
             "tag": "DU Written Special",
-            "problem": "একটি মহাশূন্যযান কত বেগে চললে পৃথিবীতে অবস্থানরত পর্যবেক্ষকের কাছে মহাশূন্যযানের ঘড়ির ১ ঘণ্টা পৃথিবীর ঘড়ির ২ ঘণ্টার সমান মনে হবে? এ অবস্থায় $100\\text{ m}$ দৈর্ঘ্যবিশিষ্ট যানটির আপাত দৈর্ঘ্য কত হবে?",
+            "problem": "একটি বর্গক্ষেত্রের দুটি বিপরীত শীর্ষে $+Q$ চার্জ স্থাপন করা হয় এবং অপর দুটি শীর্ষে $+q$ চার্জ স্থাপন করা হয়। $Q$ চার্জের যেকোনোটির উপর যদি লব্ধি বৈদ্যুতিক বল শূন্য হয়, তবে $\\frac{Q}{q}$ অনুপাতের মান কত নির্ণয় কর।",
             "marks": 3.0,
-            "solution": "কাল দীর্ঘায়ন: $t = \\frac{t_0}{\\sqrt{1 - \\frac{v^2}{c^2}}}$। এখানে $t_0 = 1\\text{ hr}, t = 2\\text{ hr}$। $\\implies 2 = \\frac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}} \\implies \\sqrt{1 - \\frac{v^2}{c^2}} = \\frac{1}{2} \\implies 1 - \\frac{v^2}{c^2} = \\frac{1}{4} \\implies v = \\frac{\\sqrt{3}}{2}c \\approx 0.866c$ ($2.60 \\times 10^8\\text{ m/s}$)। দৈর্ঘ্য সংকোচন: $L = L_0 \\sqrt{1 - \\frac{v^2}{c^2}} = 100 \\times \\frac{1}{2} = 50\\text{ m}$।",
-            "rubric": "বেগ $v = \\frac{\\sqrt{3}}{2}c$ নির্ণয়: ২.০ | আপাত দৈর্ঘ্য $L = 50\\text{ m}$ নির্ণয়: ১.০"
+            "solution": "ধরি বর্গক্ষেত্রের বাহুর দৈর্ঘ্য $a$। কর্ণ বরাবর দূরত্ব $\\sqrt{2}a$। শীর্ষবিন্দুতে $Q$ চার্জের ওপর অপর দুটি $q$ চার্জের বিকর্ষণ বল $F_1 = F_2 = \\frac{1}{4\\pi\\epsilon_0}\\frac{Qq}{a^2}$। এদের মধ্যবর্তী কোণ $90^\\circ$, ফলে লব্ধি বল $F_{12} = \\sqrt{F_1^2 + F_2^2} = \\sqrt{2}F_1 = \\sqrt{2}\\frac{Qq}{4\\pi\\epsilon_0 a^2}$। বিপরীত শীর্ষের $Q$ চার্জ দ্বারা বিকর্ষণ বল $F_3 = \\frac{1}{4\\pi\\epsilon_0}\\frac{Q^2}{(\\sqrt{2}a)^2} = \\frac{Q^2}{4\\pi\\epsilon_0 \\cdot 2a^2}$। লব্ধি বল শূন্য হতে হলে: $\\vec{F}_{12} + \\vec{F}_3 = 0 \\implies \\sqrt{2}\\frac{Qq}{a^2} + \\frac{Q^2}{2a^2} = 0 \\implies Q\\left(\\frac{Q}{2} + \\sqrt{2}q\\right) = 0 \\implies \\frac{Q}{2} = -\\sqrt{2}q \\implies \\frac{Q}{q} = -2\\sqrt{2}$।",
+            "rubric": "বাহুর দূরত্ব ও $F_1, F_2$ লব্ধি নির্ণয়: ১.০ | কর্ণ বরাবর $F_3$ বল সমীকরণ: ১.০ | সাম্যাবস্থার শর্ত প্রয়োগ করে $\\frac{Q}{q} = -2\\sqrt{2}$ প্রমাণ: ১.০"
         },
         {
             "subject": "Physics",
             "tag": "DU Written Special",
-            "problem": "একটি ধাতুর সূচনা তরঙ্গদৈর্ঘ্য $\\lambda_0 = 5000\\text{ \\AA}$। ধাতুটির উপর $2500\\text{ \\AA}$ তরঙ্গদৈর্ঘ্যের আলো আপতিত হলে নির্গত ফটোইলেকট্রনের সর্বোচ্চ গতিশক্তি ($\\text{eV}$ এককে) এবং নিবৃত্তি বিভব ($V_s$) নির্ণয় কর। [$hc = 12400\\text{ eV}\\cdot\\text{\\AA}$]",
+            "problem": "বায়ু মাধ্যমে $24\\text{ cm}$ বাহুবিশিষ্ট একটি সমবাহু ত্রিভুজের তিনটি শীর্ষবিন্দুতে যথাক্রমে $+2\\mu\\text{C}$, $-4\\mu\\text{C}$ এবং $+8\\mu\\text{C}$ চার্জ রয়েছে। উক্ত চার্জ ব্যবস্থার মোট তড়িৎ স্থিতিশক্তি নির্ণয় কর। [ধরি $\\frac{1}{4\\pi\\epsilon_0} = 9 \\times 10^9\\text{ N m}^2\\text{ C}^{-2}$]",
+            "marks": 3.0,
+            "solution": "সমবাহু ত্রিভুজের বাহু $r = 24\\text{ cm} = 0.24\\text{ m}$। চার্জ ব্যবস্থাটির মোট তড়িৎ স্থিতিশক্তি: $U = U_{12} + U_{23} + U_{31} = \\frac{1}{4\\pi\\epsilon_0 r}[q_1 q_2 + q_2 q_3 + q_3 q_1]$। মান বসিয়ে পাই: $U = \\frac{9 \\times 10^9}{0.24} \\times [(2)(-4) + (-4)(8) + (8)(2)] \\times 10^{-12} = \\frac{9 \\times 10^9}{0.24} \\times [-8 - 32 + 16] \\times 10^{-12} = \\frac{9 \\times 10^9}{0.24} \\times (-24) \\times 10^{-12} = \\frac{9 \\times (-24)}{0.24} \\times 10^{-3} = 9 \\times (-100) \\times 10^{-3} = -0.9\\text{ J}$।",
+            "rubric": "স্থিতিশক্তির সাধারণ সূত্র গঠন: ১.০ | প্রতিটি জোড়ের চার্জ গুণফল ও চিহ্ন সঠিক রাখা: ১.০ | ক্যালকুলেশন ও সঠিক মান ($-0.9\\text{ J}$): ১.০"
+        },
+        {
+            "subject": "Physics",
+            "tag": "DU Written Special",
+            "problem": "$10\\text{ cm}$ ব্যাসার্ধবিশিষ্ট একটি ফাঁপা ধাতব গোলকে $+20\\text{ nC}$ চার্জ দেওয়া হলো। (ক) গোলকের কেন্দ্র থেকে $5\\text{ cm}$, $10\\text{ cm}$ এবং $20\\text{ cm}$ দূরত্বে তড়িৎ বিভবের মান কত? (খ) কেন্দ্র থেকে $5\\text{ cm}$ দূরত্বে তড়িৎ প্রাবল্যের মান কত?",
             "marks": 2.5,
-            "solution": "ধাতুটির কার্যপেক্ষক $W_0 = \\frac{hc}{\\lambda_0} = \\frac{12400}{5000} = 2.48\\text{ eV}$। আপতিত ফোটনের শক্তি $E = \\frac{hc}{\\lambda} = \\frac{12400}{2500} = 4.96\\text{ eV}$। সর্বোচ্চ গতিশক্তি $K_{\\max} = E - W_0 = 4.96 - 2.48 = 2.48\\text{ eV}$ ($3.97 \\times 10^{-19}\\text{ J}$)। নিবৃত্তি বিভব $V_s$: $e V_s = K_{\\max} \\implies V_s = 2.48\\text{ V}$।",
-            "rubric": "কার্যপেক্ষক ও ফোটন শক্তি: ১.০ | সর্বোচ্চ গতিশক্তি: ১.০ | নিবৃত্তি বিভব: ০.৫"
+            "solution": "(ক) গোলকের পৃষ্ঠের ব্যাসার্ধ $R = 10\\text{ cm} = 0.1\\text{ m}$। পৃষ্ঠের বিভব $V_{\\text{surf}} = \\frac{1}{4\\pi\\epsilon_0}\\frac{Q}{R} = 9 \\times 10^9 \\times \\frac{20 \\times 10^{-9}}{0.1} = \\frac{180}{0.1} = 1800\\text{ V}$। পরিবাহী গোলকের অভ্যন্তর সমবিভব সম্পন্ন হওয়ায় কেন্দ্র থেকে $5\\text{ cm}$ দূরত্বে বিভব $V = 1800\\text{ V}$। পৃষ্ঠে ($10\\text{ cm}$) বিভব $V = 1800\\text{ V}$। বহিঃস্থ বিন্দু $r = 20\\text{ cm} = 0.2\\text{ m}$ এ বিভব $V = 9 \\times 10^9 \\times \\frac{20 \\times 10^{-9}}{0.2} = 900\\text{ V}$। (খ) পরিবাহীর অভ্যন্তরে চার্জ শূন্য থাকায় কেন্দ্র থেকে $5\\text{ cm}$ দূরত্বে তড়িৎ প্রাবল্য $E = 0\\text{ N/C}$।",
+            "rubric": "অভ্যন্তরে ও পৃষ্ঠের বিভব নির্ণয় ($1800\\text{ V}$): ১.০ | বাইরের বিন্দুর বিভব ($900\\text{ V}$): ০.৭৫ | অভ্যন্তরে প্রাবল্য শূন্য ($E=0$) যুক্তি সহ: ০.৭৫"
         },
 
-        # CHEMISTRY (4)
+        # CHEMISTRY (4) - Source: W-07 Varsity (Udvash).pdf Written Solutions
         {
             "subject": "Chemistry",
             "tag": "DU Written Special",
-            "problem": "$\\text{C}_4\\text{H}_8$ আণবিক সংকেতযুক্ত অ্যালকিনসমূহের সকল সম্ভাব্য সমাণুর গাঠনিক সংকেত লেখ। এদের মধ্যে কোনটি জ্যামিতিক সমাণুতা প্রদর্শন করে এবং কেন? এর cis ও trans সমাণুর গঠন দেখাও।",
-            "marks": 3.0,
-            "solution": "$\\text{C}_4\\text{H}_8$ অ্যালকিনের মুক্ত শিকল সমাণু ৩টি: ১. $\\text{CH}_3-\\text{CH}_2-\\text{CH}=\\text{CH}_2$ (বাট-১-ইন), ২. $\\text{CH}_3-\\text{CH}=\\text{CH}-\\text{CH}_3$ (বাট-২-ইন), ৩. $\\text{CH}_3-\\text{C}(\\text{CH}_3)=\\text{CH}_2$ (২-মিথাইলপ্রোপ-১-ইন)। বাট-২-ইন জ্যামিতিক সমাণুতা দেখায় কারণ দ্বিবন্ধনযুক্ত কার্বনদ্বয়ের প্রতিটিতে দুটি ভিন্ন পরমাণু/মূলক ($-\\text{H}$ ও $-\\text{CH}_3$) রয়েছে। Cis-বাট-২-ইন: দুটি $-\\text{CH}_3$ মূলক দ্বিবন্ধনের একই পাশে। Trans-বাট-২-ইন: দুটি $-\\text{CH}_3$ মূলক দ্বিবন্ধনের বিপরীত পাশে।",
-            "rubric": "৩টি সমাণুর সঠিক সংকেত: ১.০ | বাট-২-ইন নির্বাচন ও শর্ত ব্যাখ্যা: ১.০ | Cis ও Trans গঠন প্রদর্শন: ১.০"
-        },
-        {
-            "subject": "Chemistry",
-            "tag": "DU Written Special",
-            "problem": "ল্যাকটিক এসিড ($\\text{CH}_3-\\text{CH(OH)}-\\text{COOH}$) কেন আলোক সমাণুতা প্রদর্শন করে? এর d- ও l- সমাণুর গাঠনিক রূপ দেখাও। সমমোলার $d$ ও $l$ সমাণুর মিশ্রণ কেন আলোক নিষ্ক্রিয় হয়?",
+            "problem": "$\\text{C}_4\\text{H}_8\\text{O}$ আণবিক সংকেতবিশিষ্ট তিনটি ভিন্ন চাক্রিক অ্যালকোহল সমাণুর গাঠনিক সংকেত ও IUPAC নাম লেখ।",
             "marks": 2.5,
-            "solution": "ল্যাকটিক এসিডের কেন্দ্রীয় কার্বনের সাথে চারটি ভিন্ন পরমাণু/মূলক ($-\\text{H}, -\\text{OH}, -\\text{CH}_3, -\\text{COOH}$) যুক্ত থাকায় এটি একটি কাইরাল বা অপ্রতিসম কার্বন ($C^*$) কেন্দ্র। অপ্রতিসম কেন্দ্র ও অপরস্পরস্থাপনীয় দর্পণ প্রতিবিম্ব হওয়ার কারণে এটি আলোক সক্রিয়। $d$-ল্যাকটিক এসিড সমতল সমবর্তিত আলোর তলকে ডানদিকে এবং $l$-ল্যাকটিক এসিড বামদিকে আবর্তন করে। সমমোলার মিশ্রণে একটি সমাণুর ডান ঘূর্ণন অপরটির বাম ঘূর্ণন দ্বারা ঠিক সমানভাবে নিষ্ক্রিয় হয় (বাহ্যিক ক্ষতিপূরণ / External Compensation)। ফলে সৃষ্ট রেসিমিক মিশ্রণ আলোক নিষ্ক্রিয়।",
-            "rubric": "কাইরাল কার্বনের ব্যাখ্যা ও গঠন: ১.০ | $d$ ও $l$ রূপ প্রদর্শন: ০.৫ | বাহ্যিক ক্ষতিপূরণ ও রেসিমিক ব্যাখ্যা: ১.০"
+            "solution": "$\\text{C}_4\\text{H}_8\\text{O}$ এর ৩টি চাক্রিক অ্যালকোহল সমাণু: ১. সাইক্লোবিউটানল (৪-কার্বনের বলয়ে একটি $-\\text{OH}$ মূলক: $\\text{cyclo-C}_4\\text{H}_7\\text{OH}$)। ২. ২-মিথাইলসাইক্লোপ্রোপানল (৩-কার্বনের বলয়ে ১ নম্বরে $-\\text{OH}$ এবং ২ নম্বরে $-\\text{CH}_3$ মূলক)। ৩. ১-মিথাইলসাইক্লোপ্রোপানল (৩-কার্বনের বলয়ে একই কার্বনে $-\\text{OH}$ ও $-\\text{CH}_3$ মূলক যুক্ত)।",
+            "rubric": "প্রতিটি চাক্রিক সমাণুর সঠিক গাঠনিক সংকেত ও IUPAC নামের জন্য (০.৭৫ + ০.৭৫ + ১.০) = ২.৫"
         },
         {
             "subject": "Chemistry",
             "tag": "DU Written Special",
-            "problem": "প্রোপিনের সাথে $\\text{HBr}$ এর যুত বিক্রিয়ায় প্রধান উৎপাদ হিসেবে ২-ব্রোমোপ্রোপেন তৈরি হয় কিন্তু ১-ব্রোমোপ্রোপেন নগণ্য থাকে কেন? মারকভনিকভের নীতি ও কার্বোক্যাটায়নের স্থায়িত্বের মাধ্যমে ব্যাখ্যা কর।",
+            "problem": "মেসো-টার্টারিক এসিডের গঠন সংকেত লিখে এর প্রতিসাম্য তল (Plane of Symmetry) প্রদর্শন কর। মেসো-যৌগ এবং রেসিমিক মিশ্রণের মধ্যে আলোক নিষ্ক্রিয়তার মৌলিক পার্থক্য ব্যাখ্যা কর।",
             "marks": 3.0,
-            "solution": "প্রোপিন ($\\text{CH}_3-\\text{CH}=\\text{CH}_2$) একটি অপ্রতিসম অ্যালকিন। ইলেক্ট্রোফাইল $\\text{H}^+$ যুক্ত হয়ে দুটি সম্ভাব্য কার্বোক্যাটায়ন তৈরি করতে পারে: ১. প্রান্তীয় কার্বনে $\\text{H}^+$ যুক্ত হলে ২-ডিগ্রি কার্বোক্যাটায়ন তৈরি হয়: $\\text{CH}_3-\\text{C}^+\\text{H}-\\text{CH}_3$। ২. মধ্যবর্তী কার্বনে $\\text{H}^+$ যুক্ত হলে ১-ডিগ্রি কার্বোক্যাটায়ন তৈরি হয়: $\\text{CH}_3-\\text{CH}_2-\\text{C}^+\\text{H}_2$। যেহেতু দুটি অ্যালকাইল মূলকের $+I$ আবেশীয় প্রভাব ও হাইপারকনজুগেশনের কারণে $2^\\circ$ কার্বোক্যাটায়ন $1^\\circ$ কার্বোক্যাটায়ন অপেক্ষা অধিক সুস্থিত, তাই নিউক্লিওফাইল $\\text{Br}^-$ দ্রুত $2^\\circ$ কার্বোক্যাটায়নে আক্রমণ করে। ফলে ৯১% প্রধান উৎপাদ হিসেবে ২-ব্রোমোপ্রোপেন উৎপন্ন হয়।",
-            "rubric": "মারকভনিকভ নীতি ও সমীকরণ: ১.০ | $1^\\circ$ বনাম $2^\\circ$ কার্বোক্যাটায়ন গঠন: ১.০ | স্থায়িত্বের ব্যাখ্যা ও ২-ব্রোমোপ্রোপেন সিদ্ধান্ত: ১.০"
+            "solution": "টার্টারিক এসিডের গঠন: $\\text{HOOC}-\\overset{*}{\\text{C}}\\text{H(OH)}-\\overset{*}{\\text{C}}\\text{H(OH)}-\\text{COOH}$। মেসো-টার্টারিক এসিডের উভয় কাইরাল কার্বনে $-\\text{H}$ পরমাণু একই পাশে এবং $-\\text{OH}$ মূলক একই পাশে অবস্থান করে। অণুর ঠিক মাঝামাঝি দিয়ে একটি কাল্পনিক প্রতিসাম্য তল ($\\sigma$-plane) বিদ্যমান যা অণুটিকে দুটি সদৃশ অর্ধাংশে বিভক্ত করে। মৌলিক পার্থক্য: (১) মেসো-যৌগ অভ্যন্তরীণ ক্ষতিপূরণ (Internal Compensation) দ্বারা আলোক নিষ্ক্রিয়, অর্থাৎ একই অণুর উপরের অর্ধাংশের ডান ঘূর্ণন নিচের অর্ধাংশের সমপরিমাণ বাম ঘূর্ণন দ্বারা প্রশমিত হয়; (২) রেসিমিক মিশ্রণ বাহ্যিক ক্ষতিপূরণ (External Compensation) দ্বারা আলোক নিষ্ক্রিয়, যেখানে সমমোলার পৃথক দুটি এনানশিওমারের ($d$ ও $l$) ঘূর্ণন পরস্পরকে নিষ্ক্রিয় করে।",
+            "rubric": "প্রতিসাম্য তলসহ মেসো গঠন উপস্থাপন: ১.০ | অভ্যন্তরীণ ক্ষতিপূরণ ব্যাখ্যা: ১.০ | বাহ্যিক ক্ষতিপূরণ ও রেসিমিক তুলনা: ১.০"
         },
         {
             "subject": "Chemistry",
             "tag": "DU Written Special",
-            "problem": "টলুইনের নাইট্রেশনে অর্থো ও প্যারা উৎপাদ গঠিত হয় কিন্তু নাইট্রোবেনজিনের নাইট্রেশনে মেটা উৎপাদ গঠিত হয় কেন? উপযুক্ত অনুনাদন (Resonance) কাঠামোর সাহায্যে ব্যাখ্যা কর।",
+            "problem": "পেন্ট-২-ইন ($\\text{CH}_3-\\text{CH}=\\text{CH}-\\text{CH}_2-\\text{CH}_3$) যৌগটির সিস ও ট্রান্স জ্যামিতিক সমাণুর গাঠনিক রূপ আঁক। সিস-সমাণুর পোলার দ্রাবকে দ্রবণীয়তা ট্রান্স-সমাণু অপেক্ষা বেশি কেন ব্যাখ্যা কর।",
+            "marks": 3.0,
+            "solution": "গাঠনিক রূপ: (ক) Cis-পেন্ট-২-ইন: দ্বিবন্ধনযুক্ত কার্বনে মিথাইল ($-\\text{CH}_3$) ও ইথাইল ($-\\text{C}_2\\text{H}_5$) মূলক দ্বিবন্ধনের একই পাশে থাকে। (খ) Trans-পেন্ট-২-ইন: মিথাইল ও ইথাইল মূলক দ্বিবন্ধনের বিপরীত পাশে অবস্থান করে। দ্রবণীয়তার ব্যাখ্যা: সিস-সমাণুতে ইলেকট্রন দাতা অ্যালকাইল মূলকদ্বয় একই পাশে থাকায় এদের ডাইপোল মোমেন্ট একই দিকে কাজ করে, ফলে সিস-সমাণুর একটি নেট ডাইপোল মোমেন্ট ($\\mu > 0$) থাকে এবং এটি অধিক পোলার হয়। অন্যদিকে ট্রান্স-সমাণুতে মূলকগুলো বিপরীত পাশে থাকায় ডাইপোল প্রায় বাতিল হয়ে যায় ($\\mu \\approx 0$)। 'Like dissolves like' নীতি অনুসারে অধিক পোলার সিস-সমাণু পোলার দ্রাবক পানিতে বা অ্যালকোহলে ট্রান্স-সমাণুর চেয়ে অধিক দ্রবণীয়।",
+            "rubric": "Cis ও Trans সমাণুর সঠিক ত্রিমাত্রিক গঠন: ১.০ | ডাইপোল মোমেন্ট ও পোলারিটি তুলনা: ১.০ | দ্রাব্যতা সিদ্ধান্তের যৌক্তিক ব্যাখ্যা: ১.০"
+        },
+        {
+            "subject": "Chemistry",
+            "tag": "DU Written Special",
+            "problem": "$\\text{C}_4\\text{H}_{10}\\text{O}$ আণবিক সংকেত দ্বারা গঠিত তিনটি সম্ভাব্য ইথার সমাণুর গাঠনিক সংকেত ও IUPAC নাম লেখ। এদের মধ্যে কোন জোড়া মেটামারিজম সমাণুতা প্রদর্শন করে?",
             "marks": 2.5,
-            "solution": "টলুইনে মিথাইল মূলক ($-\\text{CH}_3$) একটি ইলেকট্রন দাতা মূলক (অর্থো-প্যারা নির্দেশক)। হাইপারকনজুগেশন ও $+I$ প্রভাবের কারণে বেনজিন বলয়ের ২, ৪, ৬ (অর্থো ও প্যারা) অবস্থানে ইলেকট্রন ঘনত্ব মেটা অবস্থানের চেয়ে অনেক বৃদ্ধি পায়। ফলে আক্রমণকারী ইলেক্ট্রোফাইল $\\text{NO}_2^+$ অর্থো ও প্যারা অবস্থানে যুক্ত হয়। অপরদিকে নাইট্রোবেনজিনে নাইট্রো মূলক ($-\\text{NO}_2$) একটি তীব্র ইলেকট্রন আকর্ষী মূলক (মেটা নির্দেশক)। $-M$ মেসোমারিক প্রভাবের কারণে বলয় থেকে পাই ইলেকট্রন টেনে নেওয়ায় অর্থো ও প্যারা অবস্থানে ইলেকট্রন ঘাটতি চরম আকার ধারণ করে। তুলনামূলকভাবে মেটা অবস্থানে ইলেকট্রন ঘনত্ব কিছুটা বেশি থাকায় ইলেক্ট্রোফাইল কেবল মেটা অবস্থানে আক্রমণ করে।",
-            "rubric": "টলুইনের $+I$/হাইপারকনজুগেশন ও অর্থো-প্যারা ব্যাখ্যা: ১.০ | নাইট্রোবেনজিনের $-M$ ও মেটা ব্যাখ্যা: ১.০ | রেজোন্যান্স প্রভাবের উল্লেখ: ০.৫"
+            "solution": "$\\text{C}_4\\text{H}_{10}\\text{O}$ এর ৩টি ইথার সমাণু: ১. মিথোক্সিপ্রোপেন: $\\text{CH}_3-\\text{O}-\\text{CH}_2-\\text{CH}_2-\\text{CH}_3$। ২. ইথোক্সিইথেন (ডাই-ইথাইল ইথার): $\\text{CH}_3-\\text{CH}_2-\\text{O}-\\text{CH}_2-\\text{CH}_3$। ৩. ২-মিথোক্সিপ্রোপেন: $\\text{CH}_3-\\text{O}-\\text{CH(CH}_3)_2$। মেটামার জোড়া: মিথোক্সিপ্রোপেন এবং ইথোক্সিইথেন পরস্পরের মেটামার, কারণ দ্বিজোজী অক্সিজেন পরমাণুর উভয়পাশে কার্বন পরমাণুর সংখ্যা ও বণ্টনে ভিন্নতা (১, ৩ বনাম ২, ২) রয়েছে।",
+            "rubric": "৩টি ইথারের সংকেত ও IUPAC নাম: ১.৫ | মেটামার জোড়া চিহ্নিতকরণ ও ব্যাখ্যা: ১.০"
         },
 
-        # HIGHER MATH (4)
+        # HIGHER MATH (4) - Source: W-07 Varsity (Udvash).pdf Written Solutions
         {
             "subject": "Higher Math",
             "tag": "DU Written Special",
-            "problem": "মান নির্ণয় কর: (ক) $\\lim_{x\\to 0} \\frac{x - \\sin x}{x^3}$ (খ) $\\lim_{x\\to 0} \\left(\\frac{\\sin x}{x}\\right)^{1/x^2}$",
+            "problem": "যদি $(\\cos x)^y = (\\sin y)^x$ হয়, তবে $\\frac{dy}{dx}$ নির্ণয় কর।",
+            "marks": 3.0,
+            "solution": "উভয়পক্ষে স্বাভাবিক লগারিদম ($\\ln$) নিয়ে পাই: $\\ln[(\\cos x)^y] = \\ln[(\\sin y)^x] \\implies y\\ln(\\cos x) = x\\ln(\\sin y)$। এবার উভয়পক্ষে $x$-এর সাপেক্ষে অন্তরীকরণ করি: $\\frac{dy}{dx}\\ln(\\cos x) + y \\cdot \\frac{1}{\\cos x}(-\\sin x) = 1 \\cdot \\ln(\\sin y) + x \\cdot \\frac{1}{\\sin y}(\\cos y)\\frac{dy}{dx}$। $\\implies \\frac{dy}{dx}\\ln(\\cos x) - y\\tan x = \\ln(\\sin y) + x\\cot y \\frac{dy}{dx}$। $\\frac{dy}{dx}$ পদগুলো বামে এনে: $\\frac{dy}{dx}[\\ln(\\cos x) - x\\cot y] = \\ln(\\sin y) + y\\tan x$। অতএব, $\\frac{dy}{dx} = \\frac{\\ln(\\sin y) + y\\tan x}{\\ln(\\cos x) - x\\cot y}$।",
+            "rubric": "লগারিদম প্রয়োগ ও সরলীকরণ: ১.০ | গুণের সূত্রে উভয়পক্ষের সঠিক অন্তরীকরণ: ১.০ | $\\frac{dy}{dx}$ কমন নিয়ে সঠিক সমীকরণ: ১.০"
+        },
+        {
+            "subject": "Higher Math",
+            "tag": "DU Written Special",
+            "problem": "ফাংশন $f(x) = 4e^{2x} + 9e^{-2x}$ এর সর্বনিম্ন মান নির্ণয় কর।",
             "marks": 2.5,
-            "solution": "(ক) $\\lim_{x\\to 0}\\frac{x - \\sin x}{x^3}$ [$\\frac{0}{0}$ আকার]। লা'হসপিটালের নিয়ম প্রয়োগ করে: $\\lim_{x\\to 0}\\frac{1 - \\cos x}{3x^2}$। আবার লা'হসপিটাল প্রয়োগ করে: $\\lim_{x\\to 0}\\frac{\\sin x}{6x} = \\frac{1}{6} \\lim_{x\\to 0}\\frac{\\sin x}{x} = \\frac{1}{6}$। (খ) ধরি $y = \\lim_{x\\to 0}\\left(\\frac{\\sin x}{x}\\right)^{1/x^2}$। $\\ln y = \\lim_{x\\to 0}\\frac{\\ln(\\sin x / x)}{x^2}$। ম্যাকলরিন ধারা $\\frac{\\sin x}{x} = 1 - \\frac{x^2}{6} + \\dots \\implies \\ln\\left(1 - \\frac{x^2}{6}\\right) \\approx -\\frac{x^2}{6}$। $\\implies \\ln y = \\lim_{x\\to 0}\\frac{-x^2/6}{x^2} = -\\frac{1}{6} \\implies y = e^{-1/6}$।",
-            "rubric": "(ক) অংশ লা'হসপিটাল ও মান $\\frac{1}{6}$: ১.০ | (খ) অংশ লগারিদম ও লিমিট মান $e^{-1/6}$: ১.৫"
+            "solution": "১ম অন্তরক: $f'(x) = 4(2e^{2x}) + 9(-2e^{-2x}) = 8e^{2x} - 18e^{-2x}$। চরম মানের জন্য $f'(x) = 0 \\implies 8e^{2x} = 18e^{-2x} \\implies \\frac{e^{2x}}{e^{-2x}} = \\frac{18}{8} \\implies e^{4x} = \\frac{9}{4} \\implies (e^{2x})^2 = \\left(\\frac{3}{2}\\right)^2 \\implies e^{2x} = \\frac{3}{2}$ [যেহেতু $e^{2x} > 0$]। তখন $e^{-2x} = \\frac{2}{3}$। ২য় অন্তরক: $f''(x) = 16e^{2x} + 36e^{-2x} = 16\\left(\\frac{3}{2}\\right) + 36\\left(\\frac{2}{3}\\right) = 24 + 24 = 48 > 0$। সুতরাং $e^{2x} = \\frac{3}{2}$ এ ফাংশনটির লঘুমান বিদ্যমান। সর্বনিম্ন মান $f_{\\min} = 4\\left(\\frac{3}{2}\\right) + 9\\left(\\frac{2}{3}\\right) = 6 + 6 = 12$।",
+            "rubric": "১ম অন্তরক ও $e^{2x} = \\frac{3}{2}$ সমাধান: ১.০ | ২য় অন্তরক পরীক্ষা ($f'' > 0$): ০.৫ | সর্বনিম্ন মান $12$ নির্ণয়: ১.০"
         },
         {
             "subject": "Higher Math",
             "tag": "DU Written Special",
-            "problem": "$x^2 - xy + y^2 = 3$ বক্ররেখার কোন কোন বিন্দুতে অঙ্কিত স্পর্শক $x$-অক্ষের সমান্তরাল হবে? বিন্দুসমূহ এবং স্পর্শকের সমীকরণ নির্ণয় কর।",
-            "marks": 3.0,
-            "solution": "উভয়পক্ষে $x$-এর সাপেক্ষে অন্তরীকরণ করে: $2x - (y + x\\frac{dy}{dx}) + 2y\\frac{dy}{dx} = 0 \\implies \\frac{dy}{dx}(2y - x) = y - 2x \\implies \\frac{dy}{dx} = \\frac{y - 2x}{2y - x}$। স্পর্শক $x$-অক্ষের সমান্তরাল হওয়ার শর্ত: $\\frac{dy}{dx} = 0 \\implies y - 2x = 0 \\implies y = 2x$। মূল সমীকরণে $y = 2x$ বসিয়ে পাই: $x^2 - x(2x) + (2x)^2 = 3 \\implies 3x^2 = 3 \\implies x = \\pm 1$। যখন $x = 1$, $y = 2$; বিন্দুটি $(1, 2)$ এবং স্পর্শকের সমীকরণ $y = 2$। যখন $x = -1$, $y = -2$; বিন্দুটি $(-1, -2)$ এবং স্পর্শকের সমীকরণ $y = -2$।",
-            "rubric": "অন্তরীকরণ $\\frac{dy}{dx}$ নির্ণয়: ১.০ | $y = 2x$ শর্ত ও বিন্দুদ্বয় নির্ণয়: ১.০ | স্পর্শকের সমীকরণ: ১.০"
+            "problem": "$x^2 + y^2 - 2x - 3 = 0$ বৃত্তের যে সকল বিন্দুতে অঙ্কিত স্পর্শক $x$-অক্ষের সমান্তরাল, তাদের স্থানাঙ্ক নির্ণয় কর।",
+            "marks": 2.5,
+            "solution": "উভয়পক্ষে $x$-এর সাপেক্ষে অন্তরীকরণ করি: $2x + 2y\\frac{dy}{dx} - 2 - 0 = 0 \\implies 2y\\frac{dy}{dx} = 2 - 2x \\implies \\frac{dy}{dx} = \\frac{1 - x}{y}$। স্পর্শক $x$-অক্ষের সমান্তরাল হওয়ার শর্ত: $\\frac{dy}{dx} = 0 \\implies \\frac{1 - x}{y} = 0 \\implies 1 - x = 0 \\implies x = 1$। মূল সমীকরণে $x = 1$ বসিয়ে পাই: $(1)^2 + y^2 - 2(1) - 3 = 0 \\implies 1 + y^2 - 2 - 3 = 0 \\implies y^2 - 4 = 0 \\implies y^2 = 4 \\implies y = \\pm 2$। অতএব স্পর্শকদ্বয় $x$-অক্ষের সমান্তরাল হওয়ার বিন্দুসমূহ $(1, 2)$ এবং $(1, -2)$।",
+            "rubric": "বৃত্তের অন্তরীকরণ ও ঢাল $\\frac{dy}{dx}$: ১.০ | $\\frac{dy}{dx} = 0$ শর্ত হতে $x = 1$: ০.৫ | কোটি $y = \\pm 2$ ও বিন্দুদ্বয় নির্ণয়: ১.০"
         },
         {
             "subject": "Higher Math",
             "tag": "DU Written Special",
-            "problem": "$R$ ব্যাসার্ধের একটি বৃত্তে অন্তর্লিখিত বৃহত্তম ক্ষেত্রফলবিশিষ্ট আয়তক্ষেত্রের ক্ষেত্রফল এবং এর বাহুদ্বয়ের দৈর্ঘ্য নির্ণয় কর।",
-            "marks": 3.5,
-            "solution": "ধরি আয়তক্ষেত্রের দৈর্ঘ্য $x$ এবং প্রস্থ $y$। বৃত্তে অন্তর্লিখিত হওয়ায় কর্ণ বৃত্তের ব্যাসের সমান ($2R$): $x^2 + y^2 = 4R^2 \\implies y = \\sqrt{4R^2 - x^2}$। ক্ষেত্রফল $A = xy = x\\sqrt{4R^2 - x^2}$। ক্ষেত্রফলের বর্গ $S = A^2 = 4R^2 x^2 - x^4$ বিবেচনা করি। চরম মানের জন্য $\\frac{dS}{dx} = 8R^2 x - 4x^3 = 0 \\implies 4x(2R^2 - x^2) = 0$। যেহেতু $x > 0$, তাই $x^2 = 2R^2 \\implies x = \\sqrt{2}R$। তখন $y = \\sqrt{4R^2 - 2R^2} = \\sqrt{2}R$। দ্বিতীয় অন্তরক: $\\frac{d^2S}{dx^2} = 8R^2 - 12x^2 = 8R^2 - 24R^2 = -16R^2 < 0$, সুতরাং ক্ষেত্রফল সর্বোচ্চ। আয়তক্ষেত্রটি একটি বর্গক্ষেত্র এবং সর্বোচ্চ ক্ষেত্রফল $A_{\\max} = (\\sqrt{2}R)(\\sqrt{2}R) = 2R^2$ বর্গ একক।",
-            "rubric": "কর্ণের সমীকরণ ও ক্ষেত্রফলের অপেক্ষক গঠন: ১.০ | ১ম অন্তরক ও বাহুর মান $x = \\sqrt{2}R$: ১.০ | ২য় অন্তরক পরীক্ষা: ০.৫ | সর্বোচ্চ ক্ষেত্রফল $2R^2$: ১.০"
-        },
-        {
-            "subject": "Higher Math",
-            "tag": "DU Written Special",
-            "problem": "যদি $y = (x + \\sqrt{1 + x^2})^m$ হয়, তবে প্রমাণ কর যে, $(1 + x^2)y_2 + x y_1 - m^2 y = 0$।",
-            "marks": 3.0,
-            "solution": "$y = (x + \\sqrt{1 + x^2})^m$। ১ম অন্তরীকরণ করে: $y_1 = m(x + \\sqrt{1 + x^2})^{m-1} \\left(1 + \\frac{x}{\\sqrt{1 + x^2}}\\right) = m(x + \\sqrt{1 + x^2})^{m-1} \\left(\\frac{\\sqrt{1 + x^2} + x}{\\sqrt{1 + x^2}}\\right) = \\frac{m(x + \\sqrt{1 + x^2})^m}{\\sqrt{1 + x^2}} = \\frac{my}{\\sqrt{1 + x^2}}$। $\\implies \\sqrt{1 + x^2}y_1 = my$। বর্গ করে: $(1 + x^2) y_1^2 = m^2 y^2$। পুনরায় অন্তরীকরণ করে: $2x y_1^2 + (1 + x^2) 2y_1 y_2 = m^2 \\cdot 2y y_1$। উভয়পক্ষকে $2y_1$ দ্বারা ভাগ করে ($y_1 \\neq 0$): $(1 + x^2)y_2 + x y_1 = m^2 y \\implies (1 + x^2)y_2 + x y_1 - m^2 y = 0$ [প্রমাণিত]।",
-            "rubric": "১ম অন্তরীকরণ ও সরলীকরণ: ১.০ | বর্গ করে অপেক্ষক রূপ দেওয়া: ১.০ | ২য় অন্তরীকরণ ও চূড়ান্ত সমীকরণ: ১.০"
+            "problem": "দেখাও যে, $f(x) = \\frac{\\ln x}{x}$ ফাংশনটির গুরুমান $\\frac{1}{e}$। [যেখানে $x > 0$]",
+            "marks": 2.5,
+            "solution": "১ম অন্তরক: ভাগের সূত্রানুসারে $f'(x) = \\frac{x \\cdot \\frac{d}{dx}(\\ln x) - \\ln x \\cdot \\frac{d}{dx}(x)}{x^2} = \\frac{x \\cdot \\frac{1}{x} - \\ln x(1)}{x^2} = \\frac{1 - \\ln x}{x^2}$। চরম মানের জন্য $f'(x) = 0 \\implies \\frac{1 - \\ln x}{x^2} = 0 \\implies 1 - \\ln x = 0 \\implies \\ln x = 1 \\implies x = e$। ২য় অন্তরক: $f''(x) = \\frac{x^2(-\\frac{1}{x}) - (1 - \\ln x)(2x)}{x^4} = \\frac{-x - 2x(1 - \\ln x)}{x^4} = \\frac{-1 - 2(1 - \\ln x)}{x^3}$। $x = e$ বিন্দুতে $f''(e) = \\frac{-1 - 2(1 - 1)}{e^3} = -\\frac{1}{e^3} < 0$। সুতরাং $x = e$ বিন্দুতে ফাংশনটির গুরুমান বিদ্যমান এবং গুরুমান $f(e) = \\frac{\\ln e}{e} = \\frac{1}{e}$ [দেখানো হলো]।",
+            "rubric": "ভাগ নিয়মে ১ম অন্তরীকরণ ও $x=e$ নির্ণয়: ১.০ | ২য় অন্তরক পরীক্ষা ($f''(e) < 0$): ০.৭৫ | গুরুমান $\\frac{1}{e}$ প্রমাণ: ০.৭৫"
         },
 
-        # BIOLOGY (4)
+        # BIOLOGY (4) - Source: W-07 Varsity (Udvash).pdf Written Solutions
         {
             "subject": "Biology",
             "tag": "DU Written Special",
-            "problem": "মানব মস্তিষ্কের তিনটি প্রধান অংশের নাম ও উপ-অংশসমূহের শ্রেণিবিন্যাস ছক আকারে উপস্থাপন কর। হাইপোথ্যালামাসের তিনটি প্রধান শারীরবৃত্তীয় কাজ উল্লেখ কর।",
+            "problem": "প্রতিবর্তী চক্র (Reflex Arc) বলতে কী বোঝায়? একটি প্রতিবর্তী চক্রের প্রধান পাঁচটি অংশের নাম ক্রমানুসারে লেখ।",
+            "marks": 2.5,
+            "solution": "প্রতিবর্তী চক্র: যে স্নায়বিক পথের মাধ্যমে প্রতিবর্ত ক্রিয়ার উদ্দীপনা গ্রাহক অঙ্গ থেকে সুষুম্নাকাণ্ডে গৃহীত হয় এবং সাড়াদানের নির্দেশ মোটর স্নায়ু দিয়ে কার্যকারী অঙ্গে প্রেরিত হয় তাকে প্রতিবর্তী চক্র বা রিফ্লেক্স আর্ক বলে। ৫টি প্রধান অংশ: ১. গ্রাহক অঙ্গ (Receptor) - উদ্দীপনা গ্রহণ করে; ২. সংবেদী বা অন্তর্বাহী স্নায়ু (Sensory / Afferent neuron) - উদ্দীপনা বহন করে কেন্দ্রে নেয়; ৩. প্রতিবর্ত কেন্দ্র বা সমন্বয় কেন্দ্র (Reflex Center) - সাধারণত সুষুম্নাকাণ্ডের ধূসর পদার্থে গঠিত রিলে নিউরন; ৪. চেষ্টিয় বা বহির্বাহী স্নায়ু (Motor / Efferent neuron) - সাড়ার নির্দেশ কার্যকরী অঙ্গে বহন করে; ৫. প্রভাবক বা কার্যকরী অঙ্গ (Effector) - সাড়া প্রদানকারী পেশি বা গ্রন্থি।",
+            "rubric": "প্রতিবর্তী চক্রের নির্ভুল সংজ্ঞা: ১.০ | ৫টি অংশের সঠিক নাম ও ক্রম: ১.৫"
+        },
+        {
+            "subject": "Biology",
+            "tag": "DU Written Special",
+            "problem": "প্রাণীর সহজাত আচরণের অন্তর্ভুক্ত এফএপি (Fixed Action Pattern - FAP) এর প্রধান পাঁচটি মৌলিক বৈশিষ্ট্য উল্লেখ কর।",
             "marks": 3.0,
-            "solution": "মানব মস্তিষ্ক তিনটি প্রধান অংশে বিভক্ত: ১. অগ্রমস্তিষ্ক (সেরিব্রাম, থ্যালামাস, হাইপোথ্যালামাস); ২. মধ্যমস্তিষ্ক (কর্পোরা কোয়াড্রিজেমিনা, সেরেব্রাল পেডাঙ্কল); ৩. পশ্চাৎমস্তিষ্ক (সেরিবেলাম, পনস, মেডুলা অবলংগাটা)। হাইপোথ্যালামাসের ৩টি প্রধান কাজ: (ক) দেহের অভ্যন্তরীণ তাপমাত্রা নিয়ন্ত্রণ (দেহের প্রধান থার্মোস্ট্যাট); (খ) ক্ষুধা, তৃষ্ণা, ঘুম ও আবেগীয় অনুভূতি নিয়ন্ত্রণ; (গ) নিউরোহরমোন (অক্সিটোসিন ও ভেসোপ্রেসিন) তৈরি এবং পিটুইটারি গ্রন্থির ক্ষরণ নিয়ন্ত্রণকারী র রিলিজিং ও ইনহিবিটিং হরমোন নিঃসরণ।",
-            "rubric": "মস্তিষ্কের ৩ অংশের সঠিক শ্রেণিবিন্যাস: ১.৫ | হাইপোথ্যালামাসের ৩টি শারীরবৃত্তীয় কাজ: ১.৫"
+            "solution": "FAP এর ৫টি বৈশিষ্ট্য: ১. ছাঁচসম্মত (Stereotypy): আচরণের প্যাটার্ন প্রজাতির সকল সদস্যে সর্বদা অপরিবর্তনীয় ও নির্দিষ্ট ছাঁচে সম্পন্ন হয়। ২. সার্বজনীনতা (Universality): এটি প্রজাতি-নির্দিষ্ট, অর্থাৎ ঐ প্রজাতির প্রতিটি স্বাভাবিক সদস্যের মধ্যে স্বয়ংক্রিয়ভাবে দৃশ্যমান। ৩. ব্যক্তিগত অভিজ্ঞতা বহির্ভূত (Independence of Individual Experience): পূর্ব অভিজ্ঞতা, শিখন বা অনুশীলন ছাড়াই প্রাণী প্রথম সুযোগেই নিখুঁতভাবে প্রদর্শন করে। ৪. ব্যালিস্টিক ধর্ম (Ballisticness): একবার সাইন স্টিমুলাস দ্বারা সূচিত হলে পারিপার্শ্বিক উদ্দীপক সরিয়ে নিলেও ক্রিয়াটি মাঝপথে থামে না, শেষ পর্যন্ত চলে। ৫. উদ্দেশ্যের একনিষ্ঠতা (Singleness of Purpose): এটি একটি নির্দিষ্ট জৈবিক উদ্দেশ্য (প্রজনন, আত্মরক্ষা, খাদ্য গ্রহণ) সাধনে একনিষ্ঠভাবে পরিচালিত হয়।",
+            "rubric": "প্রতিটি বৈশিষ্ট্যের নির্ভুল নামকরণ ও সংক্ষিপ্ত ব্যাখ্যার জন্য (০.৬ × ৫) = ৩.০"
         },
         {
             "subject": "Biology",
             "tag": "DU Written Special",
-            "problem": "মানবদেহের ৫ম, ৭ম, ৮ম এবং ১০ম করোটিক স্নায়ুর নাম, উৎস, বিস্তার ও প্রকৃতি ছক আকারে উল্লেখ কর।",
+            "problem": "ট্যাক্সিস (Taxis) কী? বাহ্যিক উদ্দীপকের প্রকৃতির ভিত্তিতে যে কোনো তিন ধরনের ট্যাক্সিসের নাম ও প্রাণিজগৎ থেকে বাস্তব উদাহরণ দাও।",
             "marks": 2.5,
-            "solution": "ছক: ১. ৫ম (V) ট্রাইজেমিনাল: মিশ্র প্রকৃতি; বিস্তার: অক্ষি শাখা, ঊর্ধ্ব ও নিম্ন চোয়াল; কার্য: মুখমণ্ডলের অনুভূতি ও চর্বন পেশির সঞ্চালন। ২. ৭ম (VII) ফেসিয়াল: মিশ্র প্রকৃতি; বিস্তার: মুখের পেশি, স্বাদ কোরক ও লালাগ্রন্থি; কার্য: মুখের অভিব্যক্তি ও স্বাদ গ্রহণ। ৩. ৮ম (VIII) অডিটরি / ভেস্টিবুলোককলিয়ার: সংবেদী প্রকৃতি; বিস্তার: অন্তঃকর্ণের ককলিয়া ও অর্ধবৃত্তাকার নালী; কার্য: শ্রবণ ও দেহের ভারসাম্য রক্ষা। ৪. ১০ম (X) ভেগাস: মিশ্র প্রকৃতি; বিস্তার: গলবিল, স্বরযন্ত্র, হৃৎপিণ্ড, ফুসফুস ও পাকস্থলী; কার্য: শ্বসন, হৃদগতি ও পরিপাক নিয়ন্ত্রণ।",
-            "rubric": "স্নায়ুর সঠিক নাম ও প্রকৃতি (প্রতিটির জন্য ০.২৫ করে ১.০) | সঠিক বিস্তার ও কার্য (প্রতিটির জন্য ০.৩৭৫ করে ১.৫)"
+            "solution": "ট্যাক্সিস: কোনো দিকমুখী বাহ্যিক উদ্দীপকের (আলো, তাপ, রাসায়নিক, স্পর্শ ইত্যাদি) প্রভাবে সমগ্র প্রাণিদেহের উদ্দীপকের উৎসের দিকে বা উৎসের বিপরীত দিকে স্থানান্তরমূলক চলনকে ট্যাক্সিস বলে। ৩ ধরনের ট্যাক্সিস: ১. ফটোট্যাক্সিস (Phototaxis): আলোর উদ্দীপনায় চলন; যেমন- আরশোলা আলোর বিপরীত দিকে পালায় (ঋণাত্মক ফটোট্যাক্সিস) এবং ঘাসফড়িং আলোর দিকে আসে (ধনাত্মক ফটোট্যাক্সিস)। ২. মেনোট্যাক্সিস (Menotaxis): দিকনির্দেশক উদ্দীপকের সাথে নির্দিষ্ট ধ্রুব কোণ বজায় রেখে চলন; যেমন- সূর্যের অবস্থানের সাথে কোণ মিলিয়ে কর্মী পিঁপড়ার খাদ্য সংগ্রহ। ৩. থার্মোট্যাক্সিস (Thermotaxis): তাপমাত্রার উদ্দীপনায় চলন; যেমন- তীব্র শীতে ব্যাঙ মাটির নিচে শীতনিদ্রায় চলে যাওয়া (ঋণাত্মক থার্মোট্যাক্সিস)।",
+            "rubric": "ট্যাক্সিসের সংজ্ঞা: ১.০ | ৩টি ট্যাক্সিসের নাম ও সঠিক বাস্তব উদাহরণ: ১.৫"
         },
         {
             "subject": "Biology",
             "tag": "DU Written Special",
-            "problem": "চোখের অক্ষিগোলকের তিনটি স্তরের নাম লেখ। রেটিনার রড ও কোন কোষের মধ্যে প্রধান চারটি পার্থক্য ছকে দেখাও।",
-            "marks": 2.5,
-            "solution": "অক্ষিগোলকের ৩টি স্তর: ১. তন্তুময় বহিঃস্তর (স্ক্লেরা ও কর্নিয়া); ২. রক্তনালীযুক্ত মধ্যস্তর (কোরয়েড, সিলিয়ারি বডি ও আইরিশ); ৩. সংবেদী অন্তঃস্তর (রেটিনা)। রড ও কোন কোষের পার্থক্য: ১. রঞ্জক: রড কোষে রোডপসিন, কোন কোষে আয়োডপসিন থাকে; ২. আলো সংবেদনশীলতা: রড কোষ মৃদু আলোতে (রাতের দৃষ্টি), কোন কোষ তীব্র আলোতে সংবেদনশীল; ৩. বর্ণ দর্শন: রড কোষ বর্ণ পৃথক করতে পারে না, কোন কোষ লাল, সবুজ ও নীল বর্ণ দর্শনে সক্ষম; ৪. সংখ্যা ও বিস্তার: রড কোষ প্রায় ১২ কোটি ও পরিধিতে বেশি, কোন কোষ প্রায় ৬০-৭০ লাখ ও পীতবিন্দুতে (Fovea centralis) ঘনীভূত।",
-            "rubric": "৩টি স্তরের সঠিক নাম: ১.০ | ৪টি সুস্পষ্ট পার্থক্য ছকে উপস্থাপন: ১.৫"
-        },
-        {
-            "subject": "Biology",
-            "tag": "DU Written Special",
-            "problem": "সহজাত আচরণ (Innate Behavior) এবং অর্জিত/শিক্ষিত আচরণের (Learned Behavior) মধ্যে প্রধান ৩টি মৌলিক পার্থক্য লেখ। প্যাভলভের সাপেক্ষ প্রতিবর্ত ক্রিয়ার পরীক্ষণে অনুবন্ধিত উদ্দীপক ও অনুবন্ধিত সাড়া বলতে কী বোঝায়?",
-            "marks": 2.5,
-            "solution": "সহজাত ও অর্জিত আচরণের ৩টি পার্থক্য: ১. উৎপত্তি: সহজাত আচরণ জন্মগত ও জিন দ্বারা বংশানুক্রমিক নিয়ন্ত্রিত; অর্জিত আচরণ পরিবেশের সাথে অভিজ্ঞতা ও অনুশীলনে লব্ধ। ২. স্থায়িত্ব: সহজাত আচরণ প্রজাতি-নির্দিষ্ট ও চিরস্থায়ী; অর্জিত আচরণ ব্যক্তি-নির্দিষ্ট এবং অনভ্যাসে বিলুপ্ত হতে পারে। ৩. স্নায়বিক ভিত্তি: সহজাত আচরণ সরল প্রতিবর্ত চক্র দ্বারা নিয়ন্ত্রিত; অর্জিত আচরণ উন্নত সেরেব্রাল কর্টেক্স ও স্মৃতি দ্বারা পরিচালিত। প্যাভলভের পরীক্ষা: অনুবন্ধিত উদ্দীপক (CS) হলো নিরপেক্ষ কৃত্রিম সংকেত (ঘণ্টাধ্বনি) যা খাদ্যের সাথে উপস্থাপনের ফলে প্রতিক্রিয়া সৃষ্টি করতে সক্ষম হয়। অনুবন্ধিত সাড়া (CR) হলো অনুবন্ধিত উদ্দীপকের উপস্থিতিতে সৃষ্ট অর্জিত কৃত্রিম সাড়া (ঘণ্টার শব্দ শুনে লালাক্ষরণ)।",
-            "rubric": "৩টি মৌলিক পার্থক্য: ১.৫ | অনুবন্ধিত উদ্দীপক ও সাড়ার সুনির্দিষ্ট সংজ্ঞা: ১.০"
+            "problem": "মানব মস্তিষ্কের সেরিব্রাম (Cerebrum) এবং সেরিবেলামের (Cerebellum) মধ্যে প্রধান পাঁচটি তুলনামূলক পার্থক্য ছক আকারে উপস্থাপন কর।",
+            "marks": 3.0,
+            "solution": "সেরিব্রাম বনাম সেরিবেলাম পার্থক্য ছক: ১. অবস্থান: সেরিব্রাম অগ্রমস্তিষ্কের প্রধান অংশ; সেরিবেলাম পশ্চাৎমস্তিষ্কের অংশ। ২. আকার ও অনুপাত: মস্তিষ্কের সর্ববৃহৎ অংশ (প্রায় ৮০% আয়তন জুড়ে বিস্তৃত); এটি দ্বিতীয় বৃহত্তম অংশ। ৩. সংযোগ সেতু: সেরিব্রামের দুটি গোলার্ধ কর্পাস ক্যালোসাম (Corpus callosum) দ্বারা যুক্ত; সেরিবেলামের দুটি গোলার্ধ ভার্মিস (Vermis) দ্বারা যুক্ত। ৪. খণ্ড বা লোব: সেরিব্রাম ফ্রন্টাল, প্যারাইটাল, টেম্পোরাল ও অক্সিপিটাল লোবে বিভক্ত; সেরিবেলাম তিনটি উপ-অংশে বিভক্ত হলেও এ ধরনের লোব নেই। ৫. প্রধান কাজ: সেরিব্রাম বুদ্ধি, চিন্তা, স্মৃতি, চেতনা ও সকল ঐচ্ছিক পেশির ক্রিয়া নিয়ন্ত্রণ করে; সেরিবেলাম দেহের ভারসাম্য রক্ষা, অঙ্গভঙ্গি ও পেশিটান সমন্বয় করে।",
+            "rubric": "অবস্থান ও আকার পার্থক্য: ১.০ | কর্পাস ক্যালোসাম বনাম ভার্মিস: ১.০ | কার্যাবলীর স্পষ্ট বৈসাদৃশ্য: ১.০"
         }
     ]
     return problems
