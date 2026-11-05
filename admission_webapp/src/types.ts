@@ -133,7 +133,12 @@ export interface TrapItem {
   fix: string;
 }
 
-export type VaultCardType = 'core_formula' | 'shortcut' | 'trap';
+export type VaultCardType = 'core_formula' | 'shortcut' | 'trap' | 'table';
+
+export interface VaultTableData {
+  headers: string[];
+  rows: string[][];
+}
 
 export interface VaultEntry {
   id: string;
@@ -147,6 +152,9 @@ export interface VaultEntry {
   hack?: string;
   trap?: string;
   tags?: string[];
+  headers?: string[];
+  rows?: string[][];
+  table?: VaultTableData;
 }
 
 export interface VaultData {

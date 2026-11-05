@@ -8,6 +8,41 @@ interface MathTextProps {
   block?: boolean;
 }
 
+/** Parses markdown table text into headers and rows */
+export function parseMarkdownTable(text: string): { headers: string[]; rows: string[][] } | null {
+  if (!text || !text.includes('|')) return null;
+  const lines = text.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  if (lines.length < 2) return null;
+
+  // Delimiter line matches |---| or |:---|---:| or similar
+  const delimiterIndex = lines.findIndex(l => /^\|?(\s*:?-+:?\s*\|)+\s*:?-+:?\s*\|?$/.test(l));
+  if (delimiterIndex < 1) return null;
+
+  const headerLine = lines[delimiterIndex - 1];
+  const headers = headerLine
+    .split('|')
+    .map(c => c.trim())
+    .filter((c, i, arr) => !(i === 0 && c === '') && !(i === arr.length - 1 && c === ''));
+
+  const rows: string[][] = [];
+  for (let i = delimiterIndex + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.includes('|')) continue;
+    const cells = line
+      .split('|')
+      .map(c => c.trim())
+      .filter((c, idx, arr) => !(idx === 0 && c === '') && !(idx === arr.length - 1 && c === ''));
+    if (cells.length > 0) {
+      rows.push(cells);
+    }
+  }
+
+  if (headers.length > 0 && rows.length > 0) {
+    return { headers, rows };
+  }
+  return null;
+}
+
 export const MathText: React.FC<MathTextProps> = ({ content, text: propText, className = '', block = false }) => {
   const renderedHtml = useMemo(() => {
     const rawContent = content ?? propText ?? '';
@@ -39,15 +74,17 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     // Step 1: Replace $$...$$ with block math placeholders
     const displayMathBlocks: string[] = [];
     text = text.replace(/\$\$(.*?)\$\$/gs, (_, math) => {
+      let cleanMath = math.trim();
+      cleanMath = cleanMath.replace(/(?<!\\)\b(times|implies|frac|Delta|approx|pm|sqrt|alpha|beta|rho|sigma|lambda|theta|omega|pi|to|le|ge|neq|sim|propto)\b/g, '\\$1');
       try {
-        const rendered = katex.renderToString(math.trim(), {
+        const rendered = katex.renderToString(cleanMath, {
           displayMode: true,
           throwOnError: false,
           strict: 'ignore',
         });
         displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1">${rendered}</div>`);
       } catch {
-        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1 text-rose-500 dark:text-rose-400 font-mono">$$${math}$$</div>`);
+        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1 text-rose-500 dark:text-rose-400 font-mono">$$${cleanMath}$$</div>`);
       }
       return `___DISPLAY_MATH_${displayMathBlocks.length - 1}___`;
     });
@@ -55,15 +92,17 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     // Step 2: Replace $...$ with inline math placeholders
     const inlineMathBlocks: string[] = [];
     text = text.replace(/\$(.*?)\$/g, (_, math) => {
+      let cleanMath = math.trim();
+      cleanMath = cleanMath.replace(/(?<!\\)\b(times|implies|frac|Delta|approx|pm|sqrt|alpha|beta|rho|sigma|lambda|theta|omega|pi|to|le|ge|neq|sim|propto)\b/g, '\\$1');
       try {
-        const rendered = katex.renderToString(math.trim(), {
+        const rendered = katex.renderToString(cleanMath, {
           displayMode: false,
           throwOnError: false,
           strict: 'ignore',
         });
         inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
       } catch {
-        inlineMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$${math}$</span>`);
+        inlineMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$${cleanMath}$</span>`);
       }
       return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
     });
@@ -87,6 +126,70 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
       });
     }
 
+    // Step 2c: Handle markdown table blocks
+    const tableBlocks: string[] = [];
+    if (text.includes('|')) {
+      const lines = text.split(/\r?\n/);
+      let tableBuffer: string[] = [];
+      let inTable = false;
+      const newLines: string[] = [];
+
+      const flushTable = () => {
+        if (tableBuffer.length >= 2) {
+          const tableStr = tableBuffer.join('\n');
+          const parsed = parseMarkdownTable(tableStr);
+          if (parsed) {
+            const tableHtml = `
+<div class="w-full overflow-x-auto my-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs" style="-webkit-overflow-scrolling: touch;">
+  <table class="w-full text-left border-collapse min-w-[280px]">
+    <thead>
+      <tr class="bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700">
+        ${parsed.headers.map(h => `<th class="py-2.5 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700">${h}</th>`).join('')}
+      </tr>
+    </thead>
+    <tbody>
+      ${parsed.rows.map(row => `
+        <tr class="even:bg-slate-50/50 dark:even:bg-slate-800/30 border-b border-slate-100 dark:border-slate-800/60 transition-colors">
+          ${row.map(cell => `<td class="py-2 px-3 text-xs text-slate-800 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800/60 leading-relaxed font-normal">${cell}</td>`).join('')}
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+</div>`;
+            tableBlocks.push(tableHtml);
+            newLines.push(`___TABLE_BLOCK_${tableBlocks.length - 1}___`);
+          } else {
+            newLines.push(...tableBuffer);
+          }
+        } else if (tableBuffer.length > 0) {
+          newLines.push(...tableBuffer);
+        }
+        tableBuffer = [];
+        inTable = false;
+      };
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        const isTableLine = trimmed.startsWith('|') || (trimmed.endsWith('|') && trimmed.includes('|'));
+
+        if (isTableLine) {
+          tableBuffer.push(line);
+          inTable = true;
+        } else {
+          if (inTable) {
+            flushTable();
+          }
+          newLines.push(line);
+        }
+      }
+      if (inTable) {
+        flushTable();
+      }
+
+      text = newLines.join('\n');
+    }
+
     // Step 3: Handle markdown formatting
     // Bold **text**
     text = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-slate-100">$1</strong>');
@@ -98,10 +201,11 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     text = text.replace(/^•\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-brand-600 dark:text-brand-400 font-bold">•</span><span>$1</span></div>');
     text = text.replace(/^-\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-cyan-600 dark:text-cyan-400 font-bold">-</span><span>$1</span></div>');
 
-    // Newlines that aren't already wrapped in div
-    text = text.replace(/\n(?!(?:<div|<\/div))/g, '<br />');
+    // Newlines that aren't already wrapped in div or table placeholders
+    text = text.replace(/\n(?!(?:<div|<\/div|___TABLE_BLOCK_))/g, '<br />');
 
-    // Step 4: Re-insert math blocks
+    // Step 4: Re-insert table & math blocks
+    text = text.replace(/___TABLE_BLOCK_(\d+)___/g, (_, idx) => tableBlocks[parseInt(idx)]);
     text = text.replace(/___DISPLAY_MATH_(\d+)___/g, (_, idx) => displayMathBlocks[parseInt(idx)]);
     text = text.replace(/___INLINE_MATH_(\d+)___/g, (_, idx) => inlineMathBlocks[parseInt(idx)]);
 

@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import katex from 'katex';
 import type { VaultData, VaultEntry, SubjectType, WeekFilterType } from '../types';
-import { MathText } from './MathText';
+import { MathText, parseMarkdownTable } from './MathText';
 
 interface VaultViewProps {
   vault: VaultData;
@@ -32,7 +32,7 @@ interface VaultViewProps {
 
 type ActiveWeek = 'all' | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 type ActiveSubject = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
-type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap' | 'quick_tools';
+type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap' | 'table' | 'quick_tools';
 
 const WEEK_TABS: { id: ActiveWeek; label: string; weekNum?: number }[] = [
   { id: 'all', label: 'সব সপ্তাহ' },
@@ -98,14 +98,82 @@ const SUBJECT_OPTIONS: { id: ActiveSubject; label: string; icon: string; colorCl
 ];
 
 function weekFilterToActive(filter?: WeekFilterType): ActiveWeek {
-  if (!filter || filter === 'all') return 'all';
-  const match = filter.match(/week_0?(\d+)/);
-  if (match) {
-    const num = parseInt(match[1], 10);
-    if (num >= 1 && num <= 7) return num as ActiveWeek;
+  if (filter && filter !== 'all') {
+    const match = filter.match(/week_0?(\d+)/);
+    if (match) {
+      const num = parseInt(match[1], 10);
+      if (num >= 1 && num <= 7) return num as ActiveWeek;
+    }
   }
-  return 'all';
+  // Default to latest active week (Week 06) so initial mount renders only ~20 cards instantly
+  return 6;
 }
+
+/** Clean, mobile-responsive HTML table for comparative matrices & biological tables */
+export const StructuredTableView: React.FC<{
+  headers: string[];
+  rows: string[][];
+  onCopy?: () => void;
+  isCopied?: boolean;
+}> = ({ headers, rows, onCopy, isCopied }) => {
+  return (
+    <div className="relative group my-3">
+      <div 
+        className="w-full overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-xs"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
+        <table className="w-full text-left border-collapse min-w-[280px]">
+          <thead>
+            <tr className="bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700">
+              {headers.map((h, i) => (
+                <th key={i} className="py-2.5 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700">
+                  <MathText content={h} />
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, rIdx) => (
+              <tr 
+                key={rIdx} 
+                className="even:bg-slate-50/50 dark:even:bg-slate-800/30 border-b border-slate-100 dark:border-slate-800/60 transition-colors"
+              >
+                {row.map((cell, cIdx) => (
+                  <td 
+                    key={cIdx} 
+                    className="py-2 px-3 text-xs text-slate-800 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800/60 leading-relaxed font-normal"
+                  >
+                    <MathText content={cell} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {onCopy && (
+        <button
+          type="button"
+          onClick={onCopy}
+          className="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-200/90 dark:bg-slate-800/90 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all opacity-0 group-hover:opacity-100 flex items-center gap-1 text-[11px] font-mono cursor-pointer shadow-xs active:scale-95 z-10"
+          title="ছক কপি করুন"
+        >
+          {isCopied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-500" />
+              <span className="text-emerald-500 font-bold hidden sm:inline">কপি হয়েছে</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">কপি</span>
+            </>
+          )}
+        </button>
+      )}
+    </div>
+  );
+};
 
 /** High-contrast KaTeX formula box with built-in copy and error protection */
 const FormulaBox: React.FC<{
@@ -113,6 +181,18 @@ const FormulaBox: React.FC<{
   onCopy: () => void;
   isCopied: boolean;
 }> = ({ formula, onCopy, isCopied }) => {
+  const parsedTable = useMemo(() => parseMarkdownTable(formula), [formula]);
+  if (parsedTable) {
+    return (
+      <StructuredTableView
+        headers={parsedTable.headers}
+        rows={parsedTable.rows}
+        onCopy={onCopy}
+        isCopied={isCopied}
+      />
+    );
+  }
+
   const renderedHtml = useMemo(() => {
     let clean = formula.trim();
     if (clean.startsWith('$$') && clean.endsWith('$$')) {
@@ -183,7 +263,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showQuickToolsModal, setShowQuickToolsModal] = useState(false);
   const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w4_bridge' | 'w5_bridge' | 'w6_bridge' | 'w7_matrix'>('triplets');
-  const [displayLimit, setDisplayLimit] = useState(24);
+  const [visibleCount, setVisibleCount] = useState<number>(15);
   const chapterScrollRef = useRef<HTMLDivElement | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
@@ -202,9 +282,9 @@ export const VaultView: React.FC<VaultViewProps> = ({
     }
   }, [propSubject]);
 
-  // Reset display limit when filters change
+  // Reset visibleCount to 15 whenever filters change
   useEffect(() => {
-    setDisplayLimit(24);
+    setVisibleCount(15);
   }, [activeWeek, activeSubject, selectedChapter, selectedCardType, searchQuery]);
 
   // Close Quick Tools Modal on ESC key
@@ -217,6 +297,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showQuickToolsModal]);
+
 
   const entries: VaultEntry[] = useMemo(() => vault.entries || [], [vault.entries]);
 
@@ -330,16 +411,45 @@ export const VaultView: React.FC<VaultViewProps> = ({
     setSelectedChapter('all');
   };
 
-  // Group filtered entries by chapter
-  const groupedByChapter = useMemo(() => {
+  // Sliced array for virtualized chunked lazy loading (strictly limits DOM KaTeX nodes)
+  const displayedCards = useMemo(() => {
+    return filteredEntries.slice(0, visibleCount);
+  }, [filteredEntries, visibleCount]);
+
+  // Group ONLY the currently displayed cards by chapter
+  const groupedDisplayedCards = useMemo(() => {
     const map = new Map<string, VaultEntry[]>();
-    filteredEntries.forEach((entry) => {
+    displayedCards.forEach((entry) => {
       const list = map.get(entry.chapter) || [];
       list.push(entry);
       map.set(entry.chapter, list);
     });
     return map;
-  }, [filteredEntries]);
+  }, [displayedCards]);
+
+  // Infinite scroll trigger via IntersectionObserver
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) => {
+            if (prev < filteredEntries.length) {
+              return Math.min(prev + 15, filteredEntries.length);
+            }
+            return prev;
+          });
+        }
+      },
+      { rootMargin: '300px' }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [filteredEntries.length]);
+
 
   // Legacy quick tools filter
   const qTool = searchQuery.toLowerCase().trim();
@@ -998,10 +1108,10 @@ export const VaultView: React.FC<VaultViewProps> = ({
             )}
           </div>
 
-          {/* Grouped Chapter Sections */}
-          {Array.from(groupedByChapter.entries()).map(([chapterName, chapterItems]) => {
-            const visibleItems = chapterItems.slice(0, displayLimit);
-            if (visibleItems.length === 0) return null;
+          {/* Grouped Chapter Sections (Only rendering displayedCards chunk) */}
+          {Array.from(groupedDisplayedCards.entries()).map(([chapterName, chapterItems]) => {
+            if (chapterItems.length === 0) return null;
+            const totalInChapter = filteredEntries.filter((e) => e.chapter === chapterName).length;
 
             return (
               <div key={chapterName} className="space-y-3.5">
@@ -1013,14 +1123,14 @@ export const VaultView: React.FC<VaultViewProps> = ({
                       {chapterName}
                     </h2>
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
-                      {chapterItems.length}টি
+                      {chapterItems.length < totalInChapter ? `${chapterItems.length}/${totalInChapter}টি` : `${totalInChapter}টি`}
                     </span>
                   </div>
                 </div>
 
                 {/* Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {visibleItems.map((item) => {
+                  {chapterItems.map((item) => {
                     const isCopied = copiedId === item.id;
                     const cardTypeBadge = item.type === 'core_formula'
                       ? { label: '📐 কোর সূত্রাবলী', class: 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800' }
@@ -1118,16 +1228,16 @@ export const VaultView: React.FC<VaultViewProps> = ({
           })}
 
           {/* Smooth Pagination / Load More Button */}
-          {filteredEntries.length > displayLimit && (
+          {visibleCount < filteredEntries.length && (
             <div className="pt-4 pb-2 text-center">
               <button
                 type="button"
-                onClick={() => setDisplayLimit((prev) => prev + 24)}
+                onClick={() => setVisibleCount((prev) => Math.min(prev + 15, filteredEntries.length))}
                 className="w-full py-3.5 px-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm font-bold text-[#056839] dark:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 shadow-xs flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.99]"
               >
-                <span>আরও ২৪টি কার্ড দেখুন ▾</span>
+                <span>আরো ১৫টি কার্ড লোড করুন</span>
                 <span className="text-xs text-slate-400 font-mono">
-                  ({Math.min(displayLimit, filteredEntries.length)} / {filteredEntries.length} প্রদর্শিত)
+                  (বাকি: {filteredEntries.length - visibleCount}টি)
                 </span>
               </button>
             </div>
