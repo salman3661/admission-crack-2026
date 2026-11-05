@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
-  Play, 
   ArrowRight, 
-  Layers, 
   Clock, 
   Zap, 
   BookOpen, 
   RotateCcw,
-  Sparkles
+  Sparkles,
+  ChevronDown,
+  Layers,
+  Award,
+  ShieldCheck,
+  GraduationCap
 } from 'lucide-react';
 import type { AppMode, SubjectType, WeekFilterType, UserProfile, TrackType } from '../types';
 
@@ -28,814 +31,609 @@ interface DecksViewProps {
 export const DecksView: React.FC<DecksViewProps> = ({
   onSelectMode,
   onSelectSubject,
-  user,
-  onOpenAuth,
-  totalSlides,
-  totalFlashcards,
-  totalQuizzes,
   activeTrack = 'varsity',
   onSelectTrack,
 }) => {
-  const handleDeckNavigate = (targetMode: AppMode, subject: SubjectType) => {
+  // Segmented control pills: 'all' | 'model' | 'weekly' | 'subject' | 'vault'
+  const [activeSegment, setActiveSegment] = useState<'all' | 'model' | 'weekly' | 'subject' | 'vault'>('all');
+  const [isTipsExpanded, setIsTipsExpanded] = useState(false);
+
+  const handleDeckNavigate = (targetMode: AppMode, subject: SubjectType = 'All') => {
     onSelectSubject(subject);
     onSelectMode(targetMode);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 pb-28">
+    <div className="max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-28 space-y-5">
       
-      {/* 0. DUAL-TRACK SPRINT COUNTDOWN & ACTIVE SWITCHER */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-        {/* DU 'Ka' - Primary Target */}
-        <div 
-          onClick={() => onSelectTrack && onSelectTrack('varsity')}
-          className={`p-4 rounded-3xl transition-all cursor-pointer border ${
-            activeTrack === 'varsity'
-              ? 'bg-blue-500/15 border-blue-500 ring-2 ring-blue-500 shadow-md'
-              : 'bg-blue-500/5 border-blue-500/20 hover:border-blue-500/40 opacity-80 hover:opacity-100'
-          } flex items-center justify-between group`}
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-2xl group-hover:scale-110 transition-transform">🎯</span>
-            <div>
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-xs sm:text-sm font-black text-blue-900 dark:text-blue-200">
-                  ঢাকা বিশ্ববিদ্যালয় 'ক' (DU 'Ka' - মেইন টার্গেট)
-                </span>
-                {activeTrack === 'varsity' && (
-                  <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-blue-600 text-white shadow-xs">
-                    ✓ সক্রিয় মেইন ট্র্যাক
-                  </span>
-                )}
-              </div>
-              <div className="text-[11px] text-zinc-600 dark:text-zinc-400 font-medium">
-                বাকি আর মাত্র ২৫ দিন! (MCQ ৬০ + লিখিত ৪০ = ১০০ নম্বর | No-Calculator)
-              </div>
-            </div>
-          </div>
-          <span className={`px-2.5 py-1 rounded-xl text-white font-mono text-[11px] font-extrabold shrink-0 shadow-xs transition-colors ${
-            activeTrack === 'varsity' ? 'bg-blue-600' : 'bg-zinc-500 group-hover:bg-blue-600'
-          }`}>
-            {activeTrack === 'varsity' ? 'Active' : 'সুইচ করুন'}
-          </span>
-        </div>
-
-        {/* Medical - Secondary / Backup Target */}
-        <div 
-          onClick={() => onSelectTrack && onSelectTrack('medical')}
-          className={`p-4 rounded-3xl transition-all cursor-pointer border ${
-            activeTrack === 'medical'
-              ? 'bg-rose-500/15 border-rose-500 ring-2 ring-rose-500 shadow-md'
-              : 'bg-rose-500/5 border-rose-500/20 hover:border-rose-500/40 opacity-80 hover:opacity-100'
-          } flex items-center justify-between group`}
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-2xl group-hover:scale-110 transition-transform">🩺</span>
-            <div>
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-xs sm:text-sm font-black text-rose-900 dark:text-rose-200">
-                  মেডিকেল ভর্তি পরীক্ষা (MAT 2026-27 - ব্যাকআপ)
-                </span>
-                {activeTrack === 'medical' && (
-                  <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-rose-600 text-white shadow-xs">
-                    ✓ সক্রিয় ট্র্যাক
-                  </span>
-                )}
-              </div>
-              <div className="text-[11px] text-zinc-600 dark:text-zinc-400 font-medium">
-                বাকি আর মাত্র ১৫–২০ দিন! (Bio 30, Chem 25, Phys 20, Eng 15, GK 10)
-              </div>
-            </div>
-          </div>
-          <span className={`px-2.5 py-1 rounded-xl text-white font-mono text-[11px] font-extrabold shrink-0 shadow-xs transition-colors ${
-            activeTrack === 'medical' ? 'bg-rose-600' : 'bg-zinc-500 group-hover:bg-rose-600'
-          }`}>
-            {activeTrack === 'medical' ? 'Active' : 'সুইচ করুন'}
-          </span>
-        </div>
+      {/* =========================================================================
+          1. SEGMENTED CONTROL PILLS
+          [ মডেল টেস্ট | উইকলি স্লট | বিষয় ভিত্তিক | ভল্ট শর্টকাট ]
+         ========================================================================= */}
+      <div className="flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar p-1.5 rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-slate-900/70 ring-1 ring-slate-200/80 dark:ring-slate-800/80 shadow-xs">
+        {[
+          { id: 'all' as const, label: '🌟 অল স্ট্রিম ডেক' },
+          { id: 'model' as const, label: '🏆 মডেল টেস্ট' },
+          { id: 'weekly' as const, label: '📅 উইকলি স্লট' },
+          { id: 'subject' as const, label: '📚 বিষয় ভিত্তিক' },
+          { id: 'vault' as const, label: '⚡ ভল্ট শর্টকাট' },
+        ].map((pill) => {
+          const isActive = activeSegment === pill.id;
+          return (
+            <button
+              key={pill.id}
+              onClick={() => setActiveSegment(pill.id)}
+              className={`flex-1 min-w-max px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
+                isActive
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm ring-1 ring-emerald-500/40'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100/60 dark:hover:bg-slate-800/60'
+              }`}
+            >
+              {pill.label}
+            </button>
+          );
+        })}
       </div>
 
-      {/* DUAL-TARGET SYNERGY STRATEGY CALLOUT */}
-      <div className="mb-5 p-4 rounded-3xl bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-emerald-500/10 border border-blue-500/20 dark:border-blue-500/30 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xs">
-        <div className="flex items-start gap-3">
-          <span className="text-2xl mt-0.5">💡</span>
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-black text-zinc-900 dark:text-white uppercase tracking-wider">
-                ডুয়াল-টার্গেট ৮০/২০ স্টাডি কৌশল:
-              </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-600 text-white">
-                মেইন টার্গেট: ঢাবি 'ক' (৭০% সময়)
-              </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-600 text-white">
-                সেকেন্ডারি এক্সাম: মেডিকেল (৩০% সময়)
-              </span>
-            </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-1 leading-relaxed">
-              <strong>সিলেবাসের মিল নেই, কিন্তু কনফ্লিক্ট কেন নেই?</strong> ফিজিক্স ও কেমিস্ট্রি যদি ভার্সিটির জন্য ম্যাথসহ ডিপ প্রিপারেশন নাও, তবে মেডিকেলের ফিজিক্স ও কেমিস্ট্রি থিওরি পানির মতো সহজ লাগবে। আলাদা শুধু: মেডিকেলের <strong>বায়োলজি ছক (আজমল/হাসান)</strong> এবং <strong>ইংলিশ (১৫) + জিকে (১০)</strong>। দিনে মাত্র ১.৫–২ ঘণ্টা এই সেকশনে দিলে মূল ভার্সিটি প্রস্তুতিতে কোনো প্রভাব না ফেলেই মেডিকেলে টপ স্কোর সম্ভব!
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 1. TOP 100 PARETO 80/20 COMMAND PILLARS (DYNAMICALLY TAILORED) */}
-      <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {activeTrack === 'varsity' ? (
-          <>
-            {/* Varsity Pillar 1: No-Calc Math */}
-            <div 
-              onClick={() => handleDeckNavigate('vault', 'Higher Math')}
-              className="p-4 rounded-3xl bg-amber-500/10 dark:bg-amber-950/20 border border-amber-500/30 hover:border-amber-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
+      {/* =========================================================================
+          2. COMPACT DUAL-TARGET STUDY BANNER WITH COLLAPSIBLE QUICK TIPS
+         ========================================================================= */}
+      <div className="rounded-3xl backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80 shadow-sm overflow-hidden p-4 sm:p-5 transition-all">
+        {/* Dual Sprint Track Selector Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+          {/* DU 'Ka' - Primary Target */}
+          <div 
+            onClick={() => onSelectTrack && onSelectTrack('varsity')}
+            className={`p-3.5 sm:p-4 rounded-2xl transition-all cursor-pointer ring-1 ${
+              activeTrack === 'varsity'
+                ? 'bg-gradient-to-br from-emerald-500/15 via-teal-500/10 to-blue-500/10 ring-emerald-500 stream-glow-varsity shadow-xs'
+                : 'bg-slate-50/70 dark:bg-slate-800/50 ring-slate-200/80 dark:ring-slate-700/80 opacity-75 hover:opacity-100'
+            } flex items-center justify-between group active:scale-[0.99]`}
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl group-hover:scale-110 transition-transform">🎯</span>
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">⚡</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500 text-white uppercase shadow-xs">
-                    Calculation Fix
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white">
+                    ঢাকা বিশ্ববিদ্যালয় 'ক' (DU 'Ka')
                   </span>
+                  {activeTrack === 'varsity' && (
+                    <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-600 text-white shadow-xs">
+                      ✓ সক্রিয় মেইন ট্র্যাক
+                    </span>
+                  )}
                 </div>
-                <h4 className="text-sm font-extrabold text-amber-900 dark:text-amber-200 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">
-                  নো-ক্যালকুলেটর স্পিড ম্যাথ
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  ভেক্টর ট্রিপলেট, আনুমানিক বর্গমূল ও লগ হ্যাক এবং ক্যালকুলেটরহীন দ্রাব্যতা ও বাফার pH।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-amber-500/20 flex items-center justify-between text-[11px] font-bold text-amber-800 dark:text-amber-300">
-                <span>ট্রিপলেট ও হ্যাক খুলুন</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Varsity Pillar 2: DU Written 40 Marks */}
-            <div 
-              onClick={() => handleDeckNavigate('predictor', 'Higher Math')}
-              className="p-4 rounded-3xl bg-blue-500/10 dark:bg-blue-950/20 border border-blue-500/30 hover:border-blue-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">✍️</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-600 text-white uppercase shadow-xs">
-                    Zero to 40 Marks
-                  </span>
+                <div className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">
+                  MCQ ৬০ + লিখিত ৪০ = ১০০ নম্বর • নো ক্যালকুলেটর
                 </div>
-                <h4 className="text-sm font-extrabold text-blue-900 dark:text-blue-200 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
-                  ঢাবি লিখিত ৪০-মার্ক ড্রিল
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  ১৬টি টু-দ্য-পয়েন্ট সমস্যা (৪×২.৫) ও প্রতিটি সমস্যার স্টেপ-মার্কিং নম্বর বণ্টন রুব্রিক।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-blue-500/20 flex items-center justify-between text-[11px] font-bold text-blue-800 dark:text-blue-300">
-                <span>লিখিত সমস্যা ও রুব্রিক</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
-
-            {/* Varsity Pillar 3: Higher Math Shortcuts & Conics/Calculus */}
-            <div 
-              onClick={() => handleDeckNavigate('exam', 'Higher Math')}
-              className="p-4 rounded-3xl bg-indigo-500/10 dark:bg-indigo-950/20 border border-indigo-500/30 hover:border-indigo-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">📐</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-600 text-white uppercase shadow-xs">
-                    Math High-Yield
-                  </span>
-                </div>
-                <h4 className="text-sm font-extrabold text-indigo-900 dark:text-indigo-200 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
-                  উচ্চতর গণিত কোর ট্রিকস
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  লা হসপিটাল রুল, কনিকের স্পর্শক ও উপকেন্দ্র, ম্যাট্রিক্স নির্ণায়ক ও দ্রুত ইন্টিগ্রেশন।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-indigo-500/20 flex items-center justify-between text-[11px] font-bold text-indigo-800 dark:text-indigo-300">
-                <span>গণিত প্র্যাকটিস খুলুন</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Varsity Pillar 4: Medical Secondary Booster (Eng 15 + GK 10 + Bio Tables) */}
-            <div 
-              onClick={() => {
-                if (onSelectTrack) onSelectTrack('medical');
-                handleDeckNavigate('predictor', 'English');
-              }}
-              className="p-4 rounded-3xl bg-rose-500/10 dark:bg-rose-950/20 border border-rose-500/30 hover:border-rose-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">🩺</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-600 text-white uppercase shadow-xs">
-                    Medical Booster
-                  </span>
-                </div>
-                <h4 className="text-sm font-extrabold text-rose-900 dark:text-rose-200 group-hover:text-rose-700 dark:group-hover:text-rose-300 transition-colors">
-                  মেডিকেল ব্যাকআপ বুস্টার
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  দিনে মাত্র ১ ঘণ্টা: ইংলিশ (১৫) + জিকে (১০) রেশিও ও জীববিজ্ঞান পাঠ্যবই ছক।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-rose-500/20 flex items-center justify-between text-[11px] font-bold text-rose-800 dark:text-rose-300">
-                <span>মেডিকেল ক্যাপসুল ওপেন করুন</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            {/* Medical Pillar 1: English (15) + GK (10) */}
-            <div 
-              onClick={() => handleDeckNavigate('predictor', 'English')}
-              className="p-4 rounded-3xl bg-emerald-500/10 dark:bg-emerald-950/20 border border-emerald-500/30 hover:border-emerald-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">🇬🇧🇧🇩</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white uppercase shadow-xs">
-                    ২৫ / ২৫ টার্গেট
-                  </span>
-                </div>
-                <h4 className="text-sm font-extrabold text-emerald-900 dark:text-emerald-200 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
-                  ইংলিশ (১৫) + জিকে (১০) রেশিও
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  অফিসিয়াল MAT রেশিও: Prepositions, Vocab ও ১৯৭১ মুক্তিযুদ্ধ, সেক্টর, সংবিধান ও জাতিসংঘ।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-emerald-500/20 flex items-center justify-between text-[11px] font-bold text-emerald-800 dark:text-emerald-300">
-                <span>২৫ মার্কস স্পেশাল টেস্ট</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Medical Pillar 2: Biology Tables & Exceptions */}
-            <div 
-              onClick={() => handleDeckNavigate('flashcards', 'Biology')}
-              className="p-4 rounded-3xl bg-rose-500/10 dark:bg-rose-950/20 border border-rose-500/30 hover:border-rose-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">🧬</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-600 text-white uppercase shadow-xs">
-                    Bio 30 Marks
-                  </span>
-                </div>
-                <h4 className="text-sm font-extrabold text-rose-900 dark:text-rose-200 group-hover:text-rose-700 dark:group-hover:text-rose-300 transition-colors">
-                  আজমল ও হাসান স্যারের ছক
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  উদ্ভিদ ও প্রাণিবিজ্ঞান পাঠ্যবইয়ের সরাসরি ছক, বৈজ্ঞানিক নাম ও মেডিকেল ট্র্যাপ প্রতিরক্ষা।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-rose-500/20 flex items-center justify-between text-[11px] font-bold text-rose-800 dark:text-rose-300">
-                <span>ব্যতিক্রম ছক ও কার্ডস</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Medical Pillar 3: Chemistry Hazari Lines */}
-            <div 
-              onClick={() => handleDeckNavigate('flashcards', 'Chemistry')}
-              className="p-4 rounded-3xl bg-purple-500/10 dark:bg-purple-950/20 border border-purple-500/30 hover:border-purple-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">🧪</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-600 text-white uppercase shadow-xs">
-                    Chem 25 Marks
-                  </span>
-                </div>
-                <h4 className="text-sm font-extrabold text-purple-900 dark:text-purple-200 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
-                  হাজারী-নাগ তথ্য ও ব্যতিক্রম
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  দ্রাব্যতা নীতি, কোয়ান্টাম সংখ্যা, বাফার দ্রবণ ও জৈব রসায়নের শনাক্তকারী পরীক্ষা।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-purple-500/20 flex items-center justify-between text-[11px] font-bold text-purple-800 dark:text-purple-300">
-                <span>কেমিস্ট্রি কার্ডস দেখুন</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-
-            {/* Medical Pillar 4: Physics Units, Dimensions & Formulas */}
-            <div 
-              onClick={() => handleDeckNavigate('vault', 'Physics')}
-              className="p-4 rounded-3xl bg-blue-500/10 dark:bg-blue-950/20 border border-blue-500/30 hover:border-blue-500 transition-all cursor-pointer group hover:scale-[1.02] shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xl">⚛️</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-600 text-white uppercase shadow-xs">
-                    Phys 20 Marks
-                  </span>
-                </div>
-                <h4 className="text-sm font-extrabold text-blue-900 dark:text-blue-200 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
-                  ইসহাক স্যারের একক, মাত্রা ও সূত্র
-                </h4>
-                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                  ক্যালকুলেটরবিহীন সোজা সূত্র প্রয়োগ, ধ্রুবকের মান ও বহুল পুনরাবৃত্ত একক-মাত্রা।
-                </p>
-              </div>
-              <div className="mt-3 pt-2 border-t border-blue-500/20 flex items-center justify-between text-[11px] font-bold text-blue-800 dark:text-blue-300">
-                <span>ফিজিক্স ফর্মুলা ভল্ট</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* 2. SYLLABUS & CHAPTER SCOPE ROADMAP (TRANSPARENT BOUNDARIES) */}
-      <div className="mb-6 p-5 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/90 dark:border-zinc-800 shadow-sm">
-        <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-4 flex-wrap gap-2">
-          <div className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#056839] dark:text-emerald-400" />
-            <h3 className="text-base font-extrabold text-zinc-900 dark:text-white">
-              সিলেবাস ও অধ্যায় কভারেজ ট্র্যাকার (Syllabus Scope Breakdown)
-            </h3>
-          </div>
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#056839] dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-            এইচএসসি সংক্ষিপ্ত সিলেবাস কোর
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-          <div className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/80">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 font-mono">
-                Week 01 Scope
-              </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300">
-                ভিত্তি অধ্যায়
-              </span>
-            </div>
-            <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">
-              ভেক্টর, গতিবিদ্যা, পরিমাণগত রসায়ন, সরলরেখা, রক্ত ও সংবহন, শ্বসন ও শ্বাসক্রিয়া।
-            </p>
+            <span className={`px-2.5 py-1 rounded-xl text-white font-mono text-[11px] font-extrabold shrink-0 shadow-xs transition-colors ${
+              activeTrack === 'varsity' ? 'bg-emerald-600' : 'bg-slate-500 group-hover:bg-emerald-600'
+            }`}>
+              {activeTrack === 'varsity' ? 'Active' : 'সুইচ'}
+            </span>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/80">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold text-blue-700 dark:text-blue-400 font-mono">
-                Week 02 Scope
-              </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300">
-                বলবিদ্যা ও বাফার
-              </span>
-            </div>
-            <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">
-              নিউটোনীয় বলবিদ্যা, পর্যায়বৃত্ত ধর্ম ও বন্ধন, রাসায়নিক পরিবর্তন (বাফার ও pH), বৃত্ত ও জটিল সংখ্যা, কোষ ও হাইড্রা।
-            </p>
-          </div>
-
-          <div className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/80">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold text-amber-700 dark:text-amber-400 font-mono">
-                Week 03 Scope
-              </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300">
-                কণিক ও গুণগত
-              </span>
-            </div>
-            <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed font-medium">
-              কাজ-শক্তি, মহাকর্ষ, গুণগত রসায়ন (Ksp ও কোয়ান্টাম), কণিক ও অসমতা, উদ্ভিদ শারীরতত্ত্ব ও প্রজনন।
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. ORIGINAL WELCOME BANNER */}
-      <div className="mb-5">
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-5 sm:p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm relative overflow-hidden">
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 flex items-center gap-1.5 shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Bangladesh Admission Core 2026
-                </span>
-                <span className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold border ${
-                  activeTrack === 'medical'
-                    ? 'bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/20'
-                    : 'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20'
-                }`}>
-                  {activeTrack === 'medical' ? '🩺 মেডিকেল ট্র্যাক (Bio, Chem, Phys, Eng, GK)' : "🎯 ঢাবি 'ক' ট্র্যাক (Phys, Chem, Math, Bio)"}
-                </span>
-                <span className="hidden sm:inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
-                  ⚡ {totalSlides}টি স্লাইড
-                </span>
-                <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">
-                  📚 {totalQuizzes}টি আইসোলেটেড MCQ
-                </span>
-                <button
-                  onClick={() => onSelectMode('predictor')}
-                  className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold bg-amber-500 text-white shadow-xs hover:bg-amber-600 transition-all cursor-pointer"
-                >
-                  <Sparkles className="w-3 h-3 fill-current" />
-                  <span>🔮 প্রেডিকশন ভল্ট ওপেন করুন</span>
-                </button>
-              </div>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight leading-snug">
-                {user.isLoggedIn && user.name ? `স্বাগতম, ${user.name}!` : 'ভর্তি প্রস্তুতি ২০২৬:'} {activeTrack === 'medical' ? 'মেডিকেল স্পেশাল পাঠ্যবই কোর ও ১৫ বছরের রিপিট' : "ঢাবি 'ক' স্পেশাল নো-ক্যালকুলেটর শর্টকাট ও কোর"}
-              </h1>
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
-                {activeTrack === 'medical'
-                  ? 'গাজী আজমল, আবুল হাসান, হাজারী-নাগ ও ইসহাক স্যারের পাঠ্যবইয়ের দাগানো লাইন, ব্যতিক্রম ছক এবং বিগত ১৫ বছরের মেডিকেল (MAT) ও ডেন্টাল (DAT) এর নির্ভুল প্রশ্ন।'
-                  : "ঢাকা বিশ্ববিদ্যালয়ের ১৫ বছরের প্রশ্নব্যাংক, কেতাব উদ্দীন স্যারের গণিত, হাজারী-নাগের রসায়ন ও ইসহাক স্যারের পদার্থবিজ্ঞানের ক্যালকুলেটরহীন দ্রুত সমাধান ও লিখিত সমস্যা।"}
-              </p>
-            </div>
-
-            {/* User status or Google sign-in */}
-            <div className="flex items-center gap-3 shrink-0">
-              {user.isLoggedIn ? (
-                <div 
-                  onClick={onOpenAuth}
-                  className="cursor-pointer p-2.5 sm:p-3 rounded-2xl bg-[#F6F8F6] dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700/80 flex items-center gap-3 hover:scale-102 transition-all shadow-xs"
-                >
-                  <img
-                    src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email || 'user')}`}
-                    alt={user.name}
-                    className="w-10 h-10 rounded-xl object-cover ring-2 ring-[#056839]"
-                  />
-                  <div>
-                    <div className="text-xs font-bold text-zinc-900 dark:text-white flex items-center gap-1">
-                      {user.name.split(' ')[0]}
-                      <span className="text-amber-500 font-mono">🔥{user.streakDays}d</span>
-                    </div>
-                    <div className="text-[11px] text-[#056839] dark:text-emerald-400 font-semibold">
-                      {user.target.split(' ')[0]}
-                    </div>
-                  </div>
+          {/* Medical MAT - Secondary / Backup Target */}
+          <div 
+            onClick={() => onSelectTrack && onSelectTrack('medical')}
+            className={`p-3.5 sm:p-4 rounded-2xl transition-all cursor-pointer ring-1 ${
+              activeTrack === 'medical'
+                ? 'bg-gradient-to-br from-rose-500/15 via-crimson-500/10 to-pink-500/10 ring-rose-500 stream-glow-medical shadow-xs'
+                : 'bg-slate-50/70 dark:bg-slate-800/50 ring-slate-200/80 dark:ring-slate-700/80 opacity-75 hover:opacity-100'
+            } flex items-center justify-between group active:scale-[0.99]`}
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl group-hover:scale-110 transition-transform">🩺</span>
+              <div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white">
+                    মেডিকেল ভর্তি পরীক্ষা (MAT 2026-27)
+                  </span>
+                  {activeTrack === 'medical' && (
+                    <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-rose-600 text-white shadow-xs">
+                      ✓ সক্রিয় ট্র্যাক
+                    </span>
+                  )}
                 </div>
-              ) : (
-                <button
-                  onClick={onOpenAuth}
-                  className="py-2.5 px-4 rounded-2xl bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-800 dark:text-white text-xs font-bold border border-zinc-300 dark:border-zinc-700 shadow-xs flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                  </svg>
-                  <span>Google লগইন</span>
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. SPECIAL HERO CALLOUT: বারবার প্র্যাকটিস (MASTERY RE-TEST ENGINE) */}
-      <div 
-        onClick={() => handleDeckNavigate('exam', 'All')}
-        className="mb-6 bg-gradient-to-r from-[#056839] via-[#008f5d] to-[#00B09B] rounded-3xl p-4 sm:p-5 text-white shadow-lg shadow-[#056839]/20 cursor-pointer hover:shadow-xl transition-all group border border-white/20"
-      >
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0 border border-white/30 group-hover:scale-110 transition-transform">
-              <RotateCcw className="w-6 h-6 text-white animate-spin-slow" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-black uppercase tracking-wider bg-white/25 px-2.5 py-0.5 rounded-full border border-white/30">
-                  🔥 Active Drill
-                </span>
-                <span className="text-xs text-white/90 font-medium">
-                  Leitner 2-Strike Mastery
-                </span>
+                <div className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">
+                  Bio 30, Chem 25, Phys 20, Eng 15, GK 10
+                </div>
               </div>
-              <h3 className="text-lg sm:text-xl font-black mt-0.5">
-                বারবার প্র্যাকটিস (Mastery Re-test Mode)
-              </h3>
-              <p className="text-xs sm:text-sm text-white/90">
-                ভুল বা "Unsure" হলে প্রশ্নটি কিউতে থাকবে; পরপর <strong>২ বার সঠিক</strong> না দেওয়া পর্যন্ত অটো-রিপিট ড্রিল চলবে।
-              </p>
             </div>
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="px-5 py-2.5 rounded-2xl bg-white text-[#056839] font-black text-xs sm:text-sm shadow-md group-hover:bg-white/95 flex items-center gap-1.5 transition-all">
-              <span>মাস্টারি ড্রিল শুরু</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <span className={`px-2.5 py-1 rounded-xl text-white font-mono text-[11px] font-extrabold shrink-0 shadow-xs transition-colors ${
+              activeTrack === 'medical' ? 'bg-rose-600' : 'bg-slate-500 group-hover:bg-rose-600'
+            }`}>
+              {activeTrack === 'medical' ? 'Active' : 'সুইচ'}
             </span>
           </div>
         </div>
+
+        {/* Collapsible Quick Tips Bar */}
+        <div className="border-t border-slate-200/70 dark:border-slate-800/70 pt-2.5">
+          <button
+            onClick={() => setIsTipsExpanded(!isTipsExpanded)}
+            className="w-full flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-1 cursor-pointer"
+          >
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-500" />
+              <span>💡 ডুয়াল-টার্গেট ৮০/২০ কৌশল ও টাইম ম্যানেজমেন্ট গাইডলাইন</span>
+            </div>
+            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isTipsExpanded ? 'rotate-180' : ''}`} />
+          </button>
+
+          {isTipsExpanded && (
+            <div className="mt-2.5 p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 ring-1 ring-slate-200/80 dark:ring-slate-700/80 text-xs text-slate-600 dark:text-slate-300 leading-relaxed animate-in fade-in duration-200 space-y-1.5">
+              <p>
+                <strong>কেন কোনো কনফ্লিক্ট নেই?</strong> ফিজিক্স ও কেমিস্ট্রি যদি ভার্সিটির জন্য ম্যাথসহ ডিপ প্রিপারেশন নাও, তবে মেডিকেলের ফিজিক্স ও কেমিস্ট্রি থিওরি সরাসরি কমন পড়বে।
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-medium text-[11px]">
+                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 ring-1 ring-emerald-500/20">
+                  🎯 <strong>ভার্সিটি 'ক' (৭০% সময়):</strong> পদার্থ ও রসায়ন ম্যাথ, উচ্চতর গণিত শর্টকাট এবং লিখিত অংশের নিয়মিত খাতা চর্চা।
+                </div>
+                <div className="p-2 rounded-xl bg-rose-500/10 text-rose-800 dark:text-rose-300 ring-1 ring-rose-500/20">
+                  🩺 <strong>মেডিকেল বুস্টার (৩০% সময়):</strong> দিনে ১.৫–২ ঘণ্টা বায়োলজি ছক (আজমল/হাসান) + ইংলিশ (১৫) + জিকে (১০)।
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* 3. FOUR CORE BANGLADESH ADMISSION DECKS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-        
-        {/* CARD 1: Medical Precision Deck */}
-        <div 
-          className="bg-gradient-to-br from-[#E52D27] to-[#B31217] rounded-3xl p-6 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] border border-white/20 relative group overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/15 pointer-events-none rounded-3xl" />
-
-          <div className="flex items-center justify-between gap-2 mb-4 relative z-10 flex-wrap">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white shadow-xs flex items-center gap-1.5 border border-white/25">
-                <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-                🩺 Medical Precision
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white/95 border border-white/20">
-                MAT/DAT ১৫ বছর রিপিট
-              </span>
-            </div>
-            <div className="bg-white/15 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-white/90 flex items-center gap-1.5 border border-white/20">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              গাজী আজমল ও হাজারী-নাগ
-            </div>
-          </div>
-
-          <div className="relative z-10 mb-5">
-            <h2 className="text-2xl font-black tracking-tight text-white mb-2 drop-shadow-xs font-['Outfit']">
-              Medical Precision Deck
+      {/* =========================================================================
+          3. SLEEK 2x3 GRID OF INTERACTIVE STREAM CARDS (Aesthetic Edtech Layout)
+         ========================================================================= */}
+      {(activeSegment === 'all' || activeSegment === 'weekly') && (
+        <div>
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <Layers className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span>এডমিশন কোর স্ট্রিম কার্ডস (2026 Edition)</span>
             </h2>
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
-              গাজী আজমল ও হাজারী-নাগ স্যারের বইয়ের হুবহু লাইন, গুরুত্বপূর্ণ ছক ও মেডিকেল (MAT/DAT) বিগত ১৫ বছরের রিপিট প্রশ্ন সম্ভার।
-            </p>
+            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+              ৬টি ইন্টারেক্টিভ স্ট্রিম
+            </span>
           </div>
 
-          <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/20 flex-wrap gap-2">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                ✎ 75 Questions
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                🗂️ 60 Cards
-              </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            
+            {/* Stream 1: Varsity 'Ka' Core */}
+            <div 
+              onClick={() => handleDeckNavigate('exam', 'All')}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-emerald-500/10 via-emerald-600/5 to-teal-500/10 ring-1 ring-emerald-500/30 hover:ring-emerald-500 stream-glow-varsity shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                    🔴 Live 80/20
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/20">
+                    ২,৩৭৬+ MCQ
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center text-xl shadow-md shadow-emerald-600/25 mb-3 group-hover:scale-105 transition-transform">
+                  🎯
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-1.5">
+                  ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট (DU 'Ka')
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  বিগত ১৫-২০ বছরের ঢাবি অরিজিনাল প্রশ্নব্যাংক, রিপিট প্যাটার্ন এবং নো-ক্যালকুলেটর ম্যাথ স্পিড ট্রিকস।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>MCQ ৬০ + লিখিত ৪০ • ১০০ মার্কস কমপ্লিট</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400">
+                  <span>অনুশীলন শুরু করুন</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleDeckNavigate('slides', 'Biology')}
-                className="px-3 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs backdrop-blur-md border border-white/30 transition-all flex items-center gap-1 cursor-pointer"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                কনসেপ্ট
-              </button>
-              <button
-                onClick={() => handleDeckNavigate('exam', 'Biology')}
-                className="px-4 py-2 rounded-xl bg-white text-[#B31217] font-bold text-xs shadow-md hover:bg-white/95 transition-all flex items-center gap-1.5 hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                প্র্যাকটিস
-              </button>
+            {/* Stream 2: Medical MAT */}
+            <div 
+              onClick={() => {
+                onSelectTrack && onSelectTrack('medical');
+                handleDeckNavigate('exam', 'All');
+              }}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-rose-500/10 via-red-600/5 to-pink-500/10 ring-1 ring-rose-500/30 hover:ring-rose-500 stream-glow-medical shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-500/15 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping" />
+                    🔴 Live 80/20
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/20">
+                    ১,৫৮৪+ প্রশ্ন
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-600 to-pink-600 text-white flex items-center justify-center text-xl shadow-md shadow-rose-600/25 mb-3 group-hover:scale-105 transition-transform">
+                  🩺
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors mb-1.5">
+                  মেডিকেল ভর্তি পরীক্ষা (MAT 2026-27)
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  আজমল ও হাসান স্যারের বায়োলজি ছক, হাজারী স্যারের তথ্য কণিকা এবং বিগত মেডিকেল-ডেন্টাল PYQ।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-rose-500/10 text-rose-800 dark:text-rose-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                  <span>Bio 30 • Chem 25 • Phys 20 • Eng 15 • GK 10</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-rose-700 dark:text-rose-400">
+                  <span>মেডিকেল ড্রিল শুরু</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
             </div>
+
+            {/* Stream 3: Engineering Bridge & Math Speed */}
+            <div 
+              onClick={() => handleDeckNavigate('vault', 'Higher Math')}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-cyan-500/10 via-indigo-600/5 to-blue-500/10 ring-1 ring-cyan-500/30 hover:ring-cyan-500 stream-glow-engineering shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 ring-1 ring-cyan-500/30">
+                    ⚡ BUET/CKRUET Bridge
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-cyan-700 dark:text-cyan-300 ring-1 ring-cyan-500/20">
+                    হাই-স্পিড হ্যাক
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-600 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md shadow-cyan-600/25 mb-3 group-hover:scale-105 transition-transform">
+                  📐
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors mb-1.5">
+                  ইঞ্জিনিয়ারিং ব্রিজ ও স্পিড হ্যাক
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  ক্যালকুলাস শর্টকাট (ল'হসপিটাল/ইন্টিগ্রেশন ট্রিক), কনিক্স ফর্মুলা এবং মেকানিক্স প্রবলেম সলভিং।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-800 dark:text-cyan-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
+                  <span>ক্যালকুলাস • কনিক্স • মেকানিক্স স্পিড হ্যাক</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-cyan-700 dark:text-cyan-400">
+                  <span>ম্যাথ ভল্ট এক্সপ্লোর</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+
+            {/* Stream 4: DU Written Blueprint */}
+            <div 
+              onClick={() => handleDeckNavigate('predictor', 'All')}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-purple-500/10 via-indigo-600/5 to-violet-500/10 ring-1 ring-purple-500/30 hover:ring-purple-500 shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-purple-500/15 text-purple-700 dark:text-purple-300 ring-1 ring-purple-500/30">
+                    ✍️ Written Blueprint
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-purple-700 dark:text-purple-300 ring-1 ring-purple-500/20">
+                    ৪০/৪০ টার্গেট
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md shadow-purple-600/25 mb-3 group-hover:scale-105 transition-transform">
+                  📝
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-1.5">
+                  ঢাবি লিখিত ৪০ মার্কস মাস্টারক্লাস
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  বক্স সাইজ লিমিটেশন, স্টেপ-বাই-স্টেপ পার্শিয়াল মার্কিং রুব্রিক এবং স্যাম্পল খাতা সমাধান।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-purple-500/10 text-purple-800 dark:text-purple-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <GraduationCap className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+                  <span>পার্শিয়াল মার্কিং রুব্রিক ও ঢাবি খাতা সলিউশন</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-purple-700 dark:text-purple-400">
+                  <span>লিখিত প্রবলেম দেখুন</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+
+            {/* Stream 5: 1-Second Formula Vault & Trap Defense */}
+            <div 
+              onClick={() => handleDeckNavigate('vault', 'All')}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-amber-500/10 via-yellow-600/5 to-orange-500/10 ring-1 ring-amber-500/30 hover:ring-amber-500 shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500/15 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500/30">
+                    🛡️ Trap Shield
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500/20">
+                    ২০০+ শর্টকাট
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center text-xl shadow-md shadow-amber-500/25 mb-3 group-hover:scale-105 transition-transform">
+                  ⚡
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors mb-1.5">
+                  ১-সেকেন্ড ফর্মুলা ও ট্র্যাপ ডিফেন্স
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  দশমিক ভাগ, অনুপাত শর্টকাট, ত্রিকোণমিতি ডোমেন-রেঞ্জ ট্রিক এবং ঢাবি এক্সামিনারদের পছন্দের ট্র্যাপ হ্যাক।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-amber-500/10 text-amber-800 dark:text-amber-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <span>দশমিক ভাগ • অনুপাত শর্টকাট • হটস্পট</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-amber-700 dark:text-amber-400">
+                  <span>ভল্ট ওপেন করুন</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+
+            {/* Stream 6: Leitner 2-Strike Mastery Engine */}
+            <div 
+              onClick={() => handleDeckNavigate('exam', 'All')}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-emerald-500/10 via-teal-600/5 to-cyan-500/10 ring-1 ring-emerald-500/30 hover:ring-emerald-500 shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
+                    🔄 ২-স্ট্রাইক ইঞ্জিন
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/20">
+                    ১০০% রিটেনশন
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center text-xl shadow-md shadow-emerald-600/25 mb-3 group-hover:scale-105 transition-transform">
+                  🔁
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-1.5">
+                  বারবার প্র্যাকটিস (Mastery Re-test)
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  ভুল হলে প্রশ্নটি স্বয়ংক্রিয় কিউতে ফিরে আসে। পরপর ২ বার সঠিক উত্তর না দেওয়া পর্যন্ত ঘুরতে থাকে।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <RotateCcw className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>ভুল হলে কিউতে রিপিট • ফুল মাস্টারি ড্রিল</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400">
+                  <span>মাস্টারি ড্রিল শুরু</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+      )}
 
-        {/* CARD 2: DU 'Ka' Core Deck */}
-        <div 
-          className="bg-gradient-to-br from-[#00B09B] to-[#96C93D] rounded-3xl p-6 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] border border-white/20 relative group overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/15 pointer-events-none rounded-3xl" />
-
-          <div className="flex items-center justify-between gap-2 mb-4 relative z-10 flex-wrap">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white shadow-xs flex items-center gap-1.5 border border-white/25">
-                🏆 DU 'Ka' Core
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white/95 border border-white/20">
-                ১৫-২০ বছর PYQ
-              </span>
-            </div>
-            <div className="bg-white/15 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-white/90 flex items-center gap-1.5 border border-white/20">
-              <span className="w-2 h-2 rounded-full bg-amber-300" />
-              নো-ক্যালকুলেটর &lt; ৪৫ সে
-            </div>
-          </div>
-
-          <div className="relative z-10 mb-5">
-            <h2 className="text-2xl font-black tracking-tight text-white mb-2 drop-shadow-xs font-['Outfit']">
-              DU 'Ka' Unit Core Deck
-            </h2>
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
-              ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিটের বিগত ১৫-২০ বছরের প্রশ্ন এবং ইসহাক ও কেতাব উদ্দীন স্যারের বইয়ের সরাসরি স্ট্যান্ডার্ড ম্যাথ।
-            </p>
-          </div>
-
-          <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/20 flex-wrap gap-2">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                ✎ 75 Questions
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                🗂️ 50 Cards
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleDeckNavigate('slides', 'Higher Math')}
-                className="px-3 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs backdrop-blur-md border border-white/30 transition-all flex items-center gap-1 cursor-pointer"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                কনসেপ্ট
-              </button>
-              <button
-                onClick={() => handleDeckNavigate('exam', 'Higher Math')}
-                className="px-4 py-2 rounded-xl bg-white text-[#056839] font-bold text-xs shadow-md hover:bg-white/95 transition-all flex items-center gap-1.5 hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                প্র্যাকটিস
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* CARD 3: Varsity Core Deck (RU, JU, CU, GST) */}
-        <div 
-          className="bg-gradient-to-br from-[#0052D4] to-[#4364F7] rounded-3xl p-6 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] border border-white/20 relative group overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/15 pointer-events-none rounded-3xl" />
-
-          <div className="flex items-center justify-between gap-2 mb-4 relative z-10 flex-wrap">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white shadow-xs flex items-center gap-1.5 border border-white/25">
-                🏛️ Varsity Core
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white/95 border border-white/20">
-                RU • JU • CU • GST
-              </span>
-            </div>
-            <div className="bg-white/15 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-white/90 flex items-center gap-1.5 border border-white/20">
-              <span className="w-2 h-2 rounded-full bg-cyan-300" />
-              নিউমেরিক্যাল ভ্যারিয়েশন
-            </div>
-          </div>
-
-          <div className="relative z-10 mb-5">
-            <h2 className="text-2xl font-black tracking-tight text-white mb-2 drop-shadow-xs font-['Outfit']">
-              Varsity Core Deck (RU, JU, CU, GST)
-            </h2>
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
-              রাজশাহী, জাহাঙ্গীরনগর, চট্টগ্রাম ও গুচ্ছ বিশ্ববিদ্যালয়ের প্রশ্নব্যাংক প্যাটার্ন ও বারবার আসা সংখ্যাগত পরিবর্তনের পূর্ণাঙ্গ রি-টেস্ট।
-            </p>
-          </div>
-
-          <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/20 flex-wrap gap-2">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                ✎ 75 Questions
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                🗂️ 50 Cards
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleDeckNavigate('slides', 'Physics')}
-                className="px-3 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs backdrop-blur-md border border-white/30 transition-all flex items-center gap-1 cursor-pointer"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                কনসেপ্ট
-              </button>
-              <button
-                onClick={() => handleDeckNavigate('exam', 'Physics')}
-                className="px-4 py-2 rounded-xl bg-white text-[#0052D4] font-bold text-xs shadow-md hover:bg-white/95 transition-all flex items-center gap-1.5 hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                প্র্যাকটিস
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* CARD 4: English & 1971 Liberation War GK Core Deck */}
-        <div 
-          className="bg-gradient-to-br from-[#8A2387] via-[#E94057] to-[#F27121] rounded-3xl p-6 text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] border border-white/20 relative group overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/15 pointer-events-none rounded-3xl" />
-
-          <div className="flex items-center justify-between gap-2 mb-4 relative z-10 flex-wrap">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white shadow-xs flex items-center gap-1.5 border border-white/25">
-                🇬🇧 English &amp; 🇧🇩 GK Core
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-semibold text-white/95 border border-white/20">
-                BCS • MAT • DU
-              </span>
-            </div>
-            <div className="bg-white/15 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-bold text-white/90 flex items-center gap-1.5 border border-white/20">
-              <span className="w-2 h-2 rounded-full bg-rose-300" />
-              ১০০% নিশ্চিত মার্কস
-            </div>
-          </div>
-
-          <div className="relative z-10 mb-5">
-            <h2 className="text-2xl font-black tracking-tight text-white mb-2 drop-shadow-xs font-['Outfit']">
-              English &amp; Liberation War GK Deck
-            </h2>
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
-              Appropriate Prepositions, বিসিএস ও মেডিকেলের রিপিটেড গ্রামার এবং ১৯৭১ মুক্তিযুদ্ধ ও বাংলাদেশ কোর জিকে অপরিহার্য তথ্যম্যাট্রিক্স।
-            </p>
-          </div>
-
-          <div className="relative z-10 flex items-center justify-between pt-3 border-t border-white/20 flex-wrap gap-2">
-            <div className="flex items-center gap-2">
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                ✎ 50 Questions
-              </span>
-              <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1 border border-white/20">
-                🗂️ 90 Cards
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleDeckNavigate('flashcards', 'English')}
-                className="px-3 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs backdrop-blur-md border border-white/30 transition-all flex items-center gap-1 cursor-pointer"
-              >
-                <Layers className="w-3.5 h-3.5" />
-                কার্ডস
-              </button>
-              <button
-                onClick={() => handleDeckNavigate('exam', 'English')}
-                className="px-4 py-2 rounded-xl bg-white text-[#8A2387] font-bold text-xs shadow-md hover:bg-white/95 transition-all flex items-center gap-1.5 hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                প্র্যাকটিস
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* 4. QUICK LAUNCH SHORTCUTS & VAULT HIGHLIGHTS */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Shortcut 1: Calculator Free Vault */}
-        <div 
-          onClick={() => handleDeckNavigate('vault', 'All')}
-          className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 hover:border-[#056839]/50 shadow-xs cursor-pointer transition-all hover:-translate-y-0.5 group"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500 group-hover:text-white transition-colors">
-              <Zap className="w-5 h-5" />
-            </div>
+      {/* =========================================================================
+          4. MODEL TESTS & PREDICTOR SETS (When 'model' is selected)
+         ========================================================================= */}
+      {(activeSegment === 'model' || activeSegment === 'all') && (
+        <div className="rounded-3xl backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80 p-5 shadow-sm">
+          <div className="flex items-center justify-between gap-2 mb-4">
             <div>
-              <h3 className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1">
-                হ্যান্ড ক্যালকুলেশন ভল্ট
-                <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-              </h3>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                √2, √3, লগ ও স্টয়কিওমেট্রি টেবিল
+              <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <Award className="w-4 h-4 text-amber-500" />
+                <span>মডেল টেস্ট ও পেপার ফাইনাল এক্সাম</span>
+              </h2>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                রিয়েল এক্সাম হলে বসে টাইমার ও নেগেটিভ মার্কিংসহ পূর্ণাঙ্গ মডেল টেস্ট দিন
+              </p>
+            </div>
+            <button
+              onClick={() => handleDeckNavigate('predictor')}
+              className="px-3 py-1.5 rounded-xl bg-[#056839] hover:bg-[#044e2b] text-white text-xs font-bold shadow-xs flex items-center gap-1 active:scale-95 transition-all cursor-pointer"
+            >
+              <span>সব সেট</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            {/* Model Card 1 */}
+            <div 
+              onClick={() => handleDeckNavigate('predictor')}
+              className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/50 ring-1 ring-slate-200/80 dark:ring-slate-700/80 hover:ring-emerald-500 transition-all cursor-pointer group flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/20">
+                    🔥 DU Model 01
+                  </span>
+                  <span className="text-[11px] text-slate-500 flex items-center gap-1 font-mono">
+                    <Clock className="w-3 h-3" /> ৪৫ মিনিট
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-1">
+                  ঢাকা বিশ্ববিদ্যালয় পূর্ণাঙ্গ পেপার ফাইনাল সেট
+                </h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
+                  ৬০টি এমসিকিউ (বায়োলজি, রসায়ন, পদার্থ, উচ্চতর গণিত) + লিখিত অংশ।
+                </p>
+              </div>
+              <div className="flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400 pt-2 border-t border-slate-200/60 dark:border-slate-700/60">
+                <span>৬০ মার্কস MCQ + লিখিত</span>
+                <span className="flex items-center gap-1">টেস্ট দিন <ArrowRight className="w-3.5 h-3.5" /></span>
+              </div>
+            </div>
+
+            {/* Model Card 2 */}
+            <div 
+              onClick={() => handleDeckNavigate('predictor')}
+              className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/50 ring-1 ring-slate-200/80 dark:ring-slate-700/80 hover:ring-rose-500 transition-all cursor-pointer group flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/10 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/20">
+                    🩺 MAT Model 01
+                  </span>
+                  <span className="text-[11px] text-slate-500 flex items-center gap-1 font-mono">
+                    <Clock className="w-3 h-3" /> ৬০ মিনিট
+                  </span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors mb-1">
+                  মেডিকেল ভর্তি পরীক্ষা ১০০ মার্কস মডেল টেস্ট
+                </h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
+                  ১০০টি প্রশ্ন (বায়োলজি ৩০, কেমিস্ট্রি ২৫, ফিজিক্স ২০, ইংলিশ ১৫, জিকে ১০)।
+                </p>
+              </div>
+              <div className="flex items-center justify-between text-xs font-bold text-rose-700 dark:text-rose-400 pt-2 border-t border-slate-200/60 dark:border-slate-700/60">
+                <span>১০০ মার্কস থিওরি</span>
+                <span className="flex items-center gap-1">টেস্ট দিন <ArrowRight className="w-3.5 h-3.5" /></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          5. SUBJECT-BASED CARDS (When 'subject' or 'all' is active)
+         ========================================================================= */}
+      {(activeSegment === 'subject' || activeSegment === 'all') && (
+        <div className="rounded-3xl backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80 p-5 shadow-sm">
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <div>
+              <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                <span>বিষয় ভিত্তিক স্পেশাল ড্রিল (Subject-Wise)</span>
+              </h2>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                দুর্বল বিষয় চিহ্নিত করে বিষয়ভিত্তিক গভীর অনুশীলন করুন
               </p>
             </div>
           </div>
-        </div>
 
-        {/* Shortcut 2: Smart Flashcards */}
-        <div 
-          onClick={() => handleDeckNavigate('flashcards', 'All')}
-          className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 hover:border-[#00B09B]/50 shadow-xs cursor-pointer transition-all hover:-translate-y-0.5 group"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-              <Layers className="w-5 h-5" />
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {[
+              { label: 'Physics' as const, bn: 'পদার্থবিজ্ঞান', icon: '⚛️', count: '৭৫০+ MCQ', color: 'from-blue-500/10 to-indigo-500/10 ring-blue-500/30 text-blue-700 dark:text-blue-300' },
+              { label: 'Chemistry' as const, bn: 'রসায়ন', icon: '🧪', count: '৭২০+ MCQ', color: 'from-emerald-500/10 to-teal-500/10 ring-emerald-500/30 text-emerald-700 dark:text-emerald-300' },
+              { label: 'Higher Math' as const, bn: 'উচ্চতর গণিত', icon: '📐', count: '৬৫০+ MCQ', color: 'from-cyan-500/10 to-blue-500/10 ring-cyan-500/30 text-cyan-700 dark:text-cyan-300' },
+              { label: 'Biology' as const, bn: 'জীববিজ্ঞান', icon: '🧬', count: '৮৫০+ MCQ', color: 'from-rose-500/10 to-pink-500/10 ring-rose-500/30 text-rose-700 dark:text-rose-300' },
+              { label: 'English' as const, bn: 'ইংরেজি', icon: '🇬🇧', count: '৩৫০+ MCQ', color: 'from-amber-500/10 to-orange-500/10 ring-amber-500/30 text-amber-700 dark:text-amber-300' },
+              { label: 'GK' as const, bn: 'সাধারণ জ্ঞান', icon: '🇧🇩', count: '৩০০+ MCQ', color: 'from-teal-500/10 to-emerald-500/10 ring-teal-500/30 text-teal-700 dark:text-teal-300' },
+            ].map((s) => (
+              <button
+                key={s.label}
+                onClick={() => handleDeckNavigate('exam', s.label)}
+                className={`p-3.5 rounded-2xl bg-gradient-to-br ${s.color} ring-1 text-left transition-all hover:scale-[1.02] active:scale-95 cursor-pointer shadow-xs`}
+              >
+                <div className="text-2xl mb-2">{s.icon}</div>
+                <div className="text-xs font-black truncate">{s.bn}</div>
+                <div className="text-[10px] opacity-80 font-mono mt-0.5">{s.count}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          6. VAULT SHORTCUTS (When 'vault' is selected)
+         ========================================================================= */}
+      {(activeSegment === 'vault' || activeSegment === 'all') && (
+        <div className="rounded-3xl backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80 p-5 shadow-sm">
+          <div className="flex items-center justify-between gap-2 mb-3">
             <div>
-              <h3 className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1">
-                {totalFlashcards} স্মার্ট ফ্ল্যাশকার্ড
-                <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-              </h3>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                এক্টিভ রিকল ও স্পেসড রিপিটেশন
+              <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <Zap className="w-4 h-4 text-amber-500" />
+                <span>১-সেকেন্ড ফর্মুলা ও নো-ক্যালকুলেটর ভল্ট শর্টকাট</span>
+              </h2>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                ক্যালকুলেটর ছাড়া দশমিকের ভাগ ও অনুপাত ট্রিকস
               </p>
+            </div>
+            <button
+              onClick={() => handleDeckNavigate('vault')}
+              className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs flex items-center gap-1 active:scale-95 transition-all cursor-pointer"
+            >
+              <span>ভল্ট এক্সপ্লোর</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div 
+              onClick={() => handleDeckNavigate('vault', 'Higher Math')}
+              className="p-3.5 rounded-2xl bg-amber-500/10 ring-1 ring-amber-500/30 hover:ring-amber-500 cursor-pointer transition-all active:scale-95"
+            >
+              <div className="text-xs font-black text-amber-900 dark:text-amber-200 mb-1">
+                ⚡ নো-ক্যালকুলেটর স্পিড ম্যাথ
+              </div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-300">
+                1/7 = 0.1428, 1/8 = 0.125, √2 = 1.414, √3 = 1.732 দশমিক টেবিল।
+              </div>
+            </div>
+
+            <div 
+              onClick={() => handleDeckNavigate('vault', 'Physics')}
+              className="p-3.5 rounded-2xl bg-cyan-500/10 ring-1 ring-cyan-500/30 hover:ring-cyan-500 cursor-pointer transition-all active:scale-95"
+            >
+              <div className="text-xs font-black text-cyan-900 dark:text-cyan-200 mb-1">
+                ⚛️ ফিজিক্স স্প্রিং ও সমান্তরাল অনুপাত
+              </div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-300">
+                তুল্য রোধ, ধারকত্ব এবং SHM দোলনকালের 1-সেকেন্ড স্পিড ফর্মুলা।
+              </div>
+            </div>
+
+            <div 
+              onClick={() => handleDeckNavigate('vault', 'Chemistry')}
+              className="p-3.5 rounded-2xl bg-emerald-500/10 ring-1 ring-emerald-500/30 hover:ring-emerald-500 cursor-pointer transition-all active:scale-95"
+            >
+              <div className="text-xs font-black text-emerald-900 dark:text-emerald-200 mb-1">
+                🧪 কেমিস্ট্রি pH ও সংকরায়ন ট্রিকস
+              </div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-300">
+                লগ টেবিল ছাড়া 3 সেকেন্ডে তীব্র ও মৃদু এসিড-ক্ষারকের pH নির্ণয়।
+              </div>
             </div>
           </div>
         </div>
+      )}
 
-        {/* Shortcut 3: Real Test (-0.25) */}
-        <div 
-          onClick={() => handleDeckNavigate('exam', 'All')}
-          className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 hover:border-rose-500/50 shadow-xs cursor-pointer transition-all hover:-translate-y-0.5 group"
-        >
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 group-hover:bg-rose-600 group-hover:text-white transition-colors">
-              <Clock className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1">
-                {totalQuizzes}টি কোর টেস্ট (-০.২৫)
-                <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-              </h3>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                ৪৫ সেকেন্ড টাইমার ও ট্র্যাপ ডিফেন্স
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

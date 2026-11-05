@@ -63,6 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'week_01', label: '1️⃣ Week 01' },
     { id: 'week_02', label: '2️⃣ Week 02' },
     { id: 'week_03', label: '3️⃣ Week 03' },
+    { id: 'week_04', label: '4️⃣ Week 04' },
     { id: 'week_05', label: '5️⃣ Week 05' },
     { id: 'week_06', label: '6️⃣ Week 06' },
     { id: 'week_07', label: '7️⃣ Week 07' },
@@ -87,11 +88,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       ];
 
   // Condition: Only show Weekly filter and Subject pills when inside "প্রশ্নব্যাংক" or "ডেক" (or "slides")
-  // Automatically hidden inside "প্রেডিকশন", "ভল্ট", "অ্যানালিটিক্স"
   const showFilters = currentMode === 'exam' || currentMode === 'decks' || currentMode === 'slides';
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-none md:backdrop-blur-md bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors duration-200">
+    <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-200">
       
       {/* 1. TOP BAR (COMPACT H-14, SINGLE-LINE ALIGNED) */}
       <div className="max-w-6xl mx-auto px-3 sm:px-4 h-14 flex items-center justify-between gap-1.5 sm:gap-2">
@@ -99,19 +99,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Logo & 2026 Badge (Clicking opens Home Decks) */}
         <div 
           onClick={() => onSelectMode('decks')}
-          className="flex items-center gap-1.5 cursor-pointer group select-none shrink-0"
+          className="flex items-center gap-2 cursor-pointer group select-none shrink-0"
         >
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-[#056839] via-[#00B09B] to-[#96C93D] p-0.5 shadow-sm group-hover:scale-105 transition-transform shrink-0">
-            <div className="w-full h-full bg-white dark:bg-slate-900 rounded-[9px] sm:rounded-[10px] flex items-center justify-center">
-              <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#056839] dark:text-emerald-400" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#056839] via-[#00B09B] to-[#96C93D] p-0.5 shadow-sm shadow-emerald-600/20 group-hover:scale-105 transition-transform shrink-0">
+            <div className="w-full h-full bg-white dark:bg-slate-900 rounded-[10px] flex items-center justify-center">
+              <GraduationCap className="w-4 h-4 text-[#056839] dark:text-emerald-400" />
             </div>
           </div>
           
-          <div className="flex items-center gap-1">
-            <span className="text-xs sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white font-['Outfit'] whitespace-nowrap">
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white font-['Outfit'] whitespace-nowrap">
               Admission Crack
             </span>
-            <span className="hidden sm:inline-block px-1.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-black bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 font-['Outfit']">
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-['Outfit']">
               2026
             </span>
           </div>
@@ -119,31 +119,31 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Center: Track Switcher & Predictor Vault Pill */}
         <div className="flex items-center gap-1.5 shrink-0">
-          {/* Track Switcher */}
-          <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-0.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs">
+          {/* Active Stream Switcher */}
+          <div className="flex items-center bg-slate-100/90 dark:bg-slate-800/90 p-1 rounded-2xl border border-slate-200/90 dark:border-slate-700/80 shadow-xs">
             <button
               onClick={() => onSelectTrack('varsity')}
-              className={`px-2 sm:px-2.5 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                 activeTrack === 'varsity'
-                  ? 'bg-blue-600 text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm shadow-emerald-600/30 ring-1 ring-emerald-400/40'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
-              title="ভার্সিটি 'ক' ট্র্যাক"
+              title="ভার্সিটি 'ক' ট্র্যাক (DU 'Ka')"
             >
-              <span>🎯</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
               <span className="hidden sm:inline">ভার্সিটি 'ক'</span>
               <span className="sm:hidden text-[11px]">ভার্সিটি</span>
             </button>
             <button
               onClick={() => onSelectTrack('medical')}
-              className={`px-2 sm:px-2.5 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                 activeTrack === 'medical'
-                  ? 'bg-rose-600 text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white shadow-sm shadow-rose-600/30 ring-1 ring-rose-400/40'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
-              title="মেডিকেল ট্র্যাক"
+              title="মেডিকেল ট্র্যাক (MAT)"
             >
-              <span>🩺</span>
+              <span className="w-2 h-2 rounded-full bg-rose-300 animate-pulse" />
               <span className="hidden sm:inline">মেডিকেল</span>
               <span className="sm:hidden text-[11px]">মেডি</span>
             </button>
@@ -152,10 +152,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Quick Predictor Vault Button */}
           <button
             onClick={() => onSelectMode('predictor')}
-            className={`hidden md:flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+            className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 ${
               currentMode === 'predictor'
                 ? 'bg-amber-500 text-white border-amber-600 shadow-sm'
-                : 'bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800/60 hover:bg-amber-100'
+                : 'bg-amber-500/10 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300/60 dark:border-amber-800/60 hover:bg-amber-500/20'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 fill-current" />
@@ -169,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Theme Toggle Button */}
           <button
             onClick={onToggleTheme}
-            className="p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:text-slate-900 dark:hover:text-amber-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm active:scale-95 cursor-pointer"
+            className="p-2 rounded-xl bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-amber-400 hover:text-slate-900 dark:hover:text-amber-300 ring-1 ring-slate-200/80 dark:ring-slate-700 transition-all shadow-xs active:scale-95 cursor-pointer"
             title={theme === 'dark' ? 'লাইট মোড চালু করুন' : 'ডার্ক মোড চালু করুন'}
             aria-label="Toggle Theme"
           >
@@ -185,18 +185,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-1 p-1 pr-2 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-[#056839] dark:hover:border-emerald-500/50 transition-all shadow-sm active:scale-95 cursor-pointer"
+                className="flex items-center gap-1.5 p-1 pr-2 rounded-full bg-slate-100/90 dark:bg-slate-800/90 ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-[#056839] dark:hover:ring-emerald-500/50 transition-all shadow-xs active:scale-95 cursor-pointer"
                 title="প্রোফাইল মেনু"
               >
                 <div className="relative">
                   <img
                     src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email || 'user')}`}
                     alt={user.name}
-                    className="w-6 h-6 rounded-full object-cover ring-1 ring-[#056839]"
+                    className="w-7 h-7 rounded-full object-cover ring-1 ring-[#056839]"
                   />
-                  <span className="absolute bottom-0 right-0 w-1.5 h-1.5 rounded-full bg-emerald-500 ring-1 ring-white dark:ring-slate-900" />
+                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white dark:ring-slate-900" />
                 </div>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[55px] sm:max-w-[70px] truncate">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[65px] sm:max-w-[85px] truncate">
                   {user.name.split(' ')[0] || 'শিক্ষার্থী'}
                 </span>
                 {user.streakDays > 0 && (
@@ -209,7 +209,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Clean Sign Out Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-3 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute right-0 top-full mt-2 w-64 backdrop-blur-2xl bg-white/95 dark:bg-slate-900/95 rounded-2xl shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 p-3 z-50 animate-in fade-in zoom-in-95 duration-150">
                   <div className="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-800/60 rounded-xl mb-2 border border-slate-200/60 dark:border-slate-700/60">
                     <img
                       src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email || 'user')}`}
@@ -262,7 +262,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="py-1 px-2.5 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white text-xs font-bold shadow-sm flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
+              className="py-1 px-3 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 ring-1 ring-slate-200/90 dark:ring-slate-700 text-slate-800 dark:text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
               title="Google দিয়ে সাইন ইন করুন"
             >
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
@@ -280,8 +280,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* 2. LEVEL 1: WEEK SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ডেক") */}
       {showFilters && (
-        <div className="bg-slate-50 dark:bg-slate-900/90 border-t border-b border-slate-200 dark:border-slate-800 animate-in fade-in duration-150">
-          <div className="max-w-6xl mx-auto px-3 py-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <div className="backdrop-blur-md bg-slate-50/80 dark:bg-slate-900/80 border-t border-b border-slate-200/80 dark:border-slate-800/80 animate-in fade-in duration-150">
+          <div className="max-w-6xl mx-auto px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider shrink-0 mr-1">
               সপ্তাহ:
             </span>
@@ -291,10 +291,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={w.id}
                   onClick={() => onSelectWeek(w.id)}
-                  className={`px-3 py-1 text-xs font-bold rounded-full transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`px-3 py-1 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer active:scale-95 ${
                     isActive
-                      ? 'bg-[#056839] text-white shadow-sm'
-                      : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                      ? 'bg-[#056839] text-white shadow-xs'
+                      : 'bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 ring-1 ring-slate-200/80 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
                   }`}
                 >
                   {w.label}
@@ -307,8 +307,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* 3. SUBJECT SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ডেক") */}
       {showFilters && (
-        <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 animate-in fade-in duration-150">
-          <div className="max-w-6xl mx-auto px-3 py-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <div className="backdrop-blur-md bg-white/70 dark:bg-slate-950/70 border-b border-slate-200/80 dark:border-slate-800/80 animate-in fade-in duration-150">
+          <div className="max-w-6xl mx-auto px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider shrink-0 mr-1">
               বিষয়:
             </span>
@@ -318,10 +318,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={subj.label}
                   onClick={() => onSelectSubject(subj.label)}
-                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-all whitespace-nowrap shrink-0 flex items-center gap-1 cursor-pointer ${
+                  className={`px-3 py-1 text-xs font-semibold rounded-xl transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                     isActive
-                      ? 'bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/40 font-bold'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 hover:bg-slate-200/60 dark:hover:bg-slate-700'
+                      ? 'bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 ring-1 ring-emerald-500/40 font-bold shadow-xs'
+                      : 'bg-slate-100/70 dark:bg-slate-800/70 text-slate-600 dark:text-slate-400 ring-1 ring-slate-200/80 dark:ring-slate-700 hover:bg-slate-200/60 dark:hover:bg-slate-700'
                   }`}
                 >
                   <span>{subj.icon}</span>

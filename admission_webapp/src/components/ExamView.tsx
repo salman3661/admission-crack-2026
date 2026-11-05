@@ -11,10 +11,8 @@ import {
   Clock, 
   ChevronRight, 
   ShieldAlert, 
-  Play,
   HelpCircle,
   Zap,
-  Sparkles,
   Check
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -162,11 +160,15 @@ export const ExamView: React.FC<ExamViewProps> = ({
   // -------------------------------------------------------------
   // START SESSIONS
   // -------------------------------------------------------------
-  const handleStartSession = (count: number) => {
+  const handleStartSession = (count: number, modeOverride?: 'mastery' | 'timed') => {
+    const activeMode = modeOverride || practiceMode;
+    if (modeOverride) {
+      setPracticeMode(modeOverride);
+    }
     const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
     const chosen = shuffled.slice(0, Math.min(count, shuffled.length));
 
-    if (practiceMode === 'mastery') {
+    if (activeMode === 'mastery') {
       const pool: MasteryQueueItem[] = chosen.map((q) => ({
         question: q,
         consecutiveCorrect: 0,
@@ -465,123 +467,214 @@ export const ExamView: React.FC<ExamViewProps> = ({
   ]);
 
   // -------------------------------------------------------------
-  // SCREEN 1: START SCREEN (MODE PICKER & QUESTION COUNT)
+  // SCREEN 1: START SCREEN (MODERN EDTECH EXAM ROUTINE CARDS)
   // -------------------------------------------------------------
   if (!sessionStarted) {
     const totalAvail = availableQuestions.length;
+
+    const getSubjectIcon = (subj: SubjectType) => {
+      switch (subj) {
+        case 'Physics': return '⚛️';
+        case 'Chemistry': return '🧪';
+        case 'Higher Math': return '📐';
+        case 'Biology': return '🧬';
+        case 'English': return '🇬🇧';
+        case 'GK': return '🇧🇩';
+        default: return '🎯';
+      }
+    };
+
+    const getWeekDisplay = (w: WeekFilterType) => {
+      if (w === 'all') return 'All-Week';
+      return w.replace('_', '-').toUpperCase();
+    };
+
+    const routineSlots = [
+      {
+        id: 'slot_01',
+        title: `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject} Slot-01: হাই-ইল্ড ক্যাপসুল`,
+        badge: '✨ 80/20 High Yield',
+        badgeColor: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-emerald-500/30',
+        duration: 15,
+        qCount: Math.min(12, totalAvail),
+        marks: Math.min(12, totalAvail),
+        desc: 'সবচেয়ে বেশি রিপিট হওয়া ১২টি কনসেপ্ট ও স্ট্যান্ডার্ড ঢাবি/মেডিকেল প্রশ্ন।'
+      },
+      {
+        id: 'slot_02',
+        title: `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject} Slot-02: ডিইউ রিপিট ড্রিল`,
+        badge: '🔥 DU Repeat',
+        badgeColor: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 ring-blue-500/30',
+        duration: 25,
+        qCount: Math.min(25, totalAvail),
+        marks: Math.min(25, totalAvail),
+        desc: 'বিগত বছরের প্রশ্নভিত্তিক ২৫টি এক্সপেক্টেড ট্র্যাপ ও গতি অনুশীলনী।'
+      },
+      {
+        id: 'slot_03',
+        title: `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject} Slot-03: স্পিড অ্যান্ড ট্র্যাপ মক`,
+        badge: '⚡ Trap Special',
+        badgeColor: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 ring-amber-500/30',
+        duration: 45,
+        qCount: Math.min(50, totalAvail),
+        marks: Math.min(50, totalAvail),
+        desc: 'নেগেটিভ মার্কিং এড়িয়ে ৫০টি প্রশ্নে সম্পূর্ণ পেপারের গতি ও দক্ষতা যাচাই।'
+      },
+    ].filter(slot => slot.qCount > 0);
+
     return (
-      <div className="max-w-2xl mx-auto py-5 px-3 sm:px-4 text-center">
-        {/* Animated Badge Icon */}
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#00B09B] via-[#056839] to-[#96C93D] p-0.5 mx-auto mb-3 shadow-md shadow-[#056839]/20">
-          <div className="w-full h-full bg-white dark:bg-zinc-900 rounded-[14px] flex items-center justify-center">
-            {practiceMode === 'mastery' ? (
-              <RotateCcw className="w-6 h-6 text-[#056839] dark:text-emerald-400 animate-spin-slow" />
-            ) : (
-              <Timer className="w-6 h-6 text-[#056839] dark:text-emerald-400" />
-            )}
+      <div className="max-w-4xl mx-auto py-4 sm:py-6 px-3 sm:px-4 space-y-5">
+        
+        {/* Header Title with Glass Glow */}
+        <div className="text-center max-w-xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/20 text-xs font-bold mb-2">
+            <span>{getSubjectIcon(selectedSubject)}</span>
+            <span>{selectedSubject === 'All' ? 'সকল বিষয়' : selectedSubject} প্রশ্নব্যাংক</span>
+          </div>
+
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+            বাংলাদেশ এডমিশন কোর প্রশ্নব্যাংক ও স্লট রুটিন
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            বিগত ১৫–২০ বছরের ঢাবি ও মেডিকেল মূল প্রশ্ন, নো-ক্যালকুলেটর শর্টকাট এবং ট্র্যাপ অ্যানালাইসিস।
+          </p>
+
+          {/* Selected Scope Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-1.5 mt-3">
+            <span className="px-3 py-1 rounded-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-xs">
+              সপ্তাহ: <strong className="text-emerald-600 dark:text-emerald-400">{getWeekDisplay(selectedWeek)}</strong>
+            </span>
+            <span className="px-3 py-1 rounded-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-xs">
+              বিষয়: <strong className="text-cyan-600 dark:text-cyan-400">{selectedSubject}</strong>
+            </span>
+            <span className="px-3 py-1 rounded-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800 text-xs text-slate-700 dark:text-slate-300 font-semibold shadow-xs">
+              উপলব্ধ প্রশ্ন: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
+            </span>
           </div>
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
-          বাংলাদেশ এডমিশন কোর প্রশ্নব্যাংক (DU, Medical, Varsity PYQ)
-        </h2>
-        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-lg mx-auto">
-          বিগত ১৫-২০ বছরের ঢাবি, মেডিকেল ও ভার্সিটির পুনরাবৃত্ত প্রশ্ন এবং পাঠ্যবইয়ের হাই-ইল্ড মান।
-        </p>
+        {/* =========================================================================
+            MODERN EDTECH EXAM ROUTINE CARDS GRID
+           ========================================================================= */}
+        <div className="space-y-3.5">
+          <div className="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 px-1">
+            <span>🗓️ সিলেক্টেড উইক রুটিন স্লট</span>
+            <span>{totalAvail}টি প্রশ্ন থেকে তৈরি</span>
+          </div>
 
-        {/* Selected Scope Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 my-3.5">
-          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-xs">
-            সপ্তাহ: <strong className="text-[#056839] dark:text-emerald-400">{selectedWeek === 'all' ? 'All Weeks' : selectedWeek.toUpperCase()}</strong>
-          </span>
-          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-xs">
-            বিষয়: <strong className="text-cyan-600 dark:text-cyan-400">{selectedSubject}</strong>
-          </span>
-          <span className="px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 font-semibold shadow-xs">
-            উপলব্ধ প্রশ্ন: <strong className="text-amber-600 dark:text-amber-400">{totalAvail}টি</strong>
-          </span>
-        </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            {routineSlots.map((slot) => (
+              <div 
+                key={slot.id}
+                className="group rounded-3xl backdrop-blur-xl bg-white/85 dark:bg-slate-900/85 ring-1 ring-slate-200/80 dark:ring-slate-800/80 hover:ring-emerald-500/50 dark:hover:ring-emerald-500/50 shadow-sm p-4 sm:p-5 flex flex-col justify-between transition-all duration-200"
+              >
+                <div>
+                  {/* Card Header with Status Chip */}
+                  <div className="flex items-center justify-between gap-2 mb-2.5">
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ring-1 ${slot.badgeColor}`}>
+                      {slot.badge}
+                    </span>
+                    <span className="text-[11px] font-mono text-slate-500 flex items-center gap-1">
+                      ⏱️ {slot.duration} মি.
+                    </span>
+                  </div>
 
-        {/* MODE SELECTOR TOGGLE */}
-        <div className="bg-zinc-100 dark:bg-zinc-800/80 p-1.5 rounded-2xl max-w-md mx-auto mb-5 border border-zinc-200 dark:border-zinc-700/80 grid grid-cols-2 gap-1 shadow-inner">
-          <button
-            onClick={() => setPracticeMode('mastery')}
-            className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
-              practiceMode === 'mastery'
-                ? 'bg-[#056839] text-white shadow-md'
-                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-            }`}
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>বারবার প্র্যাকটিস (Mastery)</span>
-          </button>
-          <button
-            onClick={() => setPracticeMode('timed')}
-            className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all ${
-              practiceMode === 'timed'
-                ? 'bg-[#056839] text-white shadow-md'
-                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-            }`}
-          >
-            <Timer className="w-4 h-4" />
-            <span>টাইমড টেস্ট (৪৫ সে)</span>
-          </button>
-        </div>
+                  {/* Slot Title */}
+                  <div className="flex items-start gap-2 mb-2">
+                    <span className="text-xl mt-0.5">{getSubjectIcon(selectedSubject)}</span>
+                    <h3 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
+                      {slot.title}
+                    </h3>
+                  </div>
 
-        {/* MODE HIGHLIGHT NOTE */}
-        <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-2xl p-3.5 max-w-md mx-auto mb-5 text-left text-xs leading-relaxed">
-          {practiceMode === 'mastery' ? (
-            <div className="flex items-start gap-2.5 text-emerald-900 dark:text-emerald-200">
-              <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
-              <div>
-                <strong className="block font-bold mb-0.5">মাস্টারি রি-টেস্ট ড্রিল রুল:</strong>
-                যেকোনো প্রশ্ন ভুল হলে বা <kbd className="px-1.5 py-0.2 rounded bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 font-mono font-bold">Unsure</kbd> চাপলে সেটি কিউতে থাকবে। পরপর <strong>২ বার সঠিক</strong> উত্তর না দেওয়া পর্যন্ত প্রশ্নটি ঘুরতে থাকবে।
+                  {/* Clean Metadata Row with Icons */}
+                  <div className="flex items-center gap-2 text-[11px] font-medium text-slate-500 dark:text-slate-400 py-2 border-y border-slate-100 dark:border-slate-800/80 my-2">
+                    <span className="flex items-center gap-1">
+                      ⏱️ সময় ({slot.duration} মি.)
+                    </span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1">
+                      📝 {slot.qCount}টি প্রশ্ন
+                    </span>
+                    <span>•</span>
+                    <span className="flex items-center gap-1">
+                      🎯 {slot.marks} মার্কস
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+                    {slot.desc}
+                  </p>
+                </div>
+
+                {/* Dual Call to Action Buttons */}
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+                  <button
+                    onClick={() => handleStartSession(slot.qCount, 'mastery')}
+                    className="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-all flex items-center justify-center gap-1 active:scale-95 cursor-pointer"
+                    title="বারবার প্র্যাকটিস ড্রিল (পরপর ২ বার সঠিক = মাস্টারড)"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>প্র্যাকটিস শুরু</span>
+                  </button>
+
+                  <button
+                    onClick={() => handleStartSession(slot.qCount, 'timed')}
+                    className="py-2.5 px-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold ring-1 ring-slate-200 dark:ring-slate-700 transition-all flex items-center justify-center gap-1 active:scale-95 cursor-pointer"
+                    title="৪৫ সেকেন্ডের টাইমারসহ টাইমড এক্সাম"
+                  >
+                    <Timer className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>টাইমড টেস্ট</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="flex items-start gap-2.5 text-zinc-700 dark:text-zinc-300">
-              <Clock className="w-4 h-4 text-[#056839] dark:text-emerald-400 mt-0.5 shrink-0" />
-              <div>
-                <strong className="block font-bold mb-0.5">ঢাবি/মেডিকেল টাইমড এক্সাম রুল:</strong>
-                প্রতি প্রশ্নে ৪৫ সেকেন্ড সময়, সঠিক উত্তরে +১.০ এবং ভুল উত্তরে -০.২৫ নেগেটিভ মার্কিং। শেষে পূর্ণাঙ্গ ট্র্যাপ ডিফেন্স রিপোর্ট।
-              </div>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
 
-        {/* Question Count Selection Card */}
-        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 max-w-md mx-auto mb-5 shadow-xs">
-          <label className="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2.5">
-            অনুশীলনের জন্য প্রশ্নের সংখ্যা নির্বাচন করুন
-          </label>
-          <div className="grid grid-cols-4 gap-2">
+        {/* Quick Custom Count Launcher */}
+        <div className="p-4 sm:p-5 rounded-3xl backdrop-blur-xl bg-white/70 dark:bg-slate-900/70 ring-1 ring-slate-200/80 dark:ring-slate-800/80 shadow-xs max-w-xl mx-auto text-center space-y-3">
+          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            কাস্টম প্রশ্নের সংখ্যা নির্বাচন
+          </div>
+          <div className="flex items-center justify-center gap-2 flex-wrap">
             {[10, 25, 50, Math.min(100, totalAvail), totalAvail]
               .filter((v, i, a) => a.indexOf(v) === i && v <= totalAvail && v > 0)
               .map((cnt) => (
                 <button
                   key={cnt}
                   onClick={() => setQuestionCount(cnt)}
-                  className={`py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all ${
+                  className={`py-1.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     questionCount === cnt
-                      ? 'bg-[#056839] text-white border-[#056839] shadow-xs scale-102'
-                      : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? 'bg-[#056839] text-white shadow-xs scale-105'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >
                   {cnt === totalAvail ? `সকল (${cnt})` : `${cnt} টি`}
                 </button>
               ))}
           </div>
+
+          <div className="flex items-center justify-center gap-2 pt-2">
+            <button
+              onClick={() => handleStartSession(questionCount, 'mastery')}
+              disabled={totalAvail === 0}
+              className="py-2.5 px-5 rounded-2xl bg-[#056839] hover:bg-[#044e2b] text-white text-xs font-bold shadow-md shadow-[#056839]/20 transition-all flex items-center gap-1.5 active:scale-95 disabled:opacity-40 cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>মাস্টারি ড্রিল ({Math.min(questionCount, totalAvail)}টি)</span>
+            </button>
+            <button
+              onClick={() => handleStartSession(questionCount, 'timed')}
+              disabled={totalAvail === 0}
+              className="py-2.5 px-5 rounded-2xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 text-white text-xs font-bold shadow-xs transition-all flex items-center gap-1.5 active:scale-95 disabled:opacity-40 cursor-pointer"
+            >
+              <Timer className="w-3.5 h-3.5 text-amber-400" />
+              <span>টাইমড টেস্ট ({Math.min(questionCount, totalAvail)}টি)</span>
+            </button>
+          </div>
         </div>
 
-        {/* Launch Button */}
-        <button
-          onClick={() => handleStartSession(questionCount)}
-          disabled={totalAvail === 0}
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#056839]/25 transition-all disabled:opacity-40 active:scale-95 cursor-pointer"
-        >
-          <Play className="w-4 h-4 fill-current" />
-          <span>{practiceMode === 'mastery' ? 'বারবার প্র্যাকটিস শুরু করুন' : 'টাইমড টেস্ট শুরু করুন'} ({Math.min(questionCount, totalAvail)}টি MCQ)</span>
-        </button>
       </div>
     );
   }

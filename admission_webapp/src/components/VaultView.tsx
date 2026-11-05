@@ -676,61 +676,61 @@ export const VaultView: React.FC<VaultViewProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">ত্রিকোণমিতিক সিরিজ</span>
+                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">ত্রিকোণমিতিক সিরিজ & নেস্টেড কোসাইন</span>
                   <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড রুল</span>
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ = \\frac{1}{8}$<br />$\\sin 20^\\circ \\sin 40^\\circ \\sin 80^\\circ = \\frac{\\sqrt{3}}{8}$<br />$\\tan 20^\\circ \\tan 40^\\circ \\tan 80^\\circ = \\sqrt{3}$" />
+                  <MathText content="$\\cos 20^\\circ \\cos 40^\\circ \\cos 80^\\circ = \\frac{1}{8}$<br />$\\tan 20^\\circ \\tan 40^\\circ \\tan 80^\\circ = \\sqrt{3}$<br />$\\sqrt{2+\\sqrt{2+\\dots+\\sqrt{2(1+\\cos\\theta)}}} = 2\\cos\\left(\\frac{\\theta}{2^n}\\right)$" />
                 </div>
               </div>
 
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">স্প্রিং কাটার হ্যাক</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">দোলনকাল অনুপাত</span>
+                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">সোয়ার্জশিল্ড কৃষ্ণগহ্বর ব্যাসার্ধ</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">সৌরভর শর্টকাট</span>
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="স্প্রিং কেটে $n$ টুকরো করলে:<br />$k' = n k$<br />$T' = \\frac{T}{\\sqrt{n}}$ (৪ টুকরোয় $T/2$)" />
+                  <MathText content="$R_s \\approx 3 \\times \\frac{\\text{নক্ষত্রের ভর}}{2 \\times 10^{30}}\\text{ km}$<br />$9 \\times 10^{45}\\text{ kg} \\implies 1.35 \\times 10^{19}\\text{ m}$<br />চন্দ্রশেখর সীমা $= 1.4 M_\\odot$, ব্ল্যাক হোল $> 3 M_\\odot$" />
                 </div>
               </div>
 
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">নার্নস্ট ড্যানিয়েল কোষ</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১০x পরিবর্তন</span>
+                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">এন্ট্রপি ও রুদ্ধতাপীয় অনুপাত</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">মান ও চিহ্ন</span>
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$[\\text{Zn}^{2+}]$ ১০ গুণ হ্রাস পেলে:<br />$\\Delta E = +\\frac{0.0592}{2} = +0.0296\\text{ V}$<br />$E_{\\text{cell}} = 1.10 + 0.0296 = 1.1296\\text{ V}$" />
+                  <MathText content="$\\sqrt{2}T$ থেকে $T$ এ নামলে: $\\Delta S = -0.3465 ms$<br />$T$ থেকে $\\sqrt{2}T$ এ উঠলে: $\\Delta S = +0.3465 ms$<br />রুদ্ধতাপীয়: $T_2 = T_1(V_1/V_2)^{\\gamma-1}, P_2 = P_1(V_1/V_2)^\\gamma$" />
                 </div>
               </div>
 
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">দ্বিপদী x-বর্জিত পদ</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">ঘাত শর্টকাট</span>
+                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">বাস্তব গ্যাস সংকোচনশীলতা (Z)</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">চাপের প্রভাব</span>
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="$(x^p + k/x^q)^n$ এ পদ অবস্থান:<br />$r = \\frac{np}{p + q}$<br />পদটি হবে $(r+1)$ তম পদ।" />
+                  <MathText content="নিম্নচাপে: $Z = 1 - \\frac{a}{VRT}$ ($Z < 1$)<br />উচ্চচাপে: $Z = 1 + \\frac{Pb}{RT}$ ($Z > 1$)<br />$\\text{H}_2, \\text{He}$ এর ক্ষেত্রে সর্বদা $Z > 1$" />
                 </div>
               </div>
 
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">তেজস্ক্রিয় ক্ষয় বাইনারি</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">পাওয়ার হিসাব</span>
+                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">গ্রাহামের ব্যাপন ও ধোঁয়ার অবস্থান</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">গতি অনুপাত</span>
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="১৫/১৬ অংশ ক্ষয়প্রাপ্ত $\\implies$<br />অবশিষ্ট $\\frac{1}{16} = (1/2)^4$<br />মোট সময় $t = 4 \\times T_{1/2}$" />
+                  <MathText content="$\\frac{r_{\\text{H}_2}}{r_{\\text{HC}}} = \\sqrt{M/2} = \\sqrt{14} \\implies \\text{C}_2\\text{H}_4 (n=2)$<br />$\\sqrt{21} \\implies \\text{C}_3\\text{H}_6 (n=3)$<br />$\\text{NH}_3 + \\text{HCl}$: ধোঁয়া তৈরি হয় $\\text{HCl}$ এর কাছে!" />
                 </div>
               </div>
 
               <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-amber-200/60 dark:border-amber-900/30 shadow-xs">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">আপেক্ষিকতা বেগ মান</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">স্থির মান</span>
+                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">রেচন ও পরিপাক গুরুত্বপূর্ণ মান</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">MAT স্পেশাল</span>
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
-                  <MathText content="ভর দ্বিগুণ ($m = 2m_0$) বা দৈর্ঘ্য অর্ধেক ($L = L_0/2$) হলে কণার বেগ:<br />$v = \\frac{\\sqrt{3}}{2}c \\approx 0.866c$" />
+                  <MathText content="GFR $= 125\\text{ mL/min}$ | রক্ত সঞ্চালন $= 1200\\text{ mL/min}$<br />কর্টিক্যাল নেফ্রন $= 85\\%$ | পরিস্রাবণ চাপ $= 25\\text{ mmHg}$<br />খাদ্যসার শোষণ $= $ জেজুনাম (৯০%) | ইউরিয়া চক্র $= $ অরনিথিন চক্র" />
                 </div>
               </div>
             </div>
