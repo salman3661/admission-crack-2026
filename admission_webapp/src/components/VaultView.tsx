@@ -56,11 +56,16 @@ export const VaultView: React.FC<VaultViewProps> = ({
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandedChapters, setExpandedChapters] = useState<Record<string, boolean>>({});
   const [showQuickTools, setShowQuickTools] = useState(true);
-  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w6_bridge'>('triplets');
+  const [quickToolTab, setQuickToolTab] = useState<'triplets' | 'quick_math' | 'fractions' | 'w6_bridge' | 'w7_matrix'>('w7_matrix');
   const [displayLimit, setDisplayLimit] = useState(20);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const entries: VaultEntry[] = useMemo(() => vault.entries || [], [vault.entries]);
+
+  const totalChaptersCount = useMemo(() => {
+    const set = new Set(entries.map((e) => e.chapter).filter(Boolean));
+    return set.size;
+  }, [entries]);
 
   const copyToClipboard = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -219,7 +224,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
                 অ্যাডমিশন ফর্মুলা ও ট্র্যাপ ভল্ট
               </span>
               <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400">
-                {entries.length}টি এন্ট্রি • ২৯টি অধ্যায়
+                {entries.length}টি এন্ট্রি • {totalChaptersCount}টি অধ্যায়
               </span>
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
@@ -449,7 +454,17 @@ export const VaultView: React.FC<VaultViewProps> = ({
                     : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
                 }`}
               >
-                🚀 Week 06 নো-ক্যালকুলেটর ব্রিজ
+                🚀 Week 06 ব্রিজ
+              </button>
+              <button
+                onClick={() => setQuickToolTab('w7_matrix')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${
+                  quickToolTab === 'w7_matrix'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                }`}
+              >
+                👑 Week 07 ট্রাই-স্ট্রিম ব্রিজ
               </button>
             </div>
           </div>
@@ -568,6 +583,70 @@ export const VaultView: React.FC<VaultViewProps> = ({
                 </div>
                 <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
                   <MathText content="ভর দ্বিগুণ ($m = 2m_0$) বা দৈর্ঘ্য অর্ধেক ($L = L_0/2$) হলে কণার বেগ:<br />$v = \\frac{\\sqrt{3}}{2}c \\approx 0.866c$" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {quickToolTab === 'w7_matrix' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400">তড়িৎ প্রাবল্য নাল পয়েন্ট</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">রুট অনুপাত</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$+q_1$ ও $+q_2$ এর শূন্য প্রাবল্য বিন্দু:<br />$x_1 = \\frac{\\sqrt{q_1}}{\\sqrt{q_1} + \\sqrt{q_2}} d$<br />$+4q$ ও $+q$ এর জন্য $x = \\frac{2}{3}d$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-blue-600 dark:text-blue-400">ফটোইলেকট্রন ও eV হ্যাক</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১২৪০০ ফর্মুলা</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$E = \\frac{12400}{\\lambda(\\text{\\AA})}\\text{ eV}$<br />নিবৃত্তি বিভব $V_s$ এর ভোল্ট মান সংখ্যাগতভাবে $K_{\\max}(\\text{eV})$ এর সমান!" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-purple-600 dark:text-purple-400">কার্বোক্যাটায়ন বনাম কার্বানায়ন</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">বিপরীত ক্রম</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="ক্যাটায়ন ও রেডিক্যাল: $3^\\circ > 2^\\circ > 1^\\circ > \\text{CH}_3^+$<br />কার্বানায়ন: $\\text{CH}_3^- > 1^\\circ > 2^\\circ > 3^\\circ$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-amber-600 dark:text-amber-400">ক্যালকুলাস কোসাইন লিমিট</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১ সেকেন্ড হ্যাক</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="$\\lim_{x\\to 0}\\frac{1-\\cos ax}{x^2} = \\frac{a^2}{2}$<br />$\\lim_{x\\to 0}\\frac{\\cos ax - \\cos bx}{x^2} = \\frac{b^2 - a^2}{2}$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-rose-600 dark:text-rose-400">করোটিক স্নায়ুর প্রকৃতি</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">১২ স্নায়ু রুল</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="সংবেদী: ১, ২, ৮<br />মিশ্র: ৫, ৭, ৯, ১০<br />মোটর/চেষ্টিয়: ৩, ৪, ৬, ১১, ১২<br />চোখের পেশি: $[SO_4 LR_6]_3$" />
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-zinc-900 rounded-2xl p-3 border border-emerald-200/60 dark:border-emerald-900/30 shadow-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-xs text-cyan-600 dark:text-cyan-400">রক্তের গ্লুকোজ ও ক্যালসিয়াম</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">হরমোন জোড়</span>
+                </div>
+                <div className="text-[11px] text-zinc-600 dark:text-zinc-400">
+                  <MathText content="গ্লুকোজ কমায়: ইনসুলিন (গ্লাইকোজেনেসিস)<br />গ্লুকোজ বাড়ায়: গ্লুকাগন (গ্লাইকোজেনোলাইসিস)<br />ক্যালসিয়াম বাড়ায়: প্যারাথরমোন (PTH)<br />ক্যালসিয়াম কমায়: ক্যালসিটোনিন" />
                 </div>
               </div>
             </div>
