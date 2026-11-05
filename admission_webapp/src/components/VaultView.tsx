@@ -1,3 +1,12 @@
+/**
+ * VaultView.tsx - Master Admission Formula & Trap Vault
+ * Features:
+ * - Dual Hierarchy: Level 1 (Weekly Selector W1-W7) + Level 2 (Dynamic Subject & Chapter Chips)
+ * - 100% KaTeX Rendering with High-Contrast FormulaBox & copy button
+ * - Segmented Card Types: All, Core Formulas, Speed Hacks, Trap Alerts
+ * - Special Quick Tools responsive Bottom Sheet / Modal (Triplets, Logs, Stoichiometry)
+ */
+
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { 
   Search, 
