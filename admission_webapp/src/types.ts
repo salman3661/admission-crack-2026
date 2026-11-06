@@ -74,6 +74,7 @@ export interface QuizQuestion {
   probability?: string;
   intelligence_type?: string;
   source_book?: string;
+  expected_count?: number | string;
 }
 
 export interface PredictorWrittenProblem {

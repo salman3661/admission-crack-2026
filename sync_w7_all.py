@@ -28,6 +28,7 @@ from curate_w7_vault import get_vault_entries, get_week_07_meta, get_week_07_pre
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 APP_DATA_DIR = os.path.join(BASE_DIR, "admission_webapp", "src", "data")
+SRC_DATA_DIR = os.path.join(BASE_DIR, "src", "data")
 
 def load_json(path):
     if not os.path.exists(path):
@@ -36,6 +37,7 @@ def load_json(path):
         return json.load(f)
 
 def save_json(path, data):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     print(f"Saved: {path}")
@@ -50,7 +52,7 @@ def sync_all():
     var_pred_set, med_pred_set = get_week_07_predictor_sets(written_problems)
 
     # 1. VARSITY BANK
-    for target in [os.path.join(APP_DATA_DIR, "varsity_bank.json"), os.path.join(BASE_DIR, "varsity_bank.json")]:
+    for target in [os.path.join(APP_DATA_DIR, "varsity_bank.json"), os.path.join(SRC_DATA_DIR, "varsity_bank.json"), os.path.join(BASE_DIR, "varsity_bank.json")]:
         data = load_json(target) or []
         # Filter out existing week_07 if any to allow idempotent re-runs
         data = [q for q in data if q.get("week_id") != "week_07"]
@@ -59,27 +61,37 @@ def sync_all():
         print(f"  -> Varsity Bank total items: {len(data)}")
 
     # 2. MEDICAL BANK
-    for target in [os.path.join(APP_DATA_DIR, "medical_bank.json"), os.path.join(BASE_DIR, "medical_bank.json")]:
+    for target in [os.path.join(APP_DATA_DIR, "medical_bank.json"), os.path.join(SRC_DATA_DIR, "medical_bank.json"), os.path.join(BASE_DIR, "medical_bank.json")]:
         data = load_json(target) or []
         data = [q for q in data if q.get("week_id") != "week_07"]
         data.extend(medical_mcqs)
         save_json(target, data)
         print(f"  -> Medical Bank total items: {len(data)}")
 
-    # 3. QUIZZES (Merged pool for Quizzes / Practice)
-    q_targets = [os.path.join(APP_DATA_DIR, "quizzes.json")]
+    # 3. QUIZZES & WEEKLY EXAMS (Merged pool for Quizzes / Practice / Weekly Exams)
+    q_targets = [
+        os.path.join(APP_DATA_DIR, "quizzes.json"),
+        os.path.join(SRC_DATA_DIR, "quizzes.json"),
+        os.path.join(APP_DATA_DIR, "weekly_exams.json"),
+        os.path.join(SRC_DATA_DIR, "weekly_exams.json"),
+    ]
     if os.path.exists(os.path.join(BASE_DIR, "quizzes.json")):
         q_targets.append(os.path.join(BASE_DIR, "quizzes.json"))
     for target in q_targets:
-        data = load_json(target) or []
+        data = load_json(target)
+        if not data and "weekly_exams.json" in target:
+            # Base it on quizzes.json if newly created
+            quiz_src = os.path.join(APP_DATA_DIR, "quizzes.json")
+            data = load_json(quiz_src) or []
+        data = data or []
         data = [q for q in data if q.get("week_id") != "week_07"]
         data.extend(varsity_mcqs)
         data.extend(medical_mcqs)
         save_json(target, data)
-        print(f"  -> Quizzes total items: {len(data)}")
+        print(f"  -> Quizzes/Weekly Exams ({os.path.basename(target)}) total items: {len(data)}")
 
     # 4. QUESTIONS (Merged Master pool)
-    for target in [os.path.join(APP_DATA_DIR, "questions.json"), os.path.join(BASE_DIR, "questions.json")]:
+    for target in [os.path.join(APP_DATA_DIR, "questions.json"), os.path.join(SRC_DATA_DIR, "questions.json"), os.path.join(BASE_DIR, "questions.json")]:
         data = load_json(target) or []
         data = [q for q in data if q.get("week_id") != "week_07"]
         data.extend(varsity_mcqs)
@@ -88,24 +100,25 @@ def sync_all():
         print(f"  -> Questions total items: {len(data)}")
 
     # 5. VAULT
-    vault_target = os.path.join(APP_DATA_DIR, "vault.json")
-    v_data = load_json(vault_target) or {"entries": [], "triplets": [], "quick_math": [], "magic_fractions": []}
-    existing_entries = [e for e in v_data.get("entries", []) if not e.get("id", "").startswith("v_w7_")]
-    existing_entries.extend(vault_entries)
-    v_data["entries"] = existing_entries
-    save_json(vault_target, v_data)
-    print(f"  -> Vault entries total: {len(v_data['entries'])}")
+    # Vault entries are kept intact; only populate if empty or missing w7 entries
+    for vault_target in [os.path.join(APP_DATA_DIR, "vault.json"), os.path.join(SRC_DATA_DIR, "vault.json")]:
+        v_data = load_json(vault_target) or {"entries": [], "triplets": [], "quick_math": [], "magic_fractions": []}
+        has_w7 = any(e.get("id", "").startswith("v_w7_") for e in v_data.get("entries", []))
+        if not has_w7:
+            v_data.setdefault("entries", []).extend(vault_entries)
+            save_json(vault_target, v_data)
+        print(f"  -> Vault entries total: {len(v_data.get('entries', []))}")
 
     # 6. WEEKS
-    weeks_target = os.path.join(APP_DATA_DIR, "weeks.json")
-    weeks_data = load_json(weeks_target) or []
-    weeks_data = [w for w in weeks_data if w.get("id") != "week_07"]
-    weeks_data.append(w7_meta)
-    save_json(weeks_target, weeks_data)
-    print(f"  -> Weeks registered: {[w['id'] for w in weeks_data]}")
+    for weeks_target in [os.path.join(APP_DATA_DIR, "weeks.json"), os.path.join(SRC_DATA_DIR, "weeks.json")]:
+        weeks_data = load_json(weeks_target) or []
+        weeks_data = [w for w in weeks_data if w.get("id") != "week_07"]
+        weeks_data.append(w7_meta)
+        save_json(weeks_target, weeks_data)
+        print(f"  -> Weeks registered: {[w['id'] for w in weeks_data]}")
 
     # 7. PREDICTOR SETS
-    for target in [os.path.join(APP_DATA_DIR, "predictor_sets.json"), os.path.join(BASE_DIR, "predictor_sets.json")]:
+    for target in [os.path.join(APP_DATA_DIR, "predictor_sets.json"), os.path.join(SRC_DATA_DIR, "predictor_sets.json"), os.path.join(BASE_DIR, "predictor_sets.json")]:
         ps_data = load_json(target) or {"varsity_sets": [], "medical_sets": []}
         v_sets = [s for s in ps_data.get("varsity_sets", []) if s.get("id") != "var_pred_set_w07"]
         v_sets.append(var_pred_set)
@@ -115,6 +128,7 @@ def sync_all():
         ps_data["medical_sets"] = m_sets
         save_json(target, ps_data)
         print(f"  -> Predictor Sets: {len(v_sets)} varsity sets, {len(m_sets)} medical sets")
+
 
     print("\n✅ All JSON stores successfully synchronized for Week 07!")
 

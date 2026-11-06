@@ -605,10 +605,17 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between gap-3 mb-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20">
-                      প্রশ্ন {currentExamIndex + 1} / {examQuestions.length} • {examQuestions[currentExamIndex].subject}
-                    </span>
+                  <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 shadow-xs font-mono">
+                        প্রশ্ন: {currentExamIndex + 1} / {examQuestions.length} টি • {examQuestions[currentExamIndex].subject}
+                      </span>
+                      {examQuestions[currentExamIndex].expected_count !== undefined && examQuestions[currentExamIndex].expected_count !== null && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                          <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof examQuestions[currentExamIndex].expected_count === 'number' ? `${examQuestions[currentExamIndex].expected_count} বার` : examQuestions[currentExamIndex].expected_count}</span>
+                        </span>
+                      )}
+                    </div>
 
                     <span className="text-amber-500 text-xs font-bold">
                       {'⭐️'.repeat(examQuestions[currentExamIndex].yield_stars || 4)} {examQuestions[currentExamIndex].probability || '95% Yield'}
@@ -1139,6 +1146,11 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         {q.tag && (
                           <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">
                             {q.tag}
+                          </span>
+                        )}
+                        {q.expected_count !== undefined && q.expected_count !== null && (
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                            <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof q.expected_count === 'number' ? `${q.expected_count} বার` : q.expected_count}</span>
                           </span>
                         )}
                       </div>

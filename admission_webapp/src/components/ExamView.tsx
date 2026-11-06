@@ -899,9 +899,9 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 }`}
               >
                 <div className="flex items-start justify-between gap-3 mb-2.5">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
-                      Q{originalIndex + 1}
+                      প্রশ্ন: {originalIndex + 1} / {timedQuestions.length} টি
                     </span>
                     <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${getOriginBadgeStyle(origin)}`}>
                       📍 {origin}
@@ -909,6 +909,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
                     <span className="text-xs font-medium px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
                       {q.subject}
                     </span>
+                    {q.expected_count !== undefined && q.expected_count !== null && (
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                        <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof q.expected_count === 'number' ? `${q.expected_count} বার` : q.expected_count}</span>
+                      </span>
+                    )}
                   </div>
 
                   {isCorrect ? (
@@ -1047,12 +1052,20 @@ export const ExamView: React.FC<ExamViewProps> = ({
           {/* Card Origin & Status Header */}
           <div className="flex items-center justify-between gap-2 mb-2.5">
             <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-xs">
+                প্রশ্ন: {currentQueuePos + 1} / {activeQueueIndices.length} টি
+              </span>
               <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(origin)}`}>
                 📍 {origin}
               </span>
               <span className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 font-medium">
                 {q.subject}
               </span>
+              {q.expected_count !== undefined && q.expected_count !== null && (
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                  <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof q.expected_count === 'number' ? `${q.expected_count} বার` : q.expected_count}</span>
+                </span>
+              )}
               {q.yield_stars && (
                 <span className="text-xs px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 font-bold">
                   {'⭐️'.repeat(q.yield_stars)}
@@ -1244,9 +1257,9 @@ export const ExamView: React.FC<ExamViewProps> = ({
 
       {/* Top Timer & Header */}
       <div className="flex items-center justify-between pb-3 mb-2.5 border-b border-zinc-200/80 dark:border-zinc-800">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-[#056839] dark:text-emerald-400 border border-zinc-200 dark:border-zinc-800 shadow-xs">
-            {timedIndex + 1} / {timedQuestions.length}
+            প্রশ্ন: {timedIndex + 1} / {timedQuestions.length} টি
           </span>
           <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>
             📍 {timedOrigin}
@@ -1254,6 +1267,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
           <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-xs">
             {currentTimedQ.subject}
           </span>
+          {currentTimedQ.expected_count !== undefined && currentTimedQ.expected_count !== null && (
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+              <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof currentTimedQ.expected_count === 'number' ? `${currentTimedQ.expected_count} বার` : currentTimedQ.expected_count}</span>
+            </span>
+          )}
         </div>
 
         {/* 45-Second Timer Pill */}

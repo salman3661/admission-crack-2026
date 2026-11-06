@@ -1149,13 +1149,29 @@ def get_varsity_questions():
     questions.extend(mat_mcqs)
     questions.extend(bio_mcqs)
 
-    # Standardize duplicate aliases
+    # Standardize duplicate aliases and enforce option shuffling via Fisher-Yates
+    import random
     for q in questions:
+        orig_opts = list(q["opts"])
+        orig_ans = q.get("ans", 0)
+        correct_val = orig_opts[orig_ans]
+
+        # Deterministic Fisher-Yates shuffle per question
+        rng = random.Random(f"admission_crack_w07_{q['id']}")
+        shuffled = list(orig_opts)
+        for i in range(len(shuffled) - 1, 0, -1):
+            j = rng.randint(0, i)
+            shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
+
+        new_ans = shuffled.index(correct_val)
+        q["opts"] = shuffled
+        q["ans"] = new_ans
         q["question"] = q["q"]
-        q["options"] = list(q["opts"])
-        q["correct_index"] = q["ans"]
+        q["options"] = list(shuffled)
+        q["correct_index"] = new_ans
         q["explanation"] = q["exp"]
         q["trap"] = q["trap_alert"]
+        q["expected_count"] = q.get("yield_stars", 5)
 
     return questions
 
