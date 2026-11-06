@@ -41,14 +41,22 @@ export interface FlashcardItem {
   deck_id?: string;
   deck_title?: string;
   week_id: string;
+  week?: number;
   subject: string;
+  chapter?: string;
   topic: string;
+  type?: 'core_formula' | 'shortcut' | 'trap' | 'table' | 'macro' | string;
   front: string;
   back: string;
+  formula?: string;
   concept?: string;
   hack?: string;
   trap?: string;
+  headers?: string[];
+  rows?: string[][];
+  tags?: string[];
 }
+
 
 export interface QuizQuestion {
   id: string;

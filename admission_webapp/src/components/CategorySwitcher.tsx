@@ -9,10 +9,11 @@ interface CategorySwitcherProps {
 
 const sequence: { id: AppMode; label: string }[] = [
   { id: 'slides', label: '⚡ কোর ফর্মুলা' },
-  { id: 'flashcards', label: '💡 শর্টকাট ভল্ট' },
-  { id: 'vault', label: '⚠️ ট্র্যাপ ক্যাপসুল' },
+  { id: 'flashcards', label: '🧠 অ্যাক্টিভ রিকল' },
+  { id: 'vault', label: '⚡ শর্টকাট ভল্ট' },
   { id: 'exam', label: '📝 মডেল টেস্ট' },
 ];
+
 
 export const CategorySwitcher: React.FC<CategorySwitcherProps> = ({
   currentMode,

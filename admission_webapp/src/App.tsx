@@ -38,6 +38,7 @@ export function App() {
   const getInitialMode = (): AppMode => {
     try {
       const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'activerecall' || hash === 'active-recall') return 'flashcards';
       const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor'];
       if (validModes.includes(hash as AppMode)) {
         return hash as AppMode;
@@ -67,6 +68,10 @@ export function App() {
     const handlePopState = () => {
       try {
         const hash = window.location.hash.replace('#', '').toLowerCase();
+        if (hash === 'activerecall' || hash === 'active-recall') {
+          setCurrentMode('flashcards');
+          return;
+        }
         const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor'];
         if (validModes.includes(hash as AppMode)) {
           setCurrentMode(hash as AppMode);
@@ -80,6 +85,7 @@ export function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
 
   const [selectedWeek, setSelectedWeek] = useState<WeekFilterType>('all');
   const [selectedSubject, setSelectedSubject] = useState<SubjectType>('All');
@@ -283,9 +289,13 @@ export function App() {
           <FlashcardsView
             flashcards={flashcards}
             selectedWeek={selectedWeek}
+            onSelectWeek={setSelectedWeek}
             selectedSubject={selectedSubject}
+            onSelectSubject={setSelectedSubject}
+            activeTrack={activeTrack}
           />
         )}
+
 
         {currentMode === 'analytics' && (
           <AnalyticsView

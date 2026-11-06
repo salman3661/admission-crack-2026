@@ -437,12 +437,23 @@ export const DecksView: React.FC<DecksViewProps> = ({
                   <RotateCcw className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   <span>ভুল হলে কিউতে রিপিট • ফুল মাস্টারি ড্রিল</span>
                 </div>
-                <div className="flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400">
-                  <span>মাস্টারি ড্রিল শুরু</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="flex items-center justify-between gap-2">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleDeckNavigate('flashcards', 'All'); }}
+                    className="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-all text-center cursor-pointer"
+                  >
+                    🧠 রিকল স্লাইড ডেক
+                  </button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleDeckNavigate('exam', 'All'); }}
+                    className="flex-1 py-2 px-3 rounded-xl bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30 hover:bg-emerald-50 text-xs font-bold transition-all text-center cursor-pointer"
+                  >
+                    মাস্টারি টেস্ট
+                  </button>
                 </div>
               </div>
             </div>
+
 
           </div>
         </div>
@@ -630,8 +641,22 @@ export const DecksView: React.FC<DecksViewProps> = ({
                 লগ টেবিল ছাড়া 3 সেকেন্ডে তীব্র ও মৃদু এসিড-ক্ষারকের pH নির্ণয়।
               </div>
             </div>
+
+            <div 
+              onClick={() => handleDeckNavigate('flashcards', 'All')}
+              className="p-3.5 rounded-2xl bg-purple-500/10 ring-1 ring-purple-500/30 hover:ring-purple-500 cursor-pointer transition-all active:scale-95"
+            >
+              <div className="text-xs font-black text-purple-900 dark:text-purple-200 mb-1 flex items-center justify-between">
+                <span>🧠 অ্যাক্টিভ রিকল ফ্ল্যাশকার্ড</span>
+                <span className="text-[10px] bg-purple-600 text-white px-2 py-0.5 rounded-full font-bold">স্লাইড মোড</span>
+              </div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-300">
+                উইকলি ও অধ্যায়ভিত্তিক ৩৩৪+ ফর্মুলা, ট্র্যাপ ও স্পিড হ্যাক কার্ড স্লাইডারে অনুশীলন করুন।
+              </div>
+            </div>
           </div>
         </div>
+
       )}
 
     </div>
