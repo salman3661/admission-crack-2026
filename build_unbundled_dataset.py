@@ -59,12 +59,13 @@ def get_all_75_chapters():
 def classify_question(q):
     subj = q.get('subject')
     old_bp = q.get('blueprint_chapter_id') or ''
-    ch_raw = q.get('chapter') or ''
     stem = q.get('question') or q.get('q') or ''
     exp = q.get('explanation') or q.get('exp') or ''
+    opts_str = ' '.join(q.get('options') or q.get('opts') or [])
     tag = q.get('tag') or ''
-    tref = q.get('type_ref') or ''
-    text = f"{ch_raw} {stem} {exp} {tag} {tref}".lower()
+    # Content text takes precedence to prevent legacy erroneous chapter titles from misleading classification
+    text = f"{stem} {opts_str} {exp}".lower()
+    full_text = f"{q.get('chapter') or ''} {stem} {opts_str} {exp} {tag} {q.get('type_ref') or ''}".lower()
 
     if subj == 'Biology':
         # Botany
@@ -121,124 +122,159 @@ def classify_question(q):
         return 'bio_bot_01'
 
     elif subj == 'Chemistry':
-        # 1st Paper
-        if any(k in text for k in ['হ্যাজার্ড', 'ল্যাবরেটরি', 'প্রাইমারি স্ট্যান্ডার্ড', 'সেকেন্ডারি স্ট্যান্ডার্ড', 'ক্রোমিল', 'বুনসেন']):
+        # 1st Paper: Safe Lab
+        if any(k in text for k in ['কাচপাত্র পরিষ্কার', 'ক্রোমিক অ্যাসিড', 'অ্যাকোয়া রেজিয়া', 'হ্যাজার্ড', 'ল্যাবরেটরি', 'প্রাইমারি স্ট্যান্ডার্ড', 'সেকেন্ডারি স্ট্যান্ডার্ড', 'বুনসেন']):
             return 'chem_1st_01'
-        if any(k in text for k in ['কোয়ান্টাম', 'অরবিটাল', 'রিডবার্গ', 'বর্ণালী', 'লাইমেন', 'বামার', 'দ্রাব্যতা', 'ksp', 'kip', 'ক্যাটায়ন', 'শিখা পরীক্ষা', 'নেসলার', 'গুণগত']):
-            return 'chem_1st_02'
-        if any(k in text for k in ['পর্যায়বৃত্ত', 'আয়নীকরণ', 'ইলেকট্রন আসক্তি', 'তড়িৎ ঋণাত্মকতা', 'সংকরায়ন', 'vsepr', 'ফাজান', 'হাইড্রোজেন বন্ধন', 'মুক্তজোড়', 'মৌলের']):
-            return 'chem_1st_03'
-        if any(k in text for k in ['লা-শাতেলীয়ার', 'সাম্যাবস্থা', 'kp', 'kc', 'বাফার', 'হেন্ডারসন', 'আরহেনিয়াস', 'সক্রিয়করণ শক্তি', 'রাসায়নিক পরিবর্তন']):
+        # 2nd Paper: Organic Chemistry
+        if any(k in text for k in ['জৈব', 'হাইড্রোকার্বন', 'সমাণু', 'কাইরাল', 'বেনজিন', 'টলুইন', 'ফেনল', 'অ্যালকেন', 'অ্যালকিন', 'অ্যালকাইন', 'ইথিন', 'ইথাইন', 'অ্যালকোহল', 'ইথানল', 'অ্যালডিহাইড', 'কিটোন', 'অ্যামিন', 'টলেন', 'ফেহলিং', 'লুকাস', 'সাইজেফ', 'মারকনিকভ', 'উর্টজ', 'ক্যানিজারো', 'কার্বোক্যাটায়ন', 'ইলেকট্রোফাইল', 'নিউক্লিওফাইল', 'হাকেল', 'হিউকেল', 'অ্যারোমেটিক', 'ক্লোরোফর্ম', 'ফসজিন', 'টটোমারিজম', 'ডায়াজোনিয়াম', 'হোমোলিটিক', 'লিন্ডেন', 'গ্যামাক্সিন', 'সোডা লাইম', '২-ব্রোমো', 'but-1-ene']):
+            return 'chem_2nd_02'
+        # 2nd Paper: Quantitative Chemistry
+        if any(k in text for k in ['মোলারিটি', 'মোল সংখ্যা', 'মোলালিটি', 'স্টয়কিওমেট্রি', 'লিমিটিং বিকারক', 'ppm', 'ppb', 'টাইট্রেশন', 'প্রশমন', 'অক্সালিক এসিড', 'kmno4', 'ইলেকট্রন গ্রহণ', 'জারণ সংখ্যা', 'জারণ-বিজারণ', 'আয়োডোমিতি', 'আয়োডিমেট্রি', 'বিয়ার-ল্যাম্বার্ট', 'w/v', '% (w/v)', 'প্রমাণ দ্রবণ']):
+            return 'chem_2nd_03'
+        # 2nd Paper: Electrochemistry
+        if any(k in text for k in ['ফ্যারাডে', 'তড়িৎ বিশ্লেষণ', 'কোষ বিভব', 'নার্নস্ট', 'লেড-অ্যাসিড', 'লিথিয়াম', 'ফুয়েল সেল', 'তড়িৎ রসায়ন', 'অ্যানোড', 'ক্যাথোড']):
+            return 'chem_2nd_04'
+        # 1st Paper: Chemical changes & Equilibrium
+        if any(k in text for k in ['লা-শাতেলীয়ার', 'সাম্যাবস্থা', 'kp', 'kc', 'বাফার', 'হেন্ডারসন', 'আরহেনিয়াস', 'সক্রিয়করণ শক্তি', 'রাসায়নিক পরিবর্তন', 'ph']):
             return 'chem_1st_04'
-        if any(k in text for k in ['প্রিজারভেটিভ', 'ভিনেগার', 'কোল্ড ক্রিম', 'টয়লেট্রিজ', 'কর্মমুখী']):
-            return 'chem_1st_05'
-        
-        # 2nd Paper
+        # 2nd Paper: Environmental Chemistry
         if any(k in text for k in ['বয়েল', 'চার্লস', 'গ্রাহাম', 'ব্যাপন', 'বাস্তব গ্যাস', 'ভ্যান ডার ওয়ালস', 'bod', 'cod', 'do', 'অ্যাসিড বৃষ্টি', 'পরিবেশ']):
             return 'chem_2nd_01'
-        if any(k in text for k in ['জৈব', 'হাইড্রোকার্বন', 'সমাণুতা', 'হাকেল', 'বেনজিন', 'sn1', 'sn2', 'লুকাস', 'টলেন্স', 'ফেহলিং', 'অ্যালডল', 'ক্যানিজারো', 'আয়োডোফর্ম', 'অ্যামিন', 'ডায়াজোনিয়াম']):
-            return 'chem_2nd_02'
-        if any(k in text for k in ['স্টয়কিওমেট্রি', 'লিমিটিং', 'মোলারিটি', 'মোল সংখ্যা', 'ppm', 'টাইট্রেশন', 'আয়োডোমিতি', 'বিয়ার-ল্যাম্বার্ট', 'পরিমাণগত']):
-            return 'chem_2nd_03'
-        if any(k in text for k in ['ফ্যারাডে', 'তড়িৎ বিশ্লেষণ', 'কোষ বিভব', 'নার্নস্ট', 'লেড-অ্যাসিড', 'লিথিয়াম', 'ফুয়েল সেল', 'তড়িৎ রসায়ন']):
-            return 'chem_2nd_04'
+        # 1st Paper: Periodic Properties & Bonds
+        if any(k in text for k in ['পর্যায়বৃত্ত', 'আয়নীকরণ', 'ইলেকট্রন আসক্তি', 'তড়িৎ ঋণাত্মকতা', 'সংকরায়ন', 'vsepr', 'ফাজান', 'হাইড্রোজেন বন্ধন', 'মুক্তজোড়', 'মৌলের']):
+            return 'chem_1st_03'
+        # 2nd Paper: Economic Chemistry
         if any(k in text for k in ['ইউরিয়া', 'প্রাকৃতিক গ্যাস', 'সিমেন্ট', 'পাল্প', 'কাগজ', 'ট্যানিং', 'অর্থনৈতিক']):
             return 'chem_2nd_05'
+        # 1st Paper: Applied Chemistry
+        if any(k in text for k in ['প্রিজারভেটিভ', 'ভিনেগার', 'কোল্ড ক্রিম', 'টয়লেট্রিজ', 'কর্মমুখী']):
+            return 'chem_1st_05'
+        # 1st Paper: Qualitative Chemistry
+        if any(k in text for k in ['কোয়ান্টাম', 'অরবিটাল', 'রিডবার্গ', 'বর্ণালী', 'লাইমেন', 'বামার', 'দ্রাব্যতা', 'ksp', 'kip', 'ক্যাটায়ন', 'শিখা পরীক্ষা', 'নেসলার', 'গুণগত']):
+            return 'chem_1st_02'
         return 'chem_1st_02'
 
     elif subj == 'Physics':
-        # 1st Paper
-        if any(k in text for k in ['মাত্রা সমীকরণ', 'ভার্নিয়ার', 'লঘিষ্ঠ গণন', 'স্লাইড ক্যালিপার্স', 'স্ক্রু গজ', 'শতকরা ত্রুটি', 'পরিমাপ']):
-            return 'phy_1st_01'
-        if any(k in text for k in ['ভেক্টর', 'ডট', 'ক্রস', 'নদী-নৌকা', 'ছাতা', 'আপেক্ষিক বেগ', 'গ্র্যাডিয়েন্ট', 'ডাইভারজেন্স', 'কার্ল', 'সলিনয়ডাল']):
-            return 'phy_1st_02'
-        if any(k in text for k in ['প্রক্ষেপক', 'পাল্লা', 'উড্ডয়নকাল', 'সর্বোচ্চ উচ্চতা', 'তক্তা', 'স্টপিং ডিসট্যান্স', 'গতিবিদ্যা']):
-            return 'phy_1st_03'
-        if any(k in text for k in ['জড়তার ভ্রামক', 'চক্রগতির ব্যাসার্ধ', 'ব্যাংকিং', 'রকেট', 'বন্দুক', 'টর্ক', 'ভরবেগ', 'নিউটনের']):
-            return 'phy_1st_04'
-        if any(k in text for k in ['কৃতকাজ', 'স্প্রিং', 'কুয়া', 'চৌবাচ্চা', 'ক্ষমতা', 'হর্সপাওয়ার', 'কাজ, শক্তি']):
-            return 'phy_1st_05'
-        if any(k in text for k in ['মহাকর্ষ', 'অভিকর্ষ', 'মুক্তিবেগ', 'উপগ্রহ', 'কেপলার', 'পর্যায়কাল', 'g এর মান']):
+        # 2nd Paper: Current Electricity (handle electrical power specifically first)
+        if any(k in text for k in ['বৈদ্যুতিক কেটলি', 'বাল্ব', 'প্রবাহমাত্রা', 'তুল্য রোধ', 'কার্শফ', 'হুইটস্টোন', 'মিটার ব্রিজ', 'শান্ট', 'অ্যামিটার', 'ভোল্টমিটার', 'ব্যয়িত বৈদ্যুতিক ক্ষমতা', 'চল তড়িৎ', 'ওহম', '\\omega']):
+            return 'phy_2nd_03'
+        # 2nd Paper: Atomic & Nuclear Physics
+        if any(k in text for k in ['হাইড্রোজেন পরমাণু', 'বোর মডেল', 'শক্তিস্তর', 'তেজস্ক্রিয়', 'অর্ধায়ু', 'গড় আয়ু', 'ভর ত্রুটি', 'বন্ধন শক্তি', 'ফিশন', 'ফিউশন']):
+            return 'phy_2nd_09'
+        # 1st Paper: Periodic Motion / SHM
+        if any(k in text for k in ['সরল দোলক', 'সেকেন্ড দোলক', 'দোলনকাল', 'সরল ছন্দিত', 'shm', 'পর্যায়বৃত্ত গতি', 'সেকেন্ডে']):
+            return 'phy_1st_08'
+        # 1st Paper: Gravitation & Gravity (phy_1st_06 / phy_p1_ch06)
+        if any(k in text for k in ['মহাকর্ষ', 'অভিকর্ষ', 'অভিকর্ষজ ত্বরণ', 'g এর মান', 'মুক্তিবেগ', 'উপগ্রহ', 'কৃত্রিম উপগ্রহ', 'ভূ-স্থির উপগ্রহ', 'কেপলার', 'গ্রহের']):
             return 'phy_1st_06'
+        # 1st Paper: Work, Power & Energy (phy_1st_05 / phy_p1_ch05)
+        if any(k in text for k in ['কৃতকাজ', 'গতিশক্তি', 'বিভব শক্তি', 'স্প্রিং', 'স্প্রিং ধ্রুবক', 'কুয়া', 'চৌবাচ্চা', 'পাম্প', 'হর্সপাওয়ার', 'অশ্বক্ষমতা', 'ভারকেন্দ্রের সরণ', 'কাজ, শক্তি']):
+            return 'phy_1st_05'
+        # 1st Paper: Newtonian Mechanics
+        if any(k in text for k in ['জড়তার ভ্রামক', 'চক্রগতির ব্যাসার্ধ', 'ব্যাংকিং', 'রকেট', 'বন্দুক', 'টর্ক', 'ভরবেগ', 'ঘর্ষণ']):
+            return 'phy_1st_04'
+        # 1st Paper: Dynamics / Kinematics
+        if any(k in text for k in ['প্রক্ষেপক', 'পাল্লা', 'উড্ডয়নকাল', 'সর্বোচ্চ উচ্চতা', 'তক্তা', 'স্টপিং ডিসট্যান্স', 'গতিবিদ্যা', 'ত্বরণ']):
+            return 'phy_1st_03'
+        # 1st Paper: Vectors
+        if any(k in text for k in ['ভেক্টর', 'ডট গুণন', 'ক্রস গুণন', 'নদী-নৌকা', 'ছাতা', 'আপেক্ষিক বেগ', 'ডাইভারজেন্স', 'কার্ল', 'সলিনয়ডাল']):
+            return 'phy_1st_02'
+        # 1st Paper: Structural Properties of Matter
         if any(k in text for k in ['পীড়ন', 'বিকৃতি', 'ইয়ংয়ের', 'হুকের', 'পৃষ্ঠটান', 'সান্দ্রতা', 'স্টোকস', 'প্রান্তিক বেগ', 'পয়সনের']):
             return 'phy_1st_07'
-        if any(k in text for k in ['দোলক', 'সরল ছন্দিত', 'shm', 'সেকেন্ড দোলক', 'পাহাড়', 'দোলনকাল', 'পর্যায়বৃত্ত গতি']):
-            return 'phy_1st_08'
-        if any(k in text for k in ['অগ্রগামী তরঙ্গ', 'বিট', 'স্বরকম্প', 'সুরশলাকা', 'টানা তার', 'স্থির তরঙ্গ', 'তরঙ্গ']):
+        # 1st Paper: Waves
+        if any(k in text for k in ['অগ্রগামী তরঙ্গ', 'বিট', 'স্বরকম্প', 'সুরশলাকা', 'টানা তার', 'স্থির তরঙ্গ', 'শব্দ তরঙ্গ']):
             return 'phy_1st_09'
-        if any(k in text for k in ['আদর্শ গ্যাস', 'rms', 'গতিতত্ত্ব', 'হ্রদের তলদেশ', 'বুদ্বুদ', 'আপেক্ষিক আর্দ্রতা', 'শিশিরাংক', 'গ্লেসিয়ার']):
+        # 1st Paper: Ideal Gas
+        if any(k in text for k in ['আদর্শ গ্যাস', 'rms', 'গতিতত্ত্ব', 'হ্রদের তলদেশ', 'বুদ্বুদ', 'আপেক্ষিক আর্দ্রতা', 'শিশিরাংক']):
             return 'phy_1st_10'
-        
-        # 2nd Paper
+        # 2nd Paper: Thermodynamics
         if any(k in text for k in ['তাপগতিবিদ্যা', 'কার্নো', 'এন্ট্রপি', 'সমোষ্ণ', 'রুদ্ধতাপীয়', 'কর্মদক্ষতা']):
             return 'phy_2nd_01'
+        # 2nd Paper: Electrostatics
         if any(k in text for k in ['কুলম্ব', 'স্থির তড়িৎ', 'তড়িৎ প্রাবল্য', 'তড়িৎ বিভব', 'ধারক', 'ধারকত্ব']):
             return 'phy_2nd_02'
-        if any(k in text for k in ['চল তড়িৎ', 'তুল্য রোধ', 'কার্শফ', 'হুইটস্টোন', 'মিটার ব্রিজ', 'শান্ট', 'অ্যামিটার', 'ভোল্টমিটার']):
-            return 'phy_2nd_03'
-        if any(k in text for k in ['বায়ো-সাভার্ট', 'চৌম্বক ক্ষেত্র', 'লরেঞ্জ বল', 'সলিনয়েড', 'ভূ-চৌম্বক', 'বিনতি', 'ডায়াচুম্বক', 'প্যারাচুম্বক']):
+        # 2nd Paper: Magnetism
+        if any(k in text for k in ['বায়ো-সাভার্ট', 'চৌম্বক ক্ষেত্র', 'লরেঞ্জ বল', 'সলিনয়েড', 'ভূ-চৌম্বক', 'বিনতি']):
             return 'phy_2nd_04'
+        # 2nd Paper: Induction & AC
         if any(k in text for k in ['ফ্যারাডের আবেশ', 'লেনজ', 'ট্রান্সফরমার', 'rms মান', 'পরিবর্তী প্রবাহ', 'আবেশক']):
             return 'phy_2nd_05'
-        if any(k in text for k in ['প্রতিসরণ', 'সংকট কোণ', 'পূর্ণ অভ্যন্তরীণ', 'প্রিজম', 'ন্যূনতম বিচ্যুতি', 'লেন্স প্রস্তুতকারক', 'ফোকাস দূরত্ব']):
+        # 2nd Paper: Optics
+        if any(k in text for k in ['প্রতিসরণ', 'সংকট কোণ', 'পূর্ণ অভ্যন্তরীণ', 'প্রিজম', 'ন্যূনতম বিচ্যুতি', 'লেন্স প্রস্তুতকারক']):
             return 'phy_2nd_06'
-        if any(k in text for k in ['ব্যতিচার', 'ডোরা প্রস্থ', 'অপবর্তন', 'গ্রেটিং', 'সমবর্তন', 'ব্রুস্টার', 'ভৌত আলোকবিজ্ঞান']):
+        if any(k in text for k in ['ব্যতিচার', 'ডোরা প্রস্থ', 'অপবর্তন', 'গ্রেটিং', 'সমবর্তন', 'ব্রুস্টার']):
             return 'phy_2nd_07'
+        # 2nd Paper: Modern Physics
         if any(k in text for k in ['আপেক্ষিকতা', 'কাল দীর্ঘায়ন', 'দৈর্ঘ্য সংকোচন', 'ভর বৃদ্ধি', 'ফটোইলেকট্রিক', 'কার্য-অপেক্ষক', 'নিবৃত্তি বিভব', 'কম্পটন']):
             return 'phy_2nd_08'
-        if any(k in text for k in ['বোর পরমাণু', 'বোর মডেল', 'কক্ষপথের ব্যাসার্ধ', 'তেজস্ক্রিয়', 'অর্ধায়ু', 'গড় আয়ু', 'ভর ত্রুটি', 'বন্ধন শক্তি', 'ফিশন', 'ফিউশন']):
-            return 'phy_2nd_09'
-        if any(k in text for k in ['সেমিকন্ডাক্টর', 'ডায়োড', 'রেকটিফায়ার', 'ট্রানজিস্টর', 'লজিক গেট', 'nand', 'nor', 'xor', 'বুলিয়ান']):
+        # 2nd Paper: Semiconductor & Electronics
+        if any(k in text for k in ['সেমিকন্ডাক্টর', 'ডায়োড', 'রেকটিফায়ার', 'ট্রানজিস্টর', 'লজিক গেট', 'nand', 'nor', 'xor']):
             return 'phy_2nd_10'
-        if any(k in text for k in ['চন্দ্রশেখর', 'শ্বেত বামন', 'কৃষ্ণগহ্বর', 'ব্ল্যাক হোল', 'সোয়ার্জশিল্ড', 'হাবলের', 'বিগ ব্যাং', 'জ্যোতির্বিজ্ঞান']):
+        # 2nd Paper: Astronomy
+        if any(k in text for k in ['চন্দ্রশেখর', 'শ্বেত বামন', 'কৃষ্ণগহ্বর', 'ব্ল্যাক হোল', 'সোয়ার্জশিল্ড', 'হাবলের', 'বিগ ব্যাং']):
             return 'phy_2nd_11'
+        # 1st Paper: Measurement
+        if any(k in text for k in ['মাত্রা সমীকরণ', 'ভার্নিয়ার', 'লঘিষ্ঠ গণন', 'স্লাইড ক্যালিপার্স', 'স্ক্রু গজ', 'শতকরা ত্রুটি', 'পরিমাপ']):
+            return 'phy_1st_01'
         return 'phy_1st_02'
 
     elif subj == 'Higher Math':
-        # 1st Paper
-        if any(k in text for k in ['ম্যাট্রিক্স', 'নির্ণায়ক', 'ব্যতিক্রমী', 'ইনভার্স', 'ট্রেস', 'ক্র্যামার']):
-            return 'math_1st_01'
-        if any(k in text for k in ['ভেক্টর', 'স্কেলার ট্রিপল', 'সমতলীয়', 'অভিক্ষেপ', 'লম্ব একক']):
-            return 'math_1st_02'
-        if any(k in text for k in ['সরলরেখা', 'কার্তেসীয়', 'পোলার', 'অন্তর্বিভক্ত', 'ঢাল', 'লম্ব দূরত্ব', 'সমান্তরাল রেখা']):
-            return 'math_1st_03'
-        if any(k in text for k in ['বৃত্ত', 'কেন্দ্র', 'ব্যাসার্ধ', 'ছেদাংশ', 'স্পর্শক', 'স্পর্শ']):
-            return 'math_1st_04'
-        if any(k in text for k in ['বিন্যাস', 'সমাবেশ', 'শব্দ', 'স্বরবর্ণ', 'গোল টেবিল', 'দল গঠন', 'বহুভুজ']):
-            return 'math_1st_05'
-        if any(k in text for k in ['বৃত্তচাপ', 's = r', 'ঘড়ির কাঁটা', 'রেডিয়ান']):
-            return 'math_1st_06'
-        if any(k in text for k in ['সংযুক্ত কোণ', 'গুণিতক কোণ', 'sin 2a', 'cos 2a', 'ত্রিভুজের সাইন', 'ত্রিভুজের ক্ষেত্রফল']):
-            return 'math_1st_07'
-        if any(k in text for k in ['ফাংশন', 'ডোমেন', 'রেঞ্জ', 'বিপরীত ফাংশন', 'f^-1', 'সংযোজিত']):
-            return 'math_1st_08'
-        if any(k in text for k in ['লিমিট', 'এল-হসপিটাল', 'অন্তরীকরণ', 'স্পর্শক', 'অভিলম্বের ঢাল', 'গুরুমান', 'লঘুমান']):
-            return 'math_1st_09'
-        if any(k in text for k in ['ইন্টিগ্রেশন', 'যোগজীকরণ', 'নির্দিষ্ট যোগজ', 'আবদ্ধ ক্ষেত্রফল', 'ক্ষেত্রফল']):
+        # 1st Paper: Integration (math_1st_10 / math_p1_ch10)
+        if any(k in text for k in ['\\int', 'যোগজীকরণ', 'ইন্টিগ্রেশন', 'নির্দিষ্ট যোগজ', 'আবদ্ধ ক্ষেত্রের ক্ষেত্রফল', 'দ্বারা আবদ্ধ', 'দ্বারা সীমাবদ্ধ', 'সীমাবদ্ধ ক্ষেত্রের', 'আবদ্ধ অংশের ক্ষেত্রফল', 'আবদ্ধ অঞ্চলের']):
             return 'math_1st_10'
-        
-        # 2nd Paper
+        # 1st Paper: Differentiation (math_1st_09 / math_p1_ch09)
+        if any(k in text for k in ['\\lim', 'lim_', 'লিমিট', '\\frac{dy}{dx}', '\\frac{d}{d', 'dy/dx', 'অন্তরীকরণ', 'অন্তরক সহগ', 'লঘুমান', 'গুরুমান', 'সর্বোচ্চ মান', 'সর্বনিম্ন মান', 'বক্ররেখার স্পর্শক', 'অভিলম্বের ঢাল', 'বৃদ্ধির হার', 'সরণের সমীকরণ']):
+            return 'math_1st_09'
+        # 2nd Paper: Linear Programming
+        if any(k in text for k in ['যোগাশ্রয়ী', 'শর্তাধীনে', 'অভিষ্ট']):
+            return 'math_2nd_02'
+        # 2nd Paper: Conics
+        if any(k in text for k in ['পরাবৃত্ত', 'উপবৃত্ত', 'অধিবৃত্ত', 'কনিক', 'উৎকেন্দ্রিকতা', 'উপকেন্দ্র', 'দ্বিকাক্ষ', 'অসীমতট', 'উপকেন্দ্রিক']):
+            return 'math_2nd_06'
+        # 2nd Paper: Binomial Expansion
+        if any(k in text for k in ['দ্বিপদী', 'বিস্তৃতিতে']):
+            return 'math_2nd_05'
+        # 1st Paper: Permutations & Combinations
+        if any(k in text for k in ['বিন্যাস', 'সমাবেশ', 'শব্দে', 'কতভাবে সাজানো', 'কতভাবে বিন্যাস', 'কত প্রকারে', 'গোল টেবিল', 'দল গঠন', 'বহুভুজ', '^{15}c', '^{n}c', 'স্বাভাবিক সংখ্যার', 'করমর্দন', 'অঙ্কগুলো প্রতিবার', 'বিন্দু সমরেখ']):
+            return 'math_1st_05'
+        # 2nd Paper: Probability & Dispersion
+        if any(k in text for k in ['সম্ভাবনা', 'ভেদাঙ্ক', 'পরিমিত ব্যবধান', 'পরিসরাঙ্ক', 'বিভেদাঙ্ক', 'ছক্কা', 'মুদ্রা', 'মার্বেল', 'লিপইয়ার', 'নিবেশনের']):
+            return 'math_2nd_10'
+        # 2nd Paper: Polynomials
+        if any(k in text for k in ['বহুপদী', 'দ্বিঘাত সমীকরণ', 'ত্রিঘাত সমীকরণ', 'নিশ্চয়ক', 'মূলের প্রকৃতি', 'মূলদ্বয়', 'মূল তিনটি']):
+            return 'math_2nd_04'
+        # 2nd Paper: Complex Numbers
+        if any(k in text for k in ['জটিল সংখ্যা', 'মডুলাস', 'আর্গুমেন্ট', 'কাল্পনিক ঘনমূল', '\\omega', 'i^{-', '\\sqrt{-1}', '|z -', '|z +']):
+            return 'math_2nd_03'
+        # 2nd Paper: Inverse Trig
+        if any(k in text for k in ['\\sin^{-1}', '\\cos^{-1}', '\\tan^{-1}', '\\cot^{-1}', 'বিপরীত ত্রিকোণমিতিক']):
+            return 'math_2nd_07'
+        # 1st Paper: Associated Angles & Trig
+        if any(k in text for k in ['\\sin', '\\cos', '\\tan', '\\cot', '\\sec', '\\csc', 'ত্রিকোণমিতি', 'বৃত্তচাপ']):
+            return 'math_1st_07'
+        # 1st Paper: Circles
+        if any(k in text for k in ['বৃত্ত', 'বৃত্তের', 'ব্যাসার্ধের বৃত্ত']):
+            return 'math_1st_04'
+        # 1st Paper: Straight Lines
+        if any(k in text for k in ['সরলরেখা', 'বিন্দুদ্বয়ের', 'মূলবিন্দু', 'লম্ব দূরত্ব', 'সমান্তরাল রেখা', 'ছেদবিন্দুগামী', 'পোলার', 'কার্তেসীয়', 'সমরেখ', 'লম্ববিন্দু', 'ভরকেন্দ্র']):
+            return 'math_1st_03'
+        # 1st Paper: Matrices & Determinants
+        if any(k in text for k in ['ম্যাট্রিক্স', 'নির্ণায়ক', 'ব্যতিক্রমী', 'ইনভার্স', 'ট্রেস', 'ক্র্যামার', 'ক্রেমার']):
+            return 'math_1st_01'
+        # 2nd Paper: Real Numbers & Inequalities
         if any(k in text for k in ['বাস্তব সংখ্যা', 'অসমতা', 'পরম মান', 'সুপ্রিমাম', 'ইনফিমাম']):
             return 'math_2nd_01'
-        if any(k in text for k in ['যোগাশ্রয়ী', 'অভিষ্ট', 'সীমাবদ্ধতা', 'প্রান্তিক বিন্দু']):
-            return 'math_2nd_02'
-        if any(k in text for k in ['জটিল সংখ্যা', 'মডুলাস', 'আর্গুমেন্ট', 'ওমেগা', 'omega', 'ঘনমূল', 'বর্গমূল']):
-            return 'math_2nd_03'
-        if any(k in text for k in ['বহুপদী', 'দ্বিঘাত', 'নিশ্চয়ক', 'মূলের প্রকৃতি', 'মূল ও সহগ']):
-            return 'math_2nd_04'
-        if any(k in text for k in ['দ্বিপদী', 'মধ্যপদ', 'x-বর্জিত', 'সাধারণ পদ']):
-            return 'math_2nd_05'
-        if any(k in text for k in ['কনিক', 'পরাবৃত্ত', 'উপবৃত্ত', 'অধিবৃত্ত', 'উৎকেন্দ্রিকতা', 'উপকেন্দ্র', 'নিয়ামক']):
-            return 'math_2nd_06'
-        if any(k in text for k in ['বিপরীত ত্রিকোণমিতিক', 'tan^-1', 'সাধারণ সমাধান', 'n\\pi']):
-            return 'math_2nd_07'
+        # 2nd Paper: Statics
         if any(k in text for k in ['স্থিতিবিদ্যা', 'লামির', 'বল ত্রিভুজ', 'সদৃশ সমান্তরাল', 'লব্ধি']):
             return 'math_2nd_08'
+        # 2nd Paper: Dynamics in Plane
         if any(k in text for k in ['বস্তু কণার গতি', 'ট্রেনের', 'সমতলে গতি', 'উল্লম্ব তলে গতি']):
             return 'math_2nd_09'
-        if any(k in text for k in ['সম্ভাবনা', 'ভেদাঙ্ক', 'পরিমিত ব্যবধান', 'বিভেদাঙ্ক', 'ছক্কা', 'মুদ্রা', 'তাস']):
-            return 'math_2nd_10'
-        return 'math_1st_01'
+        # 1st Paper: Functions
+        if any(k in text for k in ['ফাংশন', 'ডোমেন', 'রেঞ্জ', 'বিপরীত ফাংশন', 'f^-1', 'সংযোজিত']):
+            return 'math_1st_08'
+        return 'math_1st_08'
 
     return old_bp
 
@@ -455,14 +491,18 @@ def build_all():
         updated_count = 0
         for item in data:
             old_bp = item.get('blueprint_chapter_id')
-            if not old_bp:
-                continue
-            new_cid = classify_question(item)
-            if new_cid in ALL_CHAPTER_METADATA:
-                item['blueprint_chapter_id'] = new_cid
-                item['chapter'] = ALL_CHAPTER_METADATA[new_cid]['title']
-                updated_count += 1
-            elif old_bp in ALL_CHAPTER_METADATA:
+            subj = item.get('subject')
+            if subj in ['Biology', 'Chemistry', 'Physics', 'Higher Math']:
+                new_cid = classify_question(item)
+                if new_cid in ALL_CHAPTER_METADATA:
+                    item['blueprint_chapter_id'] = new_cid
+                    item['chapter'] = ALL_CHAPTER_METADATA[new_cid]['title']
+                    updated_count += 1
+                elif old_bp in ALL_CHAPTER_METADATA:
+                    item['blueprint_chapter_id'] = ALL_CHAPTER_METADATA[old_bp]['id']
+                    item['chapter'] = ALL_CHAPTER_METADATA[old_bp]['title']
+                    updated_count += 1
+            elif old_bp and old_bp in ALL_CHAPTER_METADATA:
                 item['blueprint_chapter_id'] = ALL_CHAPTER_METADATA[old_bp]['id']
                 item['chapter'] = ALL_CHAPTER_METADATA[old_bp]['title']
                 updated_count += 1
@@ -477,6 +517,34 @@ def build_all():
         if os.path.dirname(qf) == SRC_DATA_DIR:
             shutil.copyfile(qf, webapp_copy)
             print(f"  -> Mirrored to {webapp_copy}")
+
+    print("\n--- 4. Updating Blueprint with True Available Counts ---")
+    ch_q_counts = {ch['id']: 0 for ch in chapters}
+    with open(os.path.join(SRC_DATA_DIR, "questions.json"), "r", encoding="utf-8") as f:
+        primary_qs = json.load(f)
+    for q in primary_qs:
+        cid = q.get('blueprint_chapter_id')
+        if cid in ch_q_counts:
+            ch_q_counts[cid] += 1
+
+    pred_counts = {ch['chapter_id']: len(ch.get('predictors', [])) for ch in final_pred_chapters}
+
+    for ch in chapters:
+        cid = ch['id']
+        q_count = ch_q_counts.get(cid, 0)
+        p_count = pred_counts.get(cid, 0)
+        ch['question_count'] = q_count
+        ch['mcq_count'] = q_count + p_count
+        ch['total_questions'] = q_count + p_count
+
+    bp_output["chapters"] = chapters
+
+    for p in [os.path.join(SRC_DATA_DIR, "master_chapter_blueprint.json"),
+              os.path.join(APP_DATA_DIR, "master_chapter_blueprint.json")]:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with open(p, "w", encoding="utf-8") as f:
+            json.dump(bp_output, f, indent=2, ensure_ascii=False)
+        print(f"Updated blueprint with counts: {p}")
 
     print("\nData migration and unbundling complete!")
 

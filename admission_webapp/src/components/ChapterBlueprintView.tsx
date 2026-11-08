@@ -254,10 +254,26 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
     }, 80);
   };
 
-  // Predictors for active chapter
+  // Predictors for active chapter with dynamic option shuffle (distributes correct answers naturally across A, B, C, D)
   const activePredictors = useMemo(() => {
     if (!activeChapter) return [];
-    return syntheticByChapterId.get(activeChapter.id) || [];
+    const raw = syntheticByChapterId.get(activeChapter.id) || [];
+    const LETTERS = ['A', 'B', 'C', 'D'];
+    return raw.map(q => {
+      const opts = [...(q.options || [])];
+      if (opts.length < 2) return q;
+      const curIdx = LETTERS.indexOf(q.answer) !== -1 ? LETTERS.indexOf(q.answer) : (typeof (q as any).ans === 'number' ? (q as any).ans : 0);
+      const correctVal = opts[curIdx] ?? opts[0];
+      const shuffledOpts = [...opts].sort(() => Math.random() - 0.5);
+      const newIdx = shuffledOpts.indexOf(correctVal);
+      const newLetter = LETTERS[newIdx] || 'A';
+      return {
+        ...q,
+        options: shuffledOpts,
+        answer: newLetter,
+        ans: newIdx
+      };
+    });
   }, [syntheticByChapterId, activeChapter]);
 
   // View Mode inside chapter: 'blueprint' | 'quiz'
@@ -389,7 +405,24 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
 
   const activeWeekQuestions = useMemo(() => {
     if (!activeDrillWeekId) return [];
-    return weeklyExamsMap.get(activeDrillWeekId) || [];
+    const raw = weeklyExamsMap.get(activeDrillWeekId) || [];
+    return raw.map(q => {
+      const opts = [...(q.options || q.opts || [])];
+      if (opts.length < 2) return q;
+      const currentIdx = typeof q.correct_index === 'number'
+        ? q.correct_index
+        : (typeof q.ans === 'number' ? q.ans : 0);
+      const correctVal = opts[currentIdx] ?? opts[0];
+      const shuffledOpts = [...opts].sort(() => Math.random() - 0.5);
+      const newIdx = shuffledOpts.indexOf(correctVal);
+      return {
+        ...q,
+        options: shuffledOpts,
+        opts: shuffledOpts,
+        ans: newIdx,
+        correct_index: newIdx
+      };
+    });
   }, [activeDrillWeekId, weeklyExamsMap]);
 
   const activeWeekMeta = useMemo(() => {
@@ -539,7 +572,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   // ============================================================================
   if (activeTab === 'quiz' && activeChapter) {
     return (
-      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 font-['Hind_Siliguri']">
+      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 font-['SolaimanLipi',sans-serif]">
         <div className="max-w-4xl mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-4">
           
           {/* Top Sticky Header with Close Button */}
@@ -665,7 +698,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                   </div>
 
                   {/* Question Stem */}
-                  <div className="text-sm sm:text-base font-medium text-slate-900 dark:text-white leading-relaxed">
+                  <div className="text-lg font-medium leading-relaxed text-slate-900 dark:text-white">
                     <MathText text={currentQ.stem} />
                   </div>
 
@@ -695,9 +728,9 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                         <button
                           key={optIdx}
                           onClick={() => handleSelectOption(currentQ.id, currentLetter)}
-                          className={`p-3 rounded-xl border text-left text-xs sm:text-sm transition-all flex items-start gap-2.5 cursor-pointer ${optionStyle}`}
+                          className={`text-base py-3 px-4 rounded-xl border text-left transition-all flex items-start gap-3 cursor-pointer ${optionStyle}`}
                         >
-                          <span className={`w-5 h-5 flex-shrink-0 flex items-center justify-center rounded-md font-mono text-xs font-bold ${
+                          <span className={`w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-md font-mono text-xs font-bold ${
                             isRevealed && isOptionCorrect
                               ? 'bg-white/20 text-white'
                               : isOptionSelected
@@ -706,7 +739,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           }`}>
                             {currentLetter}
                           </span>
-                          <div className="flex-1 leading-snug">
+                          <div className="flex-1 text-base leading-relaxed">
                             <MathText text={optionText} />
                           </div>
                         </button>
@@ -723,7 +756,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           <ShieldAlert className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                           <span>সাধারণ ছাত্রভ্রান্তি ও ফাঁদ (Trap Alert):</span>
                         </div>
-                        <div className="text-xs text-slate-800 dark:text-slate-200 pl-5 font-medium">
+                        <div className="text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200 pl-5 font-medium">
                           <MathText text={currentQ.trap_alert} />
                         </div>
                       </div>
@@ -734,14 +767,14 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           <Zap className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 fill-emerald-500" />
                           <span>৫-সেকেন্ড স্পিড হ্যাক / অপশন এলিমিনেশন (Speed Hack):</span>
                         </div>
-                        <div className="text-xs text-slate-800 dark:text-slate-200 pl-5 font-medium">
+                        <div className="text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200 pl-5 font-medium">
                           <MathText text={currentQ.speed_hack} />
                         </div>
                       </div>
 
                       {/* Detailed Explanation */}
                       {currentQ.explanation && (
-                        <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-[#16221A] text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                        <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#16221A] text-sm md:text-base leading-relaxed text-slate-600 dark:text-slate-300 space-y-1">
                           <span className="font-bold text-slate-700 dark:text-slate-200">ব্যাখ্যা: </span>
                           <MathText text={currentQ.explanation} />
                         </div>
@@ -1685,7 +1718,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                         </span>
                       </div>
 
-                      <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white leading-relaxed">
+                      <div className="text-lg font-medium leading-relaxed text-slate-900 dark:text-white">
                         <MathText text={normStem} />
                       </div>
 
@@ -1713,9 +1746,9 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                             <button
                               key={optIdx}
                               onClick={() => handleSelectWeeklyOption(q.id, letter)}
-                              className={`p-3 rounded-xl border text-left text-xs sm:text-sm transition-all flex items-start gap-2.5 cursor-pointer ${optionStyle}`}
+                              className={`text-base py-3 px-4 rounded-xl border text-left transition-all flex items-start gap-3 cursor-pointer ${optionStyle}`}
                             >
-                              <span className={`w-5 h-5 flex-shrink-0 flex items-center justify-center rounded-md font-mono text-xs font-bold ${
+                              <span className={`w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-md font-mono text-xs font-bold ${
                                 isRevealed && isThisCorrect
                                   ? 'bg-white/20 text-white'
                                   : isSelected
@@ -1724,7 +1757,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                               }`}>
                                 {letter}
                               </span>
-                              <div className="flex-1 leading-snug">
+                              <div className="flex-1 text-base leading-relaxed">
                                 <MathText text={optText} />
                               </div>
                             </button>
@@ -1740,7 +1773,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                                 <ShieldAlert className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
                                 <span>সাধারণ ছাত্রভ্রান্তি ও ফাঁদ (Trap Alert):</span>
                               </div>
-                              <div className="text-xs text-slate-800 dark:text-slate-200 pl-5 font-medium leading-relaxed">
+                              <div className="text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200 pl-5 font-medium">
                                 <MathText text={trapAlert} />
                               </div>
                             </div>
@@ -1752,14 +1785,14 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                                 <Zap className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 fill-emerald-500" />
                                 <span>৫-সেকেন্ড স্পিড হ্যাক / অপশন এলিমিনেশন (Speed Hack):</span>
                               </div>
-                              <div className="text-xs text-slate-800 dark:text-slate-200 pl-5 font-medium leading-relaxed">
+                              <div className="text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200 pl-5 font-medium">
                                 <MathText text={speedHack} />
                               </div>
                             </div>
                           )}
 
                           {explanation && (
-                            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-[#16221A] text-xs text-slate-600 dark:text-slate-300 space-y-1">
+                            <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#16221A] text-sm md:text-base leading-relaxed text-slate-600 dark:text-slate-300 space-y-1">
                               <span className="font-bold text-slate-700 dark:text-slate-200">ব্যাখ্যা: </span>
                               <MathText text={explanation} />
                             </div>

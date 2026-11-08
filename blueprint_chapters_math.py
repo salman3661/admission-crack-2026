@@ -327,7 +327,7 @@ def get_math_chapters():
         },
         {
             "id": "math_1st_09",
-            "aliases": ["math_differentiation"],
+            "aliases": ["math_differentiation", "math_p1_ch09"],
             "subject": "Higher Math",
             "paper": "১ম পত্র",
             "chapter_no": "অধ্যায় ০৯",
@@ -373,7 +373,7 @@ def get_math_chapters():
         },
         {
             "id": "math_1st_10",
-            "aliases": ["math_integration"],
+            "aliases": ["math_integration", "math_p1_ch10"],
             "subject": "Higher Math",
             "paper": "১ম পত্র",
             "chapter_no": "অধ্যায় ১০",

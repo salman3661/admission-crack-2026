@@ -405,13 +405,31 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [showOnlyTraps, setShowOnlyTraps] = useState(false);
 
+  // Dynamic shuffle of predictor options so correct answers distribute across A, B, C, D
+  const shuffledPredictors = useMemo(() => {
+    const LETTERS = ['A', 'B', 'C', 'D'];
+    return (predictors || []).map((q) => {
+      const opts = [...(q.options || [])];
+      if (opts.length < 2) return q;
+      const currentAnsIdx = LETTERS.indexOf(q.answer);
+      const correctVal = opts[currentAnsIdx >= 0 ? currentAnsIdx : 0];
+      const shuffledOpts = [...opts].sort(() => Math.random() - 0.5);
+      const newAnsLetter = LETTERS[shuffledOpts.indexOf(correctVal)] || 'A';
+      return {
+        ...q,
+        options: shuffledOpts,
+        answer: newAnsLetter as 'A' | 'B' | 'C' | 'D',
+      };
+    });
+  }, [predictors]);
+
   const displayedList = useMemo(() => {
-    if (!showOnlyTraps) return predictors;
-    return predictors.filter(q => {
+    if (!showOnlyTraps) return shuffledPredictors;
+    return shuffledPredictors.filter(q => {
       const ans = userAnswers[q.id];
       return ans && ans !== q.answer;
     });
-  }, [predictors, showOnlyTraps, userAnswers]);
+  }, [shuffledPredictors, showOnlyTraps, userAnswers]);
 
   const activeQ = displayedList[currentIdx] || displayedList[0];
 
@@ -424,7 +442,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
     let correct = 0;
     let wrong = 0;
 
-    predictors.forEach(q => {
+    shuffledPredictors.forEach(q => {
       const a = userAnswers[q.id];
       if (a) {
         answered++;
@@ -434,12 +452,12 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
     });
 
     const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
-    return { answered, correct, wrong, total: predictors.length, accuracy };
-  }, [predictors, userAnswers]);
+    return { answered, correct, wrong, total: shuffledPredictors.length, accuracy };
+  }, [shuffledPredictors, userAnswers]);
 
   if (!activeQ) {
     return (
-      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-4 sm:p-6 font-['Hind_Siliguri'] flex items-center justify-center">
+      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-4 sm:p-6 font-['SolaimanLipi',sans-serif] flex items-center justify-center">
         <div className="max-w-md w-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-xl">
           <p className="text-sm text-slate-600 dark:text-slate-400">কোনো ভুল ট্র্যাপ প্রশ্ন পাওয়া যায়নি।</p>
           <div className="flex items-center justify-center gap-2 pt-1">
@@ -467,7 +485,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
   const currentQ = activeQ;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-3 sm:p-6 font-['Hind_Siliguri']">
+    <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-3 sm:p-6 font-['SolaimanLipi',sans-serif]">
       <div className="max-w-4xl mx-auto rounded-3xl border border-emerald-500/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-4 sm:p-6 shadow-xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
@@ -538,7 +556,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
       </div>
 
       {/* Question Stem */}
-      <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 text-sm sm:text-base font-semibold text-slate-900 dark:text-white leading-relaxed">
+      <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 text-lg font-medium text-slate-900 dark:text-white leading-relaxed">
         <MathText content={activeQ.stem} />
       </div>
 
@@ -566,7 +584,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
             <button
               key={i}
               onClick={() => handleSelectOption(activeQ.id, letter)}
-              className={`p-3 sm:p-3.5 rounded-xl border text-left text-xs sm:text-sm font-medium transition-all flex items-start gap-2.5 cursor-pointer ${optionStyle}`}
+              className={`text-base py-3 px-4 rounded-xl border text-left font-medium transition-all flex items-start gap-2.5 cursor-pointer ${optionStyle}`}
             >
               <span className={`w-6 h-6 rounded-md font-mono text-xs font-bold flex items-center justify-center shrink-0 ${
                 showFeedback && isCorrectAnswer 
@@ -577,7 +595,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
               }`}>
                 {letter}
               </span>
-              <div className="flex-1 pt-0.5">
+              <div className="flex-1 pt-0.5 text-base leading-relaxed">
                 <MathText content={opt} />
               </div>
             </button>
@@ -590,7 +608,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
         <div className="space-y-2.5 pt-2 animate-in fade-in duration-150">
           {/* High-Contrast Emerald Accent for Speed Hack */}
           {activeQ.speed_hack && (
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border border-emerald-500/35 text-xs sm:text-sm leading-relaxed shadow-xs">
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border border-emerald-500/35 text-sm md:text-base leading-relaxed shadow-xs">
               <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-black text-emerald-800 dark:text-emerald-300 mr-1.5 uppercase text-[11px]">
@@ -603,7 +621,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
 
           {/* Rose/Amber Badge for Trap Alert */}
           {activeQ.trap_alert && (
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-500/15 dark:bg-rose-500/20 text-amber-950 dark:text-rose-200 border border-amber-500/30 dark:border-rose-500/40 text-xs sm:text-sm leading-relaxed shadow-xs">
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-500/15 dark:bg-rose-500/20 text-amber-950 dark:text-rose-200 border border-amber-500/30 dark:border-rose-500/40 text-sm md:text-base leading-relaxed shadow-xs">
               <ShieldAlert className="w-4 h-4 text-amber-600 dark:text-rose-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-black text-amber-900 dark:text-rose-300 mr-1.5 uppercase text-[11px]">
@@ -616,7 +634,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
 
           {/* Full Step-by-Step Explanation */}
           {activeQ.explanation && (
-            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
               <span className="font-bold text-slate-900 dark:text-white mr-1.5">📖 সম্পূর্ণ সমাধান:</span>
               <MathText content={activeQ.explanation} />
             </div>

@@ -327,7 +327,7 @@ def get_chemistry_chapters():
         },
         {
             "id": "chem_2nd_02",
-            "aliases": ["chem_organic"],
+            "aliases": ["chem_organic", "chem_p2_ch02"],
             "subject": "Chemistry",
             "paper": "২য় পত্র",
             "chapter_no": "অধ্যায় ০২",
@@ -406,7 +406,7 @@ def get_chemistry_chapters():
         },
         {
             "id": "chem_2nd_03",
-            "aliases": ["chem_quantitative"],
+            "aliases": ["chem_quantitative", "chem_p2_ch03"],
             "subject": "Chemistry",
             "paper": "২য় পত্র",
             "chapter_no": "অধ্যায় ০৩",

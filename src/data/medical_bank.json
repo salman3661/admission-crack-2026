@@ -34,8 +34,8 @@
     "speed_hack": "গ্যালিলিওর ৩য় সূত্রমতে স্থির অবস্থান থেকে পড়ন্ত বস্তুর $s = \\frac{1}{2}gt^2$, তাই দূরত্ব সরাসরি সময়ের বর্গের সমানুপাতিক ($s \\propto t^2$)।",
     "type_ref": "Type 4: খাড়া নিক্ষিপ্ত বস্তু ও পর্যায়ক্রমিক সময়",
     "blueprint_type_id": "phy_dyn_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w1_phy_q14",
@@ -72,8 +72,8 @@
     "speed_hack": "নিচে নামলে কার্যকর ত্বরণ কমে $g - a = 9.8 - 1 = 8.8\\text{ ms}^{-2}$ হয়; $65 \\times 8.8 = 572\\text{ N}$ (স্বাভাবিক ওজন $637\\text{ N}$ অপেক্ষা কম)।",
     "type_ref": "Type 4: বলের ঘাত ও ভরবেগের পরিবর্তন ($J = F\\Delta t = \\Delta p$)",
     "blueprint_type_id": "phy_newt_t4",
-    "blueprint_chapter_id": "phy_1st_04",
-    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
+    "blueprint_chapter_id": "phy_1st_03",
+    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
   },
   {
     "id": "w1_phy_q16",
@@ -110,8 +110,8 @@
     "speed_hack": "কৌণিক ভরবেগ $L = mvr = (\\text{রৈখিক ভরবেগ}) \\times (\\text{দূরত্ব}) = [MLT^{-1}] \\times [L] = [ML^2T^{-1}]$।",
     "type_ref": "Type 1: জড়তার ভ্রামক ও চক্রগতির ব্যাসার্ধ (দণ্ড, চাকতি, গোলক)",
     "blueprint_type_id": "phy_newt_t1",
-    "blueprint_chapter_id": "phy_1st_01",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)"
+    "blueprint_chapter_id": "phy_1st_04",
+    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
   },
   {
     "id": "w1_phy_q24",
@@ -186,8 +186,8 @@
     "speed_hack": "ক্রোমিক অ্যাসিড = গাঢ় $\\text{K}_2\\text{Cr}_2\\text{O}_7$ + গাঢ় $\\text{H}_2\\text{SO}_4$ (তীব্র জারক পরিষ্কারক, জৈব ময়লা জারিত করে)।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_01",
+    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)"
   },
   {
     "id": "w1_che_q03",
@@ -224,8 +224,8 @@
     "speed_hack": "শর্টকাট: রাইডার ধ্রুবক $= \\frac{2 \\times W(\\text{mg})}{100} \\implies 5\\text{ mg}$ রাইডারে $0.0001\\text{ g}$ এবং $10\\text{ mg}$ রাইডারে $0.0002\\text{ g}$।",
     "type_ref": "Type 4: প্রাইমারি স্ট্যান্ডার্ড বনাম সেকেন্ডারি স্ট্যান্ডার্ড পদার্থ",
     "blueprint_type_id": "chem_quan_t4",
-    "blueprint_chapter_id": "chem_1st_01",
-    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w1_che_q05",
@@ -300,8 +300,8 @@
     "speed_hack": "নির্দেশক pH রেঞ্জ ছন্দ: মিথাইল অরেঞ্জ $3.1-4.4$, মিথাইল রেড $4.2-6.3$, ফেনল্ফথ্যালিন $8.2-9.8$ (ক্ষারীয়)।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_02",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)"
   },
   {
     "id": "w1_che_q10",
@@ -376,8 +376,8 @@
     "speed_hack": "টাইট্রেশন নির্দেশক ট্রিক: তীব্র ক্ষার থাকলে ফেনল্ফথ্যালিন; তীব্র এসিড + মৃদু ক্ষার হলে মিথাইল অরেঞ্জ/রেড।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_02",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)"
   },
   {
     "id": "w1_che_q23",
@@ -642,8 +642,8 @@
     "speed_hack": "ফ্যাগোসাইটিক শ্বেতকণিকা দুটি: ম্যাক্রোফেজ (মনোসাইট) ও মাইক্রোফেজ (নিউট্রোফিল)।",
     "type_ref": "Type 4: রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
     "blueprint_type_id": "bio_dc_t4",
-    "blueprint_chapter_id": "bio_zoo_04",
-    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w1_bio_q07",
@@ -756,8 +756,8 @@
     "speed_hack": "SAN $\\to$ AVN পরিবহন সময় মাত্র $0.03\\text{ s}$ (AVN বিলম্ব $0.09\\text{ s}$ বা প্রায় $0.1\\text{ s}$)।",
     "type_ref": "Type 3: হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
     "blueprint_type_id": "bio_dc_t3",
-    "blueprint_chapter_id": "bio_zoo_04",
-    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w1_bio_q12",
@@ -908,8 +908,8 @@
     "speed_hack": "সিরাম = রক্তরস (Plasma) $-$ ফাইব্রিনোজেন ও তঞ্চন ফ্যাক্টর।",
     "type_ref": "Type 4: রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
     "blueprint_type_id": "bio_dc_t4",
-    "blueprint_chapter_id": "bio_zoo_04",
-    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)"
+    "blueprint_chapter_id": "bio_bot_03",
+    "chapter": "কোষ রসায়ন (Cell Chemistry)"
   },
   {
     "id": "w1_bio_q16",
@@ -1098,8 +1098,8 @@
     "speed_hack": "স্বরযন্ত্রের সবচেয়ে বড় তরুণাস্থি থাইরয়েড তরুণাস্থিই পুরুষের গলায় Adam's apple।",
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
-    "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "মানব শারীরতত্ত্ব: শ্বাসক্রিয়া ও শ্বসন (Human Physiology: Respiration)"
+    "blueprint_chapter_id": "bio_zoo_08",
+    "chapter": "মানব শারীরতত্ত্ব: সমন্বয় ও নিয়ন্ত্রণ (Human Physiology: Coordination)"
   },
   {
     "id": "w1_bio_q22",
@@ -1136,8 +1136,8 @@
     "speed_hack": "ট্রাকিয়া বা শ্বাসনালিতে ১৫–২০টি C-আকৃতির অসম্পূর্ণ হায়ালিন তরুণাস্থি বলয় থাকে।",
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
-    "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "মানব শারীরতত্ত্ব: শ্বাসক্রিয়া ও শ্বসন (Human Physiology: Respiration)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w1_bio_q24",
@@ -1212,8 +1212,8 @@
     "speed_hack": "*Wuchereria bancrofti* (নেমাটোডা) $\\to$ লসিকানালি ও লসিকাগ্রন্থি $\\to$ গোদ রোগ (ফাইলেরিয়াসিস)।",
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_zoo_04",
+    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)"
   },
   {
     "id": "w2_phy_q01",
@@ -1250,8 +1250,8 @@
     "speed_hack": "আপেক্ষিক সবলতার ক্রম: মহাকর্ষ ($1$) $<$ দুর্বল নিউক্লীয় ($10^{30}$) $<$ তড়িৎচৌম্বক ($10^{39}$) $<$ সবল নিউক্লীয় ($10^{41}$); তাই মহাকর্ষ বল সবচেয়ে দুর্বল।",
     "type_ref": "Type 3: ভরবেগের সংরক্ষণ ও রকেট/বন্দুকের ধাক্কা",
     "blueprint_type_id": "phy_newt_t3",
-    "blueprint_chapter_id": "phy_1st_04",
-    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
+    "blueprint_chapter_id": "phy_1st_06",
+    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
   },
   {
     "id": "w2_phy_q07",
@@ -1288,8 +1288,8 @@
     "speed_hack": "নিচে নামলে কার্যকর ত্বরণ $9.8 - 2.2 = 7.6\\text{ ms}^{-2}$; তাই ওজন $60 \\times 7.6 = 456\\text{ N}$ (শেষে $6$ অঙ্ক দেখেই অপশন বাছাই)।",
     "type_ref": "Type 4: বলের ঘাত ও ভরবেগের পরিবর্তন ($J = F\\Delta t = \\Delta p$)",
     "blueprint_type_id": "phy_newt_t4",
-    "blueprint_chapter_id": "phy_1st_04",
-    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
+    "blueprint_chapter_id": "phy_1st_03",
+    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
   },
   {
     "id": "w2_phy_q14",
@@ -1364,8 +1364,8 @@
     "speed_hack": "যে বলের বিরুদ্ধে কাজ করলে যান্ত্রিক শক্তি তাপে অপচয় হয় (যেমন ঘর্ষণ বল, সান্দ্র বল) সেটিই অসংরক্ষণশীল বল।",
     "type_ref": "Type 1: কুয়া ও চৌবাচ্চা খালি করতে কৃতকাজ",
     "blueprint_type_id": "phy_we_t1",
-    "blueprint_chapter_id": "phy_1st_05",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
+    "blueprint_chapter_id": "phy_1st_06",
+    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
   },
   {
     "id": "w2_phy_q23",
@@ -1402,8 +1402,8 @@
     "speed_hack": "ক্ষমতা হলো বল ও বেগের ডট গুণফল: $P = \\vec{F}\\cdot\\vec{v} = (3)(2) + (4)(-1) + (-2)(3) = 6 - 4 - 6 = -4\\text{ W}$।",
     "type_ref": "Type 4: ইঞ্জিনের ক্ষমতা ও কর্মদক্ষতা (পাম্পের ক্ষমতা)",
     "blueprint_type_id": "phy_we_t4",
-    "blueprint_chapter_id": "phy_1st_05",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w2_che_q01",
@@ -1440,8 +1440,8 @@
     "speed_hack": "$d^0$ ($\\text{Sc}^{3+}, \\text{Ti}^{4+}$) এবং $d^{10}$ ($\\text{Cu}^+, \\text{Zn}^{2+}$) বিন্যাসযুক্ত আয়নসমূহে $d-d$ স্থানান্তর অসম্ভব বলে এরা সর্বদা বর্ণহীন।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w2_che_q03",
@@ -1516,8 +1516,8 @@
     "speed_hack": "ফাজানের সূত্র: ক্যাটায়নের চার্জ যত বেশি ($\\text{Al}^{3+} > \\text{Mg}^{2+} > \\text{Na}^+ > \\text{K}^+$), পোলারায়ন ও সমযোজী ধর্ম তত বেশি এবং গলনাঙ্ক তত কম।",
     "type_ref": "Type 3: ফাজানের নীতি ও পোলারায়ন (সমযোজী বনাম আয়নিক বৈশিষ্ট্য)",
     "blueprint_type_id": "chem_per_t3",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q10",
@@ -1554,8 +1554,8 @@
     "speed_hack": "উভয় পাশে গ্যাসীয় মোল সংখ্যা সমান হলে ($\\Delta n = 0$, যেমন $\\text{H}_2 + \\text{I}_2 \\rightleftharpoons 2\\text{HI}$) সাম্যাবস্থায় চাপের কোনো প্রভাব নেই।",
     "type_ref": "Type 4: লা-শাতেলিয়ার নীতি ও তাপমাত্রার প্রভাব",
     "blueprint_type_id": "chem_ch_t4",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w2_che_q15",
@@ -1592,8 +1592,8 @@
     "speed_hack": "সকল তীব্র এসিড ও তীব্র ক্ষারের প্রশমন তাপ ধ্রুবক: $\\Delta H = -57.34\\text{ kJ/mol}$ (একমাত্র ব্যতিক্রম $\\text{HF}: -68.6\\text{ kJ/mol}$)।",
     "type_ref": "Type 4: লা-শাতেলিয়ার নীতি ও তাপমাত্রার প্রভাব",
     "blueprint_type_id": "chem_ch_t4",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w2_che_q20",
@@ -1630,8 +1630,8 @@
     "speed_hack": "সংকোচনশীলতা গুণাঙ্ক $Z = \\frac{PV}{nRT}$; আদর্শ গ্যাসের জন্য $PV = nRT$ বিধায় সর্বদা $Z = 1$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w2_che_q25",
@@ -1668,8 +1668,8 @@
     "speed_hack": "ল্যান্থানাইড ও অ্যাক্টিনাইড (গ্রুপ ৩ / $f$-ব্লক) সিরিজের মৌলসমূহের প্রধান ও সবচেয়ে সুস্থিত জারণ সংখ্যা $+3$।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w2_bio_q01",
@@ -1858,8 +1858,8 @@
     "speed_hack": "$S$ (Synthesis) দশা = DNA রেপ্লিকেশন ও হিস্টোন প্রোটিন সংশ্লেষণ।",
     "type_ref": "Type 3: মাইটোসিসের বিভিন্ন ধাপের বৈশিষ্ট্য",
     "blueprint_type_id": "bio_cell_t3",
-    "blueprint_chapter_id": "bio_bot_02",
-    "chapter": "কোষ বিভাজন (Cell Division)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w2_bio_q07",
@@ -2314,8 +2314,8 @@
     "speed_hack": "আলোর তীব্রতা বাড়লে আপতিত ফোটন সংখ্যা বাড়ে, ফলে নির্গত ইলেকট্রন তথা আলোকতড়িৎ প্রবাহের মাত্রা সমানুপাতিক হারে বাড়ে।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_1st_01",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)"
+    "blueprint_chapter_id": "phy_2nd_08",
+    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)"
   },
   {
     "id": "w3_phy_q18",
@@ -2352,8 +2352,8 @@
     "speed_hack": "ডি-ব্রগলি তরঙ্গদৈর্ঘ্য $\\lambda = \\frac{h}{\\sqrt{2mE_k}} \\implies \\lambda \\propto \\frac{1}{\\sqrt{E_k}}$; তাই গতিশক্তি ২ গুণ হলে তরঙ্গদৈর্ঘ্য $\\frac{1}{\\sqrt{2}}$ গুণ হবে।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_1st_09",
-    "chapter": "তরঙ্গ (Waves)"
+    "blueprint_chapter_id": "phy_1st_05",
+    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
   },
   {
     "id": "w3_phy_q24",
@@ -2390,8 +2390,8 @@
     "speed_hack": "এন্ট্রপির পরিবর্তন $dS = \\frac{dQ}{T} = \\frac{\\text{তাপ (J)}}{\\text{তাপমাত্রা (K)}}$; তাই একক সরাসরি $\\text{J K}^{-1}$।",
     "type_ref": "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি",
     "blueprint_type_id": "phy_gt_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_2nd_01",
+    "chapter": "তাপগতিবিদ্যা (Thermodynamics)"
   },
   {
     "id": "w3_che_q01",
@@ -2580,8 +2580,8 @@
     "speed_hack": "ক্ষারীয় নেসলার বিকারক ($\\text{K}_2[\\text{HgI}_4] + \\text{KOH}$) অ্যামোনিয়া বা $\\text{NH}_4^+$ আয়নের সাথে অ্যামিনো মারকিউরিক আয়োডাইডের বাদামি অধঃক্ষেপ দেয়।",
     "type_ref": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
     "blueprint_type_id": "chem_qual_t4",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_02",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)"
   },
   {
     "id": "w3_che_q12",
@@ -2618,8 +2618,8 @@
     "speed_hack": "ইলেকট্রন সমতা: $1\\text{ mol K}_2\\text{Cr}_2\\text{O}_7$ নেয় $6e^-$ এবং $1\\text{ mol H}_2\\text{C}_2\\text{O}_4$ দেয় $2e^- \\implies \\frac{6}{2} = 3\\text{ mol}$।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w3_che_q16",
@@ -2694,8 +2694,8 @@
     "speed_hack": "অম্লীয় মাধ্যমে $\\text{KMnO}_4$-এর তুল্যসংখ্যা $e = 5 \\implies$ তুল্য ভর $E = \\frac{M}{5} = \\frac{158}{5} = 31.6$।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w3_che_q24",
@@ -2770,8 +2770,8 @@
     "speed_hack": "দ্রুততম শোষিত আয়ন = $K^+$ ও $NO_3^-$; মন্থরতম শোষিত আয়ন = $Ca^{2+}$ ও $SO_4^{2-}$।",
     "type_ref": "Type 3: প্রস্বেদন ও পত্ররন্ধ্র খোলা-বন্ধ হওয়ার কৌশল",
     "blueprint_type_id": "bio_pb_t3",
-    "blueprint_chapter_id": "bio_bot_09",
-    "chapter": "উদ্ভিদ শারীরতত্ত্ব (Plant Physiology)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w3_bio_q02",
@@ -2960,8 +2960,8 @@
     "speed_hack": "ক্রাঞ্জ অ্যানাটমি ($C_4$ উদ্ভিদ) = ভুট্টা, আখ, মুথা ঘাস ও অ্যামারান্থাস (ধান ও গম হলো $C_3$)।",
     "type_ref": "Type 1: সালোকসংশ্লেষণ ($C_3$ বনাম $C_4$ উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)",
     "blueprint_type_id": "bio_pb_t1",
-    "blueprint_chapter_id": "bio_bot_09",
-    "chapter": "উদ্ভিদ শারীরতত্ত্ব (Plant Physiology)"
+    "blueprint_chapter_id": "bio_bot_07",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
   },
   {
     "id": "w3_bio_q11",
@@ -2998,8 +2998,8 @@
     "speed_hack": "গ্লাইকোলাইসিস (EMP পথ) = সাইটোপ্লাজমে ঘটে (সবাত ও অবাত উভয় শ্বসনের প্রথম ধাপ)।",
     "type_ref": "Type 2: শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)",
     "blueprint_type_id": "bio_pb_t2",
-    "blueprint_chapter_id": "bio_bot_09",
-    "chapter": "উদ্ভিদ শারীরতত্ত্ব (Plant Physiology)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w3_bio_q15",
@@ -3036,8 +3036,8 @@
     "speed_hack": "RQ মান: গ্লুকোজ = $1.0$, প্রোটিন = $0.80$, চর্বি (ট্রাইপামিটিন) = $0.70$, ম্যালিক এসিড = $1.33$।",
     "type_ref": "Type 2: শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)",
     "blueprint_type_id": "bio_pb_t2",
-    "blueprint_chapter_id": "bio_bot_09",
-    "chapter": "উদ্ভিদ শারীরতত্ত্ব (Plant Physiology)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w3_bio_q16",
@@ -3074,8 +3074,8 @@
     "speed_hack": "অবাত শ্বসনে গৃহীত $O_2 = 0$, তাই শ্বাস অনুপাত $\\text{RQ} = \\frac{2CO_2}{0} = \\infty$ (অসীম)।",
     "type_ref": "Type 2: শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)",
     "blueprint_type_id": "bio_pb_t2",
-    "blueprint_chapter_id": "bio_bot_09",
-    "chapter": "উদ্ভিদ শারীরতত্ত্ব (Plant Physiology)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w3_bio_q18",
@@ -3112,8 +3112,8 @@
     "speed_hack": "পরাগরেণুর বহিত্বক (Exine) = স্পোরোপোলেনিন; অন্তঃত্বক (Intine) = সেলুলোজ ও পেকটিন।",
     "type_ref": "Type 4: অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ",
     "blueprint_type_id": "bio_pd_t4",
-    "blueprint_chapter_id": "bio_bot_06",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)"
+    "blueprint_chapter_id": "bio_bot_03",
+    "chapter": "কোষ রসায়ন (Cell Chemistry)"
   },
   {
     "id": "w3_bio_q21",
@@ -3188,8 +3188,8 @@
     "speed_hack": "নিষেকের পর: গর্ভাশয় $\\to$ ফল; সমগ্র ডিম্বক $\\to$ বীজ; ডিম্বাণু $\\to$ ভ্রূণ।",
     "type_ref": "Type 4: অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ",
     "blueprint_type_id": "bio_pd_t4",
-    "blueprint_chapter_id": "bio_bot_06",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)"
+    "blueprint_chapter_id": "bio_bot_10",
+    "chapter": "উদ্ভিদ প্রজনন (Plant Reproduction)"
   },
   {
     "id": "eng_q01",
@@ -4933,7 +4933,7 @@
     "id": "mat_line_bio_02",
     "week_id": "week_02",
     "subject": "Biology",
-    "chapter": "মানব শারীরতত্ত্ব: পরিপাক ও শোষণ (Human Physiology: Digestion & Absorption)",
+    "chapter": "মানব শারীরতত্ত্ব: সমন্বয় ও নিয়ন্ত্রণ (Human Physiology: Coordination)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '22 Direct Line",
@@ -4965,13 +4965,13 @@
     "speed_hack": "মানবদেহের বৃহত্তম গ্রন্থি ও বৃহত্তম বহিঃক্ষরা গ্রন্থি = যকৃৎ (বৃহত্তম অন্তঃক্ষরা = থাইরয়েড)।",
     "type_ref": "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
     "blueprint_type_id": "bio_dc_t2",
-    "blueprint_chapter_id": "bio_zoo_03"
+    "blueprint_chapter_id": "bio_zoo_08"
   },
   {
     "id": "mat_line_bio_03",
     "week_id": "week_02",
     "subject": "Biology",
-    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)",
+    "chapter": "মানব শারীরতত্ত্ব: চলন ও অঙ্গচালনা (Human Physiology: Locomotion)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '21 Direct Line",
@@ -5003,7 +5003,7 @@
     "speed_hack": "হৃদপেশির (Cardiac muscle) একক শনাক্তকারী বৈশিষ্ট্য = ইন্টারক্যালেটেড ডিস্ক।",
     "type_ref": "Type 3: হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
     "blueprint_type_id": "bio_dc_t3",
-    "blueprint_chapter_id": "bio_zoo_04"
+    "blueprint_chapter_id": "bio_zoo_07"
   },
   {
     "id": "mat_line_bio_04",
@@ -5446,8 +5446,8 @@
     "speed_hack": "নগ্নবীজী (*Cycas*) উদ্ভিদের জাইলেমে ভেসেল ও ফ্লোয়েমে সঙ্গীকোষ থাকে না (ব্যতিক্রম: *Gnetum*)।",
     "type_ref": "Type 2: নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য",
     "blueprint_type_id": "bio_pd_t2",
-    "blueprint_chapter_id": "bio_bot_06",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)"
+    "blueprint_chapter_id": "bio_bot_07",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
   },
   {
     "id": "w5_med_004",
@@ -5484,8 +5484,8 @@
     "speed_hack": "মালভেসি পরাগধানী = একপ্রকোষ্ঠী ও বৃক্কাকার (Reniform); পোয়াসি = দ্বিপ্ৰকোষ্ঠী ও সর্বমুখ (Versatile)।",
     "type_ref": "Type 3: মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_pd_t3",
-    "blueprint_chapter_id": "bio_bot_06",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)"
+    "blueprint_chapter_id": "bio_bot_07",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
   },
   {
     "id": "w5_med_005",
@@ -5522,8 +5522,8 @@
     "speed_hack": "সিউডোসিলোমেট (অপ্রকৃত সিলোম) = নেমাটোডা (গোলকৃমি) ও রটিফেরা।",
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_zoo_01",
+    "chapter": "প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস (Animal Diversity & Classification)"
   },
   {
     "id": "w5_med_006",
@@ -5674,8 +5674,8 @@
     "speed_hack": "লবণ সেতুর আদর্শ তড়িৎবিশ্লেষ্য: সমগতিসম্পন্ন আয়নবিশিষ্ট $\\text{KCl}, \\text{KNO}_3$ বা $\\text{NH}_4\\text{NO}_3$ (এগার-এগার জেলিতে মিশ্রিত)।",
     "type_ref": "Type 1: কোষ বিভব ($E^\\circ_{cell}$) ও বিক্রিয়ার স্বতঃস্ফূর্ততা",
     "blueprint_type_id": "chem_el_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w5_med_010",
@@ -5712,8 +5712,8 @@
     "speed_hack": "হাইড্রোমিটার রিডিং: পূর্ণ চার্জিত লেড স্টোরেজ ব্যাটারিতে $1.28\\text{ g/cm}^3$ এবং রিচার্জ প্রয়োজন হলে $1.15\\text{ g/cm}^3$।",
     "type_ref": "Type 4: বাণিজ্যিক ব্যাটারি (লেড-এসিড স্টোরেজ ও লিথিয়াম ব্যাটারি)",
     "blueprint_type_id": "chem_el_t4",
-    "blueprint_chapter_id": "chem_2nd_04",
-    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w5_med_011",
@@ -5826,8 +5826,8 @@
     "speed_hack": "সেকেন্ড দোলকে $T = 2\\text{ s}$ ধ্রুবক হওয়ায় $L \\propto g$; বিষুবীয় অঞ্চলে $g$ সর্বনিম্ন তাই কার্যকর দৈর্ঘ্য $L$-ও সর্বনিম্ন।",
     "type_ref": "Type 1: সরল দোলকের পর্যায়কাল ও পাহাড়ের চূড়ায় সময় হারানো",
     "blueprint_type_id": "phy_pm_t1",
-    "blueprint_chapter_id": "phy_1st_06",
-    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
+    "blueprint_chapter_id": "phy_1st_08",
+    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)"
   },
   {
     "id": "w5_med_014",
@@ -5902,8 +5902,8 @@
     "speed_hack": "$1000\\text{ Hz}$ কম্পাঙ্কে শ্রাব্যতার প্রমাণ তীব্রতা $I_0 = 10^{-12}\\text{ W/m}^2$ (এবং সর্বোচ্চ সহনীয় তীব্রতা বা ব্যথাসীমা $1\\text{ W/m}^2$)।",
     "type_ref": "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)",
     "blueprint_type_id": "phy_pm_t2",
-    "blueprint_chapter_id": "phy_1st_08",
-    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w5_med_016",
@@ -5940,8 +5940,8 @@
     "speed_hack": "শব্দের বেগ $v_t \\approx v_0 + 0.61 t$; তাই প্রতি $1^\\circ\\text{C}$ তাপমাত্রা বৃদ্ধিতে বেগ $0.6\\text{ m/s}$ বা $0.61\\text{ m/s}$ বৃদ্ধি পায়।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w5_med_017",
@@ -6326,8 +6326,8 @@
     "speed_hack": "জীবন্ত জীবাশ্ম (*Cycas*, *Ginkgo*, *Limulus*) = বিলুপ্ত প্রাচীন যুগের সমগোত্রীয়দের বৈশিষ্ট্য নিয়ে আজও জীবিত।",
     "type_ref": "Type 2: নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য",
     "blueprint_type_id": "bio_pd_t2",
-    "blueprint_chapter_id": "bio_bot_06",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)"
+    "blueprint_chapter_id": "bio_bot_07",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
   },
   {
     "id": "w5_rep_004",
@@ -6364,8 +6364,8 @@
     "speed_hack": "মলাস্কার খোলক গঠনকারী পর্দা = ম্যান্টল; খাদ্য চর্বণের কাইটিনময় রেতি-জিহ্বা = রেডুলা (Radula)।",
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_zoo_01",
+    "chapter": "প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস (Animal Diversity & Classification)"
   },
   {
     "id": "w5_rep_005",
@@ -6440,8 +6440,8 @@
     "speed_hack": "পোয়েসি (ধান, গম, ভুট্টা) = ক্যারিয়পসিস ফল; মালভেসি (ঢেঁড়শ, তুলা) = ক্যাপসুল ফল।",
     "type_ref": "Type 3: মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_pd_t3",
-    "blueprint_chapter_id": "bio_bot_06",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)"
+    "blueprint_chapter_id": "bio_bot_07",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
   },
   {
     "id": "w5_rep_007",
@@ -6478,8 +6478,8 @@
     "speed_hack": "ল্যাব ফার্স্ট-এইড শর্টকাট: চোখে এসিড/ক্ষার $\\to 1-5\\%$ বোরিক এসিড ($\\text{H}_3\\text{BO}_3$); ত্বকে এসিড $\\to 5\\% \\text{NaHCO}_3$।",
     "type_ref": "Type 4: প্রাইমারি স্ট্যান্ডার্ড বনাম সেকেন্ডারি স্ট্যান্ডার্ড পদার্থ",
     "blueprint_type_id": "chem_quan_t4",
-    "blueprint_chapter_id": "chem_1st_01",
-    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)"
+    "blueprint_chapter_id": "chem_1st_05",
+    "chapter": "কর্মমুখী রসায়ন (Applied Chemistry)"
   },
   {
     "id": "w5_rep_008",
@@ -6630,8 +6630,8 @@
     "speed_hack": "লেড-এসিড ব্যাটারিতে $38\\% \\text{H}_2\\text{SO}_4$-এর আপেক্ষিক গুরুত্ব: পূর্ণ চার্জে $1.28$, ডিসচার্জে $1.15$ (আর ল্যাবের গাঢ় এসিড $1.84$)।",
     "type_ref": "Type 4: বাণিজ্যিক ব্যাটারি (লেড-এসিড স্টোরেজ ও লিথিয়াম ব্যাটারি)",
     "blueprint_type_id": "chem_el_t4",
-    "blueprint_chapter_id": "chem_2nd_04",
-    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w5_rep_012",
@@ -6706,8 +6706,8 @@
     "speed_hack": "সেকেন্ড দোলকের পূর্ণ দোলনকাল $T = 2\\text{ s}$ এবং আদর্শ কার্যকরী দৈর্ঘ্য $L = \\frac{g}{\\pi^2} \\approx 0.993\\text{ m}$ (প্রায় $1\\text{ m}$)।",
     "type_ref": "Type 1: সরল দোলকের পর্যায়কাল ও পাহাড়ের চূড়ায় সময় হারানো",
     "blueprint_type_id": "phy_pm_t1",
-    "blueprint_chapter_id": "phy_1st_06",
-    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
+    "blueprint_chapter_id": "phy_1st_08",
+    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)"
   },
   {
     "id": "w5_rep_014",
@@ -6782,8 +6782,8 @@
     "speed_hack": "মুক্তভাবে পড়ন্ত লিফটে কার্যকর ত্বরণ $g' = g - g = 0$; তাই দোলনকাল $T = 2\\pi\\sqrt{\\frac{L}{0}} = \\infty$ (অসীম)।",
     "type_ref": "Type 1: সরল দোলকের পর্যায়কাল ও পাহাড়ের চূড়ায় সময় হারানো",
     "blueprint_type_id": "phy_pm_t1",
-    "blueprint_chapter_id": "phy_1st_06",
-    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
+    "blueprint_chapter_id": "phy_1st_08",
+    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)"
   },
   {
     "id": "w5_rep_016",
@@ -6820,8 +6820,8 @@
     "speed_hack": "জলীয় বাষ্প ($M = 18$) শুষ্ক বাতাস ($M = 28.8$) অপেক্ষা হালকা হওয়ায় আর্দ্র বায়ুর ঘনত্ব $\\rho$ কমে, ফলে $v \\propto \\frac{1}{\\sqrt{\\rho}}$ অনুসারে শব্দের বেগ বাড়ে।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w5_rep_017",
@@ -6896,8 +6896,8 @@
     "speed_hack": "অসীম পাল্লার বল কেবল দুটি (মহাকর্ষ ও তড়িৎচৌম্বক); এদের মধ্যে মহাকর্ষ বলের আপেক্ষিক সবলতা সর্বনিম্ন ($1$)।",
     "type_ref": "Type 1: উচ্চতা ও গভীরতায় অভিকর্ষজ ত্বরণ ($g$)",
     "blueprint_type_id": "phy_grav_t1",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_06",
+    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
   },
   {
     "id": "w5_rep_019",
@@ -7138,8 +7138,8 @@
     "speed_hack": "প্রাণীজগতের ১ম বৃহত্তম পর্ব = Arthropoda; ২য় বৃহত্তম পর্ব = Mollusca (কম্বোজ)।",
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_zoo_01",
+    "chapter": "প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস (Animal Diversity & Classification)"
   },
   {
     "id": "w4_med_002",
@@ -7214,8 +7214,8 @@
     "speed_hack": "সকল সরীসৃপে অসম্পূর্ণ ৪-প্রকোষ্ঠী হৃৎপিণ্ড থাকে, একমাত্র ব্যতিক্রম কুমির (সম্পূর্ণ ৪-প্রকোষ্ঠী)।",
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w4_med_004",
@@ -7366,8 +7366,8 @@
     "speed_hack": "বৃহৎ আকার ও সহজ পোলারায়নের কারণে কঠিন অধাতু হওয়া সত্ত্বেও আয়োডিন ($\\text{I}_2$) ধাতব চকচকে দ্যুতি দেখায়।",
     "type_ref": "Type 3: ফাজানের নীতি ও পোলারায়ন (সমযোজী বনাম আয়নিক বৈশিষ্ট্য)",
     "blueprint_type_id": "chem_per_t3",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w4_med_008",
@@ -7556,8 +7556,8 @@
     "speed_hack": "$\\text{CO}_2$ বিচ্ছিন্ন রৈখিক গ্যাসীয় অণু হলেও $\\text{SiO}_2$ (কোয়ার্টজ) চতুস্তলকীয় অতিকায় সমযোজী জালক (Giant Lattice) গঠন করায় উচ্চ গলনাঙ্কবিশিষ্ট কঠিন।",
     "type_ref": "Type 3: ফাজানের নীতি ও পোলারায়ন (সমযোজী বনাম আয়নিক বৈশিষ্ট্য)",
     "blueprint_type_id": "chem_per_t3",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w4_med_013",
@@ -7632,8 +7632,8 @@
     "speed_hack": "ভ্যান ডার ওয়ালসের বর্জিত আয়তন ধ্রুবক $b$ হলো ১ মোল গ্যাস অণুর নিজস্ব গোলকীয় আয়তনের ঠিক ৪ গুণ ($b = 4 V_{\\text{actual}}$)।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w4_med_015",
@@ -7670,8 +7670,8 @@
     "speed_hack": "যে তরল কাঁচ ভিজায় (পানি) তার স্পর্শকোণ সূক্ষ্মকোণ ($<90^\\circ$, প্রায় $8^\\circ$); যা কাঁচ ভিজায় না (পারদ) তার স্পর্শকোণ স্থূলকোণ ($>90^\\circ$, প্রায় $139^\\circ$)।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_07",
-    "chapter": "পদার্থের গাঠনিক ধর্ম (Structural Properties of Matter)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w4_med_016",
@@ -7708,8 +7708,8 @@
     "speed_hack": "আদর্শ গ্যাসে আন্তঃআণবিক বিভব শক্তি শূন্য হওয়ায় অভ্যন্তরীণ শক্তি $U = \\frac{f}{2}nRT$ কেবলমাত্র পরম তাপমাত্রা ($T$)-এর ওপর নির্ভরশীল।",
     "type_ref": "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি",
     "blueprint_type_id": "phy_gt_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_05",
+    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
   },
   {
     "id": "w4_med_017",
@@ -7784,8 +7784,8 @@
     "speed_hack": "প্রমাণ অবস্থায় শুষ্ক বাতাসের ঘনত্ব $\\rho = \\frac{PM}{RT} = \\frac{101325 \\times 0.0289}{8.314 \\times 273} \\approx 1.293\\text{ kg/m}^3$ (মুখস্থ স্ট্যান্ডার্ড মান)।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w4_med_019",
@@ -8064,8 +8064,8 @@
     "speed_hack": "কেলভিন স্কেলের শূন্য বিন্দু ($0\\text{ K}$) হলো সেলসিয়াস স্কেলে ঠিক $-273.15^\\circ\\text{C}$ (ফারেনহাইট স্কেলে $-459.67^\\circ\\text{F}$)।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w4_rep_003",
@@ -8102,8 +8102,8 @@
     "speed_hack": "তাপমাত্রা বাড়লে আন্তঃআণবিক আকর্ষণ কমে বলে পৃষ্ঠটান হ্রাস পায় এবং সংকট তাপমাত্রায় তরল-বাষ্প বিভেদতল লোপ পাওয়ায় পৃষ্ঠটান শূন্য হয়।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_01",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)"
+    "blueprint_chapter_id": "phy_1st_05",
+    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
   },
   {
     "id": "w4_rep_004",
@@ -8140,8 +8140,8 @@
     "speed_hack": "$P = \\frac{\\rho RT}{M}$ সমীকরণে $T$ ও $M$ স্থির থাকলে ঘনত্ব সরাসরি চাপের সমানুপাতিক ($\\rho \\propto P$); তাই চাপ দ্বিগুণ করলে ঘনত্বও দ্বিগুণ হবে।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_10",
+    "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব (Ideal Gas & Kinetic Theory)"
   },
   {
     "id": "w4_rep_005",
@@ -8178,8 +8178,8 @@
     "speed_hack": "তাপমাত্রা বাড়লে তরলের সংশক্তি বল কমে তাই সান্দ্রতা হ্রাস পায়, কিন্তু গ্যাসের অণুর সংঘর্ষ বাড়ে তাই গ্যাসের সান্দ্রতা বৃদ্ধি পায় ($\\eta \\propto \\sqrt{T}$)।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_01",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)"
+    "blueprint_chapter_id": "phy_1st_04",
+    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
   },
   {
     "id": "w4_rep_006",
@@ -8216,8 +8216,8 @@
     "speed_hack": "আদর্শ গ্যাসে আন্তঃআণবিক আকর্ষণ শূন্য থাকতে হয়, যা কেবল অণুগুলো দূরে থাকলে (নিম্ন চাপ) এবং দ্রুত ছুটলে (উচ্চ তাপমাত্রা) সম্ভব।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_05",
+    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
   },
   {
     "id": "w4_rep_007",
@@ -8330,8 +8330,8 @@
     "speed_hack": "উভধর্মী অক্সাইড শর্টকাট: $\\text{Al}_2\\text{O}_3, \\text{ZnO}, \\text{BeO}, \\text{SnO}, \\text{PbO}$ এসিড ও ক্ষার উভয়ের সাথেই লবণ ও পানি উৎপন্ন করে।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w4_rep_010",
@@ -8368,8 +8368,8 @@
     "speed_hack": "হীরায় কার্বনের ৪টি একক বন্ধন থাকায় $sp^3$ (বিদ্যুৎ অপরিবাহী) এবং গ্রাফাইটে ষড়ভুজীয় স্তরে ১টি মুক্ত $e^-$ থাকায় $sp^2$ (বিদ্যুৎ পরিবাহী)।",
     "type_ref": "Type 1: সংকরায়ন (Hybridization) ও অণুর জ্যামিতিক আকৃতি",
     "blueprint_type_id": "chem_per_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_rep_011",
@@ -8406,8 +8406,8 @@
     "speed_hack": "মুদ্রাধাতু ($\\text{Cu, Ag, Au}$) পর্যায় সারণির গ্রুপ ১১ (প্রাক্তন IB)-তে অবস্থিত।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w4_rep_012",
@@ -8444,8 +8444,8 @@
     "speed_hack": "শুষ্ক বরফ হলো অপোলার কঠিন $\\text{CO}_2$, যার অণুগুলোর মাঝে কেবল দুর্বল ভ্যান ডার ওয়ালস (লন্ডন বিচ্ছুরণ) বল ক্রিয়া করে।",
     "type_ref": "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা",
     "blueprint_type_id": "chem_per_t4",
-    "blueprint_chapter_id": "chem_1st_03",
-    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w4_rep_013",
@@ -8482,8 +8482,8 @@
     "speed_hack": "$365 = 52 \\times 7 + 1$; অবশিষ্ট $1$টি অতিরিক্ত দিন সপ্তাহের $7$ দিনের মধ্যে রবিবার হওয়ার সম্ভাবনা সরাসরি $\\frac{1}{7}$।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_01",
-    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)"
+    "blueprint_chapter_id": "math_2nd_10",
+    "chapter": "বিস্তার পরিমাপ ও সম্ভাবনা (Dispersion & Probability)"
   },
   {
     "id": "w4_rep_014",
@@ -8520,8 +8520,8 @@
     "speed_hack": "প্রথম ঘরে $0$ বাদে $4$টি অঙ্ক এবং বাকি ৪ ঘরে অবশিষ্ট $4$টি অঙ্ক বসলে মোট সংখ্যা $= 4 \\times 4! = 4 \\times 24 = 96$।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_01",
-    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)"
+    "blueprint_chapter_id": "math_1st_05",
+    "chapter": "বিন্যাস ও সমাবেশ (Permutations & Combinations)"
   },
   {
     "id": "w4_rep_015",
@@ -8558,8 +8558,8 @@
     "speed_hack": "পরিমিত ব্যবধান মূল (যোগ বা বিয়োগ) থেকে সম্পূর্ণ স্বাধীন, তাই প্রতিটি মান হতে $5$ বিয়োগ করলেও তা অপরিবর্তিত থাকবে।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_01",
-    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)"
+    "blueprint_chapter_id": "math_2nd_10",
+    "chapter": "বিস্তার পরিমাপ ও সম্ভাবনা (Dispersion & Probability)"
   },
   {
     "id": "w4_rep_016",
@@ -8596,8 +8596,8 @@
     "speed_hack": "মোট ত্রিভুজ $= \\binom{10}{3} - \\binom{4}{3} = 120 - 4 = 116$।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_01",
-    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)"
+    "blueprint_chapter_id": "math_1st_05",
+    "chapter": "বিন্যাস ও সমাবেশ (Permutations & Combinations)"
   },
   {
     "id": "w4_rep_017",
@@ -8634,8 +8634,8 @@
     "speed_hack": "৩টি মুদ্রা নিক্ষেপে 'কমপক্ষে ২টি হেড' এবং 'কমপক্ষে ২টি টেইল' সম্পূর্ণ প্রতিসম ও পরিপূরক, তাই সম্ভাবনা সরাসরি অর্ধেক $= \\frac{1}{2}$।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_01",
-    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)"
+    "blueprint_chapter_id": "math_2nd_10",
+    "chapter": "বিস্তার পরিমাপ ও সম্ভাবনা (Dispersion & Probability)"
   },
   {
     "id": "w4_rep_018",
@@ -8672,8 +8672,8 @@
     "speed_hack": "সকল উপাত্ত সমান (ধ্রুবক $c$) হলে গড় থেকে কোনো বিচ্যুতি থাকে না, তাই ভেদাঙ্ক ও পরিমিত ব্যবধান সর্বদা $0$।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_01",
-    "chapter": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)"
+    "blueprint_chapter_id": "math_2nd_10",
+    "chapter": "বিস্তার পরিমাপ ও সম্ভাবনা (Dispersion & Probability)"
   },
   {
     "id": "w4_rep_019",
@@ -8786,8 +8786,8 @@
     "speed_hack": "হিপনোটক্সিন (স্টিনোটিল নেমাটোসিস্টের বিষ) = প্রোটিন ও ফেনলের মিশ্রণ।",
     "type_ref": "Type 2: হাইড্রার নেমাটোসিস্ট ও পরিপাক",
     "blueprint_type_id": "bio_adr_t2",
-    "blueprint_chapter_id": "bio_zoo_02",
-    "chapter": "প্রাণীর পরিচিতি (হাইড্রা, ঘাসফড়িং, রুই মাছ)"
+    "blueprint_chapter_id": "bio_bot_03",
+    "chapter": "কোষ রসায়ন (Cell Chemistry)"
   },
   {
     "id": "w4_rep_022",
@@ -8900,8 +8900,8 @@
     "speed_hack": "দ্বিপদ নামকরণ (Binomial Nomenclature) ও ট্যাক্সোনমির জনক = ক্যারোলাস লিনিয়াস।",
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_zoo_01",
+    "chapter": "প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস (Animal Diversity & Classification)"
   },
   {
     "id": "w6_med_001",
@@ -8939,8 +8939,8 @@
     "speed_hack": "২য় শক্তিস্তরে $n = 2 \\implies n^2 = 4$; তাই $E_2 = \\frac{-13.6}{4} = -3.4\\text{ eV}$।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_2nd_08",
-    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)"
+    "blueprint_chapter_id": "phy_2nd_09",
+    "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান (Atomic & Nuclear Physics)"
   },
   {
     "id": "w6_med_002",
@@ -8978,8 +8978,8 @@
     "speed_hack": "কর্মদক্ষতা $\\eta = \\frac{T_1 - T_2}{T_1} \\times 100\\% = \\frac{500 - 300}{500} \\times 100\\% = \\frac{2}{5} \\times 100\\% = 40\\%$।",
     "type_ref": "Type 1: কার্নো ইঞ্জিনের কর্মদক্ষতা ও গ্রাহকের তাপমাত্রা",
     "blueprint_type_id": "phy_gt_t1",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_2nd_01",
+    "chapter": "তাপগতিবিদ্যা (Thermodynamics)"
   },
   {
     "id": "w6_med_003",
@@ -9017,8 +9017,8 @@
     "speed_hack": "বিজ্ঞানী সুব্রহ্মণ্যন চন্দ্রশেখরের নামানুসারে শ্বেত বামন তারকার সর্বোচ্চ স্থায়ী ভর সীমা হলো $1.4$ সৌরভর ($1.4 M_\\odot$)।",
     "type_ref": "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)",
     "blueprint_type_id": "phy_mn_t1",
-    "blueprint_chapter_id": "phy_2nd_08",
-    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)"
+    "blueprint_chapter_id": "phy_2nd_11",
+    "chapter": "জ্যোতির্বিজ্ঞান (Astronomy)"
   },
   {
     "id": "w6_med_004",
@@ -9056,8 +9056,8 @@
     "speed_hack": "নিউক্লিয়াসের স্থায়িত্ব দেয় সবল নিউক্লীয় বল, আর তেজস্ক্রিয় বিটা ($\\beta$) ক্ষয় ও নিউট্রিনো নির্গমন ঘটায় দুর্বল নিউক্লীয় বল।",
     "type_ref": "Type 3: তেজস্ক্রিয় ক্ষয় সূত্র, অর্ধায়ু ও গড় আয়ু",
     "blueprint_type_id": "phy_mn_t3",
-    "blueprint_chapter_id": "phy_1st_09",
-    "chapter": "তরঙ্গ (Waves)"
+    "blueprint_chapter_id": "phy_2nd_09",
+    "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান (Atomic & Nuclear Physics)"
   },
   {
     "id": "w6_med_005",
@@ -9134,8 +9134,8 @@
     "speed_hack": "প্রত্যাবর্তী প্রক্রিয়ায় (যেমন রুদ্ধতাপীয় প্রত্যাবর্তী প্রক্রিয়া বা পূর্ণ কার্নো চক্রে) মোট এনট্রপির পরিবর্তন সর্বদা শূন্য ($\\Delta S = 0$)।",
     "type_ref": "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি",
     "blueprint_type_id": "phy_gt_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_04",
+    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
   },
   {
     "id": "w6_med_007",
@@ -9173,8 +9173,8 @@
     "speed_hack": "ডপলার ক্রিয়ার ফলে উৎস দূরে সরে গেলে তরঙ্গদৈর্ঘ্য বেড়ে লাল প্রান্তের দিকে সরে (Red Shift), যা প্রমাণ করে মহাবিশ্ব সম্প্রসারণশীল।",
     "type_ref": "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)",
     "blueprint_type_id": "phy_mn_t1",
-    "blueprint_chapter_id": "phy_2nd_08",
-    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)"
+    "blueprint_chapter_id": "phy_2nd_11",
+    "chapter": "জ্যোতির্বিজ্ঞান (Astronomy)"
   },
   {
     "id": "w6_med_008",
@@ -9212,8 +9212,8 @@
     "speed_hack": "পানির ত্রৈধবিন্দু সেলসিয়াসে $0.01^\\circ\\text{C}$ এবং কেলভিন স্কেলে আন্তর্জাতিকভাবে সংজ্ঞায়িত মান ঠিক $273.16\\text{ K}$ (চাপ $4.58\\text{ mmHg}$)।",
     "type_ref": "Type 1: কার্নো ইঞ্জিনের কর্মদক্ষতা ও গ্রাহকের তাপমাত্রা",
     "blueprint_type_id": "phy_gt_t1",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w6_med_009",
@@ -9290,8 +9290,8 @@
     "speed_hack": "আইনস্টাইনের $E = mc^2$ সূত্রে $1\\text{ amu} = 1.6605 \\times 10^{-27}\\text{ kg}$ বসালে সমতুল্য শক্তি ফিক্সড ধ্রুবক $931.5\\text{ MeV}$।",
     "type_ref": "Type 4: ভর ত্রুটি ও নিউক্লীয় বন্ধন শক্তি",
     "blueprint_type_id": "phy_mn_t4",
-    "blueprint_chapter_id": "phy_2nd_09",
-    "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান (Atomic & Nuclear Physics)"
+    "blueprint_chapter_id": "phy_1st_02",
+    "chapter": "ভেক্টর (Vector)"
   },
   {
     "id": "w6_med_011",
@@ -9329,8 +9329,8 @@
     "speed_hack": "তাপীয় সাম্যাবস্থা ও তাপমাত্রা পরিমাপক যন্ত্র 'থার্মোমিটার' তৈরির মূল ভিত্তি হলো তাপগতিবিদ্যার শূন্যতম সূত্র (Zeroth Law)।",
     "type_ref": "Type 1: কার্নো ইঞ্জিনের কর্মদক্ষতা ও গ্রাহকের তাপমাত্রা",
     "blueprint_type_id": "phy_gt_t1",
-    "blueprint_chapter_id": "phy_1st_01",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)"
+    "blueprint_chapter_id": "phy_1st_03",
+    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
   },
   {
     "id": "w6_med_012",
@@ -9368,8 +9368,8 @@
     "speed_hack": "রুদ্ধ-তাপীয় (তাপ অবরুদ্ধ) নামের মধ্যেই উত্তর আছে: সিস্টেম ও পরিবেশের মধ্যে তাপের কোনো আদান-প্রদান হয় না ($\\Delta Q = 0$)।",
     "type_ref": "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি",
     "blueprint_type_id": "phy_gt_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_2nd_01",
+    "chapter": "তাপগতিবিদ্যা (Thermodynamics)"
   },
   {
     "id": "w6_med_013",
@@ -9407,8 +9407,8 @@
     "speed_hack": "ফটোকেমিক্যাল স্মগ (ধোঁয়াশা) = সূর্যালোক + গাড়ির ধোঁয়ার $\\text{NO}_x$ + হাইড্রোকার্বন $\\to \\text{O}_3 + \\text{PAN}$।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_02",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)"
   },
   {
     "id": "w6_med_014",
@@ -9446,8 +9446,8 @@
     "speed_hack": "ক্যাডমিয়াম ($\\text{Cd}^{2+}$) দূষণে হার ও কিডনি ক্ষয়কারী 'ইটাই-ইটাই' (আউচ-আউচ) রোগ হয়।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w6_med_015",
@@ -9485,8 +9485,8 @@
     "speed_hack": "আর্সেনিকের নিরাপদ মাত্রা: WHO মানদণ্ড $= 0.01\\text{ mg/L}$ (ppm), কিন্তু বাংলাদেশে গ্রহণযোগ্য মাত্রা $= 0.05\\text{ mg/L}$।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w6_med_016",
@@ -9524,8 +9524,8 @@
     "speed_hack": "বিশুদ্ধ পানিতে আদর্শ DO $= 4 - 6\\text{ ppm}$ (যত বেশি তত ভালো, $<4\\text{ ppm}$ হলে জলজ মাছ মারা যায়)।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w6_med_017",
@@ -9563,8 +9563,8 @@
     "speed_hack": "স্ট্র্যাটোস্ফিয়ারে (ভূপৃষ্ঠের $15-35\\text{ km}$ উপরে) ওজোন স্তর ($\\text{O}_3$) সূর্যের ক্ষতিকর UV রশ্মি শোষণ করে ছাঁকনি হিসেবে কাজ করে।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w6_med_018",
@@ -9602,8 +9602,8 @@
     "speed_hack": "$Z = \\frac{PV}{nRT} = 1 \\implies PV = nRT$ (আদর্শ গ্যাস সমীকরণ)।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w6_med_019",
@@ -9641,8 +9641,8 @@
     "speed_hack": "ভ্যানডার ওয়ালস সমীকরণে $a$ হলো আন্তঃআণবিক আকর্ষণ বল সংশোধন (চাপ পদ $\\frac{an^2}{V^2}$) এবং $b$ হলো অণুর কার্যকর আয়তন সংশোধন।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w6_med_020",
@@ -9680,8 +9680,8 @@
     "speed_hack": "প্রধান গ্রিনহাউস গ্যাস কার্বন ডাই-অক্সাইড ($\\text{CO}_2$), যা বৈশ্বিক উষ্ণায়নের এককভাবে প্রায় $50-55\\%$ এর জন্য দায়ী।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w6_med_021",
@@ -9758,8 +9758,8 @@
     "speed_hack": "CFC থেকে UV রশ্মির আঘাতে সৃষ্ট ১টি সক্রিয় ক্লোরিন ফ্রি-রেডিকেল ($\\text{Cl}^\\bullet$) চেইন বিক্রিয়ায় ১ লক্ষ $\\text{O}_3$ অণু ধ্বংস করে।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w6_med_023",
@@ -9797,8 +9797,8 @@
     "speed_hack": "ইউরিয়া ($\\text{NH}_2\\text{CONH}_2$, $M=60$)-এ নাইট্রোজেন $= \\frac{28}{60} \\times 100\\% = 46.66\\% \\approx 46\\%$।",
     "type_ref": "Type 1: ভিনেগার প্রস্তুতি ও খাদ্য সংরক্ষণে ভূমিকা",
     "blueprint_type_id": "chem_app_t1",
-    "blueprint_chapter_id": "chem_1st_05",
-    "chapter": "কর্মমুখী রসায়ন (Applied Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_med_024",
@@ -9836,8 +9836,8 @@
     "speed_hack": "পানিতে BOD বা COD যত বেশি, দ্রবীভূত অক্সিজেন (DO) তত কম এবং পানি তত বেশি দূষিত।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_02",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)"
   },
   {
     "id": "w6_med_025",
@@ -9875,8 +9875,8 @@
     "speed_hack": "অক্সিনটিক কোষের ইন্ট্রিনসিক ফ্যাক্টর ভিটামিন $B_{12}$ শোষণ করায় (অভাবে পারনিশিয়াস অ্যানিমিয়া হয়)।",
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
-    "blueprint_chapter_id": "bio_bot_03",
-    "chapter": "কোষ রসায়ন (Cell Chemistry)"
+    "blueprint_chapter_id": "bio_zoo_03",
+    "chapter": "মানব শারীরতত্ত্ব: পরিপাক ও শোষণ (Human Physiology: Digestion & Absorption)"
   },
   {
     "id": "w6_med_026",
@@ -10031,8 +10031,8 @@
     "speed_hack": "ডিওডেনামে অম্লীয় কাইম $\\to$ সিক্রেটিন হরমোন ক্ষরণ $\\to$ অগ্ন্যাশয় থেকে বাইকার্বনেটসমৃদ্ধ ক্ষারীয় রস নিঃসরণ।",
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
-    "blueprint_chapter_id": "bio_bot_03",
-    "chapter": "কোষ রসায়ন (Cell Chemistry)"
+    "blueprint_chapter_id": "bio_bot_07",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
   },
   {
     "id": "w6_med_030",
@@ -10148,8 +10148,8 @@
     "speed_hack": "পাকস্থলীর প্রাচীরের ভাঁজ = রুজি (Rugae); ক্ষুদ্রান্ত্রের আঙুলের ন্যায় অভিক্ষেপ = ভিলাই (Villi)।",
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
-    "blueprint_chapter_id": "bio_bot_03",
-    "chapter": "কোষ রসায়ন (Cell Chemistry)"
+    "blueprint_chapter_id": "bio_zoo_03",
+    "chapter": "মানব শারীরতত্ত্ব: পরিপাক ও শোষণ (Human Physiology: Digestion & Absorption)"
   },
   {
     "id": "w6_med_033",
@@ -10226,8 +10226,8 @@
     "speed_hack": "স্থূলতা (Obesity) সরাসরি ঘটায় টাইপ-২ ডায়াবেটিস, উচ্চ রক্তচাপ ও হৃদরোগ (টাইপ-১ ডায়াবেটিস নয়)।",
     "type_ref": "Type 4: প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
     "blueprint_type_id": "bio_re_t4",
-    "blueprint_chapter_id": "bio_bot_07",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)"
+    "blueprint_chapter_id": "bio_zoo_04",
+    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)"
   },
   {
     "id": "w6_med_035",
@@ -10460,8 +10460,8 @@
     "speed_hack": "ANP (Atrial Natriuretic Peptide) = মূত্রে $\\text{Na}^+$ ত্যাগ বাড়িয়ে রক্তচাপ হ্রাস করে।",
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
-    "blueprint_chapter_id": "bio_zoo_04",
-    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)"
+    "blueprint_chapter_id": "bio_bot_03",
+    "chapter": "কোষ রসায়ন (Cell Chemistry)"
   },
   {
     "id": "w6_med_041",
@@ -10655,8 +10655,8 @@
     "speed_hack": "রেনাল পিরামিডগুলোর মধ্যবর্তী কর্টেক্সের প্রলম্বিত স্তম্ভ = রেনাল কলাম বা বারটিনের স্তম্ভ।",
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
-    "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন (Human Physiology: Excretion)"
+    "blueprint_chapter_id": "bio_bot_01",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)"
   },
   {
     "id": "w6_med_046",
@@ -10974,7 +10974,7 @@
     "id": "w7_med_bio_06",
     "week_id": "week_07",
     "subject": "Biology",
-    "chapter": "শৈবাল ও ছত্রাক (Algae & Fungi)",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '18 Direct Line",
@@ -11007,7 +11007,7 @@
     "speed_hack": "*Agaricus* ফ্রুটবডি: ছাতার মতো অংশ = পাইলিয়াস; নিচের দণ্ড = স্টাইপ; চক্রাকার আংটি = অ্যানুলাস।",
     "type_ref": "Type 4: শৈবালের খাদ্য সঞ্চয় ও পিগমেন্ট",
     "blueprint_type_id": "bio_ma_t4",
-    "blueprint_chapter_id": "bio_bot_05"
+    "blueprint_chapter_id": "bio_bot_07"
   },
   {
     "id": "w7_med_bio_07",
@@ -11052,7 +11052,7 @@
     "id": "w7_med_bio_08",
     "week_id": "week_07",
     "subject": "Biology",
-    "chapter": "ব্রায়োফাইটা ও টেরিডোফাইটা (Bryophyta & Pteridophyta)",
+    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '21 Direct Line",
@@ -11085,7 +11085,7 @@
     "speed_hack": "*Riccia* থ্যালাস = হ্যাপ্লয়েড গ্যামিটোফাইট, চ্যাপ্টা, রোজেট আকৃতি ও দ্বি-অগ্রশাখাবিশিষ্ট (Dichotomous)।",
     "type_ref": "Type 1: ব্রায়োফাইটা (রিকসিয়া) ও টেরিডোফাইটা (টেরিস) বৈশিষ্ট্য",
     "blueprint_type_id": "bio_pd_t1",
-    "blueprint_chapter_id": "bio_bot_06"
+    "blueprint_chapter_id": "bio_bot_07"
   },
   {
     "id": "w7_med_bio_09",
@@ -11208,7 +11208,7 @@
     "id": "w7_med_bio_12",
     "week_id": "week_07",
     "subject": "Biology",
-    "chapter": "নগ্নবীজী ও আবৃতবীজী (Gymnosperms & Angiosperms)",
+    "chapter": "মানব শারীরতত্ত্ব: রক্ত ও সংবহন (Human Physiology: Blood & Circulation)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '21 Direct Line",
@@ -11241,7 +11241,7 @@
     "speed_hack": "প্যারাথরমোন (PTH) = রক্তে $\\text{Ca}^{2+}$ বাড়ায়; ক্যালসিটোনিন = রক্তে $\\text{Ca}^{2+}$ কমায়।",
     "type_ref": "Type 4: প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
     "blueprint_type_id": "bio_re_t4",
-    "blueprint_chapter_id": "bio_bot_07"
+    "blueprint_chapter_id": "bio_zoo_04"
   },
   {
     "id": "w7_med_che_01",
@@ -11286,7 +11286,7 @@
     "id": "w7_med_che_02",
     "week_id": "week_07",
     "subject": "Chemistry",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '20 Direct Line",
@@ -11319,7 +11319,7 @@
     "speed_hack": "কিটো-ইনল টটোমারিজমের শর্ত হলো কার্বনিল মূলকের সাথে যুক্ত আলফা ($\\alpha$) কার্বনে অন্তত ১টি হাইড্রোজেন থাকা (যেমন প্রোপানোন)।",
     "type_ref": "Type 1: সমাণুতা (জ্যামিতিক সিস-ট্রান্স ও আলোক সমাণুতা)",
     "blueprint_type_id": "chem_org_t1",
-    "blueprint_chapter_id": "chem_1st_04"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w7_med_che_03",
@@ -11364,7 +11364,7 @@
     "id": "w7_med_che_04",
     "week_id": "week_07",
     "subject": "Chemistry",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '23 Direct Line",
@@ -11397,7 +11397,7 @@
     "speed_hack": "কার্বোক্যাটায়ন ও ফ্রি-রেডিকেলের স্থায়িত্ব: $3^\\circ > 2^\\circ > 1^\\circ > \\text{CH}_3^+$ (কিন্তু কার্বানায়ন ও $S_N2$ সক্রিয়তায় ঠিক উল্টো: $1^\\circ > 2^\\circ > 3^\\circ$)।",
     "type_ref": "Type 3: $S_N1$ বনাম $S_N2$ বিক্রিয়া কৌশল ও সক্রিয়তার ক্রম",
     "blueprint_type_id": "chem_org_t3",
-    "blueprint_chapter_id": "chem_1st_02"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w7_med_che_05",
@@ -11559,7 +11559,7 @@
     "id": "w7_med_phy_03",
     "week_id": "week_07",
     "subject": "Physics",
-    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)",
+    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '20 Direct Line",
@@ -11592,13 +11592,13 @@
     "speed_hack": "আইনস্টাইনের সমীকরণ $K_{\\max} = hf - W_0$ অনুসারে সর্বোচ্চ গতিশক্তি কেবল আপতিত আলোর কম্পাঙ্ক ($f$)-এর ওপর রৈখিকভাবে নির্ভরশীল।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_2nd_08"
+    "blueprint_chapter_id": "phy_1st_08"
   },
   {
     "id": "w7_med_phy_04",
     "week_id": "week_07",
     "subject": "Physics",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)",
+    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '23 Direct Line",
@@ -11631,7 +11631,7 @@
     "speed_hack": "কাল দীর্ঘায়ন ($t = \\frac{t_0}{\\sqrt{1 - v^2/c^2}}$)-এর ফলে গতিশীল কাঠামোর প্রতিটি সেকেন্ড দীর্ঘ হয়, তাই ঘড়িটি ধীরগতিতে চলে।",
     "type_ref": "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)",
     "blueprint_type_id": "phy_mn_t1",
-    "blueprint_chapter_id": "phy_1st_01"
+    "blueprint_chapter_id": "phy_2nd_08"
   },
   {
     "id": "w7_med_phy_05",
@@ -12189,7 +12189,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)",
+    "chapter": "চল তড়িৎ (Current Electricity)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "Week 08 Solve Sheet - W-08",
@@ -12223,14 +12223,14 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_1st_05"
+    "blueprint_chapter_id": "phy_2nd_03"
   },
   {
     "id": "w8_phy_007",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)",
+    "chapter": "চল তড়িৎ (Current Electricity)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "DU 18-19",
@@ -12264,14 +12264,14 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_1st_05"
+    "blueprint_chapter_id": "phy_2nd_03"
   },
   {
     "id": "w8_phy_009",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "চল তড়িৎ (Current Electricity)",
+    "chapter": "ভেক্টর (Vector)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "RU 21-22",
@@ -12305,14 +12305,14 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_2nd_03"
+    "blueprint_chapter_id": "phy_1st_02"
   },
   {
     "id": "w8_phy_010",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "চল তড়িৎ (Current Electricity)",
+    "chapter": "ভেক্টর (Vector)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "Week 08 Solve Sheet - W-08",
@@ -12346,14 +12346,14 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_2nd_03"
+    "blueprint_chapter_id": "phy_1st_02"
   },
   {
     "id": "w8_phy_011",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)",
+    "chapter": "ভেক্টর (Vector)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "GST 22-23",
@@ -12387,7 +12387,7 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_1st_01"
+    "blueprint_chapter_id": "phy_1st_02"
   },
   {
     "id": "w8_phy_012",
@@ -12558,7 +12558,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভৌতজগৎ ও পরিমাপ (Physical World & Measurement)",
+    "chapter": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স (Semiconductor & Electronics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "RU 22-23",
@@ -12592,14 +12592,14 @@
     "expected_count": 5,
     "type_ref": "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি",
     "blueprint_type_id": "phy_mn_t5",
-    "blueprint_chapter_id": "phy_1st_01"
+    "blueprint_chapter_id": "phy_2nd_10"
   },
   {
     "id": "w8_phy_023",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স (Semiconductor & Electronics)",
+    "chapter": "ভেক্টর (Vector)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT 20-21",
@@ -12633,14 +12633,14 @@
     "expected_count": 5,
     "type_ref": "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি",
     "blueprint_type_id": "phy_mn_t5",
-    "blueprint_chapter_id": "phy_2nd_10"
+    "blueprint_chapter_id": "phy_1st_02"
   },
   {
     "id": "w8_phy_025",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "তরঙ্গ (Waves)",
+    "chapter": "ভেক্টর (Vector)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "GST 21-22",
@@ -12674,7 +12674,7 @@
     "expected_count": 5,
     "type_ref": "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি",
     "blueprint_type_id": "phy_mn_t5",
-    "blueprint_chapter_id": "phy_1st_09"
+    "blueprint_chapter_id": "phy_1st_02"
   },
   {
     "id": "w8_phy_026",
@@ -12886,7 +12886,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Chemistry",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "Week 08 Solve Sheet - Daily C-08",
@@ -12920,7 +12920,7 @@
     "expected_count": 5,
     "type_ref": "Type 4: কার্যকরী মূলক শনাক্তকারী পরীক্ষা",
     "blueprint_type_id": "chem_org_t4",
-    "blueprint_chapter_id": "chem_2nd_01"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w8_che_006",
@@ -13009,7 +13009,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Chemistry",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "Week 08 Solve Sheet - Daily C-08",
@@ -13043,7 +13043,7 @@
     "expected_count": 5,
     "type_ref": "Type 3: $S_N1$ বনাম $S_N2$ বিক্রিয়া কৌশল ও সক্রিয়তার ক্রম",
     "blueprint_type_id": "chem_org_t3",
-    "blueprint_chapter_id": "chem_1st_02"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w8_che_009",
@@ -13173,7 +13173,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Chemistry",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "RU 22-23",
@@ -13207,7 +13207,7 @@
     "expected_count": 5,
     "type_ref": "Type 2: বেনজিন বলয় সক্রিয়কারী (অর্থো-প্যারা) বনাম নিষ্ক্রিয়কারী (মেটা)",
     "blueprint_type_id": "chem_org_t2",
-    "blueprint_chapter_id": "chem_2nd_01"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w8_che_016",
@@ -14157,7 +14157,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Biology",
-    "chapter": "কোষ বিভাজন (Cell Division)",
+    "chapter": "কোষ ও এর গঠন (Cell & its Structure)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "GST 22-23",
@@ -14191,7 +14191,7 @@
     "expected_count": 5,
     "type_ref": "Type 3: মাইটোসিসের বিভিন্ন ধাপের বৈশিষ্ট্য",
     "blueprint_type_id": "bio_cell_t3",
-    "blueprint_chapter_id": "bio_bot_02"
+    "blueprint_chapter_id": "bio_bot_01"
   },
   {
     "id": "w8_bio_020",
@@ -14567,7 +14567,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Biology",
-    "chapter": "কোষ বিভাজন (Cell Division)",
+    "chapter": "মানব জীবনের ধারাবাহিকতা (Human Reproduction & Development)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "GST 21-22",
@@ -14601,7 +14601,7 @@
     "expected_count": 5,
     "type_ref": "Type 3: মাইটোসিসের বিভিন্ন ধাপের বৈশিষ্ট্য",
     "blueprint_type_id": "bio_cell_t3",
-    "blueprint_chapter_id": "bio_bot_02"
+    "blueprint_chapter_id": "bio_zoo_09"
   },
   {
     "id": "w8_bio_030",

@@ -198,7 +198,7 @@ def get_physics_chapters():
         },
         {
             "id": "phy_1st_05",
-            "aliases": ["phy_work_energy"],
+            "aliases": ["phy_work_energy", "phy_p1_ch05"],
             "subject": "Physics",
             "paper": "১ম পত্র",
             "chapter_no": "অধ্যায় ০৫",
@@ -244,7 +244,7 @@ def get_physics_chapters():
         },
         {
             "id": "phy_1st_06",
-            "aliases": ["phy_gravitation"],
+            "aliases": ["phy_gravitation", "phy_p1_ch06"],
             "subject": "Physics",
             "paper": "১ম পত্র",
             "chapter_no": "অধ্যায় ০৬",

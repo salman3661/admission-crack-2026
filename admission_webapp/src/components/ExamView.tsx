@@ -168,8 +168,25 @@ export const ExamView: React.FC<ExamViewProps> = ({
     const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
     const chosen = shuffled.slice(0, Math.min(count, shuffled.length));
 
+    // Dynamic shuffle of options array so correct answers distribute naturally across A, B, C, D
+    const chosenWithShuffledOptions = chosen.map((q) => {
+      const opts = [...(q.opts || q.options || [])];
+      if (opts.length < 2) return q;
+      const currentIdx = typeof q.ans === 'number' ? q.ans : (typeof q.correct_index === 'number' ? q.correct_index : 0);
+      const correctVal = opts[currentIdx] ?? opts[0];
+      const shuffledOpts = [...opts].sort(() => Math.random() - 0.5);
+      const newAnsIdx = shuffledOpts.indexOf(correctVal);
+      return {
+        ...q,
+        opts: shuffledOpts,
+        options: shuffledOpts,
+        ans: newAnsIdx,
+        correct_index: newAnsIdx,
+      };
+    });
+
     if (activeMode === 'mastery') {
-      const pool: MasteryQueueItem[] = chosen.map((q) => ({
+      const pool: MasteryQueueItem[] = chosenWithShuffledOptions.map((q) => ({
         question: q,
         consecutiveCorrect: 0,
         attempts: 0,
@@ -184,7 +201,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
       setMasteryFeedback(null);
       setTotalRoundsAnswered(0);
     } else {
-      setTimedQuestions(chosen);
+      setTimedQuestions(chosenWithShuffledOptions);
       setTimedIndex(0);
       setSelectedAnswers({});
       setTimeSpent({});
@@ -1149,7 +1166,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
             </span>
           </div>
 
-          <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
+          <div className="text-lg font-medium leading-relaxed text-zinc-900 dark:text-white mb-4 overflow-x-auto no-scrollbar">
             <MathText content={cleanText} />
           </div>
 
@@ -1176,7 +1193,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   key={optIdx}
                   onClick={() => handleMasteryAnswer(optIdx)}
                   disabled={masteryFeedback !== null}
-                  className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all text-xs sm:text-sm cursor-pointer ${style}`}
+                  className={`w-full text-base py-3 px-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${style}`}
                 >
                   <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
                     masteryFeedback && isCorrectAnswer
@@ -1187,7 +1204,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   }`}>
                     {String.fromCharCode(65 + optIdx)}
                   </span>
-                  <div className="flex-1 leading-relaxed overflow-x-auto no-scrollbar">
+                  <div className="flex-1 text-base leading-relaxed overflow-x-auto no-scrollbar">
                     <MathText content={opt} />
                   </div>
                 </button>
@@ -1214,7 +1231,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
 
               {/* Speed Hack */}
               {q.speed_hack && (
-                <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-xl p-2.5 text-xs leading-relaxed text-emerald-950 dark:text-emerald-200 flex items-start gap-2">
+                <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-xl p-3 text-sm md:text-base leading-relaxed text-emerald-950 dark:text-emerald-200 flex items-start gap-2">
                   <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-emerald-700 dark:text-emerald-400 font-bold mr-1">⚡ স্পিড হ্যাক:</strong>
@@ -1230,7 +1247,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   (!q.q.includes('পিত্ত') && !q.q.includes('যকৃৎ') && !q.q.includes('bile'));
                 if (!currentTrap || isBoilerplate) return null;
                 return (
-                  <div className="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 rounded-xl p-2.5 text-xs leading-relaxed text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                  <div className="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 rounded-xl p-3 text-sm md:text-base leading-relaxed text-amber-900 dark:text-amber-200 flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-amber-700 dark:text-amber-400 font-bold mr-1">ফাঁদ বিশ্লেষণ:</strong>
@@ -1241,7 +1258,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
               })()}
 
               {/* Detailed Explanation */}
-              <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-2.5 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/60">
+              <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-3 text-sm md:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/60">
                 <strong className="text-[#056839] dark:text-emerald-400 block mb-0.5 font-bold">স্ট্যান্ডার্ড সমাধান:</strong>
                 <MathText content={q.exp} block />
               </div>
@@ -1357,7 +1374,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
           </span>
         </div>
 
-        <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
+        <div className="text-lg font-medium leading-relaxed text-zinc-900 dark:text-white mb-4 overflow-x-auto no-scrollbar">
           <MathText content={timedCleanText} />
         </div>
 
@@ -1369,7 +1386,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <button
                 key={optIdx}
                 onClick={() => handleTimedOptionSelect(optIdx)}
-                className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all text-xs sm:text-sm cursor-pointer ${
+                className={`w-full text-base py-3 px-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-xs'
                     : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
@@ -1382,7 +1399,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 }`}>
                   {String.fromCharCode(65 + optIdx)}
                 </span>
-                <div className="flex-1 leading-relaxed overflow-x-auto no-scrollbar">
+                <div className="flex-1 text-base leading-relaxed overflow-x-auto no-scrollbar">
                   <MathText content={opt} />
                 </div>
               </button>
