@@ -109,7 +109,7 @@
   },
   {
     "id": "w2_hig_q07",
-    "stem": "[CU '18-19] $(-2, 3)$ বিন্দু হতে $x^2 + y^2 + 6x - 4y + 4 = 0$ বৃত্তের ওপর অঙ্কিত স্পর্শকের দৈর্ঘ্য কত?",
+    "stem": "[CU '18-19] $(-2, -1)$ বিন্দু হতে $x^2 + y^2 + 6x - 4y + 4 = 0$ বৃত্তের ওপর অঙ্কিত স্পর্শকের দৈর্ঘ্য কত?",
     "options": [
       "$\\sqrt{5}$",
       "$5$",
@@ -117,7 +117,7 @@
       "$3$"
     ],
     "answer": "C: $1$",
-    "issue_flag": "At point (-2, 3), S_1 = (-2)^2 + 3^2 + 6(-2) - 4(3) + 4 = -7 < 0 so the point lies strictly inside the circle; (-2, -1) is required to yield the keyed tangent length L = 1."
+    "issue_flag": "Tangent length L=sqrt(S1) from (-2,-1): S1=4+1-12+4+4=1>0 (external point) giving L=1; original point (-2,3) gave S1=-7 (inside circle) and was corrected."
   },
   {
     "id": "w3_hig_q24",
@@ -265,7 +265,7 @@
   },
   {
     "id": "w5_var_018",
-    "stem": "[Speed Hack] ড্যানিয়েল কোষের অ্যানোড প্রকোষ্ঠে $\\text{Zn}^{2+}$ এর ঘনমাত্রা $1.0\\text{ M}$ হতে কমিয়ে $0.01\\text{ M}$ করা হলে কোষ বিভব $E_{\\text{cell}}$ শতকরা কত পরিবর্তন হবে? ($E^\\circ_{\\text{cell}} = 1.10\\text{ V}$)",
+    "stem": "[Speed Hack] ড্যানিয়েল কোষের অ্যানোড প্রকোষ্ঠে $\\text{Zn}^{2+}$ এর ঘনমাত্রা $1.0\\text{ M}$ হতে কমিয়ে $0.01\\text{ M}$ করা হলে কোষ বিভব $E_{\\text{cell}}$ কত পরিবর্তন হবে? ($E^\\circ_{\\text{cell}} = 1.10\\text{ V}$)",
     "options": [
       "$+0.059\\text{ V}$ বৃদ্ধি পাবে",
       "$-0.059\\text{ V}$ হ্রাস পাবে",
