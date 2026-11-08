@@ -1,0 +1,1302 @@
+[
+  {
+    "id": "eng_q01",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "MAT '21 Direct",
+    "q": "[MAT '21 Direct] He is senior ___ me by two years.",
+    "question": "[MAT '21 Direct] He is senior ___ me by two years.",
+    "opts": [
+      "to",
+      "than",
+      "from",
+      "with"
+    ],
+    "options": [
+      "to",
+      "than",
+      "from",
+      "with"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Latin Comparative adjectives (Senior, Junior, Superior, Inferior, Prior, Posterior, Preferable) এর পর সর্বদা Preposition 'to' বসে, 'than' নয়।",
+    "explanation": "Latin Comparative adjectives (Senior, Junior, Superior, Inferior, Prior, Posterior, Preferable) এর পর সর্বদা Preposition 'to' বসে, 'than' নয়।",
+    "trap": "Comparative ডিগ্রি দেখে তাড়াহুড়োয় 'than' দাগানো একটি মারাত্মক ফাঁদ।",
+    "trap_insight": "Comparative ডিগ্রি দেখে তাড়াহুড়োয় 'than' দাগানো একটি মারাত্মক ফাঁদ।",
+    "trap_alert": "Comparative ডিগ্রি দেখে তাড়াহুড়োয় 'than' দাগানো একটি মারাত্মক ফাঁদ।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q02",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "BCS '41 / MAT Repeat",
+    "q": "[BCS '41 / MAT Repeat] Every citizen must strictly abide ___ the constitution of the country.",
+    "question": "[BCS '41 / MAT Repeat] Every citizen must strictly abide ___ the constitution of the country.",
+    "opts": [
+      "by",
+      "to",
+      "with",
+      "for"
+    ],
+    "options": [
+      "by",
+      "to",
+      "with",
+      "for"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Abide by = কোনো নিয়ম বা চুক্তি মেনে চলা (to comply with/obey rules)।",
+    "explanation": "Abide by = কোনো নিয়ম বা চুক্তি মেনে চলা (to comply with/obey rules)।",
+    "trap": "'Abide with' (কারো সাথে থাকা) এর সাথে গুলিয়ে ফেলা।",
+    "trap_insight": "'Abide with' (কারো সাথে থাকা) এর সাথে গুলিয়ে ফেলা।",
+    "trap_alert": "'Abide with' (কারো সাথে থাকা) এর সাথে গুলিয়ে ফেলা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q03",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "DU '19-20 Hubohu",
+    "q": "[DU '19-20 Hubohu] The police accused the suspect ___ shoplifting and corporate fraud.",
+    "question": "[DU '19-20 Hubohu] The police accused the suspect ___ shoplifting and corporate fraud.",
+    "opts": [
+      "of",
+      "with",
+      "for",
+      "against"
+    ],
+    "options": [
+      "of",
+      "with",
+      "for",
+      "against"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Accuse of = অভিযুক্ত করা। কিন্তু মনে রাখতে হবে: Charged with = অভিযুক্ত করা।",
+    "explanation": "Accuse of = অভিযুক্ত করা। কিন্তু মনে রাখতে হবে: Charged with = অভিযুক্ত করা।",
+    "trap": "Charged with এর 'with' মনে রেখে Accused এর পরেও 'with' দাগানো।",
+    "trap_insight": "Charged with এর 'with' মনে রেখে Accused এর পরেও 'with' দাগানো।",
+    "trap_alert": "Charged with এর 'with' মনে রেখে Accused এর পরেও 'with' দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q04",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "MAT '20 Direct",
+    "q": "[MAT '20 Direct] We warmly congratulated him ___ his outstanding success in the examination.",
+    "question": "[MAT '20 Direct] We warmly congratulated him ___ his outstanding success in the examination.",
+    "opts": [
+      "on",
+      "for",
+      "with",
+      "to"
+    ],
+    "options": [
+      "on",
+      "for",
+      "with",
+      "to"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Congratulate / Compliment এর পর সর্বদা 'on' বসে (Congratulate somebody on something)।",
+    "explanation": "Congratulate / Compliment এর পর সর্বদা 'on' বসে (Congratulate somebody on something)।",
+    "trap": "বাংলায় 'সাফল্যের জন্য' ভেবে অনেকে ভুল করে 'for' দাগিয়ে বসে।",
+    "trap_insight": "বাংলায় 'সাফল্যের জন্য' ভেবে অনেকে ভুল করে 'for' দাগিয়ে বসে।",
+    "trap_alert": "বাংলায় 'সাফল্যের জন্য' ভেবে অনেকে ভুল করে 'for' দাগিয়ে বসে।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q05",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "MAT '18 Direct",
+    "q": "[MAT '18 Direct] Perseverance, consistency and discipline are the key ___ success in admission.",
+    "question": "[MAT '18 Direct] Perseverance, consistency and discipline are the key ___ success in admission.",
+    "opts": [
+      "to",
+      "of",
+      "for",
+      "in"
+    ],
+    "options": [
+      "to",
+      "of",
+      "for",
+      "in"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Key to = চাবিকাঠি বা প্রধান সমাধান (Solution/Secret)।",
+    "explanation": "Key to = চাবিকাঠি বা প্রধান সমাধান (Solution/Secret)।",
+    "trap": "'Key of' দাগানো সাধারণ ভুল।",
+    "trap_insight": "'Key of' দাগানো সাধারণ ভুল।",
+    "trap_alert": "'Key of' দাগানো সাধারণ ভুল।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q06",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "RU '20",
+    "q": "[RU '20] The autocrat deprived the underprivileged citizens ___ their fundamental constitutional rights.",
+    "question": "[RU '20] The autocrat deprived the underprivileged citizens ___ their fundamental constitutional rights.",
+    "opts": [
+      "of",
+      "from",
+      "with",
+      "away"
+    ],
+    "options": [
+      "of",
+      "from",
+      "with",
+      "away"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Deprive of, Rob of, Strip of = কোনো অধিকার বা সম্পত্তি থেকে কাউকে বঞ্চিত করা।",
+    "explanation": "Deprive of, Rob of, Strip of = কোনো অধিকার বা সম্পত্তি থেকে কাউকে বঞ্চিত করা।",
+    "trap": "হতে/থেকে অর্থ প্রকাশ পাওয়ায় 'from' দাগানো।",
+    "trap_insight": "হতে/থেকে অর্থ প্রকাশ পাওয়ায় 'from' দাগানো।",
+    "trap_alert": "হতে/থেকে অর্থ প্রকাশ পাওয়ায় 'from' দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q07",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "CU '19-20",
+    "q": "[CU '19-20] The overworked house doctor could barely cope ___ the sudden surge of emergency patients.",
+    "question": "[CU '19-20] The overworked house doctor could barely cope ___ the sudden surge of emergency patients.",
+    "opts": [
+      "with",
+      "up with",
+      "for",
+      "against"
+    ],
+    "options": [
+      "with",
+      "up with",
+      "for",
+      "against"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "প্রমিত ব্যাকরণে সঠিক Phrase হলো 'Cope with' (মানিয়ে চলা)। 'Cope up with' ইংরেজি ব্যাকরণে ভুল ও অপ্রমিত।",
+    "explanation": "প্রমিত ব্যাকরণে সঠিক Phrase হলো 'Cope with' (মানিয়ে চলা)। 'Cope up with' ইংরেজি ব্যাকরণে ভুল ও অপ্রমিত।",
+    "trap": "কথ্য ভাষার ভুল অভ্যাস 'Cope up with' দাগানো চরম ভুল।",
+    "trap_insight": "কথ্য ভাষার ভুল অভ্যাস 'Cope up with' দাগানো চরম ভুল।",
+    "trap_alert": "কথ্য ভাষার ভুল অভ্যাস 'Cope up with' দাগানো চরম ভুল।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q08",
+    "week_id": "week_01",
+    "subject": "English",
+    "origin": "GST '21-22",
+    "q": "[GST '21-22] The strict teacher was very angry ___ the students for repeatedly being late.",
+    "question": "[GST '21-22] The strict teacher was very angry ___ the students for repeatedly being late.",
+    "opts": [
+      "with",
+      "at",
+      "for",
+      "on"
+    ],
+    "options": [
+      "with",
+      "at",
+      "for",
+      "on"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "ব্যক্তির ওপর ক্রুদ্ধ হলে 'Angry with a person', আর আচরণ বা ঘটনায় ক্ষুব্ধ হলে 'Angry at a behavior/conduct'।",
+    "explanation": "ব্যক্তির ওপর ক্রুদ্ধ হলে 'Angry with a person', আর আচরণ বা ঘটনায় ক্ষুব্ধ হলে 'Angry at a behavior/conduct'।",
+    "trap": "ব্যক্তি ও বিষয়ের ক্ষেত্রে with বনাম at গুলিয়ে ফেলা।",
+    "trap_insight": "ব্যক্তি ও বিষয়ের ক্ষেত্রে with বনাম at গুলিয়ে ফেলা।",
+    "trap_alert": "ব্যক্তি ও বিষয়ের ক্ষেত্রে with বনাম at গুলিয়ে ফেলা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q09",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "JU '19-20",
+    "q": "[JU '19-20] Only bona-fide science students are eligible ___ applying to this scholarship.",
+    "question": "[JU '19-20] Only bona-fide science students are eligible ___ applying to this scholarship.",
+    "opts": [
+      "for",
+      "to",
+      "in",
+      "with"
+    ],
+    "options": [
+      "for",
+      "to",
+      "in",
+      "with"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Eligible for = কোনো সুযোগ বা পদের জন্য যোগ্য। কিন্তু Qualified for / to + Verb।",
+    "explanation": "Eligible for = কোনো সুযোগ বা পদের জন্য যোগ্য। কিন্তু Qualified for / to + Verb।",
+    "trap": "অন্য preposition দিয়ে গুলিয়ে ফেলা।",
+    "trap_insight": "অন্য preposition দিয়ে গুলিয়ে ফেলা।",
+    "trap_alert": "অন্য preposition দিয়ে গুলিয়ে ফেলা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q10",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "MAT '17 Direct",
+    "q": "[MAT '17 Direct] The diligent student is exceptionally good ___ Mathematics but rather weak in English.",
+    "question": "[MAT '17 Direct] The diligent student is exceptionally good ___ Mathematics but rather weak in English.",
+    "opts": [
+      "at",
+      "in",
+      "with",
+      "on"
+    ],
+    "options": [
+      "at",
+      "in",
+      "with",
+      "on"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "কোনো বিষয়ে দক্ষ বা পটু হলে 'Good at', আর কাঁচা বা দুর্বল হলে 'Weak in'।",
+    "explanation": "কোনো বিষয়ে দক্ষ বা পটু হলে 'Good at', আর কাঁচা বা দুর্বল হলে 'Weak in'।",
+    "trap": "Good in দাগানোর ভুল প্রবণতা।",
+    "trap_insight": "Good in দাগানোর ভুল প্রবণতা।",
+    "trap_alert": "Good in দাগানোর ভুল প্রবণতা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q11",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "MAT '22 Direct",
+    "q": "[MAT '22 Direct] The experienced specialist finally cured the patient ___ the chronic bacterial infection.",
+    "question": "[MAT '22 Direct] The experienced specialist finally cured the patient ___ the chronic bacterial infection.",
+    "opts": [
+      "of",
+      "from",
+      "with",
+      "against"
+    ],
+    "options": [
+      "of",
+      "from",
+      "with",
+      "against"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Cure of (রোগ থেকে নিরাময় করা)। কিন্তু Cure for a disease (প্রতিষেধক)।",
+    "explanation": "Cure of (রোগ থেকে নিরাময় করা)। কিন্তু Cure for a disease (প্রতিষেধক)।",
+    "trap": "Cure from ভেবে ভুল করা।",
+    "trap_insight": "Cure from ভেবে ভুল করা।",
+    "trap_alert": "Cure from ভেবে ভুল করা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q12",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "BCS '40 / MAT",
+    "q": "[BCS '40 / MAT] The brave soldiers refused to yield ___ the overwhelming pressure of the enemy.",
+    "question": "[BCS '40 / MAT] The brave soldiers refused to yield ___ the overwhelming pressure of the enemy.",
+    "opts": [
+      "to",
+      "before",
+      "with",
+      "under"
+    ],
+    "options": [
+      "to",
+      "before",
+      "with",
+      "under"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Yield to, Surrender to, Submit to, Succumb to = নতি স্বীকার করা বা বশ্যতা স্বীকার করা।",
+    "explanation": "Yield to, Surrender to, Submit to, Succumb to = নতি স্বীকার করা বা বশ্যতা স্বীকার করা।",
+    "trap": "Yield before দাগানো।",
+    "trap_insight": "Yield before দাগানো।",
+    "trap_alert": "Yield before দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q13",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "DU '18-19",
+    "q": "[DU '18-19] The newly constructed diagnostic center is adjacent ___ the central hospital.",
+    "question": "[DU '18-19] The newly constructed diagnostic center is adjacent ___ the central hospital.",
+    "opts": [
+      "to",
+      "with",
+      "by",
+      "near"
+    ],
+    "options": [
+      "to",
+      "with",
+      "by",
+      "near"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Adjacent to = সংলগ্ন / লাগোয়া।",
+    "explanation": "Adjacent to = সংলগ্ন / লাগোয়া।",
+    "trap": "Adjacent with দাগানো।",
+    "trap_insight": "Adjacent with দাগানো।",
+    "trap_alert": "Adjacent with দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q14",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "MAT '19 Direct",
+    "q": "[MAT '19 Direct] The annual academic conference was presided ___ by the Director General of Health Services.",
+    "question": "[MAT '19 Direct] The annual academic conference was presided ___ by the Director General of Health Services.",
+    "opts": [
+      "over",
+      "upon",
+      "at",
+      "on"
+    ],
+    "options": [
+      "over",
+      "upon",
+      "at",
+      "on"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Preside over = সভায় সভাপতিত্ব করা।",
+    "explanation": "Preside over = সভায় সভাপতিত্ব করা।",
+    "trap": "Preside at বা upon দাগানো।",
+    "trap_insight": "Preside at বা upon দাগানো।",
+    "trap_alert": "Preside at বা upon দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q15",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "RU '21",
+    "q": "[RU '21] You can safely rely ___ his professional integrity and commitment.",
+    "question": "[RU '21] You can safely rely ___ his professional integrity and commitment.",
+    "opts": [
+      "on",
+      "in",
+      "with",
+      "at"
+    ],
+    "options": [
+      "on",
+      "in",
+      "with",
+      "at"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Rely on, Depend on, Bank on, Count on = নির্ভর বা আস্থা রাখা।",
+    "explanation": "Rely on, Depend on, Bank on, Count on = নির্ভর বা আস্থা রাখা।",
+    "trap": "Rely in ভাবা।",
+    "trap_insight": "Rely in ভাবা।",
+    "trap_alert": "Rely in ভাবা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q16",
+    "week_id": "week_02",
+    "subject": "English",
+    "origin": "BCS '42 / MAT",
+    "q": "[BCS '42 / MAT] Neither the professor nor his clinical assistants ___ present at yesterday's seminar.",
+    "question": "[BCS '42 / MAT] Neither the professor nor his clinical assistants ___ present at yesterday's seminar.",
+    "opts": [
+      "were",
+      "was",
+      "is",
+      "are"
+    ],
+    "options": [
+      "were",
+      "was",
+      "is",
+      "are"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Neither...nor দ্বারা দুটি Subject যুক্ত হলে Verb সর্বদা নিকটবর্তী Subject (clinical assistants - Plural) অনুযায়ী নির্ধারিত হয়।",
+    "explanation": "Neither...nor দ্বারা দুটি Subject যুক্ত হলে Verb সর্বদা নিকটবর্তী Subject (clinical assistants - Plural) অনুযায়ী নির্ধারিত হয়।",
+    "trap": "দূরবর্তী Subject (the professor - Singular) দেখে 'was' দাগানো।",
+    "trap_insight": "দূরবর্তী Subject (the professor - Singular) দেখে 'was' দাগানো।",
+    "trap_alert": "দূরবর্তী Subject (the professor - Singular) দেখে 'was' দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q17",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "MAT '21 Direct",
+    "q": "[MAT '21 Direct] What is the precise antonym of the clinical oncology term 'BENIGN'?",
+    "question": "[MAT '21 Direct] What is the precise antonym of the clinical oncology term 'BENIGN'?",
+    "opts": [
+      "Malignant",
+      "Harmful",
+      "Gentle",
+      "Innocuous"
+    ],
+    "options": [
+      "Malignant",
+      "Harmful",
+      "Gentle",
+      "Innocuous"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Benign = ক্ষতিকর নয় এমন (Non-cancerous, mild); এর বিপরীত Malignant = মারাত্মক বা প্রাণঘাতী (Cancerous, aggressive)।",
+    "explanation": "Benign = ক্ষতিকর নয় এমন (Non-cancerous, mild); এর বিপরীত Malignant = মারাত্মক বা প্রাণঘাতী (Cancerous, aggressive)।",
+    "trap": "Benign ও Malignant এর অর্থ বিপরীত না বুঝে গুলিয়ে ফেলা।",
+    "trap_insight": "Benign ও Malignant এর অর্থ বিপরীত না বুঝে গুলিয়ে ফেলা।",
+    "trap_alert": "Benign ও Malignant এর অর্থ বিপরীত না বুঝে গুলিয়ে ফেলা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q18",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "DU '20-21",
+    "q": "[DU '20-21] The vocabulary word 'RESILIENT' is closest in meaning to:",
+    "question": "[DU '20-21] The vocabulary word 'RESILIENT' is closest in meaning to:",
+    "opts": [
+      "Elastic and quick to recover",
+      "Fragile and brittle",
+      "Rigid and stubborn",
+      "Tired and exhausted"
+    ],
+    "options": [
+      "Elastic and quick to recover",
+      "Fragile and brittle",
+      "Rigid and stubborn",
+      "Tired and exhausted"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Resilient = স্থিতিস্থাপক / প্রতিকূলতা কাটিয়ে দ্রুত ঘুরে দাঁড়ানোর ক্ষমতাসম্পন্ন (Buoyant, adaptable, elastic)।",
+    "explanation": "Resilient = স্থিতিস্থাপক / প্রতিকূলতা কাটিয়ে দ্রুত ঘুরে দাঁড়ানোর ক্ষমতাসম্পন্ন (Buoyant, adaptable, elastic)।",
+    "trap": "Resistant (প্রতিরোধী) এর সাথে গুলিয়ে ফেলা।",
+    "trap_insight": "Resistant (প্রতিরোধী) এর সাথে গুলিয়ে ফেলা।",
+    "trap_alert": "Resistant (প্রতিরোধী) এর সাথে গুলিয়ে ফেলা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q19",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "MAT '20 Direct",
+    "q": "[MAT '20 Direct] In clinical medicine, a 'CHRONIC' disease refers to one that is:",
+    "question": "[MAT '20 Direct] In clinical medicine, a 'CHRONIC' disease refers to one that is:",
+    "opts": [
+      "Persistent and long-lasting",
+      "Severe and sudden in onset",
+      "Easily curable",
+      "Contagious"
+    ],
+    "options": [
+      "Persistent and long-lasting",
+      "Severe and sudden in onset",
+      "Easily curable",
+      "Contagious"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Chronic = দীর্ঘস্থায়ী ও ধীরগতির (যেমন: ডায়াবেটিস); এর বিপরীত হলো Acute = আকস্মিক ও তীব্র।",
+    "explanation": "Chronic = দীর্ঘস্থায়ী ও ধীরগতির (যেমন: ডায়াবেটিস); এর বিপরীত হলো Acute = আকস্মিক ও তীব্র।",
+    "trap": "Acute (তীব্র) ও Chronic (দীর্ঘস্থায়ী) গুলিয়ে ফেলা।",
+    "trap_insight": "Acute (তীব্র) ও Chronic (দীর্ঘস্থায়ী) গুলিয়ে ফেলা।",
+    "trap_alert": "Acute (তীব্র) ও Chronic (দীর্ঘস্থায়ী) গুলিয়ে ফেলা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q20",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "CU '18-19",
+    "q": "[CU '18-19] If I ___ a qualified surgeon, I would treat underprivileged patients free of charge.",
+    "question": "[CU '18-19] If I ___ a qualified surgeon, I would treat underprivileged patients free of charge.",
+    "opts": [
+      "were",
+      "was",
+      "am",
+      "had been"
+    ],
+    "options": [
+      "were",
+      "was",
+      "am",
+      "had been"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "2nd Conditional-এ কাল্পনিক বা অবাস্তব শর্ত প্রকাশে Subject নির্বিশেষে Subjunctive 'were' ব্যবহৃত হয়।",
+    "explanation": "2nd Conditional-এ কাল্পনিক বা অবাস্তব শর্ত প্রকাশে Subject নির্বিশেষে Subjunctive 'were' ব্যবহৃত হয়।",
+    "trap": "Subject 'I' দেখে অসাবধানে 'was' দাগানো।",
+    "trap_insight": "Subject 'I' দেখে অসাবধানে 'was' দাগানো।",
+    "trap_alert": "Subject 'I' দেখে অসাবধানে 'was' দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q21",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "GST '21-22",
+    "q": "[GST '21-22] It is high time we ___ our unproductive study routine.",
+    "question": "[GST '21-22] It is high time we ___ our unproductive study routine.",
+    "opts": [
+      "changed",
+      "change",
+      "had changed",
+      "should change"
+    ],
+    "options": [
+      "changed",
+      "change",
+      "had changed",
+      "should change"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "It is time / It is high time এর পর Subject আসলে Verb সর্বদা Past Indefinite (V2) রূপে বসে।",
+    "explanation": "It is time / It is high time এর পর Subject আসলে Verb সর্বদা Past Indefinite (V2) রূপে বসে।",
+    "trap": "Present tense 'change' বা 'should change' দাগানো।",
+    "trap_insight": "Present tense 'change' বা 'should change' দাগানো।",
+    "trap_alert": "Present tense 'change' বা 'should change' দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q22",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "MAT '19 Direct",
+    "q": "[MAT '19 Direct] The popular admission idiom 'To break the ice' signifies:",
+    "question": "[MAT '19 Direct] The popular admission idiom 'To break the ice' signifies:",
+    "opts": [
+      "To start a friendly conversation in a tense atmosphere",
+      "To cause severe physical damage",
+      "To feel freezing cold",
+      "To terminate a partnership"
+    ],
+    "options": [
+      "To start a friendly conversation in a tense atmosphere",
+      "To cause severe physical damage",
+      "To feel freezing cold",
+      "To terminate a partnership"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'To break the ice' = সামাজিক নীরবতা বা প্রথম সাক্ষাতের জড়তা ভেঙে আলোচনা শুরু করা।",
+    "explanation": "'To break the ice' = সামাজিক নীরবতা বা প্রথম সাক্ষাতের জড়তা ভেঙে আলোচনা শুরু করা।",
+    "trap": "আক্ষরিক অর্থে বরফ ভাঙা ভাবা।",
+    "trap_insight": "আক্ষরিক অর্থে বরফ ভাঙা ভাবা।",
+    "trap_alert": "আক্ষরিক অর্থে বরফ ভাঙা ভাবা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q23",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "DU '17-18",
+    "q": "[DU '17-18] The idiomatic expression 'Once in a blue moon' means:",
+    "question": "[DU '17-18] The idiomatic expression 'Once in a blue moon' means:",
+    "opts": [
+      "Very rarely",
+      "Very frequently",
+      "On a full moon night",
+      "Never in life"
+    ],
+    "options": [
+      "Very rarely",
+      "Very frequently",
+      "On a full moon night",
+      "Never in life"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Once in a blue moon' = কদাচিৎ বা খুবই বিরল ঘটনা (almost never/infrequently)।",
+    "explanation": "'Once in a blue moon' = কদাচিৎ বা খুবই বিরল ঘটনা (almost never/infrequently)।",
+    "trap": "কখনোই নয় (Never) দাগানো।",
+    "trap_insight": "কখনোই নয় (Never) দাগানো।",
+    "trap_alert": "কখনোই নয় (Never) দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q24",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "BCS '39 / MAT",
+    "q": "[BCS '39 / MAT] Choose the strictly correct spelling of the respiratory disease:",
+    "question": "[BCS '39 / MAT] Choose the strictly correct spelling of the respiratory disease:",
+    "opts": [
+      "Pneumonia",
+      "Pnumonia",
+      "Neumonia",
+      "Pneumonea"
+    ],
+    "options": [
+      "Pneumonia",
+      "Pnumonia",
+      "Neumonia",
+      "Pneumonea"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "সঠিক বানান হলো P-N-E-U-M-O-N-I-A (এখানে P অনুচ্চারিত থাকে)।",
+    "explanation": "সঠিক বানান হলো P-N-E-U-M-O-N-I-A (এখানে P অনুচ্চারিত থাকে)।",
+    "trap": "P অক্ষরটি বাদ দিয়ে Neumonia দাগানো।",
+    "trap_insight": "P অক্ষরটি বাদ দিয়ে Neumonia দাগানো।",
+    "trap_alert": "P অক্ষরটি বাদ দিয়ে Neumonia দাগানো।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "eng_q25",
+    "week_id": "week_03",
+    "subject": "English",
+    "origin": "MAT '22 Direct",
+    "q": "[MAT '22 Direct] What is the correct passive form of: 'Do not laugh at the poor'?",
+    "question": "[MAT '22 Direct] What is the correct passive form of: 'Do not laugh at the poor'?",
+    "opts": [
+      "Let not the poor be laughed at",
+      "Let the poor not laugh",
+      "You are forbidden to laugh",
+      "The poor should not be laughed"
+    ],
+    "options": [
+      "Let not the poor be laughed at",
+      "Let the poor not laugh",
+      "You are forbidden to laugh",
+      "The poor should not be laughed"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "Imperative negative: Let not + object + be + V3 + preposition ('at' বাদ দেওয়া যাবে না)।",
+    "explanation": "Imperative negative: Let not + object + be + V3 + preposition ('at' বাদ দেওয়া যাবে না)।",
+    "trap": "Preposition 'at' বাদ দিয়ে অপশন নির্বাচন করা।",
+    "trap_insight": "Preposition 'at' বাদ দিয়ে অপশন নির্বাচন করা।",
+    "trap_alert": "Preposition 'at' বাদ দিয়ে অপশন নির্বাচন করা।",
+    "tag": "DU Repeat"
+  },
+  {
+    "id": "mat_line_eng_01",
+    "week_id": "week_01",
+    "subject": "English",
+    "chapter": "Appropriate Preposition",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '23 Direct",
+    "q": "[MAT '23 Direct] Choose the appropriate preposition: \"He adhered ______ his original plan despite all difficulties.\"",
+    "question": "[MAT '23 Direct] Choose the appropriate preposition: \"He adhered ______ his original plan despite all difficulties.\"",
+    "opts": [
+      "to",
+      "with",
+      "at",
+      "for"
+    ],
+    "options": [
+      "to",
+      "with",
+      "at",
+      "for"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Adhere to' হলো উপযুক্ত প্রিপজিশন, যার অর্থ কোনো নীতি, নিয়ম বা সিদ্ধান্তে অবিচল থাকা বা লেগে থাকা।",
+    "explanation": "'Adhere to' হলো উপযুক্ত প্রিপজিশন, যার অর্থ কোনো নীতি, নিয়ম বা সিদ্ধান্তে অবিচল থাকা বা লেগে থাকা।",
+    "trap_alert": "adhere with বা adhere at মনে করা; adhere-এর পর সর্বদা to বসে।",
+    "trap": "adhere with বা adhere at মনে করা; adhere-এর পর সর্বদা to বসে।",
+    "yield_stars": 5,
+    "probability": "95% Repeat",
+    "intelligence_type": "Preposition Fix",
+    "source_book": "Medical English Master Bank"
+  },
+  {
+    "id": "mat_line_eng_02",
+    "week_id": "week_02",
+    "subject": "English",
+    "chapter": "Vocabulary & Synonyms",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '22 Direct",
+    "q": "[MAT '22 Direct] What is the synonym of the word \"EPHEMERAL\"?",
+    "question": "[MAT '22 Direct] What is the synonym of the word \"EPHEMERAL\"?",
+    "opts": [
+      "Short-lived / Transitory",
+      "Permanent",
+      "Eternal",
+      "Perpetual"
+    ],
+    "options": [
+      "Short-lived / Transitory",
+      "Permanent",
+      "Eternal",
+      "Perpetual"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Ephemeral' অর্থ ক্ষণস্থায়ী বা অল্প সময় স্থায়ী (Short-lived, Transitory, Fleeting)। বিপরীত শব্দ হলো Eternal, Permanent।",
+    "explanation": "'Ephemeral' অর্থ ক্ষণস্থায়ী বা অল্প সময় স্থায়ী (Short-lived, Transitory, Fleeting)। বিপরীত শব্দ হলো Eternal, Permanent।",
+    "trap_alert": "বিপরীত শব্দ (Antonym) ও সমার্থক শব্দ (Synonym) প্রশ্নে কোনটি চেয়েছে তা লক্ষ্য না করা।",
+    "trap": "বিপরীত শব্দ (Antonym) ও সমার্থক শব্দ (Synonym) প্রশ্নে কোনটি চেয়েছে তা লক্ষ্য না করা।",
+    "yield_stars": 5,
+    "probability": "96% MAT Line",
+    "intelligence_type": "Vocabulary Drill",
+    "source_book": "Medical English Master Bank"
+  },
+  {
+    "id": "w5_rep_019",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "DU '21-22 / MAT '23 Repeat",
+    "q": "[DU-MAT Repeat] 'None but the brave deserve the fair.' — Transform this into an affirmative sentence.",
+    "question": "[DU-MAT Repeat] 'None but the brave deserve the fair.' — Transform this into an affirmative sentence.",
+    "opts": [
+      "Only the brave deserve the fair.",
+      "All the brave deserve the fair.",
+      "Everyone but the brave deserve the fair.",
+      "The brave only can deserve the fair."
+    ],
+    "options": [
+      "Only the brave deserve the fair.",
+      "All the brave deserve the fair.",
+      "Everyone but the brave deserve the fair.",
+      "The brave only can deserve the fair."
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "ব্যক্তিবাচক বাক্যে নেগেটিভ 'None but' থাকলে অ্যাফারমেটিভে রূপান্তরিত করার সময় 'None but' এর স্থলে সরাসরি 'Only' বসে। যেমন: 'None but the brave deserve the fair' $\\to$ 'Only the brave deserve the fair'। বস্তুবাচক হলে 'nothing but' এর বদলে 'only' বসে।",
+    "explanation": "ব্যক্তিবাচক বাক্যে নেগেটিভ 'None but' থাকলে অ্যাফারমেটিভে রূপান্তরিত করার সময় 'None but' এর স্থলে সরাসরি 'Only' বসে। যেমন: 'None but the brave deserve the fair' $\\to$ 'Only the brave deserve the fair'। বস্তুবাচক হলে 'nothing but' এর বদলে 'only' বসে।",
+    "trap": null,
+    "trap_insight": "None but = Only (for persons).",
+    "trap_alert": null,
+    "track": "varsity",
+    "yield_stars": 5,
+    "probability": "98%",
+    "intelligence_type": "DU-MAT Repeat",
+    "source_book": "Varsity & Medical English QB",
+    "tag": "DU-MAT Repeat"
+  },
+  {
+    "id": "w5_rep_020",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "MAT '20 / DU '19-20 Repeat",
+    "q": "[DU-MAT Repeat] 'Walking is a good exercise for health.' — Here the underlined word 'Walking' functions as a/an:",
+    "question": "[DU-MAT Repeat] 'Walking is a good exercise for health.' — Here the underlined word 'Walking' functions as a/an:",
+    "opts": [
+      "Gerund",
+      "Participle",
+      "Verbal noun",
+      "Infinitive"
+    ],
+    "options": [
+      "Gerund",
+      "Participle",
+      "Verbal noun",
+      "Infinitive"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "যখন Verb + ing একই সাথে Verb ও Noun এর কাজ করে এবং বাক্যে Subject হিসেবে বসে, তখন তাকে Gerund বলে। এখানে 'Walking' হলো 'is' ভার্বের Subject। মনে রাখবে, 'the + verb+ing + of' থাকলে তাকে Verbal Noun বলা হতো (যেমন: 'The walking of the boy')।",
+    "explanation": "যখন Verb + ing একই সাথে Verb ও Noun এর কাজ করে এবং বাক্যে Subject হিসেবে বসে, তখন তাকে Gerund বলে। এখানে 'Walking' হলো 'is' ভার্বের Subject। মনে রাখবে, 'the + verb+ing + of' থাকলে তাকে Verbal Noun বলা হতো (যেমন: 'The walking of the boy')।",
+    "trap": "জেরান্ড এবং পার্টিসিপলের মধ্যে গুলিয়ে ফেলা।",
+    "trap_insight": "ভার্বের সাবজেক্ট বা অবজেক্ট হলে জেরান্ড; অ্যাডজেক্টিভের কাজ করলে পার্টিসিপল।",
+    "trap_alert": "সাবজেক্ট হিসেবে বসা Verb+ing সর্বদা Gerund (Noun-এর কাজ করে); আর Adjective-এর কাজ করলে Participle হয়।",
+    "track": "varsity",
+    "yield_stars": 5,
+    "probability": "99%",
+    "intelligence_type": "DU-MAT Repeat",
+    "source_book": "Varsity & Medical English QB",
+    "tag": "DU-MAT Repeat"
+  },
+  {
+    "id": "w5_rep_021",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "DU '22-23 / MAT '21 Repeat",
+    "q": "[DU-MAT Repeat] What is the antonym of the word 'Benign'?",
+    "question": "[DU-MAT Repeat] What is the antonym of the word 'Benign'?",
+    "opts": [
+      "Malignant",
+      "Benevolent",
+      "Gentle",
+      "Harmless"
+    ],
+    "options": [
+      "Malignant",
+      "Benevolent",
+      "Gentle",
+      "Harmless"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Benign' শব্দের অর্থ সদয়, মৃদু বা ক্ষতিকর নয় এমন (চিকিৎসাবিজ্ঞানে নিরীহ টিউমারকে Benign tumor বলে)। এর প্রত্যক্ষ বিপরীত শব্দ (Antonym) হলো 'Malignant', যার অর্থ মারাত্মক, হিংস্র বা প্রাণঘাতী (যেমন ক্যানসারযুক্ত টিউমার)। অপর অপশনগুলো (Benevolent, Gentle, Harmless) হলো এর সমার্থক শব্দ।",
+    "explanation": "'Benign' শব্দের অর্থ সদয়, মৃদু বা ক্ষতিকর নয় এমন (চিকিৎসাবিজ্ঞানে নিরীহ টিউমারকে Benign tumor বলে)। এর প্রত্যক্ষ বিপরীত শব্দ (Antonym) হলো 'Malignant', যার অর্থ মারাত্মক, হিংস্র বা প্রাণঘাতী (যেমন ক্যানসারযুক্ত টিউমার)। অপর অপশনগুলো (Benevolent, Gentle, Harmless) হলো এর সমার্থক শব্দ।",
+    "trap": "অ্যান্টনিম না পড়ে সিনোনিম দাগিয়ে ফেলা।",
+    "trap_insight": "Benign (নিরীহ) এর বিপরীত Malignant (মারাত্মক)।",
+    "trap_alert": "প্রশ্নে Antonym চেয়েছে; Benevolent দাগানো যাবে না, কারণ তা Synonymous।",
+    "track": "varsity",
+    "yield_stars": 5,
+    "probability": "96%",
+    "intelligence_type": "DU-MAT Repeat",
+    "source_book": "Varsity & Medical English QB",
+    "tag": "DU-MAT Repeat"
+  },
+  {
+    "id": "w5_med_017",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "MAT '22 / Medical English QB",
+    "q": "[MAT Line] What is the synonym of the word 'Meticulous'?",
+    "question": "[MAT Line] What is the synonym of the word 'Meticulous'?",
+    "opts": [
+      "Painstaking",
+      "Careless",
+      "Superficial",
+      "Hasty"
+    ],
+    "options": [
+      "Painstaking",
+      "Careless",
+      "Superficial",
+      "Hasty"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Meticulous' অর্থ অত্যন্ত যত্নবান, খুঁতখুঁতে ও সতর্ক (showing great attention to detail; very careful and precise)। এর সমার্থক শব্দ হলো Painstaking, Thorough, Scrupulous, Diligent। বিপরীত শব্দ হলো Careless, Negligent।",
+    "explanation": "'Meticulous' অর্থ অত্যন্ত যত্নবান, খুঁতখুঁতে ও সতর্ক (showing great attention to detail; very careful and precise)। এর সমার্থক শব্দ হলো Painstaking, Thorough, Scrupulous, Diligent। বিপরীত শব্দ হলো Careless, Negligent।",
+    "trap": "Painstaking কে ব্যথাদায়ক বা ক্ষতিকর মনে করা। Painstaking অর্থ অক্লান্ত পরিশ্রমী ও অতি যত্নশীল।",
+    "trap_insight": "Meticulous = Painstaking (অত্যন্ত সতর্ক ও নিখুঁত)।",
+    "trap_alert": "'Painstaking' নেতিবাচক শব্দ নয়; এর অর্থ অত্যন্ত নিখুঁত ও যত্নশীল।",
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "96%",
+    "intelligence_type": "MAT Line",
+    "source_book": "উন্মেষ মেডিকেল ইংলিশ",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w5_med_018",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "MAT '20 / Medical English QB",
+    "q": "[MAT Line] Morning walk is conducive _____ good health.",
+    "question": "[MAT Line] Morning walk is conducive _____ good health.",
+    "opts": [
+      "to",
+      "for",
+      "in",
+      "with"
+    ],
+    "options": [
+      "to",
+      "for",
+      "in",
+      "with"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Conducive' শব্দের পর এপ্রোপ্রিয়েট প্রিপজিশন 'to' বসে। Conducive to অর্থ উপকারী বা সহায়ক (Good for health)। উদাহরণ: Early rising is conducive to health.",
+    "explanation": "'Conducive' শব্দের পর এপ্রোপ্রিয়েট প্রিপজিশন 'to' বসে। Conducive to অর্থ উপকারী বা সহায়ক (Good for health)। উদাহরণ: Early rising is conducive to health.",
+    "trap": "'স্বাস্থ্যের জন্য' ভেবে বাংলায় অর্থ মিলিয়ে 'for' দাগানো। Conducive এর পর সর্বদা 'to' বসে।",
+    "trap_insight": "Conducive takes preposition 'to', never 'for'.",
+    "trap_alert": "বাংলায় 'জন্য' মনে হলেও Conducive এর সাথে সর্বদা 'to' বসে, 'for' নয়।",
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "97%",
+    "intelligence_type": "MAT Line",
+    "source_book": "উন্মেষ মেডিকেল ইংলিশ",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w5_med_019",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "MAT '19 / Medical English QB",
+    "q": "[MAT Line] What is the meaning of the idiom 'A white elephant'?",
+    "question": "[MAT Line] What is the meaning of the idiom 'A white elephant'?",
+    "opts": [
+      "A costly but useless possession",
+      "A rare and highly prized animal",
+      "An elephant that is albino",
+      "A huge profitable enterprise"
+    ],
+    "options": [
+      "A costly but useless possession",
+      "A rare and highly prized animal",
+      "An elephant that is albino",
+      "A huge profitable enterprise"
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'A white elephant' একটি বহুল ব্যবহৃত ইডিয়ম, যার অর্থ হলো এমন একটি জিনিস যা রাখা বা রক্ষণাবেক্ষণ করা অত্যন্ত ব্যয়বহুল কিন্তু কোনো উপকারে আসে না (A costly and troublesome possession of little use)।",
+    "explanation": "'A white elephant' একটি বহুল ব্যবহৃত ইডিয়ম, যার অর্থ হলো এমন একটি জিনিস যা রাখা বা রক্ষণাবেক্ষণ করা অত্যন্ত ব্যয়বহুল কিন্তু কোনো উপকারে আসে না (A costly and troublesome possession of little use)।",
+    "trap": "আক্ষরিক অর্থে সাদা হাতি বা বিরল প্রাণী মনে করা।",
+    "trap_insight": "White elephant = ব্যয়বহুল কিন্তু অকাজের বস্তু।",
+    "trap_alert": null,
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "95%",
+    "intelligence_type": "MAT Line",
+    "source_book": "উন্মেষ মেডিকেল ইংলিশ",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w5_med_020",
+    "week_id": "week_05",
+    "subject": "English",
+    "origin": "MAT '23 / Medical English QB",
+    "q": "[MAT Line] Choose the correct sentence according to Subject-Verb Agreement:",
+    "question": "[MAT Line] Choose the correct sentence according to Subject-Verb Agreement:",
+    "opts": [
+      "Neither the teacher nor the students were present in the hall.",
+      "Neither the teacher nor the students was present in the hall.",
+      "Neither the teacher nor the students has present in the hall.",
+      "Neither the teacher or the students were present in the hall."
+    ],
+    "options": [
+      "Neither the teacher nor the students were present in the hall.",
+      "Neither the teacher nor the students was present in the hall.",
+      "Neither the teacher nor the students has present in the hall.",
+      "Neither the teacher or the students were present in the hall."
+    ],
+    "ans": 0,
+    "correct_index": 0,
+    "exp": "'Neither... nor' দ্বারা দুটি ভিন্ন বচনের (singular and plural) সাবজেক্ট যুক্ত হলে ভার্বটি তার নিকটবর্তী সাবজেক্ট অনুযায়ী পরিবর্তিত হয় (Rule of Proximity)। এখানে নিকটবর্তী সাবজেক্ট 'the students' বহুবচন (plural), তাই ভার্ব 'were' হবে।",
+    "explanation": "'Neither... nor' দ্বারা দুটি ভিন্ন বচনের (singular and plural) সাবজেক্ট যুক্ত হলে ভার্বটি তার নিকটবর্তী সাবজেক্ট অনুযায়ী পরিবর্তিত হয় (Rule of Proximity)। এখানে নিকটবর্তী সাবজেক্ট 'the students' বহুবচন (plural), তাই ভার্ব 'were' হবে।",
+    "trap": "প্রথম সাবজেক্ট 'the teacher' একবচন দেখে 'was' নির্বাচন করা।",
+    "trap_insight": "Either...or / Neither...nor এর ক্ষেত্রে ভার্ব শেষের (নিকটবর্তী) সাবজেক্ট অনুসরণ করে।",
+    "trap_alert": "'Neither... nor' এ ভার্বটি প্রথম সাবজেক্ট নয়, বরং 'nor' এর পরের নিকটবর্তী সাবজেক্ট (students) অনুযায়ী বহুবচন 'were' হবে।",
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "98%",
+    "intelligence_type": "MAT Line",
+    "source_book": "উন্মেষ মেডিকেল ইংলিশ",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w4_med_019",
+    "week_id": "week_04",
+    "subject": "English",
+    "origin": "MAT Line 2026",
+    "q": "[MAT Line] 'Hardly had the teacher entered the classroom ___ the students stood up.' - Fill in the blank with the correct conjunction.",
+    "question": "[MAT Line] 'Hardly had the teacher entered the classroom ___ the students stood up.' - Fill in the blank with the correct conjunction.",
+    "opts": [
+      "than",
+      "when",
+      "then",
+      "since"
+    ],
+    "options": [
+      "than",
+      "when",
+      "then",
+      "since"
+    ],
+    "ans": 1,
+    "correct_index": 1,
+    "exp": "Negative inversion রুল: 'Hardly had ... when / before' এবং 'Scarcely had ... when' বসে। পক্ষান্তরে 'No sooner had ... than' বসে। সুতরাং Hardly had এর সাথে সঠিক কনজাংশন হবে 'when'।",
+    "explanation": "Negative inversion রুল: 'Hardly had ... when / before' এবং 'Scarcely had ... when' বসে। পক্ষান্তরে 'No sooner had ... than' বসে। সুতরাং Hardly had এর সাথে সঠিক কনজাংশন হবে 'when'।",
+    "trap": "'No sooner had' এর সাথে মিলিয়ে 'than' দাগানো।",
+    "trap_insight": "'No sooner had' এর সাথে মিলিয়ে 'than' দাগানো।",
+    "trap_alert": "No sooner এর সাথে than বসে; কিন্তু Hardly/Scarcely এর সাথে সর্বদাই when বসে।",
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "98%",
+    "intelligence_type": "MAT Line",
+    "source_book": "Medical English Master QB",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w4_med_020",
+    "week_id": "week_04",
+    "subject": "English",
+    "origin": "MAT Line 2026",
+    "q": "[MAT Line] What is the correct synonym of the medical and ethical word 'BENEVOLENT'?",
+    "question": "[MAT Line] What is the correct synonym of the medical and ethical word 'BENEVOLENT'?",
+    "opts": [
+      "Malevolent",
+      "Generous & Kind",
+      "Cruel",
+      "Selfish"
+    ],
+    "options": [
+      "Malevolent",
+      "Generous & Kind",
+      "Cruel",
+      "Selfish"
+    ],
+    "ans": 1,
+    "correct_index": 1,
+    "exp": "'Benevolent' অর্থ পরোপকারী, দয়ালু বা উদার (Kind, Generous, Altruistic)। এর বিপরীত শব্দ (Antonym) হল 'Malevolent' (বিদ্বেষপরায়ণ) বা 'Cruel'।",
+    "explanation": "'Benevolent' অর্থ পরোপকারী, দয়ালু বা উদার (Kind, Generous, Altruistic)। এর বিপরীত শব্দ (Antonym) হল 'Malevolent' (বিদ্বেষপরায়ণ) বা 'Cruel'।",
+    "trap": "Synonym না খেয়াল করে Antonym 'Malevolent' দাগিয়ে ফেলা।",
+    "trap_insight": "Synonym না খেয়াল করে Antonym 'Malevolent' দাগিয়ে ফেলা।",
+    "trap_alert": "ভর্তি পরীক্ষায় প্রশ্নের নির্দেশনা Synonym চেয়েছে নাকি Antonym চেয়েছে তা আগে দাগ দিয়ে নিন।",
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "96%",
+    "intelligence_type": "MAT Line",
+    "source_book": "Medical English Master QB",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w4_med_021",
+    "week_id": "week_04",
+    "subject": "English",
+    "origin": "MAT Line 2026",
+    "q": "[MAT Line] 'Neither of the two candidates ___ qualified for the medical post.' - Choose the correct verb form.",
+    "question": "[MAT Line] 'Neither of the two candidates ___ qualified for the medical post.' - Choose the correct verb form.",
+    "opts": [
+      "are",
+      "is",
+      "were",
+      "have been"
+    ],
+    "options": [
+      "are",
+      "is",
+      "were",
+      "have been"
+    ],
+    "ans": 1,
+    "correct_index": 1,
+    "exp": "Subject-Verb Agreement রুল: Neither of / Either of / Each of / One of এর পরে প্লুরাল নাউন (the two candidates) বসলেও মূল সাবজেক্ট ডিস্ট্রিবিউটিভ প্রোনাউন হওয়ায় ভার্বটি সর্বদা সিঙ্গুলার (is/was) হবে।",
+    "explanation": "Subject-Verb Agreement রুল: Neither of / Either of / Each of / One of এর পরে প্লুরাল নাউন (the two candidates) বসলেও মূল সাবজেক্ট ডিস্ট্রিবিউটিভ প্রোনাউন হওয়ায় ভার্বটি সর্বদা সিঙ্গুলার (is/was) হবে।",
+    "trap": "'candidates' বহুবচন দেখে বহুবচন ভার্ব 'are' নির্বাচন করা।",
+    "trap_insight": "'candidates' বহুবচন দেখে বহুবচন ভার্ব 'are' নির্বাচন করা।",
+    "trap_alert": "'Neither of' থাকলে অফ-এর পরের প্লুরাল শব্দ নয়, 'Neither' অনুসারে ভার্ব সিঙ্গুলার (is) হবে।",
+    "track": "medical",
+    "yield_stars": 5,
+    "probability": "97%",
+    "intelligence_type": "MAT Line",
+    "source_book": "Medical English Master QB",
+    "tag": "MAT Line"
+  },
+  {
+    "id": "w7_med_eng_01",
+    "week_id": "week_07",
+    "subject": "English",
+    "chapter": "Grammar & Parallelism",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '22 English Standard",
+    "q": "[MAT '22 Standard] In many ways, riding a bicycle is similar to _____.",
+    "opts": [
+      "to drive a car",
+      "when you drive a car",
+      "the driving of a car",
+      "driving a car"
+    ],
+    "ans": 3,
+    "exp": "Parallelism rule: In comparisons using 'similar to', elements compared must have identical grammatical structures. Here 'riding a bicycle' (gerund phrase) must be parallel to 'driving a car' (gerund phrase). [Unmesh Medical English Bank, Lecture E-07]",
+    "trap_alert": "Comparing gerund with infinitive 'to drive' or clause 'when you drive' violating parallel structure.",
+    "yield_stars": 5,
+    "probability": "98% Direct MAT Line",
+    "intelligence_type": "Parallelism in Comparison",
+    "source_book": "Cliffs TOEFL / Unmesh English",
+    "question": "[MAT '22 Standard] In many ways, riding a bicycle is similar to _____.",
+    "options": [
+      "to drive a car",
+      "when you drive a car",
+      "the driving of a car",
+      "driving a car"
+    ],
+    "correct_index": 3,
+    "explanation": "Parallelism rule: In comparisons using 'similar to', elements compared must have identical grammatical structures. Here 'riding a bicycle' (gerund phrase) must be parallel to 'driving a car' (gerund phrase). [Unmesh Medical English Bank, Lecture E-07]",
+    "trap": "Comparing gerund with infinitive 'to drive' or clause 'when you drive' violating parallel structure.",
+    "expected_count": 5
+  },
+  {
+    "id": "w7_med_eng_02",
+    "week_id": "week_07",
+    "subject": "English",
+    "chapter": "Modifiers",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '21 English Standard",
+    "q": "[MAT '21 Standard] Identify the grammatically correct sentence free from dangling modifiers:",
+    "opts": [
+      "Walking through the forest, the trees were tall and magnificent.",
+      "Walking through the forest, the botanist discovered a rare species of orchid.",
+      "Walking through the forest, a rare orchid was discovered by the botanist.",
+      "Walking through the forest, the rain began to fall heavily."
+    ],
+    "ans": 1,
+    "exp": "Dangling modifier rule: The introductory participial phrase 'Walking through the forest' must be immediately followed by the noun that logically performs the action. Only 'the botanist' can walk, not 'an orchid', 'the trees', or 'the rain'.",
+    "trap_alert": "Passive voice sentence where non-living object immediately follows the action modifier ('Walking ..., a rare orchid was discovered').",
+    "yield_stars": 5,
+    "probability": "99% Direct MAT Line",
+    "intelligence_type": "Dangling Modifier Rectification",
+    "source_book": "Unmesh Medical English Bank",
+    "question": "[MAT '21 Standard] Identify the grammatically correct sentence free from dangling modifiers:",
+    "options": [
+      "Walking through the forest, the trees were tall and magnificent.",
+      "Walking through the forest, the botanist discovered a rare species of orchid.",
+      "Walking through the forest, a rare orchid was discovered by the botanist.",
+      "Walking through the forest, the rain began to fall heavily."
+    ],
+    "correct_index": 1,
+    "explanation": "Dangling modifier rule: The introductory participial phrase 'Walking through the forest' must be immediately followed by the noun that logically performs the action. Only 'the botanist' can walk, not 'an orchid', 'the trees', or 'the rain'.",
+    "trap": "Passive voice sentence where non-living object immediately follows the action modifier ('Walking ..., a rare orchid was discovered').",
+    "expected_count": 5
+  },
+  {
+    "id": "w7_med_eng_03",
+    "week_id": "week_07",
+    "subject": "English",
+    "chapter": "Phrases & Clauses",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '20 English Standard",
+    "q": "[MAT '20 Standard] In the sentence 'The doctor examined the patient *with great care*', the italicized phrase functions as a/an:",
+    "opts": [
+      "Noun phrase",
+      "Adverb phrase",
+      "Prepositional object phrase",
+      "Adjective phrase"
+    ],
+    "ans": 1,
+    "exp": "'With great care' answers 'how' the doctor examined (modifies the verb 'examined'). Therefore, it acts as an Adverb phrase of manner.",
+    "trap_alert": "Confusing adverb phrase modifying verb with adjective phrase modifying noun.",
+    "yield_stars": 5,
+    "probability": "97% Direct MAT Line",
+    "intelligence_type": "Phrase Function Identification",
+    "source_book": "Unmesh Medical English Bank",
+    "question": "[MAT '20 Standard] In the sentence 'The doctor examined the patient *with great care*', the italicized phrase functions as a/an:",
+    "options": [
+      "Noun phrase",
+      "Adverb phrase",
+      "Prepositional object phrase",
+      "Adjective phrase"
+    ],
+    "correct_index": 1,
+    "explanation": "'With great care' answers 'how' the doctor examined (modifies the verb 'examined'). Therefore, it acts as an Adverb phrase of manner.",
+    "trap": "Confusing adverb phrase modifying verb with adjective phrase modifying noun.",
+    "expected_count": 5
+  },
+  {
+    "id": "w7_med_eng_04",
+    "week_id": "week_07",
+    "subject": "English",
+    "chapter": "Appropriate Preposition",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '23 English Standard",
+    "q": "[MAT '23 Standard] Choose the correct preposition: 'The arrogant physician was devoid _____ empathy.'",
+    "opts": [
+      "with",
+      "of",
+      "in",
+      "from"
+    ],
+    "ans": 1,
+    "exp": "The adjective 'devoid' takes the fixed preposition 'of'. 'Devoid of' means lacking entirely or destitute of (বর্জিত / শূন্য)।",
+    "trap_alert": null,
+    "yield_stars": 5,
+    "probability": "99% Direct MAT Line",
+    "intelligence_type": "Fixed Preposition Mastery",
+    "source_book": "Unmesh Medical English Bank",
+    "question": "[MAT '23 Standard] Choose the correct preposition: 'The arrogant physician was devoid _____ empathy.'",
+    "options": [
+      "with",
+      "of",
+      "in",
+      "from"
+    ],
+    "correct_index": 1,
+    "explanation": "The adjective 'devoid' takes the fixed preposition 'of'. 'Devoid of' means lacking entirely or destitute of (বর্জিত / শূন্য)।",
+    "trap": null,
+    "expected_count": 5
+  },
+  {
+    "id": "w7_med_eng_05",
+    "week_id": "week_07",
+    "subject": "English",
+    "chapter": "Idioms & Phrases",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '19 English Standard",
+    "q": "[MAT '19 Standard] What is the true meaning of the medical idiom 'a clean bill of health'?",
+    "opts": [
+      "A prescription with non-toxic generic drugs",
+      "A hospital receipt with zero pending fees",
+      "A surgical consent form cleared by doctors",
+      "A medical certificate declaring a person completely healthy"
+    ],
+    "ans": 3,
+    "exp": "'A clean bill of health' is an idiom meaning a declaration or confirmation that someone is completely healthy, or that something is in good operating condition.",
+    "trap_alert": "Taking literal hospital payment meaning ('hospital receipt with zero pending fees').",
+    "yield_stars": 5,
+    "probability": "98% Direct MAT Line",
+    "intelligence_type": "Idiomatic Expression Connotation",
+    "source_book": "Unmesh Medical English Bank",
+    "question": "[MAT '19 Standard] What is the true meaning of the medical idiom 'a clean bill of health'?",
+    "options": [
+      "A prescription with non-toxic generic drugs",
+      "A hospital receipt with zero pending fees",
+      "A surgical consent form cleared by doctors",
+      "A medical certificate declaring a person completely healthy"
+    ],
+    "correct_index": 3,
+    "explanation": "'A clean bill of health' is an idiom meaning a declaration or confirmation that someone is completely healthy, or that something is in good operating condition.",
+    "trap": "Taking literal hospital payment meaning ('hospital receipt with zero pending fees').",
+    "expected_count": 5
+  },
+  {
+    "id": "w7_med_eng_06",
+    "week_id": "week_07",
+    "subject": "English",
+    "chapter": "Spelling & Vocabulary",
+    "tag": "MAT Line",
+    "track": "medical",
+    "origin": "MAT '22 English Standard",
+    "q": "[MAT '22 Standard] Select the correct spelling for the word meaning administrative government body:",
+    "opts": [
+      "Bureaucrasy",
+      "Burocracy",
+      "Beaurocrasy",
+      "Bureaucracy"
+    ],
+    "ans": 3,
+    "exp": "The correct spelling is B-U-R-E-A-U-C-R-A-C-Y (আমলাতন্ত্র)। Root 'bureau' + suffix 'cracy'.",
+    "trap_alert": "Misspelling 'beau-' instead of 'bur-' and ending with '-sy' instead of '-cy'.",
+    "yield_stars": 5,
+    "probability": "99% Direct MAT Line",
+    "intelligence_type": "Medical English Orthography",
+    "source_book": "Unmesh Medical English Bank",
+    "question": "[MAT '22 Standard] Select the correct spelling for the word meaning administrative government body:",
+    "options": [
+      "Bureaucrasy",
+      "Burocracy",
+      "Beaurocrasy",
+      "Bureaucracy"
+    ],
+    "correct_index": 3,
+    "explanation": "The correct spelling is B-U-R-E-A-U-C-R-A-C-Y (আমলাতন্ত্র)। Root 'bureau' + suffix 'cracy'.",
+    "trap": "Misspelling 'beau-' instead of 'bur-' and ending with '-sy' instead of '-cy'.",
+    "expected_count": 5
+  }
+]
