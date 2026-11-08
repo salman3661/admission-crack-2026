@@ -41,6 +41,7 @@ export function App() {
     try {
       const hash = window.location.hash.replace('#', '').toLowerCase();
       if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') return 'recall';
+      if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') return 'blueprint';
       const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall', 'blueprint'];
       if (validModes.includes(hash as AppMode)) {
         return hash as AppMode;
@@ -72,6 +73,10 @@ export function App() {
         const hash = window.location.hash.replace('#', '').toLowerCase();
         if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') {
           setCurrentMode('recall');
+          return;
+        }
+        if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') {
+          setCurrentMode('blueprint');
           return;
         }
         const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall', 'blueprint'];
@@ -304,7 +309,11 @@ export function App() {
         )}
 
         {currentMode === 'blueprint' && (
-          <ChapterBlueprintView />
+          <ChapterBlueprintView
+            onSelectMode={handleSelectMode}
+            onSelectWeek={setSelectedWeek}
+            onSelectSubject={setSelectedSubject}
+          />
         )}
 
 

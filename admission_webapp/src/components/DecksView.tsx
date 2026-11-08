@@ -379,7 +379,7 @@ const WeekProgressCard = React.memo<WeekProgressCardProps>(({
         className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs sm:text-sm font-black shadow-xs hover:shadow-emerald-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
       >
         <Zap className="w-4 h-4 text-emerald-200" />
-        <span>Weekly PCMB Speed Drill (১-ক্লিক শুরু)</span>
+        <span>⚡ উইকলি স্পিড ড্রিল শুরু করুন</span>
       </button>
     </div>
   );
@@ -928,7 +928,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
           }`}
         >
           <Layers className="w-4 h-4 text-emerald-200 shrink-0" />
-          <span className="truncate">📂 চ্যাপ্টার-ভিত্তিক ব্লুপ্রিন্ট</span>
+          <span className="truncate">📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৩৪ চ্যাপ্টার)</span>
           <span className="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] bg-white/20 text-white font-mono">
             ৩৪ অধ্যায় • ৬৮০ প্রেডিক্টর
           </span>
@@ -943,7 +943,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
           }`}
         >
           <Calendar className="w-4 h-4 text-emerald-200 shrink-0" />
-          <span className="truncate">📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01–07)</span>
+          <span className="truncate">📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 07)</span>
           <span className="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] bg-white/20 text-white font-mono">
             ৭টি উইকলি স্লট • ৭৫০ MCQ
           </span>
