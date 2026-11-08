@@ -241,6 +241,8 @@ export interface SyntheticPredictorQuestion {
   trap_alert: string;
   speed_hack: string;
   explanation: string;
+  source?: string;
+  source_tag?: string;
 }
 
 export interface ChapterSyntheticPredictors {

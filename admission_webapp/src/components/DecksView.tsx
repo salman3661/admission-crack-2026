@@ -439,14 +439,24 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
 
   if (!activeQ) {
     return (
-      <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-3">
-        <p className="text-sm text-slate-600 dark:text-slate-400">কোনো ভুল ট্র্যাপ প্রশ্ন পাওয়া যায়নি।</p>
-        <button
-          onClick={() => setShowOnlyTraps(false)}
-          className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold"
-        >
-          সব ২০টি প্রশ্নে ফিরুন
-        </button>
+      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-4 sm:p-6 font-['Hind_Siliguri'] flex items-center justify-center">
+        <div className="max-w-md w-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-xl">
+          <p className="text-sm text-slate-600 dark:text-slate-400">কোনো ভুল ট্র্যাপ প্রশ্ন পাওয়া যায়নি।</p>
+          <div className="flex items-center justify-center gap-2 pt-1">
+            <button
+              onClick={() => setShowOnlyTraps(false)}
+              className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold cursor-pointer"
+            >
+              সব ২০টি প্রশ্নে ফিরুন
+            </button>
+            <button
+              onClick={onClose}
+              className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold cursor-pointer"
+            >
+              ✕ বন্ধ করুন
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -454,42 +464,45 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
   const optionLetters = ['A', 'B', 'C', 'D'];
   const userSelected = userAnswers[activeQ.id];
   const isAnswered = !!userSelected;
+  const currentQ = activeQ;
 
   return (
-    <div className="rounded-3xl border border-emerald-500/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-4 sm:p-6 shadow-xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 uppercase">
-              {chapter.subject} • ২০টি প্রেডিক্টর ড্রিল
-            </span>
-            <span className="text-xs text-slate-500 font-mono">
-              প্রশ্ন {toBn(currentIdx + 1)} / {toBn(displayedList.length)}
-            </span>
-          </div>
-          <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
-            {chapter.title}
-          </h2>
-        </div>
-
-        {/* Live Score Pill & Close */}
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <div className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-mono text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
-            <span>স্কোর: <strong className="text-emerald-600">{toBn(scoreStats.correct)}</strong>/{toBn(scoreStats.total)}</span>
-            <span>•</span>
-            <span>নির্ভুলতা: <strong className="text-cyan-600">{toBn(scoreStats.accuracy)}%</strong></span>
+    <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-3 sm:p-6 font-['Hind_Siliguri']">
+      <div className="max-w-4xl mx-auto rounded-3xl border border-emerald-500/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-4 sm:p-6 shadow-xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
+        {/* Top Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 uppercase">
+                {chapter.subject} • ২০টি প্রেডিক্টর ড্রিল
+              </span>
+              <span className="text-xs text-slate-500 font-mono">
+                প্রশ্ন {toBn(currentIdx + 1)} / {toBn(displayedList.length)}
+              </span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
+              {chapter.title}
+            </h2>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer"
-            title="ড্রিল বন্ধ করুন"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          {/* Live Score Pill & Close */}
+          <div className="flex items-center gap-2 self-start sm:self-auto">
+            <div className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 font-mono text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+              <span>স্কোর: <strong className="text-emerald-600">{toBn(scoreStats.correct)}</strong>/{toBn(scoreStats.total)}</span>
+              <span>•</span>
+              <span>নির্ভুলতা: <strong className="text-cyan-600">{toBn(scoreStats.accuracy)}%</strong></span>
+            </div>
+
+            <button
+              onClick={onClose}
+              className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors cursor-pointer flex items-center gap-1.5"
+              title="ড্রিল বন্ধ করুন"
+            >
+              <X className="w-5 h-5" />
+              <span className="text-xs font-bold hidden sm:inline">বন্ধ করুন (✕)</span>
+            </button>
+          </div>
         </div>
-      </div>
 
       {/* Quick Jump Question Dots */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
@@ -517,6 +530,11 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
             </button>
           );
         })}
+      </div>
+
+      {/* SOURCE TAG FIX */}
+      <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded w-fit mb-2">
+        {currentQ.source || (currentQ as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
       </div>
 
       {/* Question Stem */}
@@ -639,6 +657,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
         </div>
       </div>
     </div>
+  </div>
   );
 });
 
@@ -956,88 +975,90 @@ export const DecksView: React.FC<DecksViewProps> = ({
       {activeWorkflow === 'chapter' && (
         <div className="space-y-4">
           
-          {/* Active Inline Predictor Drill (if open) */}
-          {activeDrillChapter && (
+          {/* Active Inline Predictor Drill in Fullscreen Focus Mode (Zero Dashboard Leak) */}
+          {activeDrillChapter ? (
             <InlinePredictorDrill
               chapter={activeDrillChapter}
               predictors={activeDrillPredictors}
               onClose={handleClosePredictorDrill}
             />
+          ) : (
+            <>
+              {/* Smooth Horizontal Subject Selector Pills & Search */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                {/* Subject Pills: Physics, Chemistry, Higher Math, Biology, All */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                  {[
+                    { id: 'Physics' as const, label: 'পদার্থবিজ্ঞান', sub: '২১ অধ্যায়', icon: '⚡' },
+                    { id: 'Chemistry' as const, label: 'রসায়ন', sub: '১০ অধ্যায়', icon: '🧪' },
+                    { id: 'Higher Math' as const, label: 'উচ্চতর গণিত', sub: '২০ অধ্যায়', icon: '📐' },
+                    { id: 'Biology' as const, label: 'জীববিজ্ঞান', sub: '২৪ অধ্যায়', icon: '🧬' },
+                    { id: 'All' as const, label: 'সকল বিষয়', sub: '৭৫ অধ্যায়', icon: '🌟' },
+                  ].map(sub => {
+                    const isSelected = selectedChapterSubject === sub.id;
+                    const theme = SUBJECT_THEMES[sub.id] || { activeBg: 'bg-emerald-600 text-white' };
+
+                    return (
+                      <button
+                        key={sub.id}
+                        onClick={() => setSelectedChapterSubject(sub.id)}
+                        className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 border cursor-pointer flex items-center gap-1.5 ${
+                          isSelected
+                            ? `${theme.activeBg} shadow-sm border-transparent scale-[1.02]`
+                            : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'
+                        }`}
+                      >
+                        <span>{sub.icon}</span>
+                        <span>{sub.label}</span>
+                        <span className={`text-[10px] px-1.5 py-0.2 rounded-md font-mono ${
+                          isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                        }`}>
+                          {sub.sub}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Quick Search */}
+                <div className="relative min-w-[220px]">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    value={chapterSearchQuery}
+                    onChange={(e) => setChapterSearchQuery(e.target.value)}
+                    placeholder="অধ্যায় বা টপিক খুঁজুন..."
+                    className="w-full pl-9 pr-3 py-1.5 rounded-xl text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-900 dark:text-white"
+                  />
+                </div>
+              </div>
+
+              {/* Section Summary Header */}
+              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
+                <span>
+                  প্রদর্শিত হচ্ছে: <strong className="text-slate-800 dark:text-slate-200 font-bold">{toBn(filteredChapters.length)}টি অধ্যায়</strong> (২২,৮০৭+ প্রশ্ন অ্যানালাইসিস থেকে মেগা-টাইপ ও ৬৮০টি প্রেডিক্টর)
+                </span>
+                <span className="font-mono text-[11px] hidden sm:inline">
+                  ⚡ ১-ক্লিক ড্রিল লঞ্চার
+                </span>
+              </div>
+
+              {/* Chapters Grid: All 34 Chapters with Mega-Types & 1-Click Launch */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredChapters.map(chapter => {
+                  const predictors = syntheticByChapterId.get(chapter.id) || [];
+                  return (
+                    <ChapterCard
+                      key={chapter.id}
+                      chapter={chapter}
+                      predictorsCount={predictors.length}
+                      onLaunchPredictorDrill={handleLaunchPredictorDrill}
+                    />
+                  );
+                })}
+              </div>
+            </>
           )}
-
-          {/* Smooth Horizontal Subject Selector Pills & Search */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            {/* Subject Pills: Physics, Chemistry, Higher Math, Biology, All */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-              {[
-                { id: 'Physics' as const, label: 'পদার্থবিজ্ঞান', sub: '২১ অধ্যায়', icon: '⚡' },
-                { id: 'Chemistry' as const, label: 'রসায়ন', sub: '১০ অধ্যায়', icon: '🧪' },
-                { id: 'Higher Math' as const, label: 'উচ্চতর গণিত', sub: '২০ অধ্যায়', icon: '📐' },
-                { id: 'Biology' as const, label: 'জীববিজ্ঞান', sub: '২৪ অধ্যায়', icon: '🧬' },
-                { id: 'All' as const, label: 'সকল বিষয়', sub: '৭৫ অধ্যায়', icon: '🌟' },
-              ].map(sub => {
-                const isSelected = selectedChapterSubject === sub.id;
-                const theme = SUBJECT_THEMES[sub.id] || { activeBg: 'bg-emerald-600 text-white' };
-
-                return (
-                  <button
-                    key={sub.id}
-                    onClick={() => setSelectedChapterSubject(sub.id)}
-                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 border cursor-pointer flex items-center gap-1.5 ${
-                      isSelected
-                        ? `${theme.activeBg} shadow-sm border-transparent scale-[1.02]`
-                        : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800'
-                    }`}
-                  >
-                    <span>{sub.icon}</span>
-                    <span>{sub.label}</span>
-                    <span className={`text-[10px] px-1.5 py-0.2 rounded-md font-mono ${
-                      isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
-                    }`}>
-                      {sub.sub}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Quick Search */}
-            <div className="relative min-w-[220px]">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={chapterSearchQuery}
-                onChange={(e) => setChapterSearchQuery(e.target.value)}
-                placeholder="অধ্যায় বা টপিক খুঁজুন..."
-                className="w-full pl-9 pr-3 py-1.5 rounded-xl text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-900 dark:text-white"
-              />
-            </div>
-          </div>
-
-          {/* Section Summary Header */}
-          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
-            <span>
-              প্রদর্শিত হচ্ছে: <strong className="text-slate-800 dark:text-slate-200 font-bold">{toBn(filteredChapters.length)}টি অধ্যায়</strong> (২২,৮০৭+ প্রশ্ন অ্যানালাইসিস থেকে মেগা-টাইপ ও ৬৮০টি প্রেডিক্টর)
-            </span>
-            <span className="font-mono text-[11px] hidden sm:inline">
-              ⚡ ১-ক্লিক ড্রিল লঞ্চার
-            </span>
-          </div>
-
-          {/* Chapters Grid: All 34 Chapters with Mega-Types & 1-Click Launch */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredChapters.map(chapter => {
-              const predictors = syntheticByChapterId.get(chapter.id) || [];
-              return (
-                <ChapterCard
-                  key={chapter.id}
-                  chapter={chapter}
-                  predictorsCount={predictors.length}
-                  onLaunchPredictorDrill={handleLaunchPredictorDrill}
-                />
-              );
-            })}
-          </div>
         </div>
       )}
 
