@@ -1177,6 +1177,12 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                             </span>
                           </div>
 
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+                              {(q as any).source || (q as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
+                            </span>
+                          </div>
+
                           <div className="text-sm sm:text-base font-medium text-slate-900 dark:text-white leading-relaxed">
                             <MathText text={q.stem} />
                           </div>
@@ -1446,6 +1452,12 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                         </div>
                         <span className="text-[10px] font-mono text-slate-400">
                           {q.id}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+                          {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
                         </span>
                       </div>
 

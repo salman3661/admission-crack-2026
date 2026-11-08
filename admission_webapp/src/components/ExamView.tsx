@@ -946,6 +946,12 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   )}
                 </div>
 
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+                    {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
+                  </span>
+                </div>
+
                 <div className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-white mb-3">
                   <MathText content={cleanText} />
                 </div>
@@ -1137,6 +1143,12 @@ export const ExamView: React.FC<ExamViewProps> = ({
           })()}
 
           {/* Question Text */}
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+              {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
+            </span>
+          </div>
+
           <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
             <MathText content={cleanText} />
           </div>
@@ -1339,6 +1351,12 @@ export const ExamView: React.FC<ExamViewProps> = ({
             <span>{timedHotspot}</span>
           </div>
         )}
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+            {(currentTimedQ as any).source || (currentTimedQ as any).source_tag || timedOrigin || "🎯 ২০২৬ প্রেডিক্টর"}
+          </span>
+        </div>
+
         <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
           <MathText content={timedCleanText} />
         </div>
