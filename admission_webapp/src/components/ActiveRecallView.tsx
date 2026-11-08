@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { 
-  RotateCw, 
   CheckCircle, 
   HelpCircle, 
   Sparkles, 
@@ -13,16 +12,14 @@ import {
   Search, 
   Layers, 
   LayoutGrid, 
-  Bookmark, 
   Shuffle, 
   ArrowLeft,
-  Calendar,
-  Check,
-  X
+  Calendar
 } from 'lucide-react';
 import { MathText } from './MathText';
 import type { RecentGKCard, RecentGKMonthMeta, AppMode } from '../types';
-import rawData from '../data/recent_gk_monthly.json';
+import rawGkData from '../data/recent_gk_monthly.json';
+import rawEnglishData from '../data/sure_shot_english_predictors.json';
 
 export interface ActiveRecallViewProps {
   onSelectMode?: (mode: AppMode) => void;
@@ -36,9 +33,45 @@ interface MonthlyGKData {
   cards: RecentGKCard[];
 }
 
-const gkData = rawData as MonthlyGKData;
+interface EnglishPredictorItem {
+  id: string;
+  subject: string;
+  cluster_id: string;
+  cluster_name: string;
+  cluster_name_bn: string;
+  rule_id: string;
+  rule_title: string;
+  rule_formula: string;
+  q: string;
+  stem?: string;
+  opts: string[];
+  options?: string[];
+  ans: number;
+  correct_index?: number;
+  exp: string;
+  explanation?: string;
+  speed_hack: string;
+  trap_alert: string;
+  trap?: string;
+  exam_target: string;
+  star_ranking: string;
+  source?: string;
+}
 
-const CATEGORIES = [
+interface EnglishBlueprintData {
+  metadata: {
+    title: string;
+    subtitle: string;
+    total_predictors: number;
+    clusters: string[];
+  };
+  predictors: EnglishPredictorItem[];
+}
+
+const gkData = rawGkData as MonthlyGKData;
+const englishData = rawEnglishData as unknown as EnglishBlueprintData;
+
+const GK_CATEGORIES = [
   'সব ক্যাটাগরি',
   'জাতীয় অর্জন ও প্রশাসন',
   'মেগা প্রকল্প ও অর্থনীতি',
@@ -48,20 +81,38 @@ const CATEGORIES = [
   'ক্রীড়া ও রেকর্ড'
 ];
 
-export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
+const ENGLISH_CLUSTERS = [
+  { id: 'all', label: 'সব ক্লাস্টার' },
+  { id: 'cluster_1_prepositions', label: 'Appropriate Prepositions' },
+  { id: 'cluster_2_sva_verbs', label: 'Subject-Verb Agreement' },
+  { id: 'cluster_3_sentence_correction', label: 'Sentence Correction' },
+  { id: 'cluster_4_vocabulary_spelling', label: 'Vocab & Spelling Traps' },
+  { id: 'cluster_5_pos_clauses', label: 'Parts of Speech & Clauses' },
+  { id: 'cluster_medical_qb', label: 'MAT Direct Repeats' }
+];
+
+const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
   onSelectMode,
   initialMonth = 'all'
 }) => {
+  // Main Segment Switcher: 'gk' vs 'english'
+  const [deckType, setDeckType] = useState<'gk' | 'english'>('gk');
+
+  // Shared View Mode: 'card' vs 'grid'
+  const [viewMode, setViewMode] = useState<'card' | 'grid'>('card');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  // --------------------------------------------------------------------------
+  // GK DECK STATES
+  // --------------------------------------------------------------------------
   const [selectedMonth, setSelectedMonth] = useState<string>(initialMonth);
   const [selectedCategory, setSelectedCategory] = useState<string>('সব ক্যাটাগরি');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [viewMode, setViewMode] = useState<'card' | 'grid'>('card');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [gkCurrentIndex, setGkCurrentIndex] = useState(0);
+  const [gkIsFlipped, setGkIsFlipped] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // Leitner / Mastery persistence
-  const [masteredIds, setMasteredIds] = useState<Set<string>>(() => {
+  // GK Leitner persistence
+  const [masteredGkIds, setMasteredGkIds] = useState<Set<string>>(() => {
     try {
       const saved = localStorage.getItem('admission_monthly_gk_mastered');
       return saved ? new Set(JSON.parse(saved)) : new Set();
@@ -72,14 +123,13 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
 
   useEffect(() => {
     try {
-      localStorage.setItem('admission_monthly_gk_mastered', JSON.stringify(Array.from(masteredIds)));
+      localStorage.setItem('admission_monthly_gk_mastered', JSON.stringify(Array.from(masteredGkIds)));
     } catch (e) {
       console.error('Failed to save mastered GK cards', e);
     }
-  }, [masteredIds]);
+  }, [masteredGkIds]);
 
-  // Filtered Cards based on month, category, and search query
-  const filteredCards = useMemo(() => {
+  const filteredGkCards = useMemo(() => {
     let pool: RecentGKCard[] = [];
     if (selectedMonth === 'all') {
       pool = gkData.cards;
@@ -91,7 +141,7 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
       pool = pool.filter((c) => c.category === selectedCategory);
     }
 
-    if (searchQuery.trim()) {
+    if (searchQuery.trim() && deckType === 'gk') {
       const q = searchQuery.toLowerCase().trim();
       pool = pool.filter(
         (c) =>
@@ -104,15 +154,120 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
     }
 
     return pool;
-  }, [selectedMonth, selectedCategory, searchQuery]);
+  }, [selectedMonth, selectedCategory, searchQuery, deckType]);
 
-  const [cardsList, setCardsList] = useState<RecentGKCard[]>(filteredCards);
+  const [gkCardsList, setGkCardsList] = useState<RecentGKCard[]>(filteredGkCards);
 
   useEffect(() => {
-    setCardsList(filteredCards);
-    setCurrentIndex(0);
-    setIsFlipped(false);
-  }, [filteredCards]);
+    setGkCardsList(filteredGkCards);
+    setGkCurrentIndex(0);
+    setGkIsFlipped(false);
+  }, [filteredGkCards]);
+
+  // --------------------------------------------------------------------------
+  // ENGLISH PREDICTOR DECK STATES
+  // --------------------------------------------------------------------------
+  const [selectedEnglishCluster, setSelectedEnglishCluster] = useState<string>('all');
+  const [engCurrentIndex, setEngCurrentIndex] = useState(0);
+  const [engIsFlipped, setEngIsFlipped] = useState(false);
+  const [userSelectedOption, setUserSelectedOption] = useState<number | null>(null);
+
+  // English Leitner persistence
+  const [masteredEngIds, setMasteredEngIds] = useState<Set<string>>(() => {
+    try {
+      const saved = localStorage.getItem('admission_english_mastered');
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('admission_english_mastered', JSON.stringify(Array.from(masteredEngIds)));
+    } catch (e) {
+      console.error('Failed to save mastered English cards', e);
+    }
+  }, [masteredEngIds]);
+
+  const filteredEnglishPredictors = useMemo(() => {
+    let list = englishData.predictors || [];
+
+    if (selectedEnglishCluster !== 'all') {
+      list = list.filter((p) => p.cluster_id === selectedEnglishCluster);
+    }
+
+    if (searchQuery.trim() && deckType === 'english') {
+      const q = searchQuery.toLowerCase().trim();
+      list = list.filter(
+        (p) =>
+          p.q.toLowerCase().includes(q) ||
+          p.rule_title.toLowerCase().includes(q) ||
+          p.rule_formula.toLowerCase().includes(q) ||
+          p.speed_hack.toLowerCase().includes(q) ||
+          p.trap_alert.toLowerCase().includes(q)
+      );
+    }
+
+    return list;
+  }, [selectedEnglishCluster, searchQuery, deckType]);
+
+  const [engList, setEngList] = useState<EnglishPredictorItem[]>(filteredEnglishPredictors);
+
+  useEffect(() => {
+    setEngList(filteredEnglishPredictors);
+    setEngCurrentIndex(0);
+    setEngIsFlipped(false);
+    setUserSelectedOption(null);
+  }, [filteredEnglishPredictors]);
+
+  // --------------------------------------------------------------------------
+  // NAVIGATION HANDLERS (Keyboard support)
+  // --------------------------------------------------------------------------
+  const nextGkCard = useCallback(() => {
+    setGkIsFlipped(false);
+    setTimeout(() => {
+      setGkCurrentIndex((prev) => (prev + 1 < gkCardsList.length ? prev + 1 : 0));
+    }, 120);
+  }, [gkCardsList.length]);
+
+  const prevGkCard = useCallback(() => {
+    setGkIsFlipped(false);
+    setTimeout(() => {
+      setGkCurrentIndex((prev) => (prev - 1 >= 0 ? prev - 1 : gkCardsList.length - 1));
+    }, 120);
+  }, [gkCardsList.length]);
+
+  const shuffleGkCards = useCallback(() => {
+    setGkIsFlipped(false);
+    const shuffled = [...gkCardsList].sort(() => Math.random() - 0.5);
+    setGkCardsList(shuffled);
+    setGkCurrentIndex(0);
+  }, [gkCardsList]);
+
+  const nextEngCard = useCallback(() => {
+    setEngIsFlipped(false);
+    setUserSelectedOption(null);
+    setTimeout(() => {
+      setEngCurrentIndex((prev) => (prev + 1 < engList.length ? prev + 1 : 0));
+    }, 120);
+  }, [engList.length]);
+
+  const prevEngCard = useCallback(() => {
+    setEngIsFlipped(false);
+    setUserSelectedOption(null);
+    setTimeout(() => {
+      setEngCurrentIndex((prev) => (prev - 1 >= 0 ? prev - 1 : engList.length - 1));
+    }, 120);
+  }, [engList.length]);
+
+  const shuffleEngCards = useCallback(() => {
+    setEngIsFlipped(false);
+    setUserSelectedOption(null);
+    const shuffled = [...engList].sort(() => Math.random() - 0.5);
+    setEngList(shuffled);
+    setEngCurrentIndex(0);
+  }, [engList]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -121,84 +276,52 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
 
       if (e.code === 'Space') {
         e.preventDefault();
-        setIsFlipped((prev) => !prev);
+        if (deckType === 'gk') setGkIsFlipped((prev) => !prev);
+        else setEngIsFlipped((prev) => !prev);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
-        nextCard();
+        if (deckType === 'gk') nextGkCard();
+        else nextEngCard();
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        prevCard();
-      } else if (e.key === '1') {
-        markReview();
-      } else if (e.key === '2') {
-        markMastered();
+        if (deckType === 'gk') prevGkCard();
+        else prevEngCard();
       } else if (e.key.toLowerCase() === 's') {
-        shuffleCards();
+        if (deckType === 'gk') shuffleGkCards();
+        else shuffleEngCards();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, cardsList.length, isFlipped]);
+  }, [deckType, nextGkCard, nextEngCard, prevGkCard, prevEngCard, shuffleGkCards, shuffleEngCards]);
 
-  const nextCard = () => {
-    setIsFlipped(false);
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1 < cardsList.length ? prev + 1 : 0));
-    }, 150);
-  };
+  const currentGkCard: RecentGKCard | undefined = gkCardsList[gkCurrentIndex];
+  const isCurrentGkMastered = currentGkCard ? masteredGkIds.has(currentGkCard.id) : false;
 
-  const prevCard = () => {
-    setIsFlipped(false);
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 >= 0 ? prev - 1 : cardsList.length - 1));
-    }, 150);
-  };
-
-  const shuffleCards = () => {
-    setIsFlipped(false);
-    const shuffled = [...cardsList].sort(() => Math.random() - 0.5);
-    setCardsList(shuffled);
-    setCurrentIndex(0);
-  };
-
-  const currentCard: RecentGKCard | undefined = cardsList[currentIndex];
-  const isCurrentMastered = currentCard ? masteredIds.has(currentCard.id) : false;
-
-  const markMastered = () => {
-    if (!currentCard) return;
-    setMasteredIds((prev) => {
-      const next = new Set(prev);
-      next.add(currentCard.id);
-      return next;
-    });
-    nextCard();
-  };
-
-  const markReview = () => {
-    if (!currentCard) return;
-    setMasteredIds((prev) => {
-      const next = new Set(prev);
-      next.delete(currentCard.id);
-      return next;
-    });
-    nextCard();
-  };
-
-  const toggleMastered = (id: string, e?: React.MouseEvent) => {
+  const toggleGkMastered = (id: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    setMasteredIds((prev) => {
+    setMasteredGkIds((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
       return next;
     });
   };
 
-  // Scroll month slider horizontally
+  const currentEngCard: EnglishPredictorItem | undefined = engList[engCurrentIndex];
+  const isCurrentEngMastered = currentEngCard ? masteredEngIds.has(currentEngCard.id) : false;
+
+  const toggleEngMastered = (id: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setMasteredEngIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
   const scrollSlider = (direction: 'left' | 'right') => {
     if (sliderRef.current) {
       const amount = direction === 'left' ? -220 : 220;
@@ -206,18 +329,19 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
     }
   };
 
-  const masteredCount = useMemo(() => {
-    return cardsList.filter((c) => masteredIds.has(c.id)).length;
-  }, [cardsList, masteredIds]);
+  const gkMasteredCount = useMemo(() => {
+    return gkCardsList.filter((c) => masteredGkIds.has(c.id)).length;
+  }, [gkCardsList, masteredGkIds]);
 
-  const totalMasteredAll = masteredIds.size;
-  const progressPercent = cardsList.length > 0 ? Math.round((masteredCount / cardsList.length) * 100) : 0;
+  const engMasteredCount = useMemo(() => {
+    return engList.filter((c) => masteredEngIds.has(c.id)).length;
+  }, [engList, masteredEngIds]);
 
   return (
-    <div className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+    <div className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5">
       
       {/* 1. TOP HEADER & BREADCRUMB */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
             {onSelectMode && (
@@ -231,18 +355,17 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
             )}
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-600 text-white flex items-center gap-1 shadow-xs">
               <Sparkles className="w-3 h-3" />
-              UDVASH 2026 MONTHLY GK HIGHLIGHTS
-            </span>
-            <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 ring-1 ring-amber-500/30">
-              {gkData.total_cards} টি হাই-ইয়েল্ড কার্ডস
+              GK & ENGLISH DUAL MASTERY DECK
             </span>
           </div>
 
           <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <span>📅 সাম্প্রতিক সাধারণ জ্ঞান (জানুয়ারি – অক্টোবর ২০২৬)</span>
+            <span>{deckType === 'gk' ? '📅 সাম্প্রতিক সাধারণ জ্ঞান (Recent GK 2026)' : '🇬🇧 শিওর-শট ইংলিশ প্রেডিক্টর (Sure-Shot English)'}</span>
           </h1>
           <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-            উদ্ভাসের মান্থলি জিকে লেকচার ও পিডিএফ নোটের ১০০% ভর্তি-প্রাসঙ্গিক অ্যাক্টিভ রিকল ফ্ল্যাশকার্ড ও ট্র্যাপ ডিফেন্স
+            {deckType === 'gk'
+              ? 'উদ্ভাসের মান্থলি জিকে লেকচার ও নোটের ৮০টি কার্ড: ত্রয়োদশ নির্বাচন, নোবেল ২০২৬ ও মেগা প্রজেক্ট'
+              : 'মেডিকেল ১৫-মার্কস ও ঢাবি নিশ্চিত কমন ৮৮টি প্রেডিক্টর: ৫টি কোর ক্লাস্টার, স্পিড হ্যাক ও ট্র্যাপ ডিফেন্স'}
           </p>
         </div>
 
@@ -254,101 +377,161 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
           <div>
             <div className="text-[10px] text-slate-500 font-bold">মোট আয়ত্ত</div>
             <div className="text-xs font-black text-slate-900 dark:text-white font-mono">
-              {totalMasteredAll} / {gkData.total_cards} ({Math.round((totalMasteredAll / gkData.total_cards) * 100)}%)
+              {deckType === 'gk' 
+                ? `${masteredGkIds.size} / ${gkData.total_cards} (${Math.round((masteredGkIds.size / gkData.total_cards) * 100)}%)`
+                : `${masteredEngIds.size} / ${englishData.metadata.total_predictors} (${Math.round((masteredEngIds.size / englishData.metadata.total_predictors) * 100)}%)`}
             </div>
           </div>
         </div>
       </div>
 
-      {/* 2. MONTH-WISE HORIZONTAL SLIDER TABS */}
-      <div className="relative mb-3.5 group">
+      {/* 2. DUAL DECK SEGMENTED PILL SWITCHER */}
+      <div className="p-1 rounded-2xl bg-white/90 dark:bg-slate-900/90 ring-1 ring-slate-200/90 dark:ring-slate-800/90 shadow-xs flex items-center gap-1">
         <button
-          onClick={() => scrollSlider('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 dark:bg-slate-800/90 shadow-md ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:scale-105 active:scale-95 transition-all hidden sm:flex cursor-pointer"
-          aria-label="Scroll left"
+          onClick={() => {
+            setDeckType('gk');
+            setSearchQuery('');
+          }}
+          className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
+            deckType === 'gk'
+              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-xs'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+          }`}
         >
-          <ChevronLeft className="w-4 h-4" />
+          <span>🇧🇩 সাম্প্রতিক সাধারণ জ্ঞান</span>
+          <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${deckType === 'gk' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}>
+            {gkData.total_cards} কার্ডস
+          </span>
         </button>
 
-        <div
-          ref={sliderRef}
-          className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none px-1 scroll-smooth"
+        <button
+          onClick={() => {
+            setDeckType('english');
+            setSearchQuery('');
+          }}
+          className={`flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
+            deckType === 'english'
+              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-xs'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+          }`}
         >
-          {/* 'All' Tab */}
+          <span>🇬🇧 শিওর-শট ইংলিশ প্রেডিক্টর</span>
+          <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${deckType === 'english' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}>
+            {englishData.metadata.total_predictors} প্রশ্ন
+          </span>
+        </button>
+      </div>
+
+      {/* 3. TABS BAR (Month Slider for GK, Cluster Pills for English) */}
+      {deckType === 'gk' ? (
+        <div className="relative group">
           <button
-            onClick={() => setSelectedMonth('all')}
-            className={`px-3.5 py-2 rounded-2xl text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ring-1 ${
-              selectedMonth === 'all'
-                ? 'bg-[#056839] text-white ring-[#056839] shadow-sm shadow-emerald-600/30'
-                : 'bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 ring-slate-200/80 dark:ring-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
-            }`}
+            onClick={() => scrollSlider('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 dark:bg-slate-800/90 shadow-md ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:scale-105 active:scale-95 transition-all hidden sm:flex cursor-pointer"
+            aria-label="Scroll left"
           >
-            <Calendar className="w-3.5 h-3.5" />
-            <span>সব মাস</span>
-            <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-              selectedMonth === 'all' ? 'bg-white/25 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-            }`}>
-              {gkData.total_cards}
-            </span>
+            <ChevronLeft className="w-4 h-4" />
           </button>
 
-          {/* Month Tabs */}
-          {gkData.months.map((m) => {
-            const count = gkData.data[m.id]?.length || 0;
-            const isSelected = selectedMonth === m.id;
+          <div
+            ref={sliderRef}
+            className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none px-1 scroll-smooth"
+          >
+            <button
+              onClick={() => setSelectedMonth('all')}
+              className={`px-3.5 py-2 rounded-2xl text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 ring-1 ${
+                selectedMonth === 'all'
+                  ? 'bg-[#056839] text-white ring-[#056839] shadow-sm shadow-emerald-600/30'
+                  : 'bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 ring-slate-200/80 dark:ring-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+              }`}
+            >
+              <Calendar className="w-3.5 h-3.5" />
+              <span>সব মাস</span>
+              <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+                selectedMonth === 'all' ? 'bg-white/25 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+              }`}>
+                {gkData.total_cards}
+              </span>
+            </button>
+
+            {gkData.months.map((m) => {
+              const count = gkData.data[m.id]?.length || 0;
+              const isSelected = selectedMonth === m.id;
+              return (
+                <button
+                  key={m.id}
+                  onClick={() => setSelectedMonth(m.id)}
+                  className={`px-3.5 py-2 rounded-2xl text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-2 ring-1 ${
+                    isSelected
+                      ? 'bg-[#056839] text-white ring-[#056839] shadow-sm shadow-emerald-600/30'
+                      : 'bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 ring-slate-200/80 dark:ring-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <span>{m.label_bn}</span>
+                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+                    isSelected ? 'bg-white/25 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={() => scrollSlider('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 dark:bg-slate-800/90 shadow-md ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:scale-105 active:scale-95 transition-all hidden sm:flex cursor-pointer"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      ) : (
+        /* English Clusters Bar */
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {ENGLISH_CLUSTERS.map((cl) => {
+            const isSelected = selectedEnglishCluster === cl.id;
             return (
               <button
-                key={m.id}
-                onClick={() => setSelectedMonth(m.id)}
-                className={`px-3.5 py-2 rounded-2xl text-xs font-bold shrink-0 transition-all cursor-pointer flex items-center gap-2 ring-1 ${
+                key={cl.id}
+                onClick={() => setSelectedEnglishCluster(cl.id)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all cursor-pointer border ${
                   isSelected
-                    ? 'bg-[#056839] text-white ring-[#056839] shadow-sm shadow-emerald-600/30'
-                    : 'bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 ring-slate-200/80 dark:ring-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    ? 'bg-purple-600 text-white border-purple-600 shadow-xs'
+                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
-                <span>{m.label_bn}</span>
-                <span className={`text-[9px] px-1.5 py-0.5 rounded-md font-medium hidden md:inline-block ${
-                  isSelected ? 'bg-emerald-700/60 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
-                }`}>
-                  {m.badge}
-                </span>
-                <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                  isSelected ? 'bg-white/25 text-white' : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                }`}>
-                  {count}
-                </span>
+                {cl.label}
               </button>
             );
           })}
         </div>
+      )}
 
-        <button
-          onClick={() => scrollSlider('right')}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-white/90 dark:bg-slate-800/90 shadow-md ring-1 ring-slate-200 dark:ring-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:scale-105 active:scale-95 transition-all hidden sm:flex cursor-pointer"
-          aria-label="Scroll right"
-        >
-          <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* 3. FILTER, SEARCH & VIEW MODE BAR */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 mb-4">
-        {/* Category Pills (Horizontal scroll on mobile) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold shrink-0 transition-all cursor-pointer ${
-                selectedCategory === cat
-                  ? 'bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 ring-1 ring-emerald-500/40'
-                  : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+      {/* 4. SEARCH & VIEW MODE CONTROLS */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+        {/* Categories if GK */}
+        {deckType === 'gk' ? (
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            {GK_CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-2.5 py-1 rounded-xl text-[11px] font-bold shrink-0 transition-all cursor-pointer ${
+                  selectedCategory === cat
+                    ? 'bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 ring-1 ring-emerald-500/40'
+                    : 'bg-slate-100 dark:bg-slate-800/70 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+            ক্লাস্টারভিত্তিক মোট <strong className="text-purple-600 dark:text-purple-400 font-bold">{engList.length}টি</strong> নিশ্চিত প্রশ্ন
+          </div>
+        )}
 
         {/* Search & Toggle view */}
         <div className="flex items-center gap-2">
@@ -356,7 +539,7 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="টপিক বা তথ্য খুঁজুন..."
+              placeholder={deckType === 'gk' ? "টপিক বা তথ্য খুঁজুন..." : "নিয়ম বা প্রশ্ন খুঁজুন..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-8 pr-2.5 py-1.5 rounded-xl text-xs bg-white dark:bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white"
@@ -371,7 +554,6 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
                   ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-xs'
                   : 'text-slate-600 dark:text-slate-400'
               }`}
-              title="অ্যাক্টিভ রিকল কার্ড"
             >
               <Layers className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">ফ্ল্যাশকার্ড</span>
@@ -383,354 +565,323 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
                   ? 'bg-white dark:bg-slate-900 text-emerald-700 dark:text-emerald-400 shadow-xs'
                   : 'text-slate-600 dark:text-slate-400'
               }`}
-              title="চিটশিট গ্রিড ভিউ"
             >
               <LayoutGrid className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">চিটশিট</span>
+              <span className="hidden sm:inline">গ্রিড ভিউ</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 4. MAIN CARD / GRID VIEW */}
-      {cardsList.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80">
-          <HelpCircle className="w-10 h-10 text-slate-400 mx-auto mb-2" />
-          <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">কোনো ফ্ল্যাশকার্ড পাওয়া যায়নি</h3>
-          <p className="text-xs text-slate-500 mt-1">অন্য কোনো ফিল্টার বা মাস নির্বাচন করুন।</p>
-        </div>
-      ) : viewMode === 'card' && currentCard ? (
-        /* =========================================================================
-           ACTIVE RECALL 3D FLIP CARD MODE
-           ========================================================================= */
-        <div className="space-y-4">
-          
-          {/* Card Meta & Step Progress */}
-          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
-            <div className="flex items-center gap-2">
+      {/* 5. MAIN DISPLAY (GK vs ENGLISH) */}
+      {deckType === 'gk' ? (
+        /* GK DISPLAY */
+        gkCardsList.length === 0 ? (
+          <div className="p-12 text-center rounded-3xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80">
+            <HelpCircle className="w-10 h-10 text-slate-400 mx-auto mb-2" />
+            <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">কোনো ফ্ল্যাশকার্ড পাওয়া যায়নি</h3>
+          </div>
+        ) : viewMode === 'card' && currentGkCard ? (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
               <span className="px-2 py-0.5 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono font-bold text-[11px]">
-                কার্ড {currentIndex + 1} / {cardsList.length}
+                কার্ড {gkCurrentIndex + 1} / {gkCardsList.length} • {currentGkCard.month_bn} ২০২৬
               </span>
-              <span className="font-semibold text-slate-700 dark:text-slate-300">
-                {currentCard.month_bn} ২০২৬
+              <span className="text-[11px] font-mono text-emerald-600 font-bold">
+                {gkMasteredCount} আয়ত্ত
               </span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-                {masteredCount} আয়ত্ত ({progressPercent}%)
-              </span>
-              <button
-                onClick={shuffleCards}
-                className="flex items-center gap-1 text-[11px] hover:text-emerald-600 cursor-pointer"
-                title="কার্ড শাফল করুন (S)"
-              >
-                <Shuffle className="w-3 h-3" />
-                <span className="hidden sm:inline">শাফল</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
-              style={{ width: `${((currentIndex + 1) / cardsList.length) * 100}%` }}
-            />
-          </div>
-
-          {/* 3D Flip Card Container */}
-          <div className="perspective-1000 min-h-[380px] sm:min-h-[420px] select-none">
-            <div
-              onClick={() => setIsFlipped(!isFlipped)}
-              className={`relative w-full min-h-[380px] sm:min-h-[420px] transform-style-3d transition-transform duration-500 cursor-pointer rounded-3xl ${
-                isFlipped ? 'rotate-y-180' : ''
-              }`}
+              onClick={() => setGkIsFlipped(!gkIsFlipped)}
+              className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer min-h-[300px] flex flex-col justify-between"
             >
-              
-              {/* ---------------- FRONT FACE ---------------- */}
-              <div className="absolute inset-0 backface-hidden rounded-3xl p-6 sm:p-8 backdrop-blur-xl bg-white/95 dark:bg-slate-900/95 ring-1 ring-slate-200/90 dark:ring-slate-800/90 shadow-md flex flex-col justify-between hover:ring-emerald-500/60 transition-all">
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
-                        {currentCard.category}
-                      </span>
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
-                        {currentCard.topic}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-1.5">
-                      {isCurrentMastered && (
-                        <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-white shadow-xs">
-                          <Check className="w-3 h-3" /> আয়ত্ত
-                        </span>
-                      )}
-                      <button
-                        onClick={(e) => toggleMastered(currentCard.id, e)}
-                        className={`p-1.5 rounded-xl transition-colors ${
-                          isCurrentMastered
-                            ? 'text-amber-500 bg-amber-500/10'
-                            : 'text-slate-400 hover:text-amber-500 hover:bg-slate-100 dark:hover:bg-slate-800'
-                        }`}
-                        title="মাস্টার হিসেবে চিহ্নিত করুন"
-                      >
-                        <Bookmark className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Question Prompt */}
-                  <div className="mt-4 sm:mt-6">
-                    <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1 mb-2">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      অ্যাক্টিভ রিকল প্রশ্ন
-                    </span>
-                    <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white leading-relaxed">
-                      {currentCard.front}
-                    </h2>
-                  </div>
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    {currentGkCard.category}
+                  </span>
+                  <button
+                    onClick={(e) => toggleGkMastered(currentGkCard.id, e)}
+                    className={`p-1.5 rounded-xl border transition-colors ${
+                      isCurrentGkMastered 
+                        ? 'bg-emerald-600 text-white border-emerald-600' 
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700'
+                    }`}
+                  >
+                    <CheckCircle className="w-4 h-4" />
+                  </button>
                 </div>
-
-                <div>
-                  {/* Exam Targets */}
-                  <div className="flex items-center gap-1.5 flex-wrap mb-4">
-                    <span className="text-[11px] text-slate-500 font-medium">টার্গেট:</span>
-                    {currentCard.exam_targets.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-                      >
-                        {t}
-                      </span>
-                    ))}
+                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white mb-3">
+                  {currentGkCard.front}
+                </h3>
+                {gkIsFlipped && (
+                  <div className="space-y-2.5 pt-3 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-semibold">
+                      {currentGkCard.back}
+                    </p>
+                    {currentGkCard.hack && (
+                      <div className="flex items-start gap-1.5 p-2 rounded-lg bg-emerald-500/15 text-emerald-900 dark:text-emerald-200 text-xs border border-emerald-500/30">
+                        <Zap className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span><strong>স্পিড হ্যাক:</strong> {currentGkCard.hack}</span>
+                      </div>
+                    )}
+                    {currentGkCard.trap && (
+                      <div className="flex items-start gap-1.5 p-2 rounded-lg bg-amber-500/15 text-amber-900 dark:text-rose-200 text-xs border border-amber-500/30">
+                        <ShieldAlert className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                        <span><strong>ট্র্যাপ অ্যালার্ট:</strong> {currentGkCard.trap}</span>
+                      </div>
+                    )}
                   </div>
-
-                  {/* Flip Prompt Hint */}
-                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                    <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
-                      <RotateCw className="w-3.5 h-3.5 animate-spin-slow" />
-                      উত্তর দেখতে ক্লিক করুন (বা Space চাপুন)
-                    </span>
-                    <span className="text-[11px] font-mono">Front</span>
-                  </div>
-                </div>
+                )}
               </div>
-
-              {/* ---------------- BACK FACE ---------------- */}
-              <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl p-6 sm:p-8 backdrop-blur-xl bg-gradient-to-br from-white via-emerald-50/20 to-teal-50/30 dark:from-slate-900 dark:via-slate-900/90 dark:to-emerald-950/20 ring-1 ring-emerald-500/40 shadow-lg flex flex-col justify-between overflow-y-auto">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-2 border-b border-emerald-500/20 pb-2.5">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                      <span className="text-xs font-black text-emerald-700 dark:text-emerald-300">
-                        {currentCard.topic}
-                      </span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold">
-                      {currentCard.month_bn} ২০২৬
-                    </span>
-                  </div>
-
-                  {/* 1. Core Concept */}
-                  <div className="p-3.5 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/10 ring-1 ring-emerald-500/20">
-                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-emerald-800 dark:text-emerald-300 mb-1">
-                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span>সঠিক উত্তর ও মূল তথ্য:</span>
-                    </div>
-                    <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
-                      <MathText text={currentCard.concept} />
-                    </div>
-                  </div>
-
-                  {/* 2. Speed Hack */}
-                  <div className="p-3.5 rounded-2xl bg-amber-500/10 dark:bg-amber-500/10 ring-1 ring-amber-500/20">
-                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-amber-800 dark:text-amber-300 mb-1">
-                      <Zap className="w-4 h-4 text-amber-500 shrink-0" />
-                      <span>শর্টকাট হ্যাক ও মেমোরি ট্রিক:</span>
-                    </div>
-                    <div className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
-                      <MathText text={currentCard.hack} />
-                    </div>
-                  </div>
-
-                  {/* 3. Trap Shield */}
-                  <div className="p-3.5 rounded-2xl bg-rose-500/10 dark:bg-rose-500/10 ring-1 ring-rose-500/20">
-                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-rose-800 dark:text-rose-300 mb-1">
-                      <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0" />
-                      <span>পরীক্ষার অপশন ট্র্যাপ:</span>
-                    </div>
-                    <div className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
-                      <MathText text={currentCard.trap} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Flip Back hint */}
-                <div className="pt-3 mt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
-                  <span className="text-[11px] text-slate-500">কার্ডটি পুনরায় ঘোরাতে ক্লিক করুন</span>
-                  <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">Answer Back</span>
-                </div>
+              <div className="text-[11px] text-slate-400 text-center pt-3 border-t border-slate-100 dark:border-slate-800">
+                {gkIsFlipped ? 'পরবর্তী কার্ডে যেতে ডান তীর বা পরবর্তী বাটনে চাপ দিন' : 'উত্তর ও ট্র্যাপ ডিফেন্স দেখতে ক্লিক করুন'}
               </div>
-
-            </div>
-          </div>
-
-          {/* 5. CAROUSEL CONTROLS BAR */}
-          <div className="flex items-center justify-between gap-2 pt-2">
-            <button
-              onClick={prevCard}
-              className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer shadow-xs"
-              title="পূর্ববর্তী (Left Arrow)"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>পূর্ববর্তী</span>
-            </button>
-
-            {/* Quick Assessment Action Buttons */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={markReview}
-                className="px-3.5 py-2.5 rounded-2xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/30 text-xs font-black flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer"
-                title="মনে নেই (Key 1)"
-              >
-                <X className="w-4 h-4 text-rose-600" />
-                <span className="hidden sm:inline">আবার প্র্যাকটিস</span>
-              </button>
-
-              <button
-                onClick={() => setIsFlipped(!isFlipped)}
-                className="px-4 py-2.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-black flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer shadow-sm"
-                title="কার্ড উল্টান (Space)"
-              >
-                <RotateCw className="w-3.5 h-3.5" />
-                <span>{isFlipped ? 'প্রশ্ন দেখুন' : 'উত্তর দেখুন'}</span>
-              </button>
-
-              <button
-                onClick={markMastered}
-                className="px-3.5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white ring-1 ring-emerald-600 text-xs font-black flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer shadow-xs"
-                title="সম্পূর্ণ আয়ত্ত (Key 2)"
-              >
-                <Check className="w-4 h-4" />
-                <span className="hidden sm:inline">আয়ত্ত করেছি</span>
-              </button>
             </div>
 
-            <button
-              onClick={nextCard}
-              className="px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer shadow-xs"
-              title="পরবর্তী (Right Arrow)"
-            >
-              <span>পরবর্তী</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            <div className="flex items-center justify-between gap-2 pt-2">
+              <button
+                onClick={prevGkCard}
+                className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer"
+              >
+                পূর্ববর্তী
+              </button>
+              <button
+                onClick={nextGkCard}
+                className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold cursor-pointer shadow-xs"
+              >
+                পরবর্তী কার্ড
+              </button>
+            </div>
           </div>
-        </div>
-      ) : (
-        /* =========================================================================
-           CHEAT SHEET / GRID REVISION MODE
-           ========================================================================= */
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {cardsList.map((card, idx) => {
-            const isMastered = masteredIds.has(card.id);
-            return (
+        ) : (
+          /* GK Grid View */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {gkCardsList.map((card) => (
               <div
                 key={card.id}
-                className={`p-4 sm:p-5 rounded-3xl backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 ring-1 transition-all flex flex-col justify-between ${
-                  isMastered
-                    ? 'ring-emerald-500/50 bg-emerald-500/5 dark:bg-emerald-950/10'
-                    : 'ring-slate-200/80 dark:ring-slate-800/80 hover:ring-emerald-500/40'
-                }`}
+                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
-                        {card.month_bn} ২০২৬
-                      </span>
-                      <span className="px-2 py-0.5 rounded-md text-[9px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
-                        {card.category}
-                      </span>
-                    </div>
-
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">{card.month_bn} ২০২৬</span>
                     <button
-                      onClick={(e) => toggleMastered(card.id, e)}
-                      className={`p-1 rounded-lg transition-colors cursor-pointer ${
-                        isMastered ? 'text-emerald-600 bg-emerald-500/15' : 'text-slate-400 hover:text-emerald-600'
-                      }`}
-                      title={isMastered ? 'আয়ত্ত তালিকা থেকে সরান' : 'আয়ত্ত হিসেবে যোগ করুন'}
+                      onClick={() => toggleGkMastered(card.id)}
+                      className={`p-1 rounded-md ${masteredGkIds.has(card.id) ? 'text-emerald-600' : 'text-slate-300'}`}
                     >
-                      <Check className="w-3.5 h-3.5" />
+                      <CheckCircle className="w-3.5 h-3.5" />
                     </button>
                   </div>
-
-                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-2 leading-snug">
-                    {card.front}
-                  </h3>
-
-                  {/* Concept Capsule */}
-                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 ring-1 ring-slate-200/60 dark:ring-slate-700/60 text-xs text-slate-700 dark:text-slate-300 leading-relaxed mb-2.5">
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400">সঠিক তথ্য: </span>
-                    <MathText text={card.concept} />
-                  </div>
-
-                  {/* Hack & Trap */}
-                  <div className="space-y-1.5 text-[11px]">
-                    <div className="flex items-start gap-1.5 text-amber-800 dark:text-amber-300">
-                      <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
-                      <span><strong>হ্যাক:</strong> {card.hack}</span>
-                    </div>
-                    <div className="flex items-start gap-1.5 text-rose-800 dark:text-rose-300">
-                      <ShieldAlert className="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5" />
-                      <span><strong>ট্র্যাপ:</strong> {card.trap}</span>
-                    </div>
-                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-2">{card.front}</h4>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">{card.back}</p>
                 </div>
-
-                <div className="flex items-center justify-between text-[10px] text-slate-400 pt-3 mt-3 border-t border-slate-100 dark:border-slate-800">
-                  <span className="font-mono">#{idx + 1}</span>
-                  <div className="flex items-center gap-1">
-                    {card.exam_targets.map((t) => (
-                      <span key={t} className="px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 font-mono">
-                        {t}
-                      </span>
-                    ))}
+                {card.hack && (
+                  <div className="text-[10px] p-1.5 rounded bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-medium">
+                    ⚡ {card.hack}
                   </div>
-                </div>
+                )}
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )
+      ) : (
+        /* =========================================================================
+           ENGLISH PREDICTOR DECK DISPLAY
+           ========================================================================= */
+        engList.length === 0 ? (
+          <div className="p-12 text-center rounded-3xl bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80">
+            <HelpCircle className="w-10 h-10 text-slate-400 mx-auto mb-2" />
+            <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">কোনো ইংলিশ প্রশ্ন পাওয়া যায়নি</h3>
+          </div>
+        ) : viewMode === 'card' && currentEngCard ? (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
+              <span className="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-300 font-mono font-bold text-[11px]">
+                প্রশ্ন {engCurrentIndex + 1} / {engList.length} • {currentEngCard.cluster_name_bn || currentEngCard.cluster_name}
+              </span>
+              <span className="text-[11px] font-mono text-purple-600 font-bold">
+                {engMasteredCount} আয়ত্ত
+              </span>
+            </div>
+
+            <div className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-slate-900 border border-purple-500/30 shadow-md flex flex-col justify-between space-y-4">
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                    🎯 {currentEngCard.exam_target} • {currentEngCard.star_ranking}
+                  </span>
+                  <button
+                    onClick={(e) => toggleEngMastered(currentEngCard.id, e)}
+                    className={`p-1.5 rounded-xl border transition-colors ${
+                      isCurrentEngMastered 
+                        ? 'bg-purple-600 text-white border-purple-600' 
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700'
+                    }`}
+                  >
+                    <CheckCircle className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-relaxed mb-3.5">
+                  <MathText content={currentEngCard.q} />
+                </div>
+
+                {/* 4 Options Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {(currentEngCard.options || currentEngCard.opts).map((opt, idx) => {
+                    const letters = ['A', 'B', 'C', 'D'];
+                    const isSelected = userSelectedOption === idx;
+                    const isCorrect = idx === currentEngCard.ans;
+                    const showFeedback = engIsFlipped || userSelectedOption !== null;
+
+                    let optClass = 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-purple-500';
+                    if (showFeedback) {
+                      if (isCorrect) {
+                        optClass = 'bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border-emerald-500 font-bold';
+                      } else if (isSelected) {
+                        optClass = 'bg-rose-500/20 text-rose-900 dark:text-rose-200 border-rose-500 font-bold';
+                      } else {
+                        optClass = 'opacity-50 border-slate-200 dark:border-slate-800';
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          setUserSelectedOption(idx);
+                          setEngIsFlipped(true);
+                        }}
+                        className={`p-3 rounded-xl border text-left text-xs sm:text-sm font-medium transition-all flex items-center gap-2.5 cursor-pointer ${optClass}`}
+                      >
+                        <span className="w-6 h-6 rounded-md bg-slate-100 dark:bg-slate-700 font-mono text-xs font-bold flex items-center justify-center shrink-0">
+                          {letters[idx]}
+                        </span>
+                        <span>{opt}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Flipped Content / Explanations */}
+                {engIsFlipped && (
+                  <div className="mt-4 space-y-2.5 pt-3 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
+                    {/* Emerald Speed Hack */}
+                    {currentEngCard.speed_hack && (
+                      <div className="flex items-start gap-2 p-2.5 rounded-xl bg-emerald-500/15 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm border border-emerald-500/30">
+                        <Zap className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-emerald-800 dark:text-emerald-300 mr-1 uppercase text-[11px]">⚡ স্পিড হ্যাক:</strong>
+                          <MathText content={currentEngCard.speed_hack} />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Rose/Amber Trap Alert */}
+                    {currentEngCard.trap_alert && (
+                      <div className="flex items-start gap-2 p-2.5 rounded-xl bg-amber-500/15 text-amber-950 dark:text-rose-200 text-xs sm:text-sm border border-amber-500/30">
+                        <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-amber-900 dark:text-rose-300 mr-1 uppercase text-[11px]">⚠️ ট্র্যাপ অ্যালার্ট:</strong>
+                          <MathText content={currentEngCard.trap_alert} />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Explanation */}
+                    {currentEngCard.exp && (
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <strong className="text-slate-900 dark:text-white mr-1">📖 ব্যাখ্যা ও নিয়ম:</strong>
+                        <MathText content={currentEngCard.exp} />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Navigation Controls */}
+              <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  onClick={prevEngCard}
+                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer"
+                >
+                  পূর্ববর্তী প্রশ্ন
+                </button>
+                <button
+                  onClick={() => setEngIsFlipped(!engIsFlipped)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold cursor-pointer"
+                >
+                  {engIsFlipped ? 'উত্তর লুকান' : 'ব্যাখ্যা দেখুন'}
+                </button>
+                <button
+                  onClick={nextEngCard}
+                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold cursor-pointer shadow-xs"
+                >
+                  পরবর্তী প্রশ্ন
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* English Grid View */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {engList.map((q) => (
+              <div
+                key={q.id}
+                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 font-mono">{q.exam_target}</span>
+                    <button
+                      onClick={() => toggleEngMastered(q.id)}
+                      className={`p-1 rounded-md ${masteredEngIds.has(q.id) ? 'text-purple-600' : 'text-slate-300'}`}
+                    >
+                      <CheckCircle className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-2 leading-snug">{q.q}</h4>
+                  <div className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400 mb-2">
+                    ✓ সঠিক উত্তর: {q.options ? q.options[q.ans] : q.opts[q.ans]}
+                  </div>
+                </div>
+                {q.speed_hack && (
+                  <div className="text-[10px] p-1.5 rounded bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-medium">
+                    ⚡ {q.speed_hack}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )
       )}
 
       {/* 6. BOTTOM CHEAT TIPS BANNER */}
-      <div className="mt-8 p-4 rounded-3xl backdrop-blur-xl bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-blue-500/10 ring-1 ring-emerald-500/25 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <div className="mt-8 p-4 rounded-3xl backdrop-blur-xl bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-purple-500/10 ring-1 ring-emerald-500/25 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-md">
             <Award className="w-5 h-5" />
           </div>
           <div>
             <h4 className="text-xs sm:text-sm font-black text-slate-900 dark:text-white">
-              ভর্তি পরীক্ষার সাম্প্রতিক সাধারণ জ্ঞানে ১০০% কমন কৌশল
+              মেডিকেল ও ভার্সিটি ২৫-মার্কস নন-সায়েন্স বুস্টার স্ট্র্যাটেজি
             </h4>
             <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5">
-              বিগত ভর্তি পরীক্ষার ধারা অনুযায়ী প্রতিটি মাসের জাতীয় মেগা প্রকল্প, নির্বাচন/সংবিধানের ধারা এবং নোবেল ২০২৬ থেকে সরাসরি প্রশ্ন আসে।
+              মেডিকেলে ইংলিশ ১৫ + জিকে ১০ = ২৫ নম্বর। প্রতিদিন ২০ মিনিট অ্যাক্টিভ রিকলে রিভিশন দিলে নিশ্চিত ফুল মার্কস নিশ্চিত হয়।
             </p>
           </div>
         </div>
 
         <button
           onClick={() => {
-            setSelectedMonth('all');
-            setSelectedCategory('সব ক্যাটাগরি');
-            shuffleCards();
+            if (deckType === 'gk') shuffleGkCards();
+            else shuffleEngCards();
           }}
           className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shrink-0 active:scale-95 transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
         >
           <Shuffle className="w-3.5 h-3.5" />
-          <span>সম্পূর্ণ রিভিশন ড্রিল</span>
+          <span>র‌্যান্ডম রিভিশন ড্রিল</span>
         </button>
       </div>
 
@@ -738,4 +889,5 @@ export const ActiveRecallView: React.FC<ActiveRecallViewProps> = ({
   );
 };
 
+export const ActiveRecallView = React.memo(ActiveRecallViewComponent);
 export default ActiveRecallView;

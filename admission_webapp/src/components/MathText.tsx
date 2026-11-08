@@ -43,7 +43,35 @@ export function parseMarkdownTable(text: string): { headers: string[]; rows: str
   return null;
 }
 
-export const MathText: React.FC<MathTextProps> = ({ content, text: propText, className = '', block = false }) => {
+const katexCache = new Map<string, string>();
+
+function renderKatexSafe(math: string, displayMode: boolean): string {
+  const cacheKey = `${displayMode ? 'D:' : 'I:'}${math}`;
+  const cached = katexCache.get(cacheKey);
+  if (cached) return cached;
+
+  try {
+    const rendered = katex.renderToString(math, {
+      displayMode,
+      throwOnError: false,
+      strict: 'ignore',
+    });
+    // Keep cache bounded to 2000 items
+    if (katexCache.size > 2000) {
+      const firstKey = katexCache.keys().next().value;
+      if (firstKey) katexCache.delete(firstKey);
+    }
+    katexCache.set(cacheKey, rendered);
+    return rendered;
+  } catch {
+    const fallback = displayMode 
+      ? `<span class="text-rose-500 font-mono">$$${math}$$</span>`
+      : `<span class="text-rose-500 font-mono">$${math}$</span>`;
+    return fallback;
+  }
+}
+
+const MathTextComponent: React.FC<MathTextProps> = ({ content, text: propText, className = '', block = false }) => {
   const renderedHtml = useMemo(() => {
     const rawContent = content ?? propText ?? '';
     if (!rawContent) return '';
@@ -76,16 +104,8 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     text = text.replace(/\$\$(.*?)\$\$/gs, (_, math) => {
       let cleanMath = math.trim();
       cleanMath = cleanMath.replace(/(?<!\\)\b(times|implies|frac|Delta|approx|pm|sqrt|alpha|beta|rho|sigma|lambda|theta|omega|pi|to|le|ge|neq|sim|propto)\b/g, '\\$1');
-      try {
-        const rendered = katex.renderToString(cleanMath, {
-          displayMode: true,
-          throwOnError: false,
-          strict: 'ignore',
-        });
-        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1">${rendered}</div>`);
-      } catch {
-        displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1 text-rose-500 dark:text-rose-400 font-mono">$$${cleanMath}$$</div>`);
-      }
+      const rendered = renderKatexSafe(cleanMath, true);
+      displayMathBlocks.push(`<div class="overflow-x-auto no-scrollbar py-1 my-1">${rendered}</div>`);
       return `___DISPLAY_MATH_${displayMathBlocks.length - 1}___`;
     });
 
@@ -94,16 +114,8 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     text = text.replace(/\$(.*?)\$/g, (_, math) => {
       let cleanMath = math.trim();
       cleanMath = cleanMath.replace(/(?<!\\)\b(times|implies|frac|Delta|approx|pm|sqrt|alpha|beta|rho|sigma|lambda|theta|omega|pi|to|le|ge|neq|sim|propto)\b/g, '\\$1');
-      try {
-        const rendered = katex.renderToString(cleanMath, {
-          displayMode: false,
-          throwOnError: false,
-          strict: 'ignore',
-        });
-        inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
-      } catch {
-        inlineMathBlocks.push(`<span class="text-rose-500 dark:text-rose-400 font-mono">$${cleanMath}$</span>`);
-      }
+      const rendered = renderKatexSafe(cleanMath, false);
+      inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
       return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
     });
 
@@ -112,17 +124,9 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
       text = text.replace(/([^\s\u0980-\u09FF]*\\[a-zA-Z]+(?:\{[^{}]*\}|\[[^[\]]*\]|[^\s\u0980-\u09FF])*)/g, (match) => {
         const trimmed = match.trim();
         if (!trimmed || !trimmed.includes('\\')) return match;
-        try {
-          const rendered = katex.renderToString(trimmed, {
-            displayMode: false,
-            throwOnError: false,
-            strict: 'ignore',
-          });
-          inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
-          return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
-        } catch {
-          return match;
-        }
+        const rendered = renderKatexSafe(trimmed, false);
+        inlineMathBlocks.push(`<span class="inline-block max-w-full overflow-x-auto no-scrollbar align-middle">${rendered}</span>`);
+        return `___INLINE_MATH_${inlineMathBlocks.length - 1}___`;
       });
     }
 
@@ -228,3 +232,6 @@ export const MathText: React.FC<MathTextProps> = ({ content, text: propText, cla
     />
   );
 };
+
+export const MathText = React.memo(MathTextComponent);
+

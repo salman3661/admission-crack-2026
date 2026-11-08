@@ -196,6 +196,21 @@ export const ExamView: React.FC<ExamViewProps> = ({
     setSessionFinished(false);
   };
 
+  // 1-Click Speed Drill Auto-Starter
+  useEffect(() => {
+    try {
+      const autoStart = sessionStorage.getItem('admission_autostart_exam');
+      if (autoStart === 'true') {
+        sessionStorage.removeItem('admission_autostart_exam');
+        if (availableQuestions.length > 0) {
+          handleStartSession(Math.min(25, availableQuestions.length), 'mastery');
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, [availableQuestions]);
+
   // -------------------------------------------------------------
   // TIMED EXAM COUNTDOWN & AUTO-SKIP
   // -------------------------------------------------------------
