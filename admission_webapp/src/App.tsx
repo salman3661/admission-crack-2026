@@ -8,6 +8,7 @@ import { ExamView } from './components/ExamView';
 import { VaultView } from './components/VaultView';
 import { AnalyticsView } from './components/AnalyticsView';
 import { PredictorView } from './components/PredictorView';
+import { ChapterBlueprintView } from './components/ChapterBlueprintView';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
 import { CategorySwitcher } from './components/CategorySwitcher';
@@ -40,7 +41,7 @@ export function App() {
     try {
       const hash = window.location.hash.replace('#', '').toLowerCase();
       if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') return 'recall';
-      const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall'];
+      const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall', 'blueprint'];
       if (validModes.includes(hash as AppMode)) {
         return hash as AppMode;
       }
@@ -73,7 +74,7 @@ export function App() {
           setCurrentMode('recall');
           return;
         }
-        const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall'];
+        const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall', 'blueprint'];
         if (validModes.includes(hash as AppMode)) {
           setCurrentMode(hash as AppMode);
         } else {
@@ -300,6 +301,10 @@ export function App() {
 
         {currentMode === 'recall' && (
           <ActiveRecallView onSelectMode={handleSelectMode} />
+        )}
+
+        {currentMode === 'blueprint' && (
+          <ChapterBlueprintView />
         )}
 
 

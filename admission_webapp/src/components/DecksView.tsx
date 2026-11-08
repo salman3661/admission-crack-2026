@@ -183,6 +183,42 @@ export const DecksView: React.FC<DecksViewProps> = ({
       </div>
 
       {/* =========================================================================
+          MASTER QB DEEP BLUEPRINT & SYNTHETIC PREDICTOR PROMINENT LAUNCHER
+         ========================================================================= */}
+      <div 
+        onClick={() => handleDeckNavigate('blueprint', 'All')}
+        className="group relative overflow-hidden rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-slate-900 via-slate-800 to-[#0A1F13] text-white border border-emerald-500/40 shadow-lg hover:shadow-emerald-500/10 transition-all duration-200 cursor-pointer active:scale-[0.99]"
+      >
+        <div className="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+          <div className="space-y-1.5 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                🔥 এক্সক্লুসিভ মাস্টার কিউবি এক্সট্রাকশন
+              </span>
+              <span className="text-[11px] font-mono text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-700">
+                ২২,৮০৭+ প্রশ্ন অ্যানালাইজড • ৩৪ অধ্যায়
+              </span>
+            </div>
+            <h3 className="text-base sm:text-lg font-black text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
+              <span>মাস্টার কিউবি টাইপ ক্লাস্টার ও ৬৮০টি প্রেডিক্টর টেস্ট</span>
+              <span className="text-xs px-2 py-0.5 rounded bg-emerald-600 text-white font-mono">MAD & VAR</span>
+            </h3>
+            <p className="text-xs text-slate-300 leading-relaxed max-w-2xl">
+              প্রতিটি অধ্যায়ের ৪-৬টি মেগা-টাইপ, রিপিটেশন ফ্রিকোয়েন্সি, ৫-সেকেন্ড স্পিড এলিমিনেশন ট্রিক এবং আনসিন ২০টি প্রেডিক্টর টেস্টের ইন্টারেক্টিভ কুইজ।
+            </p>
+          </div>
+          <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+            <span className="px-4 py-2 rounded-xl bg-emerald-600 group-hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-900/40 flex items-center gap-1.5 transition-all">
+              <span>ব্লুপ্রিন্ট ও টেস্ট দেখুন</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* =========================================================================
           3. SLEEK 2x3 GRID OF INTERACTIVE STREAM CARDS (Aesthetic Edtech Layout)
          ========================================================================= */}
       {(activeSegment === 'all' || activeSegment === 'weekly') && (

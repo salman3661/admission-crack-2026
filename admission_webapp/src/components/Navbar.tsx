@@ -6,7 +6,8 @@ import {
   Flame, 
   LogOut, 
   Settings,
-  Sparkles
+  Sparkles,
+  Layers
 } from 'lucide-react';
 import type { AppMode, SubjectType, WeekFilterType, UserProfile, TrackType } from '../types';
 
@@ -148,6 +149,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="sm:hidden text-[11px]">মেডি</span>
             </button>
           </div>
+
+          {/* Quick Master QB Blueprint Button */}
+          <button
+            onClick={() => onSelectMode('blueprint')}
+            className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 ${
+              currentMode === 'blueprint'
+                ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
+                : 'bg-emerald-500/10 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-300/60 dark:border-emerald-800/60 hover:bg-emerald-500/20'
+            }`}
+            title="মাস্টার কিউবি ব্লুপ্রিন্ট ও প্রেডিক্টর"
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>মাস্টার ব্লুপ্রিন্ট</span>
+          </button>
 
           {/* Quick Predictor Vault Button */}
           <button

@@ -1,7 +1,7 @@
 export type TrackType = 'medical' | 'varsity';
 export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
 export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07';
-export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault' | 'recall';
+export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault' | 'recall' | 'blueprint';
 
 export interface RecentGKCard {
   id: string;
@@ -199,4 +199,45 @@ export interface VaultData {
   magic_fractions?: MagicFractionItem[];
   patterns?: FormulaPatternItem[];
   traps?: TrapItem[];
+}
+
+
+export interface MasterMegaType {
+  type_id: string;
+  name: string;
+  importance: string;
+  stars: string;
+  repeat_frequency: number;
+  past_tags: string[];
+  qb_question_refs: string[];
+  core_rule: string;
+  speed_elimination: string;
+}
+
+export interface MasterChapterBlueprint {
+  id: string;
+  title: string;
+  subject: string;
+  paper: string;
+  total_questions: number;
+  dominant_types_count: number;
+  mega_types: MasterMegaType[];
+}
+
+export interface SyntheticPredictorQuestion {
+  id: string;
+  stem: string;
+  options: string[];
+  answer: string;
+  type_ref: string;
+  trap_alert: string;
+  speed_hack: string;
+  explanation: string;
+}
+
+export interface ChapterSyntheticPredictors {
+  chapter_id: string;
+  chapter_title: string;
+  subject: string;
+  predictors: SyntheticPredictorQuestion[];
 }

@@ -11,6 +11,7 @@ const sequence: { id: AppMode; label: string }[] = [
   { id: 'slides', label: '⚡ কোর ফর্মুলা' },
   { id: 'flashcards', label: '🧠 অ্যাক্টিভ রিকল' },
   { id: 'vault', label: '⚡ শর্টকাট ভল্ট' },
+  { id: 'blueprint', label: '📊 মাস্টার ব্লুপ্রিন্ট' },
   { id: 'exam', label: '📝 মডেল টেস্ট' },
 ];
 
