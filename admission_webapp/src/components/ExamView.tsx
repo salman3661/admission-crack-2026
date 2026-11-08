@@ -963,6 +963,17 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   })}
                 </div>
 
+                {/* Speed Hack Section */}
+                {q.speed_hack && (
+                  <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-xl p-2.5 mb-2 flex items-start gap-2">
+                    <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+                    <div className="text-xs text-emerald-950 dark:text-emerald-200 leading-relaxed">
+                      <strong className="text-emerald-700 dark:text-emerald-400 font-bold mr-1">⚡ স্পিড হ্যাক:</strong>
+                      <MathText content={q.speed_hack} />
+                    </div>
+                  </div>
+                )}
+
                 {/* Trap Defense Section (Strict Conditional Rendering) */}
                 {(() => {
                   const trapAlert = (q.trap_alert || q.trap || '').trim();
@@ -974,7 +985,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                       <AlertCircle className="w-4 h-4 text-amber-500 dark:text-amber-400 mt-0.5 shrink-0" />
                       <div className="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
                         <strong className="text-amber-700 dark:text-amber-400 font-bold mr-1">ফাঁদ বিশ্লেষণ:</strong>
-                        {trapAlert}
+                        <MathText content={trapAlert} />
                       </div>
                     </div>
                   );
@@ -1174,6 +1185,17 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 </span>
               </div>
 
+              {/* Speed Hack */}
+              {q.speed_hack && (
+                <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-xl p-2.5 text-xs leading-relaxed text-emerald-950 dark:text-emerald-200 flex items-start gap-2">
+                  <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-emerald-700 dark:text-emerald-400 font-bold mr-1">⚡ স্পিড হ্যাক:</strong>
+                    <MathText content={q.speed_hack} />
+                  </div>
+                </div>
+              )}
+
               {/* Trap Insight (Strict Conditional Rendering) */}
               {(() => {
                 const currentTrap = (q.trap_alert || q.trap || '').trim();
@@ -1185,7 +1207,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                     <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-amber-700 dark:text-amber-400 font-bold mr-1">ফাঁদ বিশ্লেষণ:</strong>
-                      {currentTrap}
+                      <MathText content={currentTrap} />
                     </div>
                   </div>
                 );

@@ -675,6 +675,13 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                       </div>
                       <MathText content={examQuestions[currentExamIndex].exp} />
 
+                      {examQuestions[currentExamIndex].speed_hack && (
+                        <div className="mt-2 pt-2 border-t border-zinc-100 dark:border-zinc-800 text-emerald-700 dark:text-emerald-400 flex items-start gap-1.5">
+                          <span className="shrink-0">⚡</span>
+                          <span><strong>স্পিড হ্যাক:</strong> <MathText content={examQuestions[currentExamIndex].speed_hack} /></span>
+                        </div>
+                      )}
+
                       {/* Strict Conditional Trap Alert */}
                       {(() => {
                         const currentQ = examQuestions[currentExamIndex];
@@ -685,7 +692,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         return (
                           <div className="mt-2 pt-2 border-t border-zinc-100 dark:border-zinc-800 text-amber-700 dark:text-amber-400 flex items-start gap-1.5">
                             <AlertTriangle className="w-4 h-4 shrink-0 text-amber-500" />
-                            <span><strong>ট্র্যাপ সতর্কতা:</strong> {trapAlert}</span>
+                            <span><strong>ট্র্যাপ সতর্কতা:</strong> <MathText content={trapAlert} /></span>
                           </div>
                         );
                       })()}
@@ -1210,6 +1217,13 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         </div>
                         <MathText content={q.exp} />
 
+                        {q.speed_hack && (
+                          <div className="pt-2 text-emerald-700 dark:text-emerald-400 flex items-start gap-1.5 border-t border-zinc-200/70 dark:border-zinc-700/70">
+                            <span className="shrink-0 mt-0.5">⚡</span>
+                            <span><strong className="font-bold">স্পিড হ্যাক:</strong> <MathText content={q.speed_hack} /></span>
+                          </div>
+                        )}
+
                         {/* Strict conditional rendering: ONLY if genuine trap exists */}
                         {(() => {
                           const trapAlert = (q.trap_alert || q.trap || '').trim();
@@ -1219,7 +1233,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                           return (
                             <div className="pt-2 text-amber-700 dark:text-amber-400 flex items-start gap-1.5 border-t border-zinc-200/70 dark:border-zinc-700/70">
                               <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-amber-500 mt-0.5" />
-                              <span><strong className="font-bold">ট্র্যাপ সতর্কতা:</strong> {trapAlert}</span>
+                              <span><strong className="font-bold">ট্র্যাপ সতর্কতা:</strong> <MathText content={trapAlert} /></span>
                             </div>
                           );
                         })()}

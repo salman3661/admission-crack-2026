@@ -99,6 +99,10 @@ export interface QuizQuestion {
   trap: string;
   trap_alert?: string;
   trap_insight?: string;
+  speed_hack?: string;
+  type_ref?: string;
+  blueprint_type_id?: string;
+  blueprint_chapter_id?: string;
   origin?: string;
   yield_stars?: number;
   probability?: string;

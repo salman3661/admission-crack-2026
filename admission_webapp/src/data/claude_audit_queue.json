@@ -1,0 +1,410 @@
+[
+  {
+    "id": "w3_phy_q03",
+    "stem": "[DU '19-20] সম্পূর্ণ পানিপূর্ণ কুয়া সম্পূর্ণ খালি করতে কৃতকাজ $W$ হলে, কুয়াটির ওপরের অর্ধেক খালি করতে কৃতকাজ কত?",
+    "options": [
+      "$W/2$",
+      "$W/4$",
+      "$W/8$",
+      "$3W/8$"
+    ],
+    "answer": "B: $W/4$",
+    "issue_flag": "Couples half-mass reduction (m/2) with quarter-depth center-of-mass displacement (H/4) relative to full-well work W = (1/2)mgH, creating a high-error W/8 vs W/4 ratio trap."
+  },
+  {
+    "id": "w4_var_002",
+    "stem": "[DU '20-21 Hubohu] একটি হ্রদের তলদেশ থেকে পানির উপরিতলে আসায় একটি বায়ুর বুদ্বুদের ব্যাস দ্বিগুণ হয়। বায়ুমণ্ডলের চাপ $10^5\\text{ N/m}^2$ এবং পানির ঘনত্ব $1000\\text{ kg/m}^3$ হলে হ্রদের গভীরতা কত? ($g = 9.8\\text{ m/s}^2$)",
+    "options": [
+      "$30.6\\text{ m}$",
+      "$71.4\\text{ m}$",
+      "$40.8\\text{ m}$",
+      "$81.6\\text{ m}$"
+    ],
+    "answer": "B: $71.4\\text{ m}$",
+    "issue_flag": "Couples 3D spherical volume cubic scaling (diameter doubled -> volume 8x) with Boyle's hydrostatic pressure law h = (8-1)P_0/(rho*g)."
+  },
+  {
+    "id": "w4_var_007",
+    "stem": "[Engineering Speed Hack] সান্দ্র মাধ্যমে পতনশীল একই ব্যাসার্ধ $r$ এর ৮টি বৃষ্টির পানির ফোঁটা একত্রিত হয়ে একটি বড় ফোঁটায় পরিণত হলে নতুন ফোঁটার প্রান্তিক বেগ আদি বেগের কত গুণ হবে?",
+    "options": [
+      "$2$ গুণ",
+      "$4$ গুণ",
+      "$8$ গুণ",
+      "$16$ গুণ"
+    ],
+    "answer": "B: $4$ গুণ",
+    "issue_flag": "Couples 8-droplet volume conservation (R = 2r) with Stokes' quadratic terminal velocity dependence (v_t proportional to r^2 -> 4x)."
+  },
+  {
+    "id": "w5_var_002",
+    "stem": "[Speed Hack] একটি সেকেন্ড দোলককে ভূপৃষ্ঠ হতে কত উচ্চতায় নিয়ে গেলে এটি দিনে $120\\text{ s}$ ধীরে চলবে? (পৃথিবীর ব্যাসার্ধ $R = 6400\\text{ km}$)",
+    "options": [
+      "$8.89\\text{ km}$",
+      "$17.78\\text{ km}$",
+      "$4.44\\text{ km}$",
+      "$12.50\\text{ km}$"
+    ],
+    "answer": "A: $8.89\\text{ km}$",
+    "issue_flag": "Couples gravitational altitude variation of a seconds pendulum with cumulative time loss over 86,400 seconds per solar day."
+  },
+  {
+    "id": "w5_var_008",
+    "stem": "[DU '19-20 Hubohu] দুটি সুরশলাকা $A$ ও $B$ একত্রে বাজালে প্রতি সেকেন্ডে $5$টি বিট উৎপন্ন হয়। $B$-এর কম্পাঙ্ক $256\\text{ Hz}$। $A$-তে সামান্য মোম লাগালে বিট সংখ্যা হ্রাস পেয়ে $3$ হয়। $A$-এর আদি কম্পাঙ্ক কত ছিল?",
+    "options": [
+      "$261\\text{ Hz}$",
+      "$251\\text{ Hz}$",
+      "$253\\text{ Hz}$",
+      "$259\\text{ Hz}$"
+    ],
+    "answer": "A: $261\\text{ Hz}$",
+    "issue_flag": "Requires two-stage acoustic beat sign resolution by analyzing how wax mass-loading decreases frequency f_A relative to reference f_B = 256 Hz."
+  },
+  {
+    "id": "w6_quiz_004",
+    "stem": "একখণ্ড বরফ উপর থেকে ভূমিতে পতিত হলো। এতে পতন শক্তির ৫০% তাপে রূপান্তরিত হওয়ায় বরফ খণ্ডটির এক-চতুর্থাংশ গলে গেল। বরফ খণ্ডটি কত উচ্চতা হতে পতিত হয়েছিল? [$L_f = 336000\\text{ J/kg}, g = 9.8\\text{ ms}^{-2}$]",
+    "options": [
+      "৮.৫৭ km",
+      "১৭.১৪ km",
+      "৩৪.২৮ km",
+      "৬৮.৫৬ km"
+    ],
+    "answer": "B: ১৭.১৪ km",
+    "issue_flag": "Couples partial mechanical-to-thermal energy conversion (50% of mgh) with partial latent heat fusion (25% of m*L_f) and m-to-km unit conversion."
+  },
+  {
+    "id": "w7_var_phy_06",
+    "stem": "তড়িৎ দ্বিমেরুর দিকের সাথে $60^\\circ$ কোণে দ্বিমেরু অক্ষের মধ্যবিন্দু হতে $r$ দূরত্বে অবস্থিত কোনো বিন্দুতে তড়িৎ প্রাবল্যের মান কত?",
+    "options": [
+      "$\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{7}p}{r^3}$",
+      "$\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{3}p}{r^3}$",
+      "$\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{7}p}{2r^3}$",
+      "$\\frac{1}{4\\pi\\epsilon_0}\\frac{p}{r^3}$"
+    ],
+    "answer": "C: $\\frac{1}{4\\pi\\epsilon_0}\\frac{\\sqrt{7}p}{2r^3}$",
+    "issue_flag": "Requires general polar-angle electric dipole field evaluation E proportional to sqrt(1 + 3*cos^2(60 deg))/r^3 with radical fraction simplification sqrt(7)/2."
+  },
+  {
+    "id": "w7_var_phy_07",
+    "stem": "যদি একটি প্রোটনের গতিশক্তি তার নিশ্চল ভরশক্তি $m_0 c^2$ এর সমান হয়, তবে প্রোটনটির ভরবেগের মান কত হবে?",
+    "options": [
+      "$\\sqrt{2}m_0 c$",
+      "$2m_0 c$",
+      "$\\sqrt{3}m_0 c$",
+      "$m_0 c$"
+    ],
+    "answer": "C: $\\sqrt{3}m_0 c$",
+    "issue_flag": "Requires relativistic energy-momentum invariant E^2 = (pc)^2 + E_0^2 with E = E_k + E_0 = 2m_0*c^2, yielding sqrt(3)m_0*c instead of classical sqrt(2)m_0*c."
+  },
+  {
+    "id": "w7_var_phy_12",
+    "stem": "কোনো ধাতব পৃষ্ঠে আপতিত ফোটনের শক্তি কার্যপেক্ষকের দ্বিগুণ ($E_1 = 2W_0$)। আপতিত আলোর তরঙ্গদৈর্ঘ্য কত গুণ করলে দ্রুততম ফটো-ইলেকট্রনের গতিশক্তি দ্বিগুণ হবে?",
+    "options": [
+      "$2$ গুণ",
+      "$\\frac{1}{2}$ গুণ",
+      "$\\frac{2}{3}$ গুণ",
+      "$\\frac{3}{4}$ গুণ"
+    ],
+    "answer": "C: $\\frac{2}{3}$ গুণ",
+    "issue_flag": "Couples non-linear photoelectric work-function offset (E = W_0 + E_k) with inverse wavelength proportionality (lambda_2/lambda_1 = E_1/E_2 = 2/3)."
+  },
+  {
+    "id": "w2_hig_q07",
+    "stem": "[CU '18-19] $(-2, 3)$ বিন্দু হতে $x^2 + y^2 + 6x - 4y + 4 = 0$ বৃত্তের ওপর অঙ্কিত স্পর্শকের দৈর্ঘ্য কত?",
+    "options": [
+      "$\\sqrt{5}$",
+      "$5$",
+      "$1$",
+      "$3$"
+    ],
+    "answer": "C: $1$",
+    "issue_flag": "At point (-2, 3), S_1 = (-2)^2 + 3^2 + 6(-2) - 4(3) + 4 = -7 < 0 so the point lies strictly inside the circle; (-2, -1) is required to yield the keyed tangent length L = 1."
+  },
+  {
+    "id": "w3_hig_q24",
+    "stem": "[JU '20] পরাবৃত্ত $y^2 = 16x$ এবং সরলরেখা $y = 2x$ দ্বারা আবদ্ধ ক্ষেত্রফল কত?",
+    "options": [
+      "$\\frac{8}{3}$",
+      "$\\frac{16}{3}$",
+      "$\\frac{32}{3}$",
+      "$4$"
+    ],
+    "answer": "B: $\\frac{16}{3}$",
+    "issue_flag": "Original answer index pointed to 32/3 (index 2), whereas the bounded area between y^2 = 16x (a=4) and y = 2x (m=2) is 8a^2/(3m^3) = 16/3 (index 1)."
+  },
+  {
+    "id": "w7_var_mat_01",
+    "stem": "মান নির্ণয় কর: $\\lim_{x\\to -\\infty} \\frac{\\sqrt{x^2 + 2x}}{-x}$",
+    "options": [
+      "$-1$",
+      "$1$",
+      "$\\infty$",
+      "$0$"
+    ],
+    "answer": "B: $1$",
+    "issue_flag": "As x -> -infinity, sqrt(x^2 + 2x) factors via |x| = -x rather than +x, canceling the -x in the denominator to yield +1 instead of the -1 sign trap."
+  },
+  {
+    "id": "w7_var_mat_02",
+    "stem": "মান নির্ণয় কর: $\\lim_{x\\to 0} \\frac{e^x}{x}$",
+    "options": [
+      "$0$",
+      "$1$",
+      "$\\infty$",
+      "লিমিটের অস্তিত্ব নেই"
+    ],
+    "answer": "D: লিমিটের অস্তিত্ব নেই",
+    "issue_flag": "Non-indeterminate 1/0 limit form at x -> 0 where LHL = -infinity and RHL = +infinity diverge, making L'Hopital's rule invalid and the limit non-existent."
+  },
+  {
+    "id": "w3_hig_q10",
+    "stem": "[JU '19-20] $\\frac{1}{|x - 3|} \\ge 2$ অসমতার সমাধান সেট কোনটি?",
+    "options": [
+      "$[2.5, 3.5]$",
+      "$[2.5, 3.5] \\setminus \\{3\\}$",
+      "$(2.5, 3.5)$",
+      "$[2, 4]$"
+    ],
+    "answer": "B: $[2.5, 3.5] \\setminus \\{3\\}$",
+    "issue_flag": "Reciprocal absolute-value inequality 1/|x - 3| >= 2 requires excluding the singular denominator point x = 3 from the closed interval [2.5, 3.5]."
+  },
+  {
+    "id": "w3_hig_q04",
+    "stem": "[RU '20] $\\frac{x^2}{16} + \\frac{y^2}{25} = 1$ উপবৃত্তের উপকেন্দ্রিক লম্বের দৈর্ঘ্য কত?",
+    "options": [
+      "$\\frac{32}{5}$",
+      "$\\frac{50}{4}$",
+      "$\\frac{16}{5}$",
+      "$8$"
+    ],
+    "answer": "A: $\\frac{32}{5}$",
+    "issue_flag": "Vertical ellipse x^2/16 + y^2/25 = 1 has b > a (major axis along y-axis), so latus rectum is 2a^2/b = 32/5 rather than the standard 2b^2/a = 50/4."
+  },
+  {
+    "id": "w2_hig_q11",
+    "stem": "[RU '19] $z = -1 - \\sqrt{3}i$ জটিল সংখ্যাটির মডুলাস এবং মুখ্য আর্গুমেন্ট যথাক্রমে কোনটি?",
+    "options": [
+      "$2$ এবং $\\frac{4\\pi}{3}$",
+      "$2$ এবং $-\\frac{2\\pi}{3}$",
+      "$4$ এবং $-\\frac{\\pi}{3}$",
+      "$2$ এবং $\\frac{2\\pi}{3}$"
+    ],
+    "answer": "B: $2$ এবং $-\\frac{2\\pi}{3}$",
+    "issue_flag": "Third-quadrant complex number z = -1 - sqrt(3)i requires principal argument in (-pi, pi], giving -pi + pi/3 = -2pi/3 instead of 4pi/3 or 2pi/3."
+  },
+  {
+    "id": "w6_quiz_052",
+    "stem": "$\\cos 2x + \\sin x = 1$ সমীকরণটির সাধারণ সমাধান নিচের কোনটি?",
+    "options": [
+      "$x = n\\pi$ বা $x = n\\pi + (-1)^n \\frac{\\pi}{6}$",
+      "$x = 2n\\pi$",
+      "$x = n\\pi \\pm \\frac{\\pi}{3}$",
+      "$x = (2n+1)\\frac{\\pi}{2}$"
+    ],
+    "answer": "A: $x = n\\pi$ বা $x = n\\pi + (-1)^n \\frac{\\pi}{6}$",
+    "issue_flag": "Trigonometric equation cos(2x) + sin(x) = 1 factors as sin(x)(1 - 2sin(x)) = 0; dividing by sin(x) loses the entire family of roots x = n*pi."
+  },
+  {
+    "id": "w1_che_q19",
+    "stem": "[DU '20-21] $90\\%$ বিশুদ্ধ $444.44\\text{ g}$ চুনাপাথর অতিরিক্ত এসিডে দ্রবীভূত করলে STP-তে কত লিটার $\\text{CO}_2$ গ্যাস পাওয়া যাবে?",
+    "options": [
+      "$89.6\\text{ L}$",
+      "$100\\text{ L}$",
+      "$44.8\\text{ L}$",
+      "$22.4\\text{ L}$"
+    ],
+    "answer": "A: $89.6\\text{ L}$",
+    "issue_flag": "Multi-step stoichiometry combining 90% percentage purity with a repeating-decimal mass (444.44 g CaCO3) to STP gas volume without a calculator."
+  },
+  {
+    "id": "w1_che_q20",
+    "stem": "[CU '20] $0.5\\text{ g}$ জৈব যৌগ দহনে $0.9\\text{ g } \\text{CO}_2$ ও $0.3\\text{ g } \\text{H}_2\\text{O}$ পাওয়া গেল। যৌগে অক্সিজেনের শতকরা পরিমাণ প্রায় কত?",
+    "options": [
+      "$20\\%$",
+      "$44\\%$",
+      "$56\\%$",
+      "$32\\%$"
+    ],
+    "answer": "B: $44\\%$",
+    "issue_flag": "Multi-step Liebig organic combustion analysis requiring separate C and H mass extraction from CO2 and H2O followed by mass subtraction to find oxygen percentage."
+  },
+  {
+    "id": "w1_che_q22",
+    "stem": "[GST '20] $50\\text{ mL } 2\\text{ M } \\text{NaOH}$-এর সাথে $50\\text{ mL } 1\\text{ M } \\text{HCl}$ মিশ্রিত করলে অবশিষ্ট $\\text{NaOH}$-এর ঘনমাত্রা ppm এককে কত?",
+    "options": [
+      "$1000\\text{ ppm}$",
+      "$20000\\text{ ppm}$",
+      "$40000\\text{ ppm}$",
+      "$5000\\text{ ppm}$"
+    ],
+    "answer": "B: $20000\\text{ ppm}$",
+    "issue_flag": "Partial acid-base neutralization requiring residual molarity calculation across combined 100 mL volume followed by molarity-to-ppm unit conversion."
+  },
+  {
+    "id": "w2_che_q14",
+    "stem": "[DU '14-15] $10^{-8}\\text{ M HCl}$ দ্রবণের $\\text{pH}$ কত?",
+    "options": [
+      "$8.0$",
+      "$6.0$",
+      "$6.96$",
+      "$7.04$"
+    ],
+    "answer": "C: $6.96$",
+    "issue_flag": "Classic ultra-dilute strong acid pH paradox (10^-8 M HCl) where water auto-ionization (10^-7 M H+) must be added to avoid the alkaline pH = 8 trap."
+  },
+  {
+    "id": "w3_che_q07",
+    "stem": "[DU '17-18] $0.1\\text{ M } \\text{NaCl}$ দ্রবণে $\\text{AgCl}$-এর দ্রাব্যতা কত? ($K_{sp} = 1.8 \\times 10^{-10}$)",
+    "options": [
+      "$1.8 \\times 10^{-9}\\text{ M}$",
+      "$1.8 \\times 10^{-10}\\text{ M}$",
+      "$1.34 \\times 10^{-5}\\text{ M}$",
+      "$1.8 \\times 10^{-8}\\text{ M}$"
+    ],
+    "answer": "A: $1.8 \\times 10^{-9}\\text{ M}$",
+    "issue_flag": "Common-ion effect solubility depression calculation (AgCl in 0.1 M NaCl) with a strong distractor for pure water solubility."
+  },
+  {
+    "id": "w5_var_018",
+    "stem": "[Speed Hack] ড্যানিয়েল কোষের অ্যানোড প্রকোষ্ঠে $\\text{Zn}^{2+}$ এর ঘনমাত্রা $1.0\\text{ M}$ হতে কমিয়ে $0.01\\text{ M}$ করা হলে কোষ বিভব $E_{\\text{cell}}$ শতকরা কত পরিবর্তন হবে? ($E^\\circ_{\\text{cell}} = 1.10\\text{ V}$)",
+    "options": [
+      "$+0.059\\text{ V}$ বৃদ্ধি পাবে",
+      "$-0.059\\text{ V}$ হ্রাস পাবে",
+      "$+0.118\\text{ V}$ বৃদ্ধি পাবে",
+      "অপরিবর্তিত থাকবে"
+    ],
+    "answer": "A: $+0.059\\text{ V}$ বৃদ্ধি পাবে",
+    "issue_flag": "Nernst equation logarithmic sign-inversion trap when anode Zn2+ concentration is diluted 100-fold from 1.0 M to 0.01 M."
+  },
+  {
+    "id": "w6_quiz_020",
+    "stem": "একটি আবদ্ধ পাত্রে সমভরের $\\text{CH}_4$ ও $\\text{H}_2$ গ্যাস মিশ্রিত আছে। মিশ্রণে $\\text{H}_2$ গ্যাসের আংশিক চাপ মোট চাপের কত গুণ?",
+    "options": [
+      "$\\frac{1}{2}P$",
+      "$\\frac{1}{9}P$",
+      "$\\frac{8}{9}P$",
+      "$\\frac{16}{17}P$"
+    ],
+    "answer": "C: $\\frac{8}{9}P$",
+    "issue_flag": "Dalton's partial pressure calculation for an equal-mass mixture of CH4 and H2 requiring inverse molar-mass mole fraction conversion."
+  },
+  {
+    "id": "w7_var_che_03",
+    "stem": "IUPAC পদ্ধতি অনুসারে $\\text{CF}_3\\text{CHBrCl}$ চেতনা-নাশক হ্যালোথেন যৌগটির সঠিক নাম কোনটি?",
+    "options": [
+      "১,১,১-ট্রাইফ্লোরো-২-ব্রোমো-২-ক্লোরোইথেন",
+      "২-ব্রোমো-২-ক্লোরো-১,১,১-ট্রাইফ্লোরোইথেন",
+      "১-ব্রোমো-১-ক্লোরো-২,২,২-ট্রাইফ্লোরোইথেন",
+      "২-ক্লোরো-২-ব্রোমো-১,১,১-ট্রাইফ্লোরোইথেন"
+    ],
+    "answer": "B: ২-ব্রোমো-২-ক্লোরো-১,১,১-ট্রাইফ্লোরোইথেন",
+    "issue_flag": "High-confusion IUPAC nomenclature of halothane (CF3CHBrCl) pitting the lowest-locant-sum numbering rule against alphabetical substituent ordering."
+  },
+  {
+    "id": "w5_var_041",
+    "stem": "[Speed Hack] উৎসেচকের (Enzyme) ক্রিয়ায় প্রতিযোগিতামূলক প্রতিরোধক (Competitive Inhibitor) যোগ করলে মাইকেলিস ধ্রুবক ($K_m$) এবং সর্বোচ্চ বেগ ($V_{\\max}$) এর কী পরিবর্তন ঘটে?",
+    "options": [
+      "$K_m$ বৃদ্ধি পায় কিন্তু $V_{\\max}$ অপরিবর্তিত থাকে",
+      "$K_m$ হ্রাস পায় এবং $V_{\\max}$ হ্রাস পায়",
+      "$K_m$ অপরিবর্তিত থাকে কিন্তু $V_{\\max}$ হ্রাস পায়",
+      "উভয়ই বৃদ্ধি পায়"
+    ],
+    "answer": "A: $K_m$ বৃদ্ধি পায় কিন্তু $V_{\\max}$ অপরিবর্তিত থাকে",
+    "issue_flag": "Competitive vs non-competitive enzyme inhibition effects on Michaelis constant ($K_m$) and maximum velocity ($V_{\\max}$) frequently confuse examinees."
+  },
+  {
+    "id": "w4_var_040",
+    "stem": "[Speed Hack] একজন স্বাভাবিক দৃষ্টিসম্পন্ন পুরুষ ($X^C Y$) যদি বর্ণান্ধতার বাহক নারীকে ($X^C X^c$) বিবাহ করেন, তবে তাদের পুত্রসন্তানদের মধ্যে বর্ণান্ধ হওয়ার সম্ভাবনা কত শতাংশ?",
+    "options": [
+      "$0\\%$",
+      "$25\\%$",
+      "$50\\%$",
+      "$100\\%$"
+    ],
+    "answer": "C: $50\\%$",
+    "issue_flag": "Sex-linked inheritance probability trap: denominator asks specifically 'among sons' (50%) rather than 'among all children' (25%)."
+  },
+  {
+    "id": "w5_var_037",
+    "stem": "[DU '22-23 Hubohu] নিচের কোনটি একটি অবিজারক শর্করা (Non-reducing sugar)?",
+    "options": [
+      "সুকরোজ (Sucrose)",
+      "মল্টোজ (Maltose)",
+      "ল্যাকটোজ (Lactose)",
+      "গ্লুকোজ (Glucose)"
+    ],
+    "answer": "A: সুকরোজ (Sucrose)",
+    "issue_flag": "High-confusion carbohydrate biochemistry: distinguishing non-reducing disaccharides (sucrose) from reducing disaccharides (maltose, lactose) with free anomeric carbons."
+  },
+  {
+    "id": "w5_var_042",
+    "stem": "[DU '17-18 Hubohu] নগ্নবীজী উদ্ভিদের (যেমন Cycas ও Pinus) এন্ডোস্পার্ম বা শাঁস কোন প্রকৃতির এবং কখন গঠিত হয়?",
+    "options": [
+      "হ্যাপ্লয়েড ($n$) এবং নিষেকের পূর্বে গঠিত হয়",
+      "ট্রিপ্লয়েড ($3n$) এবং নিষেকের পরে গঠিত হয়",
+      "ডিপ্লয়েড ($2n$) এবং নিষেকের পূর্বে গঠিত হয়",
+      "ট্রিপ্লয়েড ($3n$) এবং নিষেকের পূর্বে গঠিত হয়"
+    ],
+    "answer": "A: হ্যাপ্লয়েড ($n$) এবং নিষেকের পূর্বে গঠিত হয়",
+    "issue_flag": "Classic comparative botany trap between haploid ($n$) pre-fertilization endosperm in gymnosperms (Cycas/Pinus) and triploid ($3n$) post-fertilization endosperm in angiosperms."
+  },
+  {
+    "id": "w5_med_003",
+    "stem": "[MAT Line] সাইকাস (*Cycas*) উদ্ভিদ সম্পর্কে নিচের কোন তথ্যটি সঠিক নয়?",
+    "options": [
+      "এদের জাইলেমে প্রকৃত ভেসেল বিদ্যমান",
+      "এদের ডিম্বক নগ্ন এবং গর্ভাশয় অনুপস্থিত",
+      "এদের শুক্রাণু উদ্ভিদকুলের মধ্যে সর্ববৃহৎ ও বহুফ্ল্যাজেলাযুক্ত",
+      "এদের মূল কোরালয়েড মূল প্রকৃতির"
+    ],
+    "answer": "A: এদের জাইলেমে প্রকৃত ভেসেল বিদ্যমান",
+    "issue_flag": "Negative-stem ('কোনটি সঠিক নয়') gymnosperm anatomy question testing absence of true xylem vessels in Cycas vs the Gnetum exception."
+  },
+  {
+    "id": "w4_var_038",
+    "stem": "[DU '22-23 Hubohu] মেন্ডেলের দ্বিতীয় সূত্রের ব্যতিক্রম হিসেবে দ্বৈত প্রচ্ছন্ন এপিস্ট্যাসিসের (Duplicate Recessive Epistasis) ফিনোটাইপিক অনুপাত কোনটি?",
+    "options": [
+      "$13:3$",
+      "$9:7$",
+      "$9:3:4$",
+      "$15:1$"
+    ],
+    "answer": "B: $9:7$",
+    "issue_flag": "Modified Mendelian dihybrid ratio trap: distinguishing duplicate recessive epistasis ($9:7$) from dominant epistasis ($13:3$) and duplicate dominant epistasis ($15:1$)."
+  },
+  {
+    "id": "w4_var_045",
+    "stem": "[Speed Hack] নবজাতকের এরিথ্রোব্লাস্টোসিস ফিটালিস (Erythroblastosis fetalis) রোগ সৃষ্টির ক্ষেত্রে পিতা ও মাতার রক্তের Rh ফ্যাক্টর কেমন হতে হবে?",
+    "options": [
+      "পিতা $Rh^-$ এবং মাতা $Rh^+$",
+      "পিতা $Rh^+$ এবং মাতা $Rh^-$",
+      "পিতা ও মাতা উভয়ই $Rh^-$",
+      "পিতা ও মাতা উভয়ই $Rh^+$"
+    ],
+    "answer": "B: পিতা $Rh^+$ এবং মাতা $Rh^-$",
+    "issue_flag": "Erythroblastosis fetalis parental Rh incompatibility directionality trap: requires $Rh^+$ father and $Rh^-$ mother (affecting 2nd $Rh^+$ fetus), often reversed by students."
+  },
+  {
+    "id": "w6_quiz_063",
+    "stem": "যকৃতে নিচের কোন রক্তরস প্রোটিনটি সংশ্লেষিত হয় না?",
+    "options": [
+      "অ্যালবুমিন",
+      "গামা গ্লোবিউলিন ($\\gamma$-globulin)",
+      "প্রোথ্রম্বিন",
+      "ফাইব্রিনোজেন"
+    ],
+    "answer": "B: গামা গ্লোবিউলিন ($\\gamma$-globulin)",
+    "issue_flag": "Physiological exception trap: while albumin, prothrombin, and fibrinogen are synthesized in the liver, gamma-globulin antibodies are synthesized by plasma B-lymphocytes."
+  },
+  {
+    "id": "w7_var_bio_08",
+    "stem": "রক্তে ক্যালসিয়াম ও ফসফেটের ভারসাম্য রক্ষায় প্যারাথাইরয়েড গ্রন্থি নিঃসৃত প্যারাথরমোনের প্রধান কাজ কোনটি?",
+    "options": [
+      "রক্তে ক্যালসিয়াম বৃদ্ধি এবং বৃক্কে ফসফেটের রেচন হার বৃদ্ধি করা",
+      "রক্তে ক্যালসিয়াম ও ফসফেট উভয়ই হ্রাস করা",
+      "রক্তে ক্যালসিয়াম হ্রাস এবং ফসফেট বৃদ্ধি করা",
+      "অস্থিতে ক্যালসিয়াম জমা রাখা"
+    ],
+    "answer": "A: রক্তে ক্যালসিয়াম বৃদ্ধি এবং বৃক্কে ফসফেটের রেচন হার বৃদ্ধি করা",
+    "issue_flag": "Dual-electrolyte endocrine regulation: parathormone (PTH) simultaneously increases blood $\\text{Ca}^{2+}$ and increases renal phosphate excretion (lowering blood phosphate), opposite to calcitonin."
+  }
+]
