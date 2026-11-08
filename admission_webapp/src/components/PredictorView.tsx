@@ -33,7 +33,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
   // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'sets'
   const [activeTab, setActiveTab] = useState<'weekly' | 'sets'>('weekly');
-  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07'>('week_04');
+  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'week_08'>('week_08');
   const [currentSlotIndex, setCurrentSlotIndex] = useState<number>(0);
   const pageSize = 12; // 10 to 15 questions per slot page
 
@@ -427,6 +427,22 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
               >
                 <span>👑</span>
                 <span>Week 7: Tri-Stream Pattern</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('weekly');
+                  setSelectedWeekTab('week_08');
+                  setCurrentSlotIndex(0);
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 shadow-xs ${
+                  activeTab === 'weekly' && selectedWeekTab === 'week_08'
+                    ? 'bg-[#056839] text-white ring-2 ring-[#056839]/30 scale-[1.02]'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                <span>⚡</span>
+                <span>Week 8: PCMB Master Core</span>
               </button>
 
               <button
@@ -970,7 +986,9 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                     ? '🔮 Week 5: 80/20 Multi-Stream Pattern'
                     : selectedWeekTab === 'week_06'
                     ? '🚀 Week 6: 80/20 Multi-Stream'
-                    : '👑 Week 7: Tri-Stream Pattern'}
+                    : selectedWeekTab === 'week_07'
+                    ? '👑 Week 7: Tri-Stream Pattern'
+                    : '⚡ Week 8: PCMB Master Core'}
                 </span>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#056839] dark:text-emerald-400 font-mono font-bold border border-emerald-200 dark:border-emerald-800">
                   মোট {toBn(currentWeekQuestions.length)}টি প্রশ্ন
@@ -1308,6 +1326,10 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                       setSelectedWeekTab('week_07');
                       setCurrentSlotIndex(0);
                       window.scrollTo({ top: 220, behavior: 'smooth' });
+                    } else if (selectedWeekTab === 'week_07') {
+                      setSelectedWeekTab('week_08');
+                      setCurrentSlotIndex(0);
+                      window.scrollTo({ top: 220, behavior: 'smooth' });
                     } else {
                       try {
                         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
@@ -1320,7 +1342,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                 <span>
                   {currentSlotIndex < totalSlots - 1
                     ? 'পরবর্তী স্লট'
-                    : selectedWeekTab !== 'week_07'
+                    : selectedWeekTab !== 'week_08'
                     ? 'পরবর্তী উইক স্লট ➔'
                     : 'উইক সম্পন্ন 🎉'}
                 </span>

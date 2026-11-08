@@ -916,7 +916,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
 
       {/* =========================================================================
           2. HIGH-CONTRAST TOP SEGMENTED PILL SWITCHER:
-             [📂 চ্যাপ্টার-ভিত্তিক ব্লুপ্রিন্ট] vs [📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01–07)]
+             [📂 চ্যাপ্টার-ভিত্তিক ব্লুপ্রিন্ট] vs [📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01–08)]
          ========================================================================= */}
       <div className="p-1.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl ring-2 ring-emerald-500/30 dark:ring-emerald-400/30 shadow-md flex items-center justify-between gap-1.5">
         <button
@@ -943,7 +943,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
           }`}
         >
           <Calendar className="w-4 h-4 text-emerald-200 shrink-0" />
-          <span className="truncate">📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 07)</span>
+          <span className="truncate">📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 08)</span>
           <span className="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] bg-white/20 text-white font-mono">
             ৭টি উইকলি স্লট • ৭৫০ MCQ
           </span>
@@ -1050,7 +1050,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
             <div>
               <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-emerald-600" />
-                <span>৭ সপ্তাহের ফুল সিলেবাস মাস্টারি ট্র্যাক (Week 01 – 07)</span>
+                <span>৮ সপ্তাহের ফুল সিলেবাস মাস্টারি ট্র্যাক (Week 01 – 08)</span>
               </h2>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                 প্রতিটি সপ্তাহের সলভড স্ট্যাটাস, একুরেসি % এবং পেন্ডিং ট্র্যাপ ট্র্যাক করুন ও ১-ক্লিকে স্পিড ড্রিল শুরু করুন

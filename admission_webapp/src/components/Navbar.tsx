@@ -68,6 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'week_05', label: '5️⃣ Week 05' },
     { id: 'week_06', label: '6️⃣ Week 06' },
     { id: 'week_07', label: '7️⃣ Week 07' },
+    { id: 'week_08', label: '8️⃣ Week 08' },
   ];
 
   // Subject Selector Horizontal Slider - Strictly isolated by Track

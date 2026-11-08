@@ -64,6 +64,10 @@ const WEEK_COVERED_CHAPTERS: Record<string, { badgeText: string; chaptersText: s
   'week_07': {
     badgeText: 'স্থির তড়িৎ + আধুনিক পদার্থবিজ্ঞান + জৈব রসায়ন + অন্তরীকরণ + মানব শারীরতত্ত্ব',
     chaptersText: 'স্থির তড়িৎ বিভব, ফটোইলেকট্রিক ও আপেক্ষিকতা, জৈব রসায়ন সমাণুতা, ক্যালকুলাস লিমিট ও সংবেদী অঙ্গ।'
+  },
+  'week_08': {
+    badgeText: 'চল তড়িৎ + সেমিকন্ডাক্টর ও ইলেকট্রনিক্স + জৈব রসায়ন + যোগজীকরণ + কোষ ও এর গঠন',
+    chaptersText: 'হুইটস্টোন ব্রিজ ও শান্ট, ট্রানজিস্টর (α, β) ও লজিক গেট, জৈব বিক্রিয়া ও সমাণুতা, নির্দিষ্ট যোগজ ও আবদ্ধ ক্ষেত্রফল, কোষ অঙ্গাণু ও জেনেটিক কোড।'
   }
 };
 
@@ -269,7 +273,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   }, [activePredictors, showOnlyTraps, userAnswers]);
 
   // -------------------------------------------------------------
-  // TAB 2 DATA: WEEKLY EXAMS & MASTERY ENGINE (Week 01 – 07)
+  // TAB 2 DATA: WEEKLY EXAMS & MASTERY ENGINE (Week 01 – 08)
   // -------------------------------------------------------------
   const sortedWeeks = useMemo(() => {
     return [...(weeksDataRaw as any[])].sort((a, b) => a.id.localeCompare(b.id));
@@ -477,7 +481,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
             </span>
             <span className="flex items-center gap-1 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
               <Calendar className="w-3.5 h-3.5 text-amber-400" />
-              Week 01 – 07 উইকলি মাস্টারি
+              Week 01 – 08 উইকলি মাস্টারি
             </span>
             <span className="flex items-center gap-1 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
               <Zap className="w-3.5 h-3.5 text-emerald-400" />
@@ -489,7 +493,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
 
       {/* =========================================================================
           2. DUAL WORKFLOW TAB SWITCHER (HIGH-CONTRAST SEGMENTED CONTROL)
-          [📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৩৪ চ্যাপ্টার)] | [📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 07)]
+          [📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৩৪ চ্যাপ্টার)] | [📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 08)]
          ========================================================================= */}
       <div className="p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl bg-slate-900/95 dark:bg-black/90 ring-2 ring-emerald-500/50 shadow-xl flex items-center gap-1.5 sm:gap-2">
         <button
@@ -522,7 +526,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
           <span className={`text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
             workflowMode === 'weekly' ? 'bg-amber-400/25 text-amber-200' : 'bg-slate-800 text-slate-300'
           }`}>
-            Week 01 – 07
+            Week 01 – 08
           </span>
         </button>
       </div>
@@ -975,7 +979,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                   সপ্তাহ-ভিত্তিক মাস্টারি রুটিন
                 </span>
                 <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
-                  Week 01 – 07 • ৭৫০টি হাই-ইল্ড MCQ
+                  Week 01 – 08 • ৭৫০টি হাই-ইল্ড MCQ
                 </span>
               </div>
               <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white">
@@ -1231,7 +1235,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
             </div>
           )}
 
-          {/* DEDICATED 7-WEEK CARDS GRID (Week 01 – Week 07) */}
+          {/* DEDICATED 7-WEEK CARDS GRID (Week 01 – Week 08) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {sortedWeeks.map((week, wIdx) => {
               const weekInfo = WEEK_COVERED_CHAPTERS[week.id] || {

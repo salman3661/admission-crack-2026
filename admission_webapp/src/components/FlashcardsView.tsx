@@ -729,6 +729,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
               { id: 5, label: 'Week 05' },
               { id: 6, label: 'Week 06' },
               { id: 7, label: 'Week 07' },
+              { id: 8, label: 'Week 08' },
               { id: 'all' as const, label: 'সব সপ্তাহ' },
             ].map((wk) => {
               const isActive = activeWeek === wk.id;

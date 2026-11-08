@@ -918,8 +918,8 @@
       "id": "phy_modern_nuclear",
       "subject": "Physics",
       "paper": "২য় পত্র",
-      "chapter_no": "অধ্যায় ০৮/০৯",
-      "title": "আধুনিক পদার্থবিজ্ঞান ও নিউক্লিয়ার ফিজিক্স",
+      "chapter_no": "অধ্যায় ০৮/০৯/১০",
+      "title": "আধুনিক পদার্থবিজ্ঞান, নিউক্লিয়ার ও ইলেকট্রনিক্স",
       "subtitle": "আপেক্ষিকতা, ফটোইলেকট্রিক ক্রিয়া, অর্ধায়ু ও বন্ধন শক্তি",
       "total_qb_questions": 440,
       "high_yield_score": 98,
@@ -1007,6 +1007,28 @@
           ],
           "core_rule": "$\\Delta m = [Z m_p + (A - Z)m_n] - M_{nucleus}$; শক্তি $\\Delta E = \\Delta m(\\text{amu}) \\times 931.5\\text{ MeV}$।",
           "speed_elimination": "১ amu ভর ক্ষয় হলে প্রায় $931.5\\text{ MeV}$ শক্তি উৎপন্ন হয়।"
+        },
+        {
+          "type_id": "phy_mn_t5",
+          "name": "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি",
+          "importance": "5-Star",
+          "stars": 5,
+          "repeat_frequency": 28,
+          "past_tags": [
+            "DU '22-23",
+            "DU '19-20",
+            "RU '22-23",
+            "JU '21-22",
+            "GST '21-22",
+            "MAT '20-21"
+          ],
+          "qb_question_refs": [
+            "VAR-DU-P10-Q01",
+            "VAR-RU-P10-Q04",
+            "MAD-MAT-P10-Q02"
+          ],
+          "core_rule": "$I_E = I_C + I_B$; $\\beta = \\frac{I_C}{I_B} = \\frac{\\alpha}{1 - \\alpha}$; নি-ভোল্টেজ: $\\text{Si} = 0.7\\text{ V}, \\text{Ge} = 0.3\\text{ V}$; সার্বজনীন গেট: NAND ও NOR।",
+          "speed_elimination": "$\\alpha = 0.98$ দেখলেই বিয়োগফল $0.02$ দিয়ে ভাগ করে ২ সেকেন্ডে $\\beta = 49$ দাগান।"
         }
       ]
     },

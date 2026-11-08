@@ -30,7 +30,7 @@ interface VaultViewProps {
   selectedSubject?: SubjectType;
 }
 
-type ActiveWeek = 'all' | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+type ActiveWeek = 'all' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 type ActiveSubject = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
 type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap' | 'table' | 'quick_tools';
 
@@ -43,6 +43,7 @@ const WEEK_TABS: { id: ActiveWeek; label: string; weekNum?: number }[] = [
   { id: 5, label: 'Week 05', weekNum: 5 },
   { id: 6, label: 'Week 06', weekNum: 6 },
   { id: 7, label: 'Week 07', weekNum: 7 },
+  { id: 8, label: 'Week 08', weekNum: 8 },
 ];
 
 const SUBJECT_OPTIONS: { id: ActiveSubject; label: string; icon: string; colorClass: string; activeClass: string }[] = [
