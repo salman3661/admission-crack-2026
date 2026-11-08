@@ -53,6 +53,15 @@ const toBn = (num: number | string): string => {
   return num.toString().replace(/\d/g, (d) => bnDigits[parseInt(d, 10)] ?? d);
 };
 
+// Strip repetitive inline markdown headers & bold clutter from explanation text
+const cleanExplanationText = (raw?: string): string => {
+  if (!raw) return '';
+  let cleaned = raw.split(/\n*\s*(?:⚡|⚠️)\s*\*?\*?(?:শর্টকাট হ্যাক|৫-সেকেন্ড হ্যাক|স্পিড হ্যাক|কনফিউজিং অপশন ট্র্যাপ|ট্র্যাপ অ্যালার্ট)/)[0] || '';
+  cleaned = cleaned.replace(/^(?:🎯|💡|📖)\s*\*?\*?(?:সঠিক উত্তর ও মূল তথ্য|কোর কনসেপ্ট|সম্পূর্ণ সমাধান|ব্যাখ্যা ও নিয়ম)\s*:?\*?\*?:?\s*/u, '');
+  cleaned = cleaned.replace(/\*\*/g, '');
+  return cleaned.trim();
+};
+
 // Subject Colors & Themes
 const SUBJECT_THEMES: Record<string, {
   bg: string;
@@ -550,97 +559,95 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
         })}
       </div>
 
-      {/* SOURCE TAG FIX */}
-      <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded w-fit mb-2">
-        {currentQ.source || (currentQ as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
-      </div>
-
-      {/* Question Stem */}
-      <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 text-lg font-medium text-slate-900 dark:text-white leading-relaxed">
-        <MathText content={activeQ.stem} />
-      </div>
-
-      {/* 4 Options Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-        {activeQ.options.map((opt, i) => {
-          const letter = optionLetters[i];
-          const isSelected = userSelected === letter;
-          const isCorrectAnswer = activeQ.answer === letter;
-          const showFeedback = isAnswered;
-
-          let optionStyle = 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-emerald-500';
-
-          if (showFeedback) {
-            if (isCorrectAnswer) {
-              optionStyle = 'bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border-emerald-500 font-bold ring-1 ring-emerald-500';
-            } else if (isSelected) {
-              optionStyle = 'bg-rose-500/20 text-rose-900 dark:text-rose-200 border-rose-500 font-bold ring-1 ring-rose-500';
-            } else {
-              optionStyle = 'opacity-60 bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 text-slate-500';
-            }
-          }
-
-          return (
-            <button
-              key={i}
-              onClick={() => handleSelectOption(activeQ.id, letter)}
-              className={`text-base py-3 px-4 rounded-xl border text-left font-medium transition-all flex items-start gap-2.5 cursor-pointer ${optionStyle}`}
-            >
-              <span className={`w-6 h-6 rounded-md font-mono text-xs font-bold flex items-center justify-center shrink-0 ${
-                showFeedback && isCorrectAnswer 
-                  ? 'bg-emerald-600 text-white' 
-                  : showFeedback && isSelected 
-                    ? 'bg-rose-600 text-white' 
-                    : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
-              }`}>
-                {letter}
-              </span>
-              <div className="flex-1 pt-0.5 text-base leading-relaxed">
-                <MathText content={opt} />
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Feedback Accordion (Speed Hack & Trap Alert) */}
-      {isAnswered && (
-        <div className="space-y-2.5 pt-2 animate-in fade-in duration-150">
-          {/* High-Contrast Emerald Accent for Speed Hack */}
-          {activeQ.speed_hack && (
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border border-emerald-500/35 text-sm md:text-base leading-relaxed shadow-xs">
-              <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-black text-emerald-800 dark:text-emerald-300 mr-1.5 uppercase text-[11px]">
-                  ⚡ স্পিড এলিমিনেশন হ্যাক:
-                </span>
-                <MathText content={activeQ.speed_hack} />
-              </div>
-            </div>
-          )}
-
-          {/* Rose/Amber Badge for Trap Alert */}
-          {activeQ.trap_alert && (
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-500/15 dark:bg-rose-500/20 text-amber-950 dark:text-rose-200 border border-amber-500/30 dark:border-rose-500/40 text-sm md:text-base leading-relaxed shadow-xs">
-              <ShieldAlert className="w-4 h-4 text-amber-600 dark:text-rose-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-black text-amber-900 dark:text-rose-300 mr-1.5 uppercase text-[11px]">
-                  ⚠️ ট্র্যাপ অ্যালার্ট (পরীক্ষায় যেভাবে ফাঁদে ফেলে):
-                </span>
-                <MathText content={activeQ.trap_alert} />
-              </div>
-            </div>
-          )}
-
-          {/* Full Step-by-Step Explanation */}
-          {activeQ.explanation && (
-            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
-              <span className="font-bold text-slate-900 dark:text-white mr-1.5">📖 সম্পূর্ণ সমাধান:</span>
-              <MathText content={activeQ.explanation} />
-            </div>
-          )}
+      {/* Question Card with Generous Breathing Room */}
+      <div className="p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 mb-6 bg-white dark:bg-slate-900">
+        {/* SOURCE TAG FIX */}
+        <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded w-fit mb-3">
+          {currentQ.source || (currentQ as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
         </div>
-      )}
+
+        {/* Question Stem */}
+        <div className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-slate-100 mb-4">
+          <MathText content={activeQ.stem} />
+        </div>
+
+        {/* 4 Options Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+          {activeQ.options.map((opt, i) => {
+            const letter = optionLetters[i];
+            const isSelected = userSelected === letter;
+            const isCorrectAnswer = activeQ.answer === letter;
+            const showFeedback = isAnswered;
+
+            let optionStyle = 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-emerald-500';
+
+            if (showFeedback) {
+              if (isCorrectAnswer) {
+                optionStyle = 'bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border-emerald-500 font-bold ring-1 ring-emerald-500';
+              } else if (isSelected) {
+                optionStyle = 'bg-rose-500/20 text-rose-900 dark:text-rose-200 border-rose-500 font-bold ring-1 ring-rose-500';
+              } else {
+                optionStyle = 'opacity-60 bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 text-slate-500';
+              }
+            }
+
+            return (
+              <button
+                key={i}
+                onClick={() => handleSelectOption(activeQ.id, letter)}
+                className={`p-3.5 rounded-xl border text-left text-sm sm:text-base font-medium transition-all flex items-start gap-2.5 cursor-pointer ${optionStyle}`}
+              >
+                <span className={`w-6 h-6 rounded-md font-mono text-xs font-bold flex items-center justify-center shrink-0 ${
+                  showFeedback && isCorrectAnswer 
+                    ? 'bg-emerald-600 text-white' 
+                    : showFeedback && isSelected 
+                      ? 'bg-rose-600 text-white' 
+                      : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                }`}>
+                  {letter}
+                </span>
+                <div className="flex-1 pt-0.5">
+                  <MathText content={opt} />
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Feedback Section (Core Info Paragraph, Speed Hack & Trap Alert) */}
+        {isAnswered && (
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
+            {/* Core info paragraph: clean, single block without bold clutter */}
+            {activeQ.explanation && (
+              <div className="text-base leading-loose text-slate-600 dark:text-slate-300 mb-5">
+                <MathText content={cleanExplanationText(activeQ.explanation)} />
+              </div>
+            )}
+
+            {/* Dedicated Speed Hack Box */}
+            {activeQ.speed_hack && (
+              <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 text-emerald-900 dark:text-emerald-200 text-base leading-relaxed mb-3 flex items-start gap-2.5">
+                <Zap className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-1" />
+                <div>
+                  <span className="font-bold mr-1.5">⚡ স্পিড হ্যাক:</span>
+                  <MathText content={cleanExplanationText(activeQ.speed_hack)} />
+                </div>
+              </div>
+            )}
+
+            {/* Dedicated Trap Alert Box */}
+            {activeQ.trap_alert && (
+              <div className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-base leading-relaxed flex items-start gap-2.5">
+                <ShieldAlert className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-1" />
+                <div>
+                  <span className="font-bold mr-1.5">⚠️ ট্র্যাপ অ্যালার্ট:</span>
+                  <MathText content={cleanExplanationText(activeQ.trap_alert)} />
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Navigation Controls */}
       <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-200 dark:border-slate-800">

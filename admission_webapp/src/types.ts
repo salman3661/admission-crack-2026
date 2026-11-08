@@ -172,7 +172,7 @@ export interface TrapItem {
   fix: string;
 }
 
-export type VaultCardType = 'core_formula' | 'shortcut' | 'trap' | 'table';
+export type VaultCardType = 'core_formula' | 'shortcut' | 'trap' | 'table' | 'speed_hack' | 'concept_trap';
 
 export interface VaultTableData {
   headers: string[];

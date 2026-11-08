@@ -126,6 +126,20 @@ const CHAPTER_DISPLAY_NAMES: Record<string, string> = {
   'নগ্নবীজী ও আবৃতবীজী উদ্ভিদ': 'নগ্নবীজী ও আবৃতবীজী উদ্ভিদ (Botany)',
   'সমন্বয় ও নিয়ন্ত্রণ': 'সমন্বয় ও নিয়ন্ত্রণ',
   'প্রাণীর আচরণ': 'প্রাণীর আচরণ (Animal Behavior)',
+  'চল তড়িৎ': 'চল তড়িৎ (Current Electricity)',
+  'সেমিকন্ডাক্টর ও ইলেকট্রনিক্স': 'সেমিকন্ডাক্টর ও ইলেকট্রনিক্স',
+  'যোগজীকরণ': 'যোগজীকরণ (Integration)',
+  'সরলরেখা': 'সরলরেখা (Straight Lines)',
+  'কোষ ও এর গঠন': 'কোষ ও এর গঠন (Cell Biology)',
+  'কোষ বিভাজন': 'কোষ বিভাজন (Cell Division)',
+};
+
+const cleanFlashcardText = (raw?: string): string => {
+  if (!raw) return '';
+  let cleaned = raw.split(/\n*\s*(?:⚡|⚠️)\s*\*?\*?(?:শর্টকাট হ্যাক|৫-সেকেন্ড হ্যাক|স্পিড হ্যাক|কনফিউজিং অপশন ট্র্যাপ|ট্র্যাপ অ্যালার্ট)/)[0] || '';
+  cleaned = cleaned.replace(/^(?:🎯|💡|📖)\s*\*?\*?(?:সঠিক উত্তর ও মূল তথ্য|কোর কনসেপ্ট|সম্পূর্ণ সমাধান|ব্যাখ্যা ও নিয়ম)\s*:?\*?\*?:?\s*/u, '');
+  cleaned = cleaned.replace(/\*\*/g, '');
+  return cleaned.trim();
 };
 
 const toBengaliNumber = (num: number): string => {
@@ -138,7 +152,7 @@ function weekFilterToActiveNumber(filter?: WeekFilterType): 'all' | number {
   const match = filter.match(/week_0?(\d+)/);
   if (match) {
     const num = parseInt(match[1], 10);
-    if (num >= 1 && num <= 7) return num;
+    if (num >= 1 && num <= 8) return num;
   }
   return 'all';
 }
@@ -402,9 +416,9 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         title: fc.topic || 'ক্যাপসুল কার্ড',
         type: 'macro',
         frontPrompt: fc.front || 'এই প্রশ্নের উত্তর মনে করার চেষ্টা করুন:',
-        back: fc.back || fc.concept || '',
-        formula: fc.back?.includes('$') ? fc.back : undefined,
-        concept: fc.concept || fc.back,
+        back: cleanFlashcardText(fc.back || fc.concept || ''),
+        formula: undefined,
+        concept: cleanFlashcardText(fc.concept || fc.back || ''),
         hack: fc.hack,
         trap: fc.trap,
       };
@@ -991,10 +1005,10 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
           onClick={() => setIsFlipped(!isFlipped)}
         >
           <div 
-            className={`w-full rounded-3xl p-5 sm:p-7 border-2 transition-all duration-300 shadow-md flex flex-col justify-between min-h-[300px] sm:min-h-[340px] relative overflow-hidden ${
+            className={`w-full p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 mb-6 bg-white dark:bg-slate-900 transition-all duration-300 flex flex-col justify-between min-h-[300px] sm:min-h-[340px] relative overflow-hidden ${
               isFlipped 
-                ? 'bg-white dark:bg-slate-900 border-emerald-500/70 dark:border-emerald-500/60 shadow-emerald-500/5' 
-                : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 hover:border-[#056839]/60'
+                ? 'ring-2 ring-emerald-500/30 dark:ring-emerald-500/40' 
+                : 'hover:border-[#056839]/60'
             }`}
           >
             {/* Top Bar of the Card */}
@@ -1031,24 +1045,27 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
             </div>
 
             {/* Central Card Body */}
-            <div className="min-h-[180px] sm:min-h-[200px] flex items-center justify-center p-3 sm:p-5 text-center w-full my-auto">
+            <div className="min-h-[180px] sm:min-h-[200px] flex items-center justify-center py-4 text-left w-full my-auto">
               {!isFlipped ? (
                 /* FRONT: Topic Title & Active Recall Inquiry */
-                <div className="w-full space-y-3">
-                  <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white leading-relaxed max-w-2xl mx-auto">
+                <div className="w-full">
+                  <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400 mb-2">
                     <MathText content={currentCard?.title} />
-                  </h2>
-                  <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 max-w-xl mx-auto text-slate-700 dark:text-slate-300 font-medium text-xs sm:text-sm leading-relaxed">
-                    <MathText content={currentCard?.frontPrompt} />
                   </div>
+                  <h2 className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-white mb-4">
+                    <MathText content={currentCard?.frontPrompt} />
+                  </h2>
                 </div>
               ) : (
                 /* BACK: Formula Box, Core Concept, 5-Second Hack, and Trap Alerts */
-                <div className="w-full space-y-3 text-left">
-                  
+                <div className="w-full text-left">
+                  <h3 className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-white mb-4">
+                    <MathText content={currentCard?.source === 'macro' ? currentCard?.frontPrompt : currentCard?.title} />
+                  </h3>
+
                   {/* High-Contrast Formula Box if present */}
                   {currentCard?.formula && (
-                    <div>
+                    <div className="mb-4">
                       <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                         <span>📐 গাণিতিক সমীকরণ / সূত্র:</span>
                       </div>
@@ -1058,32 +1075,28 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
 
                   {/* Core Concept & Explanation */}
                   {(currentCard?.concept || currentCard?.back) && (
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-slate-900 dark:text-slate-100 font-medium text-xs sm:text-sm leading-relaxed">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700 dark:text-emerald-400 mb-1">
-                        <span className="text-amber-500">💡</span>
-                        <span>কোর কনসেপ্ট ও সমাধান:</span>
-                      </div>
-                      <MathText content={currentCard?.concept || currentCard?.back} />
+                    <div className="text-base leading-loose text-slate-600 dark:text-slate-300 mb-5">
+                      <MathText content={cleanFlashcardText(currentCard?.concept || currentCard?.back)} />
                     </div>
                   )}
 
-                  {/* ⚡ 5-Second Hack if present */}
+                  {/* ⚡ Dedicated Speed Hack Box */}
                   {currentCard?.hack && (
-                    <div className="p-3.5 rounded-2xl bg-amber-500/10 dark:bg-amber-950/20 border border-amber-500/20 text-slate-900 dark:text-slate-100 text-xs sm:text-sm font-medium leading-relaxed">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">
-                        <Zap className="w-3.5 h-3.5 text-amber-500" />
-                        <span>৫-সেকেন্ড স্পিড হ্যাক:</span>
+                    <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 text-emerald-900 dark:text-emerald-200 text-base leading-relaxed mb-3">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-400 mb-1">
+                        <Zap className="w-4 h-4 text-emerald-600" />
+                        <span>⚡ শর্টকাট হ্যাক:</span>
                       </div>
                       <MathText content={currentCard.hack} />
                     </div>
                   )}
 
-                  {/* ⚠️ Trap Alert if present */}
+                  {/* ⚠️ Dedicated Trap Alert Box */}
                   {currentCard?.trap && (
-                    <div className="p-3.5 rounded-2xl bg-rose-500/10 dark:bg-rose-950/20 border border-rose-500/20 text-slate-900 dark:text-slate-100 text-xs sm:text-sm font-medium leading-relaxed">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-rose-700 dark:text-rose-400 mb-1">
-                        <ShieldAlert className="w-3.5 h-3.5 text-rose-500" />
-                        <span>কমন নেগেটিভ ট্র্যাপ অ্যালার্ট:</span>
+                    <div className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-base leading-relaxed">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-amber-800 dark:text-amber-400 mb-1">
+                        <ShieldAlert className="w-4 h-4 text-amber-600" />
+                        <span>⚠️ কনফিউজিং অপশন ট্র্যাপ:</span>
                       </div>
                       <MathText content={currentCard.trap} />
                     </div>
