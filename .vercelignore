@@ -1,4 +1,7 @@
-# Ignore non-webapp files for Vercel
+node_modules
+admission_webapp/node_modules
+MAD Master QB
+VAR Master QB
 *.pdf
 Week_*
 Monthly_*
@@ -9,6 +12,4 @@ __pycache__
 *.ps1
 DU_Ka_Question_Bank.pdf
 Global_Varsity_Vault.md
-node_modules
-admission_webapp/node_modules
 
