@@ -223,6 +223,10 @@ export interface MasterChapterBlueprint {
   title: string;
   subject: string;
   paper: string;
+  chapter_no?: string;
+  subtitle?: string;
+  syllabus?: string;
+  aliases?: string[];
   total_questions: number;
   dominant_types_count: number;
   mega_types: MasterMegaType[];

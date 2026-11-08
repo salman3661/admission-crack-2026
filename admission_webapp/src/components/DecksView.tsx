@@ -928,9 +928,9 @@ export const DecksView: React.FC<DecksViewProps> = ({
           }`}
         >
           <Layers className="w-4 h-4 text-emerald-200 shrink-0" />
-          <span className="truncate">📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৩৪ চ্যাপ্টার)</span>
+          <span className="truncate">📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৭৫ চ্যাপ্টার)</span>
           <span className="hidden md:inline-block px-2 py-0.5 rounded-full text-[10px] bg-white/20 text-white font-mono">
-            ৩৪ অধ্যায় • ৬৮০ প্রেডিক্টর
+            ৭৫ অধ্যায় • ১,৩৪৭ প্রেডিক্টর
           </span>
         </button>
 
@@ -970,11 +970,11 @@ export const DecksView: React.FC<DecksViewProps> = ({
             {/* Subject Pills: Physics, Chemistry, Higher Math, Biology, All */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
               {[
-                { id: 'Physics' as const, label: 'পদার্থবিজ্ঞান', sub: '১০ অধ্যায়', icon: '⚡' },
-                { id: 'Chemistry' as const, label: 'রসায়ন', sub: '৮ অধ্যায়', icon: '🧪' },
-                { id: 'Higher Math' as const, label: 'উচ্চতর গণিত', sub: '৮ অধ্যায়', icon: '📐' },
-                { id: 'Biology' as const, label: 'জীববিজ্ঞান', sub: '৮ অধ্যায়', icon: '🧬' },
-                { id: 'All' as const, label: 'সকল বিষয়', sub: '৩৪ অধ্যায়', icon: '🌟' },
+                { id: 'Physics' as const, label: 'পদার্থবিজ্ঞান', sub: '২১ অধ্যায়', icon: '⚡' },
+                { id: 'Chemistry' as const, label: 'রসায়ন', sub: '১০ অধ্যায়', icon: '🧪' },
+                { id: 'Higher Math' as const, label: 'উচ্চতর গণিত', sub: '২০ অধ্যায়', icon: '📐' },
+                { id: 'Biology' as const, label: 'জীববিজ্ঞান', sub: '২৪ অধ্যায়', icon: '🧬' },
+                { id: 'All' as const, label: 'সকল বিষয়', sub: '৭৫ অধ্যায়', icon: '🌟' },
               ].map(sub => {
                 const isSelected = selectedChapterSubject === sub.id;
                 const theme = SUBJECT_THEMES[sub.id] || { activeBg: 'bg-emerald-600 text-white' };

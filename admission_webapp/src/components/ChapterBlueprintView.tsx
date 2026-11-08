@@ -13,7 +13,12 @@ import {
   BookOpen,
   Clock,
   ArrowLeft,
-  Calendar
+  Calendar,
+  Search,
+  X,
+  LayoutGrid,
+  List,
+  Filter
 } from 'lucide-react';
 import { MathText } from './MathText';
 import masterBlueprintRaw from '../data/master_chapter_blueprint.json';
@@ -140,11 +145,38 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
     return map;
   }, [syntheticChapters]);
 
+  // Dynamic Subject Stats (True unbundled counts: Physics: 21, Chemistry: 10, Higher Math: 20, Biology: 24)
+  const subjectCounts = useMemo(() => {
+    const counts: Record<string, { chapters: number; predictors: number }> = {
+      'Physics': { chapters: 0, predictors: 0 },
+      'Chemistry': { chapters: 0, predictors: 0 },
+      'Higher Math': { chapters: 0, predictors: 0 },
+      'Biology': { chapters: 0, predictors: 0 }
+    };
+    blueprintChapters.forEach(c => {
+      const subj = c.subject;
+      if (counts[subj]) {
+        counts[subj].chapters += 1;
+        const preds = syntheticByChapterId.get(c.id)?.length || 0;
+        counts[subj].predictors += preds;
+      }
+    });
+    return counts;
+  }, [blueprintChapters, syntheticByChapterId]);
+
   // Subject Selector State: 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology'
   const [selectedSubject, setSelectedSubjectState] = useState<'Physics' | 'Chemistry' | 'Higher Math' | 'Biology'>('Physics');
 
+  // Search, Paper Filter, and Layout State
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [paperFilter, setPaperFilter] = useState<'all' | '1st' | '2nd'>('all');
+  const [viewLayout, setViewLayout] = useState<'cards' | 'pills'>('cards');
+  const activeChapterRef = useRef<HTMLDivElement>(null);
+
   const handleSubjectChange = (subj: 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology') => {
     setSelectedSubjectState(subj);
+    setSearchQuery('');
+    setPaperFilter('all');
     onSelectSubject?.(subj as SubjectType);
   };
 
@@ -152,6 +184,37 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   const currentSubjectChapters = useMemo(() => {
     return blueprintChapters.filter(c => c.subject.toLowerCase() === selectedSubject.toLowerCase());
   }, [blueprintChapters, selectedSubject]);
+
+  // Filtered Chapters based on paper filter and search query
+  const filteredSubjectChapters = useMemo(() => {
+    return currentSubjectChapters.filter(ch => {
+      // Paper filter
+      if (paperFilter === '1st') {
+        const p = (ch.paper || '').toLowerCase();
+        if (!p.includes('১ম') && !p.includes('1st') && !p.includes('উদ্ভিদ')) return false;
+      } else if (paperFilter === '2nd') {
+        const p = (ch.paper || '').toLowerCase();
+        if (!p.includes('২য়') && !p.includes('2nd') && !p.includes('প্রাণি')) return false;
+      }
+
+      // Search query filter
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        const matchTitle = (ch.title || '').toLowerCase().includes(q);
+        const matchSub = (ch.subtitle || '').toLowerCase().includes(q);
+        const matchNo = (ch.chapter_no || '').toLowerCase().includes(q);
+        const matchId = (ch.id || '').toLowerCase().includes(q);
+        const matchTypes = (ch.mega_types || []).some(t => 
+          (t.name || '').toLowerCase().includes(q) || 
+          (t.core_rule || '').toLowerCase().includes(q) ||
+          (t.past_tags || []).some(tag => tag.toLowerCase().includes(q))
+        );
+        return matchTitle || matchSub || matchNo || matchId || matchTypes;
+      }
+
+      return true;
+    });
+  }, [currentSubjectChapters, paperFilter, searchQuery]);
 
   // Active Chapter ID
   const [selectedChapterId, setSelectedChapterId] = useState<string>('');
@@ -170,6 +233,26 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   const activeChapter = useMemo(() => {
     return currentSubjectChapters.find(c => c.id === selectedChapterId) || currentSubjectChapters[0];
   }, [currentSubjectChapters, selectedChapterId]);
+
+  // 1-Click Instant Drill Launch Handler
+  const handleLaunchDrill = (chapterId: string) => {
+    setSelectedChapterId(chapterId);
+    setActiveTab('quiz');
+    setUserAnswers({});
+    setRevealedQuestions({});
+    setShowOnlyTraps(false);
+    setTimeout(() => {
+      activeChapterRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+
+  const handleSelectChapter = (chapterId: string) => {
+    setSelectedChapterId(chapterId);
+    setActiveTab('blueprint');
+    setTimeout(() => {
+      activeChapterRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
 
   // Predictors for active chapter
   const activePredictors = useMemo(() => {
@@ -477,7 +560,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
           <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-300">
             <span className="flex items-center gap-1 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
               <Layers className="w-3.5 h-3.5 text-cyan-400" />
-              ৩৪টি পূর্ণাঙ্গ অধ্যায়
+              ৭৫টি পূর্ণাঙ্গ অধ্যায় (আনবান্ডল্ড ইনডেক্স)
             </span>
             <span className="flex items-center gap-1 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
               <Calendar className="w-3.5 h-3.5 text-amber-400" />
@@ -485,7 +568,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
             </span>
             <span className="flex items-center gap-1 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700">
               <Zap className="w-3.5 h-3.5 text-emerald-400" />
-              ৭৫০টি উইকলি MCQ • ৬৮০টি প্রেডিক্টর
+              ৭৫০টি উইকলি MCQ • ১,৪৪৭টি প্রেডিক্টর MCQ
             </span>
           </div>
         </div>
@@ -493,7 +576,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
 
       {/* =========================================================================
           2. DUAL WORKFLOW TAB SWITCHER (HIGH-CONTRAST SEGMENTED CONTROL)
-          [📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৩৪ চ্যাপ্টার)] | [📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 08)]
+          [📂 অধ্যায়-ভিত্তিক ব্লুপ্রিন্ট (৭৫ চ্যাপ্টার)] | [📅 সপ্তাহ-ভিত্তিক মাস্টারি (Week 01 – 08)]
          ========================================================================= */}
       <div className="p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl bg-slate-900/95 dark:bg-black/90 ring-2 ring-emerald-500/50 shadow-xl flex items-center gap-1.5 sm:gap-2">
         <button
@@ -509,7 +592,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
           <span className={`text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-full ${
             workflowMode === 'blueprint' ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-300'
           }`}>
-            ৩৪ চ্যাপ্টার
+            ৭৫ চ্যাপ্টার
           </span>
         </button>
 
@@ -532,18 +615,38 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
       </div>
 
       {/* =========================================================================
-          WORKFLOW TAB 1: CHAPTER BLUEPRINT (PCMB 34 CHAPTERS + 20 PREDICTOR DRILLS)
+          WORKFLOW TAB 1: CHAPTER BLUEPRINT (PCMB 75 CHAPTERS + PREDICTOR DRILLS)
          ========================================================================= */}
       {workflowMode === 'blueprint' && (
         <div className="space-y-5 animate-in fade-in duration-150">
           
-          {/* PCMB Subject Selector */}
+          {/* PCMB Subject Selector with Dynamic Unbundled Totals */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {[
-              { key: 'Physics' as const, label: 'পদার্থবিজ্ঞান', sub: '১০টি অধ্যায় • ২০০ MCQ', icon: '⚡' },
-              { key: 'Chemistry' as const, label: 'রসায়ন', sub: '৮টি অধ্যায় • ১৬০ MCQ', icon: '🧪' },
-              { key: 'Higher Math' as const, label: 'উচ্চতর গণিত', sub: '৮টি অধ্যায় • ১৬০ MCQ', icon: '📐' },
-              { key: 'Biology' as const, label: 'জীববিজ্ঞান', sub: '৮টি অধ্যায় • ১৬০ MCQ', icon: '🧬' }
+              { 
+                key: 'Physics' as const, 
+                label: 'পদার্থবিজ্ঞান', 
+                sub: `${toBn(subjectCounts['Physics']?.chapters || 21)}টি অধ্যায় • ${toBn(subjectCounts['Physics']?.predictors || 0)} MCQ`, 
+                icon: '⚡' 
+              },
+              { 
+                key: 'Chemistry' as const, 
+                label: 'রসায়ন', 
+                sub: `${toBn(subjectCounts['Chemistry']?.chapters || 10)}টি অধ্যায় • ${toBn(subjectCounts['Chemistry']?.predictors || 0)} MCQ`, 
+                icon: '🧪' 
+              },
+              { 
+                key: 'Higher Math' as const, 
+                label: 'উচ্চতর গণিত', 
+                sub: `${toBn(subjectCounts['Higher Math']?.chapters || 20)}টি অধ্যায় • ${toBn(subjectCounts['Higher Math']?.predictors || 0)} MCQ`, 
+                icon: '📐' 
+              },
+              { 
+                key: 'Biology' as const, 
+                label: 'জীববিজ্ঞান', 
+                sub: `${toBn(subjectCounts['Biology']?.chapters || 24)}টি অধ্যায় • ${toBn(subjectCounts['Biology']?.predictors || 0)} MCQ`, 
+                icon: '🧬' 
+              }
             ].map(item => {
               const isSelected = selectedSubject === item.key;
               const theme = subjectThemes[item.key];
@@ -576,45 +679,233 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
             })}
           </div>
 
-          {/* Horizontal Chapter Pills */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
-              <span>অধ্যায় নির্বাচন করুন ({toBn(currentSubjectChapters.length)}টি অধ্যায়):</span>
-              <span className="font-mono text-[11px]">
-                {activeChapter?.paper || '১ম ও ২য় পত্র'}
-              </span>
+          {/* Chapter Search, Paper Filter & Layout Control Bar */}
+          <div className="bg-slate-900/90 dark:bg-[#0D1510] border border-slate-700/60 dark:border-[#1E2D22] rounded-2xl p-3 sm:p-4 space-y-3 shadow-md">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+              {/* Real-time Chapter Search */}
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={`অধ্যায়ের নাম, নম্বর বা টপিক খুঁজুন (${selectedSubject === 'Biology' ? 'যেমন: কোষ, অণুজীব, পরিপাক, রক্ত' : selectedSubject === 'Physics' ? 'যেমন: ভেক্টর, গতিবিদ্যা, কাজ, আলো' : selectedSubject === 'Chemistry' ? 'যেমন: গুণগত, পর্যায়বৃত্ত, জৈব' : 'যেমন: ম্যাট্রিক্স, সরলরেখা, ক্যালকুলাস'})...`}
+                  className="w-full pl-9 pr-9 py-2 bg-slate-800/90 dark:bg-[#141F17] text-white text-xs sm:text-sm rounded-xl border border-slate-700 dark:border-[#223528] focus:outline-none focus:ring-2 focus:ring-emerald-500/70 placeholder:text-slate-500 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white rounded-md cursor-pointer"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* View Layout Toggle (Cards vs Compact Pills) */}
+              <div className="flex items-center gap-1 bg-slate-800 dark:bg-[#152219] p-1 rounded-xl self-end sm:self-auto border border-slate-700/70 dark:border-[#1F2E23]">
+                <button
+                  onClick={() => setViewLayout('cards')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    viewLayout === 'cards'
+                      ? 'bg-emerald-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                  title="কার্ড ভিউ"
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">কার্ড ভিউ</span>
+                </button>
+                <button
+                  onClick={() => setViewLayout('pills')}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    viewLayout === 'pills'
+                      ? 'bg-emerald-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                  title="পিল ভিউ"
+                >
+                  <List className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">পিল ভিউ</span>
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-700">
-              {currentSubjectChapters.map(ch => {
-                const isSelected = ch.id === selectedChapterId;
-                return (
+            {/* Paper Filter Pills */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800 dark:border-[#18261C]">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+                <span className="text-[11px] font-bold text-slate-400 mr-1 flex items-center gap-1">
+                  <Filter className="w-3 h-3 text-emerald-400" />
+                  পত্র ফিল্টার:
+                </span>
+                {[
+                  { 
+                    key: 'all' as const, 
+                    label: `সকল পত্র (${toBn(currentSubjectChapters.length)})` 
+                  },
+                  { 
+                    key: '1st' as const, 
+                    label: selectedSubject === 'Biology' 
+                      ? `১ম পত্র (উদ্ভিদবিজ্ঞান - ${toBn(currentSubjectChapters.filter(c => (c.paper || '').includes('১ম') || (c.paper || '').includes('উদ্ভিদ')).length)})` 
+                      : `১ম পত্র (${toBn(currentSubjectChapters.filter(c => (c.paper || '').includes('১ম')).length)})` 
+                  },
+                  { 
+                    key: '2nd' as const, 
+                    label: selectedSubject === 'Biology' 
+                      ? `২য় পত্র (প্রাণিবিজ্ঞান - ${toBn(currentSubjectChapters.filter(c => (c.paper || '').includes('২য়') || (c.paper || '').includes('প্রাণি')).length)})` 
+                      : `২য় পত্র (${toBn(currentSubjectChapters.filter(c => (c.paper || '').includes('২য়')).length)})` 
+                  }
+                ].map(p => (
                   <button
-                    key={ch.id}
-                    onClick={() => setSelectedChapterId(ch.id)}
-                    className={`flex-shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all border cursor-pointer ${
-                      isSelected
-                        ? 'bg-slate-900 dark:bg-emerald-600 text-white border-slate-900 dark:border-emerald-600 shadow-sm'
-                        : 'bg-white dark:bg-[#141E18] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#223528] hover:bg-slate-50 dark:hover:bg-[#1A261F]'
+                    key={p.key}
+                    onClick={() => setPaperFilter(p.key)}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
+                      paperFilter === p.key
+                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-sm'
+                        : 'bg-slate-800/80 text-slate-400 border-slate-700/80 hover:text-white hover:bg-slate-700'
                     }`}
                   >
-                    <div className="flex items-center gap-1.5">
-                      <span>{ch.title.split('(')[0].trim()}</span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded-md ${
-                        isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-[#1F2C24] text-slate-500 dark:text-slate-400'
-                      }`}>
-                        {toBn(ch.mega_types.length)}টি টাইপ
-                      </span>
-                    </div>
+                    {p.label}
                   </button>
-                );
-              })}
+                ))}
+              </div>
+
+              <div className="text-[11px] font-mono text-slate-400">
+                প্রদর্শিত: <span className="font-bold text-emerald-400">{toBn(filteredSubjectChapters.length)}</span>টি অধ্যায়
+              </div>
             </div>
           </div>
 
+          {/* Chapter Selector Section */}
+          {viewLayout === 'cards' ? (
+            /* Responsive Grid of Individual Chapter Cards with 1-Click Drill Launch */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {filteredSubjectChapters.length === 0 ? (
+                <div className="col-span-full py-8 text-center text-slate-400 bg-white dark:bg-[#121D16] rounded-2xl border border-dashed border-slate-300 dark:border-[#223528]">
+                  <p className="text-sm font-semibold">কোনো অধ্যায় পাওয়া যায়নি।</p>
+                  <p className="text-xs text-slate-500 mt-1">অনুসন্ধান বা ফিল্টার পরিবর্তন করুন।</p>
+                </div>
+              ) : (
+                filteredSubjectChapters.map(ch => {
+                  const isSelected = ch.id === selectedChapterId;
+                  const preds = syntheticByChapterId.get(ch.id) || [];
+                  return (
+                    <div
+                      key={ch.id}
+                      className={`group relative rounded-2xl border transition-all duration-200 flex flex-col justify-between overflow-hidden p-3.5 sm:p-4 shadow-sm ${
+                        isSelected
+                          ? 'bg-gradient-to-br from-emerald-500/10 via-white to-teal-500/5 dark:from-emerald-950/40 dark:via-[#131E17] dark:to-teal-950/20 border-emerald-500 dark:border-emerald-500/80 ring-2 ring-emerald-500/30'
+                          : 'bg-white dark:bg-[#121D16] border-slate-200 dark:border-[#1E2D22] hover:border-slate-300 dark:hover:border-[#2C4232] hover:shadow-md'
+                      }`}
+                    >
+                      <div className="space-y-2.5">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-[#1B291F] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#273B2E]">
+                            {ch.paper} • {ch.chapter_no}
+                          </span>
+                          {isSelected ? (
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                              <CheckCircle2 className="w-3 h-3" />
+                              সক্রিয়
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-mono text-slate-400">
+                              {toBn(preds.length)} MCQ
+                            </span>
+                          )}
+                        </div>
+
+                        <div>
+                          <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
+                            {ch.title.split('(')[0].trim()}
+                          </h3>
+                          {ch.subtitle && (
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono truncate mt-0.5">
+                              {ch.subtitle}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+                            {toBn(ch.mega_types.length)}টি মেগা-টাইপ
+                          </span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                            {toBn(preds.length)} প্রেডিক্টর ড্রিল
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* 1-Click Instant Drill Launch & Blueprint Buttons */}
+                      <div className="grid grid-cols-2 gap-2 pt-3 mt-3 border-t border-slate-100 dark:border-[#1A281E]">
+                        <button
+                          onClick={() => handleSelectChapter(ch.id)}
+                          className={`w-full py-1.5 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+                            isSelected && activeTab === 'blueprint'
+                              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-sm'
+                              : 'bg-slate-100 dark:bg-[#1A261F] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-[#223329]'
+                          }`}
+                        >
+                          <Layers className="w-3 h-3 text-cyan-500" />
+                          <span>ব্লুপ্রিন্ট</span>
+                        </button>
+
+                        <button
+                          onClick={() => handleLaunchDrill(ch.id)}
+                          className="w-full py-1.5 px-2 rounded-xl text-xs font-black bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-sm hover:shadow transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-95"
+                          title="ইনস্ট্যান্ট ১-ক্লিক ড্রিল শুরু করুন"
+                        >
+                          <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                          <span>১-ক্লিক ড্রিল</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          ) : (
+            /* Horizontal / Wrap Pills View */
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
+                <span>অধ্যায় নির্বাচন করুন ({toBn(filteredSubjectChapters.length)}টি অধ্যায়):</span>
+                <span className="font-mono text-[11px]">
+                  {activeChapter?.paper || '১ম ও ২য় পত্র'}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-700">
+                {filteredSubjectChapters.map(ch => {
+                  const isSelected = ch.id === selectedChapterId;
+                  const preds = syntheticByChapterId.get(ch.id) || [];
+                  return (
+                    <button
+                      key={ch.id}
+                      onClick={() => handleSelectChapter(ch.id)}
+                      className={`flex-shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all border cursor-pointer ${
+                        isSelected
+                          ? 'bg-slate-900 dark:bg-emerald-600 text-white border-slate-900 dark:border-emerald-600 shadow-sm'
+                          : 'bg-white dark:bg-[#141E18] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#223528] hover:bg-slate-50 dark:hover:bg-[#1A261F]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span>{ch.title.split('(')[0].trim()}</span>
+                        <span className={`text-[10px] px-1.5 py-0.2 rounded-md ${
+                          isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-[#1F2C24] text-slate-500 dark:text-slate-400'
+                        }`}>
+                          {toBn(preds.length)} MCQ
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Active Chapter Overview Card & Section Switcher */}
           {activeChapter && (
-            <div className="bg-white dark:bg-[#101A14] rounded-3xl border border-slate-200 dark:border-[#1E2D22] p-4 sm:p-6 shadow-sm space-y-4">
+            <div ref={activeChapterRef} className="bg-white dark:bg-[#101A14] rounded-3xl border border-slate-200 dark:border-[#1E2D22] p-4 sm:p-6 shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-[#1A291E] pb-4">
                 <div>
                   <div className="flex items-center gap-2">
@@ -630,30 +921,41 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                   </h2>
                 </div>
 
-                {/* Tab Buttons */}
-                <div className="flex items-center bg-slate-100 dark:bg-[#18241D] p-1 rounded-xl self-start sm:self-auto">
+                {/* Instant 1-Click Drill Launch & Tab Buttons */}
+                <div className="flex flex-wrap items-center gap-2">
                   <button
-                    onClick={() => setActiveTab('blueprint')}
-                    className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      activeTab === 'blueprint'
-                        ? 'bg-white dark:bg-[#23352A] text-slate-900 dark:text-white shadow-sm'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                    }`}
+                    onClick={() => handleLaunchDrill(activeChapter.id)}
+                    className="px-3.5 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 cursor-pointer active:scale-95"
+                    title="এই অধ্যায়ের প্রেডিক্টর টেস্ট সরাসরি শুরু করুন"
                   >
-                    <Layers className="w-3.5 h-3.5 text-cyan-500" />
-                    <span>মাস্টার কিউবি টাইপ ও রিপিট</span>
+                    <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                    <span>⚡ ড্রিল শুরু করুন ({toBn(activePredictors.length)} MCQ)</span>
                   </button>
-                  <button
-                    onClick={() => setActiveTab('quiz')}
-                    className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      activeTab === 'quiz'
-                        ? 'bg-emerald-600 text-white shadow-sm'
-                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                    }`}
-                  >
-                    <Zap className="w-3.5 h-3.5 text-amber-300" />
-                    <span>স্পেশাল ২০টি নমুনা টেস্ট</span>
-                  </button>
+
+                  <div className="flex items-center bg-slate-100 dark:bg-[#18241D] p-1 rounded-xl self-start sm:self-auto">
+                    <button
+                      onClick={() => setActiveTab('blueprint')}
+                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        activeTab === 'blueprint'
+                          ? 'bg-white dark:bg-[#23352A] text-slate-900 dark:text-white shadow-sm'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                      }`}
+                    >
+                      <Layers className="w-3.5 h-3.5 text-cyan-500" />
+                      <span>মাস্টার কিউবি টাইপ ও রিপিট</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('quiz')}
+                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        activeTab === 'quiz'
+                          ? 'bg-emerald-600 text-white shadow-sm'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                      }`}
+                    >
+                      <Zap className="w-3.5 h-3.5 text-amber-300" />
+                      <span>স্পেশাল নমুনা টেস্ট</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
