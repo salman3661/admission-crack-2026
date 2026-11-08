@@ -33,7 +33,6 @@ import type {
   TrackType,
   PredictorSet
 } from './types';
-import { Target, Sparkles, BookOpen, Clock, ShieldCheck } from 'lucide-react';
 
 export function App() {
   // URL Hash Synchronized Mode Routing (SPA 0ms speed + Real Browser URLs & Phone Back-Button support)
@@ -335,35 +334,7 @@ export function App() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200/80 dark:border-[#1E2F24] bg-white/70 dark:bg-[#0D1410]/70 py-6 px-4 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors hidden sm:block pb-24">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <Target className="w-4 h-4 text-[#056839] dark:text-emerald-400" />
-            <span className="font-semibold text-slate-700 dark:text-slate-300">
-              Admission Crack 2026 • Chorcha UI Edition
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 text-[11px] text-slate-600 dark:text-slate-400 font-medium">
-            <span className="flex items-center gap-1">
-              <BookOpen className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" /> {slides.length} স্লাইড
-            </span>
-            <span className="flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" /> {flashcards.length} ফ্ল্যাশকার্ড
-            </span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {currentQuizzes.length} রিয়েল MCQ
-            </span>
-          </div>
-
-          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-            Vercel Edge Ready
-          </div>
-        </div>
-      </footer>
-
+      
       {/* 4. MOBILE-FIRST BOTTOM NAVIGATION DOCK:
           Sticky bottom navigation bar with rounded icons and micro-labels:
           [ 🏠 ডেক ]  [ 📚 প্রশ্নব্যাংক ]  [ ⚡ এক্সপেক্টেড ]  [ 🃏 কার্ডস ]  [ 📊 অ্যানালিটিক্স ] */}
