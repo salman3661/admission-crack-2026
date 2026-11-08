@@ -1,7 +1,29 @@
 export type TrackType = 'medical' | 'varsity';
 export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
 export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07';
-export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault';
+export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault' | 'recall';
+
+export interface RecentGKCard {
+  id: string;
+  month: string;
+  month_bn: string;
+  subject: string;
+  category: string;
+  topic: string;
+  front: string;
+  back: string;
+  concept: string;
+  hack: string;
+  trap: string;
+  exam_targets: string[];
+}
+
+export interface RecentGKMonthMeta {
+  id: string;
+  label_bn: string;
+  label_en: string;
+  badge: string;
+}
 
 export interface UserProfile {
   name: string;

@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { DecksView } from './components/DecksView';
 import { SlidesView } from './components/SlidesView';
 import { FlashcardsView } from './components/FlashcardsView';
+import { ActiveRecallView } from './components/ActiveRecallView';
 import { ExamView } from './components/ExamView';
 import { VaultView } from './components/VaultView';
 import { AnalyticsView } from './components/AnalyticsView';
@@ -38,8 +39,8 @@ export function App() {
   const getInitialMode = (): AppMode => {
     try {
       const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'activerecall' || hash === 'active-recall') return 'flashcards';
-      const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor'];
+      if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') return 'recall';
+      const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall'];
       if (validModes.includes(hash as AppMode)) {
         return hash as AppMode;
       }
@@ -68,11 +69,11 @@ export function App() {
     const handlePopState = () => {
       try {
         const hash = window.location.hash.replace('#', '').toLowerCase();
-        if (hash === 'activerecall' || hash === 'active-recall') {
-          setCurrentMode('flashcards');
+        if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') {
+          setCurrentMode('recall');
           return;
         }
-        const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor'];
+        const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall'];
         if (validModes.includes(hash as AppMode)) {
           setCurrentMode(hash as AppMode);
         } else {
@@ -293,7 +294,12 @@ export function App() {
             selectedSubject={selectedSubject}
             onSelectSubject={setSelectedSubject}
             activeTrack={activeTrack}
+            onSelectMode={handleSelectMode}
           />
+        )}
+
+        {currentMode === 'recall' && (
+          <ActiveRecallView onSelectMode={handleSelectMode} />
         )}
 
 

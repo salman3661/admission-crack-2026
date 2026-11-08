@@ -454,6 +454,47 @@ export const DecksView: React.FC<DecksViewProps> = ({
               </div>
             </div>
 
+            {/* Stream 7: Udvash Recent Monthly GK 2026 (Jan-Oct) */}
+            <div 
+              onClick={() => handleDeckNavigate('recall')}
+              className="group p-5 rounded-3xl backdrop-blur-xl bg-gradient-to-br from-teal-500/10 via-emerald-600/5 to-cyan-500/10 ring-1 ring-teal-500/30 hover:ring-teal-500 stream-glow-varsity shadow-xs transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-[0.98]"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-teal-500/15 text-teal-700 dark:text-teal-300 ring-1 ring-teal-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-ping" />
+                    📅 উদ্ভাস মান্থলি জিকে ২০২৬
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold bg-white/80 dark:bg-slate-800/80 text-teal-700 dark:text-teal-300 ring-1 ring-teal-500/20">
+                    ৮০ কার্ডস
+                  </span>
+                </div>
+
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-teal-600 to-emerald-600 text-white flex items-center justify-center text-xl shadow-md shadow-teal-600/25 mb-3 group-hover:scale-105 transition-transform">
+                  🇧🇩
+                </div>
+
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors mb-1.5">
+                  সাম্প্রতিক সাধারণ জ্ঞান (জানু–অক্টোবর ২০২৬)
+                </h3>
+
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                  ত্রয়োদশ নির্বাচন ও গণভোট, পদ্মা ব্যারাজ, নোবেল ২০২৬, আসাম-বাংলাদেশ মিথানল জাহাজ ও মেগা প্রকল্প ট্র্যাপ ডিফেন্স।
+                </p>
+              </div>
+
+              <div>
+                <div className="p-2 rounded-xl bg-teal-500/10 text-teal-800 dark:text-teal-300 text-[11px] font-semibold mb-3 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                  <span>মাসভিত্তিক স্লাইডার • হ্যাক ও অপশন ট্র্যাপ শিল্ড</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-bold text-teal-700 dark:text-teal-400">
+                  <span>অ্যাক্টিভ রিকল শুরু</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </div>
+
 
           </div>
         </div>

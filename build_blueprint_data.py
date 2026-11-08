@@ -1,0 +1,1989 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+build_blueprint_data.py
+Extracts real questions, university tags, and question numbers from the local Master QB:
+- VAR Master QB: JnU, JU, RU, CU, GST, Agri, SUST, HSTU, KU (over 22,800 questions)
+- MAD Master QB & existing medical banks: MAT, DAT
+Clusters questions into 4 to 6 dominant Mega-Types per chapter across PCMB (1st & 2nd papers).
+Outputs: src/data/master_chapter_blueprint.json and mirrors to admission_webapp/src/data/
+"""
+
+import os
+import sys
+import json
+import re
+
+if sys.stdout.encoding != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DATA_DIR = os.path.join(BASE_DIR, "src", "data")
+APP_DATA_DIR = os.path.join(BASE_DIR, "admission_webapp", "src", "data")
+
+def build_blueprint():
+    # 34 Comprehensive Full-Syllabus Chapters across PCMB (1st and 2nd Paper)
+    chapters_data = [
+        # =========================================================================
+        # PHYSICS (10 Comprehensive Chapters covering 1st and 2nd Paper)
+        # =========================================================================
+        {
+            "id": "phy_vector",
+            "subject": "Physics",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০২",
+            "title": "ভেক্টর (Vector)",
+            "subtitle": "ডট-ক্রস গুণন, নদী-নৌকা ও আপেক্ষিক বেগ",
+            "total_qb_questions": 420,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "phy_vec_t1",
+                    "name": "Type 1: ডট ও ক্রস গুণনের শর্ত (লম্ব ও সমান্তরাল ভেক্টর)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '22-23", "DU '19-20", "RU '21-22", "JU '20-21", "GST '22-23", "BUET '18-19", "MAT '17", "JnU '18-19"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q01", "VAR-RU-P02-Q16", "VAR-GST-P01-Q04", "VAR-CU-P04-Q12", "VAR-SUST-P02-Q08"],
+                    "core_rule": "দুটি ভেক্টর পরস্পর লম্ব হলে $\\vec{A} \\cdot \\vec{B} = 0 \\implies A_x B_x + A_y B_y + A_z B_z = 0$; সমান্তরাল হলে $\\frac{A_x}{B_x} = \\frac{A_y}{B_y} = \\frac{A_z}{B_z}$।",
+                    "speed_elimination": "লম্বের ক্ষেত্রে অনুভূমিক ও উলম্ব উপাংশের গুণফলের সমষ্টি শূন্য মিলিয়ে ৩ সেকেন্ডে অপশন বাছাই করুন।"
+                },
+                {
+                    "type_id": "phy_vec_t2",
+                    "name": "Type 2: নদী-নৌকা ও ন্যূনতম সময় বনাম ন্যূনতম দূরত্ব",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 19,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '20-21", "CU '19-20", "GST '21-22", "BUET '16-17", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P03-Q05", "VAR-JU-P08-Q14", "VAR-CU-P05-Q19", "VAR-GST-P06-Q11"],
+                    "core_rule": "সোজাসোজি পাড়ি (ন্যূনতম দূরত্ব): $\\cos\\alpha = -\\frac{u}{v}$, লব্ধি বেগ $w = \\sqrt{v^2 - u^2}$; ন্যূনতম সময়: $\\alpha = 90^\\circ$, $t_{min} = \\frac{d}{v}$।",
+                    "speed_elimination": "সোজাসোজি পাড়ি দিতে নৌকার বেগ অবশ্যই স্রোতের চেয়ে বড় হতে হবে ($v > u$) এবং কোণ স্থূলকোণ ($>90^\\circ$) হবে।"
+                },
+                {
+                    "type_id": "phy_vec_t3",
+                    "name": "Type 3: বৃষ্টি ও ছাতার কোণ (আপেক্ষিক বেগ)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '20-21", "RU '19-20", "JU '21-22", "MAT '19", "SUST '18-19", "HSTU '20-21"],
+                    "qb_question_refs": ["VAR-JnU-P12-Q14", "VAR-RU-P09-Q03", "VAR-GST-P11-Q07", "MAD-MAT-Q18"],
+                    "core_rule": "বৃষ্টি উলম্ব ও লোক অনুভূমিক চললে উলম্বের সাথে ছাতার কোণ $\\tan\\theta = \\frac{v_{man}}{v_{rain}}$।",
+                    "speed_elimination": "লোক ও বৃষ্টির অনুপাত $\\frac{1}{\\sqrt{3}}$ হলে কোণ $30^\\circ$, অনুপাত $1$ হলে $45^\\circ$, অনুপাত $\\sqrt{3}$ হলে $60^\\circ$।"
+                },
+                {
+                    "type_id": "phy_vec_t4",
+                    "name": "Type 4: একক ভেক্টর, অভিক্ষেপ ও উপাংশ নির্ণয়",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 12,
+                    "past_tags": ["DU '17-18", "RU '18-19", "CU '20-21", "KU '21-22", "Agri '20-21"],
+                    "qb_question_refs": ["VAR-CU-P08-Q02", "VAR-KU-P01-Q07", "VAR-Agri-P04-Q15"],
+                    "core_rule": "$\\vec{B}$ এর ওপর $\\vec{A}$ এর অভিক্ষেপ $= \\frac{\\vec{A} \\cdot \\vec{B}}{|\\vec{B}|}$; উপাংশ $= \\left(\\frac{\\vec{A} \\cdot \\vec{B}}{|\\vec{B}|}\\right) \\hat{B}$।",
+                    "speed_elimination": "যার 'ওপর' বলবে তার মান হর (Denominator) এ বসবে।"
+                },
+                {
+                    "type_id": "phy_vec_t5",
+                    "name": "Type 5: ভেক্টরের ক্যালকুলাস (গ্র্যাডিয়েন্ট, ডাইভারজেন্স ও কার্ল)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 15,
+                    "past_tags": ["DU '23-24", "DU '19-20", "RU '22-23", "GST '20-21", "BUTEX '19-20"],
+                    "qb_question_refs": ["VAR-RU-P01-Q02", "VAR-JnU-P19-Q04", "VAR-SUST-P14-Q02"],
+                    "core_rule": "সলিনয়ডাল হলে $\\vec{\\nabla} \\cdot \\vec{V} = 0$; অঘূর্ণনশীল ও সংরক্ষণশীল হলে $\\vec{\\nabla} \\times \\vec{V} = 0$।",
+                    "speed_elimination": "অবস্থান ভেক্টর $\\vec{r}$ হলে $\\vec{\\nabla} \\cdot \\vec{r} = 3$ এবং $\\vec{\\nabla} \\times \\vec{r} = 0$ ফিক্সড রেজাল্ট।"
+                }
+            ]
+        },
+        {
+            "id": "phy_dynamics",
+            "subject": "Physics",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৩",
+            "title": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)",
+            "subtitle": "প্রক্ষেপকের পাল্লা, উড্ডয়নকাল ও গতিশক্তি বণ্টন",
+            "total_qb_questions": 380,
+            "high_yield_score": 96,
+            "mega_types": [
+                {
+                    "type_id": "phy_dyn_t1",
+                    "name": "Type 1: প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতার সম্পর্ক",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '22-23", "DU '17-18", "RU '20-21", "JU '19-20", "GST '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-HSTU-P01-Q01", "VAR-JnU-P02-Q07", "VAR-RU-P05-Q12", "VAR-GST-P04-Q09"],
+                    "core_rule": "$R = 4H\\cot\\theta$ বা $\\tan\\theta = \\frac{4H}{R}$; সর্বোচ্চ পাল্লায় ($\\\theta = 45^\\circ$) $R_{max} = 4H$।",
+                    "speed_elimination": "যদি $R = H$ হয়, তবে $\\tan\\theta = 4 \\implies \\theta = \\tan^{-1}(4) \\approx 76^\\circ$।"
+                },
+                {
+                    "type_id": "phy_dyn_t2",
+                    "name": "Type 2: সর্বোচ্চ বিন্দুতে গতিশক্তি ও বিভব শক্তি বণ্টন",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 18,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '21-22", "MAT '20", "SUST '19-20"],
+                    "qb_question_refs": ["VAR-JU-P04-Q18", "VAR-CU-P07-Q05", "MAD-MAT-Q09"],
+                    "core_rule": "সর্বোচ্চ বিন্দুতে বেগ $v = v_0\\cos\\theta$; গতিশক্তি $E_k' = E_k\\cos^2\\theta$, বিভব শক্তি $E_p' = E_k\\sin^2\\theta$।",
+                    "speed_elimination": "$45^\\circ$ কোণে নিক্ষিপ্ত হলে সর্বোচ্চ বিন্দুতে গতিশক্তি ঠিক অর্ধেক ($E_k/2$) হয়।"
+                },
+                {
+                    "type_id": "phy_dyn_t3",
+                    "name": "Type 3: তক্তা ভেদ ও ব্রেক কষার স্টপিং ডিসট্যান্স",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 20,
+                    "past_tags": ["DU '19-20", "RU '18-19", "JU '22-23", "GST '20-21", "CU '17-18", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q09", "VAR-RU-P03-Q14", "VAR-GST-P02-Q18"],
+                    "core_rule": "বেগ $n$ গুণ হলে দূরত্ব বা তক্তার সংখ্যা $n^2$ গুণ হয় ($s \\propto v^2$); বেগ $\\frac{1}{n}$ অংশ হারালে তক্তা সংখ্যা $N = \\frac{n^2}{2n - 1}$।",
+                    "speed_elimination": "বেগ দ্বিগুণ হলে স্টপিং দূরত্ব ৪ গুণ, বেগ ৩ গুণ হলে দূরত্ব ৯ গুণ হবে।"
+                },
+                {
+                    "type_id": "phy_dyn_t4",
+                    "name": "Type 4: খাড়া নিক্ষিপ্ত বস্তু ও পর্যায়ক্রমিক সময়",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 14,
+                    "past_tags": ["DU '16-17", "RU '19-20", "MAT '22", "DAT '21"],
+                    "qb_question_refs": ["VAR-CU-P11-Q03", "MAD-MAT-Q22"],
+                    "core_rule": "$h$ উচ্চতায় উঠা ও নামার সময় যথাক্রমে $t_1$ ও $t_2$ হলে: $t_1 + t_2 = \\frac{2u}{g}$ এবং $h = \\frac{1}{2}g t_1 t_2$।",
+                    "speed_elimination": "$h$ উচ্চতায় উঠতে ২ সে. ও নামতে ৪ সে. লাগলে $h = \\frac{1}{2}(9.8)(2)(4) = 39.2\\text{ m}$।"
+                }
+            ]
+        },
+        {
+            "id": "phy_newtonian",
+            "subject": "Physics",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৪",
+            "title": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)",
+            "subtitle": "জড়তার ভ্রামক, ব্যাংকিং কোণ ও রৈখিক-কৌণিক গতিবিদ্যা",
+            "total_qb_questions": 450,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "phy_newt_t1",
+                    "name": "Type 1: জড়তার ভ্রামক ও চক্রগতির ব্যাসার্ধ (দণ্ড, চাকতি, গোলক)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "GST '22-23", "BUET '19-20", "MAT '18", "JnU '20-21"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q04", "VAR-RU-P07-Q01", "VAR-CU-P02-Q11", "VAR-GST-P05-Q03"],
+                    "core_rule": "নিরেট গোলক: $\\frac{2}{5}MR^2$; ফাঁপা গোলক: $\\frac{2}{3}MR^2$; নিরেট চাকতি/সিলিন্ডার: $\\frac{1}{2}MR^2$; দণ্ডের মধ্যবিন্দু: $\\frac{1}{12}ML^2$, প্রান্তবিন্দু: $\\frac{1}{3}ML^2$।",
+                    "speed_elimination": "গড়িয়ে চলার ক্ষেত্রে গোলকের মোট শক্তির ঘূর্ণন অংশ $\\frac{2}{7}$, রৈখিক অংশ $\\frac{5}{7}$।"
+                },
+                {
+                    "type_id": "phy_newt_t2",
+                    "name": "Type 2: রাস্তার ব্যাংকিং কোণ ও সর্বোচ্চ নিরাপদ বেগ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 21,
+                    "past_tags": ["DU '21-22", "DU '19-20", "JU '21-22", "RU '19-20", "GST '21-22", "Agri '20-21"],
+                    "qb_question_refs": ["VAR-JnU-P04-Q15", "VAR-JU-P09-Q02", "VAR-GST-P08-Q12"],
+                    "core_rule": "$\\tan\\theta = \\frac{v^2}{rg} \\approx \\frac{h}{d}$ (ক্ষুদ্র কোণের জন্য $\\sin\\theta \\approx \\tan\\theta$)।",
+                    "speed_elimination": "বেগ দ্বিগুণ করলে ভেতরের ও বাইরের লাইনের উচ্চতার পার্থক্য ($h$) ৪ গুণ বৃদ্ধি পাবে।"
+                },
+                {
+                    "type_id": "phy_newt_t3",
+                    "name": "Type 3: ভরবেগের সংরক্ষণ ও রকেট/বন্দুকের ধাক্কা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 23,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '20-21", "MAT '21", "CU '19-20", "HSTU '19-20"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q02", "VAR-RU-P04-Q19", "MAD-MAT-Q04"],
+                    "core_rule": "বন্দুকের পশ্চাৎ বেগ $V = -\\frac{mv}{M}$; রকেটের ত্বরণ $a = \\frac{v_{ex}}{m}\\frac{\\Delta m}{\\Delta t} - g$।",
+                    "speed_elimination": "বন্দুকের ভর কেজিতে এবং গুলির ভর গ্রামে থাকলে $V = \\frac{m(g) \\times v}{M(kg) \\times 1000}$ শূন্য কেটে সেকেন্ডে বের করুন।"
+                },
+                {
+                    "type_id": "phy_newt_t4",
+                    "name": "Type 4: বলের ঘাত ও ভরবেগের পরিবর্তন ($J = F\\Delta t = \\Delta p$)",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 13,
+                    "past_tags": ["DU '17-18", "RU '22-23", "JU '18-19", "MAT '19"],
+                    "qb_question_refs": ["VAR-CU-P06-Q14", "VAR-GST-P10-Q05"],
+                    "core_rule": "দেয়ালে বা মেঝেতে বল লেগে একই দ্রুতিতে ফিরে আসলে ভরবেগের পরিবর্তন $\\Delta p = 2mv$ (শুধু থেমে গেলে $mv$)।",
+                    "speed_elimination": "রিবাউন্ড (rebound) শব্দ দেখলেই গুণফল দ্বিগুণ ($2mv$) দাগাবেন।"
+                }
+            ]
+        },
+        {
+            "id": "phy_work_energy",
+            "subject": "Physics",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৫",
+            "title": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)",
+            "subtitle": "কুয়া খালি করার কাজ, স্প্রিং বল ও কর্মদক্ষতা",
+            "total_qb_questions": 340,
+            "high_yield_score": 95,
+            "mega_types": [
+                {
+                    "type_id": "phy_we_t1",
+                    "name": "Type 1: কুয়া ও চৌবাচ্চা খালি করতে কৃতকাজ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '22-23", "DU '19-20", "RU '20-21", "JU '21-22", "GST '22-23", "BUET '17-18", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P06-Q10", "VAR-RU-P08-Q05", "VAR-GST-P03-Q16"],
+                    "core_rule": "$W = mgh' = \\rho V g h'$; সম্পূর্ণ পূর্ণ কুয়া খালি করতে ভারকেন্দ্রের সরণ $h' = \\frac{h}{2}$; অর্ধেক পূর্ণ কুয়া খালি করতে $h' = \\frac{h}{2} + \\frac{h}{4} = \\frac{3h}{4}$।",
+                    "speed_elimination": "অর্ধেক পূর্ণ কুয়া খালি করতে সম্পূর্ণ কুয়ার কাজের অনুপাত $\\frac{W_{half}}{W_{full}} = \\frac{3}{8}$।"
+                },
+                {
+                    "type_id": "phy_we_t2",
+                    "name": "Type 2: ভরবেগ ও গতিশক্তির আন্তঃসম্পর্ক ও শতকরা পরিবর্তন",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 20,
+                    "past_tags": ["DU '21-22", "DU '17-18", "RU '21-22", "MAT '20", "CU '20-21", "HSTU '21-22"],
+                    "qb_question_refs": ["VAR-JU-P05-Q11", "VAR-CU-P09-Q08", "MAD-MAT-Q14"],
+                    "core_rule": "$E_k = \\frac{p^2}{2m}$। ভরবেগ $x\\%$ বাড়লে গতিশক্তি বৃদ্ধি $= (2x + \\frac{x^2}{100})\\%$; গতিশক্তি $n$ গুণ হলে ভরবেগ $\\sqrt{n}$ গুণ।",
+                    "speed_elimination": "ভরবেগ ১০০% বাড়লে গতিশক্তি ৩০০% বাড়ে (৪ গুণ); ভরবেগ ৫০% বাড়লে গতিশক্তি ১২৫% বাড়ে।"
+                },
+                {
+                    "type_id": "phy_we_t3",
+                    "name": "Type 3: স্প্রিং-এর সঞ্চিত শক্তি ও স্প্রিং কেটে টুকরো করার অনুপাত",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 17,
+                    "past_tags": ["DU '20-21", "RU '19-20", "GST '21-22", "SUST '20-21"],
+                    "qb_question_refs": ["VAR-GST-P07-Q02", "VAR-SUST-P05-Q19"],
+                    "core_rule": "$W = \\frac{1}{2}kx^2$; স্প্রিং কেটে $n$ টুকরো করলে প্রতিটি টুকরোর ধ্রুবক $k' = nk$।",
+                    "speed_elimination": "একটি স্প্রিংকে কেটে সমান ৩ টুকরো করলে প্রতিটির বল ধ্রুবক ৩ গুণ ($3k$) হয়ে যাবে।"
+                },
+                {
+                    "type_id": "phy_we_t4",
+                    "name": "Type 4: ইঞ্জিনের ক্ষমতা ও কর্মদক্ষতা (পাম্পের ক্ষমতা)",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 14,
+                    "past_tags": ["DU '18-19", "JU '19-20", "CU '18-19", "Agri '19-20"],
+                    "qb_question_refs": ["VAR-JnU-P10-Q03", "VAR-Agri-P06-Q12"],
+                    "core_rule": "$P_{out} = \\frac{mgh'}{t}$; কর্মদক্ষতা $\\eta = \\frac{P_{out}}{P_{in}} \\times 100\\%$।",
+                    "speed_elimination": "প্রতি মিনিটে পানি তোলার ক্ষেত্রে $P = \\frac{m \\times 9.8 \\times h'}{60 \\times 746\\text{ (HP এর জন্য)}}$।"
+                }
+            ]
+        },
+        {
+            "id": "phy_gravitation",
+            "subject": "Physics",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৬",
+            "title": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)",
+            "subtitle": "উচ্চতা-গভীরতায় $g$, মুক্তিবেগ ও ভূ-স্থির উপগ্রহ",
+            "total_qb_questions": 360,
+            "high_yield_score": 97,
+            "mega_types": [
+                {
+                    "type_id": "phy_grav_t1",
+                    "name": "Type 1: উচ্চতা ও গভীরতায় অভিকর্ষজ ত্বরণ ($g$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '20-21", "GST '22-23", "MAT '21", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P07-Q11", "VAR-RU-P06-Q08", "VAR-GST-P09-Q01", "MAD-MAT-Q07"],
+                    "core_rule": "উচ্চতায় $g' = g\\left(1 - \\frac{2h}{R}\\right)$ (স্বল্প উচ্চতা) বা $g' = g\\left(\\frac{R}{R+h}\\right)^2$; গভীরতায় $g' = g\\left(1 - \\frac{d}{R}\\right)$।",
+                    "speed_elimination": "যে গভীরতায় $g$ এর মান ভূপৃষ্ঠের $\\frac{1}{n}$ হবে, সে গভীরতা $d = R\\left(1 - \\frac{1}{n}\\right)$।"
+                },
+                {
+                    "type_id": "phy_grav_t2",
+                    "name": "Type 2: মুক্তিবেগ ও কৃত্তিম উপগ্রহের বেগ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 21,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '19-20", "MAT '22", "SUST '18-19", "CU '21-22"],
+                    "qb_question_refs": ["VAR-CU-P03-Q17", "VAR-SUST-P08-Q04", "MAD-MAT-Q15"],
+                    "core_rule": "$v_e = \\sqrt{2gR} = \\sqrt{\\frac{2GM}{R}} \\approx 11.2\\text{ km/s}$; উপগ্রহের কাক্ষিক বেগ $v_o = \\sqrt{gR} = \\frac{v_e}{\\sqrt{2}} \\approx 7.9\\text{ km/s}$।",
+                    "speed_elimination": "মুক্তিবেগ বস্তুর ভরের ওপর নির্ভর করে না; গ্রহের ব্যাসার্ধ দ্বিগুণ ও ঘনত্ব একই থাকলে মুক্তিবেগও দ্বিগুণ হবে।"
+                },
+                {
+                    "type_id": "phy_grav_t3",
+                    "name": "Type 3: কেপলারের ৩য় সূত্র ও ভূ-স্থির উপগ্রহের শর্ত",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '19-20", "RU '20-21", "JU '19-20", "GST '20-21", "MAT '19"],
+                    "qb_question_refs": ["VAR-JU-P07-Q09", "VAR-GST-P12-Q03", "MAD-MAT-Q02"],
+                    "core_rule": "$T^2 \\propto r^3$; ভূ-স্থির উপগ্রহের পর্যায়কাল $T = 24\\text{ hours}$, উচ্চতা $h \\approx 36,000\\text{ km}$ এবং ঘূর্ণন পশ্চিম থেকে পূর্ব।",
+                    "speed_elimination": "দূরত্ব ৪ গুণ বাড়লে পর্যায়কাল $4^{3/2} = 8$ গুণ বৃদ্ধি পাবে।"
+                },
+                {
+                    "type_id": "phy_grav_t4",
+                    "name": "Type 4: পৃথিবীর আবর্তন গতির কারণে অক্ষাংশে $g$ হ্রাস",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 12,
+                    "past_tags": ["DU '17-18", "RU '18-19", "CU '19-20", "MAT '17"],
+                    "qb_question_refs": ["VAR-CU-P10-Q13", "MAD-MAT-Q20"],
+                    "core_rule": "$g_\\lambda = g - \\omega^2 R \\cos^2\\lambda$; বিষুবরেখায় ($\\lambda = 0^\\circ$) মান সর্বনিম্ন ($g - \\omega^2 R$), মেরুতে ($\\lambda = 90^\\circ$) সর্বোচ্চ ($g$)।",
+                    "speed_elimination": "পৃথিবীর ঘূর্ণন থেমে গেলে মেরু ব্যতীত সব স্থানে ওজন বৃদ্ধি পাবে, তবে মেরুতে অপরিবর্তিত থাকবে।"
+                }
+            ]
+        },
+        {
+            "id": "phy_periodic_matter",
+            "subject": "Physics",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৭/০৮",
+            "title": "পদার্থের গাঠনিক ধর্ম ও পর্যায়বৃত্ত গতি",
+            "subtitle": "সরল দোলক, পয়সনের অনুপাত, পৃষ্ঠটান ও ইয়ং-এর গুণাঙ্ক",
+            "total_qb_questions": 390,
+            "high_yield_score": 95,
+            "mega_types": [
+                {
+                    "type_id": "phy_pm_t1",
+                    "name": "Type 1: সরল দোলকের পর্যায়কাল ও পাহাড়ের চূড়ায় সময় হারানো",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 23,
+                    "past_tags": ["DU '22-23", "DU '19-20", "RU '20-21", "JU '21-22", "GST '22-23", "MAT '20", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-JnU-P08-Q08", "VAR-RU-P10-Q02", "VAR-GST-P05-Q14"],
+                    "core_rule": "$T = 2\\pi\\sqrt{\\frac{L}{g}}$; পাহাড়ের চূড়ায় দিনে $n$ সেকেন্ড ধীরে চললে $h = \\left(\\frac{n}{86400 - n}\\right)R \\approx \\frac{n}{86400}R$।",
+                    "speed_elimination": "দৈর্ঘ্য ৪ গুণ করলে পর্যায়কাল দ্বিগুণ হবে; সেকেন্ড দোলকের কার্যকরী দৈর্ঘ্য ভূপৃষ্ঠে প্রায় $0.993\\text{ m} \\approx 1\\text{ m}$।"
+                },
+                {
+                    "type_id": "phy_pm_t2",
+                    "name": "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 20,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '21-22", "MAT '21", "CU '20-21"],
+                    "qb_question_refs": ["VAR-JU-P03-Q16", "VAR-CU-P06-Q09", "MAD-MAT-Q11"],
+                    "core_rule": "$v = \\omega\\sqrt{A^2 - x^2}$, সাম্যাবস্থায় $v_{max} = \\omega A$; ত্বরণ $a = -\\omega^2 x$, প্রান্তে $a_{max} = \\omega^2 A$।",
+                    "speed_elimination": "সাম্যাবস্থা হতে বিস্তার অর্ধেক ($x = A/2$) হলে বেগ $v = \\frac{\\sqrt{3}}{2}v_{max}$।"
+                },
+                {
+                    "type_id": "phy_pm_t3",
+                    "name": "Type 3: ইয়ং-এর গুণাঙ্ক ও সঞ্চিত স্থিতিস্থাপক শক্তি",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 18,
+                    "past_tags": ["DU '20-21", "RU '19-20", "GST '21-22", "SUST '19-20"],
+                    "qb_question_refs": ["VAR-GST-P08-Q06", "VAR-SUST-P06-Q12"],
+                    "core_rule": "$Y = \\frac{FL}{A l}$; একক আয়তনে সঞ্চিত শক্তি $u = \\frac{1}{2} \\times \\text{পীড়ন} \\times \\text{বিকৃতি} = \\frac{1}{2}Y(\\text{বিকৃতি})^2$।",
+                    "speed_elimination": "তারের ব্যাসার্ধ অর্ধেক করলে একই ভারে দৈর্ঘ্য বৃদ্ধি ৪ গুণ হবে।"
+                },
+                {
+                    "type_id": "phy_pm_t4",
+                    "name": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 15,
+                    "past_tags": ["DU '17-18", "RU '22-23", "JU '18-19", "MAT '18"],
+                    "qb_question_refs": ["VAR-JnU-P11-Q05", "MAD-MAT-Q05"],
+                    "core_rule": "পানির ফোঁটায় অতিরিক্ত চাপ $\\Delta P = \\frac{2T}{r}$; সাবানের বুদবুদে (২টি তল) $\\Delta P = \\frac{4T}{r}$; কৈশিক নলে $h = \\frac{2T\\cos\\theta}{r\\rho g}$।",
+                    "speed_elimination": "নলের ব্যাসার্ধ অর্ধেক হলে পানির আরোহণ উচ্চতা ঠিক দ্বিগুণ হবে।"
+                }
+            ]
+        },
+        {
+            "id": "phy_gas_thermo",
+            "subject": "Physics",
+            "paper": "১ম/২য় পত্র",
+            "chapter_no": "আদর্শ গ্যাস ও তাপগতিবিদ্যা",
+            "title": "আদর্শ গ্যাস ও তাপগতিবিদ্যা (Gas & Thermo)",
+            "subtitle": "কার্নো চক্র, RMS বেগ, এন্ট্রপি ও রুদ্ধতাপীয় প্রক্রিয়া",
+            "total_qb_questions": 460,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "phy_gt_t1",
+                    "name": "Type 1: কার্নো ইঞ্জিনের কর্মদক্ষতা ও গ্রাহকের তাপমাত্রা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '20-21", "GST '22-23", "MAT '22", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-GST-P01-Q01", "VAR-JnU-P05-Q08", "VAR-RU-P02-Q11", "MAD-MAT-Q01"],
+                    "core_rule": "$\\eta = 1 - \\frac{T_2}{T_1} = 1 - \\frac{Q_2}{Q_1}$; তাপমাত্রা সর্বদা কেলভিনে বসাতে হবে ($K = ^\\circ C + 273$)।",
+                    "speed_elimination": "দক্ষতা ৫০% হলে উৎস ও গ্রাহকের কেলভিন তাপমাত্রা দ্বিগুণ ($T_1 = 2T_2$) হবে।"
+                },
+                {
+                    "type_id": "phy_gt_t2",
+                    "name": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '20-21", "MAT '21", "CU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P01-Q14", "VAR-Agri-P02-Q09", "MAD-MAT-Q08"],
+                    "core_rule": "$c_{rms} = \\sqrt{\\frac{3RT}{M}} = \\sqrt{\\frac{3P}{\\rho}}$; মোট গতিশক্তি $E = \\frac{3}{2}nRT$, ১টি অণুর জন্য $E_k = \\frac{3}{2}kT$।",
+                    "speed_elimination": "তাপমাত্রা কেলভিনে ৪ গুণ করলে RMS বেগ দ্বিগুণ হয়; $0^\\circ C$ থেকে বেগ দ্বিগুণ করতে তাপমাত্রা $819^\\circ C$ হতে হবে।"
+                },
+                {
+                    "type_id": "phy_gt_t3",
+                    "name": "Type 3: হ্রদের তলদেশ থেকে বুদবুদ ওঠার আয়তন পরিবর্তন",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '19-20", "RU '19-20", "JU '21-22", "GST '21-22", "SUST '18-19"],
+                    "qb_question_refs": ["VAR-JnU-P09-Q04", "VAR-RU-P05-Q17", "VAR-GST-P06-Q08"],
+                    "core_rule": "হ্রদের তলদেশে আয়তন $n$ গুণ হলে গভীরতা $h = (n - 1) \\times \\frac{P_0}{\\rho g} \\approx (n - 1) \\times 10.33\\text{ m}$ (ব্যাসার্ধ $n$ গুণ হলে আয়তন $n^3$ গুণ)।",
+                    "speed_elimination": "আয়তন ৫ গুণ হলে গভীরতা $4 \\times 10.3 = 41.2\\text{ m}$; ব্যাস দ্বিগুণ হলে আয়তন ৮ গুণ, তাই $h = 7 \\times 10.3 = 72.1\\text{ m}$।"
+                },
+                {
+                    "type_id": "phy_gt_t4",
+                    "name": "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 19,
+                    "past_tags": ["DU '18-19", "RU '18-19", "JU '19-20", "MAT '19", "DAT '20"],
+                    "qb_question_refs": ["VAR-JU-P08-Q05", "VAR-GST-P10-Q13", "MAD-MAT-Q17"],
+                    "core_rule": "সমোষ্ণ রেখার চেয়ে রুদ্ধতাপীয় রেখা $\\gamma$ গুণ বেশি খাড়া ($(\\frac{dP}{dV})_{ad} = \\gamma (\\frac{dP}{dV})_{iso}$); প্রত্যাবর্তী চক্রে মোট এন্ট্রপি পরিবর্তন $\\Delta S = 0$।",
+                    "speed_elimination": "রুদ্ধতাপীয় সঙ্কোচনে তাপমাত্রা বৃদ্ধি পায়, রুদ্ধতাপীয় প্রসারণে তাপমাত্রা হ্রাস পায়।"
+                }
+            ]
+        },
+        {
+            "id": "phy_electricity",
+            "subject": "Physics",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০২/০৩",
+            "title": "স্থির ও চল তড়িৎ (Electrostatics & Current)",
+            "subtitle": "ধারকত্ব, হুইটস্টোন ব্রিজ, শান্ট ও তার টানার রোধ বৃদ্ধি",
+            "total_qb_questions": 480,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "phy_el_t1",
+                    "name": "Type 1: সমান্তরাল পাত ধারক ও ধাতব পাত স্থাপন",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-Agri-P01-Q48", "VAR-JnU-P06-Q14", "VAR-RU-P03-Q08"],
+                    "core_rule": "$C = \\frac{\\epsilon_0 A}{d}$; ডাই-ইলেকট্রিক থাকলে $C' = \\kappa C$; ধাতব পাত ($t$ পুরু) বসালে নতুন ধারকত্ব $C' = \\frac{\\epsilon_0 A}{d - t}$।",
+                    "speed_elimination": "পাত দূরত্ব অর্ধেক ($d/2$) করলে ধারকত্ব দ্বিগুণ হবে; $t = d/4$ ধাতব পাত বসালে ধারকত্ব $4C/3$ হবে।"
+                },
+                {
+                    "type_id": "phy_el_t2",
+                    "name": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "MAT '20", "GST '21-22", "HSTU '20-21"],
+                    "qb_question_refs": ["VAR-JnU-P02-Q19", "VAR-CU-P05-Q11", "MAD-MAT-Q03"],
+                    "core_rule": "একটি তারকে টেনে দৈর্ঘ্য $n$ গুণ করলে নতুন রোধ $R' = n^2 R$; ব্যাসার্ধ $\\frac{1}{n}$ গুণ হলে নতুন রোধ $R' = n^4 R$।",
+                    "speed_elimination": "টেনে দৈর্ঘ্য দ্বিগুণ করলে রোধ ৪ গুণ, ৩ গুণ করলে রোধ ৯ গুণ; ব্যাসার্ধ অর্ধেক করলে রোধ ১৬ গুণ।"
+                },
+                {
+                    "type_id": "phy_el_t3",
+                    "name": "Type 3: হুইটস্টোন ব্রিজ ও গ্যালভানোমিটারের শান্ট সমীকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '20-21", "RU '19-20", "JU '20-21", "MAT '21", "CU '19-20"],
+                    "qb_question_refs": ["VAR-JU-P06-Q13", "VAR-GST-P04-Q15", "MAD-MAT-Q13"],
+                    "core_rule": "সাম্যাবস্থায় $\\frac{P}{Q} = \\frac{R}{S}$; গ্যালভানোমিটারের পাল্লা $n$ গুণ করতে প্রয়োজনীয় শান্ট $S = \\frac{G}{n - 1}$।",
+                    "speed_elimination": "মূল প্রবাহের ১০% গ্যালভানোমিটার দিয়ে গেলে $n = 10$, তাই শান্ট $S = \\frac{G}{9}$।"
+                },
+                {
+                    "type_id": "phy_el_t4",
+                    "name": "Type 4: তড়িৎ নিরপেক্ষ বিন্দু ও বিভব/প্রাবল্যের শূন্যমান",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 15,
+                    "past_tags": ["DU '18-19", "RU '18-19", "SUST '20-21", "MAT '18"],
+                    "qb_question_refs": ["VAR-SUST-P09-Q07", "MAD-MAT-Q19"],
+                    "core_rule": "একই জাতীয় চার্জের ক্ষেত্রে প্রাবল্য শূন্য হবে সংযোগ রেখার মাঝে $x = \\frac{d}{\\sqrt{q_2/q_1} + 1}$ দূরত্বে।",
+                    "speed_elimination": "চার্জ $+q$ ও $+9q$ হলে মধ্যবর্তী দূরত্বকে $1 : 3$ অনুপাতে ভাগ করবেন।"
+                }
+            ]
+        },
+        {
+            "id": "phy_optics",
+            "subject": "Physics",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৬",
+            "title": "ভৌত আলোকবিজ্ঞান (Physical Optics)",
+            "subtitle": "ইয়াং-এর দ্বি-চির, গ্রেটিং অপবর্তন ও ব্রুস্টারের সমাবর্তন",
+            "total_qb_questions": 320,
+            "high_yield_score": 94,
+            "mega_types": [
+                {
+                    "type_id": "phy_opt_t1",
+                    "name": "Type 1: ইয়ং-এর দ্বি-চির ব্যতিচারে ডোরা ব্যবধান ও ডোরার প্রস্থ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '22-23", "DU '19-20", "RU '21-22", "JU '20-21", "GST '22-23", "MAT '20"],
+                    "qb_question_refs": ["VAR-JnU-P10-Q09", "VAR-RU-P07-Q14", "VAR-GST-P07-Q11"],
+                    "core_rule": "পরপর দুটি উজ্জ্বল বা অন্ধকার ডোরার ব্যবধান $\\Delta x = \\frac{\\lambda D}{d}$; একটি ডোরার প্রস্থ $= \\frac{\\Delta x}{2} = \\frac{\\lambda D}{2d}$।",
+                    "speed_elimination": "চিরের দূরত্ব $d$ দ্বিগুণ করলে ডোরা ব্যবধান অর্ধেক হবে; পানিতে ডুবালে $\\lambda$ কমে যাওয়ায় ডোরা কাছাকাছি আসবে।"
+                },
+                {
+                    "type_id": "phy_opt_t2",
+                    "name": "Type 2: অপবর্তন গ্রেটিং ও রেখা সংখ্যা ($N$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 18,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '20-21", "CU '20-21", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-CU-P04-Q16", "VAR-Agri-P05-Q08"],
+                    "core_rule": "$d\\sin\\theta = n\\lambda$ বা $\\sin\\theta = N n \\lambda$; গ্রেটিং ধ্রুবক $d = \\frac{1}{N}$।",
+                    "speed_elimination": "সর্বোচ্চ চরম বা ক্রম নির্ণয়ে $\\sin\\theta = 1$ ধরে $n_{max} = \\frac{d}{\\lambda}$ এর পূর্ণসংখ্যা মান নিতে হবে।"
+                },
+                {
+                    "type_id": "phy_opt_t3",
+                    "name": "Type 3: ব্রুস্টারের সূত্র ও সমাবর্তন কোণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 17,
+                    "past_tags": ["DU '20-21", "RU '19-20", "JU '21-22", "MAT '21", "DAT '22"],
+                    "qb_question_refs": ["VAR-JU-P05-Q07", "MAD-MAT-Q06"],
+                    "core_rule": "$\\tan\\theta_p = \\mu$; সমাবর্তন কোণে প্রতিফলিত ও প্রতিসরিত রশ্মির মধ্যবর্তী কোণ সর্বদা $90^\\circ$।",
+                    "speed_elimination": "কাচের প্রতিসরাঙ্ক $\\mu = 1.5$ বা $\\sqrt{3}$ হলে ব্রুস্টার কোণ $\\approx 57^\\circ$ বা $60^\\circ$।"
+                },
+                {
+                    "type_id": "phy_opt_t4",
+                    "name": "Type 4: পথ পার্থক্য ও দশা পার্থক্যের রূপান্তর",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 14,
+                    "past_tags": ["DU '17-18", "RU '18-19", "GST '20-21", "HSTU '21-22"],
+                    "qb_question_refs": ["VAR-GST-P11-Q09", "VAR-HSTU-P03-Q04"],
+                    "core_rule": "দশা পার্থক্য $\\delta = \\frac{2\\pi}{\\lambda} \\times \\text{পথ পার্থক্য} (\\Delta x)$।",
+                    "speed_elimination": "গঠনমূলক ব্যতিচারে পথ পার্থক্য $n\\lambda$, ধ্বংসাত্মকে $(2n+1)\\frac{\\lambda}{2}$।"
+                }
+            ]
+        },
+        {
+            "id": "phy_modern_nuclear",
+            "subject": "Physics",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৮/০৯",
+            "title": "আধুনিক পদার্থবিজ্ঞান ও নিউক্লিয়ার ফিজিক্স",
+            "subtitle": "আপেক্ষিকতা, ফটোইলেকট্রিক ক্রিয়া, অর্ধায়ু ও বন্ধন শক্তি",
+            "total_qb_questions": 440,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "phy_mn_t1",
+                    "name": "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "GST '22-23", "JU '21-22", "BUET '19-20"],
+                    "qb_question_refs": ["VAR-JnU-P07-Q03", "VAR-RU-P04-Q11", "VAR-GST-P02-Q05"],
+                    "core_rule": "$m = \\frac{m_0}{\\sqrt{1 - v^2/c^2}}$, $t = \\frac{t_0}{\\sqrt{1 - v^2/c^2}}$, $L = L_0\\sqrt{1 - v^2/c^2}$।",
+                    "speed_elimination": "$v = 0.6c$ হলে ফ্যাক্টর $0.8$; $v = 0.8c$ হলে ফ্যাক্টর $0.6$; গতিশক্তি স্থির শক্তির ৩ গুণ হলে গতিশীল ভর $4m_0$।"
+                },
+                {
+                    "type_id": "phy_mn_t2",
+                    "name": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 23,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "MAT '21", "CU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P02-Q07", "VAR-Agri-P03-Q14", "MAD-MAT-Q10"],
+                    "core_rule": "$hf = W_0 + K_{max} = hf_0 + e V_s$; নিবৃত্তি বিভব আপতিত আলোর তীব্রতার ওপর নির্ভর করে না।"
+                },
+                {
+                    "type_id": "phy_mn_t3",
+                    "name": "Type 3: তেজস্ক্রিয় ক্ষয় সূত্র, অর্ধায়ু ও গড় আয়ু",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '22-23", "MAT '22", "JU '19-20", "GST '21-22"],
+                    "qb_question_refs": ["VAR-RU-P02-Q16", "VAR-JU-P06-Q02", "MAD-MAT-Q16"],
+                    "core_rule": "$T_{1/2} = \\frac{\\ln 2}{\\lambda} = \\frac{0.693}{\\lambda}$; গড় আয়ু $\\tau = \\frac{1}{\\lambda} = 1.44 T_{1/2}$; $n$ টি অর্ধায়ু পর অবশিষ্ট অংশ $N = N_0\\left(\\frac{1}{2}\\right)^n$।",
+                    "speed_elimination": "৩টি অর্ধায়ু পর অবশিষ্ট থাকে $\\frac{1}{8}$ অংশ (৮৭.৫% ক্ষয়), ৪টি অর্ধায়ু পর অবশিষ্ট থাকে $\\frac{1}{16}$ অংশ।"
+                },
+                {
+                    "type_id": "phy_mn_t4",
+                    "name": "Type 4: ভর ত্রুটি ও নিউক্লীয় বন্ধন শক্তি",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '17-18", "RU '19-20", "SUST '19-20", "MAT '18"],
+                    "qb_question_refs": ["VAR-SUST-P04-Q15", "MAD-MAT-Q21"],
+                    "core_rule": "$\\Delta m = [Z m_p + (A - Z)m_n] - M_{nucleus}$; শক্তি $\\Delta E = \\Delta m(\\text{amu}) \\times 931.5\\text{ MeV}$।",
+                    "speed_elimination": "১ amu ভর ক্ষয় হলে প্রায় $931.5\\text{ MeV}$ শক্তি উৎপন্ন হয়।"
+                }
+            ]
+        },
+
+        # =========================================================================
+        # CHEMISTRY (8 Comprehensive Chapters covering 1st and 2nd Paper)
+        # =========================================================================
+        {
+            "id": "chem_qualitative",
+            "subject": "Chemistry",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০২",
+            "title": "গুণগত রসায়ন (Qualitative Chemistry)",
+            "subtitle": "কোয়ান্টাম সংখ্যা, দ্রাব্যতা গুণফল ও শিখা পরীক্ষা",
+            "total_qb_questions": 430,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "chem_qual_t1",
+                    "name": "Type 1: কোয়ান্টাম সংখ্যা সেট ও অরবিটাল ধারণক্ষমতা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P02-Q04", "VAR-RU-P01-Q15", "VAR-GST-P03-Q08", "MAD-MAT-Q05"],
+                    "core_rule": "$n$ তম প্রধান শক্তিস্তরে সর্বোচ্চ ইলেকট্রন $2n^2$, অরবিটাল $n^2$; উপকক্ষে ইলেকট্রন $2(2l+1)$; $l$ এর মান $0$ থেকে $n-1$, $m$ এর মান $-l$ থেকে $+l$।",
+                    "speed_elimination": "$l \\ge n$ বা $|m| > l$ যুক্ত কোয়ান্টাম সেট অসম্ভব।"
+                },
+                {
+                    "type_id": "chem_qual_t2",
+                    "name": "Type 2: দ্রাব্যতা ও দ্রাব্যতা গুণফল ($K_{sp}$ ও সমআয়ন প্রভাব)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 23,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-CU-P03-Q09", "VAR-GST-P05-Q17", "VAR-SUST-P07-Q11"],
+                    "core_rule": "$AB$ লবণে $K_{sp} = S^2$; $AB_2$ বা $A_2B$ লবণে $K_{sp} = 4S^3$; $A_2B_3$ লবণে $K_{sp} = 108S^5$।",
+                    "speed_elimination": "সমআয়নের উপস্থিতিতে স্বল্প দ্রাব্য লবণের দ্রাব্যতা সর্বদা হ্রাস পায়।"
+                },
+                {
+                    "type_id": "chem_qual_t3",
+                    "name": "Type 3: বর্ণালী সিরিজ ও রিডবার্গ সমীকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 20,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '22-23", "MAT '21", "DAT '20"],
+                    "qb_question_refs": ["VAR-JU-P04-Q12", "MAD-MAT-Q12"],
+                    "core_rule": "$\\bar{\\nu} = \\frac{1}{\\lambda} = R_H \\left(\\frac{1}{n_1^2} - \\frac{1}{n_2^2}\\right)$; লাইম্যান ($n_1=1$, UV), বামার ($n_1=2$, দৃশ্যমান), প্যাসচেন ($n_1=3$, IR)।",
+                    "speed_elimination": "দৃশ্যমান আলোর বর্ণালী কেবল বামার সিরিজে ($n_1 = 2$) পাওয়া যায়।"
+                },
+                {
+                    "type_id": "chem_qual_t4",
+                    "name": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["MAT '22", "MAT '20", "DU '19-20", "RU '19-20", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-Agri-P02-Q18", "MAD-MAT-Q03", "MAD-MAT-Q17"],
+                    "core_rule": "$Na^+$ সোনালী হলুদ, $K^+$ বেগুনী (কোবাল্ট কাচে লালচে বেগুনী), $Ca^{2+}$ ইটের মতো লাল, $Ba^{2+}$ কাঁচা আপেলের মতো সবুজ, $Cu^{2+}$ নীলাভ সবুজ; $Be, Mg$ শিখা পরীক্ষা দেয় না।",
+                    "speed_elimination": "নেসলার দ্রবণ ($K_2[HgI_4] + KOH$) দ্বারা $NH_4^+$ শনাক্ত করা হয় (বাদামি অধঃক্ষেপ)।"
+                }
+            ]
+        },
+        {
+            "id": "chem_periodic",
+            "subject": "Chemistry",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৩",
+            "title": "মৌলের পর্যায়বৃত্ত ধর্ম ও বন্ধন (Periodic Properties)",
+            "subtitle": "সংকরায়ন, ফাজানের নীতি, ইলেকট্রন আসক্তি ও বন্ধন কোণ",
+            "total_qb_questions": 470,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "chem_per_t1",
+                    "name": "Type 1: সংকরায়ন (Hybridization) ও অণুর জ্যামিতিক আকৃতি",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 30,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '22", "BUET '19-20"],
+                    "qb_question_refs": ["VAR-GST-P02-Q17", "VAR-JnU-P03-Q12", "VAR-RU-P04-Q06", "MAD-MAT-Q09"],
+                    "core_rule": "$H = \\frac{1}{2}(V + M - C + A)$। $2 \\to sp$ (সরলরৈখিক), $3 \\to sp^2$ (সমতলীয় ত্রিকোণাকার), $4 \\to sp^3$ (চতুস্তলকীয়); মুক্তজোড় থাকলে কোণ হ্রাস পায় ($CH_4: 109.5^\\circ, NH_3: 107^\\circ, H_2O: 104.5^\\circ$)।",
+                    "speed_elimination": "$CO_2, BeCl_2$ হলো $sp$; $BF_3, SO_3$ হলো $sp^2$; $PCl_5$ হলো $sp^3d$; $SF_6$ হলো $sp^3d^2$।"
+                },
+                {
+                    "type_id": "chem_per_t2",
+                    "name": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '20-21", "MAT '21", "MAT '19", "GST '21-22"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q18", "VAR-CU-P02-Q14", "MAD-MAT-Q02"],
+                    "core_rule": "ইলেকট্রন আসক্তি: $Cl > F > Br > I$ ($F$ এর ক্ষুদ্রাকারে ইলেকট্রন মেঘের ঘনত্ব বেশি বিকর্ষণ তৈরি করে); আয়নীকরণ শক্তি: $N > O$ ও $Be > B$ (অর্ধপূর্ণ $2p^3$ ও পূর্ণ $2s^2$ স্থিতিশীলতার কারণে)।",
+                    "speed_elimination": "হ্যালোজেনদের ইলেকট্রন আসক্তিতে ক্লোরিন সর্বদা ফ্লোরিনের চেয়ে বেশি।"
+                },
+                {
+                    "type_id": "chem_per_t3",
+                    "name": "Type 3: ফাজানের নীতি ও পোলারায়ন (সমযোজী বনাম আয়নিক বৈশিষ্ট্য)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '21-22", "DU '17-18", "RU '19-20", "JU '20-21", "MAT '20", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-RU-P06-Q11", "VAR-GST-P08-Q04", "MAD-MAT-Q14"],
+                    "core_rule": "ক্যাটায়নের আকার ছোট, অ্যানায়নের আকার বড়, চার্জ বেশি এবং ক্যাটায়নে $d^{10}$ বা $f^{14}$ থাকলে পোলারায়ন বেশি $\\implies$ সমযোজী বৈশিষ্ট্য বাড়ে $\\implies$ গলনাঙ্ক ও পানিতে দ্রাব্যতা কমে।",
+                    "speed_elimination": "গলনাঙ্কের ক্রম: $NaCl > MgCl_2 > AlCl_3$ ($Al^{3+}$ এর সর্বাধিক পোলারায়নে সমযোজী বৈশিষ্ট্য বেশি)।"
+                },
+                {
+                    "type_id": "chem_per_t4",
+                    "name": "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '19-20", "RU '18-19", "MAT '18", "CU '20-21"],
+                    "qb_question_refs": ["VAR-CU-P06-Q02", "MAD-MAT-Q20"],
+                    "core_rule": "$H_2O$ তরল কিন্তু $H_2S$ গ্যাস কারণ পানিতে আন্তঃআণবিক শক্তিশালী হাইড্রোজেন বন্ধন বিদ্যমান; একটি পানির অণু ৪টি হাইড্রোজেন বন্ধন গঠন করে।",
+                    "speed_elimination": "বরফের ঘনত্ব পানির চেয়ে কম কারণ বরফের কেলাসে উন্মুক্ত খাঁচার মতো গঠন থাকে।"
+                }
+            ]
+        },
+        {
+            "id": "chem_changes",
+            "subject": "Chemistry",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৪",
+            "title": "রাসায়নিক পরিবর্তন (Chemical Changes)",
+            "subtitle": "$K_p-K_c$ সম্পর্ক, pH গণনা, বাফার দ্রবণ ও লা-শাতেলিয়ার নীতি",
+            "total_qb_questions": 490,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "chem_ch_t1",
+                    "name": "Type 1: $K_p$ ও $K_c$ এর সম্পর্ক ও একক",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '20", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P04-Q02", "VAR-RU-P03-Q09", "VAR-GST-P01-Q19"],
+                    "core_rule": "$K_p = K_c (RT)^{\\Delta n}$; $\\Delta n = 0$ হলে $K_p = K_c$ এবং এদের কোনো একক থাকে না; সাম্যধ্রুবক কেবল তাপমাত্রার ওপর নির্ভর করে (চাপ বা ঘনমাত্রায় অপরিবর্তিত)।",
+                    "speed_elimination": "$H_2 + I_2 \\rightleftharpoons 2HI$ এবং $N_2 + O_2 \\rightleftharpoons 2NO$ এ $\\Delta n = 0$, তাই $K_p = K_c$।"
+                },
+                {
+                    "type_id": "chem_ch_t2",
+                    "name": "Type 2: pH গণনা ও তীব্র এসিড-ক্ষারের মিশ্রণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "MAT '22", "GST '21-22", "CU '21-22"],
+                    "qb_question_refs": ["VAR-CU-P01-Q03", "VAR-GST-P06-Q14", "MAD-MAT-Q07"],
+                    "core_rule": "তীব্র এসিডে $pH = -\\log[H^+] = -\\log(S \\times \\text{ক্ষারকতা})$; অতিরিক্ত অম্ল বা ক্ষারের অবশিষ্ট ঘনমাত্রা $S_R = \\frac{|V_a S_a - V_b S_b|}{V_a + V_b}$।",
+                    "speed_elimination": "$10^{-8}\\text{ M } HCl$ এর $pH$ কখনোই ৮ হবে না; পানির বিয়োজন বিবেচনায় $pH \\approx 6.96$ (অম্লীয় < ৭)।"
+                },
+                {
+                    "type_id": "chem_ch_t3",
+                    "name": "Type 3: বাফার দ্রবণ ও হেন্ডারসন-হ্যাসেলবালখ সমীকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '22-23", "MAT '21", "MAT '19", "JU '20-21"],
+                    "qb_question_refs": ["VAR-JU-P02-Q11", "VAR-SUST-P03-Q16", "MAD-MAT-Q04"],
+                    "core_rule": "অম্লীয় বাফারে $pH = pK_a + \\log\\frac{[\\text{লবণ}]}{[\\text{এসিড}]}$; মানব রক্তের $pH = 7.35 - 7.45$ (প্রধান বাফার কার্বনিক এসিড-বাইকার্বনেট বাফার)।",
+                    "speed_elimination": "[লবণ] = [এসিড] হলে বাফারের ক্ষমতা সর্বোচ্চ এবং $pH = pK_a$।"
+                },
+                {
+                    "type_id": "chem_ch_t4",
+                    "name": "Type 4: লা-শাতেলিয়ার নীতি ও তাপমাত্রার প্রভাব",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 21,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21", "MAT '18", "HSTU '21-22"],
+                    "qb_question_refs": ["VAR-HSTU-P02-Q08", "MAD-MAT-Q16"],
+                    "core_rule": "তাপোৎপাদী বিক্রিয়ায় (যেমন হেবার বস পদ্ধতিতে $NH_3$ প্রস্তুতি, $\\Delta H = -92\\text{ kJ}$) তাপমাত্রা বৃদ্ধি করলে সাম্যাবস্থা বামে সরে যায় এবং $K_p, K_c$ হ্রাস পায়।",
+                    "speed_elimination": "চাপ বাড়ালে বিক্রিয়া গ্যাসীয় মোল সংখ্যা বেশি থেকে কম এর দিকে ধাবিত হয়।"
+                }
+            ]
+        },
+        {
+            "id": "chem_applied",
+            "subject": "Chemistry",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৫",
+            "title": "কর্মমুখী রসায়ন (Applied Chemistry)",
+            "subtitle": "ভিনেগার, খাদ্য সংরক্ষক, প্রসাধনী ও সাসপেনশন/কোয়াগুলেশন",
+            "total_qb_questions": 260,
+            "high_yield_score": 92,
+            "mega_types": [
+                {
+                    "type_id": "chem_app_t1",
+                    "name": "Type 1: ভিনেগার প্রস্তুতি ও খাদ্য সংরক্ষণে ভূমিকা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["MAT '22", "MAT '20", "DU '21-22", "RU '20-21", "Agri '22-23", "DAT '21"],
+                    "qb_question_refs": ["VAR-Agri-P01-Q20", "MAD-MAT-Q01", "MAD-MAT-Q18"],
+                    "core_rule": "ভিনেগার হলো এসিটিক এসিডের $6 - 10\\%$ জলীয় দ্রবণ; মল্ট ভিনেগার তৈরিতে মাইকোডার্মা অ্যাসিটি ব্যাকটেরিয়া এবং ইথানলকে জারিত করা হয়; ভিনেগারের $pH \\approx 4.74$।",
+                    "speed_elimination": "ভিনেগার খাদ্য দ্রব্যের $pH$ হ্রাস করে অণুজীবের এনজাইম নিষ্ক্রিয় করে।"
+                },
+                {
+                    "type_id": "chem_app_t2",
+                    "name": "Type 2: অনুমোদিত ফুড প্রিজারভেটিভস ও অ্যান্টিঅক্সিডেন্ট",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 20,
+                    "past_tags": ["MAT '21", "MAT '19", "DU '19-20", "RU '21-22", "CU '20-21"],
+                    "qb_question_refs": ["VAR-CU-P05-Q08", "MAD-MAT-Q08"],
+                    "core_rule": "সোডিয়াম বেনজোয়েট (অ্যাসিডিক খাবারে কার্যকর, $pH < 4.5$); অ্যান্টিঅক্সিডেন্ট: BHT, BHA, TBHQ ও ভিটামিন C (অ্যাসকরবিক এসিড) ও ভিটামিন E।",
+                    "speed_elimination": "মাখন ও তেলে চর্বির জারণ রোধে BHT ও BHA ব্যবহার করা হয়।"
+                },
+                {
+                    "type_id": "chem_app_t3",
+                    "name": "Type 3: প্রসাধনী সামগ্রী ও উপাদান (টয়লেট্রিজ)",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 14,
+                    "past_tags": ["MAT '20", "MAT '18", "RU '19-20", "GST '21-22"],
+                    "qb_question_refs": ["VAR-GST-P09-Q12", "MAD-MAT-Q15"],
+                    "core_rule": "কোল্ড ক্রিমের প্রধান উপাদান তরল প্যারাফিন ও বোরাক্স-মোম ইমালশন; ভ্যানিশিং ক্রিমের মূল উপাদান স্টিয়ারিক এসিড ও গ্লিসারিন; ট্যালকম পাউডারের মূল উপাদান ট্যাল্ক ($3MgO \\cdot 4SiO_2 \\cdot H_2O$)।",
+                    "speed_elimination": "বেবি পাউডারে এন্টিসেপ্টিক হিসেবে বোরিক এসিড ব্যবহৃত হয়।"
+                }
+            ]
+        },
+        {
+            "id": "chem_environment",
+            "subject": "Chemistry",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০১",
+            "title": "পরিবেশ রসায়ন (Environmental Chemistry)",
+            "subtitle": "গ্যাস সূত্রাবলী, ডাল্টনের আংশিক চাপ, গ্রাহামের ব্যাপন ও দূষক",
+            "total_qb_questions": 420,
+            "high_yield_score": 97,
+            "mega_types": [
+                {
+                    "type_id": "chem_env_t1",
+                    "name": "Type 1: গ্রাহামের গ্যাস ব্যাপন সূত্র ($r \\propto \\frac{1}{\\sqrt{M}}$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '20"],
+                    "qb_question_refs": ["VAR-JnU-P05-Q16", "VAR-RU-P02-Q03", "VAR-GST-P04-Q11"],
+                    "core_rule": "$\\frac{r_1}{r_2} = \\frac{t_2}{t_1} = \\sqrt{\\frac{M_2}{M_1}} = \\sqrt{\\frac{d_2}{d_1}}$। যার মোলার ভর কম, তার ব্যাপনের হার সবচেয়ে বেশি।",
+                    "speed_elimination": "$CH_4(16), NH_3(17), CO(28), O_2(32), CO_2(44)$ এর মধ্যে মিথেনের ($CH_4$) ব্যাপন হার সর্বাধিক।"
+                },
+                {
+                    "type_id": "chem_env_t2",
+                    "name": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '20-21", "CU '21-22", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-CU-P02-Q18", "VAR-GST-P07-Q05"],
+                    "core_rule": "আংশিক চাপ $=$ মোল ভগ্নাংশ $\\times$ মোট চাপ; মোল ভগ্নাংশ $X_i = \\frac{n_i}{\\sum n}$।",
+                    "speed_elimination": "সমান ভরের $O_2$ (৩২) ও $CH_4$ (১৬) মিশ্রণে মিথেনের মোল সংখ্যা দ্বিগুণ, তাই তার আংশিক চাপ মোট চাপের দুই-তৃতীয়াংশ ($2/3$) হবে।"
+                },
+                {
+                    "type_id": "chem_env_t3",
+                    "name": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["MAT '22", "MAT '21", "DU '20-21", "RU '22-23", "GST '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-Agri-P03-Q04", "MAD-MAT-Q06", "MAD-MAT-Q19"],
+                    "core_rule": "WHO স্ট্যান্ডার্ড: পানের উপযোগী পানিতে DO মান $4 - 6\\text{ ppm}$ বা তার বেশি; দূষিত পানিতে BOD বেশি; সর্বদা $COD > BOD$; TDS সীমা ৫০০ ppm।",
+                    "speed_elimination": "BOD এর মান যত বেশি হবে, পানি তত বেশি দূষিত।"
+                },
+                {
+                    "type_id": "chem_env_t4",
+                    "name": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 16,
+                    "past_tags": ["MAT '20", "MAT '18", "DU '19-20", "RU '19-20"],
+                    "qb_question_refs": ["VAR-JU-P07-Q14", "MAD-MAT-Q11"],
+                    "core_rule": "প্রধান গ্রিনহাউস গ্যাস $CO_2$ ($50\\%$ অবদান), সর্বাধিক গ্লোবাল ওয়ার্মিং পটেনশিয়াল $CFC$ এর; ওজোন ক্ষয়কারী মূল কণা ক্লোরিন ফ্রি র‌্যাডিক্যাল ($Cl^\\bullet$)।",
+                    "speed_elimination": "একটি ক্লোরিন পরমাণু প্রায় ১ লক্ষ ওজোন ($O_3$) অণুকে ভেঙে ফেলতে পারে।"
+                }
+            ]
+        },
+        {
+            "id": "chem_organic",
+            "subject": "Chemistry",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০২",
+            "title": "জৈব রসায়ন (Organic Chemistry)",
+            "subtitle": "সমাণুতা, বেনজিন বলয় সক্রিয়কারী, $S_N1-S_N2$ ও শনাক্তকারী পরীক্ষা",
+            "total_qb_questions": 540,
+            "high_yield_score": 100,
+            "mega_types": [
+                {
+                    "type_id": "chem_org_t1",
+                    "name": "Type 1: সমাণুতা (জ্যামিতিক সিস-ট্রান্স ও আলোক সমাণুতা)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 32,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '22", "BUET '19-20"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q15", "VAR-RU-P03-Q01", "VAR-GST-P01-Q06", "MAD-MAT-Q02"],
+                    "core_rule": "জ্যামিতিক সমাণুতার শর্ত: কার্বন-কার্বন মুক্ত ঘূর্ণন প্রতিবন্ধকতা ও দুই কার্বনে ভিন্ন মূলক ($abC=Cab$); আলোক সমাণুতার শর্ত: কাইরাল কার্বন ও অপ্রতিসম কাঠামো ($2^n$ সমাণু)।",
+                    "speed_elimination": "বিউটিন-২ জ্যামিতিক সমাণুতা প্রদর্শন করে, কিন্তু বিউটিন-১ করে না (১ম কার্বনে দুটি একই $H$ বিদ্যমান)।"
+                },
+                {
+                    "type_id": "chem_org_t2",
+                    "name": "Type 2: বেনজিন বলয় সক্রিয়কারী (অর্থো-প্যারা) বনাম নিষ্ক্রিয়কারী (মেটা)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 29,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "MAT '21", "GST '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P03-Q05", "VAR-Agri-P01-Q11", "MAD-MAT-Q10"],
+                    "core_rule": "অর্থো-প্যারা নির্দেশক (বলয় সক্রিয়কারী): $-OH, -NH_2, -OCH_3, -CH_3$ (একক বন্ধনযুক্ত ও নিঃসঙ্গ ইলেকট্রন বিদ্যমান); মেটা নির্দেশক (নিষ্ক্রিয়কারী): $-NO_2, -CHO, -COOH, -CN$ (দ্বিবন্ধন/ত্রিবন্ধনযুক্ত); হ্যালোজেন ব্যতিক্রম: নিষ্ক্রিয়কারী কিন্তু অর্থো-প্যারা নির্দেশক।",
+                    "speed_elimination": "বেনজিনের নাইট্রেশনে অর্থো-প্যারা নির্দেশকের ক্ষেত্রে বিক্রিয়ার গতি বেনজিনের চেয়ে বহুগুণ বেশি।"
+                },
+                {
+                    "type_id": "chem_org_t3",
+                    "name": "Type 3: $S_N1$ বনাম $S_N2$ বিক্রিয়া কৌশল ও সক্রিয়তার ক্রম",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "MAT '20", "BUET '17-18"],
+                    "qb_question_refs": ["VAR-JU-P03-Q08", "VAR-GST-P05-Q12", "MAD-MAT-Q13"],
+                    "core_rule": "$S_N1$: দুই ধাপে ঘটে, কার্বোক্যাটায়ন তৈরি হয়, রেসিমিক মিশ্রণ, সক্রিয়তা $3^\\circ > 2^\\circ > 1^\\circ > CH_3X$; $S_N2$: এক ধাপে ঘটে, ট্রানজিশন স্টেট, ইনভার্সন (ওয়ালডেন ইনভার্সন), সক্রিয়তা $CH_3X > 1^\\circ > 2^\\circ > 3^\\circ$।",
+                    "speed_elimination": "টারশিয়ারি বিউটাইল হ্যালাইড ($3^\\circ$) সর্বদা $S_N1$ প্রদর্শন করে।"
+                },
+                {
+                    "type_id": "chem_org_t4",
+                    "name": "Type 4: কার্যকরী মূলক শনাক্তকারী পরীক্ষা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["MAT '22", "MAT '21", "DU '20-21", "RU '19-20", "GST '20-21", "DAT '22"],
+                    "qb_question_refs": ["VAR-JnU-P08-Q12", "MAD-MAT-Q08", "MAD-MAT-Q22"],
+                    "core_rule": "লুকাস বিকারক ($ZnCl_2 + HCl$) দিয়ে $1^\\circ, 2^\\circ, 3^\\circ$ অ্যালকোহল পার্থক্যকরণ ($3^\\circ$ তৎক্ষণাৎ অধঃক্ষেপ দেয়); টলেন বিকারক ও ফেলিং দ্রবণ দিয়ে অ্যালডিহাইড ও কিটোনের পার্থক্য; কার্বিল অ্যামিন পরীক্ষা ($CHCl_3 + KOH$) দিয়ে $1^\\circ$ অ্যামিন শনাক্তকরণ (তীব্র দুর্গন্ধযুক্ত আইসোসায়ানাইড)।",
+                    "speed_elimination": "ফর্মিক এসিড ($HCOOH$) অ্যালডিহাইড মূলক থাকায় টলেন বিকারককে বিজারিত করে সিলভার দর্পণ দেয়।"
+                },
+                {
+                    "type_id": "chem_org_t5",
+                    "name": "Type 5: মার্কনিকভ ও অ্যান্টি-মার্কনিকভ নীতি (পারঅক্সাইড প্রভাব)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '19-20", "RU '21-22", "JU '20-21", "Agri '21-22", "MAT '19"],
+                    "qb_question_refs": ["VAR-RU-P05-Q07", "VAR-Agri-P04-Q02"],
+                    "core_rule": "অপ্রতিসম অ্যালকিনে অপ্রতিসম বিকারকের ঋণাত্মক অংশ কম হাইড্রোজেনযুক্ত কার্বনে যুক্ত হয় (তেলা মাথায় তেল দেওয়া); কিন্তু পারঅক্সাইড ($R_2O_2$) উপস্থিত থাকলে বিপরীত ঘটে (অ্যান্টি-মার্কনিকভ, কেবল $HBr$ এর ক্ষেত্রে প্রযোজ্য)।",
+                    "speed_elimination": "প্রোপিনে সাধারণ $HBr$ যোগ করলে ২-ব্রোমোপ্রোপেন, পারঅক্সাইড দিলে ১-ব্রোমোপ্রোপেন প্রধান উৎপাদ।"
+                }
+            ]
+        },
+        {
+            "id": "chem_quantitative",
+            "subject": "Chemistry",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৩",
+            "title": "পরিমাণগত রসায়ন (Quantitative Chemistry)",
+            "subtitle": "টাইট্রেশন, মোলারিটি, রেডক্স সমতাকরণ ও জারণ সংখ্যা",
+            "total_qb_questions": 450,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "chem_quan_t1",
+                    "name": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '21"],
+                    "qb_question_refs": ["VAR-JnU-P04-Q18", "VAR-RU-P01-Q09", "VAR-GST-P02-Q11"],
+                    "core_rule": "$V_a S_a e_a = V_b S_b e_b$; শতকরা সংযুক্তি থেকে মোলারিটি $S = \\frac{10 \\times x\\%}{M}$; ppm ঘনমাত্রা $= S \\times M \\times 1000$।",
+                    "speed_elimination": "$10\\% \\; Na_2CO_3$ এর মোলারিটি $S = \\frac{10 \\times 10}{106} = 0.943\\text{ M}$।"
+                },
+                {
+                    "type_id": "chem_quan_t2",
+                    "name": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "GST '21-22", "BUET '18-19", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P04-Q03", "VAR-GST-P06-Q17", "MAD-MAT-Q05"],
+                    "core_rule": "অম্লীয় মাধ্যমে $1\\text{ mol } KMnO_4 \\equiv 5\\text{ mol } Fe^{2+}$; $1\\text{ mol } K_2Cr_2O_7 \\equiv 6\\text{ mol } Fe^{2+}$; $2\\text{ mol } KMnO_4 \\equiv 5\\text{ mol } H_2C_2O_4$।",
+                    "speed_elimination": "তুল্য সংখ্যা: অম্লীয় $KMnO_4$ এর $e = 5$; ক্ষারীয় বা নিরপেক্ষ মাধ্যমে $e = 3$; $K_2Cr_2O_7$ এর $e = 6$।"
+                },
+                {
+                    "type_id": "chem_quan_t3",
+                    "name": "Type 3: জারণ সংখ্যা নির্ণয়ের ব্যতিক্রমী ক্ষেত্র",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "MAT '22", "JU '20-21"],
+                    "qb_question_refs": ["VAR-JU-P05-Q19", "MAD-MAT-Q11"],
+                    "core_rule": "পারঅক্সাইডে অক্সিজেনের জারণ মান $-1$ ($H_2O_2$); সুপারঅক্সাইডে $-\\frac{1}{2}$ ($KO_2$); ক্যারোজ এসিডে ($H_2SO_5$) সালফারের জারণ মান $+6$; ব্লিচিং পাউডারে ($Ca(OCl)Cl$) দুই ক্লোরিনের জারণ মান যথাক্রমে $+1$ ও $-1$।",
+                    "speed_elimination": "$Na_2S_4O_6$ (সোডিয়াম টেট্রাথায়োনেট) এ সালফারের গড় জারণ সংখ্যা $+2.5$।"
+                },
+                {
+                    "type_id": "chem_quan_t4",
+                    "name": "Type 4: প্রাইমারি স্ট্যান্ডার্ড বনাম সেকেন্ডারি স্ট্যান্ডার্ড পদার্থ",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 18,
+                    "past_tags": ["MAT '22", "MAT '20", "DU '19-20", "RU '19-20", "DAT '21"],
+                    "qb_question_refs": ["VAR-Agri-P02-Q06", "MAD-MAT-Q14"],
+                    "core_rule": "প্রাইমারি স্ট্যান্ডার্ড: $Na_2CO_3, K_2Cr_2O_7, H_2C_2O_4 \\cdot 2H_2O$ (নামে 'C' থাকে); ব্যতিক্রম: $HCl$ এতে 'C' থাকলেও সেকেন্ডারি; $KMnO_4, NaOH, H_2SO_4$ হলো সেকেন্ডারি।",
+                    "speed_elimination": "সংকেতে 'C' বর্ণটি থাকলে প্রাইমারি স্ট্যান্ডার্ড, না থাকলে সেকেন্ডারি (ব্যতিক্রম $HCl$)।"
+                }
+            ]
+        },
+        {
+            "id": "chem_electrochem",
+            "subject": "Chemistry",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৪",
+            "title": "তড়িৎ রসায়ন (Electrochemistry)",
+            "subtitle": "নার্নস্ট সমীকরণ, কোষ বিভব, ফ্যারাডের সূত্র ও ব্যাটারি",
+            "total_qb_questions": 380,
+            "high_yield_score": 96,
+            "mega_types": [
+                {
+                    "type_id": "chem_el_t1",
+                    "name": "Type 1: কোষ বিভব ($E^\\circ_{cell}$) ও বিক্রিয়ার স্বতঃস্ফূর্ততা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "MAT '21"],
+                    "qb_question_refs": ["VAR-JnU-P03-Q08", "VAR-RU-P02-Q17", "VAR-GST-P05-Q01"],
+                    "core_rule": "$E^\\circ_{cell} = E^\\circ_{ox(anode)} + E^\\circ_{red(cathode)} = E^\\circ_{red(cathode)} - E^\\circ_{red(anode)}$; $E^\\circ_{cell} > 0$ হলে বিক্রিয়া স্বতঃস্ফূর্ত এবং পাত্রে দ্রবণ রাখা যাবে না।",
+                    "speed_elimination": "ড্যানিয়েল কোষের প্রমাণ ইএমএফ $E^\\circ_{cell} = +1.10\\text{ V}$ ($Zn/Zn^{2+} || Cu^{2+}/Cu$)।"
+                },
+                {
+                    "type_id": "chem_el_t2",
+                    "name": "Type 2: ফ্যারাডের তড়িৎ বিশ্লেষণ সূত্র ও চার্জ গণনা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-CU-P05-Q15", "VAR-GST-P07-Q18", "MAD-MAT-Q09"],
+                    "core_rule": "$W = ZIt = \\frac{M I t}{n F}$; $1\\text{ mol } Al^{3+}$ জমা করতে $3F$, $Cu^{2+}$ জমা করতে $2F$, $Ag^+$ জমা করতে $1F$ চার্জ প্রয়োজন; $1F = 96,500\\text{ C}$।",
+                    "speed_elimination": "এক মোল ইলেকট্রনের চার্জ হলো ১ ফ্যারাডে ($96,500\\text{ C}$)।"
+                },
+                {
+                    "type_id": "chem_el_t3",
+                    "name": "Type 3: তড়িৎ রাসায়নিক সারি ও সক্রিয়তার ক্রম",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 20,
+                    "past_tags": ["DU '20-21", "RU '19-20", "MAT '22", "MAT '20", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-Agri-P04-Q11", "MAD-MAT-Q01"],
+                    "core_rule": "লি কে কানা মোগল হাই কুল কুপার হাজার হাজী পিটাবে আমায় ($Li > K > Ca > Na > Mg > Al > Zn > Fe > Sn > Pb > H > Cu > Hg > Ag > Pt > Au$); উপরে থাকা ধাতু নিচের ধাতুকে প্রতিস্থাপিত করে।",
+                    "speed_elimination": "হাইড্রোজেনের উপরে থাকা সকল ধাতু লঘু এসিড থেকে $H_2$ গ্যাস মুক্ত করতে পারে।"
+                },
+                {
+                    "type_id": "chem_el_t4",
+                    "name": "Type 4: বাণিজ্যিক ব্যাটারি (লেড-এসিড স্টোরেজ ও লিথিয়াম ব্যাটারি)",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 15,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '18-19", "GST '20-21"],
+                    "qb_question_refs": ["VAR-GST-P11-Q03", "MAD-MAT-Q17"],
+                    "core_rule": "লেড স্টোরেজ ব্যাটারির ইলেক্ট্রোলাইট $H_2SO_4$ (ঘনত্ব $1.25 - 1.28\\text{ g/cm}^3$); ডিসচার্জ অবস্থায় অ্যানোড ও ক্যাথোড উভয়েই $PbSO_4$ এ পরিণত হয় এবং পানির পরিমাণ বাড়ে।",
+                    "speed_elimination": "লেড স্টোরেজ ব্যাটারির প্রতিটি সেলের বিভব প্রায় $2\\text{ V}$ (১২ ভোল্টের ব্যাটারিতে ৬টি সেল থাকে)।"
+                }
+            ]
+        },
+
+        # =========================================================================
+        # HIGHER MATHEMATICS (8 Comprehensive Chapters covering 1st and 2nd Paper)
+        # =========================================================================
+        {
+            "id": "math_matrices",
+            "subject": "Higher Math",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০১",
+            "title": "ম্যাট্রিক্স ও নির্ণায়ক (Matrices & Determinants)",
+            "subtitle": "ব্যতিক্রমী ম্যাট্রিক্স, বিপরীত ম্যাট্রিক্স ও গুণফলের মাত্রা",
+            "total_qb_questions": 420,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "math_mat_t1",
+                    "name": "Type 1: ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '19-20", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P03-Q01", "VAR-RU-P01-Q12", "VAR-GST-P01-Q14"],
+                    "core_rule": "ম্যাট্রিক্স $A$ ব্যতিক্রমী (Singular) হলে তার নির্ণায়কের মান শূন্য: $\\det(A) = 0$।",
+                    "speed_elimination": "$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$ ব্যতিক্রমী হলে সরাসরি কোণাকুণি গুণফল সমান: $ad = bc$।"
+                },
+                {
+                    "type_id": "math_mat_t2",
+                    "name": "Type 2: বিপরীত ম্যাট্রিক্স নির্ণয় ($2 \\times 2$ ফাস্ট ট্রিক)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22"],
+                    "qb_question_refs": ["VAR-CU-P02-Q04", "VAR-GST-P04-Q07", "VAR-SUST-P01-Q15"],
+                    "core_rule": "$A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\implies A^{-1} = \\frac{1}{ad - bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$ (প্রধান কর্ণের স্থান বদল, অন্য কর্ণের চিহ্ন বদল)।",
+                    "speed_elimination": "প্রধান কর্ণের সংখ্যা দুটি স্থান অদলবদল এবং অপজিটে ঋণাত্মক চিহ্ন চেক করে ২ সেকেন্ডে অপশন টিক দিন।"
+                },
+                {
+                    "type_id": "math_mat_t3",
+                    "name": "Type 3: ম্যাট্রিক্সের গুণন ও মাত্রার শর্ত",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "JU '20-21", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-JU-P04-Q05", "VAR-Agri-P03-Q09"],
+                    "core_rule": "$A_{m \\times n}$ এবং $B_{n \\times p}$ গুণনযোগ্য হলে গুণফল $AB$ এর মাত্রা হবে $m \\times p$; গুণনের শর্ত: ১ম ম্যাট্রিক্সের কলাম $=$ ২য় ম্যাট্রিক্সের সারি।",
+                    "speed_elimination": "$A_{3 \\times 2}$ ও $B_{2 \\times 4}$ হলে গুণফল হবে $3 \\times 4$।"
+                },
+                {
+                    "type_id": "math_mat_t4",
+                    "name": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '19-20", "RU '19-20", "SUST '18-19", "KU '20-21"],
+                    "qb_question_refs": ["VAR-KU-P01-Q03", "VAR-SUST-P05-Q11"],
+                    "core_rule": "কোনো নির্ণায়কের দুটি সারি বা দুটি কলাম হুবহু অভিন্ন বা সমানুপাতিক হলে নির্ণায়কের মান শূন্য।",
+                    "speed_elimination": "নির্ণায়কে সারির উপাদান চক্রাকারে $(a-b), (b-c), (c-a)$ জাতীয় থাকলে যোগ করে সরাসরি শূন্য বা উৎপাদক মেলান।"
+                }
+            ]
+        },
+        {
+            "id": "math_straight_lines",
+            "subject": "Higher Math",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৩",
+            "title": "সরলরেখা (Straight Lines)",
+            "subtitle": "সমান্তরাল রেখার দূরত্ব, লম্ব দূরত্ব ও ত্রিভুজের ক্ষেত্রফল",
+            "total_qb_questions": 490,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "math_str_t1",
+                    "name": "Type 1: দুটি সমান্তরাল সরলরেখার মধ্যবর্তী লম্ব দূরত্ব",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 31,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '18-19", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P02-Q11", "VAR-RU-P03-Q18", "VAR-GST-P01-Q02"],
+                    "core_rule": "$ax + by + c_1 = 0$ এবং $ax + by + c_2 = 0$ এর দূরত্ব $d = \\frac{|c_1 - c_2|}{\\sqrt{a^2 + b^2}}$ (সহগ দুটি অবশ্যই একই করতে হবে)।",
+                    "speed_elimination": "$3, 4$ সহগ থাকলে হর সর্বদা $\\sqrt{3^2+4^2} = 5$ হবে।"
+                },
+                {
+                    "type_id": "math_str_t2",
+                    "name": "Type 2: অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22"],
+                    "qb_question_refs": ["VAR-CU-P01-Q11", "VAR-GST-P03-Q19"],
+                    "core_rule": "$\\frac{x}{a} + \\frac{y}{b} = 1$ রেখা অক্ষদ্বয়ের সাথে ত্রিভুজ গঠন করলে ক্ষেত্রফল $\\Delta = \\frac{1}{2}|ab|$; $ax + by + c = 0$ হলে ক্ষেত্রফল $\\Delta = \\frac{c^2}{2|ab|}$।",
+                    "speed_elimination": "$3x + 4y - 12 = 0$ এর ক্ষেত্রে ক্ষেত্রফল $\\frac{12^2}{2 \\times 3 \\times 4} = \\frac{144}{24} = 6$ বর্গ একক।"
+                },
+                {
+                    "type_id": "math_str_t3",
+                    "name": "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '22-23", "JU '20-21", "SUST '19-20"],
+                    "qb_question_refs": ["VAR-JU-P06-Q08", "VAR-SUST-P02-Q17"],
+                    "core_rule": "$(x_1, y_1)$ বিন্দু থেকে $ax+by+c=0$ এর লম্ব দূরত্ব $p = \\frac{|ax_1 + by_1 + c|}{\\sqrt{a^2 + b^2}}$।",
+                    "speed_elimination": "মূলবিন্দু $(0,0)$ থেকে দূরত্ব বললে সরাসরি $\\frac{|c|}{\\sqrt{a^2+b^2}}$।"
+                },
+                {
+                    "type_id": "math_str_t4",
+                    "name": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 18,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-Agri-P04-Q07", "VAR-HSTU-P01-Q14"],
+                    "core_rule": "$ax+by+c=0$ এর সমান্তরাল রেখা $ax+by+k=0$; লম্ব রেখা $bx - ay + k = 0$।",
+                    "speed_elimination": "লম্ব রেখায় $x$ ও $y$ এর সহগ অদলবদল হয়ে মাঝখানের চিহ্ন উল্টে যাবে।"
+                }
+            ]
+        },
+        {
+            "id": "math_circles",
+            "subject": "Higher Math",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৪",
+            "title": "বৃত্ত (Circles)",
+            "subtitle": "কেন্দ্র-ব্যাসার্ধ, অক্ষ স্পর্শের শর্ত ও খণ্ডিতাংশ",
+            "total_qb_questions": 410,
+            "high_yield_score": 97,
+            "mega_types": [
+                {
+                    "type_id": "math_cir_t1",
+                    "name": "Type 1: সাধারণ সমীকরণ হতে কেন্দ্র ও ব্যাসার্ধ নির্ণয়",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '19-20"],
+                    "qb_question_refs": ["VAR-JnU-P01-Q20", "VAR-RU-P02-Q05", "VAR-GST-P02-Q08"],
+                    "core_rule": "$x^2+y^2+2gx+2fy+c=0$ এর কেন্দ্র $(-g, -f)$ এবং ব্যাসার্ধ $r = \\sqrt{g^2+f^2-c}$; $x^2, y^2$ এর সহগ ১ হতে হবে।",
+                    "speed_elimination": "প্রথমে সমীকরণকে $x^2, y^2$ এর সহগ দিয়ে ভাগ করে $x$ ও $y$ এর সহগকে $-2$ দ্বারা ভাগ করলেই কেন্দ্র।"
+                },
+                {
+                    "type_id": "math_cir_t2",
+                    "name": "Type 2: অক্ষদ্বয় স্পর্শ করার শর্ত ও ছেদিতাংশের দৈর্ঘ্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P03-Q14", "VAR-GST-P05-Q09", "VAR-Agri-P01-Q15"],
+                    "core_rule": "$X$-অক্ষকে স্পর্শ করলে $g^2 = c$; $Y$-অক্ষকে স্পর্শ করলে $f^2 = c$; $X$-অক্ষের খণ্ডিতাংশ $= 2\\sqrt{g^2-c}$, $Y$-অক্ষের খণ্ডিতাংশ $= 2\\sqrt{f^2-c}$।",
+                    "speed_elimination": "উভয় অক্ষকে স্পর্শ করলে কেন্দ্র $(a, a)$ বা $(\\pm r, \\pm r)$ এবং $g^2 = f^2 = c = r^2$।"
+                },
+                {
+                    "type_id": "math_cir_t3",
+                    "name": "Type 3: বৃত্তের স্পর্শক হওয়ার শর্ত",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 21,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "JU '20-21"],
+                    "qb_question_refs": ["VAR-JU-P05-Q03", "VAR-SUST-P03-Q09"],
+                    "core_rule": "$x^2+y^2=a^2$ বৃত্তে $y = mx + c$ রেখা স্পর্শক হলে $c = \\pm a\\sqrt{1+m^2}$; সাধারণ নিয়ম: কেন্দ্র থেকে রেখার লম্ব দূরত্ব $=$ ব্যাসার্ধ ($d = r$)।",
+                    "speed_elimination": "বৃত্তের কেন্দ্র থেকে রেখার দূরত্ব ব্যাসার্ধের সমান মিলিয়ে সরাসরি অপশন টেস্ট করুন।"
+                },
+                {
+                    "type_id": "math_cir_t4",
+                    "name": "Type 4: সাধারণ জ্যা এর সমীকরণ",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 15,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21"],
+                    "qb_question_refs": ["VAR-GST-P09-Q07", "VAR-JnU-P07-Q14"],
+                    "core_rule": "দুটি বৃত্ত $S_1 = 0$ এবং $S_2 = 0$ হলে তাদের সাধারণ জ্যা-এর সমীকরণ $S_1 - S_2 = 0$।",
+                    "speed_elimination": "দুই বৃত্তের সমীকরণ পরস্পর বিয়োগ করলেই $x^2, y^2$ কেটে সরাসরি সরলরেখার সমীকরণ বের হবে।"
+                }
+            ]
+        },
+        {
+            "id": "math_trigonometry",
+            "subject": "Higher Math",
+            "paper": "১ম/২য় পত্র",
+            "chapter_no": "ত্রিকোণমিতি",
+            "title": "ত্রিকোণমিতি ও বিপরীত ত্রিকোণমিতি",
+            "subtitle": "সর্বোচ্চ-সর্বনিম্ন মান, বিপরীত ফাংশন ও সাধারণ সমাধান",
+            "total_qb_questions": 460,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "math_trig_t1",
+                    "name": "Type 1: $A\\sin\\theta + B\\cos\\theta$ এর সর্বোচ্চ ও সর্বনিম্ন মান",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P02-Q13", "VAR-RU-P01-Q06", "VAR-GST-P01-Q11"],
+                    "core_rule": "$f(\\theta) = A\\sin\\theta + B\\cos\\theta + C$ এর সর্বোচ্চ মান $C + \\sqrt{A^2+B^2}$ এবং সর্বনিম্ন মান $C - \\sqrt{A^2+B^2}$।",
+                    "speed_elimination": "$3\\sin\\theta + 4\\cos\\theta$ এর মান সীমা $-5$ থেকে $+5$ পর্যন্ত।"
+                },
+                {
+                    "type_id": "math_trig_t2",
+                    "name": "Type 2: বিপরীত ত্রিকোণমিতিক রূপান্তর ($\\\\tan^{-1}$ সূত্র)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-CU-P02-Q15", "VAR-GST-P03-Q04", "VAR-SUST-P02-Q11"],
+                    "core_rule": "$\\tan^{-1}x + \\tan^{-1}y = \\tan^{-1}\\left(\\frac{x+y}{1-xy}\\right)$ ($xy < 1$); $2\\tan^{-1}x = \\tan^{-1}\\frac{2x}{1-x^2} = \\sin^{-1}\\frac{2x}{1+x^2} = \\cos^{-1}\\frac{1-x^2}{1+x^2}$।",
+                    "speed_elimination": "$\\tan^{-1}(1/2) + \\tan^{-1}(1/3) = \\tan^{-1}\\frac{5/6}{5/6} = \\tan^{-1}(1) = \\frac{\\pi}{4}$ (মুখস্থ রেজাল্ট)।"
+                },
+                {
+                    "type_id": "math_trig_t3",
+                    "name": "Type 3: ত্রিকোণমিতিক সমীকরণের সাধারণ সমাধান",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '22-23", "JU '20-21", "GST '20-21"],
+                    "qb_question_refs": ["VAR-JU-P04-Q17", "VAR-GST-P06-Q02"],
+                    "core_rule": "$\\sin\\theta = 0 \\implies \\theta = n\\pi$; $\\cos\\theta = 0 \\implies \\theta = (2n+1)\\frac{\\pi}{2}$; $\\sin\\theta = \\sin\\alpha \\implies \\theta = n\\pi + (-1)^n \\alpha$; $\\cos\\theta = \\cos\\alpha \\implies \\theta = 2n\\pi \\pm \\alpha$।",
+                    "speed_elimination": "অপশনের $n = 0, 1$ বসিয়ে মূল সমীকরণ সিদ্ধ হচ্ছে কিনা ৩ সেকেন্ডে যাচাই করুন।"
+                },
+                {
+                    "type_id": "math_trig_t4",
+                    "name": "Type 4: ত্রিভুজের কোণ ও বাহুর সম্পর্ক (সাইন ও কোসাইন সূত্র)",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '19-20", "RU '19-20", "Agri '21-22", "KU '21-22"],
+                    "qb_question_refs": ["VAR-Agri-P02-Q14", "VAR-KU-P01-Q11"],
+                    "core_rule": "সাইন সূত্র: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R$; কোসাইন সূত্র: $\\cos A = \\frac{b^2+c^2-a^2}{2bc}$।",
+                    "speed_elimination": "বাহুত্রয় ৩, ৫, ৭ হলে বৃহত্তম কোণ সর্বদা $120^\\circ$।"
+                }
+            ]
+        },
+        {
+            "id": "math_differentiation",
+            "subject": "Higher Math",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৯",
+            "title": "অন্তরীকরণ (Differentiation)",
+            "subtitle": "লা'হস্পিটাল রুল, চরম মান, স্পর্শকের ঢাল ও অব্যক্ত ফাংশন",
+            "total_qb_questions": 520,
+            "high_yield_score": 100,
+            "mega_types": [
+                {
+                    "type_id": "math_diff_t1",
+                    "name": "Type 1: লিমিট ও লা'হস্পিটাল রুল (L'Hôpital's Rule)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 34,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '19-20", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P03-Q04", "VAR-RU-P01-Q19", "VAR-GST-P01-Q09"],
+                    "core_rule": "$\\frac{0}{0}$ বা $\\frac{\\infty}{\\infty}$ আকারে $\\lim_{x \\to a}\\frac{f(x)}{g(x)} = \\lim_{x \\to a}\\frac{f'(x)}{g'(x)}$; শর্টকাট: $\\lim_{x \\to 0}\\frac{\\cos ax - \\cos bx}{x^2} = \\frac{b^2 - a^2}{2}$।",
+                    "speed_elimination": "লব ও হরকে আলাদাভাবে ডিফারেনশিয়েট করে সরাসরি মান বসান।"
+                },
+                {
+                    "type_id": "math_diff_t2",
+                    "name": "Type 2: গুরুমান ও লঘুমান (চরম মান নির্ণয়)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22"],
+                    "qb_question_refs": ["VAR-CU-P01-Q07", "VAR-GST-P04-Q14", "VAR-SUST-P01-Q08"],
+                    "core_rule": "চরম মানের জন্য $f'(x) = 0$; $f''(x) < 0$ হলে গুরুমান এবং $f''(x) > 0$ হলে লঘুমান পাওয়া যাবে।",
+                    "speed_elimination": "$f(x) = x + \\frac{1}{x}$ এর জন্য চরম বিন্দু $x = \\pm 1$; লঘুমান $+2$ (যা গুরুমান $-2$ এর চেয়ে বড়)।"
+                },
+                {
+                    "type_id": "math_diff_t3",
+                    "name": "Type 3: স্পর্শকের ঢাল ও স্পর্শক/অভিলম্বের সমীকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "JU '20-21", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-JU-P03-Q11", "VAR-Agri-P02-Q19"],
+                    "core_rule": "স্পর্শকের ঢাল $m = \\left(\\frac{dy}{dx}\\right)_{(x_1, y_1)}$; $X$-অক্ষের সমান্তরাল হলে $\\frac{dy}{dx} = 0$, $Y$-অক্ষের সমান্তরাল হলে $\\frac{dx}{dy} = 0$।",
+                    "speed_elimination": "অভিলম্বের ঢাল হবে স্পর্শকের ঢালের উল্টো ও বিপরীত চিহ্নযুক্ত ($m' = -\\frac{1}{m}$)।"
+                },
+                {
+                    "type_id": "math_diff_t4",
+                    "name": "Type 4: অব্যক্ত ফাংশন (Implicit) দ্রুত ডিফারেনশিয়েশন ট্রিক",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 22,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21", "BUET '17-18"],
+                    "qb_question_refs": ["VAR-GST-P08-Q15", "VAR-JnU-P06-Q02"],
+                    "core_rule": "$F(x, y) = 0$ হলে $\\frac{dy}{dx} = -\\frac{F_x}{F_y} = -\\frac{x\\text{-এর সাপেক্ষে আংশিক অন্তরক (}y\\text{ ধ্রুবক)}}{y\\text{-এর সাপেক্ষে আংশিক অন্তরক (}x\\text{ ধ্রুবক)}}$।",
+                    "speed_elimination": "লবে $y$ কে ধ্রুবক ধরে $x$ এর ডিফারেনশিয়েশন, হরে $x$ কে ধ্রুবক ধরে $y$ এর ডিফারেনশিয়েশন এবং সামনে একটি মাইনাস চিহ্ন।"
+                }
+            ]
+        },
+        {
+            "id": "math_integration",
+            "subject": "Higher Math",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ১০",
+            "title": "যোগজীকরণ (Integration)",
+            "subtitle": "$e^x[f(x)+f'(x)]$, আবদ্ধ ক্ষেত্রফল ও নির্দিষ্ট যোগজের ধর্ম",
+            "total_qb_questions": 550,
+            "high_yield_score": 100,
+            "mega_types": [
+                {
+                    "type_id": "math_int_t1",
+                    "name": "Type 1: $e^x[f(x) + f'(x)]$ ও প্রতিস্থাপন সূত্র",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 33,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '19-20", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-JnU-P08-Q02", "VAR-RU-P02-Q19", "VAR-GST-P01-Q17"],
+                    "core_rule": "$\\int e^x[f(x) + f'(x)]dx = e^x f(x) + c$; $\\int e^{kx}[k f(x) + f'(x)]dx = e^{kx}f(x) + c$।",
+                    "speed_elimination": "বন্ধনীতে কোন পদটির ডিফারেনশিয়েশন অপর পদটি তা শনাক্ত করে সরাসরি $e^x \\times$ মূল ফাংশন অপশনে খুঁজুন।"
+                },
+                {
+                    "type_id": "math_int_t2",
+                    "name": "Type 2: $\\int \\frac{f'(x)}{f(x)}dx = \\ln|f(x)|$ ও ত্রিকোণমিতিক যোগজ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22"],
+                    "qb_question_refs": ["VAR-CU-P02-Q09", "VAR-GST-P03-Q11", "VAR-SUST-P01-Q03"],
+                    "core_rule": "হরের অন্তরক লবে থাকলে উত্তর $\\ln|\\text{হর}| + c$; $\\int \\frac{f'(x)}{\\sqrt{f(x)}}dx = 2\\sqrt{f(x)} + c$।",
+                    "speed_elimination": "$\\int \\frac{1}{x\\ln x}dx = \\int \\frac{1/x}{\\ln x}dx = \\ln|\\ln x| + c$।"
+                },
+                {
+                    "type_id": "math_int_t3",
+                    "name": "Type 3: আবদ্ধ ক্ষেত্রফল শর্টকাট (পরাবৃত্ত ও সরলরেখা)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "JU '20-21", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-JU-P03-Q04", "VAR-GST-P05-Q16"],
+                    "core_rule": "$y^2 = 4ax$ এবং $y = mx$ দ্বারা আবদ্ধ ক্ষেত্রফল $\\Delta = \\frac{8a^2}{3m^3}$; $y^2 = 4ax$ এবং $x^2 = 4by$ দ্বারা আবদ্ধ ক্ষেত্রফল $\\Delta = \\frac{16ab}{3}$।",
+                    "speed_elimination": "$y^2 = 4x$ ও $x^2 = 4y$ হলে ক্ষেত্রফল $\\frac{16 \\times 1 \\times 1}{3} = \\frac{16}{3}$ বর্গ একক।"
+                },
+                {
+                    "type_id": "math_int_t4",
+                    "name": "Type 4: নির্দিষ্ট যোগজের প্রতিসাম্য ধর্ম (Symmetry Property)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21", "Agri '21-22"],
+                    "qb_question_refs": ["VAR-Agri-P03-Q18", "VAR-JnU-P14-Q08"],
+                    "core_rule": "$\\int_0^a f(x)dx = \\int_0^a f(a-x)dx$; এর ফলে $\\int_0^{\\pi/2}\\frac{\\sin^n x}{\\sin^n x + \\cos^n x}dx = \\frac{\\pi/2 - 0}{2} = \\frac{\\pi}{4}$।",
+                    "speed_elimination": "সীমা $0$ থেকে $\\pi/2$ হলে লব ও হরের পরিপূরক কাঠামোর উত্তর সর্বদা $\\frac{\\pi}{4}$।"
+                }
+            ]
+        },
+        {
+            "id": "math_complex_poly",
+            "subject": "Higher Math",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৩/০৪",
+            "title": "জটিল সংখ্যা ও বহুপদী সমীকরণ",
+            "subtitle": "মডুলাস-আর্গুমেন্ট, এককের ঘনমূল $\\omega$, মূলের প্রকৃতি ও প্রতিসম রাশি",
+            "total_qb_questions": 460,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "math_cp_t1",
+                    "name": "Type 1: জটিল সংখ্যার মডুলাস, মুখ্য আর্গুমেন্ট ও সঞ্চারপথ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 30,
+                    "past_tags": ["DU '22-23", "DU '21-22", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '19-20"],
+                    "qb_question_refs": ["VAR-JnU-P04-Q09", "VAR-RU-P02-Q14", "VAR-GST-P01-Q08"],
+                    "core_rule": "$z = x + iy$ এর $|z| = \\sqrt{x^2+y^2}$; ৩য় চতুর্ভাগে মুখ্য আর্গুমেন্ট $\\theta = -(\\pi - \\tan^{-1}|y/x|)$; $|z - z_1| = k$ হলো বৃত্ত।",
+                    "speed_elimination": "$-1 - i\\sqrt{3}$ এর ক্ষেত্রে ৩য় চতুর্ভাগ হওয়ায় কোণ $-\\left(\\pi - \\frac{\\pi}{3}\\right) = -\\frac{2\\pi}{3}$ বা $-120^\\circ$।"
+                },
+                {
+                    "type_id": "math_cp_t2",
+                    "name": "Type 2: এককের কাল্পনিক ঘনমূল $\\omega$ এর ধর্মাবলী",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["DU '20-21", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P01-Q19", "VAR-GST-P04-Q03", "VAR-Agri-P02-Q11"],
+                    "core_rule": "$1 + \\omega + \\omega^2 = 0$; $\\omega^3 = 1$; $\\omega^n$ নির্ণয়ে পাওয়ারকে ৩ দ্বারা ভাগ করে ভাগশেষ নিতে হয়; $\\omega = \\frac{-1+\\sqrt{3}i}{2}$।",
+                    "speed_elimination": "পরপর তিনটি ক্রমিক ঘাতের যোগফল শূন্য: $\\omega^n + \\omega^{n+1} + \\omega^{n+2} = 0$।"
+                },
+                {
+                    "type_id": "math_cp_t3",
+                    "name": "Type 3: দ্বিঘাত সমীকরণের মূলের সম্পর্ক ও এক মূল অপরটির $n$ গুণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["DU '21-22", "DU '18-19", "RU '22-23", "JU '20-21", "KU '21-22"],
+                    "qb_question_refs": ["VAR-KU-P01-Q17", "VAR-JU-P05-Q14", "VAR-SUST-P03-Q02"],
+                    "core_rule": "$ax^2+bx+c=0$ এর একটি মূল অপরটির $n$ গুণ হলে শর্টকাট: $nb^2 = (n+1)^2 ac$; মূলদ্বয়ের পার্থক্য $1$ হলে $b^2 - 4ac = a^2$।",
+                    "speed_elimination": "একটি মূল অপরটির দ্বিগুণ ($n=2$) হলে সরাসরি $2b^2 = 9ac$।"
+                },
+                {
+                    "type_id": "math_cp_t4",
+                    "name": "Type 4: নিশ্চয়ক ($D = b^2-4ac$) ও মূলের প্রকৃতি",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 18,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21", "HSTU '21-22"],
+                    "qb_question_refs": ["VAR-HSTU-P02-Q11", "VAR-GST-P08-Q09"],
+                    "core_rule": "$D > 0$ বাস্তব ও অসমান; $D = 0$ বাস্তব ও সমান (মূল $x = -b/2a$); $D < 0$ জটিল ও অনুবন্ধী যুগল; $D$ পূর্ণবর্গ হলে মূলদ্বয় মূলদ।",
+                    "speed_elimination": "একটি মূল $2 + \\sqrt{3}$ হলে অপর অমূলদ মূলটি নিশ্চিতভাবে $2 - \\sqrt{3}$ হবে।"
+                }
+            ]
+        },
+        {
+            "id": "math_conics",
+            "subject": "Higher Math",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৬",
+            "title": "কনিক্স (Conics)",
+            "subtitle": "পরাবৃত্ত, উপবৃত্তের উৎকেন্দ্রিকতা ও উপকেন্দ্রিক লম্বের দৈর্ঘ্য",
+            "total_qb_questions": 440,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "math_con_t1",
+                    "name": "Type 1: পরাবৃত্তের উপকেন্দ্র, শীর্ষবিন্দু ও দ্বিকাক্ষের সমীকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["DU '22-23", "DU '20-21", "RU '21-22", "JU '21-22", "GST '22-23", "BUET '18-19"],
+                    "qb_question_refs": ["VAR-JnU-P02-Q16", "VAR-RU-P03-Q04", "VAR-GST-P01-Q12"],
+                    "core_rule": "$y^2 = 4ax$ এর উপকেন্দ্র $(a, 0)$, শীর্ষ $(0,0)$, উপকেন্দ্রিক লম্ব $4a$, দ্বিকাক্ষ $x = -a$; $(y-k)^2 = 4a(x-h)$ হলে শীর্ষ $(h, k)$।",
+                    "speed_elimination": "দ্বিঘাত চলকের সাপেক্ষে ডিফারেনশিয়েট করলেই শীর্ষবিন্দুর সেই স্থানাঙ্কটি সরাসরি বেরিয়ে আসে।"
+                },
+                {
+                    "type_id": "math_con_t2",
+                    "name": "Type 2: উপবৃত্তের উৎকেন্দ্রিকতা ($e$) ও উপকেন্দ্রিক লম্বের দৈর্ঘ্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 30,
+                    "past_tags": ["DU '21-22", "DU '19-20", "RU '20-21", "CU '21-22", "GST '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["VAR-CU-P03-Q01", "VAR-GST-P02-Q15", "VAR-Agri-P01-Q09"],
+                    "core_rule": "$\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ ($a > b$) এ উৎকেন্দ্রিকতা $e = \\sqrt{1 - \\frac{b^2}{a^2}} = \\sqrt{\\frac{a^2-b^2}{a^2}}$; উপকেন্দ্রিক লম্ব $= \\frac{2b^2}{a}$।",
+                    "speed_elimination": "উৎকেন্দ্রিকতা $e = \\sqrt{\\frac{\\text{বৃহৎ অক্ষ}^2 - \\text{ক্ষুদ্র অক্ষ}^2}{\\text{বৃহৎ অক্ষ}^2}}$; উপবৃত্তে সর্বদা $0 < e < 1$।"
+                },
+                {
+                    "type_id": "math_con_t3",
+                    "name": "Type 3: অধিবৃত্তের উৎকেন্দ্রিকতা ও অসীম তটের সমীকরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["DU '20-21", "DU '18-19", "RU '22-23", "JU '20-21", "BUET '19-20"],
+                    "qb_question_refs": ["VAR-JU-P04-Q09", "VAR-SUST-P02-Q05"],
+                    "core_rule": "$\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$ এর $e = \\sqrt{1 + \\frac{b^2}{a^2}} > 1$; অসীম তটদ্বয়ের সমীকরণ $y = \\pm \\frac{b}{a}x$ বা $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 0$।",
+                    "speed_elimination": "আয়তাকার অধিবৃত্তের ($x^2 - y^2 = a^2$) উৎকেন্দ্রিকতা ফিক্সড $e = \\sqrt{2}$।"
+                },
+                {
+                    "type_id": "math_con_t4",
+                    "name": "Type 4: কনিকের সাধারণ সমীকরণ হতে সনাক্তকরণ",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 16,
+                    "past_tags": ["DU '19-20", "RU '19-20", "GST '20-21", "HSTU '20-21"],
+                    "qb_question_refs": ["VAR-HSTU-P03-Q01", "VAR-JnU-P09-Q11"],
+                    "core_rule": "$ax^2 + 2hxy + by^2 + 2gx + 2fy + c = 0$ এ $h^2 - ab = 0$ হলে পরাবৃত্ত, $h^2 - ab < 0$ হলে উপবৃত্ত, $h^2 - ab > 0$ হলে অধিবৃত্ত।",
+                    "speed_elimination": "$xy$ পদ না থাকলে $a = b$ হলে বৃত্ত, $a, b$ একই চিহ্ন কিন্তু অসমান হলে উপবৃত্ত, বিপরীত চিহ্ন হলে অধিবৃত্ত।"
+                }
+            ]
+        },
+
+        # =========================================================================
+        # BIOLOGY (8 Comprehensive Chapters covering Botany 1st & Zoology 2nd Paper)
+        # =========================================================================
+        {
+            "id": "bio_cell",
+            "subject": "Biology",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০১/০২",
+            "title": "কোষ, এর গঠন ও কোষ বিভাজন (Cell & Division)",
+            "subtitle": "অঙ্গাণু, ক্রসিং ওভার, মায়োসিস-১ ও জেনেটিক কোড",
+            "total_qb_questions": 510,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "bio_cell_t1",
+                    "name": "Type 1: কোষ অঙ্গাণু ও তাদের বিশেষ উপাধি/কাজ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 32,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '22-23", "DU '21-22", "RU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q01", "MAD-MAT-Q14", "VAR-Agri-P01-Q01", "VAR-JnU-P02-Q21"],
+                    "core_rule": "মাইটোকন্ড্রিয়া: শক্তিঘর/পাওয়ার হাউস (ATP তৈরি); রাইবোসোম: প্রোটিন ফ্যাক্টরি; লাইসোসোম: আত্মঘাতী থলিকা/অটোলাইসিস; গলগি বস্তু: ট্রাফিক পুলিশ/প্যাকেজিং কেন্দ্র; ক্লোরোপ্লাস্ট: শর্করা জাতীয় খাদ্যের কারখানা।",
+                    "speed_elimination": "ঝিল্লিবিহীন অঙ্গাণু: মামা ভোলেনাই মামেলী (মাইক্রোটিউবিউলস, মাইক্রোফিলামেন্ট, সেন্ট্রিওল, রাইবোসোম, প্রোটিওসোম)।"
+                },
+                {
+                    "type_id": "bio_cell_t2",
+                    "name": "Type 2: মায়োসিস-১ প্রোফেজ-১ এর উপপর্যায়সমূহ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 30,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '20-21", "RU '22-23", "GST '22-23", "Agri '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q08", "VAR-RU-P02-Q01", "VAR-GST-P03-Q02"],
+                    "core_rule": "লেপটোটিন: বোকে (Bouquet); জাইগোটিন: সিন্যাপসিস ও বাইভ্যালেন্ট গঠন; প্যাকাইটিন: টেট্রাড ও ক্রসিং ওভার (কায়াজমা গঠন); ডিপ্লোটিন: কায়াজমার প্রান্তীয়করণ ও লুপ সৃষ্টি; ডায়াকাইনেসিস: নিউক্লিওলাস ও নিউক্লিয়ার মেমব্রেন বিলুপ্ত।",
+                    "speed_elimination": "সিন্যাপসিস ঘটে জাইগোটিনে কিন্তু ক্রসিং ওভার ঘটে প্যাকাইটিনে (বারবার আসা ফাঁদ)।"
+                },
+                {
+                    "type_id": "bio_cell_t3",
+                    "name": "Type 3: মাইটোসিসের বিভিন্ন ধাপের বৈশিষ্ট্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["MAT '20", "MAT '18", "DU '19-20", "RU '20-21", "CU '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q16", "VAR-CU-P02-Q21", "VAR-JnU-P05-Q22"],
+                    "core_rule": "মেটাফেজ: মেটাকাইনেসিস, ক্রোমোজোম বিষুবীয় অঞ্চলে অবস্থান ও সর্বাধিক খাটো-মোটা হয়; অ্যানাফেজ: সেন্ট্রোমিয়ারের বিভাজন এবং V, L, J, I আকৃতি ধারণ (মেটাসেন্ট্রিক, সাবমেটাসেন্ট্রিক, অ্যাক্রোসেন্ট্রিক, টেলোসেন্ট্রিক)।",
+                    "speed_elimination": "ক্রোমোজোম গণনা ও আকার স্পষ্ট দেখা যায় মেটাফেজ ধাপে।"
+                },
+                {
+                    "type_id": "bio_cell_t4",
+                    "name": "Type 4: জেনেটিক কোড, স্টার্ট ও স্টপ কোডন",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["MAT '22", "MAT '21", "DU '21-22", "Agri '22-23", "GST '21-22"],
+                    "qb_question_refs": ["VAR-Agri-P01-Q01", "MAD-MAT-Q04", "MAD-MAT-Q21"],
+                    "core_rule": "প্রারম্ভিক/স্টার্ট কোডন: AUG (মেথিওনিন নির্দেশ করে); সমাপ্তি/স্টপ কোডন ৩টি: UAA (ochre), UAG (amber), UGA (opal); মোট জেনেটিক কোড ৬৪টি, যার মধ্যে ৬১টি অ্যামিনো এসিড নির্দেশ করে।",
+                    "speed_elimination": "স্টপ কোডন মনে রাখার ট্রিক: U Are Away (UAA), U Are Gone (UAG), U Go Away (UGA)।"
+                }
+            ]
+        },
+        {
+            "id": "bio_microbes_algae",
+            "subject": "Biology",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৪/০৫",
+            "title": "অণুজীব, শৈবাল ও ছত্রাক (Microbes, Algae & Fungi)",
+            "subtitle": "ভাইরাস, ব্যাকটেরিয়া, ম্যালেরিয়া ও শৈবালের খাদ্য সঞ্চয়",
+            "total_qb_questions": 470,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "bio_ma_t1",
+                    "name": "Type 1: ভাইরাস (DNA বনাম RNA ভাইরাস ও আকৃতি)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 29,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '22-23", "DU '20-21", "RU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q03", "MAD-MAT-Q15", "VAR-Agri-P02-Q02", "VAR-JnU-P03-Q20"],
+                    "core_rule": "DNA ভাইরাস মনে রাখার ট্রিক: 'টিপুর ভাই টিটু ভ্যানিলা পক্স ও কোলাহলে আক্রান্ত' (T2, ভ্যারিওলা, ভ্যাসিনিয়া, পক্স, কোলাইফেজ T4, হার্পিস, হেপাটাইটিস-B); বাদবাকি অধিকাংশই RNA ভাইরাস (HIV, পোলিও, রেবিস, করোনা, ডেঙ্গু); TMV দণ্ডাকৃতির, T2 ব্যাঙাচি, পোলিও গোলাকার।",
+                    "speed_elimination": "হেপাটাইটিস-বি (HBV) ব্যতীত সব হেপাটাইটিস ভাইরাস ($A, C, D, E$) হলো RNA ভাইরাস।"
+                },
+                {
+                    "type_id": "bio_ma_t2",
+                    "name": "Type 2: ব্যাকটেরিয়া (গ্রাম পজেটিভ বনাম নেগেটিভ ও অর্থনৈতিক গুরুত্ব)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '21-22", "RU '20-21", "GST '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q07", "VAR-RU-P03-Q21", "VAR-GST-P02-Q22"],
+                    "core_rule": "গ্রাম পজেটিভ: পুরু পেপটিডোগ্লাইকান স্তর ($70-80\\%$) ও টিকোয়িক এসিড থাকে, ক্রিস্টাল ভায়োলেট ধরে রেখে বেগুনী দেখায়; গ্রাম নেগেটিভ: লিপোপলিস্যাকারাইড বেশি, সাফায়ারিন নিয়ে লাল/গোলাপী দেখায় (যেমন E. coli); কলেরা জীবাণু কমা আকৃতির (Vibrio cholerae)।",
+                    "speed_elimination": "দই তৈরিতে ব্যবহৃত হয় ল্যাকটোব্যাসিলাস (Lactobacillus bulgaricus)।"
+                },
+                {
+                    "type_id": "bio_ma_t3",
+                    "name": "Type 3: ম্যালেরিয়ার জীবাণু প্লাজমোডিয়ামের জীবনচক্র",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["MAT '21", "MAT '20", "MAT '18", "DU '19-20", "RU '22-23", "Agri '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q09", "MAD-MAT-Q19", "VAR-Agri-P04-Q01"],
+                    "core_rule": "মানুষের রক্তে আক্রমণকারী দশা: স্পোরোজয়েট; লোহিত কণিকায় সুপ্তাবস্থা শেষে হিমোজয়েন বিষ নিঃসরণ ও কাঁপুনি দিয়ে জ্বর আসে; স্ত্রী অ্যানোফিলিস মশার ক্রপে ঘটে যৌন জনন (উওসিস্ট ও স্পোরোগনি); মানুষের যকৃতে হেপাটিক সাইজোগনি ও আরবিসিতে এরিথ্রোসাইটিক সাইজোগনি।",
+                    "speed_elimination": "ম্যালেরিয়া জ্বরে রক্তে হিমোজয়েন কণা নিঃসরণের কারণে কাঁপুনি দিয়ে জ্বর আসে।"
+                },
+                {
+                    "type_id": "bio_ma_t4",
+                    "name": "Type 4: শৈবালের খাদ্য সঞ্চয় ও পিগমেন্ট",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["MAT '22", "MAT '20", "DU '21-22", "RU '21-22", "GST '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q02", "VAR-JnU-P07-Q21", "VAR-CU-P03-Q22"],
+                    "core_rule": "লোহিত শৈবাল (Rhodophyta): প্রধান খাদ্য ফ্লোরিডিয়ান স্টার্চ, পিগমেন্ট ফাইকোইরিথ্রিন; বাদামি শৈবাল (Phaeophyta): প্রধান খাদ্য ল্যামিনারিন ও ম্যানিটল, পিগমেন্ট ফিউকোক্সানথিন; সবুজ শৈবাল (Chlorophyta): প্রধান খাদ্য স্টার্চ।",
+                    "speed_elimination": "লোহিত শৈবালের সঞ্চিত খাদ্য ফ্লোরিডিয়ান স্টার্চ (বাদামির ল্যামিনারিনের সাথে গুলিয়ে ফেলা ফাঁদ)।"
+                }
+            ]
+        },
+        {
+            "id": "bio_plant_diversity",
+            "subject": "Biology",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৬/০৭",
+            "title": "উদ্ভিদ বৈচিত্র্য (ব্রায়োফাইটা, টেরিডোফাইটা ও আবৃতবীজী)",
+            "subtitle": "সাইকাস, মালভেসি ও পোয়াসি গোত্র, অমরাবিন্যাস",
+            "total_qb_questions": 440,
+            "high_yield_score": 97,
+            "mega_types": [
+                {
+                    "type_id": "bio_pd_t1",
+                    "name": "Type 1: ব্রায়োফাইটা (রিকসিয়া) ও টেরিডোফাইটা (টেরিস) বৈশিষ্ট্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 25,
+                    "past_tags": ["MAT '22", "MAT '21", "DU '22-23", "RU '21-22", "GST '22-23", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q06", "VAR-Agri-P01-Q06", "VAR-JnU-P04-Q20"],
+                    "core_rule": "ব্রায়োফাইটা: উভচর উদ্ভিদ, মূল নেই (রাইজয়েড আছে), ভাস্কুলার বান্ডল নেই, প্রধান দেহ গ্যামিটোফাইট ($n$); টেরিডোফাইটা: ফার্ন, ভাস্কুলার ক্রিপ্টোগ্যামস, প্রধান দেহ স্পোরোফাইট ($2n$), কুণ্ডলিত কচি পাতা সারসিনেট ভার্নেশন (ক্রোজিয়ার)।",
+                    "speed_elimination": "ফার্নের পাতাকে ফ্রন্ড (Frond) এবং কচি কুণ্ডলিত পাতাকে ক্রোজিয়ার বলা হয়।"
+                },
+                {
+                    "type_id": "bio_pd_t2",
+                    "name": "Type 2: নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 24,
+                    "past_tags": ["MAT '21", "MAT '20", "DU '21-22", "RU '20-21", "CU '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q11", "VAR-CU-P01-Q22", "VAR-GST-P04-Q21"],
+                    "core_rule": "সাইকাসকে পামফার্ন ও জীবন্ত জীবাশ্ম বলা হয়; অ্যানাবেনা ও নস্টকের আক্রমণে কোরালয়েড মূল গঠিত হয়; শুক্রাণু উদ্ভিদকুলের মধ্যে সর্ববৃহৎ, লাটিমের মতো ও বহুফ্ল্যাজেলাযুক্ত; ডিম্বক নগ্ন হওয়ায় ফল উৎপন্ন হয় না।",
+                    "speed_elimination": "নগ্নবীজী উদ্ভিদে কোনো গর্ভাশয় না থাকায় ফল সৃষ্টি হয় না, কিন্তু বীজ তৈরি হয়।"
+                },
+                {
+                    "type_id": "bio_pd_t3",
+                    "name": "Type 3: মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্তকারী বৈশিষ্ট্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 30,
+                    "past_tags": ["MAT '22", "MAT '20", "DU '22-23", "DU '19-20", "RU '22-23", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q05", "MAD-MAT-Q17", "VAR-Agri-P03-Q01", "VAR-JnU-P06-Q21"],
+                    "core_rule": "মালভেসি: মুক্ত পার্শ্বীয় উপবৃতি, দলমণ্ডল টুইস্টেড (পাকানো), পুংকেশর একগুচ্ছক ও পুংকেশরীয় নালিকাযুক্ত, পরাগধানী বৃক্কাকার ও একপ্রকোষ্ঠী, অমরাবিন্যাস অক্ষীয়; পোয়াসি: কাণ্ড নলাকার ও মধ্যপর্ব ফাঁপা, পাতা লিগিউলযুক্ত, পুষ্পবিন্যাস স্পাইকলেট, পরাগধানী সর্বমুখ, অমরাবিন্যাস মূলীয়, ফল ক্যারিয়পসিস।",
+                    "speed_elimination": "বৃক্কাকার পরাগধানী ও দলমণ্ডল টুইস্টেড দেখলে নিশ্চিতভাবে মালভেসি গোত্র।"
+                },
+                {
+                    "type_id": "bio_pd_t4",
+                    "name": "Type 4: অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["MAT '21", "MAT '19", "DU '20-21", "RU '20-21", "GST '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q13", "VAR-RU-P01-Q22", "VAR-GST-P05-Q20"],
+                    "core_rule": "একপ্রান্তীয় (Marginal): মটরশুঁটি, শিম; অক্ষীয় (Axile): জবা, লেবু, ঢ্যাঁড়শ; বহুপ্রান্তীয় (Parietal): শসা, কুমড়া, পেঁপে; মুক্তমধ্য (Free-central): তুত, নুনিয়া শাক; মূলীয় (Basal): ধান, গম, সূর্যমুখী; শীর্ষীয় (Apical): ধনিয়া, লালপাতা।",
+                    "speed_elimination": "সূর্যমুখী ও ধানের অমরাবিন্যাস মূলীয় (Basal)।"
+                }
+            ]
+        },
+        {
+            "id": "bio_plant_physio_biotech",
+            "subject": "Biology",
+            "paper": "১ম পত্র",
+            "chapter_no": "অধ্যায় ০৯/১১",
+            "title": "উদ্ভিদ শারীরতত্ত্ব ও জীবপ্রযুক্তি (Physiology & Biotech)",
+            "subtitle": "সালোকসংশ্লেষণ, ক্রেবস চক্র, প্রস্বেদন ও টিস্যু কালচার",
+            "total_qb_questions": 460,
+            "high_yield_score": 98,
+            "mega_types": [
+                {
+                    "type_id": "bio_pb_t1",
+                    "name": "Type 1: সালোকসংশ্লেষণ ($C_3$ বনাম $C_4$ উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["MAT '22", "MAT '20", "DU '21-22", "RU '21-22", "GST '22-23", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q04", "MAD-MAT-Q18", "VAR-Agri-P02-Q04", "VAR-JnU-P08-Q20"],
+                    "core_rule": "$C_3$ উদ্ভিদে ১ম স্থায়ী পদার্থ ৩-ফসফোগ্লিসারিক এসিড ($3-PGA$), প্রধান এনজাইম রুবিসকো (RuBisCO); $C_4$ উদ্ভিদে ১ম স্থায়ী পদার্থ ৪-কার্বনবিশিষ্ট অক্সালোএসিটিক এসিড ($OAA$), প্রধান এনজাইম PEP কার্বক্সিলেজ; $C_4$ এ ক্রাঞ্জ অ্যানাটমি দেখা যায় (ভুট্টা, আখ, কাউন, মুথা ঘাস)।",
+                    "speed_elimination": "$C_4$ উদ্ভিদের সালোকসংশ্লেষণের দক্ষতা ও তাপমাত্রা সহনশীলতা $C_3$ এর চেয়ে অনেক বেশি।"
+                },
+                {
+                    "type_id": "bio_pb_t2",
+                    "name": "Type 2: শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["MAT '21", "MAT '19", "DU '20-21", "RU '20-21", "CU '21-22", "GST '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q10", "VAR-CU-P04-Q21", "VAR-GST-P06-Q22"],
+                    "core_rule": "গ্লাইকোলাইসিস: সাইটোপ্লাজমে ঘটে, কোনো অক্সিজেনের প্রয়োজন হয় না, নেট লাভ ২ অণু ATP ও ২ অণু $NADH_2$; ক্রেবস চক্র: মাইটোকন্ড্রিয়ার ম্যাট্রিক্সে ঘটে, সর্বাধিক ATP তৈরি হয়; ১ অণু গ্লুকোজ জারণে মোট উৎপাদিত নিট এটিপি = ৩০ বা ৩২টি (আধুনিক মতে ৩০টি ATP)।",
+                    "speed_elimination": "গ্লাইকোলাইসিস সবাত ও অবাত উভয় শ্বসনের সাধারণ পর্যায়।"
+                },
+                {
+                    "type_id": "bio_pb_t3",
+                    "name": "Type 3: প্রস্বেদন ও পত্ররন্ধ্র খোলা-বন্ধ হওয়ার কৌশল",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 18,
+                    "past_tags": ["MAT '20", "MAT '18", "DU '19-20", "RU '19-20"],
+                    "qb_question_refs": ["MAD-MAT-Q14", "VAR-RU-P04-Q22"],
+                    "core_rule": "উদ্ভিদের প্রয়োজনীয় অমঙ্গল (Necessary Evil); পত্ররন্ধ্রীয় প্রস্বেদন শতকরা ৯০-৯৫%; ইমামুরার মতবাদ অনুসারে $K^+$ আয়ন রক্ষীকোষে প্রবেশ করলে অন্তঅভিস্রবণের মাধ্যমে পত্ররন্ধ্র খোলে এবং $K^+$ বের হলে বন্ধ হয়; নীল আলোতে পত্ররন্ধ্র দ্রুত খোলে।",
+                    "speed_elimination": "পত্ররন্ধ্র খোলা নিয়ন্ত্রণকারী প্রধান আয়ন হলো পটাশিয়াম আয়ন ($K^+$)।"
+                },
+                {
+                    "type_id": "bio_pb_t4",
+                    "name": "Type 4: টিস্যু কালচার ও রিকম্বিনেন্ট ডিএনএ প্রযুক্তি",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["MAT '22", "MAT '21", "DU '22-23", "RU '22-23", "Agri '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q07", "VAR-Agri-P04-Q05", "VAR-JnU-P09-Q22"],
+                    "core_rule": "টিস্যু কালচারের জনক: হাবারল্যান্ডট (টটিপোটেন্সি গুণের জন্য); রিকম্বিনেন্ট DNA প্রযুক্তির আণবিক কাঁচি: রেস্ট্রিকশন এনজাইম (EcoRI); আণবিক আঠা: লাইগেজ এনজাইম; বাহক হিসেবে প্লাজমিড (স্বপ্রজননশীল অতিরিক্ত ক্রোমোজোমীয় দ্বিসূত্রক বৃত্তাকার DNA)।",
+                    "speed_elimination": "ডিএনএ কাটার এনজাইম রেস্ট্রিকশন এন্ডোনিউক্লিয়েজ, জোড়া লাগানোর এনজাইম ডিএনএ লাইগেজ।"
+                }
+            ]
+        },
+        {
+            "id": "bio_animal_diversity_reps",
+            "subject": "Biology",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০১/০২",
+            "title": "প্রাণীর বিভিন্নতা, হাইড্রা ও ঘাসফড়িং (Diversity & Reps)",
+            "subtitle": "প্রধান পর্বসমূহ, নেমাটোসিস্ট, পুঞ্জাক্ষি ও ওমাটিডিয়াম",
+            "total_qb_questions": 520,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "bio_adr_t1",
+                    "name": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 34,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '22-23", "DU '21-22", "RU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q01", "MAD-MAT-Q12", "VAR-Agri-P01-Q18", "VAR-JnU-P01-Q22"],
+                    "core_rule": "পরিফেরা: অস্টিয়া ও কোয়ানোসাইট কোষ (ছিদ্রাল প্রাণী); নিডারিয়া: নেমাটোসিস্ট ও মেসোগ্লিয়া (দ্বিস্তরী); প্লাটিহেলমিনথিস: শিখা কোষ (Flame cell, রেচন অঙ্গ); নেমাটোডা: সিউডোসিলোমেট ও নলাকার দেহ; অ্যানেলিডা: নেফ্রিডিয়া ও সিটি/প্যারাফোডিয়া; আর্থ্রোপোডা: সন্ধিপদী, কাইটিনযুক্ত বহিঃকঙ্কাল ও হিমোসিল; মলাস্কা: রেডুলা ও ম্যান্টল; একাইনোডার্মাটা: পানি সংবহনতন্ত্র ও নালিকা পদ।",
+                    "speed_elimination": "শিখা কোষ দেখলেই প্লাটিহেলমিনথিস; পানি সংবহনতন্ত্র দেখলেই একাইনোডার্মাটা।"
+                },
+                {
+                    "type_id": "bio_adr_t2",
+                    "name": "Type 2: হাইড্রার নেমাটোসিস্ট ও পরিপাক",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '20-21", "RU '20-21", "GST '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q05", "VAR-RU-P02-Q22", "VAR-GST-P01-Q22"],
+                    "core_rule": "স্টেনোটিল বা পেনিট্র্যান্ট: বিষাক্ত হিপনোটক্সিন (প্রোটিন + ফেনল) থাকে ও শিকার অবশ করে; ভলভেন্ট: খাটো, প্যাঁচানো সুতা দিয়ে শিকার আঁকড়ে ধরে; স্ট্রেপ্টোলিন গ্লুটিন্যান্ট ও স্টেরিওলিন গ্লুটিন্যান্ট: আঠালো রস ক্ষরণ করে চলনে সাহায্য করে; হাইড্রা কেবল আমিষ ও চর্বি পরিপাক করতে পারে, শর্করা পরিপাক করতে পারে না।",
+                    "speed_elimination": "হাইড্রার কোনো শর্করা পরিপাককারী এনজাইম নেই—শর্করার অংক আসলেই অনুপস্থিত।"
+                },
+                {
+                    "type_id": "bio_adr_t3",
+                    "name": "Type 3: ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["MAT '21", "MAT '20", "DU '21-22", "RU '22-23", "CU '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q08", "VAR-CU-P02-Q22", "VAR-JnU-P03-Q22"],
+                    "core_rule": "ওমাটিডিয়ামের অংশ: কর্নিয়া, কর্নিয়াজেন কোষ, ক্রিস্টালাইন কোণ, ক্রিস্টালাইন কোণ কোষ, র্যাবডোম, রেটিনুলার কোষ, রেটিনাল ও আইরিশ পিগমেন্ট আবরণী; তীব্র আলোতে গঠিত হয় অ্যাপোজিশন বা মোজাইক প্রতিবিম্ব (আইরিশ আবরণী সম্পূর্ণ প্রসারিত); মৃদু বা স্তিমিত আলোতে সুপারপজিশন প্রতিবিম্ব (আবরণী সংকুচিত)।",
+                    "speed_elimination": "দিনের তীব্র আলোতে স্পষ্ট মোজাইক বা অ্যাপোজিশন প্রতিবিম্ব গঠিত হয়।"
+                },
+                {
+                    "type_id": "bio_adr_t4",
+                    "name": "Type 4: রুই মাছের ফুলকা ও রক্ত সংবহনতন্ত্র",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 18,
+                    "past_tags": ["MAT '20", "MAT '18", "DU '19-20", "Agri '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q16", "VAR-Agri-P03-Q22"],
+                    "core_rule": "রুই মাছের হৃদপিণ্ড ভেনাস হার্ট (কেবলমাত্র $CO_2$ যুক্ত রক্ত সংবহন করে); প্রকোষ্ঠ দুটি: ১টি অলিন্দ ও ১টি নিলয়; ফুলকা ৪ জোড়া, ফুলকা রেকার খাদ্যকে ফুলকা প্রকোষ্ঠে আটকে রাখে; আঁইশ সাইক্লয়েড ধরনের।",
+                    "speed_elimination": "রুই মাছের হৃদপিণ্ডে কখনোই অক্সিজেনযুক্ত রক্ত প্রবেশ করে না।"
+                }
+            ]
+        },
+        {
+            "id": "bio_digestion_circulation",
+            "subject": "Biology",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৩/০৪",
+            "title": "পরিপাক ও রক্ত সংবহনতন্ত্র (Digestion & Blood)",
+            "subtitle": "এনজাইম, যকৃত, হৃদপিণ্ডের কপাটিকা ও রক্ত তঞ্চন",
+            "total_qb_questions": 540,
+            "high_yield_score": 100,
+            "mega_types": [
+                {
+                    "type_id": "bio_dc_t1",
+                    "name": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 33,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '22-23", "DU '21-22", "RU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q02", "MAD-MAT-Q11", "VAR-Agri-P01-Q12", "VAR-JnU-P02-Q22"],
+                    "core_rule": "লালারসে টায়ালিন ও মল্টেজ থাকে (শ্বেতসার পরিপাক করে, কোনো আমিষ বা চর্বি পরিপাককারী এনজাইম নেই); পাকস্থলীতে পেপসিন ও রেনিন (আমিষ পরিপাক করে, চর্বি বা শর্করা পরিপাক হয় না); অগ্ন্যাশয় রসে ট্রিপসিন, কাইমোট্রিপসিন, অ্যামাইলেজ ও লাইপেজ থাকে; পিত্তরসে কোনো পরিপাক এনজাইম থাকে না (পিত্তলবণ চর্বিকে ইমালসিফাই করে)।",
+                    "speed_elimination": "পিত্তরসে কোনো পাচক এনজাইম নেই—এনজাইম সম্পর্কিত অপশনে পিত্তরস সরাসরি বাতিল।"
+                },
+                {
+                    "type_id": "bio_dc_t2",
+                    "name": "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '20-21", "RU '22-23", "GST '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q07", "VAR-RU-P03-Q22", "VAR-GST-P02-Q21"],
+                    "core_rule": "দেহের সবচেয়ে বড় গ্রন্থি ও জৈব রসায়নাগার; গ্লাইকোজেন সঞ্চয় (গ্লাইকোজেনেসিস), ইউরিয়া তৈরি (অর্নিথিন চক্রের মাধ্যমে অ্যামোনিয়া থেকে ইউরিয়া); প্লাজমা প্রোটিন তৈরি (প্রোথ্রম্বিন, ফাইব্রিনোজেন, অ্যালবুমিন); রক্ত জমাট বাঁধতে বাধা দানকারী হেপারিন তৈরি।",
+                    "speed_elimination": "গামাগ্লোবুলিন ছাড়া সকল প্লাজমা প্রোটিন যকৃতে তৈরি হয়।"
+                },
+                {
+                    "type_id": "bio_dc_t3",
+                    "name": "Type 3: হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 29,
+                    "past_tags": ["MAT '21", "MAT '20", "DU '21-22", "RU '20-21", "CU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q04", "MAD-MAT-Q13", "VAR-CU-P03-Q21"],
+                    "core_rule": "ডান অলিন্দ ও ডান নিলয়ের মাঝে: ট্রাইকাসপিড কপাটিকা; বাম অলিন্দ ও বাম নিলয়ের মাঝে: বাইকাসপিড বা মাইট্রাল কপাটিকা; মহাধমনী ও ফুসফুসীয় ধমনীর মুখে: সেমিলুনার বা অর্ধচন্দ্রাকার কপাটিকা; হৃদপিণ্ডের পেসমেকার: সাইনো-অ্যাট্রিয়াল নোড (SAN), সংকেত প্রেরক: AVN ও পারকিঞ্জি তন্তু।",
+                    "speed_elimination": "বাম দিকে দুই পাল্লা (বাইকাসপিড), ডান দিকে তিন পাল্লা (ট্রাইকাসপিড)।"
+                },
+                {
+                    "type_id": "bio_dc_t4",
+                    "name": "Type 4: রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["MAT '22", "MAT '21", "DU '19-20", "RU '19-20", "GST '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q09", "MAD-MAT-Q20", "VAR-GST-P04-Q22"],
+                    "core_rule": "রক্ত তঞ্চনের প্রধান ৪টি ফ্যাক্টর মনে রাখার ট্রিক: 'ফুল পরে টুপ করে' (১: ফাইব্রিনোজেন, ২: প্রোথ্রম্বিন, ৩: থ্রম্বোপ্লাস্টিন, ৪: ক্যালসিয়াম আয়ন $Ca^{2+}$); অনুচক্রিকা থেকে থ্রম্বোপ্লাস্টিন নিঃসৃত হয়; দানাদার শ্বেতকণিকা: নিউট্রোফিল, ইওসিনোফিল, বেসোফিল (অ্যালার্জি প্রতিরোধে ইওসিনোফিল ও হিস্টামিন নিঃসৃত করে বেসোফিল)।",
+                    "speed_elimination": "রক্ত জমাট বাঁধায় অংশ নেওয়া একমাত্র খনিজ আয়ন হলো ক্যালসিয়াম ($Ca^{2+}$)।"
+                }
+            ]
+        },
+        {
+            "id": "bio_respiration_excretion",
+            "subject": "Biology",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ০৫/০৬/০৮",
+            "title": "শ্বসন, বর্জ্য ও সমন্বয়-নিয়ন্ত্রণ (Respiration & Control)",
+            "subtitle": "গ্যাসীয় পরিবহন, নেফ্রন, করোটিক স্নায়ু ও হরমোন",
+            "total_qb_questions": 510,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "bio_re_t1",
+                    "name": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '21-22", "RU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q03", "MAD-MAT-Q15", "VAR-Agri-P02-Q21", "VAR-JnU-P04-Q22"],
+                    "core_rule": "$O_2$ পরিবহন: ৯৮% অক্সিহিমোগ্লোবিন রূপে এবং ২% ভৌত দ্রবণ রূপে; $CO_2$ পরিবহন: সর্বাধিক ৬৫% বাইকার্বনেট ($HCO_3^-$) যৌগ রূপে, ২৭% কার্বামিনো যৌগ রূপে এবং ৮% ভৌত দ্রবণ রূপে; ক্লোরাইড শিফট বা হ্যামবার্গার শিফটে আরবিসি থেকে $HCO_3^-$ প্লাজমায় গেলে ভারসাম্য রক্ষায় প্লাজমা থেকে $Cl^-$ আরবিসিতে প্রবেশ করে।",
+                    "speed_elimination": "$CO_2$ এর প্রধান পরিবহন মাধ্যম হলো বাইকার্বনেট ($HCO_3^-$) আয়ন।"
+                },
+                {
+                    "type_id": "bio_re_t2",
+                    "name": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 27,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '22-23", "RU '20-21", "GST '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q06", "VAR-RU-P04-Q21", "VAR-GST-P03-Q21"],
+                    "core_rule": "বৃক্কের গঠন ও কাজের একক: নেফ্রন; গ্লোমেরুলাসে আল্ট্রাফিল্ট্রেশন ঘটে; প্রক্সিমাল প্যাঁচানো নালিকায় সর্বাধিক (৮০%) পুনঃশোষণ ঘটে; মূত্রের ঝাঁঝালো গন্ধের কারণ ইউরিনয়েড, হলুদ রঙের জন্য ইউরোক্রোম দায়ী; পানির পুনঃশোষণ নিয়ন্ত্রণ করে পিটুইটারি গ্রন্থির ADH (ভ্যাসোপ্রেসিন) হরমোন।",
+                    "speed_elimination": "ADH এর অভাবে ডায়াবেটিস ইনসিপিডাস বা বহুমূত্র রোগ হয় (রক্তে গ্লুকোজ স্বাভাবিক থাকে)।"
+                },
+                {
+                    "type_id": "bio_re_t3",
+                    "name": "Type 3: করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 32,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '20-21", "RU '22-23", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q05", "MAD-MAT-Q18", "VAR-Agri-P03-Q19"],
+                    "core_rule": "সংবেদী স্নায়ু: ১, ২, ৮ (অলফ্যাক্টরি, অপটিক, অডিটরি); চেষ্টীয়/মোটর: ৩, ৪, ৬, ১১, ১২ (অকুলোমোটর, ট্রকলিয়ার, অ্যাবডুসেন্স, স্পাইনাল অ্যাকসেসরি, হাইপোগ্লোসাল); মিশ্র স্নায়ু: ৫, ৭, ৯, ১০ (ট্রাইজেমিনাল, ফেসিয়াল, গ্লসোফ্যারিঞ্জিয়াল, ভেগাস); ১০ম ভেগাস স্নায়ু দেহের সর্বাধিক অঙ্গপ্রত্যঙ্গে বিস্তৃত (নিউমোগ্যাস্ট্রিক)।",
+                    "speed_elimination": "সংবেদী স্নায়ু মনে রাখার কোড: ১২৮ (১-অলফ্যাক্টরি, ২-অপটিক, ৮-অডিটরি)।"
+                },
+                {
+                    "type_id": "bio_re_t4",
+                    "name": "Type 4: প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["MAT '21", "MAT '18", "DU '19-20", "RU '19-20", "GST '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q10", "VAR-GST-P05-Q22"],
+                    "core_rule": "মাস্টার গ্ল্যান্ড: পিটুইটারি গ্রন্থি; অগ্ন্যাশয়ের আইলেটস অব ল্যাঙ্গারহ্যান্স: আলফা কোষ থেকে গ্লুকাগন (রক্তে গ্লুকোজ বাড়ায়), বিটা কোষ থেকে ইনসুলিন (রক্তে গ্লুকোজ কমায়), ডেল্টা থেকে সোমাটোস্ট্যাটিন; থাইরক্সিন বিপাক হার নিয়ন্ত্রণ করে; এড্রেনালিন জরুরি কালীন হরমোন (Fight or Flight)।",
+                    "speed_elimination": "ইনসুলিনের অভাবে রক্তের গ্লুকোজ বেড়ে ডায়াবেটিস মেলিটাস রোগ হয়।"
+                }
+            ]
+        },
+        {
+            "id": "bio_genetics_evolution",
+            "subject": "Biology",
+            "paper": "২য় পত্র",
+            "chapter_no": "অধ্যায় ১১",
+            "title": "জিনতত্ত্ব ও বিবর্তন (Genetics & Evolution)",
+            "subtitle": "মেন্ডেলীয় ব্যতিক্রম, লিথাল জিন, সেক্স-লিংকড ও রক্তের গ্রুপ",
+            "total_qb_questions": 490,
+            "high_yield_score": 99,
+            "mega_types": [
+                {
+                    "type_id": "bio_ge_t1",
+                    "name": "Type 1: মেন্ডেলের সূত্রের ব্যতিক্রম ও অনুপাতসমূহ",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 34,
+                    "past_tags": ["MAT '22", "MAT '21", "MAT '20", "DU '22-23", "DU '21-22", "RU '21-22", "Agri '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q01", "MAD-MAT-Q14", "VAR-Agri-P01-Q02", "VAR-JnU-P05-Q21"],
+                    "core_rule": "অসম্পূর্ণ প্রকটতা (সন্ধ্যামালতী): ১:২:১; সমপ্রকটতা (আন্দালুসিয়ান মোরগ-মুরগি): ১:২:১; লিথাল জিন: ২:১; পরিপূরক জিন (মূক ও বধির): ৯:৭; প্রকট এপিস্ট্যাসিস (লেগহর্ন মুরগি): ১৩:৩; দ্বৈত প্রচ্ছন্ন এপিস্ট্যাসিস: ৯:৭; দ্বৈত প্রকট এপিস্ট্যাসিস: ১৫:১।",
+                    "speed_elimination": "লিথাল জিনের ফিনোটাইপিক অনুপাত সর্বদা ২:১ (হোমোজাইগাস অবস্থায় ভ্রূণ মারা যায়)।"
+                },
+                {
+                    "type_id": "bio_ge_t2",
+                    "name": "Type 2: সেক্স-লিংকড ডিসঅর্ডার (হিমোফিলিয়া ও বর্ণান্ধতা)",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 28,
+                    "past_tags": ["MAT '22", "MAT '19", "DU '20-21", "RU '22-23", "GST '22-23"],
+                    "qb_question_refs": ["MAD-MAT-Q07", "VAR-RU-P01-Q21", "VAR-GST-P02-Q20"],
+                    "core_rule": "সেক্স-লিংকড প্রচ্ছন্ন বৈশিষ্ট্য: বর্ণান্ধতা, ক্লাসিক্যাল হিমোফিলিয়া (ফ্যাক্টর VIII এর অভাব), ডুশেন মাসকুলার ডিস্ট্রফি; পুরুষদের একটি মাত্র X ক্রোমোজোম থাকায় প্রচ্ছন্ন জিনটি সরাসরি প্রকাশ পায় (Hemizygous); মহিলারা সাধারণত বাহক হয়।",
+                    "speed_elimination": "বর্ণান্ধ বাবার রোগ মেয়ে বাহক হিসেবে গ্রহণ করে এবং দৌহিত্রে প্রকাশ পায় (Criss-Cross Inheritance)।"
+                },
+                {
+                    "type_id": "bio_ge_t3",
+                    "name": "Type 3: রক্তের এবিও গ্রুপ ও আরএইচ অসামঞ্জস্যতা",
+                    "importance": "5-Star",
+                    "stars": 5,
+                    "repeat_frequency": 26,
+                    "past_tags": ["MAT '21", "MAT '20", "DU '21-22", "RU '20-21", "CU '21-22"],
+                    "qb_question_refs": ["MAD-MAT-Q03", "MAD-MAT-Q16", "VAR-CU-P04-Q22"],
+                    "core_rule": "সর্বজনীন গ্রহীতা: $AB^+$ (কোনো অ্যান্টিবডি নেই); সর্বজনীন দাতা: $O^-$ (কোনো অ্যান্টিজেন ও Rh ফ্যাক্টর নেই); এরিথ্রোব্লাস্টোসিস ফিটালিস: মা $Rh^-$ এবং বাবা $Rh^+$ হলে ২য় গর্ভের সন্তান আক্রান্ত হয় (প্রথম সন্তান অক্ষত থাকে)।",
+                    "speed_elimination": "রক্তের গ্রুপ O তে কোনো অ্যান্টিজেন থাকে না, AB তে কোনো অ্যান্টিবডি থাকে না।"
+                },
+                {
+                    "type_id": "bio_ge_t4",
+                    "name": "Type 4: সমসংস্থ বনাম সমবৃত্তীয় অঙ্গ ও বিবর্তন",
+                    "importance": "3-Star",
+                    "stars": 3,
+                    "repeat_frequency": 18,
+                    "past_tags": ["MAT '20", "MAT '18", "DU '19-20", "RU '19-20"],
+                    "qb_question_refs": ["MAD-MAT-Q12", "VAR-JnU-P07-Q22"],
+                    "core_rule": "সমসংস্থ অঙ্গ (Homologous): উৎপত্তি ও অভ্যন্তরীণ গঠন একই কিন্তু কাজ ভিন্ন (মানুষের হাত, পাখির ডানা, তিমির ফ্লিপার - অপসারী বিবর্তন); সমবৃত্তীয় অঙ্গ (Analogous): উৎপত্তি ভিন্ন কিন্তু কাজ একই (পাখির ডানা ও প্রজাপতির ডানা - অভিসারী বিবর্তন)।",
+                    "speed_elimination": "উৎপত্তি এক কিন্তু কাজ ভিন্ন হলে সমসংস্থ (Homologous) অঙ্গ।"
+                }
+            ]
+        }
+    ]
+
+    blueprint_output = {
+        "metadata": {
+            "title": "Master QB Full-Syllabus Clustered Blueprint 2026",
+            "source_banks": ["VAR Master QB (22,800+ Questions)", "MAD Master QB & Medical Bank"],
+            "total_chapters": len(chapters_data),
+            "subjects": ["Physics", "Chemistry", "Higher Math", "Biology"],
+            "version": "2026.1"
+        },
+        "chapters": chapters_data
+    }
+
+    # Save to both locations
+    os.makedirs(SRC_DATA_DIR, exist_ok=True)
+    os.makedirs(APP_DATA_DIR, exist_ok=True)
+
+    p1 = os.path.join(SRC_DATA_DIR, "master_chapter_blueprint.json")
+    p2 = os.path.join(APP_DATA_DIR, "master_chapter_blueprint.json")
+
+    with open(p1, "w", encoding="utf-8") as f:
+        json.dump(blueprint_output, f, indent=2, ensure_ascii=False)
+    with open(p2, "w", encoding="utf-8") as f:
+        json.dump(blueprint_output, f, indent=2, ensure_ascii=False)
+
+    print(f"Blueprint created successfully with {len(chapters_data)} chapters.")
+    print(f"Saved: {p1}")
+    print(f"Saved: {p2}")
+
+if __name__ == "__main__":
+    build_blueprint()

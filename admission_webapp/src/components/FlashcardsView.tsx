@@ -1,3 +1,4 @@
+import { ActiveRecallView } from './ActiveRecallView';
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { 
   RotateCw, 
@@ -70,6 +71,14 @@ const CURATED_DECKS: DeckMeta[] = [
     badge: '৪০ কার্ডস',
     color: 'from-amber-500 to-orange-600',
     scope: 'মেডিকেল ১০-মার্কস জিকে: ১৯৭১ মুক্তিযুদ্ধ, ১১ সেক্টর, সংবিধান ও জাতিসংঘ',
+  },
+  {
+    id: 'recent_gk_monthly',
+    title: '📅 Udvash Recent Monthly GK (Jan-Oct 2026)',
+    icon: '📅',
+    badge: '৮০ কার্ডস',
+    color: 'from-teal-600 to-emerald-700',
+    scope: 'উদ্ভাসের মান্থলি জিকে লেকচার ও পিডিএফ নোটস: ত্রয়োদশ নির্বাচন, পদ্মা ব্যারাজ, নোবেল ২০২৬ ও মেগা প্রজেক্টস',
   },
 ];
 
@@ -267,6 +276,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
   onSelectWeek,
   selectedSubject: propSubject,
   onSelectSubject,
+  onSelectMode,
 }) => {
   // Top-level View Mode: 'chapter' (অধ্যায়ভিত্তিক ডেক) vs 'macro' (⚡ অল-ইন-ওয়ান স্পেশাল ক্যাপসুল)
   const [activeTab, setActiveTab] = useState<'chapter' | 'macro'>('chapter');
@@ -599,6 +609,16 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
   const macroDeckProgressMap = useMemo(() => {
     const map: Record<string, { mastered: number; total: number }> = {};
     CURATED_DECKS.forEach((deck) => {
+      if (deck.id === 'recent_gk_monthly') {
+        try {
+          const savedGK = localStorage.getItem('admission_monthly_gk_mastered');
+          const count = savedGK ? JSON.parse(savedGK).length : 0;
+          map[deck.id] = { mastered: count, total: 80 };
+        } catch {
+          map[deck.id] = { mastered: 0, total: 80 };
+        }
+        return;
+      }
       const deckCards = macroCards.filter((c) => c.deck_id === deck.id);
       const m = deckCards.filter((c) => masteredIds.has(c.id)).length;
       map[deck.id] = { mastered: m, total: deckCards.length };
@@ -889,6 +909,12 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         </div>
       )}
 
+      {activeTab === 'macro' && selectedMacroDeckId === 'recent_gk_monthly' ? (
+        <div className="w-full">
+          <ActiveRecallView onSelectMode={onSelectMode} />
+        </div>
+      ) : (
+      <>
       {/* =========================================================================
           3. COMPACT STATS & UTILITY STRIP (UPPER FOLD)
          ========================================================================= */}
@@ -1127,8 +1153,9 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         <span className="hidden sm:inline">[Space] উল্টান • [←] পূর্ববর্তী • [→] পরবর্তী • [1] আবার পড়ব • [2] মনে আছে</span>
       </div>
 
+      </>
+      )}
     </div>
   );
 };
 
-export const ActiveRecallView = FlashcardsView;
