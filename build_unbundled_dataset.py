@@ -330,116 +330,13 @@ def build_all():
     for ch in chapters:
         cid = ch['id']
         preds = unbundled_predictors.get(cid, [])
-        # If fewer than 8, generate seed predictors from mega_types
-        if len(preds) < 8:
-            cycle = 0
-            while len(preds) < 8:
-                cycle += 1
-                for i, mt in enumerate(ch['mega_types']):
-                    if len(preds) >= 8:
-                        break
-                    core = mt.get('core_rule', '')
-                    speed = mt.get('speed_elimination', core[:100] or 'অপশন এলিমিনেশন ও ডাইমেনশন যাচাই করুন।')
-                    mname = mt.get('name', '')
-                    tags = mt.get('past_tags', ['DU Direct', 'MAT Repeated'])
+        # Preserve existing predictors without generating dummy template MCQs
+        if not preds and cid in {c['chapter_id'] for c in old_pred_data.get('chapters', [])}:
+            for c in old_pred_data.get('chapters', []):
+                if c.get('chapter_id') == cid:
+                    preds = c.get('predictors', [])
+                    break
 
-                    if cycle == 1:
-                        p_id = f"pred_{cid}_{i+1:02d}_a"
-                        stem = f"[{ch['title'].split('(')[0].strip()}] {mname} সংক্রান্ত মৌলিক নীতি বা সূত্র কোনটি?"
-                        opts = [
-                            f"সঠিক নীতি: {core[:110]}",
-                            f"বিপরীত বিবৃতি যা অসম্পূর্ণ ও বিভ্রান্তিকর অনুসিদ্ধান্ত নির্দেশ করে।",
-                            f"প্রচলিত সাধারণ ধারণার ভুল প্রয়োগ যেখানে ভৌত/গাণিতিক শর্ত লঙ্ঘিত হয়।",
-                            f"উপরের কোনটিই সঠিক নয়।"
-                        ]
-                        preds.append({
-                            "id": p_id,
-                            "stem": stem,
-                            "options": opts,
-                            "answer": "A",
-                            "type_ref": mname,
-                            "trap_alert": f"সতর্কতা: {speed[:100]}",
-                            "speed_hack": speed,
-                            "explanation": f"কোর রুল ও বিশ্লেষণ: {core}"
-                        })
-
-                        if len(preds) < 8:
-                            p_id2 = f"pred_{cid}_{i+1:02d}_b"
-                            stem2 = f"[{ch['chapter_no']}] {mname} এর দ্রুত সমাধান টেকনিক (Speed Hack) কোনটি?"
-                            opts2 = [
-                                f"{speed}",
-                                f"দীর্ঘায়িত প্রথাগত সমীকরণ সমাধান যেখানে ৩ মিনিটের অধিক সময় প্রয়োজন।",
-                                f"অনুপাত ও একক বিবেচনা না করে সরাসরি মুখস্থ মানের প্রয়োগ।",
-                                f"উভয় পক্ষ বর্গ না করে অপরিবর্তিত রাখা।"
-                            ]
-                            preds.append({
-                                "id": p_id2,
-                                "stem": stem2,
-                                "options": opts2,
-                                "answer": "A",
-                                "type_ref": mname,
-                                "trap_alert": "ফর্মুলা প্রয়োগের সময় একক ও চিহ্নের সঠিকতা যাচাই করুন।",
-                                "speed_hack": speed,
-                                "explanation": f"ব্যাখ্যা ও সূত্র: {core}"
-                            })
-
-                    elif cycle == 2:
-                        p_id3 = f"pred_{cid}_{i+1:02d}_c"
-                        tag_str = ', '.join(tags[:2]) if tags else 'ভর্তি পরীক্ষা'
-                        stem3 = f"[{tag_str}] {mname} সংক্রান্ত প্রশ্নে সচরাচর পরীক্ষার্থীরা কোন ট্র্যাপে পড়ে?"
-                        opts3 = [
-                            f"ট্র্যাপ সতর্কতা: {speed}",
-                            f"সবসময় প্রথম অপশনটিকে সঠিক ধরে বাকিগুলো না দেখে দাগানো।",
-                            f"একক রূপান্তরের প্রয়োজন না থাকা সত্ত্বেও অতিরিক্ত গুণ করা।",
-                            f"সমীকরণের উভয় পাশে শূন্য দ্বারা ভাগ করা।"
-                        ]
-                        preds.append({
-                            "id": p_id3,
-                            "stem": stem3,
-                            "options": opts3,
-                            "answer": "A",
-                            "type_ref": mname,
-                            "trap_alert": f"সতর্কতা: {speed[:90]}",
-                            "speed_hack": speed,
-                            "explanation": f"ভর্তি পরীক্ষার ট্র্যাপ অ্যানালাইসিস: {core}"
-                        })
-
-                        if len(preds) < 8:
-                            p_id4 = f"pred_{cid}_{i+1:02d}_d"
-                            stem4 = f"[{ch['title'].split('(')[0].strip()}] {mname} থেকে প্রশ্ন আসলে নিচের কোন সম্পর্কটি সর্বদা সত্য?"
-                            opts4 = [
-                                f"সত্য সম্পর্ক: {core[:100]}",
-                                f"চলকের মান সর্বদা ঋণাত্মক হবে।",
-                                f"মাত্রা সমীকরণ অপরিবর্তিত থাকে না।",
-                                f"কোনোটিই নয়।"
-                            ]
-                            preds.append({
-                                "id": p_id4,
-                                "stem": stem4,
-                                "options": opts4,
-                                "answer": "A",
-                                "type_ref": mname,
-                                "trap_alert": "সূত্রের সীমার বাইরে সম্পর্ক প্রয়োগ করবেন না।",
-                                "speed_hack": speed,
-                                "explanation": f"বিশ্লেষণ: {core}"
-                            })
-                    else:
-                        p_id5 = f"pred_{cid}_{len(preds)+1:02d}"
-                        preds.append({
-                            "id": p_id5,
-                            "stem": f"[{ch['chapter_no']}] {mname} সংক্রান্ত অতিরিক্ত প্র্যাকটিস প্রশ্ন - মূল সমীকরণ কোনটি?",
-                            "options": [
-                                f"{core[:100]}",
-                                f"ভুল সমীকরণ অনুসিদ্ধান্ত ক",
-                                f"ভুল সমীকরণ অনুসিদ্ধান্ত খ",
-                                f"উপরের কোনটিই নয়"
-                            ],
-                            "answer": "A",
-                            "type_ref": mname,
-                            "trap_alert": f"{speed[:90]}",
-                            "speed_hack": speed,
-                            "explanation": f"সূত্র বিশ্লেষণ: {core}"
-                        })
 
         final_pred_chapters.append({
             "chapter_id": cid,

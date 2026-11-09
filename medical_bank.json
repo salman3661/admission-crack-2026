@@ -34,8 +34,8 @@
     "speed_hack": "গ্যালিলিওর ৩য় সূত্রমতে স্থির অবস্থান থেকে পড়ন্ত বস্তুর $s = \\frac{1}{2}gt^2$, তাই দূরত্ব সরাসরি সময়ের বর্গের সমানুপাতিক ($s \\propto t^2$)।",
     "type_ref": "Type 4: খাড়া নিক্ষিপ্ত বস্তু ও পর্যায়ক্রমিক সময়",
     "blueprint_type_id": "phy_dyn_t4",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_03",
+    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
   },
   {
     "id": "w1_phy_q14",
@@ -72,8 +72,8 @@
     "speed_hack": "নিচে নামলে কার্যকর ত্বরণ কমে $g - a = 9.8 - 1 = 8.8\\text{ ms}^{-2}$ হয়; $65 \\times 8.8 = 572\\text{ N}$ (স্বাভাবিক ওজন $637\\text{ N}$ অপেক্ষা কম)।",
     "type_ref": "Type 4: বলের ঘাত ও ভরবেগের পরিবর্তন ($J = F\\Delta t = \\Delta p$)",
     "blueprint_type_id": "phy_newt_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_04",
+    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
   },
   {
     "id": "w1_phy_q16",
@@ -1288,8 +1288,8 @@
     "speed_hack": "নিচে নামলে কার্যকর ত্বরণ $9.8 - 2.2 = 7.6\\text{ ms}^{-2}$; তাই ওজন $60 \\times 7.6 = 456\\text{ N}$ (শেষে $6$ অঙ্ক দেখেই অপশন বাছাই)।",
     "type_ref": "Type 4: বলের ঘাত ও ভরবেগের পরিবর্তন ($J = F\\Delta t = \\Delta p$)",
     "blueprint_type_id": "phy_newt_t4",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_04",
+    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
   },
   {
     "id": "w2_phy_q14",
@@ -1364,8 +1364,8 @@
     "speed_hack": "যে বলের বিরুদ্ধে কাজ করলে যান্ত্রিক শক্তি তাপে অপচয় হয় (যেমন ঘর্ষণ বল, সান্দ্র বল) সেটিই অসংরক্ষণশীল বল।",
     "type_ref": "Type 1: কুয়া ও চৌবাচ্চা খালি করতে কৃতকাজ",
     "blueprint_type_id": "phy_we_t1",
-    "blueprint_chapter_id": "phy_1st_06",
-    "chapter": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)"
+    "blueprint_chapter_id": "phy_1st_05",
+    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
   },
   {
     "id": "w2_phy_q23",
@@ -1402,8 +1402,8 @@
     "speed_hack": "ক্ষমতা হলো বল ও বেগের ডট গুণফল: $P = \\vec{F}\\cdot\\vec{v} = (3)(2) + (4)(-1) + (-2)(3) = 6 - 4 - 6 = -4\\text{ W}$।",
     "type_ref": "Type 4: ইঞ্জিনের ক্ষমতা ও কর্মদক্ষতা (পাম্পের ক্ষমতা)",
     "blueprint_type_id": "phy_we_t4",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_05",
+    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
   },
   {
     "id": "w2_che_q01",
@@ -2352,8 +2352,8 @@
     "speed_hack": "ডি-ব্রগলি তরঙ্গদৈর্ঘ্য $\\lambda = \\frac{h}{\\sqrt{2mE_k}} \\implies \\lambda \\propto \\frac{1}{\\sqrt{E_k}}$; তাই গতিশক্তি ২ গুণ হলে তরঙ্গদৈর্ঘ্য $\\frac{1}{\\sqrt{2}}$ গুণ হবে।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_1st_05",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
+    "blueprint_chapter_id": "phy_2nd_08",
+    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)"
   },
   {
     "id": "w3_phy_q24",
@@ -5902,8 +5902,8 @@
     "speed_hack": "$1000\\text{ Hz}$ কম্পাঙ্কে শ্রাব্যতার প্রমাণ তীব্রতা $I_0 = 10^{-12}\\text{ W/m}^2$ (এবং সর্বোচ্চ সহনীয় তীব্রতা বা ব্যথাসীমা $1\\text{ W/m}^2$)।",
     "type_ref": "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)",
     "blueprint_type_id": "phy_pm_t2",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_09",
+    "chapter": "তরঙ্গ (Waves)"
   },
   {
     "id": "w5_med_016",
@@ -5940,8 +5940,8 @@
     "speed_hack": "শব্দের বেগ $v_t \\approx v_0 + 0.61 t$; তাই প্রতি $1^\\circ\\text{C}$ তাপমাত্রা বৃদ্ধিতে বেগ $0.6\\text{ m/s}$ বা $0.61\\text{ m/s}$ বৃদ্ধি পায়।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_09",
+    "chapter": "তরঙ্গ (Waves)"
   },
   {
     "id": "w5_med_017",
@@ -6744,8 +6744,8 @@
     "speed_hack": "মানুষের শ্রাব্যতার সীমা $20\\text{ Hz} - 20,000\\text{ Hz}$ এবং প্রমাণ তীব্রতা $I_0 = 10^{-12}\\text{ W/m}^2$।",
     "type_ref": "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)",
     "blueprint_type_id": "phy_pm_t2",
-    "blueprint_chapter_id": "phy_1st_03",
-    "chapter": "গতিবিদ্যা ও প্রক্ষেপক (Dynamics & Projectile)"
+    "blueprint_chapter_id": "phy_1st_09",
+    "chapter": "তরঙ্গ (Waves)"
   },
   {
     "id": "w5_rep_015",
@@ -6820,8 +6820,8 @@
     "speed_hack": "জলীয় বাষ্প ($M = 18$) শুষ্ক বাতাস ($M = 28.8$) অপেক্ষা হালকা হওয়ায় আর্দ্র বায়ুর ঘনত্ব $\\rho$ কমে, ফলে $v \\propto \\frac{1}{\\sqrt{\\rho}}$ অনুসারে শব্দের বেগ বাড়ে।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_09",
+    "chapter": "তরঙ্গ (Waves)"
   },
   {
     "id": "w5_rep_017",
@@ -6858,8 +6858,8 @@
     "speed_hack": "প্রতি সেকেন্ডে বিট $|384 - 380| = 4$টি; তাই প্রতি মিনিটে ($60\\text{ s}$) মোট বিট $= 4 \\times 60 = 240$টি।",
     "type_ref": "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)",
     "blueprint_type_id": "phy_pm_t2",
-    "blueprint_chapter_id": "phy_1st_08",
-    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)"
+    "blueprint_chapter_id": "phy_1st_09",
+    "chapter": "তরঙ্গ (Waves)"
   },
   {
     "id": "w5_rep_018",
@@ -7632,8 +7632,8 @@
     "speed_hack": "ভ্যান ডার ওয়ালসের বর্জিত আয়তন ধ্রুবক $b$ হলো ১ মোল গ্যাস অণুর নিজস্ব গোলকীয় আয়তনের ঠিক ৪ গুণ ($b = 4 V_{\\text{actual}}$)।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_10",
+    "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব (Ideal Gas & Kinetic Theory)"
   },
   {
     "id": "w4_med_015",
@@ -7670,8 +7670,8 @@
     "speed_hack": "যে তরল কাঁচ ভিজায় (পানি) তার স্পর্শকোণ সূক্ষ্মকোণ ($<90^\\circ$, প্রায় $8^\\circ$); যা কাঁচ ভিজায় না (পারদ) তার স্পর্শকোণ স্থূলকোণ ($>90^\\circ$, প্রায় $139^\\circ$)।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_07",
+    "chapter": "পদার্থের গাঠনিক ধর্ম (Structural Properties of Matter)"
   },
   {
     "id": "w4_med_016",
@@ -7708,8 +7708,8 @@
     "speed_hack": "আদর্শ গ্যাসে আন্তঃআণবিক বিভব শক্তি শূন্য হওয়ায় অভ্যন্তরীণ শক্তি $U = \\frac{f}{2}nRT$ কেবলমাত্র পরম তাপমাত্রা ($T$)-এর ওপর নির্ভরশীল।",
     "type_ref": "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি",
     "blueprint_type_id": "phy_gt_t4",
-    "blueprint_chapter_id": "phy_1st_05",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
+    "blueprint_chapter_id": "phy_1st_10",
+    "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব (Ideal Gas & Kinetic Theory)"
   },
   {
     "id": "w4_med_017",
@@ -7746,8 +7746,8 @@
     "speed_hack": "তরল স্তরের বেগ অবক্রমের সূত্র ($F = \\eta A \\frac{dv}{dy}$) হলো নিউটনের সান্দ্রতা সূত্র; আর গোলকের প্রান্তিক বেগের সূত্র ($F = 6\\pi\\eta rv$) স্টোকসের।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_04",
-    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
+    "blueprint_chapter_id": "phy_1st_07",
+    "chapter": "পদার্থের গাঠনিক ধর্ম (Structural Properties of Matter)"
   },
   {
     "id": "w4_med_018",
@@ -7784,8 +7784,8 @@
     "speed_hack": "প্রমাণ অবস্থায় শুষ্ক বাতাসের ঘনত্ব $\\rho = \\frac{PM}{RT} = \\frac{101325 \\times 0.0289}{8.314 \\times 273} \\approx 1.293\\text{ kg/m}^3$ (মুখস্থ স্ট্যান্ডার্ড মান)।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_10",
+    "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব (Ideal Gas & Kinetic Theory)"
   },
   {
     "id": "w4_med_019",
@@ -8064,8 +8064,8 @@
     "speed_hack": "কেলভিন স্কেলের শূন্য বিন্দু ($0\\text{ K}$) হলো সেলসিয়াস স্কেলে ঠিক $-273.15^\\circ\\text{C}$ (ফারেনহাইট স্কেলে $-459.67^\\circ\\text{F}$)।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_1st_10",
+    "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব (Ideal Gas & Kinetic Theory)"
   },
   {
     "id": "w4_rep_003",
@@ -8102,8 +8102,8 @@
     "speed_hack": "তাপমাত্রা বাড়লে আন্তঃআণবিক আকর্ষণ কমে বলে পৃষ্ঠটান হ্রাস পায় এবং সংকট তাপমাত্রায় তরল-বাষ্প বিভেদতল লোপ পাওয়ায় পৃষ্ঠটান শূন্য হয়।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_05",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
+    "blueprint_chapter_id": "phy_1st_07",
+    "chapter": "পদার্থের গাঠনিক ধর্ম (Structural Properties of Matter)"
   },
   {
     "id": "w4_rep_004",
@@ -8178,8 +8178,8 @@
     "speed_hack": "তাপমাত্রা বাড়লে তরলের সংশক্তি বল কমে তাই সান্দ্রতা হ্রাস পায়, কিন্তু গ্যাসের অণুর সংঘর্ষ বাড়ে তাই গ্যাসের সান্দ্রতা বৃদ্ধি পায় ($\\eta \\propto \\sqrt{T}$)।",
     "type_ref": "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ",
     "blueprint_type_id": "phy_pm_t4",
-    "blueprint_chapter_id": "phy_1st_04",
-    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)"
+    "blueprint_chapter_id": "phy_1st_07",
+    "chapter": "পদার্থের গাঠনিক ধর্ম (Structural Properties of Matter)"
   },
   {
     "id": "w4_rep_006",
@@ -8216,8 +8216,8 @@
     "speed_hack": "আদর্শ গ্যাসে আন্তঃআণবিক আকর্ষণ শূন্য থাকতে হয়, যা কেবল অণুগুলো দূরে থাকলে (নিম্ন চাপ) এবং দ্রুত ছুটলে (উচ্চ তাপমাত্রা) সম্ভব।",
     "type_ref": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
     "blueprint_type_id": "phy_gt_t2",
-    "blueprint_chapter_id": "phy_1st_05",
-    "chapter": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)"
+    "blueprint_chapter_id": "phy_1st_10",
+    "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব (Ideal Gas & Kinetic Theory)"
   },
   {
     "id": "w4_rep_007",
@@ -9212,8 +9212,8 @@
     "speed_hack": "পানির ত্রৈধবিন্দু সেলসিয়াসে $0.01^\\circ\\text{C}$ এবং কেলভিন স্কেলে আন্তর্জাতিকভাবে সংজ্ঞায়িত মান ঠিক $273.16\\text{ K}$ (চাপ $4.58\\text{ mmHg}$)।",
     "type_ref": "Type 1: কার্নো ইঞ্জিনের কর্মদক্ষতা ও গ্রাহকের তাপমাত্রা",
     "blueprint_type_id": "phy_gt_t1",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_2nd_01",
+    "chapter": "তাপগতিবিদ্যা (Thermodynamics)"
   },
   {
     "id": "w6_med_009",
@@ -9290,8 +9290,8 @@
     "speed_hack": "আইনস্টাইনের $E = mc^2$ সূত্রে $1\\text{ amu} = 1.6605 \\times 10^{-27}\\text{ kg}$ বসালে সমতুল্য শক্তি ফিক্সড ধ্রুবক $931.5\\text{ MeV}$।",
     "type_ref": "Type 4: ভর ত্রুটি ও নিউক্লীয় বন্ধন শক্তি",
     "blueprint_type_id": "phy_mn_t4",
-    "blueprint_chapter_id": "phy_1st_02",
-    "chapter": "ভেক্টর (Vector)"
+    "blueprint_chapter_id": "phy_2nd_09",
+    "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান (Atomic & Nuclear Physics)"
   },
   {
     "id": "w6_med_011",
@@ -11559,7 +11559,7 @@
     "id": "w7_med_phy_03",
     "week_id": "week_07",
     "subject": "Physics",
-    "chapter": "পর্যায়বৃত্ত গতি (Periodic Motion)",
+    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '20 Direct Line",
@@ -11592,7 +11592,7 @@
     "speed_hack": "আইনস্টাইনের সমীকরণ $K_{\\max} = hf - W_0$ অনুসারে সর্বোচ্চ গতিশক্তি কেবল আপতিত আলোর কম্পাঙ্ক ($f$)-এর ওপর রৈখিকভাবে নির্ভরশীল।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_1st_08"
+    "blueprint_chapter_id": "phy_2nd_08"
   },
   {
     "id": "w7_med_phy_04",
@@ -11676,7 +11676,7 @@
     "id": "w7_med_phy_06",
     "week_id": "week_07",
     "subject": "Physics",
-    "chapter": "নিউটনীয় বলবিদ্যা (Newtonian Mechanics)",
+    "chapter": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT '21 Direct Line",
@@ -11709,7 +11709,7 @@
     "speed_hack": "ফোটনের ভরবেগ $p = \\frac{h}{\\lambda}$ থেকে কণার তরঙ্গদৈর্ঘ্য সরাসরি ব্যস্তানুপাতিক: $\\lambda = \\frac{h}{p} = \\frac{h}{mv}$।",
     "type_ref": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
     "blueprint_type_id": "phy_mn_t2",
-    "blueprint_chapter_id": "phy_1st_04"
+    "blueprint_chapter_id": "phy_2nd_08"
   },
   {
     "id": "w7_med_eng_01",
@@ -12271,7 +12271,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভেক্টর (Vector)",
+    "chapter": "চল তড়িৎ (Current Electricity)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "RU 21-22",
@@ -12305,14 +12305,14 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_1st_02"
+    "blueprint_chapter_id": "phy_2nd_03"
   },
   {
     "id": "w8_phy_010",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভেক্টর (Vector)",
+    "chapter": "চল তড়িৎ (Current Electricity)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "Week 08 Solve Sheet - W-08",
@@ -12346,14 +12346,14 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_1st_02"
+    "blueprint_chapter_id": "phy_2nd_03"
   },
   {
     "id": "w8_phy_011",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভেক্টর (Vector)",
+    "chapter": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স (Semiconductor & Electronics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "GST 22-23",
@@ -12387,7 +12387,7 @@
     "expected_count": 5,
     "type_ref": "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট",
     "blueprint_type_id": "phy_el_t2",
-    "blueprint_chapter_id": "phy_1st_02"
+    "blueprint_chapter_id": "phy_2nd_10"
   },
   {
     "id": "w8_phy_012",
@@ -12599,7 +12599,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভেক্টর (Vector)",
+    "chapter": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স (Semiconductor & Electronics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "MAT 20-21",
@@ -12633,14 +12633,14 @@
     "expected_count": 5,
     "type_ref": "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি",
     "blueprint_type_id": "phy_mn_t5",
-    "blueprint_chapter_id": "phy_1st_02"
+    "blueprint_chapter_id": "phy_2nd_10"
   },
   {
     "id": "w8_phy_025",
     "week_id": "week_08",
     "week": 8,
     "subject": "Physics",
-    "chapter": "ভেক্টর (Vector)",
+    "chapter": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স (Semiconductor & Electronics)",
     "tag": "MAT Line",
     "track": "medical",
     "origin": "GST 21-22",
@@ -12674,7 +12674,7 @@
     "expected_count": 5,
     "type_ref": "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি",
     "blueprint_type_id": "phy_mn_t5",
-    "blueprint_chapter_id": "phy_1st_02"
+    "blueprint_chapter_id": "phy_2nd_10"
   },
   {
     "id": "w8_phy_026",
