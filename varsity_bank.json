@@ -1060,8 +1060,8 @@
     "speed_hack": "শর্টকাট: রাইডার ধ্রুবক $= \\frac{2 \\times W(\\text{mg})}{100} \\implies 5\\text{ mg}$ রাইডারে $0.0001\\text{ g}$ এবং $10\\text{ mg}$ রাইডারে $0.0002\\text{ g}$।",
     "type_ref": "Type 4: প্রাইমারি স্ট্যান্ডার্ড বনাম সেকেন্ডারি স্ট্যান্ডার্ড পদার্থ",
     "blueprint_type_id": "chem_quan_t4",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_01",
+    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)"
   },
   {
     "id": "w1_che_q04",
@@ -1174,8 +1174,8 @@
     "speed_hack": "ইলেকট্রন বিনিময় ক্রস-গুণন: $\\text{KMnO}_4$ নেয় $5e^-$ আর $\\text{H}_2\\text{S}$ দেয় $2e^-$ $\\implies a=2, c=5$ এবং $\\text{H}_2\\text{SO}_4$ লাগে $b=3$।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q07",
@@ -1212,8 +1212,8 @@
     "speed_hack": "নির্দেশক pH রেঞ্জ ছন্দ: মিথাইল অরেঞ্জ $3.1-4.4$, মিথাইল রেড $4.2-6.3$, ফেনল্ফথ্যালিন $8.2-9.8$ (ক্ষারীয়)।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q08",
@@ -1250,8 +1250,8 @@
     "speed_hack": "তুল্যতা সূত্র: $e_a V_a M_a = e_b V_b M_b \\implies 3 \\times 25 \\times 0.2 = 2 \\times V_b \\times 0.1 \\implies V_b = 75\\text{ mL}$।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q09",
@@ -1288,8 +1288,8 @@
     "speed_hack": "দ্রুত হিসাব: $250\\text{ mL} = \\frac{1}{4}\\text{ L}$; $W = N \\times E \\times V(\\text{L}) = 0.1 \\times 40 \\times \\frac{1}{4} = 1.0\\text{ g}$।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q10",
@@ -1402,8 +1402,8 @@
     "speed_hack": "সমভরে যার আণবিক ভর ($M$) সবচেয়ে কম, তার মোল ও STP আয়তন ($V \\propto \\frac{1}{M}$) সর্বাধিক — এখানে $\\text{H}_2$ ($M=2$)।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w1_che_q13",
@@ -1440,8 +1440,8 @@
     "speed_hack": "$\\text{N}_2\\text{O}$ ও $\\text{CO}_2$ উভয়েরই আণবিক ভর $44\\text{ g/mol}$; তাই $44\\text{ g} = 1\\text{ mol} = 22.4\\text{ L}$ (STP-তে)।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w1_che_q14",
@@ -1478,8 +1478,8 @@
     "speed_hack": "কাটাকাটি ট্রিক: $\\frac{22.4}{84} = \\frac{4}{15}$; তাই $1000 \\times \\frac{4}{15} = \\frac{800}{3} = 266.67\\text{ L}$।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q15",
@@ -1554,8 +1554,8 @@
     "speed_hack": "টাইট্রেশন নির্দেশক ট্রিক: তীব্র ক্ষার থাকলে ফেনল্ফথ্যালিন; তীব্র এসিড + মৃদু ক্ষার হলে মিথাইল অরেঞ্জ/রেড।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q17",
@@ -1592,8 +1592,8 @@
     "speed_hack": "মৃদু অম্ল + মৃদু ক্ষার টাইট্রেশনে pH-এর কোনো খাড়া উল্লম্ফন (steep jump) ঘটে না, তাই কোনো রাসায়নিক নির্দেশকই উপযুক্ত নয়।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q18",
@@ -1668,8 +1668,8 @@
     "speed_hack": "ফ্র্যাকশন হ্যাক: $444.44 \\times 90\\% = \\frac{4000}{9} \\times \\frac{9}{10} = 400\\text{ g CaCO}_3 = 4\\text{ mol} \\implies 4 \\times 22.4 = 89.6\\text{ L}$।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q20",
@@ -1744,8 +1744,8 @@
     "speed_hack": "$2\\text{KClO}_3 \\to 2\\text{KCl} + 3\\text{O}_2 \\implies 1\\text{ mol KClO}_3 (122.5\\text{ g})$ থেকে $1.5\\text{ mol O}_2 = 1.5 \\times 22.4 = 33.6\\text{ L}$।",
     "type_ref": "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক",
     "blueprint_type_id": "chem_quan_t1",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_che_q22",
@@ -1896,8 +1896,8 @@
     "speed_hack": "তুল্য সংখ্যা দিয়ে মিলি-তুল্য (meq) তুলনা করুন: এসিড $= 10 \\times 1 \\times 2 = 20\\text{ meq}$ < ক্ষার $= 50 \\times 0.5 = 25\\text{ meq}$ (ক্ষারীয়)।",
     "type_ref": "Type 2: pH গণনা ও তীব্র এসিড-ক্ষারের মিশ্রণ",
     "blueprint_type_id": "chem_ch_t2",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w1_mat_q01",
@@ -4670,8 +4670,8 @@
     "speed_hack": "$d^0$ ($\\text{Sc}^{3+}, \\text{Ti}^{4+}$) এবং $d^{10}$ ($\\text{Cu}^+, \\text{Zn}^{2+}$) বিন্যাসযুক্ত আয়নসমূহে $d-d$ স্থানান্তর অসম্ভব বলে এরা সর্বদা বর্ণহীন।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w2_che_q02",
@@ -4746,8 +4746,8 @@
     "speed_hack": "অর্ধপূর্ণ $2p^3$ ইলেকট্রন বিন্যাসের অতিরিক্ত স্থায়িত্বের জন্য ২য় পর্যায়ে ১ম আয়নীকরণ শক্তি: $\\text{N} > \\text{O} > \\text{C} > \\text{B}$।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w2_che_q04",
@@ -4784,8 +4784,8 @@
     "speed_hack": "উভধর্মী অক্সাইড মনে রাখার ছন্দ: 'জেনো আলি বেয়াই সব পাবে' ($\\text{ZnO}, \\text{Al}_2\\text{O}_3, \\text{BeO}, \\text{SnO}, \\text{PbO}$)।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w2_che_q05",
@@ -4822,8 +4822,8 @@
     "speed_hack": "ফাজানের সূত্র: ক্যাটায়নের চার্জ যত বেশি ($\\text{Al}^{3+} > \\text{Mg}^{2+} > \\text{Na}^+ > \\text{K}^+$), পোলারায়ন ও সমযোজী ধর্ম তত বেশি এবং গলনাঙ্ক তত কম।",
     "type_ref": "Type 3: ফাজানের নীতি ও পোলারায়ন (সমযোজী বনাম আয়নিক বৈশিষ্ট্য)",
     "blueprint_type_id": "chem_per_t3",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w2_che_q06",
@@ -4898,8 +4898,8 @@
     "speed_hack": "অক্সো-এসিডের কেন্দ্রীয় পরমাণুর জারণ মান যত বেশি, অম্লত্ব তত তীব্র: $\\text{HClO}_4 (+7) > \\text{HClO}_3 (+5) > \\text{HClO}_2 (+3) > \\text{HClO} (+1)$।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w2_che_q08",
@@ -4936,8 +4936,8 @@
     "speed_hack": "$n$-তম ক্রম বিক্রিয়ার হার ধ্রুবকের একক $= (\\text{mol L}^{-1})^{1-n}\\text{s}^{-1} \\implies n=1$ হলে কেবল $\\text{s}^{-1}$ (ঘনমাত্রা নিরপেক্ষ)।",
     "type_ref": "Type 1: $K_p$ ও $K_c$ এর সম্পর্ক ও একক",
     "blueprint_type_id": "chem_ch_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q09",
@@ -4974,8 +4974,8 @@
     "speed_hack": "হেবার প্রণালীতে $\\Delta n = 2 - (1+3) = -2 \\implies K_p = K_c(RT)^{\\Delta n} = K_c(RT)^{-2}$।",
     "type_ref": "Type 1: $K_p$ ও $K_c$ এর সম্পর্ক ও একক",
     "blueprint_type_id": "chem_ch_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q10",
@@ -5012,8 +5012,8 @@
     "speed_hack": "উভয় পাশে গ্যাসীয় মোল সংখ্যা সমান হলে ($\\Delta n = 0$, যেমন $\\text{H}_2 + \\text{I}_2 \\rightleftharpoons 2\\text{HI}$) সাম্যাবস্থায় চাপের কোনো প্রভাব নেই।",
     "type_ref": "Type 4: লা-শাতেলিয়ার নীতি ও তাপমাত্রার প্রভাব",
     "blueprint_type_id": "chem_ch_t4",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q11",
@@ -5050,8 +5050,8 @@
     "speed_hack": "বিক্রিয়া উল্টালে সাম্যধ্রুবক ব্যস্তানুপাতিক ($1/K_c$) এবং $\\frac{1}{2}$ দিয়ে গুণ করলে বর্গমূল হয়: $K'_c = \\frac{1}{\\sqrt{64}} = \\frac{1}{8}$।",
     "type_ref": "Type 1: $K_p$ ও $K_c$ এর সম্পর্ক ও একক",
     "blueprint_type_id": "chem_ch_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q12",
@@ -5202,8 +5202,8 @@
     "speed_hack": "সকল তীব্র এসিড ও তীব্র ক্ষারের প্রশমন তাপ ধ্রুবক: $\\Delta H = -57.34\\text{ kJ/mol}$ (একমাত্র ব্যতিক্রম $\\text{HF}: -68.6\\text{ kJ/mol}$)।",
     "type_ref": "Type 4: লা-শাতেলিয়ার নীতি ও তাপমাত্রার প্রভাব",
     "blueprint_type_id": "chem_ch_t4",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q16",
@@ -5240,8 +5240,8 @@
     "speed_hack": "একক ভেদে $R$-এর মান: SI এককে $8.314\\text{ J K}^{-1}\\text{mol}^{-1}$, লিটার-বায়ুচাপে $0.0821\\text{ L atm K}^{-1}\\text{mol}^{-1}$, ক্যালরিতে $1.987\\text{ cal}$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w2_che_q17",
@@ -5316,8 +5316,8 @@
     "speed_hack": "$4\\text{ g He} = 1\\text{ mol}$ এবং $27^\\circ\\text{C} = 300\\text{ K} \\implies E_k = \\frac{3}{2}nRT = 1.5 \\times 1 \\times 8.314 \\times 300 = 3741.3\\text{ J}$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w2_che_q19",
@@ -5392,8 +5392,8 @@
     "speed_hack": "সংকোচনশীলতা গুণাঙ্ক $Z = \\frac{PV}{nRT}$; আদর্শ গ্যাসের জন্য $PV = nRT$ বিধায় সর্বদা $Z = 1$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w2_che_q21",
@@ -5430,8 +5430,8 @@
     "speed_hack": "বিশুদ্ধ ভূপৃষ্ঠের পানিতে জলজ প্রাণী বাঁচার জন্য আদর্শ DO পরিসর $4 - 6\\text{ ppm}$ (বা $\\text{mg/L}$)।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w2_che_q22",
@@ -5468,8 +5468,8 @@
     "speed_hack": "ভারী ধাতু রোগের শর্টকাট: আর্সেনিক ($\\text{As}$) $\\to$ ব্ল্যাকফুট ডিজিজ; ক্যাডমিয়াম ($\\text{Cd}$) $\\to$ ইটাই-ইটাই; পারদ ($\\text{Hg}$) $\\to$ মিনামাটা।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w2_che_q23",
@@ -5506,8 +5506,8 @@
     "speed_hack": "COD-তে জৈব ও অজৈব উভয় দূষকই রাসায়নিকভাবে জারিত হয়, কিন্তু BOD-তে কেবল জৈব দূষক বিয়োজিত হয়; তাই সর্বদা $\\text{COD} > \\text{BOD}$।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_1st_04",
+    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
   },
   {
     "id": "w2_che_q24",
@@ -5544,8 +5544,8 @@
     "speed_hack": "বাতাসের $\\text{CO}_2$-এর কারণে স্বাভাবিক বৃষ্টির $\\text{pH} = 5.6$; এর নিচে ($< 5.6$) নামলেই তা এসিড বৃষ্টি।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w2_che_q25",
@@ -5582,8 +5582,8 @@
     "speed_hack": "ল্যান্থানাইড ও অ্যাক্টিনাইড (গ্রুপ ৩ / $f$-ব্লক) সিরিজের মৌলসমূহের প্রধান ও সবচেয়ে সুস্থিত জারণ সংখ্যা $+3$।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w2_hig_q01",
@@ -8698,8 +8698,8 @@
     "speed_hack": "ক্ষুদ্র আকার ও অতি উচ্চ আয়নীকরণ শক্তির কারণে $\\text{Be}$ ও $\\text{Mg}$ বুনসেন শিখায় উত্তেজিত হয় না এবং কোনো বর্ণ দেয় না।",
     "type_ref": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
     "blueprint_type_id": "chem_qual_t4",
-    "blueprint_chapter_id": "chem_1st_01",
-    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w3_che_q10",
@@ -8736,8 +8736,8 @@
     "speed_hack": "ক্ষারীয় নেসলার বিকারক ($\\text{K}_2[\\text{HgI}_4] + \\text{KOH}$) অ্যামোনিয়া বা $\\text{NH}_4^+$ আয়নের সাথে অ্যামিনো মারকিউরিক আয়োডাইডের বাদামি অধঃক্ষেপ দেয়।",
     "type_ref": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
     "blueprint_type_id": "chem_qual_t4",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w3_che_q11",
@@ -8812,8 +8812,8 @@
     "speed_hack": "ইলেকট্রন সমতা: $1\\text{ mol K}_2\\text{Cr}_2\\text{O}_7$ নেয় $6e^-$ এবং $1\\text{ mol H}_2\\text{C}_2\\text{O}_4$ দেয় $2e^- \\implies \\frac{6}{2} = 3\\text{ mol}$।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w3_che_q13",
@@ -9002,8 +9002,8 @@
     "speed_hack": "$\\text{Cu}^{2+}$ দ্রবণে অল্প $\\text{NH}_4\\text{OH}$ দিলে হালকা নীল $\\text{Cu(OH)}_2$, কিন্তু অতিরিক্ত দিলে গাঢ় নীল $[\\text{Cu(NH}_3)_4]\\text{SO}_4$ তৈরি হয়।",
     "type_ref": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
     "blueprint_type_id": "chem_qual_t4",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_1st_02",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
   },
   {
     "id": "w3_che_q18",
@@ -9078,8 +9078,8 @@
     "speed_hack": "অম্লীয় মাধ্যমে $\\text{KMnO}_4$-এর তুল্যসংখ্যা $e = 5 \\implies$ তুল্য ভর $E = \\frac{M}{5} = \\frac{158}{5} = 31.6$।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w3_che_q20",
@@ -9154,8 +9154,8 @@
     "speed_hack": "ব্লিচিং পাউডার $\\text{Ca(OCl)Cl}$ মিশ্র লবণ: $\\text{OCl}^-$ অংশে ক্লোরিন $+1$ এবং $\\text{Cl}^-$ অংশে ক্লোরিন $-1$।",
     "type_ref": "Type 3: জারণ সংখ্যা নির্ণয়ের ব্যতিক্রমী ক্ষেত্র",
     "blueprint_type_id": "chem_quan_t3",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_03",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
   },
   {
     "id": "w3_che_q22",
@@ -11403,7 +11403,7 @@
     "id": "du_rep_chem_02",
     "week_id": "week_01",
     "subject": "Chemistry",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
+    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)",
     "tag": "DU Repeat",
     "track": "varsity",
     "origin": "DU '21-22 Repeat",
@@ -11435,7 +11435,7 @@
     "speed_hack": "অম্লীয় মাধ্যমে $1\\text{ mol K}_2\\text{Cr}_2\\text{O}_7 \\equiv 6e^- \\equiv 6\\text{ mol FeSO}_4$ (আর $\\text{KMnO}_4$ হলে $5\\text{ mol FeSO}_4$)।",
     "type_ref": "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)",
     "blueprint_type_id": "chem_quan_t2",
-    "blueprint_chapter_id": "chem_1st_02"
+    "blueprint_chapter_id": "chem_2nd_03"
   },
   {
     "id": "du_rep_chem_03",
@@ -12346,8 +12346,8 @@
     "speed_hack": "স্থির চার্জে সঞ্চিত মোল সংখ্যা যোজনীর ব্যস্তানুপাতিক ($n \\propto \\frac{1}{z}$) $\\implies n_{\\text{Ag}} : n_{\\text{Cu}} = z_{\\text{Cu}} : z_{\\text{Ag}} = 2 : 1$।",
     "type_ref": "Type 2: ফ্যারাডের তড়িৎ বিশ্লেষণ সূত্র ও চার্জ গণনা",
     "blueprint_type_id": "chem_el_t2",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_04",
+    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
   },
   {
     "id": "w5_var_017",
@@ -12498,8 +12498,8 @@
     "speed_hack": "লবণ সেতুতে $\\text{KCl}, \\text{KNO}_3, \\text{NH}_4\\text{NO}_3$ ব্যবহৃত হয় কারণ এদের ক্যাটায়ন ও অ্যানায়নের আয়নিক গতিবেগ সমান (তরল সংযোগ বিভব শূন্য রাখে)।",
     "type_ref": "Type 1: কোষ বিভব ($E^\\circ_{cell}$) ও বিক্রিয়ার স্বতঃস্ফূর্ততা",
     "blueprint_type_id": "chem_el_t1",
-    "blueprint_chapter_id": "chem_1st_04",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)"
+    "blueprint_chapter_id": "chem_2nd_04",
+    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
   },
   {
     "id": "w5_var_021",
@@ -12612,8 +12612,8 @@
     "speed_hack": "প্রমাণ হাইড্রোজেন তড়িৎদ্বার (SHE) শর্ত: $T = 25^\\circ\\text{C} (298\\text{ K})$, $P_{\\text{H}_2} = 1\\text{ atm}$, এবং $[\\text{H}^+] = 1.0\\text{ M}$ হলে $E^\\circ = 0.00\\text{ V}$।",
     "type_ref": "Type 1: কোষ বিভব ($E^\\circ_{cell}$) ও বিক্রিয়ার স্বতঃস্ফূর্ততা",
     "blueprint_type_id": "chem_el_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_04",
+    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
   },
   {
     "id": "w5_var_024",
@@ -12650,8 +12650,8 @@
     "speed_hack": "তড়িৎ রাসায়নিক সারির যত নিচের ক্যাটায়ন (বিজারণ বিভব যত বেশি), ক্যাথোডে সেটি তত আগে চার্জমুক্ত হয়: $\\text{Ag}^+ > \\text{Cu}^{2+} > \\text{H}^+ > \\text{Na}^+$।",
     "type_ref": "Type 3: তড়িৎ রাসায়নিক সারি ও সক্রিয়তার ক্রম",
     "blueprint_type_id": "chem_el_t3",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_04",
+    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
   },
   {
     "id": "w5_var_025",
@@ -13828,8 +13828,8 @@
     "speed_hack": "ল্যাব ফার্স্ট-এইড শর্টকাট: চোখে এসিড/ক্ষার $\\to 1-5\\%$ বোরিক এসিড ($\\text{H}_3\\text{BO}_3$); ত্বকে এসিড $\\to 5\\% \\text{NaHCO}_3$।",
     "type_ref": "Type 4: প্রাইমারি স্ট্যান্ডার্ড বনাম সেকেন্ডারি স্ট্যান্ডার্ড পদার্থ",
     "blueprint_type_id": "chem_quan_t4",
-    "blueprint_chapter_id": "chem_1st_05",
-    "chapter": "কর্মমুখী রসায়ন (Applied Chemistry)"
+    "blueprint_chapter_id": "chem_1st_01",
+    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)"
   },
   {
     "id": "w5_rep_008",
@@ -13980,8 +13980,8 @@
     "speed_hack": "লেড-এসিড ব্যাটারিতে $38\\% \\text{H}_2\\text{SO}_4$-এর আপেক্ষিক গুরুত্ব: পূর্ণ চার্জে $1.28$, ডিসচার্জে $1.15$ (আর ল্যাবের গাঢ় এসিড $1.84$)।",
     "type_ref": "Type 4: বাণিজ্যিক ব্যাটারি (লেড-এসিড স্টোরেজ ও লিথিয়াম ব্যাটারি)",
     "blueprint_type_id": "chem_el_t4",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_04",
+    "chapter": "তড়িৎ রসায়ন (Electrochemistry)"
   },
   {
     "id": "w5_rep_012",
@@ -15096,8 +15096,8 @@
     "speed_hack": "হাইড্রোজেন হ্যালাইডে শক্তিশালী আন্তঃআণবিক H-বন্ধনের কারণে স্ফুটনাঙ্ক ক্রম: $\\text{HF} > \\text{HI} > \\text{HBr} > \\text{HCl}$।",
     "type_ref": "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা",
     "blueprint_type_id": "chem_per_t4",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_var_018",
@@ -15248,8 +15248,8 @@
     "speed_hack": "'ফেরো' মানে $+2$ ($\\text{K}_4[\\text{Fe(CN)}_6]$) এবং 'ফেরি' মানে $+3$ ($\\text{K}_3[\\text{Fe(CN)}_6]$); উভয় ক্ষেত্রেই ৬টি $\\text{CN}^-$ থাকায় সন্নিবেশ সংখ্যা $6$।",
     "type_ref": "Type 1: সংকরায়ন (Hybridization) ও অণুর জ্যামিতিক আকৃতি",
     "blueprint_type_id": "chem_per_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_var_022",
@@ -15286,8 +15286,8 @@
     "speed_hack": "বেনজিন বলয়ের $1,2$ (অর্থো) অবস্থানে $-\\text{OH}$ ও $-\\text{NO}_2/-\\text{CHO}$ থাকলে নিজেদের মধ্যে অন্তঃআণবিক H-বন্ধন (কিলেশন) ঘটে।",
     "type_ref": "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা",
     "blueprint_type_id": "chem_per_t4",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_var_023",
@@ -15324,8 +15324,8 @@
     "speed_hack": "ক্ষুদ্রতম দুই নিষ্ক্রিয় গ্যাস $\\text{He}$ ও $\\text{Ne}$ কেলাসের ফাঁক দিয়ে বেরিয়ে যায় বলে কখনো ক্ল্যাথরেট (খাঁচা) যৌগ গঠন করে না।",
     "type_ref": "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা",
     "blueprint_type_id": "chem_per_t4",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_var_024",
@@ -15362,8 +15362,8 @@
     "speed_hack": "কক্ষ তাপমাত্রায় একমাত্র তরল 'অধাতু' ব্রোমিন ($\\text{Br}_2$) এবং একমাত্র তরল 'ধাতু' পারদ ($\\text{Hg}$)।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_var_025",
@@ -16540,8 +16540,8 @@
     "speed_hack": "অর্ধপূর্ণ $d^5$ স্থায়িত্বের জন্য ক্রোমিয়াম ($Z=24$): $[\\text{Ar}]\\,3d^5 4s^1$ এবং পূর্ণ $d^{10}$ স্থায়িত্বের জন্য কপার ($Z=29$): $[\\text{Ar}]\\,3d^{10} 4s^1$।",
     "type_ref": "Type 1: কোয়ান্টাম সংখ্যা সেট ও অরবিটাল ধারণক্ষমতা",
     "blueprint_type_id": "chem_qual_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_rep_008",
@@ -16578,8 +16578,8 @@
     "speed_hack": "$\\text{NH}_4\\text{Cl}, \\text{NH}_4\\text{NO}_3, \\text{CuSO}_4\\cdot 5\\text{H}_2\\text{O}, \\text{K}_4[\\text{Fe(CN)}_6]$ যৌগগুলোতে আয়নিক, সমযোজী ও সন্নিবেশ—তিনটি বন্ধনই বিদ্যমান।",
     "type_ref": "Type 1: সংকরায়ন (Hybridization) ও অণুর জ্যামিতিক আকৃতি",
     "blueprint_type_id": "chem_per_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_rep_009",
@@ -16616,8 +16616,8 @@
     "speed_hack": "উভধর্মী অক্সাইড শর্টকাট: $\\text{Al}_2\\text{O}_3, \\text{ZnO}, \\text{BeO}, \\text{SnO}, \\text{PbO}$ এসিড ও ক্ষার উভয়ের সাথেই লবণ ও পানি উৎপন্ন করে।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_rep_010",
@@ -16692,8 +16692,8 @@
     "speed_hack": "মুদ্রাধাতু ($\\text{Cu, Ag, Au}$) পর্যায় সারণির গ্রুপ ১১ (প্রাক্তন IB)-তে অবস্থিত।",
     "type_ref": "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)",
     "blueprint_type_id": "chem_per_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_rep_012",
@@ -16730,8 +16730,8 @@
     "speed_hack": "শুষ্ক বরফ হলো অপোলার কঠিন $\\text{CO}_2$, যার অণুগুলোর মাঝে কেবল দুর্বল ভ্যান ডার ওয়ালস (লন্ডন বিচ্ছুরণ) বল ক্রিয়া করে।",
     "type_ref": "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা",
     "blueprint_type_id": "chem_per_t4",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_1st_03",
+    "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন (Periodic Properties)"
   },
   {
     "id": "w4_rep_013",
@@ -17927,8 +17927,8 @@
     "speed_hack": "$17\\text{ g NH}_3 = \\frac{17}{17} = 1\\text{ mol}$; তাই $n=1$ মোলের আদর্শ ভ্যানডার ওয়ালস সমীকরণ $\\left(P + \\frac{a}{V^2}\\right)(V - b) = RT$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_2nd_03",
-    "chapter": "পরিমাণগত রসায়ন (Quantitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_020",
@@ -17966,8 +17966,8 @@
     "speed_hack": "সমভরে মোল সংখ্যা আণবিক ভরের ব্যস্তানুপাতিক: $n_{\\text{H}_2} : n_{\\text{CH}_4} = \\frac{1}{2} : \\frac{1}{16} = 8 : 1 \\implies P_{\\text{H}_2} = \\frac{8}{8+1}P = \\frac{8}{9}P$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_021",
@@ -18005,8 +18005,8 @@
     "speed_hack": "$\\frac{r_1}{r_2} = \\sqrt{\\frac{M_2}{M_1}} \\implies M_{\\text{HC}} = M_{\\text{H}_2} \\times (\\sqrt{14})^2 = 2 \\times 14 = 28 \\implies 14n = 28 \\implies n = 2$।",
     "type_ref": "Type 1: গ্রাহামের গ্যাস ব্যাপন সূত্র ($r \\propto \\frac{1}{\\sqrt{M}}$)",
     "blueprint_type_id": "chem_env_t1",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_022",
@@ -18044,8 +18044,8 @@
     "speed_hack": "অতি ক্ষুদ্র আকার ও নগণ্য আকর্ষণ বলের ($a \\approx 0$) কারণে কেবল $\\text{H}_2$ এবং $\\text{He}$ গ্যাসের ক্ষেত্রে সর্বদা $Z > 1$ হয়।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_023",
@@ -18083,8 +18083,8 @@
     "speed_hack": "ভারী গ্যাস ($\\text{HCl}, M=36.5$) ধীরগতিতে চলে, তাই সাদা ধোঁয়া সর্বদা ভারী গ্যাসের প্রান্তের (১ম মুখের) কাছাকাছি তৈরি হয়।",
     "type_ref": "Type 1: গ্রাহামের গ্যাস ব্যাপন সূত্র ($r \\propto \\frac{1}{\\sqrt{M}}$)",
     "blueprint_type_id": "chem_env_t1",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_024",
@@ -18122,8 +18122,8 @@
     "speed_hack": "ভ্যানডার ওয়ালস আকর্ষণ ধ্রুবক $a$-এর মান যে গ্যাসের যত বেশি, তার আন্তঃআণবিক আকর্ষণ ও সংকট তাপমাত্রা তত বেশি এবং তরলীকরণ তত সহজ।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_025",
@@ -18161,8 +18161,8 @@
     "speed_hack": "লেড ($\\text{Pb}^{2+}$) দূষণ শিশুদের মস্তিষ্ক ও স্নায়ুতন্ত্রের বিকাশ বাধাগ্রস্ত করে স্থায়ীভাবে IQ হ্রাস ও রক্তস্বল্পতা ঘটায়।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_026",
@@ -18200,8 +18200,8 @@
     "speed_hack": "উৎস থেকে সরাসরি নির্গত অক্সাইড ($\\text{CO}, \\text{NO}, \\text{SO}_2$) প্রাইমারি দূষক; আর সূর্যালোকে সৃষ্ট $\\text{O}_3, \\text{PAN}$ হলো সেকেন্ডারি দূষক।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_027",
@@ -18239,8 +18239,8 @@
     "speed_hack": "পোর্টল্যান্ড সিমেন্টে $2-5\\%$ জিপসাম ($\\text{CaSO}_4\\cdot 2\\text{H}_2\\text{O}$) যোগ করা হয় দ্রুত জমাট বাঁধা রোধ বা মন্থর (Retarder) করার জন্য।",
     "type_ref": "Type 2: অনুমোদিত ফুড প্রিজারভেটিভস ও অ্যান্টিঅক্সিডেন্ট",
     "blueprint_type_id": "chem_app_t2",
-    "blueprint_chapter_id": "chem_2nd_01",
-    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_var_028",
@@ -18317,8 +18317,8 @@
     "speed_hack": "কয়লার মানের ক্রম (কার্বন % ও জ্বালানি মান অনুসারে): অ্যানথ্রাসাইট (সেরা, $86-97\\%$) > বিটুমিনাস > লিগনাইট > পিট।",
     "type_ref": "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়",
     "blueprint_type_id": "chem_env_t4",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_var_030",
@@ -18356,8 +18356,8 @@
     "speed_hack": "ট্যানারি শিল্পের প্রধান বিষাক্ত বর্জ্য $\\text{Cr}^{3+}$ আয়ন ETP-তে তড়িৎ বিশ্লেষণ (Electrolysis) প্রক্রিয়ায় পুনরুদ্ধার ও পৃথক করা হয়।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_2nd_02",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_var_031",
@@ -18395,8 +18395,8 @@
     "speed_hack": "$P_{\\text{O}_2} = \\frac{4}{1+4} \\times 1\\text{ atm} = 0.8\\text{ atm} \\approx 0.8 \\times 10^5\\text{ N/m}^2 = 8 \\times 10^4\\text{ N/m}^2$।",
     "type_ref": "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)",
     "blueprint_type_id": "chem_env_t2",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_01",
+    "chapter": "পরিবেশ রসায়ন (Environmental Chemistry)"
   },
   {
     "id": "w6_var_032",
@@ -18434,8 +18434,8 @@
     "speed_hack": "সানস্ক্রিন লোশন ও বিউটি ক্রিমের প্রধান UV-রশ্মি প্রতিফলক ন্যানোকণা হলো জিংক অক্সাইড ($\\text{ZnO}$) এবং $\\text{TiO}_2$।",
     "type_ref": "Type 3: প্রসাধনী সামগ্রী ও উপাদান (টয়লেট্রিজ)",
     "blueprint_type_id": "chem_app_t3",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_var_033",
@@ -18512,8 +18512,8 @@
     "speed_hack": "তরল শিল্পবর্জ্য = Effluent $\\implies$ ETP = Effluent Treatment Plant।",
     "type_ref": "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)",
     "blueprint_type_id": "chem_env_t3",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_var_035",
@@ -18551,8 +18551,8 @@
     "speed_hack": "কাচের ব্যবহার হ্যাক: অপটিক্যাল চশমা/লেন্স $\\to$ ফ্লিন্ট গ্লাস ($\\text{PbO}$ যুক্ত); ল্যাবরেটরি যন্ত্রপাতি $\\to$ পাইরেক্স গ্লাস ($\\text{B}_2\\text{O}_3$ যুক্ত)।",
     "type_ref": "Type 3: প্রসাধনী সামগ্রী ও উপাদান (টয়লেট্রিজ)",
     "blueprint_type_id": "chem_app_t3",
-    "blueprint_chapter_id": "chem_1st_02",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)"
+    "blueprint_chapter_id": "chem_2nd_05",
+    "chapter": "অর্থনৈতিক রসায়ন (Economic Chemistry)"
   },
   {
     "id": "w6_var_036",
@@ -20664,7 +20664,7 @@
     "id": "w7_var_che_06",
     "week_id": "week_07",
     "subject": "Chemistry",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "DU Repeat",
     "track": "varsity",
     "origin": "W-07 Weekly Exam Set-A Q24",
@@ -20697,7 +20697,7 @@
     "speed_hack": "অ্যালকাইল মূলকের ($\\text{C}_n\\text{H}_{2n+1}-$) সাথে অ্যামাইড মূলক ($-\\text{CONH}_2$) যুক্ত হয়ে সাধারণ সংকেত হয় $\\text{C}_n\\text{H}_{2n+1}\\text{CONH}_2$।",
     "type_ref": "Type 4: কার্যকরী মূলক শনাক্তকারী পরীক্ষা",
     "blueprint_type_id": "chem_org_t4",
-    "blueprint_chapter_id": "chem_1st_02"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w7_var_che_07",
@@ -20898,7 +20898,7 @@
     "id": "w7_var_che_12",
     "week_id": "week_07",
     "subject": "Chemistry",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "Speed Hack",
     "track": "varsity",
     "origin": "W-07 Weekly Exam Set-D Q23",
@@ -20931,7 +20931,7 @@
     "speed_hack": "১টি বলয়যুক্ত যৌগে মোট $\\sigma$ বন্ধন $= \\text{মোট পরমাণু সংখ্যা}$; সাইক্লোহেক্সানোনে ($\\text{C}_6\\text{H}_{10}\\text{O}$) মোট পরমাণু $= 6+10+1 = 17\\sigma$।",
     "type_ref": "Type 1: সমাণুতা (জ্যামিতিক সিস-ট্রান্স ও আলোক সমাণুতা)",
     "blueprint_type_id": "chem_org_t1",
-    "blueprint_chapter_id": "chem_1st_02"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w7_var_mat_01",
@@ -22809,7 +22809,7 @@
     "id": "w3_var_sol_025",
     "week_id": "week_03",
     "subject": "Chemistry",
-    "chapter": "জৈব রসায়ন (Organic Chemistry)",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
     "tag": "Varsity Core",
     "track": "varsity",
     "origin": "W-03 Weekly Exam Set-A Q20",
@@ -22826,7 +22826,7 @@
     "speed_hack": "দ্রাবক নিষ্কাশনের আদর্শ দ্রাবক $=$ ডাইইথাইল ইথার (পানিতে অমিশ্রণীয় $+$ নিম্ন স্ফুটনাঙ্ক)।",
     "type_ref": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
     "blueprint_type_id": "chem_qual_t4",
-    "blueprint_chapter_id": "chem_2nd_02",
+    "blueprint_chapter_id": "chem_1st_02",
     "yield_stars": 5,
     "probability": "96% DU Hotspot",
     "intelligence_type": "Solvent Extraction Ideal Reagent",
@@ -22887,7 +22887,7 @@
     "id": "w3_var_sol_027",
     "week_id": "week_03",
     "subject": "Chemistry",
-    "chapter": "ল্যাবরেটরির নিরাপদ ব্যবহার (Safe Use of Laboratory)",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
     "tag": "Varsity Core",
     "track": "varsity",
     "origin": "W-03 Weekly Exam Set-A Q22",
@@ -22904,7 +22904,7 @@
     "speed_hack": "শিখা পরীক্ষায় বর্ণহীন ক্যাটায়ন: $\\text{Be}^{2+}, \\text{Mg}^{2+}$ (উচ্চ আয়নন শক্তি)।",
     "type_ref": "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ",
     "blueprint_type_id": "chem_qual_t4",
-    "blueprint_chapter_id": "chem_1st_01",
+    "blueprint_chapter_id": "chem_1st_02",
     "yield_stars": 5,
     "probability": "98% DU Hotspot",
     "intelligence_type": "Flame Test Colorless Ions",
@@ -23121,7 +23121,7 @@
     "id": "w3_var_sol_033",
     "week_id": "week_03",
     "subject": "Chemistry",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
     "tag": "Varsity Core",
     "track": "varsity",
     "origin": "W-03 Weekly Exam Set-A Q28",
@@ -23138,7 +23138,7 @@
     "speed_hack": "তাপমাত্রা বাড়ালে দ্রাব্যতা কমে $=$ অনার্দ্র $\\text{Na}_2\\text{SO}_4, \\text{Ce}_2(\\text{SO}_4)_3, \\text{Ca(OH)}_2$।",
     "type_ref": "Type 2: দ্রাব্যতা ও দ্রাব্যতা গুণফল ($K_{sp}$ ও সমআয়ন প্রভাব)",
     "blueprint_type_id": "chem_qual_t2",
-    "blueprint_chapter_id": "chem_1st_04",
+    "blueprint_chapter_id": "chem_1st_02",
     "yield_stars": 5,
     "probability": "99% DU Hotspot",
     "intelligence_type": "Exothermic Dissolution Retrograde Solubility",
@@ -23355,7 +23355,7 @@
     "id": "w3_var_sol_039",
     "week_id": "week_03",
     "subject": "Chemistry",
-    "chapter": "রাসায়নিক পরিবর্তন (Chemical Changes)",
+    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
     "tag": "Varsity Core",
     "track": "varsity",
     "origin": "Daily Exam C-03 Set-A Q09",
@@ -23372,7 +23372,7 @@
     "speed_hack": "$Z = 15 - 13 = 2, A = 31 - 27 = 4 \\implies ^4_2\\text{He} = \\alpha$-কণা।",
     "type_ref": "Type 1: কোয়ান্টাম সংখ্যা সেট ও অরবিটাল ধারণক্ষমতা",
     "blueprint_type_id": "chem_qual_t1",
-    "blueprint_chapter_id": "chem_1st_04",
+    "blueprint_chapter_id": "chem_1st_02",
     "yield_stars": 5,
     "probability": "98% DU Hotspot",
     "intelligence_type": "Nuclear Reaction Balance Particle",
@@ -27085,7 +27085,7 @@
     "week_id": "week_08",
     "week": 8,
     "subject": "Chemistry",
-    "chapter": "গুণগত রসায়ন (Qualitative Chemistry)",
+    "chapter": "জৈব রসায়ন (Organic Chemistry)",
     "tag": "Speed Hack",
     "track": "varsity",
     "origin": "Week 08 Solve Sheet - Daily C-08",
@@ -27119,7 +27119,7 @@
     "expected_count": 5,
     "type_ref": "Type 5: মার্কনিকভ ও অ্যান্টি-মার্কনিকভ নীতি (পারঅক্সাইড প্রভাব)",
     "blueprint_type_id": "chem_org_t5",
-    "blueprint_chapter_id": "chem_1st_02"
+    "blueprint_chapter_id": "chem_2nd_02"
   },
   {
     "id": "w8_che_023",
