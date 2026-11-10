@@ -626,6 +626,16 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                       <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 shadow-xs font-mono">
                         প্রশ্ন: {currentExamIndex + 1} / {examQuestions.length} টি • {examQuestions[currentExamIndex].subject}
                       </span>
+                      {((examQuestions[currentExamIndex] as any).is_du_repeated || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Most Repeated') || examQuestions[currentExamIndex].tag?.includes('DU Repeat')) && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
+                          🔥 DU Most Repeated
+                        </span>
+                      )}
+                      {((examQuestions[currentExamIndex] as any).is_du_speed_hack || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Speed-Hack') || examQuestions[currentExamIndex].speed_hack) && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
+                          ⚡ DU Speed-Hack
+                        </span>
+                      )}
                       {examQuestions[currentExamIndex].expected_count !== undefined && examQuestions[currentExamIndex].expected_count !== null && (
                         <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
                           <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof examQuestions[currentExamIndex].expected_count === 'number' ? `${examQuestions[currentExamIndex].expected_count} বার` : examQuestions[currentExamIndex].expected_count}</span>
@@ -1171,6 +1181,16 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         {q.tag && (
                           <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">
                             {q.tag}
+                          </span>
+                        )}
+                        {((q as any).is_du_repeated || (q as any).source_tag?.includes('DU Most Repeated') || q.tag?.includes('DU Repeat')) && (
+                          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                            🔥 DU Most Repeated
+                          </span>
+                        )}
+                        {((q as any).is_du_speed_hack || (q as any).source_tag?.includes('DU Speed-Hack') || q.speed_hack) && (
+                          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                            ⚡ DU Speed-Hack
                           </span>
                         )}
                         {q.expected_count !== undefined && q.expected_count !== null && (

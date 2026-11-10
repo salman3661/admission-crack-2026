@@ -692,9 +692,21 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                     </span>
                   </div>
 
-                  {/* SOURCE TAG FIX */}
-                  <div className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded w-fit mb-2">
-                    {currentQ.source || (currentQ as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
+                  {/* SOURCE & DU HACK TAGS */}
+                  <div className="flex items-center gap-1.5 flex-wrap mb-2">
+                    <span className="text-[11px] font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 px-2 py-0.5 rounded">
+                      {currentQ.source || (currentQ as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
+                    </span>
+                    {((currentQ as any).is_du_repeated || (currentQ as any).source_tag?.includes('DU Most Repeated')) && (
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
+                        🔥 DU Most Repeated
+                      </span>
+                    )}
+                    {((currentQ as any).is_du_speed_hack || (currentQ as any).source_tag?.includes('DU Speed-Hack') || currentQ.speed_hack) && (
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
+                        ⚡ DU Speed-Hack
+                      </span>
+                    )}
                   </div>
 
                   {/* Question Stem */}
@@ -1434,10 +1446,20 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                             </span>
                           </div>
 
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+                          <div className="flex items-center gap-1.5 flex-wrap mb-2">
+                            <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800">
                               {(q as any).source || (q as any).source_tag || "🎯 ২০২৬ প্রেডিক্টর"}
                             </span>
+                            {((q as any).is_du_repeated || (q as any).source_tag?.includes('DU Most Repeated')) && (
+                              <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
+                                🔥 DU Most Repeated
+                              </span>
+                            )}
+                            {((q as any).is_du_speed_hack || (q as any).source_tag?.includes('DU Speed-Hack') || q.speed_hack) && (
+                              <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
+                                ⚡ DU Speed-Hack
+                              </span>
+                            )}
                           </div>
 
                           <div className="text-sm sm:text-base font-medium text-slate-900 dark:text-white leading-relaxed">
@@ -1712,10 +1734,20 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+                      <div className="flex items-center gap-1.5 flex-wrap mb-2">
+                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800">
                           {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
                         </span>
+                        {((q as any).is_du_repeated || (q as any).source_tag?.includes('DU Most Repeated')) && (
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
+                            🔥 DU Most Repeated
+                          </span>
+                        )}
+                        {((q as any).is_du_speed_hack || (q as any).source_tag?.includes('DU Speed-Hack') || q.speed_hack) && (
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
+                            ⚡ DU Speed-Hack
+                          </span>
+                        )}
                       </div>
 
                       <div className="text-lg font-medium leading-relaxed text-slate-900 dark:text-white">

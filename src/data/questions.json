@@ -1712,8 +1712,8 @@
     "speed_hack": "মূলবিন্দুগামী রেখায় ধ্রুবপদ থাকে না এবং $m = \\tan 60^\\circ = \\sqrt{3}$ হওয়ায় সমীকরণ সরাসরি $y = \\sqrt{3}x \\implies \\sqrt{3}x - y = 0$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_07",
-    "chapter": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত (Associated Angles)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q03",
@@ -1811,8 +1811,8 @@
     "speed_hack": "$x$-অক্ষের সাপেক্ষে প্রতিবিম্ব নিলে কেবল ঢালের চিহ্ন উল্টে যায়: আদি ঢাল $-\\frac{12}{9} = -\\frac{4}{3}$ থেকে সরাসরি $+\\frac{4}{3}$।",
     "type_ref": "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
     "blueprint_type_id": "math_str_t3",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q06",
@@ -1877,8 +1877,8 @@
     "speed_hack": "$y = \\text{ধ্রুবক}$ ($x$-অক্ষের সমান্তরাল) এবং $x = \\text{ধ্রুবক}$ ($y$-অক্ষের সমান্তরাল) রেখাদ্বয় সর্বদা পরস্পর লম্ব ($90^\\circ$)।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q08",
@@ -1943,8 +1943,8 @@
     "speed_hack": "লম্ব শর্ত $\\Delta x_1 \\Delta x_2 + \\Delta y_1 \\Delta y_2 = 0$: ভেক্টর তুলনায় সরাসরি $(a-1)(2) + 1(2-b) = 0 \\implies 2a - b = 0$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q10",
@@ -1976,8 +1976,8 @@
     "speed_hack": "$x + 2y = 10$ ও $x + y = 6$ বিয়োগ করলে ছেদবিন্দু $(2, 4)$, যাতে $z = 2(2) + 3(4) = 16$ সর্বোচ্চ।",
     "type_ref": "Type 2: অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল",
     "blueprint_type_id": "math_str_t2",
-    "blueprint_chapter_id": "math_1st_09",
-    "chapter": "অন্তরীকরণ (Differentiation)"
+    "blueprint_chapter_id": "math_2nd_02",
+    "chapter": "math_2nd_02"
   },
   {
     "id": "w1_mat_q11",
@@ -2009,8 +2009,8 @@
     "speed_hack": "$z = 2x - y$ সর্বনিম্ন করতে $x$ সর্বনিম্ন ($0$) ও $y$ সর্বোচ্চ ($5$) বসালেই $z = 2(0) - 5 = -5$।",
     "type_ref": "Type 2: অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল",
     "blueprint_type_id": "math_str_t2",
-    "blueprint_chapter_id": "math_1st_09",
-    "chapter": "অন্তরীকরণ (Differentiation)"
+    "blueprint_chapter_id": "math_2nd_02",
+    "chapter": "math_2nd_02"
   },
   {
     "id": "w1_mat_q12",
@@ -2042,8 +2042,8 @@
     "speed_hack": "$150^\\circ$ ২য় চতুর্ভাগে হওয়ায় $x < 0, y > 0$; অপশনগুলোর মধ্যে কেবল প্রথমটিতেই ভুজ ঋণাত্মক ও কোটি ধনাত্মক ও হরে $2$ আছে।",
     "type_ref": "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
     "blueprint_type_id": "math_str_t3",
-    "blueprint_chapter_id": "math_1st_07",
-    "chapter": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত (Associated Angles)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q13",
@@ -2075,8 +2075,8 @@
     "speed_hack": "উভয় স্থানাঙ্ক ঋণাত্মক হওয়ায় বিন্দুটি ৩য় চতুর্ভাগে ($\\theta = 180^\\circ + 30^\\circ = 210^\\circ$ বা $-150^\\circ$) এবং $r = \\sqrt{27+9} = 6$।",
     "type_ref": "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
     "blueprint_type_id": "math_str_t3",
-    "blueprint_chapter_id": "math_2nd_03",
-    "chapter": "জটিল সংখ্যা (Complex Numbers)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q14",
@@ -2108,8 +2108,8 @@
     "speed_hack": "$r + r\\cos\\theta = 2 \\implies r = 2 - x$; উভয়পক্ষে বর্গ করলে $x^2$ কেটে সরাসরি পরাবৃত্ত $y^2 + 4x = 4$ পাওয়া যায়।",
     "type_ref": "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
     "blueprint_type_id": "math_str_t3",
-    "blueprint_chapter_id": "math_1st_07",
-    "chapter": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত (Associated Angles)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q15",
@@ -2174,8 +2174,8 @@
     "speed_hack": "সমান্তরাল রেখায় $3x + 7y$ অংশ স্থির রেখে বিন্দু $(2, 1)$ বসালে ধ্রুবক $= 3(2) + 7(1) = 13 \\implies 3x + 7y - 13 = 0$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q17",
@@ -2207,8 +2207,8 @@
     "speed_hack": "ঢাল $m = \\tan 135^\\circ = -1$ হলে রেখার আকার $x + y = x_1 + y_1 = 3 + (-2) = 1 \\implies x + y - 1 = 0$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_07",
-    "chapter": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত (Associated Angles)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q18",
@@ -2273,8 +2273,8 @@
     "speed_hack": "$a + 2b$ পেতে $(x, y) = (-1, -2)$ ছেদবিন্দু ৩য় রেখায় বসালেই $-a - 2b - 7 = 0 \\implies a + 2b = -7$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q20",
@@ -2339,8 +2339,8 @@
     "speed_hack": "শীর্ষত্রয় $(0,0), (0,1)$ ও $(-\\frac{1}{4}, -\\frac{1}{4})$; $y$-অক্ষের ওপর ভূমি $1$ ও উচ্চতা $\\frac{1}{4}$ হওয়ায় ক্ষেত্রফল $\\frac{1}{2} \\times 1 \\times \\frac{1}{4} = \\frac{1}{8}$।",
     "type_ref": "Type 2: অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল",
     "blueprint_type_id": "math_str_t2",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q22",
@@ -2372,8 +2372,8 @@
     "speed_hack": "সামান্তরিকের ৪র্থ শীর্ষ $D = A + C - B = (3 - 2 - (-6), -4 - 1 - 5) = (7, -10)$—ভুজ $7$ দেখেই ১ সেকেন্ডে উত্তর।",
     "type_ref": "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
     "blueprint_type_id": "math_str_t3",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q23",
@@ -2438,8 +2438,8 @@
     "speed_hack": "অপশন টেস্ট: $(-1, 2)$ বিন্দু ও ঢাল $m = \\frac{3 \\mp 1}{1 \\pm 3} = \\frac{1}{2}$ বা $-2$; $m = \\frac{1}{2}$ বিশিষ্ট একমাত্র রেখা $x - 2y + 5 = 0$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_mat_q25",
@@ -2471,8 +2471,8 @@
     "speed_hack": "প্রথম রেখার ঢাল $\\frac{1}{\\sqrt{3}}$ ($\\theta_1 = 30^\\circ$) ও দ্বিতীয়টির ঢাল $\\sqrt{3}$ ($\\theta_2 = 60^\\circ$); অন্তর্ভুক্ত সূক্ষ্মকোণ $30^\\circ$ বলে স্থূলকোণ $180^\\circ - 30^\\circ = 150^\\circ$।",
     "type_ref": "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
     "blueprint_type_id": "math_str_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_03",
+    "chapter": "math_1st_03"
   },
   {
     "id": "w1_bio_q01",
@@ -13462,8 +13462,8 @@
     "speed_hack": "পূর্ণবর্গ করলে $2(x - 2)^2 + 3$, যার সর্বনিম্ন মান সরাসরি ধ্রুবপদ $3$ (যখন $x = 2$)।",
     "type_ref": "Type 2: গুরুমান ও লঘুমান (চরম মান নির্ণয়)",
     "blueprint_type_id": "math_diff_t2",
-    "blueprint_chapter_id": "math_1st_09",
-    "chapter": "অন্তরীকরণ (Differentiation)"
+    "blueprint_chapter_id": "math_2nd_04",
+    "chapter": "math_2nd_04"
   },
   {
     "id": "w5_var_029",
@@ -13500,8 +13500,8 @@
     "speed_hack": "সমীকরণ দুটি বিয়োগ করলে সাধারণ মূল $x = 1$ পাওয়া যায়; ১ম সমীকরণে $x = 1$ বসালেই $1 + a + b = 0 \\implies a + b = -1$।",
     "type_ref": "Type 3: দ্বিঘাত সমীকরণের মূলের সম্পর্ক ও এক মূল অপরটির $n$ গুণ",
     "blueprint_type_id": "math_cp_t3",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_2nd_04",
+    "chapter": "math_2nd_04"
   },
   {
     "id": "w5_var_030",
@@ -13690,8 +13690,8 @@
     "speed_hack": "$x \\to \\frac{1}{x}$ প্রতিস্থাপনে সমীকরণ হয় $cx^2 + bx + a = 0$, যার মূল $\\frac{1}{\\alpha}, \\frac{1}{\\beta}$; তাই বর্গের সমষ্টি সরাসরি $\\frac{b^2 - 2ac}{c^2}$।",
     "type_ref": "Type 3: দ্বিঘাত সমীকরণের মূলের সম্পর্ক ও এক মূল অপরটির $n$ গুণ",
     "blueprint_type_id": "math_cp_t3",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_2nd_04",
+    "chapter": "math_2nd_04"
   },
   {
     "id": "w5_var_035",
@@ -17358,8 +17358,8 @@
     "speed_hack": "সর্বোচ্চ $H = 50$ ও সর্বনিম্ন $L = 10$ হলে পরিসরাঙ্ক $= \\frac{50-10}{50+10} \\times 100\\% = \\frac{40}{60} \\times 100\\% = 66.67\\%$।",
     "type_ref": "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
     "blueprint_type_id": "math_mat_t4",
-    "blueprint_chapter_id": "math_1st_09",
-    "chapter": "অন্তরীকরণ (Differentiation)"
+    "blueprint_chapter_id": "math_2nd_10",
+    "chapter": "math_2nd_10"
   },
   {
     "id": "w4_var_037",
@@ -21369,8 +21369,8 @@
     "speed_hack": "গোল্ডেন হেরন ত্রয়ী: $13, 14, 15$ বাহুবিশিষ্ট ত্রিভুজের ক্ষেত্রফল সর্বদা $84$ বর্গ একক (যেমন $5,12,13$ ও $9,12,15$ দুটি সমকোণী ত্রিভুজের যোগফল $\\frac{1}{2}\\times 14\\times 12 = 84$)।",
     "type_ref": "Type 4: ত্রিভুজের কোণ ও বাহুর সম্পর্ক (সাইন ও কোসাইন সূত্র)",
     "blueprint_type_id": "math_trig_t4",
-    "blueprint_chapter_id": "math_1st_08",
-    "chapter": "ফাংশন ও ফাংশনের লেখচিত্র (Functions & Graphs)"
+    "blueprint_chapter_id": "math_1st_07",
+    "chapter": "math_1st_07"
   },
   {
     "id": "w6_quiz_046",
@@ -21486,8 +21486,8 @@
     "speed_hack": "সর্বোচ্চ মান $= 4 + \\sqrt{1^2 + (\\sqrt{3})^2} = 4 + 2 = 6$।",
     "type_ref": "Type 1: $A\\sin\\theta + B\\cos\\theta$ এর সর্বোচ্চ ও সর্বনিম্ন মান",
     "blueprint_type_id": "math_trig_t1",
-    "blueprint_chapter_id": "math_1st_09",
-    "chapter": "অন্তরীকরণ (Differentiation)"
+    "blueprint_chapter_id": "math_1st_07",
+    "chapter": "math_1st_07"
   },
   {
     "id": "w6_quiz_049",
@@ -28438,7 +28438,7 @@
     "id": "w3_var_sol_048",
     "week_id": "week_03",
     "subject": "Higher Math",
-    "chapter": "অন্তরীকরণ (Differentiation)",
+    "chapter": "math_2nd_06",
     "tag": "Speed Hack",
     "track": "varsity",
     "origin": "W-03 Weekly Exam Set-A Q38",
@@ -28455,7 +28455,7 @@
     "speed_hack": "আংশিক অন্তরীকরণ শর্টকাট: $6x = 12 \\implies x = 2$; $2y = 4 \\implies y = 2$! ৩ সেকেন্ডে কেন্দ্র নির্ণয়।",
     "type_ref": "Type 3: অধিবৃত্তের উৎকেন্দ্রিকতা ও অসীম তটের সমীকরণ",
     "blueprint_type_id": "math_con_t3",
-    "blueprint_chapter_id": "math_1st_09",
+    "blueprint_chapter_id": "math_2nd_06",
     "yield_stars": 5,
     "probability": "99% DU Hotspot",
     "intelligence_type": "Partial Derivative Conic Center",
@@ -36616,5 +36616,1655 @@
     "blueprint_type_id": "bio_zoo_12_t1",
     "blueprint_chapter_id": "bio_zoo_12",
     "chapter": "bio_zoo_12"
+  },
+  {
+    "id": "vb_pred_math_1st_01_01",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$A = \\begin{pmatrix} k - 2 & 4 \\\\ 3 & k + 2 \\end{pmatrix}$ ম্যাট্রিক্সটি ব্যতিক্রমী (Singular) হলে $k$ এর মান কত?",
+    "question": "$A = \\begin{pmatrix} k - 2 & 4 \\\\ 3 & k + 2 \\end{pmatrix}$ ম্যাট্রিক্সটি ব্যতিক্রমী (Singular) হলে $k$ এর মান কত?",
+    "opts": [
+      "$\\pm 4$",
+      "$\\pm 2$",
+      "$16$",
+      "$\\pm \\sqrt{10}$"
+    ],
+    "options": [
+      "$\\pm 4$",
+      "$\\pm 2$",
+      "$16$",
+      "$\\pm \\sqrt{10}$"
+    ],
+    "ans": "$\\pm 4$",
+    "correct_index": 0,
+    "exp": "ব্যতিক্রমী ম্যাট্রিক্সের নির্ণায়ক শূন্য: $|A| = (k-2)(k+2) - (3)(4) = k^2 - 4 - 12 = k^2 - 16 = 0 \\implies k = \\pm 4$。",
+    "explanation": "ব্যতিক্রমী ম্যাট্রিক্সের নির্ণায়ক শূন্য: $|A| = (k-2)(k+2) - (3)(4) = k^2 - 4 - 12 = k^2 - 16 = 0 \\implies k = \\pm 4$。",
+    "trap": "কোণাকুণি বিয়োগে চিহ্নের ভুল করে $k^2 + 4$ ভাবা। $(k-2)(k+2) = k^2 - 4$!",
+    "trap_insight": "কোণাকুণি বিয়োগে চিহ্নের ভুল করে $k^2 + 4$ ভাবা। $(k-2)(k+2) = k^2 - 4$!",
+    "trap_alert": "কোণাকুণি বিয়োগে চিহ্নের ভুল করে $k^2 + 4$ ভাবা। $(k-2)(k+2) = k^2 - 4$!",
+    "tag": "Type 1: ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান (DU Repeated)",
+    "speed_hack": "ব্যতিক্রমী হলে $|A| = 0 \\implies (k-2)(k+2) - 12 = 0 \\implies k^2 - 16 = 0 \\implies k = \\pm 4$। ৩ সেকেন্ডে নির্ণয়!",
+    "type_ref": "Type 1: ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান (DU Repeated)",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_02",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$A = \\begin{pmatrix} 3 & 5 \\\\ 1 & 2 \\end{pmatrix}$ হলে $A^{-1}$ ম্যাট্রিক্সটি কোনটি?",
+    "question": "$A = \\begin{pmatrix} 3 & 5 \\\\ 1 & 2 \\end{pmatrix}$ হলে $A^{-1}$ ম্যাট্রিক্সটি কোনটি?",
+    "opts": [
+      "$\\begin{pmatrix} -2 & 5 \\\\ 1 & -3 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 3 & -5 \\\\ -1 & 2 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 2 & 5 \\\\ 1 & 3 \\end{pmatrix}$"
+    ],
+    "options": [
+      "$\\begin{pmatrix} -2 & 5 \\\\ 1 & -3 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 3 & -5 \\\\ -1 & 2 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 2 & 5 \\\\ 1 & 3 \\end{pmatrix}$"
+    ],
+    "ans": "$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$",
+    "correct_index": 1,
+    "exp": "$A^{-1} = \\frac{1}{ad-bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix} = \\frac{1}{6-5}\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$।",
+    "explanation": "$A^{-1} = \\frac{1}{ad-bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix} = \\frac{1}{6-5}\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$।",
+    "trap": "নির্ণায়কের মান $6 - 5 = 1$ হলেও চিহ্নের পরিবর্তনের নিয়ম ভুল করা।",
+    "trap_insight": "নির্ণায়কের মান $6 - 5 = 1$ হলেও চিহ্নের পরিবর্তনের নিয়ম ভুল করা।",
+    "trap_alert": "নির্ণায়কের মান $6 - 5 = 1$ হলেও চিহ্নের পরিবর্তনের নিয়ম ভুল করা।",
+    "tag": "Type 2: বিপরীত ম্যাট্রিক্স নির্ণয় ($2 \\times 2$ ফাস্ট ট্রিক)",
+    "speed_hack": "২×২ শর্টকাট: প্রধান কর্ণের স্থান বদল ($3 \\leftrightarrow 2$) এবং গৌণ কর্ণের চিহ্ন বদল ($-5, -1$), তারপর $|A| = 1$ দিয়ে ভাগ!",
+    "type_ref": "Type 2: বিপরীত ম্যাট্রিক্স নির্ণয় ($2 \\times 2$ ফাস্ট ট্রিক)",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_03",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "যদি $A$ ম্যাট্রিক্সের ক্রম $3 \\times 4$, $B$ ম্যাট্রিক্সের ক্রম $4 \\times 3$ এবং $C$ ম্যাট্রিক্সের ক্রম $3 \\times 2$ হয়, তবে $(A^T + B) \\times C$ ম্যাট্রিক্সের আকার (Order) কত?",
+    "question": "যদি $A$ ম্যাট্রিক্সের ক্রম $3 \\times 4$, $B$ ম্যাট্রিক্সের ক্রম $4 \\times 3$ এবং $C$ ম্যাট্রিক্সের ক্রম $3 \\times 2$ হয়, তবে $(A^T + B) \\times C$ ম্যাট্রিক্সের আকার (Order) কত?",
+    "opts": [
+      "$4 \\times 3$",
+      "$3 \\times 2$",
+      "$4 \\times 2$",
+      "$3 \\times 4$"
+    ],
+    "options": [
+      "$4 \\times 3$",
+      "$3 \\times 2$",
+      "$4 \\times 2$",
+      "$3 \\times 4$"
+    ],
+    "ans": "$4 \\times 2$",
+    "correct_index": 2,
+    "exp": "যোগফল $(A^T + B)$ এর ক্রম $4 \\times 3$ এবং $C$ এর ক্রম $3 \\times 2$। গুণফলের ক্রম হবে $4 \\times 2$।",
+    "explanation": "যোগফল $(A^T + B)$ এর ক্রম $4 \\times 3$ এবং $C$ এর ক্রম $3 \\times 2$। গুণফলের ক্রম হবে $4 \\times 2$।",
+    "trap": "যোগের জন্য আকার অভিন্ন হতে হয়। $A$ এর আকার $3 \\times 4$ হলে $A^T$ হয় $4 \\times 3$!",
+    "trap_insight": "যোগের জন্য আকার অভিন্ন হতে হয়। $A$ এর আকার $3 \\times 4$ হলে $A^T$ হয় $4 \\times 3$!",
+    "trap_alert": "যোগের জন্য আকার অভিন্ন হতে হয়। $A$ এর আকার $3 \\times 4$ হলে $A^T$ হয় $4 \\times 3$!",
+    "tag": "Type 3: ম্যাট্রিক্সের গুণন ও মাত্রার শর্ত (DU Speed-Hack)",
+    "speed_hack": "ডাইমেনশন রুল: $A$ এর আকার $3 \\times 4 \\implies A^T$ হয় $4 \\times 3$। তাই $(A^T + B)$ হলো $4 \\times 3$। এবার $(A^T + B)_{4 \\times 3} \\times C_{3 \\times 2} = 4 \\times 2$! মান হিসাব ছাড়াই সরাসরি নির্ণয়!",
+    "type_ref": "Type 3: ম্যাট্রিক্সের গুণন ও মাত্রার শর্ত (DU Speed-Hack)",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_04",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি $3 \\times 3$ ক্রমের বর্গ ম্যাট্রিক্স $A$ এর নির্ণায়ক $|A| = 5$ হলে $|2A|$ এর মান কত?",
+    "question": "একটি $3 \\times 3$ ক্রমের বর্গ ম্যাট্রিক্স $A$ এর নির্ণায়ক $|A| = 5$ হলে $|2A|$ এর মান কত?",
+    "opts": [
+      "$20$",
+      "$10$",
+      "$30$",
+      "$40$"
+    ],
+    "options": [
+      "$20$",
+      "$10$",
+      "$30$",
+      "$40$"
+    ],
+    "ans": "$40$",
+    "correct_index": 3,
+    "exp": "$3 \\times 3$ ম্যাট্রিক্সের ৩টি সারি থেকেই ২ সাধারণ নেওয়া যায়, ফলে $|2A| = 2^3 |A| = 8 \\times 5 = 40$।",
+    "explanation": "$3 \\times 3$ ম্যাট্রিক্সের ৩টি সারি থেকেই ২ সাধারণ নেওয়া যায়, ফলে $|2A| = 2^3 |A| = 8 \\times 5 = 40$।",
+    "trap": "সরাসরি $2 \\times 5 = 10$ দাগানো! $n$ মাত্রার জন্য স্কেলার গুণিতক $k^n$ আকারে বের হয়।",
+    "trap_insight": "সরাসরি $2 \\times 5 = 10$ দাগানো! $n$ মাত্রার জন্য স্কেলার গুণিতক $k^n$ আকারে বের হয়।",
+    "trap_alert": "সরাসরি $2 \\times 5 = 10$ দাগানো! $n$ মাত্রার জন্য স্কেলার গুণিতক $k^n$ আকারে বের হয়।",
+    "tag": "Type 3: নির্ণায়কের ধর্মাবলী ও স্কেলার গুণিতক",
+    "speed_hack": "শর্টকাট: $|kA| = k^n |A|$। এখানে $n = 3$, তাই $|2A| = 2^3 \\times 5 = 8 \\times 5 = 40$।",
+    "type_ref": "Type 3: নির্ণায়কের ধর্মাবলী ও স্কেলার গুণিতক",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_05",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\begin{vmatrix} 1 & a & b+c \\\\ 1 & b & c+a \\\\ 1 & c & a+b \\end{vmatrix}$ নির্ণায়কটির মান কত?",
+    "question": "$\\begin{vmatrix} 1 & a & b+c \\\\ 1 & b & c+a \\\\ 1 & c & a+b \\end{vmatrix}$ নির্ণায়কটির মান কত?",
+    "opts": [
+      "$0$",
+      "$a+b+c$",
+      "$1$",
+      "$(a-b)(b-c)(c-a)$"
+    ],
+    "options": [
+      "$0$",
+      "$a+b+c$",
+      "$1$",
+      "$(a-b)(b-c)(c-a)$"
+    ],
+    "ans": "$0$",
+    "correct_index": 0,
+    "exp": "দুটি কলাম বা সারি অভিন্ন হলে নির্ণায়কের মান সর্বদা শূন্য হয়।",
+    "explanation": "দুটি কলাম বা সারি অভিন্ন হলে নির্ণায়কের মান সর্বদা শূন্য হয়।",
+    "trap": "বড় উৎপাদক বিশ্লেষণ করতে যাওয়া। ২য় ও ৩য় কলাম যোগ করলেই মান শূন্য!",
+    "trap_insight": "বড় উৎপাদক বিশ্লেষণ করতে যাওয়া। ২য় ও ৩য় কলাম যোগ করলেই মান শূন্য!",
+    "trap_alert": "বড় উৎপাদক বিশ্লেষণ করতে যাওয়া। ২য় ও ৩য় কলাম যোগ করলেই মান শূন্য!",
+    "tag": "Type 3: নির্ণায়কের ধর্মাবলী ও $|A|=0$ ট্রিক (DU Speed-Hack)",
+    "speed_hack": "নির্ণায়কের ধর্মাবলী ও $|A|=0$ ট্রিক: $C_3' = C_2 + C_3$ করলে ৩য় কলামে $(a+b+c)$ কমন এসে ১ম ও ৩য় কলাম অভিন্ন ($1, 1, 1$) হয়ে যায়, ফলে বিস্তার ছাড়াই মান $0$!",
+    "type_ref": "Type 3: নির্ণায়কের ধর্মাবলী ও $|A|=0$ ট্রিক (DU Speed-Hack)",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_06",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$A$ একটি প্রতিসম (Symmetric) ম্যাট্রিক্স হলে নিচের কোনটি সর্বদা সঠিক?",
+    "question": "$A$ একটি প্রতিসম (Symmetric) ম্যাট্রিক্স হলে নিচের কোনটি সর্বদা সঠিক?",
+    "opts": [
+      "$A^T = -A$",
+      "$A^T = A$",
+      "$A^2 = A$",
+      "$A^{-1} = A$"
+    ],
+    "options": [
+      "$A^T = -A$",
+      "$A^T = A$",
+      "$A^2 = A$",
+      "$A^{-1} = A$"
+    ],
+    "ans": "$A^T = A$",
+    "correct_index": 1,
+    "exp": "কোনো ম্যাট্রিক্সকে ট্রান্সপোজ করলে মূল ম্যাট্রিক্স ফিরে এলে তাকে প্রতিসম ম্যাট্রিক্স বলে।",
+    "explanation": "কোনো ম্যাট্রিক্সকে ট্রান্সপোজ করলে মূল ম্যাট্রিক্স ফিরে এলে তাকে প্রতিসম ম্যাট্রিক্স বলে।",
+    "trap": "বক্র-প্রতিসম ($A^T = -A$) এর সাথে প্রতিসমের সংজ্ঞা গুলিয়ে ফেলা।",
+    "trap_insight": "বক্র-প্রতিসম ($A^T = -A$) এর সাথে প্রতিসমের সংজ্ঞা গুলিয়ে ফেলা।",
+    "trap_alert": "বক্র-প্রতিসম ($A^T = -A$) এর সাথে প্রতিসমের সংজ্ঞা গুলিয়ে ফেলা।",
+    "tag": "Type 1: বিশেষ ধরনের ম্যাট্রিক্স",
+    "speed_hack": "প্রতিসম $\\implies A^T = A$; বক্র-প্রতিসম (Skew-Symmetric) $\\implies A^T = -A$ এবং এর প্রধান কর্ণের ভুক্তিগুলো শূন্য।",
+    "type_ref": "Type 1: বিশেষ ধরনের ম্যাট্রিক্স",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_07",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$A = \\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$ হলে $A^{-1}$ ম্যাট্রিক্সটি কোনটি?",
+    "question": "$A = \\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$ হলে $A^{-1}$ ম্যাট্রিক্সটি কোনটি?",
+    "opts": [
+      "$\\frac{1}{30}\\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1/3 & 0 \\\\ 0 & 0 & 1/5 \\end{pmatrix}$",
+      "$\\begin{pmatrix} -2 & 0 & 0 \\\\ 0 & -3 & 0 \\\\ 0 & 0 & -5 \\end{pmatrix}$"
+    ],
+    "options": [
+      "$\\frac{1}{30}\\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$",
+      "$\\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1/3 & 0 \\\\ 0 & 0 & 1/5 \\end{pmatrix}$",
+      "$\\begin{pmatrix} -2 & 0 & 0 \\\\ 0 & -3 & 0 \\\\ 0 & 0 & -5 \\end{pmatrix}$"
+    ],
+    "ans": "$\\begin{pmatrix} 1/2 & 0 & 0 \\\\ 0 & 1/3 & 0 \\\\ 0 & 0 & 1/5 \\end{pmatrix}$",
+    "correct_index": 2,
+    "exp": "কর্ণ ম্যাট্রিক্সের জন্য $A^{-1}$ সরাসরি প্রতিটি কর্ণের ভুক্তির গুণাত্মক বিপরীত $1/a_{ii}$ নিয়ে গঠিত।",
+    "explanation": "কর্ণ ম্যাট্রিক্সের জন্য $A^{-1}$ সরাসরি প্রতিটি কর্ণের ভুক্তির গুণাত্মক বিপরীত $1/a_{ii}$ নিয়ে গঠিত।",
+    "trap": "কর্ণ ম্যাট্রিক্সের ক্ষেত্রে বড় অ্যাডজয়েন্ট ম্যাট্রিক্স বের করতে গিয়ে সময় নষ্ট করা।",
+    "trap_insight": "কর্ণ ম্যাট্রিক্সের ক্ষেত্রে বড় অ্যাডজয়েন্ট ম্যাট্রিক্স বের করতে গিয়ে সময় নষ্ট করা।",
+    "trap_alert": "কর্ণ ম্যাট্রিক্সের ক্ষেত্রে বড় অ্যাডজয়েন্ট ম্যাট্রিক্স বের করতে গিয়ে সময় নষ্ট করা।",
+    "tag": "Type 2: বিপরীত ম্যাট্রিক্স",
+    "speed_hack": "কর্ণ ম্যাট্রিক্স $\\text{diag}(a, b, c)$ এর বিপরীত ম্যাট্রিক্স হলো কর্ণের ভুক্তিগুলোর উল্টো মান $\\text{diag}(1/a, 1/b, 1/c)$।",
+    "type_ref": "Type 2: বিপরীত ম্যাট্রিক্স",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_08",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$A$ একটি $3 \\times 3$ বর্গ ম্যাট্রিক্স এবং $|A| = 4$ হলে $|\\text{adj}(A)|$ এর মান কত?",
+    "question": "$A$ একটি $3 \\times 3$ বর্গ ম্যাট্রিক্স এবং $|A| = 4$ হলে $|\\text{adj}(A)|$ এর মান কত?",
+    "opts": [
+      "$8$",
+      "$4$",
+      "$64$",
+      "$16$"
+    ],
+    "options": [
+      "$8$",
+      "$4$",
+      "$64$",
+      "$16$"
+    ],
+    "ans": "$16$",
+    "correct_index": 3,
+    "exp": "যে কোনো $n \\times n$ ম্যাট্রিক্সের জন্য $|\\text{adj}(A)| = |A|^{n-1}$। এখানে $4^{3-1} = 16$।",
+    "explanation": "যে কোনো $n \\times n$ ম্যাট্রিক্সের জন্য $|\\text{adj}(A)| = |A|^{n-1}$। এখানে $4^{3-1} = 16$।",
+    "trap": "সূত্রে ভুল করে $|A|^n = 4^3 = 64$ দাগানো। সূত্র হলো $|\\text{adj}(A)| = |A|^{n-1}$!",
+    "trap_insight": "সূত্রে ভুল করে $|A|^n = 4^3 = 64$ দাগানো। সূত্র হলো $|\\text{adj}(A)| = |A|^{n-1}$!",
+    "trap_alert": "সূত্রে ভুল করে $|A|^n = 4^3 = 64$ দাগানো। সূত্র হলো $|\\text{adj}(A)| = |A|^{n-1}$!",
+    "tag": "Type 2: অ্যাডজয়েন্ট ম্যাট্রিক্সের ধর্ম",
+    "speed_hack": "$|\\text{adj}(A)| = |A|^{n-1}$। এখানে $n=3$, তাই $|\\text{adj}(A)| = 4^{3-1} = 4^2 = 16$।",
+    "type_ref": "Type 2: অ্যাডজয়েন্ট ম্যাট্রিক্সের ধর্ম",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_09",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "ক্র্যামারের নিয়মে সমীকরণ জোট সমাধানের ক্ষেত্রে যদি $D = 0$ কিন্তু অন্তত একটি $D_x, D_y, D_z \\ne 0$ হয়, তবে সমীকরণ জোটের:",
+    "question": "ক্র্যামারের নিয়মে সমীকরণ জোট সমাধানের ক্ষেত্রে যদি $D = 0$ কিন্তু অন্তত একটি $D_x, D_y, D_z \\ne 0$ হয়, তবে সমীকরণ জোটের:",
+    "opts": [
+      "কোনো সমাধান থাকবে না (অসামঞ্জস্য)",
+      "একটি অনন্য সমাধান থাকবে",
+      "অসংখ্য সমাধান থাকবে",
+      "সর্বদা শূন্য সমাধান থাকবে"
+    ],
+    "options": [
+      "কোনো সমাধান থাকবে না (অসামঞ্জস্য)",
+      "একটি অনন্য সমাধান থাকবে",
+      "অসংখ্য সমাধান থাকবে",
+      "সর্বদা শূন্য সমাধান থাকবে"
+    ],
+    "ans": "কোনো সমাধান থাকবে না (অসামঞ্জস্য)",
+    "correct_index": 0,
+    "exp": "হরে শূন্য এবং লবে অশূন্য সংখ্যা এলে মান অসংজ্ঞায়িত হয়, অর্থাৎ কোনো বাস্তব সমাধান নেই।",
+    "explanation": "হরে শূন্য এবং লবে অশূন্য সংখ্যা এলে মান অসংজ্ঞায়িত হয়, অর্থাৎ কোনো বাস্তব সমাধান নেই।",
+    "trap": "অসংখ্য সমাধানের সাথে কোনো সমাধান না থাকার শর্ত গুলিয়ে ফেলা।",
+    "trap_insight": "অসংখ্য সমাধানের সাথে কোনো সমাধান না থাকার শর্ত গুলিয়ে ফেলা।",
+    "trap_alert": "অসংখ্য সমাধানের সাথে কোনো সমাধান না থাকার শর্ত গুলিয়ে ফেলা।",
+    "tag": "Type 3: ক্র্যামারের নিয়ম ও সমাধানের শর্ত",
+    "speed_hack": "$D \\ne 0 \\implies$ অনন্য সমাধান; $D = D_x = D_y = D_z = 0 \\implies$ অসংখ্য সমাধান; $D = 0$ কিন্তু কোনো $D_i \\ne 0 \\implies$ কোনো সমাধান নেই।",
+    "type_ref": "Type 3: ক্র্যামারের নিয়ম ও সমাধানের শর্ত",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_01_10",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 4 & 5 \\\\ 0 & 0 & 6 \\end{pmatrix}$ ম্যাট্রিক্সটির ট্রেস (Trace) কত?",
+    "question": "$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 4 & 5 \\\\ 0 & 0 & 6 \\end{pmatrix}$ ম্যাট্রিক্সটির ট্রেস (Trace) কত?",
+    "opts": [
+      "$24$",
+      "$11$",
+      "$6$",
+      "$18$"
+    ],
+    "options": [
+      "$24$",
+      "$11$",
+      "$6$",
+      "$18$"
+    ],
+    "ans": "$11$",
+    "correct_index": 1,
+    "exp": "ম্যাট্রিক্সের ট্রেস $\\text{Tr}(A) = a_{11} + a_{22} + a_{33} = 1 + 4 + 6 = 11$।",
+    "explanation": "ম্যাট্রিক্সের ট্রেস $\\text{Tr}(A) = a_{11} + a_{22} + a_{33} = 1 + 4 + 6 = 11$।",
+    "trap": "ট্রেস বের করতে গিয়ে গুণ করে ফেলা ($1 \\times 4 \\times 6 = 24$ হলো নির্ণায়ক, ট্রেস নয়!)।",
+    "trap_insight": "ট্রেস বের করতে গিয়ে গুণ করে ফেলা ($1 \\times 4 \\times 6 = 24$ হলো নির্ণায়ক, ট্রেস নয়!)।",
+    "trap_alert": "ট্রেস বের করতে গিয়ে গুণ করে ফেলা ($1 \\times 4 \\times 6 = 24$ হলো নির্ণায়ক, ট্রেস নয়!)।",
+    "tag": "Type 1: ম্যাট্রিক্সের ট্রেস ও নির্ণায়ক",
+    "speed_hack": "ট্রেস = প্রধান কর্ণের ভুক্তিগুলোর যোগফল $= 1 + 4 + 6 = 11$।",
+    "type_ref": "Type 1: ম্যাট্রিক্সের ট্রেস ও নির্ণায়ক",
+    "blueprint_type_id": "math_1st_01_t1",
+    "blueprint_chapter_id": "math_1st_01",
+    "chapter": "math_1st_01"
+  },
+  {
+    "id": "vb_pred_math_1st_02_01",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\vec{A} = 2\\hat{i} + 3\\hat{j} - \\hat{k}$ এবং $\\vec{B} = m\\hat{i} - 2\\hat{j} + 4\\hat{k}$ ভেক্টরদ্বয় পরস্পর লম্ব হলে $m$ এর মান কত?",
+    "question": "$\\vec{A} = 2\\hat{i} + 3\\hat{j} - \\hat{k}$ এবং $\\vec{B} = m\\hat{i} - 2\\hat{j} + 4\\hat{k}$ ভেক্টরদ্বয় পরস্পর লম্ব হলে $m$ এর মান কত?",
+    "opts": [
+      "$5$",
+      "$3$",
+      "$-5$",
+      "$2$"
+    ],
+    "options": [
+      "$5$",
+      "$3$",
+      "$-5$",
+      "$2$"
+    ],
+    "ans": "$5$",
+    "correct_index": 0,
+    "exp": "ভেক্টরদ্বয় পরস্পর লম্ব হলে ডট গুণন শূন্য: $2(m) + 3(-2) + (-1)(4) = 0 \\implies 2m - 10 = 0 \\implies m = 5$।",
+    "explanation": "ভেক্টরদ্বয় পরস্পর লম্ব হলে ডট গুণন শূন্য: $2(m) + 3(-2) + (-1)(4) = 0 \\implies 2m - 10 = 0 \\implies m = 5$।",
+    "trap": "ডট গুণনে $-4$ ও $-\\hat{k}$ গুণ করার সময় চিহ্নের ভুল করে $+4$ ভাবা।",
+    "trap_insight": "ডট গুণনে $-4$ ও $-\\hat{k}$ গুণ করার সময় চিহ্নের ভুল করে $+4$ ভাবা।",
+    "trap_alert": "ডট গুণনে $-4$ ও $-\\hat{k}$ গুণ করার সময় চিহ্নের ভুল করে $+4$ ভাবা।",
+    "tag": "Type 1: ডট গুণন ও লম্ব হওয়ার শর্ত",
+    "speed_hack": "লম্ব $\\implies \\vec{A} \\cdot \\vec{B} = 0 \\implies 2m - 6 - 4 = 0 \\implies 2m = 10 \\implies m = 5$।",
+    "type_ref": "Type 1: ডট গুণন ও লম্ব হওয়ার শর্ত",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_02",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\vec{P} = 2\\hat{i} - 3\\hat{j} + 6\\hat{k}$ ভেক্টরের সমান্তরাল একক ভেক্টর কোনটি?",
+    "question": "$\\vec{P} = 2\\hat{i} - 3\\hat{j} + 6\\hat{k}$ ভেক্টরের সমান্তরাল একক ভেক্টর কোনটি?",
+    "opts": [
+      "$\\frac{1}{49}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+      "$\\frac{1}{7}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+      "$\\frac{1}{\\sqrt{7}}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+      "$\\frac{1}{5}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$"
+    ],
+    "options": [
+      "$\\frac{1}{49}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+      "$\\frac{1}{7}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+      "$\\frac{1}{\\sqrt{7}}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+      "$\\frac{1}{5}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$"
+    ],
+    "ans": "$\\frac{1}{7}(2\\hat{i} - 3\\hat{j} + 6\\hat{k})$",
+    "correct_index": 1,
+    "exp": "সমান্তরাল একক ভেক্টর $\\hat{u} = \\frac{\\vec{P}}{|\\vec{P}|} = \\frac{2\\hat{i}-3\\hat{j}+6\\hat{k}}{7}$।",
+    "explanation": "সমান্তরাল একক ভেক্টর $\\hat{u} = \\frac{\\vec{P}}{|\\vec{P}|} = \\frac{2\\hat{i}-3\\hat{j}+6\\hat{k}}{7}$।",
+    "trap": "বর্গমূল না করে হরে মান $49$ বসিয়ে ভুল অপশন দাগানো।",
+    "trap_insight": "বর্গমূল না করে হরে মান $49$ বসিয়ে ভুল অপশন দাগানো।",
+    "trap_alert": "বর্গমূল না করে হরে মান $49$ বসিয়ে ভুল অপশন দাগানো।",
+    "tag": "Type 1: একক ভেক্টর নির্ণয়",
+    "speed_hack": "মান $|\\vec{P}| = \\sqrt{2^2 + (-3)^2 + 6^2} = \\sqrt{4 + 9 + 36} = \\sqrt{49} = 7$। একক ভেক্টর $\\frac{\\vec{P}}{|\\vec{P}|}$।",
+    "type_ref": "Type 1: একক ভেক্টর নির্ণয়",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_03",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\vec{A} = 2\\hat{i} - \\hat{j} + \\hat{k}$ ভেক্টরের ওপর $\\vec{B} = \\hat{i} - 2\\hat{j} + \\hat{k}$ ভেক্টরের স্কেলার অভিক্ষেপ (Scalar Projection) কত?",
+    "question": "$\\vec{A} = 2\\hat{i} - \\hat{j} + \\hat{k}$ ভেক্টরের ওপর $\\vec{B} = \\hat{i} - 2\\hat{j} + \\hat{k}$ ভেক্টরের স্কেলার অভিক্ষেপ (Scalar Projection) কত?",
+    "opts": [
+      "$\\frac{\\sqrt{6}}{5}$",
+      "$\\frac{5}{6}$",
+      "$\\frac{5}{\\sqrt{6}}$",
+      "$\\frac{4}{\\sqrt{6}}$"
+    ],
+    "options": [
+      "$\\frac{\\sqrt{6}}{5}$",
+      "$\\frac{5}{6}$",
+      "$\\frac{5}{\\sqrt{6}}$",
+      "$\\frac{4}{\\sqrt{6}}$"
+    ],
+    "ans": "$\\frac{5}{\\sqrt{6}}$",
+    "correct_index": 2,
+    "exp": "$\\vec{A}$ এর ওপর $\\vec{B}$ এর স্কেলার অভিক্ষেপ $= \\frac{\\vec{A} \\cdot \\vec{B}}{|\\vec{A}|} = \\frac{5}{\\sqrt{6}}$।",
+    "explanation": "$\\vec{A}$ এর ওপর $\\vec{B}$ এর স্কেলার অভিক্ষেপ $= \\frac{\\vec{A} \\cdot \\vec{B}}{|\\vec{A}|} = \\frac{5}{\\sqrt{6}}$।",
+    "trap": "যার ওপর অভিক্ষেপ তার মান দিয়ে ভাগ করতে হবে, অর্থাৎ $|\u000bec{A}|$ দ্বারা ভাগ।",
+    "trap_insight": "যার ওপর অভিক্ষেপ তার মান দিয়ে ভাগ করতে হবে, অর্থাৎ $|\u000bec{A}|$ দ্বারা ভাগ।",
+    "trap_alert": "যার ওপর অভিক্ষেপ তার মান দিয়ে ভাগ করতে হবে, অর্থাৎ $|\u000bec{A}|$ দ্বারা ভাগ।",
+    "tag": "Type 1: ভেক্টরের স্কেলার অভিক্ষেপ (DU Speed-Hack)",
+    "speed_hack": "স্কেলার অভিক্ষেপ শর্টকাট: $X$ এর ওপর $Y$ এর অভিক্ষেপ = $\\frac{X \\cdot Y}{|X|}$। এখানে $\\vec{A} \\cdot \\vec{B} = 2(1) + (-1)(-2) + 1(1) = 5$ এবং $|\\vec{A}| = \\sqrt{4+1+1} = \\sqrt{6}$। তাই মান $\\frac{5}{\\sqrt{6}}$!",
+    "type_ref": "Type 1: ভেক্টরের স্কেলার অভিক্ষেপ (DU Speed-Hack)",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_04",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\vec{A} = 2\\hat{i} + 4\\hat{j} - 5\\hat{k}$ এবং $\\vec{B} = \\hat{i} + 2\\hat{j} + m\\hat{k}$ ভেক্টর দুটি সমান্তরাল হলে $m$ এর মান কত?",
+    "question": "$\\vec{A} = 2\\hat{i} + 4\\hat{j} - 5\\hat{k}$ এবং $\\vec{B} = \\hat{i} + 2\\hat{j} + m\\hat{k}$ ভেক্টর দুটি সমান্তরাল হলে $m$ এর মান কত?",
+    "opts": [
+      "$\\frac{2}{5}$",
+      "$\\frac{5}{2}$",
+      "$-5$",
+      "$-\\frac{5}{2}$"
+    ],
+    "options": [
+      "$\\frac{2}{5}$",
+      "$\\frac{5}{2}$",
+      "$-5$",
+      "$-\\frac{5}{2}$"
+    ],
+    "ans": "$-\\frac{5}{2}$",
+    "correct_index": 3,
+    "exp": "ভেক্টরদ্বয় সমান্তরাল হলে $\\frac{A_x}{B_x} = \\frac{A_y}{B_y} = \\frac{A_z}{B_z} \\implies 2 = \\frac{-5}{m} \\implies m = -\\frac{5}{2}$।",
+    "explanation": "ভেক্টরদ্বয় সমান্তরাল হলে $\\frac{A_x}{B_x} = \\frac{A_y}{B_y} = \\frac{A_z}{B_z} \\implies 2 = \\frac{-5}{m} \\implies m = -\\frac{5}{2}$।",
+    "trap": "অনুপাত নেওয়ার সময় চিহ্নের মাইনাস ছেড়ে দেওয়া।",
+    "trap_insight": "অনুপাত নেওয়ার সময় চিহ্নের মাইনাস ছেড়ে দেওয়া।",
+    "trap_alert": "অনুপাত নেওয়ার সময় চিহ্নের মাইনাস ছেড়ে দেওয়া।",
+    "tag": "Type 2: সমান্তরাল ভেক্টরের শর্ত",
+    "speed_hack": "সমান্তরাল হলে সহগগুলোর অনুপাত সমান: $\\frac{2}{1} = \\frac{4}{2} = \\frac{-5}{m} \\implies 2 = \\frac{-5}{m} \\implies m = -\\frac{5}{2}$।",
+    "type_ref": "Type 2: সমান্তরাল ভেক্টরের শর্ত",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_05",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি সামান্তরিকের দুটি সন্নিহিত বাহু $\\vec{a} = 3\\hat{i} + \\hat{j} - 2\\hat{k}$ এবং $\\vec{b} = \\hat{i} - 3\\hat{j} + 4\\hat{k}$ হলে তার ক্ষেত্রফল কত বর্গ একক?",
+    "question": "একটি সামান্তরিকের দুটি সন্নিহিত বাহু $\\vec{a} = 3\\hat{i} + \\hat{j} - 2\\hat{k}$ এবং $\\vec{b} = \\hat{i} - 3\\hat{j} + 4\\hat{k}$ হলে তার ক্ষেত্রফল কত বর্গ একক?",
+    "opts": [
+      "$10\\sqrt{3}$",
+      "$5\\sqrt{3}$",
+      "$300$",
+      "$20$"
+    ],
+    "options": [
+      "$10\\sqrt{3}$",
+      "$5\\sqrt{3}$",
+      "$300$",
+      "$20$"
+    ],
+    "ans": "$10\\sqrt{3}$",
+    "correct_index": 0,
+    "exp": "সামান্তরিকের ক্ষেত্রফল $= |\\vec{a} \\times \\vec{b}| = \\sqrt{(-2)^2 + (-14)^2 + (-10)^2} = \\sqrt{300} = 10\\sqrt{3}$ বর্গ একক।",
+    "explanation": "সামান্তরিকের ক্ষেত্রফল $= |\\vec{a} \\times \\vec{b}| = \\sqrt{(-2)^2 + (-14)^2 + (-10)^2} = \\sqrt{300} = 10\\sqrt{3}$ বর্গ একক।",
+    "trap": "কর্ণ দেওয়া থাকলে $\\frac{1}{2}|\\vec{d}_1 \\times \\vec{d}_2|$, কিন্তু সন্নিহিত বাহু দেওয়া থাকলে সরাসরি $|\\vec{a} \\times \\vec{b}|$!",
+    "trap_insight": "কর্ণ দেওয়া থাকলে $\\frac{1}{2}|\\vec{d}_1 \\times \\vec{d}_2|$, কিন্তু সন্নিহিত বাহু দেওয়া থাকলে সরাসরি $|\\vec{a} \\times \\vec{b}|$!",
+    "trap_alert": "কর্ণ দেওয়া থাকলে $\\frac{1}{2}|\\vec{d}_1 \\times \\vec{d}_2|$, কিন্তু সন্নিহিত বাহু দেওয়া থাকলে সরাসরি $|\\vec{a} \\times \\vec{b}|$!",
+    "tag": "Type 2: ক্রস গুণন ও জ্যামিতিক ক্ষেত্রফল",
+    "speed_hack": "$\\vec{a} \\times \\vec{b} = \\begin{vmatrix} \\hat{i} & \\hat{j} & \\hat{k} \\\\ 3 & 1 & -2 \\\\ 1 & -3 & 4 \\end{vmatrix} = -2\\hat{i} - 14\\hat{j} - 10\\hat{k}$। মান $= \\sqrt{4 + 196 + 100} = \\sqrt{300} = 10\\sqrt{3}$।",
+    "type_ref": "Type 2: ক্রস গুণন ও জ্যামিতিক ক্ষেত্রফল",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_06",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\vec{A} = 2\\hat{i} + \\hat{j} - \\hat{k}$, $\\vec{B} = 3\\hat{i} - 2\\hat{j} + 4\\hat{k}$ এবং $\\vec{C} = \\hat{i} - 3\\hat{j} + a\\hat{k}$ ভেক্টর তিনটি সমতলীয় (Coplanar) হলে $a$ এর মান কত?",
+    "question": "$\\vec{A} = 2\\hat{i} + \\hat{j} - \\hat{k}$, $\\vec{B} = 3\\hat{i} - 2\\hat{j} + 4\\hat{k}$ এবং $\\vec{C} = \\hat{i} - 3\\hat{j} + a\\hat{k}$ ভেক্টর তিনটি সমতলীয় (Coplanar) হলে $a$ এর মান কত?",
+    "opts": [
+      "$3$",
+      "$5$",
+      "$-5$",
+      "$7$"
+    ],
+    "options": [
+      "$3$",
+      "$5$",
+      "$-5$",
+      "$7$"
+    ],
+    "ans": "$5$",
+    "correct_index": 1,
+    "exp": "ভেক্টরত্রয় সমতলীয় হলে তাদের গঠিত নির্ণায়ক শূন্য হয়। অথবা $\\vec{C} = \\vec{B} - \\vec{A}$ হওয়ায় $a = 4 - (-1) = 5$।",
+    "explanation": "ভেক্টরত্রয় সমতলীয় হলে তাদের গঠিত নির্ণায়ক শূন্য হয়। অথবা $\\vec{C} = \\vec{B} - \\vec{A}$ হওয়ায় $a = 4 - (-1) = 5$।",
+    "trap": "৩য় ক্রমের নির্ণায়ক বিস্তার না করে লিনিয়ার ডিপেনডেন্স লক্ষ্য করুন!",
+    "trap_insight": "৩য় ক্রমের নির্ণায়ক বিস্তার না করে লিনিয়ার ডিপেনডেন্স লক্ষ্য করুন!",
+    "trap_alert": "৩য় ক্রমের নির্ণায়ক বিস্তার না করে লিনিয়ার ডিপেনডেন্স লক্ষ্য করুন!",
+    "tag": "Type 2: সমতলীয় ভেক্টর ও রৈখিক নির্ভরশীলতা (DU Speed-Hack)",
+    "speed_hack": "সমতলীয় ভেক্টর শর্টকাট: নির্ণায়ক $= 0$ অথবা রৈখিক নির্ভরশীলতা পরীক্ষণ! লক্ষ্য করুন $\\vec{C} = \\vec{B} - \\vec{A} \\implies 3-2 = 1, -2-1 = -3$, তাই $a = 4 - (-1) = 5$! নির্ণায়ক না ভেঙেই ৩ সেকেন্ডে মুখে মুখে সমাধান!",
+    "type_ref": "Type 2: সমতলীয় ভেক্টর ও রৈখিক নির্ভরশীলতা (DU Speed-Hack)",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_07",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$|\\vec{A} + \\vec{B}| = |\\vec{A} - \\vec{B}|$ হলে $\\vec{A}$ ও $\\vec{B}$ এর মধ্যবর্তী কোণ কত?",
+    "question": "$|\\vec{A} + \\vec{B}| = |\\vec{A} - \\vec{B}|$ হলে $\\vec{A}$ ও $\\vec{B}$ এর মধ্যবর্তী কোণ কত?",
+    "opts": [
+      "$60^\\circ$",
+      "$0^\\circ$",
+      "$90^\\circ$",
+      "$180^\\circ$"
+    ],
+    "options": [
+      "$60^\\circ$",
+      "$0^\\circ$",
+      "$90^\\circ$",
+      "$180^\\circ$"
+    ],
+    "ans": "$90^\\circ$",
+    "correct_index": 2,
+    "exp": "$|\\vec{A}+\\vec{B}|^2 = |\\vec{A}-\\vec{B}|^2 \\implies 4\\vec{A}\\cdot\\vec{B} = 0 \\implies \\cos\\theta = 0 \\implies \\theta = 90^\\circ$।",
+    "explanation": "$|\\vec{A}+\\vec{B}|^2 = |\\vec{A}-\\vec{B}|^2 \\implies 4\\vec{A}\\cdot\\vec{B} = 0 \\implies \\cos\\theta = 0 \\implies \\theta = 90^\\circ$।",
+    "trap": "উভয় পাশে বর্গ না করে শুধু মান সমান ভেবে $0^\\circ$ দাগানো।",
+    "trap_insight": "উভয় পাশে বর্গ না করে শুধু মান সমান ভেবে $0^\\circ$ দাগানো।",
+    "trap_alert": "উভয় পাশে বর্গ না করে শুধু মান সমান ভেবে $0^\\circ$ দাগানো।",
+    "tag": "Type 1: ভেক্টরের মধ্যবর্তী কোণ",
+    "speed_hack": "বর্গ করলে: $A^2 + B^2 + 2\\vec{A}\\cdot\\vec{B} = A^2 + B^2 - 2\\vec{A}\\cdot\\vec{B} \\implies 4\\vec{A}\\cdot\\vec{B} = 0 \\implies \\vec{A} \\perp \\vec{B}$ (কোণ $90^\\circ$)।",
+    "type_ref": "Type 1: ভেক্টরের মধ্যবর্তী কোণ",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_08",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\vec{A} = 2\\hat{i} + 2\\hat{j} - \\hat{k}$ ভেক্টরটি $x$-অক্ষের সাথে কত কোণ উৎপন্ন করে?",
+    "question": "$\\vec{A} = 2\\hat{i} + 2\\hat{j} - \\hat{k}$ ভেক্টরটি $x$-অক্ষের সাথে কত কোণ উৎপন্ন করে?",
+    "opts": [
+      "$\\cos^{-1}(2/9)$",
+      "$\\cos^{-1}(1/3)$",
+      "$\\sin^{-1}(2/3)$",
+      "$\\cos^{-1}(2/3)$"
+    ],
+    "options": [
+      "$\\cos^{-1}(2/9)$",
+      "$\\cos^{-1}(1/3)$",
+      "$\\sin^{-1}(2/3)$",
+      "$\\cos^{-1}(2/3)$"
+    ],
+    "ans": "$\\cos^{-1}(2/3)$",
+    "correct_index": 3,
+    "exp": "$x$-অক্ষের সাথে উৎপন্ন কোণ $\\alpha$ হলে $\\cos\\alpha = \\frac{A_x}{|\\vec{A}|} = \\frac{2}{\\sqrt{4+4+1}} = \\frac{2}{3}$।",
+    "explanation": "$x$-অক্ষের সাথে উৎপন্ন কোণ $\\alpha$ হলে $\\cos\\alpha = \\frac{A_x}{|\\vec{A}|} = \\frac{2}{\\sqrt{4+4+1}} = \\frac{2}{3}$।",
+    "trap": "ভেক্টরের মান হিসাব করতে গিয়ে বর্গমূল ভুল করে ৯ দিয়ে ভাগ করা।",
+    "trap_insight": "ভেক্টরের মান হিসাব করতে গিয়ে বর্গমূল ভুল করে ৯ দিয়ে ভাগ করা।",
+    "trap_alert": "ভেক্টরের মান হিসাব করতে গিয়ে বর্গমূল ভুল করে ৯ দিয়ে ভাগ করা।",
+    "tag": "Type 1: দিক কোসাইন (Direction Cosines)",
+    "speed_hack": "দিক কোসাইন: $\\cos\\alpha = \\frac{A_x}{|\\vec{A}|} = \\frac{2}{\\sqrt{4+4+1}} = \\frac{2}{3} \\implies \\alpha = \\cos^{-1}(2/3)$।",
+    "type_ref": "Type 1: দিক কোসাইন (Direction Cosines)",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_09",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "কোনো সমতলে অবস্থিত দুটি ভেক্টর $\\vec{A}$ ও $\\vec{B}$ এর উভয়ের ওপর লম্ব একক ভেক্টর কোনটি?",
+    "question": "কোনো সমতলে অবস্থিত দুটি ভেক্টর $\\vec{A}$ ও $\\vec{B}$ এর উভয়ের ওপর লম্ব একক ভেক্টর কোনটি?",
+    "opts": [
+      "$\\pm \\frac{\\vec{A} \\times \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$",
+      "$\\frac{\\vec{A} \\cdot \\vec{B}}{|\\vec{A} \\cdot \\vec{B}|}$",
+      "$\\pm \\frac{\\vec{A} + \\vec{B}}{|\\vec{A} + \\vec{B}|}$",
+      "$\\frac{\\vec{A} - \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$"
+    ],
+    "options": [
+      "$\\pm \\frac{\\vec{A} \\times \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$",
+      "$\\frac{\\vec{A} \\cdot \\vec{B}}{|\\vec{A} \\cdot \\vec{B}|}$",
+      "$\\pm \\frac{\\vec{A} + \\vec{B}}{|\\vec{A} + \\vec{B}|}$",
+      "$\\frac{\\vec{A} - \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$"
+    ],
+    "ans": "$\\pm \\frac{\\vec{A} \\times \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$",
+    "correct_index": 0,
+    "exp": "দুটি ভেক্টরের উভয়ের ওপর লম্ব একক ভেক্টর $\\hat{\\eta} = \\pm \\frac{\\vec{A} \\times \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$।",
+    "explanation": "দুটি ভেক্টরের উভয়ের ওপর লম্ব একক ভেক্টর $\\hat{\\eta} = \\pm \\frac{\\vec{A} \\times \\vec{B}}{|\\vec{A} \\times \\vec{B}|}$।",
+    "trap": "উভয় দিক হতে পারে বলে $\\pm$ চিহ্ন খেয়াল না করা।",
+    "trap_insight": "উভয় দিক হতে পারে বলে $\\pm$ চিহ্ন খেয়াল না করা।",
+    "trap_alert": "উভয় দিক হতে পারে বলে $\\pm$ চিহ্ন খেয়াল না করা।",
+    "tag": "Type 2: লম্ব একক ভেক্টর",
+    "speed_hack": "ক্রস গুণনের দিক সর্বদা উভয় ভেক্টরের সমতলের ওপর লম্ব। একক ভেক্টরের জন্য মান দিয়ে ভাগ এবং উভয় পাশের জন্য $\\pm$।",
+    "type_ref": "Type 2: লম্ব একক ভেক্টর",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_02_10",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "যদি $|\\vec{A} \\times \\vec{B}| = \\sqrt{3}(\\vec{A} \\cdot \\vec{B})$ হয়, তবে ভেক্টরদ্বয়ের মধ্যবর্তী কোণ $\\theta$ কত?",
+    "question": "যদি $|\\vec{A} \\times \\vec{B}| = \\sqrt{3}(\\vec{A} \\cdot \\vec{B})$ হয়, তবে ভেক্টরদ্বয়ের মধ্যবর্তী কোণ $\\theta$ কত?",
+    "opts": [
+      "$30^\\circ$",
+      "$60^\\circ$",
+      "$45^\\circ$",
+      "$90^\\circ$"
+    ],
+    "options": [
+      "$30^\\circ$",
+      "$60^\\circ$",
+      "$45^\\circ$",
+      "$90^\\circ$"
+    ],
+    "ans": "$60^\\circ$",
+    "correct_index": 1,
+    "exp": "$\\frac{|\\vec{A} \\times \\vec{B}|}{\\vec{A} \\cdot \\vec{B}} = \\tan\\theta = \\sqrt{3} \\implies \\theta = 60^\\circ$।",
+    "explanation": "$\\frac{|\\vec{A} \\times \\vec{B}|}{\\vec{A} \\cdot \\vec{B}} = \\tan\\theta = \\sqrt{3} \\implies \\theta = 60^\\circ$।",
+    "trap": "$\\tan\\theta = \\sqrt{3}$ কে ভুল করে $30^\\circ$ ভাবা। $\\tan 60^\\circ = \\sqrt{3}$!",
+    "trap_insight": "$\\tan\\theta = \\sqrt{3}$ কে ভুল করে $30^\\circ$ ভাবা। $\\tan 60^\\circ = \\sqrt{3}$!",
+    "trap_alert": "$\\tan\\theta = \\sqrt{3}$ কে ভুল করে $30^\\circ$ ভাবা। $\\tan 60^\\circ = \\sqrt{3}$!",
+    "tag": "Type 1: ডট ও ক্রস গুণনের সম্পর্ক",
+    "speed_hack": "$AB\\sin\\theta = \\sqrt{3} AB\\cos\\theta \\implies \\tan\\theta = \\sqrt{3} \\implies \\theta = 60^\\circ$। ৩ সেকেন্ডে সমাধান!",
+    "type_ref": "Type 1: ডট ও ক্রস গুণনের সম্পর্ক",
+    "blueprint_type_id": "math_1st_02_t1",
+    "blueprint_chapter_id": "math_1st_02",
+    "chapter": "math_1st_02"
+  },
+  {
+    "id": "vb_pred_math_1st_06_01",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি বৃত্তের ব্যাসার্ধ $14\\text{ cm}$ হলে বৃত্তটির $11\\text{ cm}$ দীর্ঘ চাপ কেন্দ্রে কত ডিগ্রি কোণ উৎপন্ন করে?",
+    "question": "একটি বৃত্তের ব্যাসার্ধ $14\\text{ cm}$ হলে বৃত্তটির $11\\text{ cm}$ দীর্ঘ চাপ কেন্দ্রে কত ডিগ্রি কোণ উৎপন্ন করে?",
+    "opts": [
+      "$45^\\circ$",
+      "$30^\\circ$",
+      "$60^\\circ$",
+      "$90^\\circ$"
+    ],
+    "options": [
+      "$45^\\circ$",
+      "$30^\\circ$",
+      "$60^\\circ$",
+      "$90^\\circ$"
+    ],
+    "ans": "$45^\\circ$",
+    "correct_index": 0,
+    "exp": "$s = r\\theta \\implies \\theta = \\frac{s}{r} = \\frac{11}{14}$ রেডিয়ান $= \\frac{11}{14} \\times \\frac{180^\\circ}{\\pi} = 45^\\circ$।",
+    "explanation": "$s = r\\theta \\implies \\theta = \\frac{s}{r} = \\frac{11}{14}$ রেডিয়ান $= \\frac{11}{14} \\times \\frac{180^\\circ}{\\pi} = 45^\\circ$।",
+    "trap": "কোণকে রেডিয়ান থেকে ডিগ্রিতে রূপান্তর ($180^\\circ/\\pi$) করতে ভুলে যাওয়া।",
+    "trap_insight": "কোণকে রেডিয়ান থেকে ডিগ্রিতে রূপান্তর ($180^\\circ/\\pi$) করতে ভুলে যাওয়া।",
+    "trap_alert": "কোণকে রেডিয়ান থেকে ডিগ্রিতে রূপান্তর ($180^\\circ/\\pi$) করতে ভুলে যাওয়া।",
+    "tag": "Type 1: বৃত্তচাপ, ব্যাসার্ধ ও কোণ ($s = r\\theta$)",
+    "speed_hack": "$\\theta = \\frac{s}{r} = \\frac{11}{14}\\text{ rad}$। ডিগ্রিতে: $\\frac{11}{14} \\times \\frac{180^\\circ}{22/7} = \\frac{11}{14} \\times \\frac{180 \\times 7}{22} = 45^\\circ$। ৩ সেকেন্ডে সমাধান!",
+    "type_ref": "Type 1: বৃত্তচাপ, ব্যাসার্ধ ও কোণ ($s = r\\theta$)",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_02",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "ঘড়িতে যখন দুপুর ২টা ১৫ মিনিট বাজে, তখন ঘণ্টার কাঁটা ও মিনিটের কাঁটার মধ্যবর্তী সূক্ষ্মকোণ কত?",
+    "question": "ঘড়িতে যখন দুপুর ২টা ১৫ মিনিট বাজে, তখন ঘণ্টার কাঁটা ও মিনিটের কাঁটার মধ্যবর্তী সূক্ষ্মকোণ কত?",
+    "opts": [
+      "$30^\\circ$",
+      "$22.5^\\circ$",
+      "$25^\\circ$",
+      "$37.5^\\circ$"
+    ],
+    "options": [
+      "$30^\\circ$",
+      "$22.5^\\circ$",
+      "$25^\\circ$",
+      "$37.5^\\circ$"
+    ],
+    "ans": "$22.5^\\circ$",
+    "correct_index": 1,
+    "exp": "ঘড়ির কাঁটা দুটির মধ্যবর্তী কোণ $\\theta = |30H - 5.5M| = |60 - 82.5| = 22.5^\\circ$।",
+    "explanation": "ঘড়ির কাঁটা দুটির মধ্যবর্তী কোণ $\\theta = |30H - 5.5M| = |60 - 82.5| = 22.5^\\circ$।",
+    "trap": "সরাসরি $30^\\circ$ দাগানো। ১৫ মিনিটে ঘণ্টার কাঁটাও যে কিছুটা এগিয়ে যায় তা খেয়াল রাখতে হবে!",
+    "trap_insight": "সরাসরি $30^\\circ$ দাগানো। ১৫ মিনিটে ঘণ্টার কাঁটাও যে কিছুটা এগিয়ে যায় তা খেয়াল রাখতে হবে!",
+    "trap_alert": "সরাসরি $30^\\circ$ দাগানো। ১৫ মিনিটে ঘণ্টার কাঁটাও যে কিছুটা এগিয়ে যায় তা খেয়াল রাখতে হবে!",
+    "tag": "Type 1: ঘড়ির কাঁটা সংক্রান্ত কোণ",
+    "speed_hack": "ম্যাজিক ফর্মুলা: $\\theta = \\left|30H - \\frac{11}{2}M\\right| = \\left|30(2) - \\frac{11}{2}(15)\\right| = |60 - 82.5| = 22.5^\\circ$।",
+    "type_ref": "Type 1: ঘড়ির কাঁটা সংক্রান্ত কোণ",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_03",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "যদি $\\sec\\theta + \\tan\\theta = 5$ হয়, তবে $\\sec\\theta - \\tan\\theta$ এর মান কত?",
+    "question": "যদি $\\sec\\theta + \\tan\\theta = 5$ হয়, তবে $\\sec\\theta - \\tan\\theta$ এর মান কত?",
+    "opts": [
+      "$-5$",
+      "$5$",
+      "$\\frac{1}{5}$",
+      "$\\frac{2}{5}$"
+    ],
+    "options": [
+      "$-5$",
+      "$5$",
+      "$\\frac{1}{5}$",
+      "$\\frac{2}{5}$"
+    ],
+    "ans": "$\\frac{1}{5}$",
+    "correct_index": 2,
+    "exp": "$\\sec\\theta - \\tan\\theta = \\frac{1}{\\sec\\theta + \\tan\\theta} = \\frac{1}{5}$।",
+    "explanation": "$\\sec\\theta - \\tan\\theta = \\frac{1}{\\sec\\theta + \\tan\\theta} = \\frac{1}{5}$।",
+    "trap": "চিহ্ন বদল করে $-5$ ভাবা। এটি গুণাত্মক বিপরীত ($1/5$), যোগাত্মক নয়!",
+    "trap_insight": "চিহ্ন বদল করে $-5$ ভাবা। এটি গুণাত্মক বিপরীত ($1/5$), যোগাত্মক নয়!",
+    "trap_alert": "চিহ্ন বদল করে $-5$ ভাবা। এটি গুণাত্মক বিপরীত ($1/5$), যোগাত্মক নয়!",
+    "tag": "Type 2: ত্রিকোণমিতিক অভেদাবলী ও অনুপাত",
+    "speed_hack": "আমরা জানি $\\sec^2\\theta - \\tan^2\\theta = 1 \\implies (\\sec\\theta + \\tan\\theta)(\\sec\\theta - \\tan\\theta) = 1$। তাই মান হবে $1/5$।",
+    "type_ref": "Type 2: ত্রিকোণমিতিক অভেদাবলী ও অনুপাত",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_04",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "যদি $\\tan\\theta = -\\frac{4}{3}$ এবং $\\cos\\theta > 0$ হয়, তবে $\\sin\\theta$ এর মান কত?",
+    "question": "যদি $\\tan\\theta = -\\frac{4}{3}$ এবং $\\cos\\theta > 0$ হয়, তবে $\\sin\\theta$ এর মান কত?",
+    "opts": [
+      "$\\frac{3}{5}$",
+      "$\\frac{4}{5}$",
+      "$-\\frac{3}{5}$",
+      "$-\\frac{4}{5}$"
+    ],
+    "options": [
+      "$\\frac{3}{5}$",
+      "$\\frac{4}{5}$",
+      "$-\\frac{3}{5}$",
+      "$-\\frac{4}{5}$"
+    ],
+    "ans": "$-\\frac{4}{5}$",
+    "correct_index": 3,
+    "exp": "$\\cos\\theta > 0$ এবং $\\tan\\theta < 0$ হওয়ায় কোণ $\\theta$ ৪র্থ চতুর্ভাগে অবস্থান করে। ৪র্থ চতুর্ভাগে $\\sin\\theta = -4/5$।",
+    "explanation": "$\\cos\\theta > 0$ এবং $\\tan\\theta < 0$ হওয়ায় কোণ $\\theta$ ৪র্থ চতুর্ভাগে অবস্থান করে। ৪র্থ চতুর্ভাগে $\\sin\\theta = -4/5$।",
+    "trap": "চতুর্ভাগ ভুল শনাক্ত করা। $\\tan < 0$ ও $\\cos > 0$ মানে কোণটি ৪র্থ চতুর্ভাগে, যেখানে $\\sin$ ঋণাত্মক!",
+    "trap_insight": "চতুর্ভাগ ভুল শনাক্ত করা। $\\tan < 0$ ও $\\cos > 0$ মানে কোণটি ৪র্থ চতুর্ভাগে, যেখানে $\\sin$ ঋণাত্মক!",
+    "trap_alert": "চতুর্ভাগ ভুল শনাক্ত করা। $\\tan < 0$ ও $\\cos > 0$ মানে কোণটি ৪র্থ চতুর্ভাগে, যেখানে $\\sin$ ঋণাত্মক!",
+    "tag": "Type 2: চতুর্ভাগে চিহ্নের নিয়ম ও অনুপাত",
+    "speed_hack": "৪র্থ চতুর্ভাগে $\\sin\\theta$ ঋণাত্মক। ট্রিপলেট $(3, 4, 5) \\implies \\sin\\theta = -4/5$।",
+    "type_ref": "Type 2: চতুর্ভাগে চিহ্নের নিয়ম ও অনুপাত",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_05",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\tan 1^\\circ \\cdot \\tan 2^\\circ \\cdot \\tan 3^\\circ \\dots \\tan 89^\\circ$ এর মান কত?",
+    "question": "$\\tan 1^\\circ \\cdot \\tan 2^\\circ \\cdot \\tan 3^\\circ \\dots \\tan 89^\\circ$ এর মান কত?",
+    "opts": [
+      "$1$",
+      "$0$",
+      "$\\infty$",
+      "$\\frac{1}{2}$"
+    ],
+    "options": [
+      "$1$",
+      "$0$",
+      "$\\infty$",
+      "$\\frac{1}{2}$"
+    ],
+    "ans": "$1$",
+    "correct_index": 0,
+    "exp": "প্রথম ও শেষ পদগুলো গুণ হয়ে ১ তৈরি করে এবং মাঝের $\\tan 45^\\circ = 1$, ফলে সামগ্রিক গুণফল ১।",
+    "explanation": "প্রথম ও শেষ পদগুলো গুণ হয়ে ১ তৈরি করে এবং মাঝের $\\tan 45^\\circ = 1$, ফলে সামগ্রিক গুণফল ১।",
+    "trap": "$\\tan 90^\\circ$ মনে করে মান অসংজ্ঞায়িত বা শূন্য দাগানো। এখানে শেষ পদ $\\tan 89^\\circ$!",
+    "trap_insight": "$\\tan 90^\\circ$ মনে করে মান অসংজ্ঞায়িত বা শূন্য দাগানো। এখানে শেষ পদ $\\tan 89^\\circ$!",
+    "trap_alert": "$\\tan 90^\\circ$ মনে করে মান অসংজ্ঞায়িত বা শূন্য দাগানো। এখানে শেষ পদ $\\tan 89^\\circ$!",
+    "tag": "Type 2: পূরক কোণের রূপান্তর",
+    "speed_hack": "$\\tan(90^\\circ - \\theta) = \\cot\\theta \\implies \\tan 89^\\circ = \\cot 1^\\circ$। $\\tan 1^\\circ \\cot 1^\\circ = 1$ এভাবে সব জোড়া কেটে মাঝে শুধু $\\tan 45^\\circ = 1$ থাকে।",
+    "type_ref": "Type 2: পূরক কোণের রূপান্তর",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_06",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\sin^2 10^\\circ + \\sin^2 20^\\circ + \\dots + \\sin^2 80^\\circ$ এর মান কত?",
+    "question": "$\\sin^2 10^\\circ + \\sin^2 20^\\circ + \\dots + \\sin^2 80^\\circ$ এর মান কত?",
+    "opts": [
+      "$8$",
+      "$4$",
+      "$4.5$",
+      "$3.5$"
+    ],
+    "options": [
+      "$8$",
+      "$4$",
+      "$4.5$",
+      "$3.5$"
+    ],
+    "ans": "$4$",
+    "correct_index": 1,
+    "exp": "$\\sin^2 10^\\circ + \\sin^2 80^\\circ = \\sin^2 10^\\circ + \\cos^2 10^\\circ = 1$। এমন ৪টি জোড়ার সমষ্টি $4$।",
+    "explanation": "$\\sin^2 10^\\circ + \\sin^2 80^\\circ = \\sin^2 10^\\circ + \\cos^2 10^\\circ = 1$। এমন ৪টি জোড়ার সমষ্টি $4$।",
+    "trap": "মোট পদের সংখ্যা ও জোড়া ঠিকমতো না গুনে পদ সংখ্যাকে সরাসরি উত্তর ভাবা।",
+    "trap_insight": "মোট পদের সংখ্যা ও জোড়া ঠিকমতো না গুনে পদ সংখ্যাকে সরাসরি উত্তর ভাবা।",
+    "trap_alert": "মোট পদের সংখ্যা ও জোড়া ঠিকমতো না গুনে পদ সংখ্যাকে সরাসরি উত্তর ভাবা।",
+    "tag": "Type 2: বর্গের সমষ্টি ও পূরক কোণ",
+    "speed_hack": "পদ সংখ্যা $(80-10)/10 + 1 = 8$ টি। প্রতি জোড়ায় $\\sin^2\\theta + \\cos^2\\theta = 1$। মোট ৪টি জোড়া $\\implies 4 \\times 1 = 4$।",
+    "type_ref": "Type 2: বর্গের সমষ্টি ও পূরক কোণ",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_07",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি চাকার ব্যাস $1\\text{ m}$ হলে $314\\text{ m}$ দূরত্ব অতিক্রম করতে চাকাটি কতবার পূর্ণ ঘূর্ণন সম্পন্ন করবে? (ধরি $\\pi \\approx 3.14$)",
+    "question": "একটি চাকার ব্যাস $1\\text{ m}$ হলে $314\\text{ m}$ দূরত্ব অতিক্রম করতে চাকাটি কতবার পূর্ণ ঘূর্ণন সম্পন্ন করবে? (ধরি $\\pi \\approx 3.14$)",
+    "opts": [
+      "$200$",
+      "$50$",
+      "$100$",
+      "$314$"
+    ],
+    "options": [
+      "$200$",
+      "$50$",
+      "$100$",
+      "$314$"
+    ],
+    "ans": "$100$",
+    "correct_index": 2,
+    "exp": "১ বার ঘুরলে অতিক্রম করে পরিধি $\\pi d = 3.14\\text{ m}$। সুতরাং ঘূর্ণন সংখ্যা $= 314/3.14 = 100$।",
+    "explanation": "১ বার ঘুরলে অতিক্রম করে পরিধি $\\pi d = 3.14\\text{ m}$। সুতরাং ঘূর্ণন সংখ্যা $= 314/3.14 = 100$।",
+    "trap": "ব্যাস দেওয়া আছে, ব্যাসার্ধ নয়! পরিধি $=\\pi d = 3.14\\text{ m}$।",
+    "trap_insight": "ব্যাস দেওয়া আছে, ব্যাসার্ধ নয়! পরিধি $=\\pi d = 3.14\\text{ m}$।",
+    "trap_alert": "ব্যাস দেওয়া আছে, ব্যাসার্ধ নয়! পরিধি $=\\pi d = 3.14\\text{ m}$।",
+    "tag": "Type 1: চাকার ঘূর্ণন ও পরিধি",
+    "speed_hack": "ঘূর্ণন সংখ্যা $N = \\frac{\\text{মোট দূরত্ব}}{\\pi d} = \\frac{314}{3.14 \\times 1} = 100$ বার।",
+    "type_ref": "Type 1: চাকার ঘূর্ণন ও পরিধি",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_08",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$\\cos\\left(-\\frac{19\\pi}{3}\\right)$ এর সঠিক মান কোনটি?",
+    "question": "$\\cos\\left(-\\frac{19\\pi}{3}\\right)$ এর সঠিক মান কোনটি?",
+    "opts": [
+      "$-\\frac{\\sqrt{3}}{2}$",
+      "$-\\frac{1}{2}$",
+      "$\\frac{\\sqrt{3}}{2}$",
+      "$\\frac{1}{2}$"
+    ],
+    "options": [
+      "$-\\frac{\\sqrt{3}}{2}$",
+      "$-\\frac{1}{2}$",
+      "$\\frac{\\sqrt{3}}{2}$",
+      "$\\frac{1}{2}$"
+    ],
+    "ans": "$\\frac{1}{2}$",
+    "correct_index": 3,
+    "exp": "$\\cos(-19\\pi/3) = \\cos(19\\pi/3) = \\cos(6\\pi + \\pi/3) = \\cos(\\pi/3) = 1/2$।",
+    "explanation": "$\\cos(-19\\pi/3) = \\cos(19\\pi/3) = \\cos(6\\pi + \\pi/3) = \\cos(\\pi/3) = 1/2$।",
+    "trap": "$\\cos(-\\theta) = \\cos\\theta$ মনে না রেখে চিহ্নের ভুল করে মাইনাস দাগানো।",
+    "trap_insight": "$\\cos(-\\theta) = \\cos\\theta$ মনে না রেখে চিহ্নের ভুল করে মাইনাস দাগানো।",
+    "trap_alert": "$\\cos(-\\theta) = \\cos\\theta$ মনে না রেখে চিহ্নের ভুল করে মাইনাস দাগানো।",
+    "tag": "Type 2: ঋণাত্মক ও বৃহৎ কোণের অনুপাত",
+    "speed_hack": "$\\cos(-\\theta) = \\cos\\theta$। $\\cos(19\\pi/3) = \\cos(6\\pi + \\pi/3) = \\cos(\\pi/3) = 1/2$। ৩ সেকেন্ডে সমাধান!",
+    "type_ref": "Type 2: ঋণাত্মক ও বৃহৎ কোণের অনুপাত",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_09",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$r$ ব্যাসার্ধবিশিষ্ট বৃত্তের কোনো বৃত্তকলার কোণ $\\theta$ রেডিয়ান হলে বৃত্তকলাটির ক্ষেত্রফল কত?",
+    "question": "$r$ ব্যাসার্ধবিশিষ্ট বৃত্তের কোনো বৃত্তকলার কোণ $\\theta$ রেডিয়ান হলে বৃত্তকলাটির ক্ষেত্রফল কত?",
+    "opts": [
+      "$\\frac{1}{2}r^2\\theta$",
+      "$r^2\\theta$",
+      "$\\frac{1}{2}r\\theta$",
+      "$\\pi r^2\\theta$"
+    ],
+    "options": [
+      "$\\frac{1}{2}r^2\\theta$",
+      "$r^2\\theta$",
+      "$\\frac{1}{2}r\\theta$",
+      "$\\pi r^2\\theta$"
+    ],
+    "ans": "$\\frac{1}{2}r^2\\theta$",
+    "correct_index": 0,
+    "exp": "সম্পূর্ণ বৃত্তের ক্ষেত্রফল $\\pi r^2$ এবং সম্পূর্ণ কোণ $2\\pi$, ফলে ক্ষেত্রফল $= \\frac{\\theta}{2\\pi} \\times \\pi r^2 = \\frac{1}{2}r^2\\theta$।",
+    "explanation": "সম্পূর্ণ বৃত্তের ক্ষেত্রফল $\\pi r^2$ এবং সম্পূর্ণ কোণ $2\\pi$, ফলে ক্ষেত্রফল $= \\frac{\\theta}{2\\pi} \\times \\pi r^2 = \\frac{1}{2}r^2\\theta$।",
+    "trap": "হাফ ($1/2$) বাদ দিয়ে সরাসরি $r^2\\theta$ দাগানো।",
+    "trap_insight": "হাফ ($1/2$) বাদ দিয়ে সরাসরি $r^2\\theta$ দাগানো।",
+    "trap_alert": "হাফ ($1/2$) বাদ দিয়ে সরাসরি $r^2\\theta$ দাগানো।",
+    "tag": "Type 1: বৃত্তকলার ক্ষেত্রফল",
+    "speed_hack": "বৃত্তকলার ক্ষেত্রফল $A = \\frac{1}{2}r^2\\theta = \\frac{1}{2}rs$ (যেখানে $s = r\\theta$)।",
+    "type_ref": "Type 1: বৃত্তকলার ক্ষেত্রফল",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_1st_06_10",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "যদি $\\csc\\theta - \\cot\\theta = \\frac{1}{3}$ হয়, তবে $\\cos\\theta$ এর মান কত?",
+    "question": "যদি $\\csc\\theta - \\cot\\theta = \\frac{1}{3}$ হয়, তবে $\\cos\\theta$ এর মান কত?",
+    "opts": [
+      "$\\frac{3}{5}$",
+      "$\\frac{4}{5}$",
+      "$-\\frac{4}{5}$",
+      "$\\frac{5}{4}$"
+    ],
+    "options": [
+      "$\\frac{3}{5}$",
+      "$\\frac{4}{5}$",
+      "$-\\frac{4}{5}$",
+      "$\\frac{5}{4}$"
+    ],
+    "ans": "$\\frac{4}{5}$",
+    "correct_index": 1,
+    "exp": "$\\csc\\theta + \\cot\\theta = 3$ ও $\\csc\\theta - \\cot\\theta = 1/3$ সমাধান করে $\\sin\\theta = 3/5 \\implies \\cos\\theta = 4/5$।",
+    "explanation": "$\\csc\\theta + \\cot\\theta = 3$ ও $\\csc\\theta - \\cot\\theta = 1/3$ সমাধান করে $\\sin\\theta = 3/5 \\implies \\cos\\theta = 4/5$।",
+    "trap": "যোগ করে $\\csc\\theta = 5/3$ পাওয়ার পর $\\cos\\theta$ বের করতে গিয়ে সাইন ও কস গুলিয়ে ফেলা।",
+    "trap_insight": "যোগ করে $\\csc\\theta = 5/3$ পাওয়ার পর $\\cos\\theta$ বের করতে গিয়ে সাইন ও কস গুলিয়ে ফেলা।",
+    "trap_alert": "যোগ করে $\\csc\\theta = 5/3$ পাওয়ার পর $\\cos\\theta$ বের করতে গিয়ে সাইন ও কস গুলিয়ে ফেলা।",
+    "tag": "Type 2: ত্রিকোণমিতিক রূপান্তর",
+    "speed_hack": "$\\csc\\theta + \\cot\\theta = 3$। যোগ করলে $2\\csc\\theta = 10/3 \\implies \\sin\\theta = 3/5$। ট্রিপলেট $(3, 4, 5) \\implies \\cos\\theta = 4/5$।",
+    "type_ref": "Type 2: ত্রিকোণমিতিক রূপান্তর",
+    "blueprint_type_id": "math_1st_06_t1",
+    "blueprint_chapter_id": "math_1st_06",
+    "chapter": "math_1st_06"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_01",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "কোনো বিন্দুতে ক্রিয়ারত দুটি সমান বল $P$ এর মধ্যবর্তী কোণ কত হলে তাদের লব্ধির মানও $P$ হবে?",
+    "question": "কোনো বিন্দুতে ক্রিয়ারত দুটি সমান বল $P$ এর মধ্যবর্তী কোণ কত হলে তাদের লব্ধির মানও $P$ হবে?",
+    "opts": [
+      "$120^\\circ$",
+      "$60^\\circ$",
+      "$90^\\circ$",
+      "$180^\\circ$"
+    ],
+    "options": [
+      "$120^\\circ$",
+      "$60^\\circ$",
+      "$90^\\circ$",
+      "$180^\\circ$"
+    ],
+    "ans": "$120^\\circ$",
+    "correct_index": 0,
+    "exp": "$P^2 = 2P^2(1 + \\cos\\alpha) \\implies 1 + \\cos\\alpha = 1/2 \\implies \\cos\\alpha = -1/2 \\implies \\alpha = 120^\\circ$।",
+    "explanation": "$P^2 = 2P^2(1 + \\cos\\alpha) \\implies 1 + \\cos\\alpha = 1/2 \\implies \\cos\\alpha = -1/2 \\implies \\alpha = 120^\\circ$।",
+    "trap": "লব্ধি সমান হলে কোণ $120^\\circ$।",
+    "trap_insight": "লব্ধি সমান হলে কোণ $120^\\circ$।",
+    "trap_alert": "লব্ধি সমান হলে কোণ $120^\\circ$।",
+    "tag": "দুটি সমান বলের লব্ধি",
+    "speed_hack": "বল সমান ও লব্ধি সমান $\\implies \\alpha = 120^\\circ$।",
+    "type_ref": "দুটি সমান বলের লব্ধি",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_02",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি বিন্দুতে ক্রিয়াশীল তিনটি বলের সাম্যাবস্থার জন্য লামির উপপাদ্য কোনটি?",
+    "question": "একটি বিন্দুতে ক্রিয়াশীল তিনটি বলের সাম্যাবস্থার জন্য লামির উপপাদ্য কোনটি?",
+    "opts": [
+      "$\\frac{P}{\\cos\\alpha} = \\frac{Q}{\\cos\\beta} = \\frac{R}{\\cos\\gamma}$",
+      "$\\frac{P}{\\sin\\alpha} = \\frac{Q}{\\sin\\beta} = \\frac{R}{\\sin\\gamma}$",
+      "$P\\sin\\alpha = Q\\sin\\beta = R\\sin\\gamma$",
+      "$\\frac{P}{\\sin\\beta} = \\frac{Q}{\\sin\\alpha} = \\frac{R}{\\sin\\gamma}$"
+    ],
+    "options": [
+      "$\\frac{P}{\\cos\\alpha} = \\frac{Q}{\\cos\\beta} = \\frac{R}{\\cos\\gamma}$",
+      "$\\frac{P}{\\sin\\alpha} = \\frac{Q}{\\sin\\beta} = \\frac{R}{\\sin\\gamma}$",
+      "$P\\sin\\alpha = Q\\sin\\beta = R\\sin\\gamma$",
+      "$\\frac{P}{\\sin\\beta} = \\frac{Q}{\\sin\\alpha} = \\frac{R}{\\sin\\gamma}$"
+    ],
+    "ans": "$\\frac{P}{\\sin\\alpha} = \\frac{Q}{\\sin\\beta} = \\frac{R}{\\sin\\gamma}$",
+    "correct_index": 1,
+    "exp": "লামির উপপাদ্য অনুসারে $\\frac{P}{\\sin\\alpha} = \\frac{Q}{\\sin\\beta} = \\frac{R}{\\sin\\gamma}$।",
+    "explanation": "লামির উপপাদ্য অনুসারে $\\frac{P}{\\sin\\alpha} = \\frac{Q}{\\sin\\beta} = \\frac{R}{\\sin\\gamma}$।",
+    "trap": "প্রতিটি বল অপর দুটির মধ্যবর্তী কোণের সাইনের সমানুপাতিক।",
+    "trap_insight": "প্রতিটি বল অপর দুটির মধ্যবর্তী কোণের সাইনের সমানুপাতিক।",
+    "trap_alert": "প্রতিটি বল অপর দুটির মধ্যবর্তী কোণের সাইনের সমানুপাতিক।",
+    "tag": "লামির উপপাদ্যের বিবৃতি",
+    "speed_hack": "Lami: $\\frac{F_i}{\\sin\\theta_i} = \\text{ধ্রুবক}$।",
+    "type_ref": "লামির উপপাদ্যের বিবৃতি",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_03",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "দুটি বলের সর্বোচ্চ ও সর্বনিম্ন লব্ধির মান যথাক্রমে $14\\text{ N}$ এবং $2\\text{ N}$ হলে বল দুটির মান কত?",
+    "question": "দুটি বলের সর্বোচ্চ ও সর্বনিম্ন লব্ধির মান যথাক্রমে $14\\text{ N}$ এবং $2\\text{ N}$ হলে বল দুটির মান কত?",
+    "opts": [
+      "$9\\text{ N}$ এবং $5\\text{ N}$",
+      "$10\\text{ N}$ এবং $4\\text{ N}$",
+      "$8\\text{ N}$ এবং $6\\text{ N}$",
+      "$12\\text{ N}$ এবং $2\\text{ N}$"
+    ],
+    "options": [
+      "$9\\text{ N}$ এবং $5\\text{ N}$",
+      "$10\\text{ N}$ এবং $4\\text{ N}$",
+      "$8\\text{ N}$ এবং $6\\text{ N}$",
+      "$12\\text{ N}$ এবং $2\\text{ N}$"
+    ],
+    "ans": "$8\\text{ N}$ এবং $6\\text{ N}$",
+    "correct_index": 2,
+    "exp": "$P + Q = 14$ এবং $P - Q = 2$। সমাধান করে $P = 8\\text{ N}$ এবং $Q = 6\\text{ N}$।",
+    "explanation": "$P + Q = 14$ এবং $P - Q = 2$। সমাধান করে $P = 8\\text{ N}$ এবং $Q = 6\\text{ N}$।",
+    "trap": "$P+Q = 14, P-Q = 2$।",
+    "trap_insight": "$P+Q = 14, P-Q = 2$।",
+    "trap_alert": "$P+Q = 14, P-Q = 2$।",
+    "tag": "সর্বোচ্চ ও সর্বনিম্ন লব্ধি",
+    "speed_hack": "$P = (14+2)/2 = 8, Q = (14-2)/2 = 6$।",
+    "type_ref": "সর্বোচ্চ ও সর্বনিম্ন লব্ধি",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_04",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একই বিন্দুতে ক্রিয়ারত $3\\text{ N}$ এবং $4\\text{ N}$ মানের দুটি বলের মধ্যবর্তী কোণ $90^\\circ$ হলে লব্ধির মান কত?",
+    "question": "একই বিন্দুতে ক্রিয়ারত $3\\text{ N}$ এবং $4\\text{ N}$ মানের দুটি বলের মধ্যবর্তী কোণ $90^\\circ$ হলে লব্ধির মান কত?",
+    "opts": [
+      "$25\\text{ N}$",
+      "$7\\text{ N}$",
+      "$1\\text{ N}$",
+      "$5\\text{ N}$"
+    ],
+    "options": [
+      "$25\\text{ N}$",
+      "$7\\text{ N}$",
+      "$1\\text{ N}$",
+      "$5\\text{ N}$"
+    ],
+    "ans": "$5\\text{ N}$",
+    "correct_index": 3,
+    "exp": "$R = \\sqrt{3^2 + 4^2 + 2(3)(4)\\cos 90^\\circ} = \\sqrt{25} = 5\\text{ N}$।",
+    "explanation": "$R = \\sqrt{3^2 + 4^2 + 2(3)(4)\\cos 90^\\circ} = \\sqrt{25} = 5\\text{ N}$।",
+    "trap": "$R = \\sqrt{3^2 + 4^2} = 5$।",
+    "trap_insight": "$R = \\sqrt{3^2 + 4^2} = 5$।",
+    "trap_alert": "$R = \\sqrt{3^2 + 4^2} = 5$।",
+    "tag": "পরস্পর লম্ব বলের লব্ধি",
+    "speed_hack": "পিথাগোরাস: $3, 4, 5$।",
+    "type_ref": "পরস্পর লম্ব বলের লব্ধি",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_05",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "দুটি সমমুখী সমান্তরাল বল $P$ এবং $Q$ যথাক্রমে $A$ ও $B$ তে ক্রিয়ারত। লব্ধি $C$ তে ক্রিয়া করলে কোনটি সঠিক?",
+    "question": "দুটি সমমুখী সমান্তরাল বল $P$ এবং $Q$ যথাক্রমে $A$ ও $B$ তে ক্রিয়ারত। লব্ধি $C$ তে ক্রিয়া করলে কোনটি সঠিক?",
+    "opts": [
+      "$P \\cdot AC = Q \\cdot BC$",
+      "$P \\cdot BC = Q \\cdot AC$",
+      "$\\frac{P}{AC} = \\frac{Q}{BC}$",
+      "$P + AC = Q + BC$"
+    ],
+    "options": [
+      "$P \\cdot AC = Q \\cdot BC$",
+      "$P \\cdot BC = Q \\cdot AC$",
+      "$\\frac{P}{AC} = \\frac{Q}{BC}$",
+      "$P + AC = Q + BC$"
+    ],
+    "ans": "$P \\cdot AC = Q \\cdot BC$",
+    "correct_index": 0,
+    "exp": "সমান্তরাল বলের সূত্র অনুসারে লব্ধির ক্রিয়াবিন্দুতে $P \\cdot AC = Q \\cdot BC$।",
+    "explanation": "সমান্তরাল বলের সূত্র অনুসারে লব্ধির ক্রিয়াবিন্দুতে $P \\cdot AC = Q \\cdot BC$।",
+    "trap": "$C$ বিন্দুর সাপেক্ষে মোমেন্ট সমান: $P \\cdot AC = Q \\cdot BC$।",
+    "trap_insight": "$C$ বিন্দুর সাপেক্ষে মোমেন্ট সমান: $P \\cdot AC = Q \\cdot BC$।",
+    "trap_alert": "$C$ বিন্দুর সাপেক্ষে মোমেন্ট সমান: $P \\cdot AC = Q \\cdot BC$।",
+    "tag": "সমান্তরাল বলের লব্ধির অবস্থান",
+    "speed_hack": "$P \\cdot AC = Q \\cdot BC$।",
+    "type_ref": "সমান্তরাল বলের লব্ধির অবস্থান",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_06",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "কোনো বিন্দুতে ক্রিয়াশীল $P$ এবং $2P$ মানের বলদ্বয়ের লব্ধি $P$ বলটির ওপর লম্ব হলে মধ্যবর্তী কোণ কত?",
+    "question": "কোনো বিন্দুতে ক্রিয়াশীল $P$ এবং $2P$ মানের বলদ্বয়ের লব্ধি $P$ বলটির ওপর লম্ব হলে মধ্যবর্তী কোণ কত?",
+    "opts": [
+      "$150^\\circ$",
+      "$120^\\circ$",
+      "$135^\\circ$",
+      "$90^\\circ$"
+    ],
+    "options": [
+      "$150^\\circ$",
+      "$120^\\circ$",
+      "$135^\\circ$",
+      "$90^\\circ$"
+    ],
+    "ans": "$120^\\circ$",
+    "correct_index": 1,
+    "exp": "$\\tan 90^\\circ = \\infty \\implies P + 2P\\cos\\alpha = 0 \\implies \\cos\\alpha = -1/2 \\implies \\alpha = 120^\\circ$।",
+    "explanation": "$\\tan 90^\\circ = \\infty \\implies P + 2P\\cos\\alpha = 0 \\implies \\cos\\alpha = -1/2 \\implies \\alpha = 120^\\circ$।",
+    "trap": "$P + 2P\\cos\\alpha = 0 \\implies \\cos\\alpha = -1/2$।",
+    "trap_insight": "$P + 2P\\cos\\alpha = 0 \\implies \\cos\\alpha = -1/2$।",
+    "trap_alert": "$P + 2P\\cos\\alpha = 0 \\implies \\cos\\alpha = -1/2$।",
+    "tag": "লব্ধি ক্ষুদ্রতর বলের ওপর লম্ব",
+    "speed_hack": "$\\cos\\alpha = -P/(2P) = -1/2 \\implies 120^\\circ$।",
+    "type_ref": "লব্ধি ক্ষুদ্রতর বলের ওপর লম্ব",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_07",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি বিন্দুতে ক্রিয়ারত তিনটি বল $P, Q, R$ সাম্যাবস্থায় আছে এবং মধ্যবর্তী কোণগুলো পরস্পর সমান হলে বলগুলোর অনুপাত কত?",
+    "question": "একটি বিন্দুতে ক্রিয়ারত তিনটি বল $P, Q, R$ সাম্যাবস্থায় আছে এবং মধ্যবর্তী কোণগুলো পরস্পর সমান হলে বলগুলোর অনুপাত কত?",
+    "opts": [
+      "$\\sqrt{3} : 1 : 2$",
+      "$1 : 2 : 3$",
+      "$1 : 1 : 1$",
+      "$1 : \\sqrt{2} : 1$"
+    ],
+    "options": [
+      "$\\sqrt{3} : 1 : 2$",
+      "$1 : 2 : 3$",
+      "$1 : 1 : 1$",
+      "$1 : \\sqrt{2} : 1$"
+    ],
+    "ans": "$1 : 1 : 1$",
+    "correct_index": 2,
+    "exp": "প্রতিটি কোণ $120^\\circ$। লামির উপপাদ্য মতে $\\frac{P}{\\sin 120^\\circ} = \\frac{Q}{\\sin 120^\\circ} = \\frac{R}{\\sin 120^\\circ} \\implies P : Q : R = 1 : 1 : 1$।",
+    "explanation": "প্রতিটি কোণ $120^\\circ$। লামির উপপাদ্য মতে $\\frac{P}{\\sin 120^\\circ} = \\frac{Q}{\\sin 120^\\circ} = \\frac{R}{\\sin 120^\\circ} \\implies P : Q : R = 1 : 1 : 1$।",
+    "trap": "কোণগুলো $120^\\circ$ করে।",
+    "trap_insight": "কোণগুলো $120^\\circ$ করে।",
+    "trap_alert": "কোণগুলো $120^\\circ$ করে।",
+    "tag": "সমান কোণে সাম্যাবস্থা",
+    "speed_hack": "লামির সূত্রে হর সমান $\\implies P = Q = R$।",
+    "type_ref": "সমান কোণে সাম্যাবস্থা",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_08",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "দুটি বিপরীতমুখী সমান্তরাল বল $12\\text{ N}$ এবং $8\\text{ N}$ এর লব্ধির মান কত?",
+    "question": "দুটি বিপরীতমুখী সমান্তরাল বল $12\\text{ N}$ এবং $8\\text{ N}$ এর লব্ধির মান কত?",
+    "opts": [
+      "$\\sqrt{208}\\text{ N}$",
+      "$20\\text{ N}$",
+      "$96\\text{ N}$",
+      "$4\\text{ N}$"
+    ],
+    "options": [
+      "$\\sqrt{208}\\text{ N}$",
+      "$20\\text{ N}$",
+      "$96\\text{ N}$",
+      "$4\\text{ N}$"
+    ],
+    "ans": "$4\\text{ N}$",
+    "correct_index": 3,
+    "exp": "বিসদৃশ সমান্তরাল বলের লব্ধি $R = |P - Q| = 12 - 8 = 4\\text{ N}$।",
+    "explanation": "বিসদৃশ সমান্তরাল বলের লব্ধি $R = |P - Q| = 12 - 8 = 4\\text{ N}$।",
+    "trap": "বিসদৃশ বলের লব্ধি $|P - Q|$।",
+    "trap_insight": "বিসদৃশ বলের লব্ধি $|P - Q|$।",
+    "trap_alert": "বিসদৃশ বলের লব্ধি $|P - Q|$।",
+    "tag": "বিসদৃশ সমান্তরাল বলের লব্ধি",
+    "speed_hack": "$12 - 8 = 4\\text{ N}$।",
+    "type_ref": "বিসদৃশ সমান্তরাল বলের লব্ধি",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_09",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি বল যুগলের ভ্রামক কিসের ওপর নির্ভর করে না?",
+    "question": "একটি বল যুগলের ভ্রামক কিসের ওপর নির্ভর করে না?",
+    "opts": [
+      "ঘূর্ণন অক্ষ বা মূলবিন্দুর অবস্থানের ওপর",
+      "বলদ্বয়ের মানের ওপর",
+      "বলদ্বয়ের মধ্যবর্তী লম্ব দূরত্বের ওপর",
+      "বলের অভিমুখের ওপর"
+    ],
+    "options": [
+      "ঘূর্ণন অক্ষ বা মূলবিন্দুর অবস্থানের ওপর",
+      "বলদ্বয়ের মানের ওপর",
+      "বলদ্বয়ের মধ্যবর্তী লম্ব দূরত্বের ওপর",
+      "বলের অভিমুখের ওপর"
+    ],
+    "ans": "ঘূর্ণন অক্ষ বা মূলবিন্দুর অবস্থানের ওপর",
+    "correct_index": 0,
+    "exp": "যুগলের ভ্রামক $M = F \\times d$, যা মূলবিন্দু বা ঘূর্ণন অক্ষের অবস্থানের ওপর নির্ভর করে না।",
+    "explanation": "যুগলের ভ্রামক $M = F \\times d$, যা মূলবিন্দু বা ঘূর্ণন অক্ষের অবস্থানের ওপর নির্ভর করে না।",
+    "trap": "যুগলের ভ্রামক সমতলের যে কোনো বিন্দুর সাপেক্ষে ধ্রুবক।",
+    "trap_insight": "যুগলের ভ্রামক সমতলের যে কোনো বিন্দুর সাপেক্ষে ধ্রুবক।",
+    "trap_alert": "যুগলের ভ্রামক সমতলের যে কোনো বিন্দুর সাপেক্ষে ধ্রুবক।",
+    "tag": "যুগলের ভ্রামকের বৈশিষ্ট্য",
+    "speed_hack": "বিন্দুর অবস্থানের ওপর নিরপেক্ষ।",
+    "type_ref": "যুগলের ভ্রামকের বৈশিষ্ট্য",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_08_10",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$P$ এবং $Q$ মানের দুটি বলের স্থান বিনিময় করলে লব্ধির দিক পরিবর্তিত হয় না। কোনটি সত্য?",
+    "question": "$P$ এবং $Q$ মানের দুটি বলের স্থান বিনিময় করলে লব্ধির দিক পরিবর্তিত হয় না। কোনটি সত্য?",
+    "opts": [
+      "$\\alpha = 90^\\circ$",
+      "$P = Q$",
+      "$P + Q = 0$",
+      "$\\alpha = 180^\\circ$"
+    ],
+    "options": [
+      "$\\alpha = 90^\\circ$",
+      "$P = Q$",
+      "$P + Q = 0$",
+      "$\\alpha = 180^\\circ$"
+    ],
+    "ans": "$P = Q$",
+    "correct_index": 1,
+    "exp": "$P = Q$ হলে লব্ধি মধ্যবর্তী কোণের সমদ্বিখণ্ডক বরাবর ক্রিয়া করে, তাই স্থান পরিবর্তনে দিক বদলায় না।",
+    "explanation": "$P = Q$ হলে লব্ধি মধ্যবর্তী কোণের সমদ্বিখণ্ডক বরাবর ক্রিয়া করে, তাই স্থান পরিবর্তনে দিক বদলায় না।",
+    "trap": "বলদ্বয় সমান হলেই দিক সমদ্বিখণ্ডক বরাবর অপরিবর্তিত থাকে।",
+    "trap_insight": "বলদ্বয় সমান হলেই দিক সমদ্বিখণ্ডক বরাবর অপরিবর্তিত থাকে।",
+    "trap_alert": "বলদ্বয় সমান হলেই দিক সমদ্বিখণ্ডক বরাবর অপরিবর্তিত থাকে।",
+    "tag": "লব্ধির প্রতিসাম্য ধর্ম",
+    "speed_hack": "$P = Q$।",
+    "type_ref": "লব্ধির প্রতিসাম্য ধর্ম",
+    "blueprint_type_id": "math_2nd_08_t1",
+    "blueprint_chapter_id": "math_2nd_08",
+    "chapter": "math_2nd_08"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_01",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি প্রক্ষেপককে $u$ বেগে অনুভূমিকের সাথে $\\alpha$ কোণে নিক্ষেপ করা হলে এর অনুভূমিক পাল্লা $R$ কত?",
+    "question": "একটি প্রক্ষেপককে $u$ বেগে অনুভূমিকের সাথে $\\alpha$ কোণে নিক্ষেপ করা হলে এর অনুভূমিক পাল্লা $R$ কত?",
+    "opts": [
+      "$\\frac{u^2\\sin 2\\alpha}{g}$",
+      "$\\frac{u^2\\sin^2\\alpha}{2g}$",
+      "$\\frac{2u\\sin\\alpha}{g}$",
+      "$\\frac{u^2\\cos 2\\alpha}{g}$"
+    ],
+    "options": [
+      "$\\frac{u^2\\sin 2\\alpha}{g}$",
+      "$\\frac{u^2\\sin^2\\alpha}{2g}$",
+      "$\\frac{2u\\sin\\alpha}{g}$",
+      "$\\frac{u^2\\cos 2\\alpha}{g}$"
+    ],
+    "ans": "$\\frac{u^2\\sin 2\\alpha}{g}$",
+    "correct_index": 0,
+    "exp": "অনুভূমিক পাল্লা $R = u\\cos\\alpha \\times \\frac{2u\\sin\\alpha}{g} = \\frac{u^2\\sin 2\\alpha}{g}$।",
+    "explanation": "অনুভূমিক পাল্লা $R = u\\cos\\alpha \\times \\frac{2u\\sin\\alpha}{g} = \\frac{u^2\\sin 2\\alpha}{g}$।",
+    "trap": "পাল্লায় $\\sin 2\\alpha$ থাকে।",
+    "trap_insight": "পাল্লায় $\\sin 2\\alpha$ থাকে।",
+    "trap_alert": "পাল্লায় $\\sin 2\\alpha$ থাকে।",
+    "tag": "প্রক্ষেপকের অনুভূমিক পাল্লা সূত্র",
+    "speed_hack": "$R = \\frac{u^2\\sin 2\\alpha}{g}$।",
+    "type_ref": "প্রক্ষেপকের অনুভূমিক পাল্লা সূত্র",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_02",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "প্রক্ষেপকের সর্বাধিক অনুভূমিক পাল্লার জন্য নিক্ষেপণ কোণ কত হতে হবে?",
+    "question": "প্রক্ষেপকের সর্বাধিক অনুভূমিক পাল্লার জন্য নিক্ষেপণ কোণ কত হতে হবে?",
+    "opts": [
+      "$90^\\circ$",
+      "$45^\\circ$",
+      "$30^\\circ$",
+      "$60^\\circ$"
+    ],
+    "options": [
+      "$90^\\circ$",
+      "$45^\\circ$",
+      "$30^\\circ$",
+      "$60^\\circ$"
+    ],
+    "ans": "$45^\\circ$",
+    "correct_index": 1,
+    "exp": "$\\sin 2\\alpha = 1 \\implies 2\\alpha = 90^\\circ \\implies \\alpha = 45^\\circ$।",
+    "explanation": "$\\sin 2\\alpha = 1 \\implies 2\\alpha = 90^\\circ \\implies \\alpha = 45^\\circ$।",
+    "trap": "$2\\alpha = 90^\\circ \\implies \\alpha = 45^\\circ$।",
+    "trap_insight": "$2\\alpha = 90^\\circ \\implies \\alpha = 45^\\circ$।",
+    "trap_alert": "$2\\alpha = 90^\\circ \\implies \\alpha = 45^\\circ$।",
+    "tag": "সর্বাধিক পাল্লার কোণ",
+    "speed_hack": "Max range at $45^\\circ$।",
+    "type_ref": "সর্বাধিক পাল্লার কোণ",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_03",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি বস্তুকে $49\\text{ m/s}$ বেগে খাড়া ওপরের দিকে নিক্ষেপ করলে কত সময় পর ভূমিতে ফিরবে? ($g = 9.8\\text{ m/s}^2$)",
+    "question": "একটি বস্তুকে $49\\text{ m/s}$ বেগে খাড়া ওপরের দিকে নিক্ষেপ করলে কত সময় পর ভূমিতে ফিরবে? ($g = 9.8\\text{ m/s}^2$)",
+    "opts": [
+      "$2.5\\text{ s}$",
+      "$5\\text{ s}$",
+      "$10\\text{ s}$",
+      "$20\\text{ s}$"
+    ],
+    "options": [
+      "$2.5\\text{ s}$",
+      "$5\\text{ s}$",
+      "$10\\text{ s}$",
+      "$20\\text{ s}$"
+    ],
+    "ans": "$10\\text{ s}$",
+    "correct_index": 2,
+    "exp": "$T = \\frac{2u}{g} = \\frac{2 \\times 49}{9.8} = 10\\text{ s}$।",
+    "explanation": "$T = \\frac{2u}{g} = \\frac{2 \\times 49}{9.8} = 10\\text{ s}$।",
+    "trap": "মোট সময় $T = 2u/g$।",
+    "trap_insight": "মোট সময় $T = 2u/g$।",
+    "trap_alert": "মোট সময় $T = 2u/g$।",
+    "tag": "খাড়া নিক্ষিপ্ত বস্তুর উড্ডয়নকাল",
+    "speed_hack": "$T = \\frac{2(49)}{9.8} = 10\\text{ s}$।",
+    "type_ref": "খাড়া নিক্ষিপ্ত বস্তুর উড্ডয়নকাল",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_04",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "স্থির অবস্থান থেকে সুষম ত্বরণে চলে একটি বস্তু $4\\text{ s}$ এ $32\\text{ m}$ যায়। ত্বরণ কত?",
+    "question": "স্থির অবস্থান থেকে সুষম ত্বরণে চলে একটি বস্তু $4\\text{ s}$ এ $32\\text{ m}$ যায়। ত্বরণ কত?",
+    "opts": [
+      "$16\\text{ m/s}^2$",
+      "$2\\text{ m/s}^2$",
+      "$8\\text{ m/s}^2$",
+      "$4\\text{ m/s}^2$"
+    ],
+    "options": [
+      "$16\\text{ m/s}^2$",
+      "$2\\text{ m/s}^2$",
+      "$8\\text{ m/s}^2$",
+      "$4\\text{ m/s}^2$"
+    ],
+    "ans": "$4\\text{ m/s}^2$",
+    "correct_index": 3,
+    "exp": "$32 = \\frac{1}{2}a(4^2) = 8a \\implies a = 4\\text{ m/s}^2$।",
+    "explanation": "$32 = \\frac{1}{2}a(4^2) = 8a \\implies a = 4\\text{ m/s}^2$।",
+    "trap": "$s = \\frac{1}{2}at^2$।",
+    "trap_insight": "$s = \\frac{1}{2}at^2$।",
+    "trap_alert": "$s = \\frac{1}{2}at^2$।",
+    "tag": "সুষম ত্বরণে রৈখিক গতি",
+    "speed_hack": "$a = \\frac{2(32)}{16} = 4\\text{ m/s}^2$।",
+    "type_ref": "সুষম ত্বরণে রৈখিক গতি",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_05",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "স্থির অবস্থান থেকে সুষম ত্বরণে চলমান বস্তুর $t$-তম সেকেন্ডে দূরত্বের সূত্র কোনটি?",
+    "question": "স্থির অবস্থান থেকে সুষম ত্বরণে চলমান বস্তুর $t$-তম সেকেন্ডে দূরত্বের সূত্র কোনটি?",
+    "opts": [
+      "$s_t = \\frac{1}{2}a(2t - 1)$",
+      "$s_t = at - \\frac{1}{2}a$",
+      "$s_t = \\frac{1}{2}at^2$",
+      "$s_t = a(2t - 1)$"
+    ],
+    "options": [
+      "$s_t = \\frac{1}{2}a(2t - 1)$",
+      "$s_t = at - \\frac{1}{2}a$",
+      "$s_t = \\frac{1}{2}at^2$",
+      "$s_t = a(2t - 1)$"
+    ],
+    "ans": "$s_t = \\frac{1}{2}a(2t - 1)$",
+    "correct_index": 0,
+    "exp": "$s_t = s(t) - s(t-1) = \\frac{1}{2}a(2t-1)$।",
+    "explanation": "$s_t = s(t) - s(t-1) = \\frac{1}{2}a(2t-1)$।",
+    "trap": "$u = 0$ হলে $s_t = \\frac{1}{2}a(2t-1)$।",
+    "trap_insight": "$u = 0$ হলে $s_t = \\frac{1}{2}a(2t-1)$।",
+    "trap_alert": "$u = 0$ হলে $s_t = \\frac{1}{2}a(2t-1)$।",
+    "tag": "$t$-তম সেকেন্ডের দূরত্ব সূত্র",
+    "speed_hack": "$s_t = \\frac{1}{2}a(2t-1)$।",
+    "type_ref": "$t$-তম সেকেন্ডের দূরত্ব সূত্র",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_06",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি প্রক্ষেপকের $\\alpha = 45^\\circ$ হলে পাল্লা $R$ ও সর্বোচ্চ উচ্চতা $H$ এর সম্পর্ক কোনটি?",
+    "question": "একটি প্রক্ষেপকের $\\alpha = 45^\\circ$ হলে পাল্লা $R$ ও সর্বোচ্চ উচ্চতা $H$ এর সম্পর্ক কোনটি?",
+    "opts": [
+      "$R = 2H$",
+      "$R = 4H$",
+      "$H = 4R$",
+      "$R = H$"
+    ],
+    "options": [
+      "$R = 2H$",
+      "$R = 4H$",
+      "$H = 4R$",
+      "$R = H$"
+    ],
+    "ans": "$R = 4H$",
+    "correct_index": 1,
+    "exp": "$R\\tan\\alpha = 4H \\implies R(1) = 4H \\implies R = 4H$।",
+    "explanation": "$R\\tan\\alpha = 4H \\implies R(1) = 4H \\implies R = 4H$।",
+    "trap": "$R\\tan\\alpha = 4H$। $\\tan 45^\\circ = 1$।",
+    "trap_insight": "$R\\tan\\alpha = 4H$। $\\tan 45^\\circ = 1$।",
+    "trap_alert": "$R\\tan\\alpha = 4H$। $\\tan 45^\\circ = 1$।",
+    "tag": "পাল্লা ও সর্বোচ্চ উচ্চতার সম্পর্ক",
+    "speed_hack": "$R = 4H$।",
+    "type_ref": "পাল্লা ও সর্বোচ্চ উচ্চতার সম্পর্ক",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_07",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একটি গুলি তক্তার মধ্যে $3\\text{ cm}$ প্রবেশ করে বেগ অর্ধেক হারায়। আর কতদূর প্রবেশ করবে?",
+    "question": "একটি গুলি তক্তার মধ্যে $3\\text{ cm}$ প্রবেশ করে বেগ অর্ধেক হারায়। আর কতদূর প্রবেশ করবে?",
+    "opts": [
+      "$2\\text{ cm}$",
+      "$1.5\\text{ cm}$",
+      "$1\\text{ cm}$",
+      "$3\\text{ cm}$"
+    ],
+    "options": [
+      "$2\\text{ cm}$",
+      "$1.5\\text{ cm}$",
+      "$1\\text{ cm}$",
+      "$3\\text{ cm}$"
+    ],
+    "ans": "$1\\text{ cm}$",
+    "correct_index": 2,
+    "exp": "অবশিষ্ট দূরত্ব $x' = \\frac{x}{n^2-1} = \\frac{3}{4-1} = 1\\text{ cm}$।",
+    "explanation": "অবশিষ্ট দূরত্ব $x' = \\frac{x}{n^2-1} = \\frac{3}{4-1} = 1\\text{ cm}$।",
+    "trap": "বাকি দূরত্ব $x' = \\frac{x}{n^2 - 1} = \\frac{3}{2^2 - 1} = 1\\text{ cm}$।",
+    "trap_insight": "বাকি দূরত্ব $x' = \\frac{x}{n^2 - 1} = \\frac{3}{2^2 - 1} = 1\\text{ cm}$।",
+    "trap_alert": "বাকি দূরত্ব $x' = \\frac{x}{n^2 - 1} = \\frac{3}{2^2 - 1} = 1\\text{ cm}$।",
+    "tag": "তক্তায় গুলির প্রবেশ সংক্রান্ত শর্টকাট",
+    "speed_hack": "$x' = \\frac{3}{3} = 1\\text{ cm}$।",
+    "type_ref": "তক্তায় গুলির প্রবেশ সংক্রান্ত শর্টকাট",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_08",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "$s = 2t^3 - 3t^2 + 4t$ হলে $t = 2\\text{ s}$ সময়ে কণাটির ত্বরণ কত?",
+    "question": "$s = 2t^3 - 3t^2 + 4t$ হলে $t = 2\\text{ s}$ সময়ে কণাটির ত্বরণ কত?",
+    "opts": [
+      "$6\\text{ m/s}^2$",
+      "$12\\text{ m/s}^2$",
+      "$24\\text{ m/s}^2$",
+      "$18\\text{ m/s}^2$"
+    ],
+    "options": [
+      "$6\\text{ m/s}^2$",
+      "$12\\text{ m/s}^2$",
+      "$24\\text{ m/s}^2$",
+      "$18\\text{ m/s}^2$"
+    ],
+    "ans": "$18\\text{ m/s}^2$",
+    "correct_index": 3,
+    "exp": "$v = 6t^2 - 6t + 4 \\implies a = 12t - 6$। $t = 2$ তে $a = 24 - 6 = 18\\text{ m/s}^2$।",
+    "explanation": "$v = 6t^2 - 6t + 4 \\implies a = 12t - 6$। $t = 2$ তে $a = 24 - 6 = 18\\text{ m/s}^2$।",
+    "trap": "$a = \\frac{d^2s}{dt^2} = 12t - 6$।",
+    "trap_insight": "$a = \\frac{d^2s}{dt^2} = 12t - 6$।",
+    "trap_alert": "$a = \\frac{d^2s}{dt^2} = 12t - 6$।",
+    "tag": "ব্যবকলনের সাহায্যে ত্বরণ নির্ণয়",
+    "speed_hack": "$12(2) - 6 = 18$।",
+    "type_ref": "ব্যবকলনের সাহায্যে ত্বরণ নির্ণয়",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_09",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "নদীর প্রস্থ $d$, স্রোতের বেগ $u$, সাঁতারুর বেগ $v$। সোজাসুজি নদী পার হতে সময় কত?",
+    "question": "নদীর প্রস্থ $d$, স্রোতের বেগ $u$, সাঁতারুর বেগ $v$। সোজাসুজি নদী পার হতে সময় কত?",
+    "opts": [
+      "$\\frac{d}{\\sqrt{v^2 - u^2}}$",
+      "$\\frac{d}{v}$",
+      "$\\frac{d}{v + u}$",
+      "$\\frac{d}{\\sqrt{v^2 + u^2}}$"
+    ],
+    "options": [
+      "$\\frac{d}{\\sqrt{v^2 - u^2}}$",
+      "$\\frac{d}{v}$",
+      "$\\frac{d}{v + u}$",
+      "$\\frac{d}{\\sqrt{v^2 + u^2}}$"
+    ],
+    "ans": "$\\frac{d}{\\sqrt{v^2 - u^2}}$",
+    "correct_index": 0,
+    "exp": "সোজাসুজি পাড়ে লব্ধি বেগ $w = \\sqrt{v^2 - u^2}$। সময় $t = \\frac{d}{\\sqrt{v^2 - u^2}}$।",
+    "explanation": "সোজাসুজি পাড়ে লব্ধি বেগ $w = \\sqrt{v^2 - u^2}$। সময় $t = \\frac{d}{\\sqrt{v^2 - u^2}}$।",
+    "trap": "লব্ধি বেগ $w = \\sqrt{v^2 - u^2}$।",
+    "trap_insight": "লব্ধি বেগ $w = \\sqrt{v^2 - u^2}$।",
+    "trap_alert": "লব্ধি বেগ $w = \\sqrt{v^2 - u^2}$।",
+    "tag": "নদী ও নৌকার ন্যূনতম দূরত্বে পারাপার",
+    "speed_hack": "$t = \\frac{d}{\\sqrt{v^2 - u^2}}$।",
+    "type_ref": "নদী ও নৌকার ন্যূনতম দূরত্বে পারাপার",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
+  },
+  {
+    "id": "vb_pred_math_2nd_09_10",
+    "week_id": "seed_full_syllabus",
+    "subject": "Higher Math",
+    "origin": "[DU/Varsity Standard]",
+    "q": "একই বেগে নিক্ষিপ্ত দুটি প্রক্ষেপকের পাল্লা সমান হবে যদি নিক্ষেপণ কোণদ্বয় হয়—",
+    "question": "একই বেগে নিক্ষিপ্ত দুটি প্রক্ষেপকের পাল্লা সমান হবে যদি নিক্ষেপণ কোণদ্বয় হয়—",
+    "opts": [
+      "$\\alpha$ এবং $180^\\circ - \\alpha$",
+      "$\\alpha$ এবং $90^\\circ - \\alpha$",
+      "$\\alpha$ এবং $45^\\circ - \\alpha$",
+      "$\\alpha$ এবং $60^\\circ - \\alpha$"
+    ],
+    "options": [
+      "$\\alpha$ এবং $180^\\circ - \\alpha$",
+      "$\\alpha$ এবং $90^\\circ - \\alpha$",
+      "$\\alpha$ এবং $45^\\circ - \\alpha$",
+      "$\\alpha$ এবং $60^\\circ - \\alpha$"
+    ],
+    "ans": "$\\alpha$ এবং $90^\\circ - \\alpha$",
+    "correct_index": 1,
+    "exp": "$\\sin 2(90^\\circ - \\alpha) = \\sin(180^\\circ - 2\\alpha) = \\sin 2\\alpha$ হওয়ায় পাল্লা সমান হয়।",
+    "explanation": "$\\sin 2(90^\\circ - \\alpha) = \\sin(180^\\circ - 2\\alpha) = \\sin 2\\alpha$ হওয়ায় পাল্লা সমান হয়।",
+    "trap": "পূরক কোণে পাল্লা সমান।",
+    "trap_insight": "পূরক কোণে পাল্লা সমান।",
+    "trap_alert": "পূরক কোণে পাল্লা সমান।",
+    "tag": "সমান পাল্লার নিক্ষেপণ কোণ",
+    "speed_hack": "$\\alpha$ এবং $90^\\circ - \\alpha$।",
+    "type_ref": "সমান পাল্লার নিক্ষেপণ কোণ",
+    "blueprint_type_id": "math_2nd_09_t1",
+    "blueprint_chapter_id": "math_2nd_09",
+    "chapter": "math_2nd_09"
   }
 ]
