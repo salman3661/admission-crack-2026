@@ -66,7 +66,46 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
   // Hotspot detection helper
   const getHotspotBadge = (q: QuizQuestion): string | null => {
+    if (q.du_badge) return q.du_badge;
+    if (q.du_topic && q.du_freq) {
+      const icon = q.du_tier === 'super_hot' ? '🔥' : '⚡';
+      const tierLabel = q.du_tier === 'super_hot' ? 'Super Hot' : 'Hot';
+      return `${icon} ঢাবি ${tierLabel}: ${q.du_topic} (${toBn(q.du_freq)} বার)`;
+    }
     const text = (q.q + ' ' + (q.exp || '')).toLowerCase();
+    if (text.includes('পর্ব') || text.includes('সিলোম') || text.includes('পরিফেরা') || text.includes('নিডারিয়া') || text.includes('প্লাটিহেলমিনথিস') || text.includes('নেমাটোডা') || text.includes('অ্যানিলিডা') || text.includes('আর্থ্রোপোডা') || text.includes('মলাস্কা') || text.includes('একাইনোডার্মাটা') || text.includes('কর্ডাটা') || text.includes('শিখা কোষ')) {
+      return '🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)';
+    }
+    if (text.includes('c3') || text.includes('c4') || text.includes('ক্যালভিন') || text.includes('হ্যাচ ও স্ল্যাক') || text.includes('ক্র্যাঞ্জ') || text.includes('kranz')) {
+      return '🔥 ঢাবি Super Hot: C3 ও C4 উদ্ভিদের পার্থক্য (১৭ বার)';
+    }
+    if (text.includes('করোটিক স্নায়ু') || text.includes('অলফ্যাক্টরি') || text.includes('অপটিক') || text.includes('ভেগাস') || text.includes('ট্রাইজেমিনাল')) {
+      return '🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)';
+    }
+    if (text.includes('এন্ডোক্রাইন') || text.includes('অন্তঃক্ষরা') || text.includes('পিটুইটারি') || text.includes('থাইরয়েড') || text.includes('অ্যাড্রেনাল') || text.includes('ইনসুলিন') || text.includes('গ্লুকাগন')) {
+      return '🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)';
+    }
+    if (text.includes('প্রোফেজ-১') || text.includes('লেপ্টোটিন') || text.includes('জাইগোটিন') || text.includes('প্যাকাইটিন') || text.includes('ডিপ্লোটিন') || text.includes('ডায়াকাইনেসিস') || text.includes('কায়াজমা') || text.includes('ক্রসিং ওভার') || text.includes('সাইন্যাপসিস')) {
+      return '🔥 ঢাবি Super Hot: মায়োসিসের প্রোফেজ-১ (১২ বার)';
+    }
+    if (text.includes('জাইলেম') || text.includes('ফ্লোয়েম') || text.includes('ট্রাকিয়া') || text.includes('ভেসেল') || text.includes('সিভনল') || text.includes('ভাস্কুলার বান্ডল')) {
+      return '🔥 ঢাবি Super Hot: জাইলেম ও ফ্লোয়েম (১১ বার)';
+    }
+    if (text.includes('হাইড্রা') || text.includes('নিডোসাইট') || text.includes('নেমাটোসিস্ট') || text.includes('মেসোগ্লিয়া') || text.includes('ইন্টারস্টিশিয়াল')) {
+      return '⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)';
+    }
+    if (text.includes('হৃৎপিণ্ড') || text.includes('পেসমেকার') || text.includes('san') || text.includes('avn') || text.includes('কার্ডিয়াক') || text.includes('বাইপাস') || text.includes('অ্যানজিওপ্লাস্টি')) {
+      return '⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)';
+    }
+    if (text.includes('মেন্ডেল') || text.includes('অসম্পূর্ণ প্রকটতা') || text.includes('সমপ্রকটতা') || text.includes('লিথাল জিন') || text.includes('এপিস্ট্যাসিস') || text.includes('দ্বৈত প্রচ্ছন্ন')) {
+      return '⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)';
+    }
+    if (text.includes('মাইটোকন্ড্রি') || text.includes('ক্রিস্টি') || text.includes('atp synthase')) {
+      return '⚡ ঢাবি Hot: মাইটোকন্ড্রিয়া (৮ বার)';
+    }
+    if (text.includes('dna') || text.includes('rna') || text.includes('ডাবল হেলিক্স') || text.includes('শারগাফ') || text.includes('ট্রান্সক্রিপশন') || text.includes('ট্রান্সলেশন') || text.includes('জেনেটিক কোড')) {
+      return '⚡ ঢাবি Hot: নিউক্লিক অ্যাসিড (৮ বার)';
+    }
     if (text.includes('বর্তনী') || text.includes('রোধ') || text.includes('তুল্যরোধ') || text.includes('সার্কিট') || text.includes('কার্শফ') || text.includes('রোধের')) {
       return '⚡ ঢাবি হটস্পট: বর্তনী ও রোধের ম্যাথ';
     }

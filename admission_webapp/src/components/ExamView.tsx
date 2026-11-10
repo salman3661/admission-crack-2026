@@ -113,8 +113,52 @@ export const ExamView: React.FC<ExamViewProps> = ({
     return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
   };
 
+  const toBn = (num: number | string) => {
+    const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return num.toString().replace(/\d/g, (d) => bnDigits[parseInt(d, 10)]);
+  };
+
   const getHotspotBadge = (q: QuizQuestion): string | null => {
+    if (q.du_badge) return q.du_badge;
+    if (q.du_topic && q.du_freq) {
+      const icon = q.du_tier === 'super_hot' ? '🔥' : '⚡';
+      const tierLabel = q.du_tier === 'super_hot' ? 'Super Hot' : 'Hot';
+      return `${icon} ঢাবি ${tierLabel}: ${q.du_topic} (${toBn(q.du_freq)} বার)`;
+    }
     const text = `${q.q} ${q.exp || ''} ${q.trap || ''} ${q.trap_insight || ''}`;
+    if (/পর্ব|সিলোম|পরিফেরা|নিডারিয়া|প্লাটিহেলমিনথিস|নেমাটোডা|অ্যানিলিডা|আর্থ্রোপোডা|মলাস্কা|একাইনোডার্মাটা|কর্ডাটা|শিখা\s*কোষ/.test(text)) {
+      return '🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)';
+    }
+    if (/C3|C4|ক্যালভিন\s*চক্র|হ্যাচ\s*ও\s*স্ল্যাক|ক্র্যাঞ্জ|Kranz/.test(text)) {
+      return '🔥 ঢাবি Super Hot: C3 ও C4 উদ্ভিদের পার্থক্য (১৭ বার)';
+    }
+    if (/করোটিক\s*স্নায়ু|অলফ্যাক্টরি|অপটিক|ভেগাস|ট্রাইজেমিনাল/.test(text)) {
+      return '🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)';
+    }
+    if (/এন্ডোক্রাইন|অন্তঃক্ষরা|পিটুইটারি|থাইরয়েড|অ্যাড্রেনাল|ইনসুলিন|গ্লুকাগন/.test(text)) {
+      return '🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)';
+    }
+    if (/প্রোফেজ-১|লেপ্টোটিন|জাইগোটিন|প্যাকাইটিন|ডিপ্লোটিন|ডায়াকাইনেসিস|কায়াজমা|ক্রসিং\s*ওভার|সাইন্যাপসিস/.test(text)) {
+      return '🔥 ঢাবি Super Hot: মায়োসিসের প্রোফেজ-১ (১২ বার)';
+    }
+    if (/জাইলেম|ফ্লোয়েম|ট্রাকিয়া|ভেসেল|সিভনল|ভাস্কুলার\s*বান্ডল/.test(text)) {
+      return '🔥 ঢাবি Super Hot: জাইলেম ও ফ্লোয়েম (১১ বার)';
+    }
+    if (/হাইড্রা|নিডোসাইট|নেমাটোসিস্ট|মেসোগ্লিয়া|ইন্টারস্টিশিয়াল/.test(text)) {
+      return '⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)';
+    }
+    if (/হৃৎপিণ্ড|পেসমেকার|SAN|AVN|কার্ডিয়াক|বাইপাস|অ্যানজিওপ্লাস্টি/.test(text)) {
+      return '⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)';
+    }
+    if (/মেন্ডেল|অসম্পূর্ণ\s*প্রকটতা|সমপ্রকটতা|লিথাল\s*জিন|এপিস্ট্যাসিস|দ্বৈত\s*প্রচ্ছন্ন/.test(text)) {
+      return '⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)';
+    }
+    if (/মাইটোকন্ড্রি|ক্রিস্টি|ATP\s*synthase/.test(text)) {
+      return '⚡ ঢাবি Hot: মাইটোকন্ড্রিয়া (৮ বার)';
+    }
+    if (/DNA|RNA|ডাবল\s*হেলিক্স|শারগাফ|ট্রান্সক্রিপশন|ট্রান্সলেশন|জেনেটিক\s*কোড/.test(text)) {
+      return '⚡ ঢাবি Hot: নিউক্লিক অ্যাসিড (৮ বার)';
+    }
     if (/বর্তনী|তুল্য\s*রোধ|সার্কিট|অ্যাম্পিয়ার|রোধের\s*মান|হুইটস্টোন|তড়িচ্চালক/.test(text)) {
       return '⚡ ঢাবি হটস্পট: বর্তনী ও রোধের ম্যাথ';
     }

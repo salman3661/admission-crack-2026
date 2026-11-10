@@ -10,6 +10,7 @@ import {
   Star,
   ShieldAlert,
   Flame,
+  Sparkles,
   BookOpen,
   Clock,
   ArrowLeft,
@@ -1068,10 +1069,20 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                       }`}
                     >
                       <div className="space-y-2.5">
-                        <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center justify-between gap-2 flex-wrap">
                           <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-[#1B291F] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#273B2E]">
                             {ch.paper} • {ch.chapter_no}
                           </span>
+                          {ch.du_hotspot?.has_hotspot && (
+                            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs ${
+                              ch.du_hotspot.tier === 'super_hot'
+                                ? 'bg-gradient-to-r from-rose-500 to-red-600 text-white ring-2 ring-rose-300 dark:ring-rose-800 animate-pulse'
+                                : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                            }`}>
+                              <Flame className="w-3 h-3 text-amber-200 fill-amber-200" />
+                              <span>{ch.du_hotspot.badge_text}</span>
+                            </span>
+                          )}
                           {isSelected ? (
                             <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
                               <CheckCircle2 className="w-3 h-3" />
@@ -1088,6 +1099,12 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug">
                             {ch.title.split('(')[0].trim()}
                           </h3>
+                          {ch.du_hotspot?.has_hotspot && (
+                            <div className="mt-1 flex items-center gap-1 text-[11px] font-bold text-rose-600 dark:text-rose-400 bg-rose-50/80 dark:bg-rose-950/30 px-2 py-0.5 rounded-md border border-rose-200/70 dark:border-rose-900/40">
+                              <Sparkles className="w-3 h-3 text-rose-500 shrink-0" />
+                              <span className="truncate">ঢাবি হটস্পট: {ch.du_hotspot.topic}</span>
+                            </div>
+                          )}
                           {ch.subtitle && (
                             <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono truncate mt-0.5">
                               {ch.subtitle}
@@ -1159,6 +1176,9 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                     >
                       <div className="flex items-center gap-1.5">
                         <span>{ch.title.split('(')[0].trim()}</span>
+                        {ch.du_hotspot?.has_hotspot && (
+                          <span className="text-xs" title={ch.du_hotspot.badge_text}>🔥</span>
+                        )}
                         <span className={`text-[10px] px-1.5 py-0.2 rounded-md ${
                           isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-[#1F2C24] text-slate-500 dark:text-slate-400'
                         }`}>
@@ -1177,10 +1197,20 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
             <div ref={activeChapterRef} className="bg-white dark:bg-[#101A14] rounded-3xl border border-slate-200 dark:border-[#1E2D22] p-4 sm:p-6 shadow-sm space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-[#1A291E] pb-4">
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className={`text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider ${currentTheme.badge}`}>
                       {activeChapter.subject} • {activeChapter.paper}
                     </span>
+                    {activeChapter.du_hotspot?.has_hotspot && (
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-black shadow-xs ${
+                        activeChapter.du_hotspot.tier === 'super_hot'
+                          ? 'bg-gradient-to-r from-rose-500 to-red-600 text-white ring-2 ring-rose-300 dark:ring-rose-800 animate-pulse'
+                          : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                      }`}>
+                        <Flame className="w-3.5 h-3.5 text-amber-200 fill-amber-200" />
+                        <span>{activeChapter.du_hotspot.badge_text}</span>
+                      </span>
+                    )}
                     <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                       {toBn(activePredictors.length)} প্রেডিক্টর MCQ
                     </span>
@@ -1188,6 +1218,12 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                   <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
                     {activeChapter.title}
                   </h2>
+                  {activeChapter.du_hotspot?.has_hotspot && (
+                    <div className="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-300 text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5 text-rose-500" />
+                      <span>শীর্ষ ঢাবি হটস্পট বিষয়: {activeChapter.du_hotspot.topic}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Instant 1-Click Drill Launch & Tab Buttons */}

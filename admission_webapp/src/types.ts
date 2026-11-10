@@ -109,6 +109,10 @@ export interface QuizQuestion {
   intelligence_type?: string;
   source_book?: string;
   expected_count?: number | string;
+  du_topic?: string;
+  du_freq?: number;
+  du_tier?: 'super_hot' | 'hot';
+  du_badge?: string;
 }
 
 export interface PredictorWrittenProblem {
@@ -218,6 +222,21 @@ export interface MasterMegaType {
   speed_elimination: string;
 }
 
+export interface DUHotspotSubTopic {
+  topic: string;
+  freq: number;
+  tier: 'super_hot' | 'hot';
+}
+
+export interface DUHotspotMeta {
+  has_hotspot: boolean;
+  tier: 'super_hot' | 'hot';
+  topic: string;
+  freq: number;
+  badge_text: string;
+  sub_topics?: DUHotspotSubTopic[];
+}
+
 export interface MasterChapterBlueprint {
   id: string;
   title: string;
@@ -230,6 +249,7 @@ export interface MasterChapterBlueprint {
   total_questions: number;
   dominant_types_count: number;
   mega_types: MasterMegaType[];
+  du_hotspot?: DUHotspotMeta;
 }
 
 export interface SyntheticPredictorQuestion {
@@ -243,11 +263,18 @@ export interface SyntheticPredictorQuestion {
   explanation: string;
   source?: string;
   source_tag?: string;
+  du_topic?: string;
+  du_freq?: number;
+  du_tier?: 'super_hot' | 'hot';
+  du_badge?: string;
 }
 
 export interface ChapterSyntheticPredictors {
   chapter_id: string;
   chapter_title: string;
   subject: string;
+  paper?: string;
+  chapter_no?: string;
+  du_hotspot?: DUHotspotMeta;
   predictors: SyntheticPredictorQuestion[];
 }

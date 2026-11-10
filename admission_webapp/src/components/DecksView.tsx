@@ -8,6 +8,7 @@ import {
   Calendar, 
   CheckCircle2, 
   ShieldAlert, 
+  Flame,
   Search, 
   X, 
   Filter 
@@ -210,10 +211,22 @@ const ChapterCard = React.memo<ChapterCardProps>(({
     <div className="rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
       <div>
         {/* Header Badges */}
-        <div className="flex items-center justify-between gap-2 mb-2.5">
-          <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider border ${theme.badge}`}>
-            {theme.icon} {theme.labelBn} • {chapter.paper}
-          </span>
+        <div className="flex items-center justify-between gap-2 mb-2.5 flex-wrap">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider border ${theme.badge}`}>
+              {theme.icon} {theme.labelBn} • {chapter.paper}
+            </span>
+            {chapter.du_hotspot?.has_hotspot && (
+              <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs ${
+                chapter.du_hotspot.tier === 'super_hot'
+                  ? 'bg-gradient-to-r from-rose-500 to-red-600 text-white ring-2 ring-rose-300 dark:ring-rose-800 animate-pulse'
+                  : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+              }`}>
+                <Flame className="w-3 h-3 text-amber-200 fill-amber-200" />
+                <span>{chapter.du_hotspot.badge_text}</span>
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-1.5">
             <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
               {toBn(predictorsCount)} MCQ ড্রিল
@@ -229,6 +242,14 @@ const ChapterCard = React.memo<ChapterCardProps>(({
         <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-2">
           {chapter.title}
         </h3>
+
+        {/* Hotspot banner if applicable */}
+        {chapter.du_hotspot?.has_hotspot && (
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-50/90 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border border-rose-200/80 dark:border-rose-900/40 text-xs font-semibold mb-2.5">
+            <Flame className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+            <span className="truncate">ঢাবি হটস্পট: {chapter.du_hotspot.topic}</span>
+          </div>
+        )}
 
         {/* Mega Types Preview Pills */}
         <div className="flex flex-wrap gap-1.5 mb-3.5">

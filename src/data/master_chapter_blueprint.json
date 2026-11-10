@@ -4223,7 +4223,26 @@
       ],
       "question_count": 70,
       "mcq_count": 175,
-      "total_questions": 175
+      "total_questions": 175,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "hot",
+        "topic": "মাইটোকন্ড্রিয়া ও নিউক্লিক অ্যাসিড",
+        "freq": 8,
+        "badge_text": "⚡ DU Hot (৮ বার)",
+        "sub_topics": [
+          {
+            "topic": "মাইটোকন্ড্রিয়া",
+            "freq": 8,
+            "tier": "hot"
+          },
+          {
+            "topic": "নিউক্লিক অ্যাসিড",
+            "freq": 8,
+            "tier": "hot"
+          }
+        ]
+      }
     },
     {
       "id": "bio_bot_02",
@@ -4302,7 +4321,14 @@
       ],
       "question_count": 7,
       "mcq_count": 71,
-      "total_questions": 71
+      "total_questions": 71,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "super_hot",
+        "topic": "মায়োসিসের প্রোফেজ-১",
+        "freq": 12,
+        "badge_text": "🔥 DU Super Hot (১২ বার)"
+      }
     },
     {
       "id": "bio_bot_03",
@@ -4765,7 +4791,14 @@
       ],
       "question_count": 3,
       "mcq_count": 11,
-      "total_questions": 11
+      "total_questions": 11,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "super_hot",
+        "topic": "জাইলেম ও ফ্লোয়েম",
+        "freq": 11,
+        "badge_text": "🔥 DU Super Hot (১১ বার)"
+      }
     },
     {
       "id": "bio_bot_09",
@@ -4850,7 +4883,14 @@
       ],
       "question_count": 10,
       "mcq_count": 18,
-      "total_questions": 18
+      "total_questions": 18,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "super_hot",
+        "topic": "C3 ও C4 উদ্ভিদের পার্থক্য",
+        "freq": 17,
+        "badge_text": "🔥 DU Super Hot (১৭ বার)"
+      }
     },
     {
       "id": "bio_bot_10",
@@ -5131,7 +5171,26 @@
       ],
       "question_count": 13,
       "mcq_count": 21,
-      "total_questions": 21
+      "total_questions": 21,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "super_hot",
+        "topic": "৯টি পর্বের বৈশিষ্ট্য ও উদাহরণ",
+        "freq": 32,
+        "badge_text": "🔥 DU Super Hot (৩২ বার)",
+        "sub_topics": [
+          {
+            "topic": "৯টি পর্বের বৈশিষ্ট্য",
+            "freq": 19,
+            "tier": "super_hot"
+          },
+          {
+            "topic": "৯টি পর্বের উদাহরণ",
+            "freq": 13,
+            "tier": "super_hot"
+          }
+        ]
+      }
     },
     {
       "id": "bio_zoo_02",
@@ -5233,7 +5292,14 @@
       ],
       "question_count": 8,
       "mcq_count": 20,
-      "total_questions": 20
+      "total_questions": 20,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "hot",
+        "topic": "হাইড্রার কোষসমূহ",
+        "freq": 9,
+        "badge_text": "⚡ DU Hot (৯ বার)"
+      }
     },
     {
       "id": "bio_zoo_03",
@@ -5400,7 +5466,14 @@
       ],
       "question_count": 24,
       "mcq_count": 55,
-      "total_questions": 55
+      "total_questions": 55,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "hot",
+        "topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
+        "freq": 9,
+        "badge_text": "⚡ DU Hot (৯ বার)"
+      }
     },
     {
       "id": "bio_zoo_05",
@@ -5748,7 +5821,26 @@
       ],
       "question_count": 10,
       "mcq_count": 22,
-      "total_questions": 22
+      "total_questions": 22,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "super_hot",
+        "topic": "এন্ডোক্রাইন গ্রন্থি ও করোটিক স্নায়ু",
+        "freq": 26,
+        "badge_text": "🔥 DU Super Hot (২৬ বার)",
+        "sub_topics": [
+          {
+            "topic": "এন্ডোক্রাইন গ্রন্থি",
+            "freq": 16,
+            "tier": "super_hot"
+          },
+          {
+            "topic": "করোটিক স্নায়ু",
+            "freq": 10,
+            "tier": "super_hot"
+          }
+        ]
+      }
     },
     {
       "id": "bio_zoo_09",
@@ -6010,7 +6102,14 @@
       ],
       "question_count": 1,
       "mcq_count": 9,
-      "total_questions": 9
+      "total_questions": 9,
+      "du_hotspot": {
+        "has_hotspot": true,
+        "tier": "hot",
+        "topic": "মেন্ডেলের সূত্রের ব্যতিক্রম",
+        "freq": 9,
+        "badge_text": "⚡ DU Hot (৯ বার)"
+      }
     },
     {
       "id": "bio_zoo_12",
