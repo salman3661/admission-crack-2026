@@ -670,6 +670,11 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                           🔥 DU Most Repeated
                         </span>
                       )}
+                      {examQuestions[currentExamIndex].written_essential && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
+                          ✍️ Written Essential
+                        </span>
+                      )}
                       {((examQuestions[currentExamIndex] as any).is_du_speed_hack || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Speed-Hack') || examQuestions[currentExamIndex].speed_hack) && (
                         <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
                           ⚡ DU Speed-Hack
@@ -1212,6 +1217,11 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20">
                           {q.subject}
                         </span>
+                        {q.written_essential && (
+                          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">
+                            ✍️ Written Essential
+                          </span>
+                        )}
                         {q.chapter && (
                           <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
                             {q.chapter}

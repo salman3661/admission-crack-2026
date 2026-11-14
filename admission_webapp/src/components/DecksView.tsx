@@ -216,6 +216,15 @@ const ChapterCard = React.memo<ChapterCardProps>(({
             <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider border ${theme.badge}`}>
               {theme.icon} {theme.labelBn} • {chapter.paper}
             </span>
+            {chapter.priority_tier && (
+              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${
+                chapter.priority_tier.startsWith('Tier-1')
+                  ? 'bg-indigo-600 text-white border-indigo-500 shadow-xs'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700'
+              }`}>
+                {chapter.priority_tier.startsWith('Tier-1') ? '⭐ ' : ''}{chapter.priority_tier}
+              </span>
+            )}
             {chapter.du_hotspot?.has_hotspot && (
               <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs ${
                 chapter.du_hotspot.tier === 'super_hot'

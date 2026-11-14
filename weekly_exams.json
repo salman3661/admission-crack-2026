@@ -2509,7 +2509,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q02",
@@ -2546,7 +2547,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q03",
@@ -2653,7 +2655,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q06",
@@ -2690,7 +2693,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q07",
@@ -2723,7 +2727,8 @@
     "type_ref": "Type 3: হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
     "blueprint_type_id": "bio_dc_t3",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q08",
@@ -2756,7 +2761,8 @@
     "type_ref": "Type 3: হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
     "blueprint_type_id": "bio_dc_t3",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q09",
@@ -2826,7 +2832,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q11",
@@ -2863,7 +2870,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q12",
@@ -2900,7 +2908,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q13",
@@ -2937,7 +2946,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q14",
@@ -2974,7 +2984,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q15",
@@ -3044,7 +3055,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q17",
@@ -3081,7 +3093,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q18",
@@ -3118,7 +3131,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q19",
@@ -3151,7 +3165,8 @@
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
     "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "bio_zoo_05"
+    "chapter": "bio_zoo_05",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q20",
@@ -3184,7 +3199,8 @@
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
     "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "bio_zoo_05"
+    "chapter": "bio_zoo_05",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q21",
@@ -3217,7 +3233,8 @@
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
     "blueprint_chapter_id": "bio_zoo_07",
-    "chapter": "bio_zoo_07"
+    "chapter": "bio_zoo_07",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q22",
@@ -3250,7 +3267,8 @@
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
     "blueprint_chapter_id": "bio_zoo_07",
-    "chapter": "bio_zoo_07"
+    "chapter": "bio_zoo_07",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q23",
@@ -3283,7 +3301,8 @@
     "type_ref": "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)",
     "blueprint_type_id": "bio_re_t1",
     "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "bio_zoo_05"
+    "chapter": "bio_zoo_05",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q24",
@@ -3320,7 +3339,8 @@
     "du_topic": "করোটিক স্নায়ু",
     "du_freq": 10,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)",
+    "written_essential": true
   },
   {
     "id": "w1_bio_q25",
@@ -3353,7 +3373,8 @@
     "type_ref": "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
     "blueprint_type_id": "bio_adr_t1",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w2_phy_q01",
@@ -6133,7 +6154,8 @@
     "du_topic": "হাইড্রার কোষসমূহ",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q10",
@@ -6170,7 +6192,8 @@
     "du_topic": "হাইড্রার কোষসমূহ",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q11",
@@ -6207,7 +6230,8 @@
     "du_topic": "হাইড্রার কোষসমূহ",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q12",
@@ -6273,7 +6297,8 @@
     "type_ref": "Type 3: ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
     "blueprint_type_id": "bio_adr_t3",
     "blueprint_chapter_id": "bio_zoo_02",
-    "chapter": "bio_zoo_02"
+    "chapter": "bio_zoo_02",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q14",
@@ -6339,7 +6364,8 @@
     "type_ref": "Type 3: ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
     "blueprint_type_id": "bio_adr_t3",
     "blueprint_chapter_id": "bio_zoo_02",
-    "chapter": "bio_zoo_02"
+    "chapter": "bio_zoo_02",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q16",
@@ -6442,7 +6468,8 @@
     "type_ref": "Type 4: রুই মাছের ফুলকা ও রক্ত সংবহনতন্ত্র",
     "blueprint_type_id": "bio_adr_t4",
     "blueprint_chapter_id": "bio_zoo_02",
-    "chapter": "bio_zoo_02"
+    "chapter": "bio_zoo_02",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q19",
@@ -6475,7 +6502,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q20",
@@ -6508,7 +6536,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q21",
@@ -6541,7 +6570,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q22",
@@ -6607,7 +6637,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q24",
@@ -6640,7 +6671,8 @@
     "type_ref": "Type 3: করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
     "blueprint_type_id": "bio_re_t3",
     "blueprint_chapter_id": "bio_zoo_12",
-    "chapter": "bio_zoo_12"
+    "chapter": "bio_zoo_12",
+    "written_essential": true
   },
   {
     "id": "w2_bio_q25",
@@ -6673,7 +6705,8 @@
     "type_ref": "Type 3: করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
     "blueprint_type_id": "bio_re_t3",
     "blueprint_chapter_id": "bio_zoo_12",
-    "chapter": "bio_zoo_12"
+    "chapter": "bio_zoo_12",
+    "written_essential": true
   },
   {
     "id": "w3_phy_q01",
@@ -9185,7 +9218,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w3_bio_q02",
@@ -12029,7 +12063,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "du_rep_bio_02",
@@ -12109,7 +12144,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "mat_line_bio_02",
@@ -12147,7 +12183,8 @@
     "speed_hack": "মানবদেহের বৃহত্তম গ্রন্থি ও বৃহত্তম বহিঃক্ষরা গ্রন্থি = যকৃৎ (বৃহত্তম অন্তঃক্ষরা = থাইরয়েড)।",
     "type_ref": "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
     "blueprint_type_id": "bio_dc_t2",
-    "blueprint_chapter_id": "bio_zoo_03"
+    "blueprint_chapter_id": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "mat_line_bio_03",
@@ -12189,7 +12226,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "mat_line_bio_04",
@@ -14507,7 +14545,8 @@
     "du_topic": "৯টি পর্বের উদাহরণ",
     "du_freq": 13,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের উদাহরণ (১৩ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের উদাহরণ (১৩ বার)",
+    "written_essential": true
   },
   {
     "id": "w5_rep_005",
@@ -15437,7 +15476,8 @@
     "du_topic": "৯টি পর্বের উদাহরণ",
     "du_freq": 13,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের উদাহরণ (১৩ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের উদাহরণ (১৩ বার)",
+    "written_essential": true
   },
   {
     "id": "w5_med_006",
@@ -15479,7 +15519,8 @@
     "du_topic": "৯টি পর্বের বৈশিষ্ট্য",
     "du_freq": 19,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w5_med_007",
@@ -17541,7 +17582,8 @@
     "du_topic": "৯টি পর্বের বৈশিষ্ট্য",
     "du_freq": 19,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_var_038",
@@ -17625,7 +17667,8 @@
     "du_topic": "৯টি পর্বের বৈশিষ্ট্য",
     "du_freq": 19,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_var_040",
@@ -17667,7 +17710,8 @@
     "du_topic": "মেন্ডেলের সূত্রের ব্যতিক্রম",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_var_041",
@@ -17747,7 +17791,8 @@
     "du_topic": "৯টি পর্বের বৈশিষ্ট্য",
     "du_freq": 19,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_var_043",
@@ -17865,7 +17910,8 @@
     "type_ref": "Type 3: রক্তের এবিও গ্রুপ ও আরএইচ অসামঞ্জস্যতা",
     "blueprint_type_id": "bio_ge_t3",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w4_var_046",
@@ -17907,7 +17953,8 @@
     "du_topic": "৯টি পর্বের বৈশিষ্ট্য",
     "du_freq": 19,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_var_047",
@@ -18709,7 +18756,8 @@
     "type_ref": "Type 3: ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
     "blueprint_type_id": "bio_adr_t3",
     "blueprint_chapter_id": "bio_zoo_02",
-    "chapter": "bio_zoo_02"
+    "chapter": "bio_zoo_02",
+    "written_essential": true
   },
   {
     "id": "w4_rep_020",
@@ -18747,7 +18795,8 @@
     "type_ref": "Type 3: রক্তের এবিও গ্রুপ ও আরএইচ অসামঞ্জস্যতা",
     "blueprint_type_id": "bio_ge_t3",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w4_rep_021",
@@ -18789,7 +18838,8 @@
     "du_topic": "হাইড্রার কোষসমূহ",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_rep_022",
@@ -18827,7 +18877,8 @@
     "type_ref": "Type 3: ম্যালেরিয়ার জীবাণু প্লাজমোডিয়ামের জীবনচক্র",
     "blueprint_type_id": "bio_ma_t3",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w4_rep_023",
@@ -18949,7 +19000,8 @@
     "du_topic": "৯টি পর্বের বৈশিষ্ট্য",
     "du_freq": 19,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_med_002",
@@ -18991,7 +19043,8 @@
     "du_topic": "মেন্ডেলের সূত্রের ব্যতিক্রম",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_med_003",
@@ -19067,7 +19120,8 @@
     "type_ref": "Type 3: ম্যালেরিয়ার জীবাণু প্লাজমোডিয়ামের জীবনচক্র",
     "blueprint_type_id": "bio_ma_t3",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w4_med_005",
@@ -19151,7 +19205,8 @@
     "du_topic": "মেন্ডেলের সূত্রের ব্যতিক্রম",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w4_med_007",
@@ -21956,7 +22011,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_056",
@@ -21995,7 +22051,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_057",
@@ -22034,7 +22091,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_058",
@@ -22073,7 +22131,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_059",
@@ -22112,7 +22171,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_060",
@@ -22151,7 +22211,8 @@
     "type_ref": "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
     "blueprint_type_id": "bio_dc_t2",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_061",
@@ -22190,7 +22251,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_062",
@@ -22233,7 +22295,8 @@
     "du_topic": "এন্ডোক্রাইন গ্রন্থি",
     "du_freq": 16,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_063",
@@ -22272,7 +22335,8 @@
     "type_ref": "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
     "blueprint_type_id": "bio_dc_t2",
     "blueprint_chapter_id": "bio_zoo_10",
-    "chapter": "bio_zoo_10"
+    "chapter": "bio_zoo_10",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_064",
@@ -22311,7 +22375,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_065",
@@ -22393,7 +22458,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_067",
@@ -22432,7 +22498,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_068",
@@ -22471,7 +22538,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_069",
@@ -22510,7 +22578,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_070",
@@ -22549,7 +22618,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_071",
@@ -22627,7 +22697,8 @@
     "type_ref": "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
     "blueprint_type_id": "bio_dc_t2",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_073",
@@ -23095,7 +23166,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_085",
@@ -23134,7 +23206,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_086",
@@ -23173,7 +23246,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_087",
@@ -23212,7 +23286,8 @@
     "type_ref": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
     "blueprint_type_id": "bio_dc_t1",
     "blueprint_chapter_id": "bio_zoo_03",
-    "chapter": "bio_zoo_03"
+    "chapter": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_088",
@@ -23290,7 +23365,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_090",
@@ -23329,7 +23405,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_091",
@@ -23368,7 +23445,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_092",
@@ -23450,7 +23528,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_094",
@@ -23528,7 +23607,8 @@
     "type_ref": "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
     "blueprint_type_id": "bio_re_t2",
     "blueprint_chapter_id": "bio_zoo_06",
-    "chapter": "bio_zoo_06"
+    "chapter": "bio_zoo_06",
+    "written_essential": true
   },
   {
     "id": "w6_quiz_096",
@@ -25135,7 +25215,8 @@
     "du_topic": "করোটিক স্নায়ু",
     "du_freq": 10,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_var_bio_05",
@@ -25178,7 +25259,8 @@
     "du_topic": "করোটিক স্নায়ু",
     "du_freq": 10,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_var_bio_06",
@@ -25260,7 +25342,8 @@
     "du_topic": "করোটিক স্নায়ু",
     "du_freq": 10,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_var_bio_08",
@@ -25303,7 +25386,8 @@
     "du_topic": "এন্ডোক্রাইন গ্রন্থি",
     "du_freq": 16,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_var_bio_09",
@@ -25346,7 +25430,8 @@
     "du_topic": "করোটিক স্নায়ু",
     "du_freq": 10,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_var_bio_10",
@@ -25424,7 +25509,8 @@
     "speed_hack": "সূর্য বা আলোর সাথে নির্দিষ্ট কোণ (Light compass) বজায় রেখে পিঁপড়া/মৌমাছির চলন = মেনোট্যাক্সিস।",
     "type_ref": "Type 3: করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
     "blueprint_type_id": "bio_re_t3",
-    "blueprint_chapter_id": "bio_zoo_12"
+    "blueprint_chapter_id": "bio_zoo_12",
+    "written_essential": true
   },
   {
     "id": "w7_var_bio_12",
@@ -25900,7 +25986,8 @@
     "du_topic": "করোটিক স্নায়ু",
     "du_freq": 10,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_med_bio_12",
@@ -25943,7 +26030,8 @@
     "du_topic": "এন্ডোক্রাইন গ্রন্থি",
     "du_freq": 16,
     "du_tier": "super_hot",
-    "du_badge": "🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)"
+    "du_badge": "🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)",
+    "written_essential": true
   },
   {
     "id": "w7_med_che_01",
@@ -29882,7 +29970,8 @@
     "explanation": "আইসোসাইট্রেট ডিহাইড্রোজিনেজ এনজাইমটি ADP দ্বারা উদ্দীপিত হয় এবং ATP/NADH দ্বারা ইনহিবিট হয়, যার ফলে এটি সমগ্র ক্রেবস চক্রের গতি নিয়ন্ত্রণ করে।",
     "trap": "সাইট্রেট সিন্থেজ প্রথম বিক্রিয়ার এনজাইম হলেও গতি নিয়ন্ত্রণের মূল চাবিকাঠি আইসোসাইট্রেট ডিহাইড্রোজিনেজ।",
     "trap_insight": "সাইট্রেট সিন্থেজ প্রথম বিক্রিয়ার এনজাইম হলেও গতি নিয়ন্ত্রণের মূল চাবিকাঠি আইসোসাইট্রেট ডিহাইড্রোজিনেজ।",
-    "expected_count": 5
+    "expected_count": 5,
+    "written_essential": true
   },
   {
     "id": "w3_var_sol_078",
@@ -33783,7 +33872,8 @@
     "du_topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
     "du_freq": 9,
     "du_tier": "hot",
-    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)"
+    "du_badge": "⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)",
+    "written_essential": true
   },
   {
     "id": "w8_bio_003",
@@ -34328,7 +34418,8 @@
     "expected_count": 5,
     "type_ref": "Type 4: জেনেটিক কোড, স্টার্ট ও স্টপ কোডন",
     "blueprint_type_id": "bio_cell_t4",
-    "blueprint_chapter_id": "bio_zoo_03"
+    "blueprint_chapter_id": "bio_zoo_03",
+    "written_essential": true
   },
   {
     "id": "w8_bio_016",
@@ -36613,7 +36704,8 @@
     "type_ref": "Type 1: অ্যালভিওলাস ও সারফ্যাক্ট্যান্ট",
     "blueprint_type_id": "bio_zoo_05_t1",
     "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "bio_zoo_05"
+    "chapter": "bio_zoo_05",
+    "written_essential": true
   },
   {
     "id": "qb_bio_zoo_05_03",
@@ -36651,7 +36743,8 @@
     "type_ref": "Type 2: কার্বন ডাই-অক্সাইড পরিবহন",
     "blueprint_type_id": "bio_zoo_05_t1",
     "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "bio_zoo_05"
+    "chapter": "bio_zoo_05",
+    "written_essential": true
   },
   {
     "id": "qb_bio_zoo_05_04",
@@ -36689,7 +36782,8 @@
     "type_ref": "Type 2: বোর প্রভাব",
     "blueprint_type_id": "bio_zoo_05_t1",
     "blueprint_chapter_id": "bio_zoo_05",
-    "chapter": "bio_zoo_05"
+    "chapter": "bio_zoo_05",
+    "written_essential": true
   },
   {
     "id": "qb_bio_zoo_07_01",
@@ -36959,7 +37053,8 @@
     "type_ref": "Type 2: প্যাভলভের সাপেক্ষ প্রতিবর্ত",
     "blueprint_type_id": "bio_zoo_12_t1",
     "blueprint_chapter_id": "bio_zoo_12",
-    "chapter": "bio_zoo_12"
+    "chapter": "bio_zoo_12",
+    "written_essential": true
   },
   {
     "id": "vb_pred_math_1st_01_01",

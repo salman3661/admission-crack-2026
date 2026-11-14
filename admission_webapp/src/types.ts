@@ -113,6 +113,7 @@ export interface QuizQuestion {
   du_freq?: number;
   du_tier?: 'super_hot' | 'hot';
   du_badge?: string;
+  written_essential?: boolean;
 }
 
 export interface PredictorWrittenProblem {
@@ -250,6 +251,7 @@ export interface MasterChapterBlueprint {
   dominant_types_count: number;
   mega_types: MasterMegaType[];
   du_hotspot?: DUHotspotMeta;
+  priority_tier?: string;
 }
 
 export interface SyntheticPredictorQuestion {
@@ -267,6 +269,7 @@ export interface SyntheticPredictorQuestion {
   du_freq?: number;
   du_tier?: 'super_hot' | 'hot';
   du_badge?: string;
+  written_essential?: boolean;
 }
 
 export interface ChapterSyntheticPredictors {
@@ -276,5 +279,6 @@ export interface ChapterSyntheticPredictors {
   paper?: string;
   chapter_no?: string;
   du_hotspot?: DUHotspotMeta;
+  priority_tier?: string;
   predictors: SyntheticPredictorQuestion[];
 }

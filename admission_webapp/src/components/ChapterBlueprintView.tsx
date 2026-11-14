@@ -708,6 +708,11 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                         ⚡ DU Speed-Hack
                       </span>
                     )}
+                    {currentQ.written_essential && (
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
+                        ✍️ Written Essential
+                      </span>
+                    )}
                   </div>
 
                   {/* Question Stem */}
@@ -1073,6 +1078,15 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-[#1B291F] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-[#273B2E]">
                             {ch.paper} • {ch.chapter_no}
                           </span>
+                          {ch.priority_tier && (
+                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold border ${
+                              ch.priority_tier.startsWith('Tier-1')
+                                ? 'bg-indigo-600 text-white border-indigo-500 shadow-xs'
+                                : 'bg-slate-100 dark:bg-[#1C2A21] text-slate-600 dark:text-slate-300 border-slate-300 dark:border-[#2D4234]'
+                            }`}>
+                              {ch.priority_tier.startsWith('Tier-1') ? '⭐ ' : ''}{ch.priority_tier}
+                            </span>
+                          )}
                           {ch.du_hotspot?.has_hotspot && (
                             <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs ${
                               ch.du_hotspot.tier === 'super_hot'
@@ -1176,6 +1190,11 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                     >
                       <div className="flex items-center gap-1.5">
                         <span>{ch.title.split('(')[0].trim()}</span>
+                        {ch.priority_tier?.startsWith('Tier-1') && (
+                          <span className="text-[10px] font-black px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30" title={ch.priority_tier}>
+                            T1
+                          </span>
+                        )}
                         {ch.du_hotspot?.has_hotspot && (
                           <span className="text-xs" title={ch.du_hotspot.badge_text}>🔥</span>
                         )}
@@ -1201,6 +1220,15 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                     <span className={`text-xs px-2 py-0.5 rounded font-bold uppercase tracking-wider ${currentTheme.badge}`}>
                       {activeChapter.subject} • {activeChapter.paper}
                     </span>
+                    {activeChapter.priority_tier && (
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold border ${
+                        activeChapter.priority_tier.startsWith('Tier-1')
+                          ? 'bg-indigo-600 text-white border-indigo-500 shadow-xs'
+                          : 'bg-slate-100 dark:bg-[#1C2A21] text-slate-600 dark:text-slate-300 border-slate-300 dark:border-[#2D4234]'
+                      }`}>
+                        {activeChapter.priority_tier.startsWith('Tier-1') ? '⭐ ' : ''}{activeChapter.priority_tier}
+                      </span>
+                    )}
                     {activeChapter.du_hotspot?.has_hotspot && (
                       <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-black shadow-xs ${
                         activeChapter.du_hotspot.tier === 'super_hot'
@@ -1496,6 +1524,11 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                                 ⚡ DU Speed-Hack
                               </span>
                             )}
+                            {q.written_essential && (
+                              <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
+                                ✍️ Written Essential
+                              </span>
+                            )}
                           </div>
 
                           <div className="text-sm sm:text-base font-medium text-slate-900 dark:text-white leading-relaxed">
@@ -1762,6 +1795,11 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           {q.chapter && (
                             <span className="text-xs px-2 py-0.5 rounded font-semibold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
                               {q.chapter}
+                            </span>
+                          )}
+                          {q.written_essential && (
+                            <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
+                              ✍️ Written Essential
                             </span>
                           )}
                         </div>

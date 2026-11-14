@@ -5190,7 +5190,8 @@
             "tier": "super_hot"
           }
         ]
-      }
+      },
+      "priority_tier": "Tier-1 (Must Read First)"
     },
     {
       "id": "bio_zoo_02",
@@ -5299,7 +5300,8 @@
         "topic": "হাইড্রার কোষসমূহ",
         "freq": 9,
         "badge_text": "⚡ DU Hot (৯ বার)"
-      }
+      },
+      "priority_tier": "Tier-1 (Must Read First)"
     },
     {
       "id": "bio_zoo_03",
@@ -5381,7 +5383,8 @@
       ],
       "question_count": 8,
       "mcq_count": 16,
-      "total_questions": 16
+      "total_questions": 16,
+      "priority_tier": "Tier-1 (Must Read First)"
     },
     {
       "id": "bio_zoo_04",
@@ -5473,7 +5476,8 @@
         "topic": "হৃৎপিণ্ড ও রক্ত সংবহন",
         "freq": 9,
         "badge_text": "⚡ DU Hot (৯ বার)"
-      }
+      },
+      "priority_tier": "Tier-1 (Must Read First)"
     },
     {
       "id": "bio_zoo_05",
@@ -5555,7 +5559,8 @@
       ],
       "question_count": 0,
       "mcq_count": 8,
-      "total_questions": 8
+      "total_questions": 8,
+      "priority_tier": "Tier-2"
     },
     {
       "id": "bio_zoo_06",
@@ -5636,7 +5641,8 @@
       ],
       "question_count": 4,
       "mcq_count": 12,
-      "total_questions": 12
+      "total_questions": 12,
+      "priority_tier": "Tier-2"
     },
     {
       "id": "bio_zoo_07",
@@ -5714,7 +5720,8 @@
       ],
       "question_count": 3,
       "mcq_count": 13,
-      "total_questions": 13
+      "total_questions": 13,
+      "priority_tier": "Tier-2"
     },
     {
       "id": "bio_zoo_08",
@@ -5840,7 +5847,8 @@
             "tier": "super_hot"
           }
         ]
-      }
+      },
+      "priority_tier": "Tier-1 (Must Read First)"
     },
     {
       "id": "bio_zoo_09",
@@ -5918,7 +5926,8 @@
       ],
       "question_count": 2,
       "mcq_count": 10,
-      "total_questions": 10
+      "total_questions": 10,
+      "priority_tier": "Tier-2"
     },
     {
       "id": "bio_zoo_10",
@@ -5999,7 +6008,8 @@
       ],
       "question_count": 1,
       "mcq_count": 9,
-      "total_questions": 9
+      "total_questions": 9,
+      "priority_tier": "Tier-2"
     },
     {
       "id": "bio_zoo_11",
@@ -6109,7 +6119,8 @@
         "topic": "মেন্ডেলের সূত্রের ব্যতিক্রম",
         "freq": 9,
         "badge_text": "⚡ DU Hot (৯ বার)"
-      }
+      },
+      "priority_tier": "Tier-1 (Must Read First)"
     },
     {
       "id": "bio_zoo_12",
@@ -6167,7 +6178,8 @@
       ],
       "question_count": 3,
       "mcq_count": 11,
-      "total_questions": 11
+      "total_questions": 11,
+      "priority_tier": "Tier-2"
     }
   ]
 }
