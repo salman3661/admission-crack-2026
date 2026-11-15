@@ -66,7 +66,46 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
   // Hotspot detection helper
   const getHotspotBadge = (q: QuizQuestion): string | null => {
+    if (q.du_badge) return q.du_badge;
+    if (q.du_topic && q.du_freq) {
+      const icon = q.du_tier === 'super_hot' ? '🔥' : '⚡';
+      const tierLabel = q.du_tier === 'super_hot' ? 'Super Hot' : 'Hot';
+      return `${icon} ঢাবি ${tierLabel}: ${q.du_topic} (${toBn(q.du_freq)} বার)`;
+    }
     const text = (q.q + ' ' + (q.exp || '')).toLowerCase();
+    if (text.includes('পর্ব') || text.includes('সিলোম') || text.includes('পরিফেরা') || text.includes('নিডারিয়া') || text.includes('প্লাটিহেলমিনথিস') || text.includes('নেমাটোডা') || text.includes('অ্যানিলিডা') || text.includes('আর্থ্রোপোডা') || text.includes('মলাস্কা') || text.includes('একাইনোডার্মাটা') || text.includes('কর্ডাটা') || text.includes('শিখা কোষ')) {
+      return '🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)';
+    }
+    if (text.includes('c3') || text.includes('c4') || text.includes('ক্যালভিন') || text.includes('হ্যাচ ও স্ল্যাক') || text.includes('ক্র্যাঞ্জ') || text.includes('kranz')) {
+      return '🔥 ঢাবি Super Hot: C3 ও C4 উদ্ভিদের পার্থক্য (১৭ বার)';
+    }
+    if (text.includes('করোটিক স্নায়ু') || text.includes('অলফ্যাক্টরি') || text.includes('অপটিক') || text.includes('ভেগাস') || text.includes('ট্রাইজেমিনাল')) {
+      return '🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)';
+    }
+    if (text.includes('এন্ডোক্রাইন') || text.includes('অন্তঃক্ষরা') || text.includes('পিটুইটারি') || text.includes('থাইরয়েড') || text.includes('অ্যাড্রেনাল') || text.includes('ইনসুলিন') || text.includes('গ্লুকাগন')) {
+      return '🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)';
+    }
+    if (text.includes('প্রোফেজ-১') || text.includes('লেপ্টোটিন') || text.includes('জাইগোটিন') || text.includes('প্যাকাইটিন') || text.includes('ডিপ্লোটিন') || text.includes('ডায়াকাইনেসিস') || text.includes('কায়াজমা') || text.includes('ক্রসিং ওভার') || text.includes('সাইন্যাপসিস')) {
+      return '🔥 ঢাবি Super Hot: মায়োসিসের প্রোফেজ-১ (১২ বার)';
+    }
+    if (text.includes('জাইলেম') || text.includes('ফ্লোয়েম') || text.includes('ট্রাকিয়া') || text.includes('ভেসেল') || text.includes('সিভনল') || text.includes('ভাস্কুলার বান্ডল')) {
+      return '🔥 ঢাবি Super Hot: জাইলেম ও ফ্লোয়েম (১১ বার)';
+    }
+    if (text.includes('হাইড্রা') || text.includes('নিডোসাইট') || text.includes('নেমাটোসিস্ট') || text.includes('মেসোগ্লিয়া') || text.includes('ইন্টারস্টিশিয়াল')) {
+      return '⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)';
+    }
+    if (text.includes('হৃৎপিণ্ড') || text.includes('পেসমেকার') || text.includes('san') || text.includes('avn') || text.includes('কার্ডিয়াক') || text.includes('বাইপাস') || text.includes('অ্যানজিওপ্লাস্টি')) {
+      return '⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)';
+    }
+    if (text.includes('মেন্ডেল') || text.includes('অসম্পূর্ণ প্রকটতা') || text.includes('সমপ্রকটতা') || text.includes('লিথাল জিন') || text.includes('এপিস্ট্যাসিস') || text.includes('দ্বৈত প্রচ্ছন্ন')) {
+      return '⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)';
+    }
+    if (text.includes('মাইটোকন্ড্রি') || text.includes('ক্রিস্টি') || text.includes('atp synthase')) {
+      return '⚡ ঢাবি Hot: মাইটোকন্ড্রিয়া (৮ বার)';
+    }
+    if (text.includes('dna') || text.includes('rna') || text.includes('ডাবল হেলিক্স') || text.includes('শারগাফ') || text.includes('ট্রান্সক্রিপশন') || text.includes('ট্রান্সলেশন') || text.includes('জেনেটিক কোড')) {
+      return '⚡ ঢাবি Hot: নিউক্লিক অ্যাসিড (৮ বার)';
+    }
     if (text.includes('বর্তনী') || text.includes('রোধ') || text.includes('তুল্যরোধ') || text.includes('সার্কিট') || text.includes('কার্শফ') || text.includes('রোধের')) {
       return '⚡ ঢাবি হটস্পট: বর্তনী ও রোধের ম্যাথ';
     }
@@ -626,6 +665,21 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                       <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 shadow-xs font-mono">
                         প্রশ্ন: {currentExamIndex + 1} / {examQuestions.length} টি • {examQuestions[currentExamIndex].subject}
                       </span>
+                      {((examQuestions[currentExamIndex] as any).is_du_repeated || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Most Repeated') || examQuestions[currentExamIndex].tag?.includes('DU Repeat')) && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
+                          🔥 DU Most Repeated
+                        </span>
+                      )}
+                      {examQuestions[currentExamIndex].written_essential && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
+                          ✍️ Written Essential
+                        </span>
+                      )}
+                      {((examQuestions[currentExamIndex] as any).is_du_speed_hack || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Speed-Hack') || examQuestions[currentExamIndex].speed_hack) && (
+                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
+                          ⚡ DU Speed-Hack
+                        </span>
+                      )}
                       {examQuestions[currentExamIndex].expected_count !== undefined && examQuestions[currentExamIndex].expected_count !== null && (
                         <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
                           <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof examQuestions[currentExamIndex].expected_count === 'number' ? `${examQuestions[currentExamIndex].expected_count} বার` : examQuestions[currentExamIndex].expected_count}</span>
@@ -1163,6 +1217,11 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20">
                           {q.subject}
                         </span>
+                        {q.written_essential && (
+                          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">
+                            ✍️ Written Essential
+                          </span>
+                        )}
                         {q.chapter && (
                           <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
                             {q.chapter}
@@ -1171,6 +1230,16 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         {q.tag && (
                           <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">
                             {q.tag}
+                          </span>
+                        )}
+                        {((q as any).is_du_repeated || (q as any).source_tag?.includes('DU Most Repeated') || q.tag?.includes('DU Repeat')) && (
+                          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                            🔥 DU Most Repeated
+                          </span>
+                        )}
+                        {((q as any).is_du_speed_hack || (q as any).source_tag?.includes('DU Speed-Hack') || q.speed_hack) && (
+                          <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                            ⚡ DU Speed-Hack
                           </span>
                         )}
                         {q.expected_count !== undefined && q.expected_count !== null && (

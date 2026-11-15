@@ -91,6 +91,14 @@ const ENGLISH_CLUSTERS = [
   { id: 'cluster_medical_qb', label: 'MAT Direct Repeats' }
 ];
 
+const cleanCardText = (raw?: string): string => {
+  if (!raw) return '';
+  let cleaned = raw.split(/\n*\s*(?:⚡|⚠️)\s*\*?\*?(?:শর্টকাট হ্যাক|৫-সেকেন্ড হ্যাক|স্পিড হ্যাক|কনফিউজিং অপশন ট্র্যাপ|ট্র্যাপ অ্যালার্ট)/)[0] || '';
+  cleaned = cleaned.replace(/^(?:🎯|💡|📖)\s*\*?\*?(?:সঠিক উত্তর ও মূল তথ্য|কোর কনসেপ্ট|সম্পূর্ণ সমাধান|ব্যাখ্যা ও নিয়ম)\s*:?\*?\*?:?\s*/u, '');
+  cleaned = cleaned.replace(/\*\*/g, '');
+  return cleaned.trim();
+};
+
 const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
   onSelectMode,
   initialMonth = 'all'
@@ -594,11 +602,11 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
 
             <div
               onClick={() => setGkIsFlipped(!gkIsFlipped)}
-              className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer min-h-[300px] flex flex-col justify-between"
+              className="p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 mb-6 bg-white dark:bg-slate-900 cursor-pointer min-h-[300px] flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                     {currentGkCard.category}
                   </span>
                   <button
@@ -612,30 +620,30 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
                     <CheckCircle className="w-4 h-4" />
                   </button>
                 </div>
-                <h3 className="text-base sm:text-lg font-black text-slate-900 dark:text-white mb-3">
+                <h3 className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-slate-100 mb-4">
                   {currentGkCard.front}
                 </h3>
                 {gkIsFlipped && (
-                  <div className="space-y-2.5 pt-3 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
-                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-semibold">
-                      {currentGkCard.back}
+                  <div className="pt-4 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
+                    <p className="text-base leading-loose text-slate-600 dark:text-slate-300 mb-5">
+                      {cleanCardText(currentGkCard.concept || currentGkCard.back)}
                     </p>
                     {currentGkCard.hack && (
-                      <div className="flex items-start gap-1.5 p-2 rounded-lg bg-emerald-500/15 text-emerald-900 dark:text-emerald-200 text-xs border border-emerald-500/30">
-                        <Zap className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                        <span><strong>স্পিড হ্যাক:</strong> {currentGkCard.hack}</span>
+                      <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 text-emerald-900 dark:text-emerald-200 text-base leading-relaxed mb-3 flex items-start gap-2.5">
+                        <Zap className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+                        <span><strong>স্পিড হ্যাক:</strong> {cleanCardText(currentGkCard.hack)}</span>
                       </div>
                     )}
                     {currentGkCard.trap && (
-                      <div className="flex items-start gap-1.5 p-2 rounded-lg bg-amber-500/15 text-amber-900 dark:text-rose-200 text-xs border border-amber-500/30">
-                        <ShieldAlert className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
-                        <span><strong>ট্র্যাপ অ্যালার্ট:</strong> {currentGkCard.trap}</span>
+                      <div className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-base leading-relaxed flex items-start gap-2.5">
+                        <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-1" />
+                        <span><strong>ট্র্যাপ অ্যালার্ট:</strong> {cleanCardText(currentGkCard.trap)}</span>
                       </div>
                     )}
                   </div>
                 )}
               </div>
-              <div className="text-[11px] text-slate-400 text-center pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="text-xs text-slate-400 text-center pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
                 {gkIsFlipped ? 'পরবর্তী কার্ডে যেতে ডান তীর বা পরবর্তী বাটনে চাপ দিন' : 'উত্তর ও ট্র্যাপ ডিফেন্স দেখতে ক্লিক করুন'}
               </div>
             </div>
@@ -657,30 +665,39 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
           </div>
         ) : (
           /* GK Grid View */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {gkCardsList.map((card) => (
               <div
                 key={card.id}
-                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between"
+                className="p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 mb-6 bg-white dark:bg-slate-900 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">{card.month_bn} ২০২৬</span>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">{card.month_bn} ২০২৬ • {card.category}</span>
                     <button
                       onClick={() => toggleGkMastered(card.id)}
-                      className={`p-1 rounded-md ${masteredGkIds.has(card.id) ? 'text-emerald-600' : 'text-slate-300'}`}
+                      className={`p-1.5 rounded-lg ${masteredGkIds.has(card.id) ? 'text-emerald-600' : 'text-slate-300'}`}
                     >
-                      <CheckCircle className="w-3.5 h-3.5" />
+                      <CheckCircle className="w-4 h-4" />
                     </button>
                   </div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-2">{card.front}</h4>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-300 mb-2">{card.back}</p>
+                  <h4 className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-slate-100 mb-4">{card.front}</h4>
+                  <p className="text-base leading-loose text-slate-600 dark:text-slate-300 mb-5">
+                    {cleanCardText(card.concept || card.back)}
+                  </p>
                 </div>
-                {card.hack && (
-                  <div className="text-[10px] p-1.5 rounded bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-medium">
-                    ⚡ {card.hack}
-                  </div>
-                )}
+                <div>
+                  {card.hack && (
+                    <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 text-emerald-900 dark:text-emerald-200 text-base leading-relaxed mb-3">
+                      <strong>⚡ স্পিড হ্যাক:</strong> {cleanCardText(card.hack)}
+                    </div>
+                  )}
+                  {card.trap && (
+                    <div className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-base leading-relaxed">
+                      <strong>⚠️ ট্র্যাপ অ্যালার্ট:</strong> {cleanCardText(card.trap)}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -705,10 +722,10 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
               </span>
             </div>
 
-            <div className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-slate-900 border border-purple-500/30 shadow-md flex flex-col justify-between space-y-4">
+            <div className="p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 mb-6 bg-white dark:bg-slate-900 flex flex-col justify-between space-y-5">
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                     🎯 {currentEngCard.exam_target} • {currentEngCard.star_ranking}
                   </span>
                   <button
@@ -723,12 +740,12 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
                   </button>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-relaxed mb-3.5">
+                <div className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-slate-100 mb-4">
                   <MathText content={currentEngCard.q} />
                 </div>
 
                 {/* 4 Options Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
                   {(currentEngCard.options || currentEngCard.opts).map((opt, idx) => {
                     const letters = ['A', 'B', 'C', 'D'];
                     const isSelected = userSelectedOption === idx;
@@ -753,7 +770,7 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
                           setUserSelectedOption(idx);
                           setEngIsFlipped(true);
                         }}
-                        className={`p-3 rounded-xl border text-left text-xs sm:text-sm font-medium transition-all flex items-center gap-2.5 cursor-pointer ${optClass}`}
+                        className={`p-3.5 rounded-xl border text-left text-sm sm:text-base font-medium transition-all flex items-center gap-2.5 cursor-pointer ${optClass}`}
                       >
                         <span className="w-6 h-6 rounded-md bg-slate-100 dark:bg-slate-700 font-mono text-xs font-bold flex items-center justify-center shrink-0">
                           {letters[idx]}
@@ -766,34 +783,33 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
 
                 {/* Flipped Content / Explanations */}
                 {engIsFlipped && (
-                  <div className="mt-4 space-y-2.5 pt-3 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
-                    {/* Emerald Speed Hack */}
-                    {currentEngCard.speed_hack && (
-                      <div className="flex items-start gap-2 p-2.5 rounded-xl bg-emerald-500/15 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm border border-emerald-500/30">
-                        <Zap className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <div>
-                          <strong className="text-emerald-800 dark:text-emerald-300 mr-1 uppercase text-[11px]">⚡ স্পিড হ্যাক:</strong>
-                          <MathText content={currentEngCard.speed_hack} />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Rose/Amber Trap Alert */}
-                    {currentEngCard.trap_alert && (
-                      <div className="flex items-start gap-2 p-2.5 rounded-xl bg-amber-500/15 text-amber-950 dark:text-rose-200 text-xs sm:text-sm border border-amber-500/30">
-                        <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                        <div>
-                          <strong className="text-amber-900 dark:text-rose-300 mr-1 uppercase text-[11px]">⚠️ ট্র্যাপ অ্যালার্ট:</strong>
-                          <MathText content={currentEngCard.trap_alert} />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Explanation */}
+                  <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-150">
+                    {/* Core info paragraph: clean, single block without bold clutter */}
                     {currentEngCard.exp && (
-                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                        <strong className="text-slate-900 dark:text-white mr-1">📖 ব্যাখ্যা ও নিয়ম:</strong>
-                        <MathText content={currentEngCard.exp} />
+                      <div className="text-base leading-loose text-slate-600 dark:text-slate-300 mb-5">
+                        <MathText content={cleanCardText(currentEngCard.exp)} />
+                      </div>
+                    )}
+
+                    {/* Dedicated Speed Hack Box */}
+                    {currentEngCard.speed_hack && (
+                      <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 text-emerald-900 dark:text-emerald-200 text-base leading-relaxed mb-3 flex items-start gap-2.5">
+                        <Zap className="w-5 h-5 text-emerald-600 shrink-0 mt-1" />
+                        <div>
+                          <strong className="mr-1.5">⚡ স্পিড হ্যাক:</strong>
+                          <MathText content={cleanCardText(currentEngCard.speed_hack)} />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Dedicated Trap Alert Box */}
+                    {currentEngCard.trap_alert && (
+                      <div className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-base leading-relaxed flex items-start gap-2.5">
+                        <ShieldAlert className="w-5 h-5 text-amber-600 shrink-0 mt-1" />
+                        <div>
+                          <strong className="mr-1.5">⚠️ ট্র্যাপ অ্যালার্ট:</strong>
+                          <MathText content={cleanCardText(currentEngCard.trap_alert)} />
+                        </div>
                       </div>
                     )}
                   </div>
@@ -801,7 +817,7 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
               </div>
 
               {/* Navigation Controls */}
-              <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-between gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={prevEngCard}
                   className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer"
@@ -825,32 +841,44 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
           </div>
         ) : (
           /* English Grid View */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {engList.map((q) => (
               <div
                 key={q.id}
-                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col justify-between"
+                className="p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 mb-6 bg-white dark:bg-slate-900 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-bold text-purple-600 dark:text-purple-400 font-mono">{q.exam_target}</span>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-purple-600 dark:text-purple-400 font-mono">{q.exam_target}</span>
                     <button
                       onClick={() => toggleEngMastered(q.id)}
-                      className={`p-1 rounded-md ${masteredEngIds.has(q.id) ? 'text-purple-600' : 'text-slate-300'}`}
+                      className={`p-1.5 rounded-lg ${masteredEngIds.has(q.id) ? 'text-purple-600' : 'text-slate-300'}`}
                     >
-                      <CheckCircle className="w-3.5 h-3.5" />
+                      <CheckCircle className="w-4 h-4" />
                     </button>
                   </div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-2 leading-snug">{q.q}</h4>
-                  <div className="text-[11px] font-medium text-emerald-700 dark:text-emerald-400 mb-2">
+                  <h4 className="text-lg md:text-xl font-bold leading-relaxed text-slate-800 dark:text-slate-100 mb-4">{q.q}</h4>
+                  <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400 mb-3">
                     ✓ সঠিক উত্তর: {q.options ? q.options[q.ans] : q.opts[q.ans]}
                   </div>
+                  {q.exp && (
+                    <p className="text-base leading-loose text-slate-600 dark:text-slate-300 mb-5">
+                      {cleanCardText(q.exp)}
+                    </p>
+                  )}
                 </div>
-                {q.speed_hack && (
-                  <div className="text-[10px] p-1.5 rounded bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-medium">
-                    ⚡ {q.speed_hack}
-                  </div>
-                )}
+                <div>
+                  {q.speed_hack && (
+                    <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 text-emerald-900 dark:text-emerald-200 text-base leading-relaxed mb-3">
+                      <strong>⚡ স্পিড হ্যাক:</strong> {cleanCardText(q.speed_hack)}
+                    </div>
+                  )}
+                  {q.trap_alert && (
+                    <div className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-amber-900 dark:text-amber-200 text-base leading-relaxed">
+                      <strong>⚠️ ট্র্যাপ অ্যালার্ট:</strong> {cleanCardText(q.trap_alert)}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>

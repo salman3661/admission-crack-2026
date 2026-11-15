@@ -113,8 +113,52 @@ export const ExamView: React.FC<ExamViewProps> = ({
     return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
   };
 
+  const toBn = (num: number | string) => {
+    const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return num.toString().replace(/\d/g, (d) => bnDigits[parseInt(d, 10)]);
+  };
+
   const getHotspotBadge = (q: QuizQuestion): string | null => {
+    if (q.du_badge) return q.du_badge;
+    if (q.du_topic && q.du_freq) {
+      const icon = q.du_tier === 'super_hot' ? '🔥' : '⚡';
+      const tierLabel = q.du_tier === 'super_hot' ? 'Super Hot' : 'Hot';
+      return `${icon} ঢাবি ${tierLabel}: ${q.du_topic} (${toBn(q.du_freq)} বার)`;
+    }
     const text = `${q.q} ${q.exp || ''} ${q.trap || ''} ${q.trap_insight || ''}`;
+    if (/পর্ব|সিলোম|পরিফেরা|নিডারিয়া|প্লাটিহেলমিনথিস|নেমাটোডা|অ্যানিলিডা|আর্থ্রোপোডা|মলাস্কা|একাইনোডার্মাটা|কর্ডাটা|শিখা\s*কোষ/.test(text)) {
+      return '🔥 ঢাবি Super Hot: ৯টি পর্বের বৈশিষ্ট্য (১৯ বার)';
+    }
+    if (/C3|C4|ক্যালভিন\s*চক্র|হ্যাচ\s*ও\s*স্ল্যাক|ক্র্যাঞ্জ|Kranz/.test(text)) {
+      return '🔥 ঢাবি Super Hot: C3 ও C4 উদ্ভিদের পার্থক্য (১৭ বার)';
+    }
+    if (/করোটিক\s*স্নায়ু|অলফ্যাক্টরি|অপটিক|ভেগাস|ট্রাইজেমিনাল/.test(text)) {
+      return '🔥 ঢাবি Super Hot: করোটিক স্নায়ু (১০ বার)';
+    }
+    if (/এন্ডোক্রাইন|অন্তঃক্ষরা|পিটুইটারি|থাইরয়েড|অ্যাড্রেনাল|ইনসুলিন|গ্লুকাগন/.test(text)) {
+      return '🔥 ঢাবি Super Hot: এন্ডোক্রাইন গ্রন্থি (১৬ বার)';
+    }
+    if (/প্রোফেজ-১|লেপ্টোটিন|জাইগোটিন|প্যাকাইটিন|ডিপ্লোটিন|ডায়াকাইনেসিস|কায়াজমা|ক্রসিং\s*ওভার|সাইন্যাপসিস/.test(text)) {
+      return '🔥 ঢাবি Super Hot: মায়োসিসের প্রোফেজ-১ (১২ বার)';
+    }
+    if (/জাইলেম|ফ্লোয়েম|ট্রাকিয়া|ভেসেল|সিভনল|ভাস্কুলার\s*বান্ডল/.test(text)) {
+      return '🔥 ঢাবি Super Hot: জাইলেম ও ফ্লোয়েম (১১ বার)';
+    }
+    if (/হাইড্রা|নিডোসাইট|নেমাটোসিস্ট|মেসোগ্লিয়া|ইন্টারস্টিশিয়াল/.test(text)) {
+      return '⚡ ঢাবি Hot: হাইড্রার কোষসমূহ (৯ বার)';
+    }
+    if (/হৃৎপিণ্ড|পেসমেকার|SAN|AVN|কার্ডিয়াক|বাইপাস|অ্যানজিওপ্লাস্টি/.test(text)) {
+      return '⚡ ঢাবি Hot: হৃৎপিণ্ড ও রক্ত সংবহন (৯ বার)';
+    }
+    if (/মেন্ডেল|অসম্পূর্ণ\s*প্রকটতা|সমপ্রকটতা|লিথাল\s*জিন|এপিস্ট্যাসিস|দ্বৈত\s*প্রচ্ছন্ন/.test(text)) {
+      return '⚡ ঢাবি Hot: মেন্ডেলের সূত্রের ব্যতিক্রম (৯ বার)';
+    }
+    if (/মাইটোকন্ড্রি|ক্রিস্টি|ATP\s*synthase/.test(text)) {
+      return '⚡ ঢাবি Hot: মাইটোকন্ড্রিয়া (৮ বার)';
+    }
+    if (/DNA|RNA|ডাবল\s*হেলিক্স|শারগাফ|ট্রান্সক্রিপশন|ট্রান্সলেশন|জেনেটিক\s*কোড/.test(text)) {
+      return '⚡ ঢাবি Hot: নিউক্লিক অ্যাসিড (৮ বার)';
+    }
     if (/বর্তনী|তুল্য\s*রোধ|সার্কিট|অ্যাম্পিয়ার|রোধের\s*মান|হুইটস্টোন|তড়িচ্চালক/.test(text)) {
       return '⚡ ঢাবি হটস্পট: বর্তনী ও রোধের ম্যাথ';
     }
@@ -168,8 +212,25 @@ export const ExamView: React.FC<ExamViewProps> = ({
     const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
     const chosen = shuffled.slice(0, Math.min(count, shuffled.length));
 
+    // Dynamic shuffle of options array so correct answers distribute naturally across A, B, C, D
+    const chosenWithShuffledOptions = chosen.map((q) => {
+      const opts = [...(q.opts || q.options || [])];
+      if (opts.length < 2) return q;
+      const currentIdx = typeof q.ans === 'number' ? q.ans : (typeof q.correct_index === 'number' ? q.correct_index : 0);
+      const correctVal = opts[currentIdx] ?? opts[0];
+      const shuffledOpts = [...opts].sort(() => Math.random() - 0.5);
+      const newAnsIdx = shuffledOpts.indexOf(correctVal);
+      return {
+        ...q,
+        opts: shuffledOpts,
+        options: shuffledOpts,
+        ans: newAnsIdx,
+        correct_index: newAnsIdx,
+      };
+    });
+
     if (activeMode === 'mastery') {
-      const pool: MasteryQueueItem[] = chosen.map((q) => ({
+      const pool: MasteryQueueItem[] = chosenWithShuffledOptions.map((q) => ({
         question: q,
         consecutiveCorrect: 0,
         attempts: 0,
@@ -184,7 +245,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
       setMasteryFeedback(null);
       setTotalRoundsAnswered(0);
     } else {
-      setTimedQuestions(chosen);
+      setTimedQuestions(chosenWithShuffledOptions);
       setTimedIndex(0);
       setSelectedAnswers({});
       setTimeSpent({});
@@ -946,6 +1007,12 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   )}
                 </div>
 
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+                    {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
+                  </span>
+                </div>
+
                 <div className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-white mb-3">
                   <MathText content={cleanText} />
                 </div>
@@ -1137,7 +1204,18 @@ export const ExamView: React.FC<ExamViewProps> = ({
           })()}
 
           {/* Question Text */}
-          <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 mb-2 flex-wrap">
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+              {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
+            </span>
+            {q.written_essential && (
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30">
+                ✍️ Written Essential
+              </span>
+            )}
+          </div>
+
+          <div className="text-lg font-medium leading-relaxed text-zinc-900 dark:text-white mb-4 overflow-x-auto no-scrollbar">
             <MathText content={cleanText} />
           </div>
 
@@ -1164,7 +1242,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   key={optIdx}
                   onClick={() => handleMasteryAnswer(optIdx)}
                   disabled={masteryFeedback !== null}
-                  className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all text-xs sm:text-sm cursor-pointer ${style}`}
+                  className={`w-full text-base py-3 px-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${style}`}
                 >
                   <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
                     masteryFeedback && isCorrectAnswer
@@ -1175,7 +1253,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   }`}>
                     {String.fromCharCode(65 + optIdx)}
                   </span>
-                  <div className="flex-1 leading-relaxed overflow-x-auto no-scrollbar">
+                  <div className="flex-1 text-base leading-relaxed overflow-x-auto no-scrollbar">
                     <MathText content={opt} />
                   </div>
                 </button>
@@ -1202,7 +1280,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
 
               {/* Speed Hack */}
               {q.speed_hack && (
-                <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-xl p-2.5 text-xs leading-relaxed text-emerald-950 dark:text-emerald-200 flex items-start gap-2">
+                <div className="bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-xl p-3 text-sm md:text-base leading-relaxed text-emerald-950 dark:text-emerald-200 flex items-start gap-2">
                   <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-emerald-700 dark:text-emerald-400 font-bold mr-1">⚡ স্পিড হ্যাক:</strong>
@@ -1218,7 +1296,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   (!q.q.includes('পিত্ত') && !q.q.includes('যকৃৎ') && !q.q.includes('bile'));
                 if (!currentTrap || isBoilerplate) return null;
                 return (
-                  <div className="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 rounded-xl p-2.5 text-xs leading-relaxed text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                  <div className="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 rounded-xl p-3 text-sm md:text-base leading-relaxed text-amber-900 dark:text-amber-200 flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-amber-700 dark:text-amber-400 font-bold mr-1">ফাঁদ বিশ্লেষণ:</strong>
@@ -1229,7 +1307,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
               })()}
 
               {/* Detailed Explanation */}
-              <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-2.5 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/60">
+              <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-3 text-sm md:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/60">
                 <strong className="text-[#056839] dark:text-emerald-400 block mb-0.5 font-bold">স্ট্যান্ডার্ড সমাধান:</strong>
                 <MathText content={q.exp} block />
               </div>
@@ -1309,6 +1387,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof currentTimedQ.expected_count === 'number' ? `${currentTimedQ.expected_count} বার` : currentTimedQ.expected_count}</span>
             </span>
           )}
+          {currentTimedQ.written_essential && (
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30 shadow-xs inline-flex items-center gap-1">
+              ✍️ Written Essential
+            </span>
+          )}
         </div>
 
         {/* 45-Second Timer Pill */}
@@ -1339,7 +1422,13 @@ export const ExamView: React.FC<ExamViewProps> = ({
             <span>{timedHotspot}</span>
           </div>
         )}
-        <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-relaxed mb-4 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
+            {(currentTimedQ as any).source || (currentTimedQ as any).source_tag || timedOrigin || "🎯 ২০২৬ প্রেডিক্টর"}
+          </span>
+        </div>
+
+        <div className="text-lg font-medium leading-relaxed text-zinc-900 dark:text-white mb-4 overflow-x-auto no-scrollbar">
           <MathText content={timedCleanText} />
         </div>
 
@@ -1351,7 +1440,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <button
                 key={optIdx}
                 onClick={() => handleTimedOptionSelect(optIdx)}
-                className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all text-xs sm:text-sm cursor-pointer ${
+                className={`w-full text-base py-3 px-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-xs'
                     : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
@@ -1364,7 +1453,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 }`}>
                   {String.fromCharCode(65 + optIdx)}
                 </span>
-                <div className="flex-1 leading-relaxed overflow-x-auto no-scrollbar">
+                <div className="flex-1 text-base leading-relaxed overflow-x-auto no-scrollbar">
                   <MathText content={opt} />
                 </div>
               </button>

@@ -317,7 +317,7 @@ export const VaultView: React.FC<VaultViewProps> = ({
   // Entries filtered by Active Week
   const weekScopedEntries = useMemo(() => {
     if (activeWeek === 'all') return entries;
-    return entries.filter((e) => e.week === activeWeek);
+    return entries.filter((item) => item.week === activeWeek || Number(item.week) === Number(activeWeek));
   }, [entries, activeWeek]);
 
   // Subject-level counts for the active week
@@ -359,9 +359,9 @@ export const VaultView: React.FC<VaultViewProps> = ({
 
     return {
       all: base.length,
-      core_formula: base.filter((e) => e.type === 'core_formula').length,
-      shortcut: base.filter((e) => e.type === 'shortcut').length,
-      trap: base.filter((e) => e.type === 'trap').length,
+      core_formula: base.filter((e) => e.type === 'core_formula' || e.type === 'table').length,
+      shortcut: base.filter((e) => e.type === 'shortcut' || e.type === 'speed_hack').length,
+      trap: base.filter((e) => e.type === 'trap' || e.type === 'concept_trap').length,
       quick_tools: qToolsCount,
     };
   }, [subjectScopedEntries, selectedChapter, vault]);
@@ -374,8 +374,12 @@ export const VaultView: React.FC<VaultViewProps> = ({
       // Chapter filter
       if (selectedChapter !== 'all' && item.chapter !== selectedChapter) return false;
 
-      // Card Type filter
-      if (selectedCardType !== 'all' && selectedCardType !== 'quick_tools' && item.type !== selectedCardType) return false;
+      // Card Type filter (when 'all' is active or under 'সব বিষয়', include all formula/table/shortcut/trap entries without strictly requiring type === 'trap')
+      if (selectedCardType !== 'all' && selectedCardType !== 'quick_tools') {
+        if (selectedCardType === 'core_formula' && item.type !== 'core_formula' && item.type !== 'table') return false;
+        if (selectedCardType === 'shortcut' && item.type !== 'shortcut' && item.type !== 'speed_hack') return false;
+        if (selectedCardType === 'trap' && item.type !== 'trap' && item.type !== 'concept_trap') return false;
+      }
 
       // Search Query filter
       if (q) {
@@ -405,6 +409,9 @@ export const VaultView: React.FC<VaultViewProps> = ({
   const handleWeekChange = (w: ActiveWeek) => {
     setActiveWeek(w);
     setSelectedChapter('all');
+    if (selectedCardType === 'quick_tools') {
+      setSelectedCardType('all');
+    }
   };
 
   const handleSubjectChange = (sub: ActiveSubject) => {
@@ -1133,9 +1140,11 @@ export const VaultView: React.FC<VaultViewProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {chapterItems.map((item) => {
                     const isCopied = copiedId === item.id;
-                    const cardTypeBadge = item.type === 'core_formula'
+                    const cardTypeBadge = item.type === 'table'
+                      ? { label: '📊 তুলনামূলক ছক', class: 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800' }
+                      : item.type === 'core_formula'
                       ? { label: '📐 কোর সূত্রাবলী', class: 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800' }
-                      : item.type === 'shortcut'
+                      : item.type === 'shortcut' || item.type === 'speed_hack'
                       ? { label: '⚡ নো-ক্যালকুলেটর হ্যাক', class: 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800' }
                       : { label: '⚠️ ট্র্যাপ অ্যালার্ট', class: 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800' };
 

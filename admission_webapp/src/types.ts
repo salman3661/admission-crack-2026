@@ -109,6 +109,11 @@ export interface QuizQuestion {
   intelligence_type?: string;
   source_book?: string;
   expected_count?: number | string;
+  du_topic?: string;
+  du_freq?: number;
+  du_tier?: 'super_hot' | 'hot';
+  du_badge?: string;
+  written_essential?: boolean;
 }
 
 export interface PredictorWrittenProblem {
@@ -172,7 +177,7 @@ export interface TrapItem {
   fix: string;
 }
 
-export type VaultCardType = 'core_formula' | 'shortcut' | 'trap' | 'table';
+export type VaultCardType = 'core_formula' | 'shortcut' | 'trap' | 'table' | 'speed_hack' | 'concept_trap';
 
 export interface VaultTableData {
   headers: string[];
@@ -218,14 +223,35 @@ export interface MasterMegaType {
   speed_elimination: string;
 }
 
+export interface DUHotspotSubTopic {
+  topic: string;
+  freq: number;
+  tier: 'super_hot' | 'hot';
+}
+
+export interface DUHotspotMeta {
+  has_hotspot: boolean;
+  tier: 'super_hot' | 'hot';
+  topic: string;
+  freq: number;
+  badge_text: string;
+  sub_topics?: DUHotspotSubTopic[];
+}
+
 export interface MasterChapterBlueprint {
   id: string;
   title: string;
   subject: string;
   paper: string;
+  chapter_no?: string;
+  subtitle?: string;
+  syllabus?: string;
+  aliases?: string[];
   total_questions: number;
   dominant_types_count: number;
   mega_types: MasterMegaType[];
+  du_hotspot?: DUHotspotMeta;
+  priority_tier?: string;
 }
 
 export interface SyntheticPredictorQuestion {
@@ -237,11 +263,22 @@ export interface SyntheticPredictorQuestion {
   trap_alert: string;
   speed_hack: string;
   explanation: string;
+  source?: string;
+  source_tag?: string;
+  du_topic?: string;
+  du_freq?: number;
+  du_tier?: 'super_hot' | 'hot';
+  du_badge?: string;
+  written_essential?: boolean;
 }
 
 export interface ChapterSyntheticPredictors {
   chapter_id: string;
   chapter_title: string;
   subject: string;
+  paper?: string;
+  chapter_no?: string;
+  du_hotspot?: DUHotspotMeta;
+  priority_tier?: string;
   predictors: SyntheticPredictorQuestion[];
 }

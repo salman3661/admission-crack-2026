@@ -31,7 +31,8 @@ export default {
         }
       },
       fontFamily: {
-        bengali: ['"Hind Siliguri"', 'sans-serif'],
+        sans: ["'SolaimanLipi'", "'Hind Siliguri'", 'system-ui', 'sans-serif'],
+        bengali: ["'SolaimanLipi'", "'Hind Siliguri'", 'sans-serif'],
         outfit: ['"Outfit"', 'sans-serif'],
       },
       boxShadow: {
