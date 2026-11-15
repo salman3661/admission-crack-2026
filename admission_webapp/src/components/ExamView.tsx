@@ -72,6 +72,8 @@ export const ExamView: React.FC<ExamViewProps> = ({
   const [masteryPool, setMasteryPool] = useState<MasteryQueueItem[]>([]);
   const [activeQueueIndices, setActiveQueueIndices] = useState<number[]>([]);
   const [currentQueuePos, setCurrentQueuePos] = useState<number>(0);
+  // Written (CQ) question: id whose solution has been revealed
+  const [writtenRevealedId, setWrittenRevealedId] = useState<string | null>(null);
   const [masteryFeedback, setMasteryFeedback] = useState<{
     type: 'correct' | 'wrong' | 'unsure';
     userChoice: number | null;
@@ -374,7 +376,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
   const currentPoolIdx = activeQueueIndices[currentQueuePos];
   const currentMasteryItem = currentPoolIdx !== undefined ? masteryPool[currentPoolIdx] : null;
 
-  const handleMasteryAnswer = (userChoice: number | null, isUnsure: boolean = false) => {
+  const handleMasteryAnswer = (userChoice: number | null, isUnsure: boolean = false, forceCorrect: boolean = false) => {
     if (!currentMasteryItem || masteryFeedback) return;
 
     if (autoAdvanceTimerRef.current) {
@@ -383,7 +385,9 @@ export const ExamView: React.FC<ExamViewProps> = ({
     }
 
     const q = currentMasteryItem.question;
-    const isCorrect = !isUnsure && userChoice !== null && userChoice === q.ans;
+    // Written questions have no options: ignore keyboard 1-4 option picks
+    if (userChoice !== null && (!q.opts || q.opts.length === 0)) return;
+    const isCorrect = forceCorrect || (!isUnsure && userChoice !== null && userChoice === q.ans);
     setTotalRoundsAnswered((prev) => prev + 1);
 
     // Copy pool
@@ -446,6 +450,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
 
     const activePool = overridePool || masteryPool;
     setMasteryFeedback(null);
+    setWrittenRevealedId(null);
 
     // Remaining unmastered indices in pool
     const unmastered = activePool
@@ -1095,6 +1100,8 @@ export const ExamView: React.FC<ExamViewProps> = ({
     const masteredCount = masteryPool.filter((i) => i.status === 'mastered').length;
     const remainingUnmastered = masteryPool.length - masteredCount;
     const progressPercent = Math.round((masteredCount / masteryPool.length) * 100);
+    const isWritten = (q as any).type === 'written' || !q.opts || q.opts.length === 0;
+    const writtenRevealed = isWritten && writtenRevealedId === q.id;
 
     return (
       <div className="max-w-2xl mx-auto py-3 px-3 sm:px-4">
@@ -1219,9 +1226,39 @@ export const ExamView: React.FC<ExamViewProps> = ({
             <MathText content={cleanText} />
           </div>
 
+          {/* Written question: reveal solution + self-grade */}
+          {isWritten && (
+            <div className="space-y-2.5">
+              {!writtenRevealed && !masteryFeedback && (
+                <button
+                  onClick={() => setWrittenRevealedId(q.id)}
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white text-sm sm:text-base font-bold shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                >
+                  <span>✍️ সমাধান দেখুন (Show Written Solution)</span>
+                </button>
+              )}
+              {writtenRevealed && !masteryFeedback && (
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    onClick={() => handleMasteryAnswer(null, false, true)}
+                    className="px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold shadow-xs cursor-pointer"
+                  >
+                    ✅ বুঝেছি / Mastered
+                  </button>
+                  <button
+                    onClick={() => handleMasteryAnswer(null, true)}
+                    className="px-4 py-2.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700/60 text-sm font-bold cursor-pointer"
+                  >
+                    🔁 আবার দেখব
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Options (Fast Click / Keyboard 1-4) */}
           <div className="space-y-2">
-            {q.opts.map((opt, optIdx) => {
+            {!isWritten && q.opts.map((opt, optIdx) => {
               const isSelected = masteryFeedback?.userChoice === optIdx;
               const isCorrectAnswer = q.ans === optIdx;
 
@@ -1262,9 +1299,10 @@ export const ExamView: React.FC<ExamViewProps> = ({
           </div>
 
           {/* Feedback & Solution Popup inside card when answered */}
-          {masteryFeedback && (
+          {(masteryFeedback || writtenRevealed) && (
             <div className="mt-3.5 pt-3 border-t border-zinc-200 dark:border-zinc-800 space-y-2 animate-in fade-in duration-200">
               {/* Status Message */}
+              {masteryFeedback && (
               <div className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-between ${
                 masteryFeedback.type === 'correct'
                   ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200'
@@ -1277,6 +1315,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   Space / Enter ⏎
                 </span>
               </div>
+              )}
 
               {/* Speed Hack */}
               {q.speed_hack && (
@@ -1309,7 +1348,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
               {/* Detailed Explanation */}
               <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-3 text-sm md:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed border border-zinc-200 dark:border-zinc-700/60">
                 <strong className="text-[#056839] dark:text-emerald-400 block mb-0.5 font-bold">স্ট্যান্ডার্ড সমাধান:</strong>
-                <MathText content={q.exp} block />
+                <div className="overflow-x-auto max-w-full"><MathText content={q.exp} block /></div>
               </div>
             </div>
           )}
@@ -1320,7 +1359,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
           {/* Unsure / Doubt Button */}
           <button
             onClick={() => handleMasteryAnswer(null, true)}
-            disabled={masteryFeedback !== null}
+            disabled={masteryFeedback !== null || isWritten}
             className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-900/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700/60 text-xs sm:text-sm font-bold shadow-xs transition-all disabled:opacity-40 cursor-pointer"
             title="সংশয় চিহ্নিত করলে প্রশ্নটি কিউতে থাকবে যাতে ২ বার নির্ভুল উত্তর দেওয়া যায়"
           >
@@ -1336,7 +1375,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
           {/* Next Button */}
           <button
             onClick={() => handleMasteryNext()}
-            disabled={masteryFeedback === null}
+            disabled={masteryFeedback === null && !isWritten}
             className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#056839]/20 transition-all disabled:opacity-40 active:scale-95 cursor-pointer"
           >
             <span>পরবর্তী প্রশ্ন</span>
