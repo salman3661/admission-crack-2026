@@ -132,5 +132,20 @@
     "total_mcqs": 120,
     "total_slides": 14,
     "total_flashcards": 70
+  },
+  {
+    "id": "week_09",
+    "name": "Week 09",
+    "badge": "তড়িৎ চৌম্বক ক্রিয়া ও আবেশ, জৈব রসায়ন (অ্যালকোহল-ফেনল), ম্যাট্রিক্স ও স্থিতিবিদ্যা, অণুজীব ও শৈবাল-ব্রায়োফাইটা",
+    "description": "উইক ৯ সলভ শিট মাস্টার: বায়োট-স্যাভার্ট ও লেঞ্জের সূত্র, গ্রিগনার্ড বিকারক ও লুকাস পরীক্ষা, নির্ণায়ক ও ল্যামির উপপাদ্য, ভাইরাস-ম্যালেরিয়া ও Ulothrix-Riccia-Pteris।",
+    "subjects": [
+      "Physics",
+      "Chemistry",
+      "Higher Math",
+      "Biology"
+    ],
+    "total_mcqs": 76,
+    "total_slides": 0,
+    "total_flashcards": 0
   }
 ]
