@@ -32,6 +32,26 @@ interface NormalizedQ {
   trap?: string;
 }
 
+
+function resolveCorrectIndex(rawItem: any, opts: string[]): number {
+  const raw = rawItem?.ans ?? rawItem?.answer ?? rawItem?.correct_index ?? rawItem?.correctAnswer;
+  if (typeof raw === 'number' && Number.isFinite(raw)) {
+    return raw >= 0 && raw < opts.length ? Math.trunc(raw) : 0;
+  }
+  const str = String(raw ?? '').trim();
+  const upper = str.toUpperCase();
+  if (upper === 'A' || str === 'ক') return 0;
+  if (upper === 'B' || str === 'খ') return 1;
+  if (upper === 'C' || str === 'গ') return 2;
+  if (upper === 'D' || str === 'ঘ') return 3;
+  if (/^[0-9]+$/.test(str)) {
+    const n = parseInt(str, 10);
+    return n >= 0 && n < opts.length ? n : 0;
+  }
+  const textMatch = opts.findIndex((o) => o.trim() === str);
+  return textMatch >= 0 ? textMatch : 0;
+}
+
 const toOpts = (raw: unknown): string[] => {
   if (Array.isArray(raw)) return raw.map(String);
   return [];
@@ -225,7 +245,7 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
           id: q.id,
           stem: q._stem,
           opts: toOpts(q.opts || q.options),
-          ans: Number(q.ans ?? q.correct_index ?? 0),
+          ans: resolveCorrectIndex(q, toOpts(q.opts || q.options)),
           origin,
           track: classifyTrack(origin, q._bank),
           exp: q.exp || q.explanation,
@@ -279,7 +299,7 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
         id: `${typeId}_pred_${i}_${p.id || i}`,
         stem: String(p.stem || ''),
         opts: toOpts(p.options),
-        ans: Number(p.answer ?? 0),
+        ans: resolveCorrectIndex(p, toOpts(p.options)),
         origin: originLabel,
         track,
         exp: p.explanation,
@@ -341,6 +361,8 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
                       cls = 'bg-emerald-500/15 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-bold';
                     } else if (isPicked) {
                       cls = 'bg-rose-500/15 border-rose-500 text-rose-800 dark:text-rose-300 font-bold';
+                    } else {
+                      cls = 'bg-slate-50/50 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-800 text-slate-400 dark:text-slate-500';
                     }
                   }
                   return (
@@ -349,8 +371,14 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
                       onClick={() => setSelectedOpt((prev) => ({ ...prev, [q.id]: oi }))}
                       className={`text-left text-xs px-2.5 py-2 rounded-lg border flex items-center gap-2 transition-all cursor-pointer ${cls}`}
                     >
-                      <span className="w-5 h-5 rounded-md bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 flex items-center justify-center text-[10px] font-bold shrink-0">
-                        {String.fromCharCode(65 + oi)}
+                      <span className={`w-5 h-5 rounded-md border flex items-center justify-center text-[10px] font-bold shrink-0 ${
+                        answered && isCorrect
+                          ? 'bg-emerald-600 text-white border-emerald-600'
+                          : answered && isPicked && !isCorrect
+                          ? 'bg-rose-600 text-white border-rose-600'
+                          : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600'
+                      }`}>
+                        {answered && isCorrect ? '✓' : answered && isPicked ? '✕' : String.fromCharCode(65 + oi)}
                       </span>
                       <span className="flex-1 overflow-x-auto no-scrollbar">
                         <MathText content={opt} />
@@ -361,7 +389,11 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
               </div>
 
               {answered && (
-                <div className="space-y-1.5 pt-1 border-t border-slate-100 dark:border-slate-800 text-[11px] animate-in fade-in duration-150">
+                <div className="space-y-1.5 pt-1.5 border-t border-slate-100 dark:border-slate-800 text-[11px] animate-in fade-in duration-150">
+                  <div className="px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 font-bold flex items-center gap-1.5 flex-wrap">
+                    <span>✔ সঠিক উত্তর: ({String.fromCharCode(65 + q.ans)})</span>
+                    <MathText content={q.opts[q.ans] || ''} />
+                  </div>
                   {q.speedHack && (
                     <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-900 dark:text-amber-200">
                       <span className="font-bold mr-1">⚡ Speed Hack:</span>
