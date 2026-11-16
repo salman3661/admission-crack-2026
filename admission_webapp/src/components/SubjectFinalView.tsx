@@ -177,7 +177,7 @@ export const SubjectFinalView: React.FC<SubjectFinalViewProps> = ({
   if (isMockActive) {
     const q = mockQuestions[mockIdx];
     return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-5 pb-28 space-y-5">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-5 pb-32 space-y-5">
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-wrap items-center justify-between gap-3 sticky top-16 z-30">
           <div className="flex items-center gap-3">
             <button
@@ -324,7 +324,7 @@ export const SubjectFinalView: React.FC<SubjectFinalViewProps> = ({
   // SUBJECT-WISE & CHAPTER-WISE QB DIRECTORY
   // =========================================================================
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 pb-28 space-y-6">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 pb-32 space-y-5">
       {/* Header */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-7 shadow-sm space-y-4">
         <div className="flex items-center justify-between gap-3 flex-wrap">

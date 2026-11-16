@@ -58,9 +58,9 @@ const BottomNavComponent: React.FC<BottomNavProps> = ({
   onSelectMode,
 }) => {
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-40 pointer-events-none pb-safe select-none">
-      <div className="pointer-events-auto max-w-md mx-auto mb-2 sm:mb-3 px-3">
-        <div className="backdrop-blur-2xl bg-white/90 dark:bg-slate-900/90 ring-1 ring-slate-200/90 dark:ring-slate-800/90 rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.12)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.5)] p-1.5 flex items-center justify-around gap-1 transition-all">
+    <nav className="fixed bottom-0 inset-x-0 z-40 select-none backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-t border-slate-200/60 dark:border-slate-800/60 pb-[env(safe-area-inset-bottom)]">
+      <div className="max-w-md mx-auto px-2">
+        <div className="py-1.5 flex items-center justify-around gap-1">
           {NAV_ITEMS.map((item) => {
             const isActive = currentMode === item.id;
 
@@ -94,7 +94,7 @@ const BottomNavComponent: React.FC<BottomNavProps> = ({
 
                 {/* Active Dot Indicator */}
                 {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400 mt-1 shadow-sm shadow-emerald-500/50" />
+                  <span className="w-1 h-1 rounded-full bg-emerald-600 dark:bg-emerald-400 mt-1" />
                 )}
               </button>
             );

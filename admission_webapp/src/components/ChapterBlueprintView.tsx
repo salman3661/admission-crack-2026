@@ -299,7 +299,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   const toggleTypeExpand = (typeId: string) => {
     setExpandedTypes(prev => ({
       ...prev,
-      [typeId]: prev[typeId] === undefined ? false : !prev[typeId]
+      [typeId]: !prev[typeId]
     }));
   };
 
@@ -586,7 +586,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   // ============================================================================
   if (activeTab === 'quiz' && activeChapter) {
     return (
-      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 font-['SolaimanLipi',sans-serif]">
+      <div className="fixed inset-0 z-50 overflow-y-auto pb-32 bg-white dark:bg-slate-950 font-['SolaimanLipi',sans-serif]">
         <div className="max-w-4xl mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-4">
           
           {/* Top Sticky Header with Close Button */}
@@ -1101,7 +1101,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                             </span>
                           )}
                           {ch.du_hotspot?.has_hotspot && (
-                            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs ${
+                            <span className={`inline-flex items-center gap-1 px-2 py-px rounded-md whitespace-nowrap text-[10px] font-black shadow-xs ${
                               ch.du_hotspot.tier === 'super_hot'
                                 ? 'bg-gradient-to-r from-rose-500 to-red-600 text-white ring-2 ring-rose-300 dark:ring-rose-800 animate-pulse'
                                 : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
@@ -1332,7 +1332,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
 
                   <div className="space-y-3">
                     {activeChapter.mega_types.map((typeItem, idx) => {
-                      const isExpanded = expandedTypes[typeItem.type_id] !== false;
+                      const isExpanded = expandedTypes[typeItem.type_id] === true;
                       const isFiveStar = typeItem.importance === '⭐⭐⭐⭐⭐';
 
                       return (
@@ -1643,7 +1643,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
           <div className="rounded-3xl p-4 sm:p-5 bg-white/80 dark:bg-slate-900/80 ring-1 ring-slate-200/80 dark:ring-slate-800/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30 flex items-center gap-1">
+                <span className="px-2 py-px rounded-md whitespace-nowrap text-[10px] font-black bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
                   সপ্তাহ-ভিত্তিক মাস্টারি রুটিন
                 </span>
@@ -1956,7 +1956,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           {week.name}
                         </span>
                       </div>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-100 dark:bg-[#1C2A20] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                      <span className="px-2 py-px rounded-md whitespace-nowrap text-[10px] font-mono font-bold bg-slate-100 dark:bg-[#1C2A20] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                         {toBn(stats.total)}টি MCQ
                       </span>
                     </div>

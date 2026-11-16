@@ -248,7 +248,7 @@ export function App() {
       />
 
       {/* Main Mode View Area */}
-      <main className="flex-1 overflow-x-hidden pb-28">
+      <main className="flex-1 overflow-x-hidden pb-32">
         {currentMode === 'decks' && (
           <DecksView
             onSelectMode={handleSelectMode}

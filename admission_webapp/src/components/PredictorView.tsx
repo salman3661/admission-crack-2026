@@ -324,7 +324,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 pb-28">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 pb-32">
       
       {/* 1. TOP HERO HEADER (CLEAN SOLID, NO BLUR/GPU ARTIFACTS) */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-7 shadow-sm mb-6 space-y-4">
@@ -676,26 +676,26 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
                   <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 shadow-xs font-mono">
+                      <span className="px-2 py-px rounded-md whitespace-nowrap text-[11px] font-bold bg-[#056839]/10 text-[#056839] dark:text-emerald-400 border border-[#056839]/20 shadow-xs font-mono">
                         প্রশ্ন: {currentExamIndex + 1} / {examQuestions.length} টি • {examQuestions[currentExamIndex].subject}
                       </span>
                       {((examQuestions[currentExamIndex] as any).is_du_repeated || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Most Repeated') || examQuestions[currentExamIndex].tag?.includes('DU Repeat')) && (
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
+                        <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
                           🔥 DU Most Repeated
                         </span>
                       )}
                       {examQuestions[currentExamIndex].written_essential && (
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
+                        <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30 flex items-center gap-1">
                           ✍️ Written Essential
                         </span>
                       )}
                       {((examQuestions[currentExamIndex] as any).is_du_speed_hack || (examQuestions[currentExamIndex] as any).source_tag?.includes('DU Speed-Hack') || examQuestions[currentExamIndex].speed_hack) && (
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
+                        <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 flex items-center gap-1">
                           ⚡ DU Speed-Hack
                         </span>
                       )}
                       {examQuestions[currentExamIndex].expected_count !== undefined && examQuestions[currentExamIndex].expected_count !== null && (
-                        <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                        <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
                           <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof examQuestions[currentExamIndex].expected_count === 'number' ? `${examQuestions[currentExamIndex].expected_count} বার` : examQuestions[currentExamIndex].expected_count}</span>
                         </span>
                       )}
@@ -814,7 +814,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
           {/* ==================== TAB 2: WRITTEN SECTION (40 MARKS, 4 SUBJECT BLOCKS) ==================== */}
           {examTab === 'written' && activeExamSet.written_problems && (
-            <div className="mt-6 space-y-8">
+            <div className="mt-6 space-y-5">
               <div className="p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 text-xs text-blue-900 dark:text-blue-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <span>
                   <strong>ঢাকা বিশ্ববিদ্যালয় 'ক' লিখিত অংশ (DU 40-Mark Written Engine):</strong> ৪টি বিষয় (পদার্থ, রসায়ন, গণিত, জীববিজ্ঞান) × ৪টি সমস্যা (২.৫ নম্বর) = মোট ১৬টি সমস্যা (৪০ নম্বর)।
@@ -855,7 +855,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                         <div key={pIdx} className="p-4 sm:p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700 flex flex-col justify-between">
                           <div>
                             <div className="flex items-center justify-between gap-2 mb-2">
-                              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300">
+                              <span className="px-2 py-px rounded-md whitespace-nowrap text-[11px] font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300">
                                 সমস্যা {pIdx + 1} • {wp.subject}
                               </span>
                               <span className="text-xs font-bold text-zinc-500 font-mono">
@@ -924,10 +924,10 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/20">
+                      <span className="px-2 py-px rounded-md whitespace-nowrap text-[10px] font-bold bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/20">
                         {set.badge}
                       </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500/20">
+                      <span className="px-2 py-px rounded-md whitespace-nowrap text-[10px] font-bold bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500/20">
                         ✨ 80/20 High Yield
                       </span>
                     </div>
@@ -1098,10 +1098,10 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
             <div className="rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/90 via-slate-50/80 to-emerald-50/30 dark:from-slate-900/90 dark:via-slate-900/80 dark:to-emerald-950/20 ring-1 ring-slate-200/80 dark:ring-slate-800/80 hover:ring-emerald-500/50 p-4 sm:p-5 shadow-sm transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
+                  <span className="px-2 py-px rounded-md whitespace-nowrap text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-500/30">
                     ✨ 80/20 High Yield
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-700 dark:text-blue-300 ring-1 ring-blue-500/20">
+                  <span className="px-2 py-px rounded-md whitespace-nowrap text-[10px] font-bold bg-blue-500/10 text-blue-700 dark:text-blue-300 ring-1 ring-blue-500/20">
                     🔥 DU Repeat
                   </span>
                   <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">

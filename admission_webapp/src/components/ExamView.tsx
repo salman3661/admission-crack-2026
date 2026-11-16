@@ -112,15 +112,15 @@ export const ExamView: React.FC<ExamViewProps> = ({
   // Color style for origin badge
   const getOriginBadgeStyle = (origin: string) => {
     if (origin.includes('DU')) {
-      return 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800';
+      return 'bg-transparent text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800';
     } else if (origin.includes('MAT') || origin.includes('DAT') || origin.includes('Medical')) {
-      return 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800';
+      return 'bg-transparent text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800';
     } else if (origin.includes('RU') || origin.includes('JU') || origin.includes('CU') || origin.includes('GST')) {
-      return 'bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800';
+      return 'bg-transparent text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800';
     } else if (origin.includes('BCS') || origin.includes('1971') || origin.includes('Liberation War') || origin.includes('Core GK')) {
-      return 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800';
+      return 'bg-transparent text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800';
     }
-    return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
+    return 'bg-transparent text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800';
   };
 
   const toBn = (num: number | string) => {
@@ -699,7 +699,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 <div>
                   {/* Card Header with Status Chip */}
                   <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ring-1 ${slot.badgeColor}`}>
+                    <span className={`px-2 py-px rounded-md whitespace-nowrap text-[10px] font-bold ring-1 ${slot.badgeColor}`}>
                       {slot.badge}
                     </span>
                     <span className="text-[11px] font-mono text-slate-500 flex items-center gap-1">
@@ -1031,11 +1031,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
                     <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
                       প্রশ্ন: {originalIndex + 1} / {timedQuestions.length} টি
                     </span>
-                    <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${getOriginBadgeStyle(origin)}`}>
+                    <span className={`text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border ${getOriginBadgeStyle(origin)}`}>
                       📍 {origin}
                     </span>
                     {(q.repeat_count ?? 0) > 0 && (
-                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
+                      <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
                         🔁 [Repeated {q.repeat_count}x]
                       </span>
                     )}
@@ -1043,7 +1043,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                       {q.subject}
                     </span>
                     {q.expected_count !== undefined && q.expected_count !== null && (
-                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                      <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
                         <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof q.expected_count === 'number' ? `${q.expected_count} বার` : q.expected_count}</span>
                       </span>
                     )}
@@ -1207,11 +1207,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 shadow-xs">
                 প্রশ্ন: {currentQueuePos + 1} / {activeQueueIndices.length} টি
               </span>
-              <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(origin)}`}>
+              <span className={`text-[11px] font-black px-2 py-px rounded-md whitespace-nowrap border shadow-xs ${getOriginBadgeStyle(origin)}`}>
                 📍 {origin}
               </span>
               {(q.repeat_count ?? 0) > 0 && (
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
+                <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
                   🔁 [Repeated {q.repeat_count}x]
                 </span>
               )}
@@ -1219,7 +1219,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 {q.subject}
               </span>
               {q.expected_count !== undefined && q.expected_count !== null && (
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
+                <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
                   <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof q.expected_count === 'number' ? `${q.expected_count} বার` : q.expected_count}</span>
                 </span>
               )}
@@ -1259,7 +1259,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
             if (!badge) return null;
             return (
               <div className="mb-2.5">
-                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shadow-xs">
+                <span className="px-2 py-px rounded-md whitespace-nowrap text-[11px] font-extrabold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 inline-flex items-center gap-1 shadow-xs">
                   <Zap className="w-3.5 h-3.5 text-amber-500" />
                   {badge}
                 </span>
@@ -1498,19 +1498,19 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 ${T.text} border border-zinc-200 dark:border-zinc-800`}>
                 Q {timedIndex + 1} / {timedQuestions.length}
               </span>
-              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>📍 {timedOrigin}</span>
+              <span className={`text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>📍 {timedOrigin}</span>
               {(currentTimedQ.repeat_count ?? 0) > 0 && (
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">🔁 [Repeated {currentTimedQ.repeat_count}x]</span>
+                <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">🔁 [Repeated {currentTimedQ.repeat_count}x]</span>
               )}
               <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800">{currentTimedQ.subject}</span>
               {isAssertion && (
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">🧩 Assertion–Reason</span>
+                <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">🧩 Assertion–Reason</span>
               )}
               {isMedical && !isAssertion && (
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">📌 High-Yield Data Point</span>
+                <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">📌 High-Yield Data Point</span>
               )}
               {currentTimedQ.written_essential && (
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">✍️ Written Essential</span>
+                <span className="text-[11px] font-bold px-2 py-px rounded-md whitespace-nowrap bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">✍️ Written Essential</span>
               )}
             </div>
             <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold font-mono shadow-xs ${isTimeCritical ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 animate-pulse' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200'}`}>

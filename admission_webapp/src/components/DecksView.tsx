@@ -226,7 +226,7 @@ const ChapterCard = React.memo<ChapterCardProps>(({
               </span>
             )}
             {chapter.du_hotspot?.has_hotspot && (
-              <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs ${
+              <span className={`inline-flex items-center gap-1 px-2 py-px rounded-md whitespace-nowrap text-[10px] font-black shadow-xs ${
                 chapter.du_hotspot.tier === 'super_hot'
                   ? 'bg-gradient-to-r from-rose-500 to-red-600 text-white ring-2 ring-rose-300 dark:ring-rose-800 animate-pulse'
                   : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
@@ -496,7 +496,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
 
   if (!activeQ) {
     return (
-      <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-4 sm:p-6 font-['SolaimanLipi',sans-serif] flex items-center justify-center">
+      <div className="fixed inset-0 z-50 overflow-y-auto pb-32 bg-white dark:bg-slate-950 p-4 sm:p-6 font-['SolaimanLipi',sans-serif] flex items-center justify-center">
         <div className="max-w-md w-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-xl">
           <p className="text-sm text-slate-600 dark:text-slate-400">কোনো ভুল ট্র্যাপ প্রশ্ন পাওয়া যায়নি।</p>
           <div className="flex items-center justify-center gap-2 pt-1">
@@ -524,7 +524,7 @@ const InlinePredictorDrill = React.memo<InlinePredictorDrillProps>(({
   const currentQ = activeQ;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto pb-24 bg-white dark:bg-slate-950 p-3 sm:p-6 font-['SolaimanLipi',sans-serif]">
+    <div className="fixed inset-0 z-50 overflow-y-auto pb-32 bg-white dark:bg-slate-950 p-3 sm:p-6 font-['SolaimanLipi',sans-serif]">
       <div className="max-w-4xl mx-auto rounded-3xl border border-emerald-500/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-4 sm:p-6 shadow-xl space-y-4 animate-in fade-in zoom-in-95 duration-150">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
@@ -881,7 +881,7 @@ export const DecksView: React.FC<DecksViewProps> = ({
   }, [onSelectSubject, onSelectMode]);
 
   return (
-    <div className="max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-28 space-y-6">
+    <div className="max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-32 space-y-5">
 
       {/* =========================================================================
           0. 4-TIER ADMISSION PREPARATION ARCHITECTURE LAUNCHER
