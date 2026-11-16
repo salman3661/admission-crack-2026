@@ -14,6 +14,7 @@ import {
   Filter 
 } from 'lucide-react';
 import { MathText } from './MathText';
+import { TypeDrillPanel } from './TypeDrillPanel';
 import masterBlueprintRaw from '../data/master_chapter_blueprint.json';
 import syntheticPredictorsRaw from '../data/chapter_synthetic_predictors.json';
 import questionsRaw from '../data/questions.json';
@@ -115,12 +116,13 @@ const SUBJECT_THEMES: Record<string, {
 // MEMOIZED SUBCOMPONENT: MegaTypeItem
 // ============================================================================
 interface MegaTypeItemProps {
+  chapterId: string;
   type: MasterMegaType;
   isExpanded: boolean;
   onToggle: () => void;
 }
 
-const MegaTypeItem = React.memo<MegaTypeItemProps>(({ type, isExpanded, onToggle }) => {
+const MegaTypeItem = React.memo<MegaTypeItemProps>(({ chapterId, type, isExpanded, onToggle }) => {
   return (
     <div className="rounded-xl border border-slate-200/90 dark:border-slate-800/90 bg-white/70 dark:bg-slate-900/60 overflow-hidden transition-all duration-150">
       <button
@@ -140,39 +142,15 @@ const MegaTypeItem = React.memo<MegaTypeItemProps>(({ type, isExpanded, onToggle
       </button>
 
       {isExpanded && (
-        <div className="p-3.5 sm:p-4 pt-1 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5 animate-in fade-in duration-150">
-          {/* Core Rule / Formula */}
-          {type.core_rule && (
-            <div className="p-2.5 sm:p-3 rounded-lg bg-slate-50 dark:bg-slate-800/70 text-xs sm:text-sm text-slate-800 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700/60 leading-relaxed font-sans">
-              <span className="font-bold text-slate-900 dark:text-white mr-1.5">📌 কোর সূত্র ও নিয়ম:</span>
-              <MathText content={type.core_rule} />
-            </div>
-          )}
-
-          {/* High-Contrast Emerald Accent Speed Elimination Hack */}
-          {type.speed_elimination && (
-            <div className="flex items-start gap-2 p-2.5 rounded-lg bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-900 dark:text-emerald-200 border border-emerald-500/35 text-xs sm:text-sm leading-relaxed shadow-xs">
-              <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-              <div>
-                <span className="font-black text-emerald-800 dark:text-emerald-300 mr-1.5 uppercase tracking-wide text-[11px]">
-                  ⚡ স্পিড এলিমিনেশন ট্রিক:
-                </span>
-                <MathText content={type.speed_elimination} />
-              </div>
-            </div>
-          )}
-
-          {/* Repeat Past Tags */}
-          {type.past_tags && type.past_tags.length > 0 && (
-            <div className="flex items-center gap-1.5 flex-wrap text-[10px] font-mono text-slate-500 dark:text-slate-400 pt-1">
-              <span className="font-sans font-semibold text-slate-600 dark:text-slate-300">পূর্ববর্তী প্রশ্ন রেফারেন্স:</span>
-              {type.past_tags.slice(0, 6).map((tag, i) => (
-                <span key={i} className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+        <div className="p-3.5 sm:p-4 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+          <TypeDrillPanel
+            typeId={type.type_id}
+            typeName={type.name}
+            chapterId={chapterId}
+            coreRule={type.core_rule}
+            speedElimination={type.speed_elimination}
+            pastTags={type.past_tags}
+          />
         </div>
       )}
     </div>
@@ -311,6 +289,7 @@ const ChapterCard = React.memo<ChapterCardProps>(({
             {chapter.mega_types.map(type => (
               <MegaTypeItem
                 key={type.type_id}
+                chapterId={chapter.id}
                 type={type}
                 isExpanded={!!expandedTypeIds[type.type_id]}
                 onToggle={() => toggleType(type.type_id)}
