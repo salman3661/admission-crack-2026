@@ -1,7 +1,20 @@
 export type TrackType = 'medical' | 'varsity';
 export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
 export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'week_08' | 'week_09';
-export type AppMode = 'decks' | 'exam' | 'predictor' | 'slides' | 'flashcards' | 'analytics' | 'vault' | 'recall' | 'blueprint';
+export type AppMode =
+  | 'decks'
+  | 'weekly'
+  | 'paper_final'
+  | 'subject_final'
+  | 'full_mock'
+  | 'exam'
+  | 'predictor'
+  | 'slides'
+  | 'flashcards'
+  | 'analytics'
+  | 'vault'
+  | 'recall'
+  | 'blueprint';
 
 export interface RecentGKCard {
   id: string;
@@ -284,4 +297,57 @@ export interface ChapterSyntheticPredictors {
   du_hotspot?: DUHotspotMeta;
   priority_tier?: string;
   predictors: SyntheticPredictorQuestion[];
+}
+
+export interface PaperFinalTest {
+  id: string;
+  title: string;
+  subtitle: string;
+  track: TrackType;
+  subject: string;
+  subject_bn: string;
+  paper: string;
+  paper_en: string;
+  badge: string;
+  duration_minutes: number;
+  total_marks: number;
+  mcq_marks: number;
+  written_marks: number;
+  written_marks_per_question: number;
+  negative_marking: number;
+  target_mcqs: number;
+  target_written: number;
+  mcqs: QuizQuestion[];
+  written_questions: PredictorWrittenProblem[];
+}
+
+export interface PaperFinalBank {
+  metadata: {
+    tier: string;
+    description: string;
+    total_tests: number;
+  };
+  tests: PaperFinalTest[];
+}
+
+export interface SubjectFinalBank {
+  metadata: {
+    tier: string;
+    description: string;
+    varsity_count: number;
+    medical_count: number;
+  };
+  varsity: QuizQuestion[];
+  medical: QuizQuestion[];
+}
+
+export interface FullMockBank {
+  metadata: {
+    tier: string;
+    description: string;
+    varsity_mocks_count: number;
+    medical_mocks_count: number;
+  };
+  varsity_mocks: PredictorSet[];
+  medical_mocks: PredictorSet[];
 }

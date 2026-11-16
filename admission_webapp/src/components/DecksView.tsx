@@ -882,6 +882,70 @@ export const DecksView: React.FC<DecksViewProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-28 space-y-6">
+
+      {/* =========================================================================
+          0. 4-TIER ADMISSION PREPARATION ARCHITECTURE LAUNCHER
+         ========================================================================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {[
+          {
+            mode: 'weekly' as AppMode,
+            tier: 'TIER 1',
+            title: 'Weekly Mode',
+            subtitle: 'Week 01–09 সলভ শিট, স্পিড হ্যাক ও প্র্যাকটিস ড্রিল',
+            badge: 'weekly_exams.json',
+            gradient: 'from-emerald-600 to-teal-600',
+            ring: 'hover:ring-emerald-500/50',
+          },
+          {
+            mode: 'paper_final' as AppMode,
+            tier: 'TIER 2',
+            title: 'Paper Final',
+            subtitle: '১ম/২য় পত্র ফুল টেস্ট (৬০ MCQ + ১৬ Written × ২.৫)',
+            badge: 'paper_final_bank.json',
+            gradient: 'from-indigo-600 to-blue-600',
+            ring: 'hover:ring-indigo-500/50',
+          },
+          {
+            mode: 'subject_final' as AppMode,
+            tier: 'TIER 3',
+            title: 'Subject-wise Final',
+            subtitle: 'অধ্যায় ও বিষয়ভিত্তিক Varsity + Medical MAT প্রশ্নব্যাংক',
+            badge: 'subject_final_bank.json',
+            gradient: 'from-teal-600 to-cyan-600',
+            ring: 'hover:ring-teal-500/50',
+          },
+          {
+            mode: 'full_mock' as AppMode,
+            tier: 'TIER 4',
+            title: 'Final Model Test',
+            subtitle: 'পূর্ণাঙ্গ সিলেবাস মাস্টার মক (DU Ka & MAT স্ট্যান্ডার্ড)',
+            badge: 'full_mock_bank.json',
+            gradient: 'from-rose-600 to-orange-600',
+            ring: 'hover:ring-rose-500/50',
+          },
+        ].map((card) => (
+          <button
+            key={card.mode}
+            onClick={() => {
+              onSelectMode(card.mode);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`text-left p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 ring-1 ring-slate-200/90 dark:ring-slate-800 ${card.ring} shadow-xs hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between gap-2.5 group`}
+          >
+            <div className="flex items-center justify-between gap-2 w-full">
+              <span className={`px-2 py-0.5 rounded-lg text-[10px] font-black text-white bg-gradient-to-r ${card.gradient}`}>
+                {card.tier}
+              </span>
+              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+            <div>
+              <div className="text-sm font-extrabold text-slate-900 dark:text-white">{card.title}</div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-snug">{card.subtitle}</div>
+            </div>
+          </button>
+        ))}
+      </div>
       
       {/* =========================================================================
           1. DUAL-TARGET SPRINT TRACK SELECTOR (DU 'Ka' vs Medical MAT)

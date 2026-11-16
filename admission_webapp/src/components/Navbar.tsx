@@ -307,6 +307,42 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
+      {/* 1.5. 4-TIER ADMISSION ARCHITECTURE NAVIGATION STRIP */}
+      <div className="bg-slate-50/90 dark:bg-slate-900/90 border-t border-slate-200/80 dark:border-slate-800/80">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          {[
+            { id: 'weekly' as AppMode, label: 'Tier 1: Weekly Mode', badge: 'W01-09', activeCls: 'bg-emerald-600 text-white shadow-xs' },
+            { id: 'paper_final' as AppMode, label: 'Tier 2: Paper Final', badge: '60+16', activeCls: 'bg-indigo-600 text-white shadow-xs' },
+            { id: 'subject_final' as AppMode, label: 'Tier 3: Subject Final', badge: 'QB', activeCls: 'bg-teal-600 text-white shadow-xs' },
+            { id: 'full_mock' as AppMode, label: 'Tier 4: Final Model Test', badge: 'MOCK', activeCls: 'bg-rose-600 text-white shadow-xs' },
+          ].map((tier) => {
+            const isActive = currentMode === tier.id;
+            return (
+              <button
+                key={tier.id}
+                onClick={() => onSelectMode(tier.id)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                  isActive
+                    ? tier.activeCls
+                    : 'bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 ring-1 ring-slate-200/80 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                <span>{tier.label}</span>
+                <span
+                  className={`px-1.5 py-0.5 rounded-md text-[10px] font-black ${
+                    isActive
+                      ? 'bg-white/20 text-white'
+                      : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                  }`}
+                >
+                  {tier.badge}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* 2. LEVEL 1: WEEK SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ডেক") */}
       {showFilters && (
         <div className="backdrop-blur-md bg-slate-50/80 dark:bg-slate-900/80 border-t border-b border-slate-200/80 dark:border-slate-800/80 animate-in fade-in duration-150">

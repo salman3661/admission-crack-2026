@@ -1,9 +1,10 @@
 import React from 'react';
 import { 
   LayoutDashboard, 
-  Target, 
-  ShieldAlert, 
-  Sparkles
+  Calendar, 
+  FileText, 
+  BookOpen,
+  Award
 } from 'lucide-react';
 import type { AppMode } from '../types';
 
@@ -27,22 +28,28 @@ const NAV_ITEMS: BottomNavItem[] = [
     icon: <LayoutDashboard className="w-[19px] h-[19px]" />,
   },
   {
-    id: 'exam',
-    label: 'প্র্যাকটিস ড্রিল',
-    sublabel: 'Practice Drill',
-    icon: <Target className="w-[19px] h-[19px]" />,
+    id: 'weekly',
+    label: 'Weekly',
+    sublabel: 'Tier 1',
+    icon: <Calendar className="w-[19px] h-[19px]" />,
   },
   {
-    id: 'vault',
-    label: 'ট্র্যাপ ভল্ট',
-    sublabel: 'Trap Vault',
-    icon: <ShieldAlert className="w-[19px] h-[19px]" />,
+    id: 'paper_final',
+    label: 'Paper Final',
+    sublabel: 'Tier 2',
+    icon: <FileText className="w-[19px] h-[19px]" />,
   },
   {
-    id: 'recall',
-    label: 'GK/English ডেক',
-    sublabel: 'GK/English Deck',
-    icon: <Sparkles className="w-[19px] h-[19px]" />,
+    id: 'subject_final',
+    label: 'Subject QB',
+    sublabel: 'Tier 3',
+    icon: <BookOpen className="w-[19px] h-[19px]" />,
+  },
+  {
+    id: 'full_mock',
+    label: 'Full Mock',
+    sublabel: 'Tier 4',
+    icon: <Award className="w-[19px] h-[19px]" />,
   },
 ];
 
@@ -55,7 +62,7 @@ const BottomNavComponent: React.FC<BottomNavProps> = ({
       <div className="pointer-events-auto max-w-md mx-auto mb-2 sm:mb-3 px-3">
         <div className="backdrop-blur-2xl bg-white/90 dark:bg-slate-900/90 ring-1 ring-slate-200/90 dark:ring-slate-800/90 rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.12)] dark:shadow-[0_10px_35px_rgba(0,0,0,0.5)] p-1.5 flex items-center justify-around gap-1 transition-all">
           {NAV_ITEMS.map((item) => {
-            const isActive = currentMode === item.id || (item.id === 'decks' && currentMode === 'blueprint');
+            const isActive = currentMode === item.id;
 
             return (
               <button

@@ -9,6 +9,9 @@ import { VaultView } from './components/VaultView';
 import { AnalyticsView } from './components/AnalyticsView';
 import { PredictorView } from './components/PredictorView';
 import { ChapterBlueprintView } from './components/ChapterBlueprintView';
+import { PaperFinalView } from './components/PaperFinalView';
+import { SubjectFinalView } from './components/SubjectFinalView';
+import { FullMockView } from './components/FullMockView';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
 import { CategorySwitcher } from './components/CategorySwitcher';
@@ -16,8 +19,8 @@ import { auth, onAuthStateChanged, logoutFirebase } from './lib/firebase';
 
 import slidesData from './data/slides.json';
 import flashcardsData from './data/flashcards.json';
-import medicalBankData from './data/medical_bank.json';
-import varsityBankData from './data/varsity_bank.json';
+import weeklyExamsData from './data/weekly_exams.json';
+import subjectFinalData from './data/subject_final_bank.json';
 import predictorSetsData from './data/predictor_sets.json';
 import vaultData from './data/vault.json';
 
@@ -31,24 +34,35 @@ import type {
   VaultData as VaultDataType,
   UserProfile,
   TrackType,
-  PredictorSet
+  PredictorSet,
+  SubjectFinalBank
 } from './types';
 
 export function App() {
   // URL Hash Synchronized Mode Routing (SPA 0ms speed + Real Browser URLs & Phone Back-Button support)
-  const getInitialMode = (): AppMode => {
-    try {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') return 'recall';
-      if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') return 'blueprint';
-      const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall', 'blueprint'];
-      if (validModes.includes(hash as AppMode)) {
-        return hash as AppMode;
-      }
-    } catch {
-      // fallback
+  const resolveModeFromHash = (rawHash: string): AppMode => {
+    const hash = rawHash.replace('#', '').toLowerCase();
+    if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') return 'recall';
+    if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') return 'weekly';
+    if (hash === 'paper-final' || hash === 'paper_final' || hash === 'paperfinal') return 'paper_final';
+    if (hash === 'subject-final' || hash === 'subject_final' || hash === 'subjectfinal') return 'subject_final';
+    if (hash === 'full-mock' || hash === 'full_mock' || hash === 'fullmock') return 'full_mock';
+    const validModes: AppMode[] = [
+      'decks', 'weekly', 'paper_final', 'subject_final', 'full_mock',
+      'exam', 'predictor', 'slides', 'flashcards', 'analytics', 'vault', 'recall', 'blueprint'
+    ];
+    if (validModes.includes(hash as AppMode)) {
+      return hash as AppMode;
     }
     return 'decks';
+  };
+
+  const getInitialMode = (): AppMode => {
+    try {
+      return resolveModeFromHash(window.location.hash);
+    } catch {
+      return 'decks';
+    }
   };
 
   const [currentMode, setCurrentMode] = useState<AppMode>(getInitialMode);
@@ -69,21 +83,7 @@ export function App() {
   useEffect(() => {
     const handlePopState = () => {
       try {
-        const hash = window.location.hash.replace('#', '').toLowerCase();
-        if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') {
-          setCurrentMode('recall');
-          return;
-        }
-        if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') {
-          setCurrentMode('blueprint');
-          return;
-        }
-        const validModes: AppMode[] = ['decks', 'slides', 'flashcards', 'exam', 'vault', 'analytics', 'predictor', 'recall', 'blueprint'];
-        if (validModes.includes(hash as AppMode)) {
-          setCurrentMode(hash as AppMode);
-        } else {
-          setCurrentMode('decks');
-        }
+        setCurrentMode(resolveModeFromHash(window.location.hash));
       } catch {
         setCurrentMode('decks');
       }
@@ -210,10 +210,16 @@ export function App() {
   const flashcards = flashcardsData as FlashcardItem[];
   const vault = vaultData as VaultDataType;
 
-  // Strict Track Question Isolation (Medical vs Varsity 'Ka')
+  // Tier 3: Strict Track Question Isolation (Medical vs Varsity 'Ka')
+  const subjectBank = subjectFinalData as unknown as SubjectFinalBank;
   const currentQuizzes = useMemo(() => {
-    return (activeTrack === 'medical' ? medicalBankData : varsityBankData) as QuizQuestion[];
-  }, [activeTrack]);
+    return (activeTrack === 'medical' ? subjectBank.medical : subjectBank.varsity) as QuizQuestion[];
+  }, [activeTrack, subjectBank]);
+
+  // Tier 1: Strictly isolated Weekly Solve Sheet pool for Practice Drill when a week is selected
+  const weeklyQuizzes = useMemo(() => {
+    return weeklyExamsData as QuizQuestion[];
+  }, []);
 
   // Combined predictor sets
   const allPredictorSets = useMemo(() => {
@@ -259,9 +265,38 @@ export function App() {
           />
         )}
 
+        {/* TIER 1: WEEKLY MODE (weekly_exams.json) */}
+        {currentMode === 'weekly' && (
+          <ChapterBlueprintView
+            onSelectMode={handleSelectMode}
+            onSelectWeek={setSelectedWeek}
+            onSelectSubject={setSelectedSubject}
+            forcedWorkflowMode="weekly"
+          />
+        )}
+
+        {/* TIER 2: PAPER FINAL SECTION (paper_final_bank.json) */}
+        {currentMode === 'paper_final' && (
+          <PaperFinalView activeTrack={activeTrack} />
+        )}
+
+        {/* TIER 3: SUBJECT-WISE FINAL MODEL (subject_final_bank.json) */}
+        {currentMode === 'subject_final' && (
+          <SubjectFinalView
+            activeTrack={activeTrack}
+            selectedSubject={selectedSubject}
+            onSelectSubject={setSelectedSubject}
+          />
+        )}
+
+        {/* TIER 4: FINAL MODEL TEST (full_mock_bank.json) */}
+        {currentMode === 'full_mock' && (
+          <FullMockView activeTrack={activeTrack} />
+        )}
+
         {currentMode === 'exam' && (
           <ExamView
-            quizzes={currentQuizzes}
+            quizzes={selectedWeek !== 'all' ? weeklyQuizzes : currentQuizzes}
             selectedWeek={selectedWeek}
             selectedSubject={selectedSubject}
           />
@@ -313,6 +348,7 @@ export function App() {
             onSelectMode={handleSelectMode}
             onSelectWeek={setSelectedWeek}
             onSelectSubject={setSelectedSubject}
+            forcedWorkflowMode="blueprint"
           />
         )}
 

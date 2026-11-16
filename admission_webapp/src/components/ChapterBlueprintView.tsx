@@ -39,6 +39,7 @@ interface ChapterBlueprintViewProps {
   onSelectMode?: (mode: AppMode) => void;
   onSelectWeek?: (week: WeekFilterType) => void;
   onSelectSubject?: (subject: SubjectType) => void;
+  forcedWorkflowMode?: 'blueprint' | 'weekly';
 }
 
 // 7-Week High-Yield Syllabus & Covered Chapters Tags
@@ -85,9 +86,11 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   onSelectMode,
   onSelectWeek,
   onSelectSubject,
+  forcedWorkflowMode,
 }) => {
   // Hash-aware Dual Workflow Mode: 'blueprint' (অধ্যায় ব্লুপ্রিন্ট) vs 'weekly' (উইকলি মাস্টারি)
   const getInitialWorkflowMode = (): 'blueprint' | 'weekly' => {
+    if (forcedWorkflowMode) return forcedWorkflowMode;
     try {
       const hash = window.location.hash.replace('#', '').toLowerCase();
       if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') return 'weekly';
@@ -98,6 +101,12 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   };
 
   const [workflowMode, setWorkflowMode] = useState<'blueprint' | 'weekly'>(getInitialWorkflowMode);
+
+  useEffect(() => {
+    if (forcedWorkflowMode) {
+      setWorkflowMode(forcedWorkflowMode);
+    }
+  }, [forcedWorkflowMode]);
 
   const handleWorkflowChange = (mode: 'blueprint' | 'weekly') => {
     setWorkflowMode(mode);
