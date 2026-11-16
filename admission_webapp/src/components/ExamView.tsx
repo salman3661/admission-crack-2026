@@ -206,12 +206,12 @@ export const ExamView: React.FC<ExamViewProps> = ({
   // -------------------------------------------------------------
   // START SESSIONS
   // -------------------------------------------------------------
-  const handleStartSession = (count: number, modeOverride?: 'mastery' | 'timed') => {
+  const handleStartSession = (count: number, modeOverride?: 'mastery' | 'timed', poolOverride?: QuizQuestion[]) => {
     const activeMode = modeOverride || practiceMode;
     if (modeOverride) {
       setPracticeMode(modeOverride);
     }
-    const shuffled = [...availableQuestions].sort(() => Math.random() - 0.5);
+    const shuffled = [...(poolOverride ?? availableQuestions)].sort(() => Math.random() - 0.5);
     const chosen = shuffled.slice(0, Math.min(count, shuffled.length));
 
     // Dynamic shuffle of options array so correct answers distribute naturally across A, B, C, D
@@ -570,38 +570,55 @@ export const ExamView: React.FC<ExamViewProps> = ({
       return w.replace('_', '-').toUpperCase();
     };
 
+    // Mutually exclusive slot pools (no overlap), adaptive to actual question count
+    const isMcq = (q: QuizQuestion) => (q.opts || q.options || []).length >= 2;
+    const mcqs = availableQuestions.filter(isMcq);
+    const written = availableQuestions.filter((q) => !isMcq(q));
+    let pool1: QuizQuestion[];
+    let pool2: QuizQuestion[];
+    let pool3: QuizQuestion[];
+    if (totalAvail <= 25) {
+      const half = Math.ceil(mcqs.length / 2);
+      pool1 = mcqs.slice(0, half);
+      pool2 = mcqs.slice(half);
+      pool3 = written;
+    } else {
+      pool1 = availableQuestions.slice(0, 12);
+      pool2 = availableQuestions.slice(12, 37);
+      pool3 = availableQuestions.slice(37, 87);
+    }
+    const slotName = `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject}`;
     const routineSlots = [
       {
         id: 'slot_01',
-        title: `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject} Slot-01: হাই-ইল্ড ক্যাপসুল`,
+        title: `${slotName} Slot-01: হাই-ইল্ড MCQ ক্যাপসুল`,
         badge: '✨ 80/20 High Yield',
         badgeColor: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 ring-emerald-500/30',
-        duration: 15,
-        qCount: Math.min(12, totalAvail),
-        marks: Math.min(12, totalAvail),
-        desc: 'সবচেয়ে বেশি রিপিট হওয়া ১২টি কনসেপ্ট ও স্ট্যান্ডার্ড ঢাবি/মেডিকেল প্রশ্ন।'
+        pool: pool1,
+        desc: `${pool1.length}টি বাছাইকৃত প্রশ্ন`,
       },
       {
         id: 'slot_02',
-        title: `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject} Slot-02: ডিইউ রিপিট ড্রিল`,
+        title: `${slotName} Slot-02: ডিইউ রিপিট ও ট্র্যাপ ড্রিল`,
         badge: '🔥 DU Repeat',
         badgeColor: 'bg-blue-500/15 text-blue-700 dark:text-blue-300 ring-blue-500/30',
-        duration: 25,
-        qCount: Math.min(25, totalAvail),
-        marks: Math.min(25, totalAvail),
-        desc: 'বিগত বছরের প্রশ্নভিত্তিক ২৫টি এক্সপেক্টেড ট্র্যাপ ও গতি অনুশীলনী।'
+        pool: pool2,
+        desc: `${pool2.length}টি বাছাইকৃত প্রশ্ন`,
       },
       {
         id: 'slot_03',
-        title: `${getWeekDisplay(selectedWeek)} ${selectedSubject === 'All' ? 'কোর' : selectedSubject} Slot-03: স্পিড অ্যান্ড ট্র্যাপ মক`,
+        title: `${slotName} Slot-03: রিটেন ও ফুল সলভ মক`,
         badge: '⚡ Trap Special',
         badgeColor: 'bg-amber-500/15 text-amber-700 dark:text-amber-300 ring-amber-500/30',
-        duration: 45,
-        qCount: Math.min(50, totalAvail),
-        marks: Math.min(50, totalAvail),
-        desc: 'নেগেটিভ মার্কিং এড়িয়ে ৫০টি প্রশ্নে সম্পূর্ণ পেপারের গতি ও দক্ষতা যাচাই।'
+        pool: pool3,
+        desc: `${pool3.length}টি বাছাইকৃত প্রশ্ন`,
       },
-    ].filter(slot => slot.qCount > 0);
+    ].map((slot) => ({
+      ...slot,
+      qCount: slot.pool.length,
+      marks: slot.pool.length,
+      duration: Math.max(5, Math.ceil(slot.pool.length * 1.2)),
+    })).filter(slot => slot.qCount > 0);
 
     return (
       <div className="max-w-4xl mx-auto py-4 sm:py-6 px-3 sm:px-4 space-y-5">
@@ -691,7 +708,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                 {/* Dual Call to Action Buttons */}
                 <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80">
                   <button
-                    onClick={() => handleStartSession(slot.qCount, 'mastery')}
+                    onClick={() => handleStartSession(slot.qCount, 'mastery', slot.pool)}
                     className="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-all flex items-center justify-center gap-1 active:scale-95 cursor-pointer"
                     title="বারবার প্র্যাকটিস ড্রিল (পরপর ২ বার সঠিক = মাস্টারড)"
                   >
@@ -700,7 +717,7 @@ export const ExamView: React.FC<ExamViewProps> = ({
                   </button>
 
                   <button
-                    onClick={() => handleStartSession(slot.qCount, 'timed')}
+                    onClick={() => handleStartSession(slot.qCount, 'timed', slot.pool)}
                     className="py-2.5 px-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold ring-1 ring-slate-200 dark:ring-slate-700 transition-all flex items-center justify-center gap-1 active:scale-95 cursor-pointer"
                     title="৪৫ সেকেন্ডের টাইমারসহ টাইমড এক্সাম"
                   >
