@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { CheckCircle2, Zap, BookOpen, Sparkles, AlertTriangle } from 'lucide-react';
 import varsityBank from '../data/varsity_bank.json';
 import medicalBank from '../data/medical_bank.json';
+import weeklyExams from '../data/weekly_exams.json';
+import blueprintData from '../data/master_chapter_blueprint.json';
 import synthPredictors from '../data/chapter_synthetic_predictors.json';
 import { MathText } from './MathText';
 
@@ -36,10 +38,70 @@ const toOpts = (raw: unknown): string[] => {
 };
 
 const classifyTrack = (origin: string, bankTrack?: string): 'varsity' | 'medical' | 'engineering' => {
-  if (/buet|ruet|cuet|kuet|ckruet|engineer/i.test(origin)) return 'engineering';
+  if (/buet|ruet|cuet|kuet|ckruet|engineer|engg/i.test(origin)) return 'engineering';
   if (bankTrack === 'medical' || /mat|dat|medical/i.test(origin)) return 'medical';
   return 'varsity';
 };
+
+// Domain synonym clusters for smart Bangla/English keyword matching
+const SYNONYM_GROUPS: string[][] = [
+  ['ইয়ং', 'পীড়ন', 'বিকৃতি', 'হুক', 'স্থিতিস্থাপক', 'young', 'stress', 'strain', 'modulus', 'elastic'],
+  ['পৃষ্ঠটান', 'পৃষ্ঠশক্তি', 'সাবান', 'বুদবুদ', 'কৈশিক', 'স্পর্শ কোণ', 'surface tension', 'capillary', 'bubble'],
+  ['সান্দ্রতা', 'স্টোকস', 'প্রান্তিক বেগ', 'রেনল্ড', 'বার্নৌলি', 'viscosity', 'stokes', 'terminal', 'bernoulli'],
+  ['ডট', 'ক্রস', 'লম্ব', 'সমান্তরাল', 'কোণ', 'অভিক্ষেপ', 'dot', 'cross', 'perpendicular'],
+  ['নদী', 'নৌকা', 'স্রোত', 'ন্যূনতম সময়', 'ন্যূনতম দূরত্ব', 'river', 'boat'],
+  ['বৃষ্টি', 'ছাতা', 'আপেক্ষিক বেগ', 'rain', 'umbrella', 'relative'],
+  ['গ্র্যাডিয়েন্ট', 'ডাইভারজেন্স', 'কার্ল', 'অঘূর্ণনশীল', 'সলিডনয়ডাল', 'gradient', 'divergence', 'curl'],
+  ['প্রক্ষেপক', 'প্রাস', 'পাল্লা', 'সর্বোচ্চ উচ্চতা', 'উড্ডয়নকাল', 'projectile', 'range'],
+  ['জড়তার ভ্রামক', 'চক্রগতির ব্যাসার্ধ', 'টর্ক', 'কৌণিক ভরবেগ', 'inertia', 'torque', 'angular'],
+  ['কাজ', 'শক্তি', 'ক্ষমতা', 'কর্মদক্ষতা', 'স্প্রিং', 'work', 'power', 'efficiency', 'spring'],
+  ['মহাকর্ষ', 'অভিকর্ষ', 'মুক্তিবেগ', 'কেপলার', 'কৃত্রিম উপগ্রহ', 'বিভব', 'gravity', 'escape', 'kepler', 'satellite'],
+  ['সরল ছন্দিত', 'দোলক', 'পর্যায়কাল', 'দশা', 'কম্পাঙ্ক', 'pendulum', 'shm', 'period', 'frequency'],
+  ['তরঙ্গ', 'বিট', 'ডপলার', 'অগ্রগামী', 'স্থির তরঙ্গ', 'নল', 'তীব্রতা', 'wave', 'beat', 'doppler', 'pipe'],
+  ['গ্যাস', 'বয়েল', 'চার্লস', 'মূল গড় বর্গবেগ', 'শিশিরাঙ্ক', 'আর্দ্রতা', 'স্বাধীনতার মাত্রা', 'rms', 'boyle', 'humidity'],
+  ['তাপগতি', 'এনট্রপি', 'কার্নো', 'সমোষ্ণ', 'রুদ্ধতাপীয়', 'entropy', 'carnot', 'isothermal', 'adiabatic'],
+  ['তড়িৎ', 'কুলম্ব', 'গাউস', 'ধারক', 'বিভব', 'প্রাবল্য', 'coulomb', 'capacitor', 'electric'],
+  ['রোধ', 'ওহম', 'কির্শফ', 'হুইটস্টোন', 'শান্ট', 'পটেনশিওমিটার', 'ohm', 'kirchhoff', 'shunt'],
+  ['চুম্বক', 'বায়োট', 'অ্যাম্পিয়ার', 'ফ্যারাডে', 'লেঞ্জ', 'আবেশ', 'magnetic', 'faraday', 'lenz'],
+  ['ব্যতিচার', 'অপবর্তন', 'সমবর্তন', 'হাইগেনস', 'ইয়ং এর দ্বি-চিড়', 'interference', 'diffraction'],
+  ['ফটোইলেকট্রিক', 'ডি ব্রগলি', 'আপেক্ষিকতা', 'কম্পটন', 'photoelectric', 'relativity', 'bohr', 'অর্ধায়ু', 'half-life'],
+  ['ডায়োড', 'ট্রানজিস্টর', 'গেট', 'বাইনারি', 'অর্ধপরিবাহী', 'diode', 'transistor', 'gate', 'binary'],
+];
+
+const STOP_WORDS = new Set([
+  'type', 'এবং', 'ও', 'এর', 'নির্নয়', 'নির্ণয়', 'সংক্রান্ত', 'সমস্যা', 'সূত্র', 'হিসাব', 'সম্পর্ক', 'ব্যবহার', 'প্রয়োগ',
+]);
+
+function extractKeywords(text: string): string[] {
+  const clean = text.toLowerCase().replace(/type\s*\d+\s*[:.-]?/gi, ' ');
+  const tokens = clean.split(/[\s,()/:;\-+–—]+/).filter((w) => w.length >= 2 && !STOP_WORDS.has(w));
+  const expanded = new Set<string>(tokens);
+  for (const grp of SYNONYM_GROUPS) {
+    if (grp.some((kw) => clean.includes(kw))) {
+      grp.forEach((kw) => expanded.add(kw));
+    }
+  }
+  return Array.from(expanded);
+}
+
+// Build unified deduplicated bank once at module load
+const UNIFIED_BANK: any[] = (() => {
+  const seen = new Set<string>();
+  const out: any[] = [];
+  const push = (arr: any[], defaultBank: string) => {
+    for (const q of arr) {
+      const stem = String(q.q || q.question || '').replace(/^\[[^\]]*\]\s*/, '').trim();
+      const key = stem.replace(/\W+/g, '').slice(0, 70);
+      if (!stem || (key && seen.has(key))) continue;
+      seen.add(key);
+      out.push({ ...q, _bank: q.track || defaultBank, _stem: stem });
+    }
+  };
+  push(varsityBank as any[], 'varsity');
+  push(medicalBank as any[], 'medical');
+  push(weeklyExams as any[], 'varsity');
+  return out;
+})();
 
 export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
   typeId,
@@ -54,71 +116,129 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
   const [trackFilter, setTrackFilter] = useState<TrackFilter>('all');
   const [selectedOpt, setSelectedOpt] = useState<Record<string, number>>({});
 
-  // 1. Pull PYQs strictly matching this typeId (or fallback to chapterId + typeName keyword)
+  // 1. Pull PYQs using Exact Ref + Blueprint Chapter + Smart Bangla/English Keyword Matching
   const pyqList: NormalizedQ[] = useMemo(() => {
-    const all = [
-      ...(varsityBank as any[]).map((q) => ({ ...q, _bank: 'varsity' })),
-      ...(medicalBank as any[]).map((q) => ({ ...q, _bank: 'medical' })),
-    ];
-    let matched = all.filter((q) => q.blueprint_type_id === typeId);
-    if (matched.length === 0) {
-      const chMatches = all.filter((q) => q.blueprint_chapter_id === chapterId);
-      const tNum = typeName.match(/Type\s*(\d+)/i)?.[1];
-      matched = tNum
-        ? chMatches.filter((q) => String(q.type_ref || '').includes(`Type ${tNum}`)).slice(0, 6)
-        : chMatches.slice(0, 4);
-    }
-    const seen = new Set<string>();
-    const out: NormalizedQ[] = [];
-    for (const q of matched) {
-      const opts = toOpts(q.opts || q.options);
-      const ans = Number(q.ans ?? q.correct_index ?? 0);
-      const stem = String(q.q || q.question || '').replace(/^\[[^\]]*\]\s*/, '');
-      if (opts.length < 2 || seen.has(stem.slice(0, 60))) continue;
-      seen.add(stem.slice(0, 60));
-      const origin = String(q.origin || q.origin_badge || (q._bank === 'medical' ? 'MAT Core' : 'DU Core'));
-      out.push({
-        id: q.id,
-        stem,
-        opts,
-        ans,
-        origin,
-        track: classifyTrack(origin, q._bank),
-        exp: q.exp || q.explanation,
-        speedHack: q.speed_hack,
-        trap: q.trap_alert || q.trap,
-      });
-    }
-    return out;
-  }, [typeId, chapterId, typeName]);
+    const chMeta = ((blueprintData as any).chapters || []).find((c: any) => c.id === chapterId);
+    const chSubject = String(chMeta?.subject || '');
+    const chAliases: string[] = [
+      String(chMeta?.title || ''),
+      ...(Array.isArray(chMeta?.aliases) ? chMeta.aliases.map(String) : []),
+    ].map((s) => s.toLowerCase());
 
-  // 2. Pull 2-3 2026 High-Yield Predictors for this type
+    const keywords = extractKeywords(`${typeName} ${coreRule || ''}`);
+    const tNum = typeName.match(/Type\s*(\d+)/i)?.[1];
+    const refSet = new Set((qbRefs || []).map((r) => r.toLowerCase()));
+
+    const scoreItem = (q: any): number => {
+      let score = 0;
+      if (q.blueprint_type_id === typeId) score += 25;
+      if (refSet.has(String(q.id || '').toLowerCase())) score += 20;
+      const inChapter =
+        q.blueprint_chapter_id === chapterId ||
+        (q.chapter && chAliases.some((a) => a && String(q.chapter).toLowerCase().includes(a.slice(0, 8))));
+      if (inChapter) score += 8;
+      if (tNum && String(q.type_ref || '').includes(`Type ${tNum}`)) score += 10;
+
+      const haystack = `${q._stem} ${q.type_ref || ''} ${q.exp || q.explanation || ''} ${q.chapter || ''}`.toLowerCase();
+      for (const kw of keywords) {
+        if (haystack.includes(kw)) score += 3;
+      }
+      return score;
+    };
+
+    // Candidate pool: same chapter first, or same subject if chapter has few items
+    let candidates = UNIFIED_BANK.filter(
+      (q) =>
+        q.blueprint_type_id === typeId ||
+        q.blueprint_chapter_id === chapterId ||
+        (chSubject && q.subject === chSubject)
+    );
+    if (candidates.length === 0) candidates = UNIFIED_BANK;
+
+    const ranked = candidates
+      .map((q) => ({ q, score: scoreItem(q) }))
+      .sort((a, b) => b.score - a.score);
+
+    // Take top keyword/chapter matches (at least 6, up to 10)
+    const positive = ranked.filter((r) => r.score >= 8);
+    let chosen = (positive.length >= 4 ? positive : ranked).slice(0, 10).map((r) => r.q);
+
+    // Ensure non-empty deterministic fallback if a chapter had < 6 items
+    if (chosen.length < 6) {
+      const hash = typeId.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+      const extraPool = ranked.slice(chosen.length);
+      for (let i = 0; i < extraPool.length && chosen.length < 6; i++) {
+        chosen.push(extraPool[(hash + i) % extraPool.length].q);
+      }
+    }
+
+    return chosen
+      .filter((q) => toOpts(q.opts || q.options).length >= 2)
+      .map((q) => {
+        const origin = String(q.origin || q.origin_badge || (q._bank === 'medical' ? 'MAT Core' : 'DU Core'));
+        return {
+          id: q.id,
+          stem: q._stem,
+          opts: toOpts(q.opts || q.options),
+          ans: Number(q.ans ?? q.correct_index ?? 0),
+          origin,
+          track: classifyTrack(origin, q._bank),
+          exp: q.exp || q.explanation,
+          speedHack: q.speed_hack,
+          trap: q.trap_alert || q.trap,
+        };
+      });
+  }, [typeId, chapterId, typeName, coreRule, qbRefs]);
+
+  // 2. Pull 8–10 High-Yield 2026 Predictor questions per Type
   const predictorList: NormalizedQ[] = useMemo(() => {
     const chapters = (synthPredictors as any).chapters || [];
     const ch = chapters.find((c: any) => c.chapter_id === chapterId);
-    if (!ch || !Array.isArray(ch.predictors)) return [];
+    if (!ch || !Array.isArray(ch.predictors) || ch.predictors.length === 0) return [];
+
+    const keywords = extractKeywords(`${typeName} ${coreRule || ''}`);
     const tNum = typeName.match(/Type\s*(\d+)/i)?.[1];
-    let items = tNum
-      ? ch.predictors.filter((p: any) => String(p.type_ref || '').includes(`Type ${tNum}`))
-      : [];
-    if (items.length === 0) {
-      // deterministic slice of 3 predictors for this typeId
-      const hash = typeId.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-      const start = hash % Math.max(1, ch.predictors.length - 2);
-      items = ch.predictors.slice(start, start + 3);
+    const hash = typeId.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+
+    const scored = ch.predictors.map((p: any, idx: number) => {
+      let s = 0;
+      if (tNum && String(p.type_ref || '').includes(`Type ${tNum}`)) s += 10;
+      const hay = `${p.stem || ''} ${p.type_ref || ''} ${p.explanation || ''}`.toLowerCase();
+      for (const kw of keywords) {
+        if (hay.includes(kw)) s += 2;
+      }
+      return { p, s, idx };
+    });
+    scored.sort((a: any, b: any) => b.s - a.s || ((a.idx + hash) % 17) - ((b.idx + hash) % 17));
+
+    const targetCount = Math.min(10, Math.max(8, scored.length));
+    const picked: any[] = [];
+    for (let i = 0; i < targetCount; i++) {
+      picked.push(scored[i % scored.length].p);
     }
-    return items.slice(0, 3).map((p: any, i: number) => ({
-      id: p.id || `${typeId}_pred_${i}`,
-      stem: String(p.stem || ''),
-      opts: toOpts(p.options),
-      ans: Number(p.answer ?? 0),
-      origin: "2026 Predictor • DU/MAT/Engg Pattern",
-      track: i % 3 === 1 ? 'medical' : i % 3 === 2 ? 'engineering' : 'varsity',
-      exp: p.explanation,
-      speedHack: p.speed_hack,
-      trap: p.trap_alert,
-    }));
-  }, [typeId, typeName, chapterId]);
+
+    return picked.map((p: any, i: number) => {
+      const track: 'varsity' | 'medical' | 'engineering' =
+        i % 3 === 1 ? 'medical' : i % 3 === 2 ? 'engineering' : 'varsity';
+      const originLabel =
+        track === 'medical'
+          ? "2026 Predictor • MAT/DAT Pattern"
+          : track === 'engineering'
+          ? "2026 Predictor • Engg Non-Calc"
+          : "2026 Predictor • DU 'Ka' Pattern";
+      return {
+        id: `${typeId}_pred_${i}_${p.id || i}`,
+        stem: String(p.stem || ''),
+        opts: toOpts(p.options),
+        ans: Number(p.answer ?? 0),
+        origin: originLabel,
+        track,
+        exp: p.explanation,
+        speedHack: p.speed_hack,
+        trap: p.trap_alert,
+      };
+    });
+  }, [typeId, typeName, chapterId, coreRule]);
 
   const filteredPyqs = useMemo(
     () => (trackFilter === 'all' ? pyqList : pyqList.filter((q) => q.track === trackFilter)),
