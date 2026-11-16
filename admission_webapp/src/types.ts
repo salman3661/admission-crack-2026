@@ -113,6 +113,9 @@ export interface QuizQuestion {
   du_freq?: number;
   du_tier?: 'super_hot' | 'hot';
   du_badge?: string;
+  repeat_count?: number;
+  du_repeat_tag?: string;
+  bank_type?: string;
   written_essential?: boolean;
 }
 

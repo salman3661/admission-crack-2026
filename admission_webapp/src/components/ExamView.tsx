@@ -1004,6 +1004,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
                     <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${getOriginBadgeStyle(origin)}`}>
                       📍 {origin}
                     </span>
+                    {(q.repeat_count ?? 0) > 0 && (
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
+                        🔁 [Repeated {q.repeat_count}x]
+                      </span>
+                    )}
                     <span className="text-xs font-medium px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
                       {q.subject}
                     </span>
@@ -1175,6 +1180,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
               <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(origin)}`}>
                 📍 {origin}
               </span>
+              {(q.repeat_count ?? 0) > 0 && (
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
+                  🔁 [Repeated {q.repeat_count}x]
+                </span>
+              )}
               <span className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 font-medium">
                 {q.subject}
               </span>
@@ -1435,6 +1445,11 @@ export const ExamView: React.FC<ExamViewProps> = ({
           <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>
             📍 {timedOrigin}
           </span>
+          {(currentTimedQ.repeat_count ?? 0) > 0 && (
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
+              🔁 [Repeated {currentTimedQ.repeat_count}x]
+            </span>
+          )}
           <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-xs">
             {currentTimedQ.subject}
           </span>

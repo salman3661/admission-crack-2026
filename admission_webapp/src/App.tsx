@@ -108,6 +108,7 @@ export function App() {
     setActiveTrack(track);
     localStorage.setItem('admission_track', track);
     setSelectedSubject('All');
+    setSelectedWeek('all');
     setUser((prev) => ({
       ...prev,
       target: track === 'medical' ? 'মেডিকেল ভর্তি পরীক্ষা (MAT)' : "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট",
