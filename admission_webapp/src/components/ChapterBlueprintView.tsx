@@ -6,7 +6,6 @@ import {
   CheckCircle2, 
   Zap, 
   RotateCcw, 
-  Hash,
   Star,
   ShieldAlert,
   Flame,
