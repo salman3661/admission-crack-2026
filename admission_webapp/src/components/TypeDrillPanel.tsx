@@ -68,6 +68,46 @@ const SYNONYM_GROUPS: string[][] = [
   ['ডায়োড', 'ট্রানজিস্টর', 'গেট', 'বাইনারি', 'অর্ধপরিবাহী', 'diode', 'transistor', 'gate', 'binary'],
 ];
 
+
+/** Split prose + LaTeX into scannable bullet lines without breaking inside $...$ or decimal numbers. */
+function splitFormulaBullets(raw: string): string[] {
+  const parts: string[] = [];
+  let buf = '';
+  let inMath = false;
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
+    if (ch === '$' && raw[i - 1] !== '\\') {
+      inMath = !inMath;
+      buf += ch;
+      continue;
+    }
+    if (!inMath && (ch === '।' || ch === ';')) {
+      const trimmed = buf.trim();
+      if (trimmed) parts.push(trimmed + (ch === '।' ? '।' : ''));
+      buf = '';
+      continue;
+    }
+    if (
+      !inMath &&
+      ch === '.' &&
+      raw[i + 1] === ' ' &&
+      !/[0-9০-৯]/.test(raw[i - 1] || '')
+    ) {
+      const trimmed = buf.trim();
+      if (trimmed) parts.push(trimmed + '.');
+      buf = '';
+      i++; // skip trailing space
+      continue;
+    }
+    buf += ch;
+  }
+  const tail = buf.trim();
+  if (tail) parts.push(tail);
+  return parts.length > 0 ? parts : [raw];
+}
+
+const isEquationLine = (line: string) => /(=|∝|\propto|\frac)/.test(line);
+
 const STOP_WORDS = new Set([
   'type', 'এবং', 'ও', 'এর', 'নির্নয়', 'নির্ণয়', 'সংক্রান্ত', 'সমস্যা', 'সূত্র', 'হিসাব', 'সম্পর্ক', 'ব্যবহার', 'প্রয়োগ',
 ]);
@@ -417,28 +457,56 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
       </div>
 
       {activeTab === 'rule' && (
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {coreRule && (
-            <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/25 space-y-1">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 space-y-2">
               <div className="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>কোর রুল ও ফান্ডামেন্টাল সূত্র (Core Rule):</span>
               </div>
-              <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed pl-5 font-medium">
-                <MathText content={coreRule} />
-              </div>
+              <ul className="space-y-2 pl-1">
+                {splitFormulaBullets(coreRule).map((line, i) => (
+                  <li
+                    key={i}
+                    className={`flex items-start gap-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium ${
+                      isEquationLine(line)
+                        ? 'py-1.5 px-2.5 rounded-lg bg-white/70 dark:bg-slate-900/60 border border-emerald-500/20 overflow-x-auto no-scrollbar'
+                        : ''
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                    <div className="flex-1 min-w-0 overflow-x-auto no-scrollbar">
+                      <MathText content={line} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
           {speedElimination && (
-            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 space-y-1">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/25 space-y-2">
               <div className="text-[11px] font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>৫-সেকেন্ড স্পিড এলিমিনেশন ট্রিক (Speed Elimination):</span>
               </div>
-              <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed pl-5 font-medium">
-                <MathText content={speedElimination} />
-              </div>
+              <ul className="space-y-2 pl-1">
+                {splitFormulaBullets(speedElimination).map((line, i) => (
+                  <li
+                    key={i}
+                    className={`flex items-start gap-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium ${
+                      isEquationLine(line)
+                        ? 'py-1.5 px-2.5 rounded-lg bg-white/70 dark:bg-slate-900/60 border border-amber-500/20 overflow-x-auto no-scrollbar'
+                        : ''
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
+                    <div className="flex-1 min-w-0 overflow-x-auto no-scrollbar">
+                      <MathText content={line} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
