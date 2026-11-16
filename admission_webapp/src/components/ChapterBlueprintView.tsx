@@ -415,6 +415,8 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   const [activeDrillWeekId, setActiveDrillWeekId] = useState<string | null>(null);
   const [weeklyRevealed, setWeeklyRevealed] = useState<Record<string, boolean>>({});
   const [weeklyShowOnlyTraps, setWeeklyShowOnlyTraps] = useState<boolean>(false);
+  const [weeklySubjectTab, setWeeklySubjectTab] = useState<string>('');
+  const [weeklyChapterFilter, setWeeklyChapterFilter] = useState<string>('All');
   const drillSectionRef = useRef<HTMLDivElement>(null);
 
   const activeWeekQuestions = useMemo(() => {
@@ -447,6 +449,8 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
   const handleStartWeeklyDrill = (weekId: string) => {
     setActiveDrillWeekId(weekId);
     setWeeklyShowOnlyTraps(false);
+    setWeeklySubjectTab('');
+    setWeeklyChapterFilter('All');
     onSelectWeek?.(weekId as WeekFilterType);
     setTimeout(() => {
       drillSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -536,18 +540,59 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
     };
   }, [activeDrillWeekId, weeklyAnswers, weeklyExamsMap]);
 
-  // Questions displayed in active weekly speed drill
+  // Group active week questions by subject
+  const weeklySubjectGroups = useMemo(() => {
+    const order = ['Physics', 'Chemistry', 'Higher Math', 'Biology', 'Bangla', 'English', 'GK', 'ICT'];
+    const counts = new Map<string, number>();
+    activeWeekQuestions.forEach((q) => {
+      const subj = q.subject || 'অন্যান্য';
+      counts.set(subj, (counts.get(subj) || 0) + 1);
+    });
+    return [...counts.entries()]
+      .sort((a, b) => {
+        const ia = order.indexOf(a[0]);
+        const ib = order.indexOf(b[0]);
+        return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+      })
+      .map(([subject, count]) => ({ subject, count }));
+  }, [activeWeekQuestions]);
+
+  const effectiveWeeklySubject = useMemo(() => {
+    if (weeklySubjectTab && weeklySubjectGroups.some((g) => g.subject === weeklySubjectTab)) {
+      return weeklySubjectTab;
+    }
+    return weeklySubjectGroups[0]?.subject || '';
+  }, [weeklySubjectTab, weeklySubjectGroups]);
+
+  const weeklySubjectQuestions = useMemo(() => {
+    if (!effectiveWeeklySubject) return activeWeekQuestions;
+    return activeWeekQuestions.filter((q) => (q.subject || 'অন্যান্য') === effectiveWeeklySubject);
+  }, [activeWeekQuestions, effectiveWeeklySubject]);
+
+  const weeklyChapterOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    weeklySubjectQuestions.forEach((q) => {
+      if (q.chapter) counts.set(q.chapter, (counts.get(q.chapter) || 0) + 1);
+    });
+    return [...counts.entries()].map(([chapter, count]) => ({ chapter, count }));
+  }, [weeklySubjectQuestions]);
+
+  // Questions displayed in active weekly speed drill (Subject + Chapter + optional Trap filter)
   const displayedWeeklyQuestions = useMemo(() => {
-    if (!weeklyShowOnlyTraps) return activeWeekQuestions;
+    let list = weeklySubjectQuestions;
+    if (weeklyChapterFilter !== 'All') {
+      list = list.filter((q) => q.chapter === weeklyChapterFilter);
+    }
+    if (!weeklyShowOnlyTraps) return list;
     const answers = activeDrillWeekId ? (weeklyAnswers[activeDrillWeekId] || {}) : {};
     const optionLetters = ['A', 'B', 'C', 'D'];
-    return activeWeekQuestions.filter(q => {
+    return list.filter(q => {
       const ans = answers[q.id];
       if (!ans) return false;
       const correctIdx = typeof q.correct_index === 'number' ? q.correct_index : (typeof q.ans === 'number' ? q.ans : 0);
       return ans !== optionLetters[correctIdx];
     });
-  }, [activeWeekQuestions, weeklyShowOnlyTraps, activeDrillWeekId, weeklyAnswers]);
+  }, [weeklySubjectQuestions, weeklyChapterFilter, weeklyShowOnlyTraps, activeDrillWeekId, weeklyAnswers]);
 
   // Bengali Numerals Converter
   const toBn = (num: number | string) => {
@@ -1741,6 +1786,61 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                 </div>
               </div>
 
+              {/* Subject-Wise Tabs & Chapter Filter inside Active Week */}
+              {weeklySubjectGroups.length > 0 && (
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
+                    {weeklySubjectGroups.map((g) => {
+                      const isSel = g.subject === effectiveWeeklySubject;
+                      return (
+                        <button
+                          key={g.subject}
+                          onClick={() => {
+                            setWeeklySubjectTab(g.subject);
+                            setWeeklyChapterFilter('All');
+                          }}
+                          className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap border transition-all cursor-pointer shrink-0 ${
+                            isSel
+                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+                              : 'bg-white dark:bg-[#16231A] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-[#24372A] hover:border-emerald-500/50'
+                          }`}
+                        >
+                          {g.subject === 'Higher Math' ? 'Math' : g.subject} ({toBn(g.count)})
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {weeklyChapterOptions.length > 1 && (
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <button
+                        onClick={() => setWeeklyChapterFilter('All')}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border cursor-pointer transition-all ${
+                          weeklyChapterFilter === 'All'
+                            ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
+                            : 'bg-transparent text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#24372A]'
+                        }`}
+                      >
+                        সব অধ্যায় ({toBn(weeklySubjectQuestions.length)})
+                      </button>
+                      {weeklyChapterOptions.map((c) => (
+                        <button
+                          key={c.chapter}
+                          onClick={() => setWeeklyChapterFilter(c.chapter)}
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border cursor-pointer transition-all ${
+                            weeklyChapterFilter === c.chapter
+                              ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
+                              : 'bg-transparent text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#24372A]'
+                          }`}
+                        >
+                          {c.chapter} ({toBn(c.count)})
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Weekly Questions List */}
               <div className="space-y-4">
                 {displayedWeeklyQuestions.map((q, qIndex) => {
@@ -1788,15 +1888,18 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                             </span>
                           )}
                         </div>
-                        <span className="text-[10px] font-mono text-slate-400">
-                          {q.id}
-                        </span>
                       </div>
 
-                      <div className="flex items-center gap-1.5 flex-wrap mb-2">
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800">
-                          {(q as any).source || (q as any).source_tag || origin || "🎯 ২০২৬ প্রেডিক্টর"}
-                        </span>
+                      <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                        {(() => {
+                          const srcLabel = ((q as any).source || (q as any).source_tag || '').trim();
+                          const showSrc = srcLabel && srcLabel.toLowerCase() !== origin.trim().toLowerCase();
+                          return showSrc ? (
+                            <span className="text-[11px] font-semibold px-2 py-px rounded-md border bg-transparent text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800">
+                              {srcLabel}
+                            </span>
+                          ) : null;
+                        })()}
                         {((q as any).is_du_repeated || (q as any).source_tag?.includes('DU Most Repeated')) && (
                           <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30 flex items-center gap-1">
                             🔥 DU Most Repeated
@@ -1897,7 +2000,8 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
             </div>
           )}
 
-          {/* DEDICATED 7-WEEK CARDS GRID (Week 01 – Week 08) */}
+          {/* DEDICATED 7-WEEK CARDS GRID (Hidden in Active Week Focus Mode) */}
+          {!activeDrillWeekId && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {sortedWeeks.map((week, wIdx) => {
               const weekInfo = WEEK_COVERED_CHAPTERS[week.id] || {
@@ -2015,6 +2119,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
               );
             })}
           </div>
+          )}
 
         </div>
       )}
