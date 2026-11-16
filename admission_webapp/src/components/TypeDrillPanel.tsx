@@ -394,27 +394,69 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
                     <span>✔ সঠিক উত্তর: ({String.fromCharCode(65 + q.ans)})</span>
                     <MathText content={q.opts[q.ans] || ''} />
                   </div>
-                  {q.speedHack && (
-                    <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-900 dark:text-amber-200">
-                      <span className="font-bold mr-1">⚡ Speed Hack:</span>
-                      <MathText content={q.speedHack} />
-                    </div>
-                  )}
-                  {q.exp && (
-                    <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-slate-700 dark:text-slate-200">
-                      <span className="font-bold text-emerald-700 dark:text-emerald-300 mr-1">✔ ব্যাখ্যা:</span>
-                      <MathText content={q.exp} />
-                    </div>
-                  )}
-                  {q.trap && (
-                    <div className="p-2 rounded-lg bg-rose-500/10 border border-rose-500/25 text-rose-800 dark:text-rose-300 flex items-start gap-1.5">
-                      <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-bold mr-1">Trap Alert:</span>
-                        <MathText content={q.trap} />
+                  {q.speedHack && (() => {
+                    const lines = splitFormulaBullets(q.speedHack);
+                    return (
+                      <div className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-900 dark:text-amber-200 space-y-1.5">
+                        <div className="font-bold">⚡ Speed Hack:</div>
+                        {lines.length > 1 ? (
+                          <ul className="space-y-1.5 pl-1">
+                            {lines.map((line, i) => (
+                              <li key={i} className="flex items-start gap-2 leading-relaxed">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+                                <span className="flex-1 min-w-0 overflow-x-auto no-scrollbar"><MathText content={line} /></span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <div className="leading-relaxed"><MathText content={lines[0]} /></div>
+                        )}
                       </div>
+                    );
+                  })()}
+                  {q.exp && (
+                    <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-slate-700 dark:text-slate-200 space-y-1.5">
+                      <div className="font-bold text-emerald-700 dark:text-emerald-300">✔ ব্যাখ্যা:</div>
+                      <ul className="space-y-1.5 pl-1">
+                        {splitFormulaBullets(q.exp).map((line, i) => (
+                          <li
+                            key={i}
+                            className={`flex items-start gap-2 leading-relaxed ${
+                              isEquationLine(line)
+                                ? 'py-1 px-2 rounded-md bg-white/70 dark:bg-slate-900/60 border border-emerald-500/20 overflow-x-auto no-scrollbar'
+                                : ''
+                            }`}
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
+                            <span className="flex-1 min-w-0 overflow-x-auto no-scrollbar"><MathText content={line} /></span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
+                  {q.trap && (() => {
+                    const lines = splitFormulaBullets(q.trap);
+                    return (
+                      <div className="p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/25 text-rose-800 dark:text-rose-300 space-y-1.5">
+                        <div className="font-bold flex items-center gap-1.5">
+                          <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                          <span>Trap Alert:</span>
+                        </div>
+                        {lines.length > 1 ? (
+                          <ul className="space-y-1.5 pl-1">
+                            {lines.map((line, i) => (
+                              <li key={i} className="flex items-start gap-2 leading-relaxed">
+                                <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 shrink-0" />
+                                <span className="flex-1 min-w-0 overflow-x-auto no-scrollbar"><MathText content={line} /></span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <div className="leading-relaxed pl-5"><MathText content={lines[0]} /></div>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               )}
             </div>
