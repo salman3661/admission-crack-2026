@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { QuizQuestion, SubjectType, WeekFilterType } from '../types';
+import { scopeByWeek, weekChapterBreakdown, weekMeta } from '../lib/scope';
 import { MathText } from './MathText';
 import { saveExamAttempt, type ExamAttemptRecord } from '../lib/analytics';
 
@@ -41,8 +42,9 @@ export const ExamView: React.FC<ExamViewProps> = ({
   selectedSubject,
 }) => {
   // Filter questions by week and subject
-  const availableQuestions = quizzes.filter((q) => {
-    const matchWeek = selectedWeek === 'all' || q.week_id === selectedWeek;
+  // Strict isolation: weekly mode sees ONLY that week's questions (de-duplicated)
+  const availableQuestions = scopeByWeek(quizzes, selectedWeek).filter((q) => {
+    const matchWeek = true;
     const matchSubject = selectedSubject === 'All' || q.subject === selectedSubject;
     return matchWeek && matchSubject;
   });
@@ -650,6 +652,26 @@ export const ExamView: React.FC<ExamViewProps> = ({
             </span>
           </div>
         </div>
+
+        {selectedWeek !== 'all' && (() => {
+          const meta = weekMeta(selectedWeek);
+          const chapters = weekChapterBreakdown(availableQuestions);
+          return (
+            <div className="rounded-2xl border border-emerald-200/70 dark:border-emerald-900 bg-white dark:bg-slate-900 p-4 shadow-xs">
+              <div className="text-xs font-extrabold text-emerald-700 dark:text-emerald-300 mb-1">
+                📚 {meta?.name || getWeekDisplay(selectedWeek)} — শুধুমাত্র এই সপ্তাহের চ্যাপ্টার
+              </div>
+              {meta && <div className="text-[11px] text-slate-500 dark:text-slate-400 mb-2">{meta.badge}</div>}
+              <div className="flex flex-wrap gap-1.5">
+                {chapters.map((c) => (
+                  <span key={c.chapter} className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    {c.chapter} · {c.count}
+                  </span>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* =========================================================================
             MODERN EDTECH EXAM ROUTINE CARDS GRID

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { dedupeQuestions } from '../lib/scope';
 import { 
   Sparkles, 
   Award, 
@@ -33,7 +34,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
   // Weekly Prediction Slot Tabs State: 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'sets'
   const [activeTab, setActiveTab] = useState<'weekly' | 'sets'>('weekly');
-  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'week_08'>('week_08');
+  const [selectedWeekTab, setSelectedWeekTab] = useState<'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'week_08' | 'week_09'>('week_08');
   const [currentSlotIndex, setCurrentSlotIndex] = useState<number>(0);
   const pageSize = 12; // 10 to 15 questions per slot page
 
@@ -159,26 +160,18 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
   // Questions filtered strictly for the active weekly tab
   const currentWeekQuestions = useMemo(() => {
-    return questions.filter((q) => {
+    return dedupeQuestions(questions.filter((q) => {
       const qTrack = (q.track || '').toLowerCase();
       const aTrack = activeTrack.toLowerCase();
       const matchTrack = !q.track || qTrack === aTrack;
 
-      const qWeekId = (q.week_id || '').toLowerCase();
-      const qWeek = q.week !== undefined && q.week !== null ? String(q.week).toLowerCase() : '';
-      const selWeek = selectedWeekTab.toLowerCase();
-      const selWeekNum = selectedWeekTab.replace('week_0', '').replace('week_', '');
-
-      const matchWeek = 
-        qWeekId === selWeek || 
-        qWeek === selWeek || 
-        qWeek === selWeekNum ||
-        (typeof q.week === 'number' && selWeek === `week_${String(q.week).padStart(2, '0')}`);
+      // Strict isolation: exact week_id match only
+      const matchWeek = (q.week_id || '').toLowerCase() === selectedWeekTab.toLowerCase();
 
       const matchStar = selectedStar === 'all' || (q.yield_stars || 4) === selectedStar;
       const matchSubject = selectedSubject === 'All' || q.subject === selectedSubject;
       return matchTrack && matchWeek && matchStar && matchSubject;
-    });
+    }));
   }, [questions, activeTrack, selectedWeekTab, selectedStar, selectedSubject]);
 
   // Total slots calculation (10 to 15 questions per slot/page)
@@ -482,6 +475,22 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
               >
                 <span>⚡</span>
                 <span>Week 8: PCMB Master Core</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('weekly');
+                  setSelectedWeekTab('week_09');
+                  setCurrentSlotIndex(0);
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 shadow-xs ${
+                  activeTab === 'weekly' && selectedWeekTab === 'week_09'
+                    ? 'bg-[#056839] text-white ring-2 ring-[#056839]/30 scale-[1.02]'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                <span>🏁</span>
+                <span>Week 9: Final Revision</span>
               </button>
 
               <button
@@ -1042,6 +1051,8 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
                     ? '🚀 Week 6: 80/20 Multi-Stream'
                     : selectedWeekTab === 'week_07'
                     ? '👑 Week 7: Tri-Stream Pattern'
+                    : selectedWeekTab === 'week_09'
+                    ? '🏁 Week 9: Final Revision'
                     : '⚡ Week 8: PCMB Master Core'}
                 </span>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-[#056839] dark:text-emerald-400 font-mono font-bold border border-emerald-200 dark:border-emerald-800">
