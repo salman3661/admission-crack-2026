@@ -169,7 +169,7 @@ export const DeckView: React.FC<QuestionDeckViewProps> = (props) => {
   if (questions && questions.length > 0) {
     const currentQ = questions[currentIndex] || questions[0];
     return (
-      <div className="max-w-4xl mx-auto px-3 sm:px-6 py-6 pb-28 space-y-5">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 py-6 pb-32 space-y-5">
         <QuestionDeckCard
           question={currentQ}
           index={currentIndex}

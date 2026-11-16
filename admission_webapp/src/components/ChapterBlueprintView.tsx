@@ -1386,7 +1386,7 @@ export const ChapterBlueprintView: React.FC<ChapterBlueprintViewProps> = ({
                           </button>
 
                           {isExpanded && (
-                            <div className="p-3.5 sm:p-4 pt-0 border-t border-slate-100 dark:border-[#1E2E23] space-y-3 bg-slate-50/50 dark:bg-[#111A14]">
+                            <div className="p-3.5 sm:p-4 pt-0 border-t border-slate-100 dark:border-[#1E2E23] space-y-3 bg-slate-50/50 dark:bg-[#111A14] animate-in fade-in duration-150">
                               <div className="space-y-1.5 pt-2">
                                 <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1">
                                   <Hash className="w-3 h-3 text-cyan-500" />
