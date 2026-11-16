@@ -159,16 +159,21 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
       .map((q) => ({ q, score: scoreItem(q) }))
       .sort((a, b) => b.score - a.score);
 
-    // Take top keyword/chapter matches (at least 6, up to 10)
-    const positive = ranked.filter((r) => r.score >= 8);
-    let chosen = (positive.length >= 4 ? positive : ranked).slice(0, 10).map((r) => r.q);
+    // Uncapped 80/20 pool: load ALL deduplicated matches with score >= 5 (up to 40 per Type)
+    const positive = ranked.filter((r) => r.score >= 5);
+    let chosen = (positive.length >= 6 ? positive.slice(0, 40) : ranked.slice(0, 20)).map((r) => r.q);
 
-    // Ensure non-empty deterministic fallback if a chapter had < 6 items
-    if (chosen.length < 6) {
+    // Ensure non-empty deterministic fallback if a chapter had < 10 items
+    if (chosen.length < 10 && ranked.length > chosen.length) {
       const hash = typeId.split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+      const seenChosen = new Set(chosen.map((c) => c.id));
       const extraPool = ranked.slice(chosen.length);
-      for (let i = 0; i < extraPool.length && chosen.length < 6; i++) {
-        chosen.push(extraPool[(hash + i) % extraPool.length].q);
+      for (let i = 0; i < extraPool.length && chosen.length < 10; i++) {
+        const candidate = extraPool[(hash + i) % extraPool.length].q;
+        if (!seenChosen.has(candidate.id)) {
+          seenChosen.add(candidate.id);
+          chosen.push(candidate);
+        }
       }
     }
 
@@ -211,10 +216,14 @@ export const TypeDrillPanel: React.FC<TypeDrillPanelProps> = ({
     });
     scored.sort((a: any, b: any) => b.s - a.s || ((a.idx + hash) % 17) - ((b.idx + hash) % 17));
 
-    const targetCount = Math.min(10, Math.max(8, scored.length));
+    // Load ALL available unique synthetic predictors for this chapter/type (zero duplicate stems)
+    const seenStems = new Set<string>();
     const picked: any[] = [];
-    for (let i = 0; i < targetCount; i++) {
-      picked.push(scored[i % scored.length].p);
+    for (const item of scored) {
+      const key = String(item.p.stem || '').replace(/\W+/g, '').slice(0, 70);
+      if (!key || seenStems.has(key)) continue;
+      seenStems.add(key);
+      picked.push(item.p);
     }
 
     return picked.map((p: any, i: number) => {
