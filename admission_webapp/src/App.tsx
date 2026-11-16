@@ -299,6 +299,7 @@ export function App() {
             quizzes={selectedWeek !== 'all' ? weeklyQuizzes : currentQuizzes}
             selectedWeek={selectedWeek}
             selectedSubject={selectedSubject}
+            activeTrack={activeTrack}
           />
         )}
 

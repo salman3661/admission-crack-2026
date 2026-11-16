@@ -25,6 +25,7 @@ interface ExamViewProps {
   quizzes: QuizQuestion[];
   selectedWeek: WeekFilterType;
   selectedSubject: SubjectType;
+  activeTrack?: 'varsity' | 'medical';
 }
 
 interface MasteryQueueItem {
@@ -40,7 +41,12 @@ export const ExamView: React.FC<ExamViewProps> = ({
   quizzes,
   selectedWeek,
   selectedSubject,
+  activeTrack = 'varsity',
 }) => {
+  // CBT-only UI state: bookmarks (mark for review) and speed-hack drawer
+  const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({});
+  const [hackOpen, setHackOpen] = useState(false);
+  const isMedical = activeTrack === 'medical';
   // Filter questions by week and subject
   // Strict isolation: weekly mode sees ONLY that week's questions (de-duplicated)
   const availableQuestions = scopeByWeek(quizzes, selectedWeek).filter((q) => {
@@ -1445,136 +1451,158 @@ export const ExamView: React.FC<ExamViewProps> = ({
   const { origin: timedOrigin, cleanText: timedCleanText } = currentTimedQ ? parseQuestionData(currentTimedQ) : { origin: "DU Core", cleanText: "" };
   const timedHotspot = currentTimedQ ? getHotspotBadge(currentTimedQ) : null;
 
+  const T = isMedical
+    ? { accent: '#0E7490', accentCls: 'bg-[#0E7490]', ring: 'border-[#0E7490]', soft: 'bg-cyan-50 dark:bg-cyan-950/30', text: 'text-[#0E7490] dark:text-cyan-300', hover: 'hover:bg-[#155E75]', label: 'Medical MAT/DAT CBT', strip: 'from-[#0E7490] to-[#14B8A6]' }
+    : { accent: '#056839', accentCls: 'bg-[#056839]', ring: 'border-[#056839]', soft: 'bg-emerald-50 dark:bg-emerald-950/30', text: 'text-[#056839] dark:text-emerald-300', hover: 'hover:bg-[#044e2b]', label: "Varsity DU 'Ka' CBT", strip: 'from-[#0B2A4A] to-[#056839]' };
+  const qText = String((currentTimedQ as any).q || (currentTimedQ as any).question || '');
+  const isEngineering = /engineer|buet|ruet|cuet|kuet/i.test(String(timedOrigin));
+  const boardChip = isMedical ? '[MAT / DAT Medical Standard]' : isEngineering ? '[Engineering Non-Calc Format]' : "[DU 'Ka' Unit Standard]";
+  const isAssertion = /assertion|reason|দাবি|উক্তি|বিবৃতি/i.test(qText);
+  const answeredCount = Object.values(selectedAnswers).filter((v) => v !== null && v !== undefined).length;
+  const elapsed = Object.values(timeSpent).reduce((a, b) => a + b, 0);
+  const avgSpeed = answeredCount > 0 ? Math.round(elapsed / Math.max(1, timedIndex + (userSelected != null ? 1 : 0))) : 0;
+  const bookmarkedCount = Object.values(bookmarked).filter(Boolean).length;
+  const jumpTo = (i: number) => { setTimedIndex(i); setTimeLeft(45); setHackOpen(false); };
+  const hackText = (currentTimedQ as any).speed_hack as string | undefined;
+
   return (
-    <div className="max-w-2xl mx-auto py-3 px-3 sm:px-4">
-      {/* Milton Khandokar Golden Order 1-Click Action */}
-      <div className="flex items-center justify-between gap-2 mb-2">
-        <button
-          onClick={applyMiltonGoldenOrder}
-          title="বায়োলজি ➔ রসায়ন ➔ পদার্থ ➔ গণিত ক্রমানুসারে সাজান"
-          className="w-full py-1.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-[11px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
-        >
-          <span>⚡ মিল্টন স্যারের গোল্ডেন অর্ডার: বায়োলজি ➔ রসায়ন ➔ পদার্থ ➔ গণিত</span>
-        </button>
-      </div>
-
-      {/* Top Timer & Header */}
-      <div className="flex items-center justify-between pb-3 mb-2.5 border-b border-zinc-200/80 dark:border-zinc-800">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-[#056839] dark:text-emerald-400 border border-zinc-200 dark:border-zinc-800 shadow-xs">
-            প্রশ্ন: {timedIndex + 1} / {timedQuestions.length} টি
-          </span>
-          <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>
-            📍 {timedOrigin}
-          </span>
-          {(currentTimedQ.repeat_count ?? 0) > 0 && (
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">
-              🔁 [Repeated {currentTimedQ.repeat_count}x]
-            </span>
-          )}
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 shadow-xs">
-            {currentTimedQ.subject}
-          </span>
-          {currentTimedQ.expected_count !== undefined && currentTimedQ.expected_count !== null && (
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 shadow-xs inline-flex items-center gap-1">
-              <span>🎯 প্রত্যাশিত ফ্রিকোয়েন্সি: {typeof currentTimedQ.expected_count === 'number' ? `${currentTimedQ.expected_count} বার` : currentTimedQ.expected_count}</span>
-            </span>
-          )}
-          {currentTimedQ.written_essential && (
-            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30 shadow-xs inline-flex items-center gap-1">
-              ✍️ Written Essential
-            </span>
-          )}
+    <div className="max-w-5xl mx-auto py-3 px-3 sm:px-4">
+      <button
+        onClick={applyMiltonGoldenOrder}
+        title="বায়োলজি ➔ রসায়ন ➔ পদার্থ ➔ গণিত ক্রমানুসারে সাজান"
+        className="w-full mb-2 py-1.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-[11px] sm:text-xs font-bold cursor-pointer"
+      >
+        ⚡ মিল্টন স্যারের গোল্ডেন অর্ডার: বায়োলজি ➔ রসায়ন ➔ পদার্থ ➔ গণিত
+      </button>
+      {/* CBT top bar */}
+      <div className={`rounded-2xl bg-gradient-to-r ${T.strip} text-white px-4 py-2.5 mb-3 flex flex-wrap items-center justify-between gap-2 shadow-md`}>
+        <div className="flex items-center gap-2 text-xs font-extrabold tracking-wide">
+          <span>{isMedical ? '🩺' : '🎓'}</span>
+          <span>{T.label}</span>
+          <span className="px-2 py-0.5 rounded-full bg-white/15 font-mono">{boardChip}</span>
         </div>
-
-        {/* 45-Second Timer Pill */}
-        <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold font-mono transition-all shadow-xs ${
-          isTimeCritical 
-            ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 animate-pulse' 
-            : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200'
-        }`}>
-          <Clock className="w-3.5 h-3.5" />
-          <span>{timeLeft}s</span>
+        <div className="flex items-center gap-2 text-[11px] font-mono font-bold">
+          <span className="px-2 py-0.5 rounded-full bg-emerald-400/25" title="সঠিক উত্তর">+1.0</span>
+          <span className="px-2 py-0.5 rounded-full bg-rose-400/30" title="ভুল উত্তর (নেগেটিভ মার্কিং)">−0.25</span>
+          <span className="px-2 py-0.5 rounded-full bg-white/15">⏱ গড় {avgSpeed}s/প্রশ্ন</span>
+          <span className="px-2 py-0.5 rounded-full bg-white/15">✔ {answeredCount}/{timedQuestions.length}</span>
         </div>
       </div>
 
-      {/* Timer Progress Line */}
-      <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-3">
-        <div 
-          className={`h-full transition-all duration-1000 ${
-            isTimeCritical ? 'bg-rose-500' : 'bg-gradient-to-r from-[#00B09B] to-[#96C93D]'
-          }`}
-          style={{ width: `${timerPercent}%` }}
-        />
-      </div>
-
-      {/* Question Card */}
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl p-4 sm:p-5 border border-zinc-200/80 dark:border-zinc-800 shadow-sm mb-3">
-        {timedHotspot && (
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 text-xs font-bold mb-2.5 shadow-xs">
-            <span>{timedHotspot}</span>
+      <div className="grid lg:grid-cols-[1fr_16rem] gap-3">
+        <div>
+          <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-200/80 dark:border-zinc-800">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 ${T.text} border border-zinc-200 dark:border-zinc-800`}>
+                Q {timedIndex + 1} / {timedQuestions.length}
+              </span>
+              <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-xs ${getOriginBadgeStyle(timedOrigin)}`}>📍 {timedOrigin}</span>
+              {(currentTimedQ.repeat_count ?? 0) > 0 && (
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800">🔁 [Repeated {currentTimedQ.repeat_count}x]</span>
+              )}
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800">{currentTimedQ.subject}</span>
+              {isAssertion && (
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">🧩 Assertion–Reason</span>
+              )}
+              {isMedical && !isAssertion && (
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">📌 High-Yield Data Point</span>
+              )}
+              {currentTimedQ.written_essential && (
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30">✍️ Written Essential</span>
+              )}
+            </div>
+            <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold font-mono shadow-xs ${isTimeCritical ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 animate-pulse' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200'}`}>
+              <Clock className="w-3.5 h-3.5" />
+              <span>{timeLeft}s</span>
+            </div>
           </div>
-        )}
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-[11px] font-semibold px-2 py-0.5 rounded border bg-amber-50 text-amber-800 border-amber-200">
-            {(currentTimedQ as any).source || (currentTimedQ as any).source_tag || timedOrigin || "🎯 ২০২৬ প্রেডিক্টর"}
-          </span>
-        </div>
 
-        <div className="text-lg font-medium leading-relaxed text-zinc-900 dark:text-white mb-4 overflow-x-auto no-scrollbar">
-          <MathText content={timedCleanText} />
-        </div>
+          <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-3">
+            <div className={`h-full transition-all duration-1000 ${isTimeCritical ? 'bg-rose-500' : `bg-gradient-to-r ${T.strip}`}`} style={{ width: `${timerPercent}%` }} />
+          </div>
 
-        {/* Options */}
-        <div className="space-y-2">
-          {currentTimedQ.opts.map((opt, optIdx) => {
-            const isSelected = userSelected === optIdx;
-            return (
-              <button
-                key={optIdx}
-                onClick={() => handleTimedOptionSelect(optIdx)}
-                className={`w-full text-base py-3 px-4 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
-                  isSelected
-                    ? 'bg-[#056839]/10 dark:bg-[#056839]/25 border-[#056839] text-[#056839] dark:text-emerald-300 font-bold shadow-xs'
-                    : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                }`}
-              >
-                <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 transition-all ${
-                  isSelected 
-                    ? 'bg-[#056839] text-white shadow-xs' 
-                    : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700'
-                }`}>
-                  {String.fromCharCode(65 + optIdx)}
-                </span>
-                <div className="flex-1 text-base leading-relaxed overflow-x-auto no-scrollbar">
-                  <MathText content={opt} />
-                </div>
+          <div className={`bg-white dark:bg-zinc-900 rounded-2xl p-4 sm:p-5 border-2 ${isMedical ? 'border-cyan-200 dark:border-cyan-900' : 'border-emerald-200 dark:border-emerald-900'} shadow-sm mb-3`}>
+            {timedHotspot && (
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 text-xs font-bold mb-2.5">
+                <span>{timedHotspot}</span>
+              </div>
+            )}
+            <div className="text-lg font-medium leading-relaxed text-zinc-900 dark:text-white mb-4 overflow-x-auto no-scrollbar">
+              <MathText content={timedCleanText} />
+            </div>
+            <div className="space-y-2">
+              {currentTimedQ.opts.map((opt, optIdx) => {
+                const isSelected = userSelected === optIdx;
+                return (
+                  <button
+                    key={optIdx}
+                    onClick={() => handleTimedOptionSelect(optIdx)}
+                    className={`w-full text-base py-3 px-4 rounded-xl border text-left flex items-center gap-3 transition-all cursor-pointer ${isSelected ? `${T.soft} ${T.ring} ${T.text} font-bold shadow-xs` : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+                  >
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${isSelected ? `${T.accentCls} text-white` : 'bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-300 dark:border-zinc-700'}`}>
+                      {String.fromCharCode(65 + optIdx)}
+                    </span>
+                    <div className="flex-1 text-base leading-relaxed overflow-x-auto no-scrollbar"><MathText content={opt} /></div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Speed-hack drawer */}
+          {hackOpen && (
+            <div className="mb-3 rounded-2xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/30 p-3 text-sm text-amber-900 dark:text-amber-200">
+              <div className="text-[11px] font-extrabold mb-1">⚡ Speed-Hack</div>
+              {hackText ? <MathText content={hackText} /> : <span className="text-xs">এই প্রশ্নের জন্য আলাদা স্পিড-হ্যাক নেই।</span>}
+            </div>
+          )}
+
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              <button onClick={() => setBookmarked((b) => ({ ...b, [timedIndex]: !b[timedIndex] }))}
+                className={`px-3 py-2 rounded-full border text-xs font-bold cursor-pointer transition-all ${bookmarked[timedIndex] ? 'bg-amber-400 border-amber-500 text-amber-950' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300'}`}>
+                {bookmarked[timedIndex] ? '🔖 মার্কড' : '🔖 বুকমার্ক'}
               </button>
-            );
-          })}
+              <button onClick={() => setHackOpen((v) => !v)}
+                className="px-3 py-2 rounded-full border border-amber-300 dark:border-amber-700 bg-white dark:bg-zinc-900 text-amber-700 dark:text-amber-300 text-xs font-bold cursor-pointer">
+                ⚡ স্পিড-হ্যাক
+              </button>
+              <button onClick={() => handleTimedNext(null)}
+                className="px-3 py-2 rounded-full bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs font-semibold cursor-pointer">
+                স্কিপ (S)
+              </button>
+            </div>
+            <button onClick={() => handleTimedNext(userSelected ?? null)}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-full ${T.accentCls} ${T.hover} text-white text-xs sm:text-sm font-bold shadow-lg transition-all active:scale-95 cursor-pointer`}>
+              <span>{timedIndex + 1 === timedQuestions.length ? 'পরীক্ষা জমা দিন' : 'পরবর্তী প্রশ্ন'}</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Action Footer */}
-      <div className="flex items-center justify-between gap-3">
-        <button
-          onClick={() => handleTimedNext(null)}
-          className="px-4 py-2.5 rounded-full bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm font-semibold shadow-xs transition-all cursor-pointer"
-        >
-          স্কিপ করুন (S)
-        </button>
-
-        <span className="hidden sm:inline text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-          <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700">1-4</kbd> বিকল্প | <kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700">Enter</kbd> পরবর্তী প্রশ্ন
-        </span>
-
-        <button
-          onClick={() => handleTimedNext(userSelected ?? null)}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#056839] hover:bg-[#044e2b] text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#056839]/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-        >
-          <span>{timedIndex + 1 === timedQuestions.length ? 'পরীক্ষা জমা দিন' : 'পরবর্তী প্রশ্ন'}</span>
-          <ChevronRight className="w-4 h-4" />
-        </button>
+        {/* Question palette */}
+        <aside className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-3 h-fit lg:sticky lg:top-3">
+          <div className="text-xs font-extrabold text-zinc-700 dark:text-zinc-200 mb-2">Question Palette</div>
+          <div className="grid grid-cols-8 lg:grid-cols-5 gap-1.5 max-h-60 overflow-y-auto">
+            {timedQuestions.map((_, i) => {
+              const a = selectedAnswers[i];
+              const answered = a !== null && a !== undefined;
+              const cur = i === timedIndex;
+              return (
+                <button key={i} onClick={() => jumpTo(i)}
+                  className={`relative h-8 rounded-md text-[11px] font-bold border cursor-pointer ${cur ? `${T.accentCls} text-white ${T.ring}` : answered ? `${T.soft} ${T.text} ${T.ring}` : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-700'}`}>
+                  {i + 1}
+                  {bookmarked[i] && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 border border-white" />}
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-3 space-y-1 text-[10px] text-zinc-500 dark:text-zinc-400 font-semibold">
+            <div>● উত্তর দেওয়া: {answeredCount} · ○ বাকি: {timedQuestions.length - answeredCount}</div>
+            <div>🔖 বুকমার্ক: {bookmarkedCount}</div>
+            <div>পূর্ণমান {timedQuestions.length} · নেগেটিভ −0.25</div>
+          </div>
+        </aside>
       </div>
     </div>
   );
