@@ -116,8 +116,8 @@ export const PaperFinalView: React.FC<PaperFinalViewProps> = ({ activeTrack }) =
 
   const subjects =
     activeTrack === 'medical'
-      ? ['All', 'Physics', 'Chemistry', 'Biology']
-      : ['All', 'Physics', 'Chemistry', 'Higher Math', 'Biology'];
+      ? ['All', 'Physics', 'Chemistry', 'Biology', 'English', 'GK', 'ICT']
+      : ['All', 'Physics', 'Chemistry', 'Higher Math', 'Biology', 'Bangla', 'English', 'GK', 'ICT'];
 
   // =========================================================================
   // ACTIVE PAPER FINAL EXAM SIMULATOR

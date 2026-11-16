@@ -1,5 +1,5 @@
 export type TrackType = 'medical' | 'varsity';
-export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
+export type SubjectType = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'Bangla' | 'English' | 'GK' | 'ICT';
 export type WeekFilterType = 'all' | 'week_01' | 'week_02' | 'week_03' | 'week_04' | 'week_05' | 'week_06' | 'week_07' | 'week_08' | 'week_09';
 export type AppMode =
   | 'decks'

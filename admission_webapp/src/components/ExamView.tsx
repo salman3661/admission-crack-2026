@@ -567,8 +567,10 @@ export const ExamView: React.FC<ExamViewProps> = ({
         case 'Chemistry': return '🧪';
         case 'Higher Math': return '📐';
         case 'Biology': return '🧬';
+        case 'Bangla': return '📖';
         case 'English': return '🇬🇧';
         case 'GK': return '🇧🇩';
+        case 'ICT': return '💻';
         default: return '🎯';
       }
     };

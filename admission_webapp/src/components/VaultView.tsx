@@ -31,7 +31,7 @@ interface VaultViewProps {
 }
 
 type ActiveWeek = 'all' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-type ActiveSubject = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'English' | 'GK';
+type ActiveSubject = 'All' | 'Physics' | 'Chemistry' | 'Higher Math' | 'Biology' | 'Bangla' | 'English' | 'GK' | 'ICT';
 type ActiveCardType = 'all' | 'core_formula' | 'shortcut' | 'trap' | 'table' | 'quick_tools';
 
 const WEEK_TABS: { id: ActiveWeek; label: string; weekNum?: number }[] = [

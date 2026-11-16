@@ -81,6 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         { label: 'Physics', bn: 'ফিজিক্স', icon: '⚛️' },
         { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
         { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+        { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
       ]
     : [
         { label: 'All', bn: 'সব বিষয়', icon: '🌐' },
@@ -88,6 +89,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         { label: 'Chemistry', bn: 'কেমিস্ট্রি', icon: '🧪' },
         { label: 'Higher Math', bn: 'উচ্চতর গণিত', icon: '📐' },
         { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
+        { label: 'Bangla', bn: 'বাংলা', icon: '📖' },
+        { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
+        { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+        { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
       ];
 
   // Condition: Only show Weekly filter and Subject pills when inside "প্রশ্নব্যাংক" or "ডেক" (or "slides")

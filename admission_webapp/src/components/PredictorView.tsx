@@ -198,6 +198,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
         { label: 'Physics', bn: 'ফিজিক্স', icon: '⚛️' },
         { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
         { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+        { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
       ];
     } else {
       return [
@@ -206,6 +207,10 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
         { label: 'Chemistry', bn: 'কেমিস্ট্রি', icon: '🧪' },
         { label: 'Higher Math', bn: 'উচ্চতর গণিত', icon: '📐' },
         { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
+        { label: 'Bangla', bn: 'বাংলা', icon: '📖' },
+        { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
+        { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+        { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
       ];
     }
   }, [activeTrack]);
@@ -1106,7 +1111,7 @@ export const PredictorView: React.FC<PredictorViewProps> = ({
 
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="text-2xl">
-                    {selectedSubject === 'Physics' ? '⚛️' : selectedSubject === 'Chemistry' ? '🧪' : selectedSubject === 'Higher Math' ? '📐' : selectedSubject === 'Biology' ? '🧬' : '🎯'}
+                    {selectedSubject === 'Physics' ? '⚛️' : selectedSubject === 'Chemistry' ? '🧪' : selectedSubject === 'Higher Math' ? '📐' : selectedSubject === 'Biology' ? '🧬' : selectedSubject === 'Bangla' ? '📖' : selectedSubject === 'English' ? '🇬🇧' : selectedSubject === 'GK' ? '🇧🇩' : selectedSubject === 'ICT' ? '💻' : '🎯'}
                   </span>
                   <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
                     {selectedWeekTab.toUpperCase()} {selectedSubject === 'All' ? (activeTrack === 'medical' ? 'Medical Core' : 'Varsity Core') : selectedSubject} Slot-{toBn(currentSlotIndex + 1)}

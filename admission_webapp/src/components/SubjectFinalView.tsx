@@ -49,6 +49,7 @@ export const SubjectFinalView: React.FC<SubjectFinalViewProps> = ({
           { id: 'Physics', label: 'পদার্থবিজ্ঞান', icon: '⚛️' },
           { id: 'English', label: 'ইংরেজি', icon: '🇬🇧' },
           { id: 'GK', label: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+          { id: 'ICT', label: 'আইসিটি', icon: '💻' },
         ]
       : [
           { id: 'All', label: 'সব বিষয়', icon: '🌐' },
@@ -56,6 +57,10 @@ export const SubjectFinalView: React.FC<SubjectFinalViewProps> = ({
           { id: 'Chemistry', label: 'রসায়ন', icon: '🧪' },
           { id: 'Higher Math', label: 'উচ্চতর গণিত', icon: '📐' },
           { id: 'Biology', label: 'জীববিজ্ঞান', icon: '🧬' },
+          { id: 'Bangla', label: 'বাংলা', icon: '📖' },
+          { id: 'English', label: 'ইংরেজি', icon: '🇬🇧' },
+          { id: 'GK', label: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+          { id: 'ICT', label: 'আইসিটি', icon: '💻' },
         ];
 
   const [selectedChapter, setSelectedChapter] = useState<string>('All');

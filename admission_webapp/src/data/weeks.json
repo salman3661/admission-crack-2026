@@ -9,10 +9,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 115,
+    "total_mcqs": 127,
     "total_slides": 14,
     "total_flashcards": 65
   },
@@ -26,10 +28,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 115,
+    "total_mcqs": 123,
     "total_slides": 14,
     "total_flashcards": 65
   },
@@ -43,10 +47,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 200,
+    "total_mcqs": 205,
     "total_slides": 14,
     "total_flashcards": 70
   },
@@ -60,10 +66,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 96,
+    "total_mcqs": 75,
     "total_slides": 16,
     "total_flashcards": 64
   },
@@ -77,10 +85,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 96,
+    "total_mcqs": 92,
     "total_slides": 16,
     "total_flashcards": 65
   },
@@ -94,10 +104,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 96,
+    "total_mcqs": 101,
     "total_slides": 16,
     "total_flashcards": 60
   },
@@ -111,10 +123,12 @@
       "Chemistry",
       "Higher Math",
       "Biology",
+      "Bangla",
       "English",
-      "GK"
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 84,
+    "total_mcqs": 53,
     "total_slides": 14,
     "total_flashcards": 70
   },
@@ -127,9 +141,13 @@
       "Physics",
       "Chemistry",
       "Higher Math",
-      "Biology"
+      "Biology",
+      "Bangla",
+      "English",
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 120,
+    "total_mcqs": 175,
     "total_slides": 14,
     "total_flashcards": 70
   },
@@ -142,9 +160,13 @@
       "Physics",
       "Chemistry",
       "Higher Math",
-      "Biology"
+      "Biology",
+      "Bangla",
+      "English",
+      "GK",
+      "ICT"
     ],
-    "total_mcqs": 76,
+    "total_mcqs": 71,
     "total_slides": 0,
     "total_flashcards": 0
   }
