@@ -30,6 +30,20 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
     }
   };
 
+  const handleOpenPhysics2Master = async () => {
+    setLoading(true);
+    try {
+      const mod = await import('../data/master/physics_2nd_master.json');
+      const raw = (mod.default || []) as Question[];
+      setActiveSet({
+        label: "DU 'Ka' — Physics 2nd Paper Master Set (Udvash Pattern)",
+        questions: raw,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (activeSet) {
     return (
       <DrillRunner
@@ -117,6 +131,35 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
           টপিক-লেভেল মডেল; কোচিং মডেল টেস্ট যোগ হলে আরও নিখুঁত হয়।
         </div>
       </div>
+
+      {/* Calibrated Physics 2nd Paper Master Set */}
+      {exam === 'du_ka' && (
+        <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/30 rounded-3xl border border-emerald-200 dark:border-emerald-800/60 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-600 text-white">
+                Udvash Paper Final Pattern
+              </span>
+              <span className="text-xs font-black text-emerald-700 dark:text-emerald-300">
+                ৬০ MCQ + ১৬ লিখিত (১০০ নম্বর)
+              </span>
+            </div>
+            <h2 className="text-base font-extrabold text-slate-900 dark:text-white">
+              ⚛️ Physics 2nd Paper Master Set (ক্যালিব্রেটেড)
+            </h2>
+            <p className="text-xs text-slate-600 dark:text-slate-300 max-w-2xl">
+              রিয়েল Udvash Physics-I Paper Final-এর অধ্যায় ওয়েটেজ, মেন্টাল-ম্যাথ ও ট্র্যাপ প্যাটার্ন অনুযায়ী তৈরি — চল তড়িৎ (১০), তাপগতিবিদ্যা (৯), স্থির তড়িৎ (৮) + ১৬টি ২.৫ নম্বরের লিখিত।
+            </p>
+          </div>
+          <button
+            onClick={handleOpenPhysics2Master}
+            disabled={loading}
+            className="px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shrink-0 disabled:opacity-50"
+          >
+            <Play className="w-3.5 h-3.5" /> মাস্টার সেট শুরু করো
+          </button>
+        </div>
+      )}
 
       <div className="grid sm:grid-cols-3 gap-4">
         {sets.map((s) => (
