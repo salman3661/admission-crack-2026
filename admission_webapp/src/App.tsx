@@ -431,7 +431,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#F6F8F6] dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-['Hind_Siliguri'] antialiased transition-colors duration-200">
+    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#F6F8F6] dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors duration-200">
       {!isExamFocus && (
         <Navbar
           currentMode={currentMode}
