@@ -864,3 +864,185 @@ export function resetAllLocalProgress() {
   keys.forEach((k) => localStorage.removeItem(k));
   allBankCache = null;
 }
+
+let extendedBankCache: Array<Question & { __isPredictor?: boolean; __rawChapter?: string }> | null = null;
+
+function mapLegacyToQuestion(
+  raw: Record<string, unknown>,
+  idx: number,
+  opts: { defaultExam?: ExamSlug; defaultSourceType?: SourceType; sourceName?: string; isPredictor?: boolean }
+): Question & { __isPredictor?: boolean; __rawChapter?: string } {
+  const questionText = String(raw.question || raw.q || '');
+  const rawOpts = Array.isArray(raw.options) ? raw.options : Array.isArray(raw.opts) ? raw.opts : [];
+  const options = rawOpts.map((o) => String(o)).filter((o) => o.trim().length > 0);
+  const isWritten = Boolean(raw.is_written) || options.length === 0;
+  const rawAns = typeof raw.correct_index === 'number' ? raw.correct_index : typeof raw.ans === 'number' ? raw.ans : 0;
+  const correctIndex = isWritten ? null : rawAns >= 0 && rawAns < options.length ? rawAns : 0;
+
+  const trackStr = String(raw.track || raw.bank_type || '').toLowerCase();
+  const inferredExam: ExamSlug =
+    raw.exam ? normalizeExam(String(raw.exam)) : trackStr.includes('medical') || trackStr === 'mat' ? 'mat' : opts.defaultExam || 'du_ka';
+
+  const rawChapter = String(raw.chapter_name || raw.chapter || raw.chapter_id || '');
+  const id = String(raw.id || `ext_${idx}`);
+  const isPred =
+    Boolean(opts.isPredictor) ||
+    id.startsWith('pred_') ||
+    (typeof raw.years_hit === 'number' && raw.years_hit >= 2) ||
+    (typeof raw.likelihood_pct === 'number' && raw.likelihood_pct > 0) ||
+    (typeof raw.yield_stars === 'number' && raw.yield_stars >= 4) ||
+    Boolean(raw.probability);
+
+  return {
+    id,
+    source_type: (raw.source_type as SourceType) || opts.defaultSourceType || 'past_paper',
+    source_name: String(raw.source_name || raw.origin || opts.sourceName || 'Question Bank'),
+    exam: inferredExam,
+    exam_year: typeof raw.exam_year === 'number' ? raw.exam_year : null,
+    exam_date: (raw.exam_date as string | null | undefined) ?? null,
+    week: questionWeek(raw as Partial<Question>),
+    subject: normalizeSubject(typeof raw.subject === 'string' ? raw.subject : String(raw.subject || '')),
+    chapter_id: String(raw.chapter_id || raw.blueprint_chapter_id || 'unclassified').trim().toLowerCase(),
+    chapter_name: rawChapter || 'অনির্ধারিত',
+    mega_type: (raw.mega_type as string | null | undefined) ?? (raw.type_ref as string | null | undefined) ?? null,
+    question: questionText,
+    options,
+    correct_index: correctIndex,
+    explanation: String(raw.explanation || raw.exp || ''),
+    trap: String(raw.trap || raw.trap_alert || raw.trap_insight || ''),
+    is_written: isWritten,
+    marks: typeof raw.marks === 'number' ? raw.marks : isWritten ? 2.5 : 1,
+    duration_sec: typeof raw.duration_sec === 'number' ? raw.duration_sec : isWritten ? 240 : 45,
+    probability_label: (raw.probability_label as string | undefined) || (raw.probability as string | undefined),
+    appears_in: Array.isArray(raw.appears_in) ? (raw.appears_in as string[]) : undefined,
+    likelihood_pct: typeof raw.likelihood_pct === 'number' ? raw.likelihood_pct : undefined,
+    expected_mcq_in_paper: typeof raw.expected_mcq_in_paper === 'number' ? raw.expected_mcq_in_paper : undefined,
+    years_hit: typeof raw.years_hit === 'number' ? raw.years_hit : undefined,
+    papers_hit: typeof raw.papers_hit === 'number' ? raw.papers_hit : undefined,
+    source_weight: typeof raw.source_weight === 'number' ? raw.source_weight : undefined,
+    __isPredictor: isPred,
+    __rawChapter: rawChapter,
+  };
+}
+
+async function loadExtendedBankPool(): Promise<Array<Question & { __isPredictor?: boolean; __rawChapter?: string }>> {
+  if (extendedBankCache) return extendedBankCache;
+
+  const collected: Array<Question & { __isPredictor?: boolean; __rawChapter?: string }> = [];
+
+  const [pfMod, sfMod, fmMod, vbMod, mbMod, ...masterMods] = await Promise.all([
+    import('../data/paper_final_bank.json').catch(() => null),
+    import('../data/subject_final_bank.json').catch(() => null),
+    import('../data/full_mock_bank.json').catch(() => null),
+    import('../data/varsity_bank.json').catch(() => null),
+    import('../data/medical_bank.json').catch(() => null),
+    ...Object.entries(masterModules).map(async ([k, loader]) => ({ key: k, mod: await loader().catch(() => null) })),
+  ]);
+
+  const pushTestContainer = (mod: unknown, sourceType: SourceType, isPredictor: boolean) => {
+    const data = (mod as { default?: { tests?: unknown[]; exams?: unknown[] } } | null)?.default || (mod as { tests?: unknown[]; exams?: unknown[] } | null);
+    const list = (data?.tests || data?.exams || []) as Array<{
+      track?: string;
+      title?: string;
+      mcqs?: Record<string, unknown>[];
+      written_questions?: Record<string, unknown>[];
+    }>;
+    for (const t of list) {
+      const defaultExam: ExamSlug = String(t.track || '').toLowerCase() === 'medical' ? 'mat' : 'du_ka';
+      for (const m of t.mcqs || []) {
+        collected.push(mapLegacyToQuestion(m, collected.length, { defaultExam, defaultSourceType: sourceType, sourceName: t.title, isPredictor }));
+      }
+      for (const w of t.written_questions || []) {
+        collected.push(mapLegacyToQuestion({ ...w, is_written: true }, collected.length, { defaultExam, defaultSourceType: sourceType, sourceName: t.title, isPredictor }));
+      }
+    }
+  };
+
+  pushTestContainer(pfMod, 'paper_final', true);
+  pushTestContainer(sfMod, 'subject_final', true);
+  pushTestContainer(fmMod, 'model_test', true);
+
+  const pushArray = (mod: unknown, defaultExam: ExamSlug, isPredictor: boolean, sourceName: string) => {
+    const raw = (mod as { default?: Record<string, unknown>[] } | null)?.default || (mod as Record<string, unknown>[] | null);
+    if (!Array.isArray(raw)) return;
+    raw.forEach((item, idx) => {
+      collected.push(mapLegacyToQuestion(item, idx, { defaultExam, defaultSourceType: 'past_paper', sourceName, isPredictor }));
+    });
+  };
+
+  pushArray(vbMod, 'du_ka', false, 'Varsity Bank');
+  pushArray(mbMod, 'mat', false, 'Medical Bank');
+
+  for (const entry of masterMods) {
+    const isMat = entry.key.includes('mat_');
+    pushArray(entry.mod, isMat ? 'mat' : 'du_ka', true, 'Master Predictor Set');
+  }
+
+  extendedBankCache = collected;
+  return collected;
+}
+
+const cleanBnChapter = (s: string) =>
+  s
+    .replace(/\([^)]*\)/g, '')
+    .replace(/[^\u0980-\u09FFa-zA-Z0-9]+/g, ' ')
+    .trim()
+    .toLowerCase();
+
+export async function loadChapterQuestionsComplete(
+  chapterId: string,
+  chapterName: string,
+  subject: string
+): Promise<{
+  all: Question[];
+  varsity: Question[];
+  mat: Question[];
+  predictor: Question[];
+}> {
+  const [bankAll, extPool] = await Promise.all([loadAllBankQuestions(), loadExtendedBankPool()]);
+  const targetClean = cleanBnChapter(chapterName);
+  const targetId = chapterId.trim().toLowerCase();
+
+  const matchesChapter = (qChapterId: string, qChapterName: string, qSubject: string) => {
+    if (qChapterId.trim().toLowerCase() === targetId) return true;
+    if (normalizeSubject(qSubject) !== normalizeSubject(subject)) return false;
+    const cand = cleanBnChapter(qChapterName);
+    if (!cand || !targetClean) return false;
+    return cand === targetClean || cand.includes(targetClean) || targetClean.includes(cand);
+  };
+
+  const bankMatches = bankAll
+    .filter((q) => matchesChapter(q.chapter_id, q.chapter_name, q.subject))
+    .map((q) => ({
+      ...q,
+      __isPredictor:
+        (q.years_hit ?? 0) >= 2 ||
+        (q.likelihood_pct ?? 0) > 0 ||
+        q.source_type === 'paper_final' ||
+        q.id.startsWith('pred_'),
+    }));
+
+  const extMatches = extPool.filter((q) =>
+    matchesChapter(q.chapter_id, q.__rawChapter || q.chapter_name, q.subject)
+  );
+
+  // Merge and dedupe while preserving __isPredictor if ANY duplicate copy was a predictor
+  const predTexts = new Set<string>();
+  const combined = [...bankMatches, ...extMatches];
+  for (const q of combined) {
+    if (q.__isPredictor) {
+      predTexts.add(q.question.replace(/\s+/g, ' ').trim().toLowerCase().slice(0, 140));
+    }
+  }
+
+  const all = dedupe(combined);
+  const varsity = all.filter((q) => q.exam !== 'mat');
+  const mat = all.filter((q) => q.exam === 'mat');
+  const predictor = all.filter((q) => {
+    const key = q.question.replace(/\s+/g, ' ').trim().toLowerCase().slice(0, 140);
+    return predTexts.has(key) || (q.years_hit ?? 0) >= 2 || (q.likelihood_pct ?? 0) > 0;
+  });
+
+  return { all, varsity, mat, predictor };
+}
+

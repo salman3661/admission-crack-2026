@@ -17,6 +17,7 @@ import {
 import {
   BANK_INDEX,
   loadPapersByFilter,
+  loadChapterQuestionsComplete,
   type Question,
   type ChapterIndexEntry,
 } from '../lib/library';
@@ -99,6 +100,11 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
   // Selected Chapter Hub state
   const [selectedChapter, setSelectedChapter] = useState<ChapterIndexEntry | null>(null);
   const [chapterQuestions, setChapterQuestions] = useState<Question[]>([]);
+  const [chapterCategories, setChapterCategories] = useState<{
+    varsity: Question[];
+    mat: Question[];
+    predictor: Question[];
+  }>({ varsity: [], mat: [], predictor: [] });
   const [chapterLoading, setChapterLoading] = useState(false);
   const [formulaChapters, setFormulaChapters] = useState<FormulaChapterEntry[] | null>(null);
 
@@ -116,22 +122,28 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
     path: '/chapters',
   });
 
-  // Load chapter questions + formulas.json when a chapter grid box is clicked
+  // Load ALL chapter questions (bank + paper final + subject final + full mock + master + varsity/medical banks) + formulas.json
   useEffect(() => {
     if (!selectedChapter) return;
     let cancelled = false;
     setChapterLoading(true);
     setChapterQuestions([]);
+    setChapterCategories({ varsity: [], mat: [], predictor: [] });
 
     Promise.all([
-      loadPapersByFilter({ chapterId: selectedChapter.chapter_id }),
+      loadChapterQuestionsComplete(
+        selectedChapter.chapter_id,
+        selectedChapter.chapter_name,
+        selectedChapter.subject
+      ),
       formulaChapters
         ? Promise.resolve(formulaChapters)
         : import('../data/formulas.json').then((m) => (m.default?.chapters || m.chapters || []) as FormulaChapterEntry[]),
     ])
-      .then(([qs, fChapters]) => {
+      .then(([res, fChapters]) => {
         if (cancelled) return;
-        setChapterQuestions(qs);
+        setChapterQuestions(res.all);
+        setChapterCategories({ varsity: res.varsity, mat: res.mat, predictor: res.predictor });
         if (!formulaChapters) {
           setFormulaChapters(fChapters);
         }
@@ -174,16 +186,6 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
       })
       .sort((a, b) => b.count - a.count || b.years_hit - a.years_hit);
   }, [megaEntries, query, subject]);
-
-  // 3-category breakdown for selected chapter
-  const chapterCategories = useMemo(() => {
-    const varsity = chapterQuestions.filter((q) => q.exam !== 'mat');
-    const mat = chapterQuestions.filter((q) => q.exam === 'mat');
-    const predictor = chapterQuestions.filter(
-      (q) => (q.years_hit ?? 0) >= 2 || (q.likelihood_pct ?? 0) > 0 || q.source_type === 'paper_final'
-    );
-    return { varsity, mat, predictor };
-  }, [chapterQuestions]);
 
   // Match formulas for selected chapter
   const matchedFormulas = useMemo(() => {
@@ -267,7 +269,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
               {selectedChapter.subject}
             </span>
             <span className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-              মোট {selectedChapter.count}টি প্রশ্ন • {selectedChapter.years_hit} বছর
+              মোট {chapterLoading ? '...' : chapterQuestions.length || selectedChapter.count}টি প্রশ্ন • {selectedChapter.years_hit} বছর
             </span>
           </div>
         </div>
