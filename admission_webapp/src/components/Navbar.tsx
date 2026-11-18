@@ -115,8 +115,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   const showFilters =
     currentMode === 'weekly' ||
     currentMode === 'exam' ||
+    currentMode === 'subject_final' ||
     currentMode === 'decks' ||
-    currentMode === 'slides';
+    currentMode === 'slides' ||
+    currentMode === 'flashcards' ||
+    currentMode === 'vault';
 
   // Fix 4: Dynamic Tier badge counts from BANK_INDEX.papers (hide when 0)
   const countByType = (t: SourceType) =>
@@ -522,7 +525,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               return (
                 <button
                   key={subj.label}
-                  onClick={() => onSelectSubject(subj.label)}
+                  onClick={() => {
+                    onSelectSubject(subj.label);
+                    if (currentMode === 'decks' && subj.label !== 'All') {
+                      onSelectMode('exam');
+                    }
+                  }}
                   className={`px-3 py-1 text-xs font-semibold rounded-xl transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                     isActive
                       ? 'bg-emerald-600/15 text-emerald-800 dark:text-emerald-300 ring-1 ring-emerald-500/40 font-bold shadow-xs'

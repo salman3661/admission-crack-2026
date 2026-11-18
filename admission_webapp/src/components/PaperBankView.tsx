@@ -166,9 +166,35 @@ export const PaperBankView: React.FC<PaperBankViewProps> = ({
   const handleOpenPaper = async (paperPath: string) => {
     setLoadingPath(paperPath);
     try {
-      const qs = await loadPaper(paperPath);
+      let qs = await loadPaper(paperPath);
+      const wkNum =
+        selectedWeek && selectedWeek !== 'all' ? parseInt(selectedWeek.replace('week_', ''), 10) : null;
+      if (wkNum) qs = qs.filter((q) => q.week === wkNum);
+      if (selectedSubject !== 'All') qs = qs.filter((q) => q.subject === selectedSubject);
+      const wkBadge = wkNum ? ` · Week 0${wkNum}` : '';
+      const subjBadge = selectedSubject !== 'All' ? ` · ${SUBJECT_BN[selectedSubject] || selectedSubject}` : '';
       setActiveDrill({
-        title: paperPath.replace(/^bank\//, '').replace(/\.json$/, '').replace(/\//g, ' · '),
+        title: `${paperPath.replace(/^bank\//, '').replace(/\.json$/, '').replace(/\//g, ' · ')}${wkBadge}${subjBadge}`,
+        questions: qs,
+      });
+    } finally {
+      setLoadingPath(null);
+    }
+  };
+
+  const handleOpenFilteredDrill = async () => {
+    setLoadingPath('__filtered__');
+    try {
+      const qs = await loadPapersByFilter({
+        week: selectedWeek !== 'all' ? selectedWeek : undefined,
+        subject: selectedSubject !== 'All' ? selectedSubject : undefined,
+        sourceType: sourceFilter,
+        exam: examFilter !== 'track' && examFilter !== 'all' ? examFilter : undefined,
+      });
+      const wkLabel = selectedWeek !== 'all' ? `Week 0${selectedWeek.replace('week_', '')}` : '';
+      const subjLabel = selectedSubject !== 'All' ? SUBJECT_BN[selectedSubject] || selectedSubject : 'সব বিষয়';
+      setActiveDrill({
+        title: `${[wkLabel, subjLabel].filter(Boolean).join(' · ')} — ফিল্টার্ড ড্রিল`,
         questions: qs,
       });
     } finally {
@@ -186,7 +212,7 @@ export const PaperBankView: React.FC<PaperBankViewProps> = ({
         subject: selectedSubject,
       });
       setActiveDrill({
-        title: `Week 0${weekNum} — সাপ্তাহিক ড্রিল${selectedSubject !== 'All' ? ` (${selectedSubject})` : ''}`,
+        title: `Week 0${weekNum} — সাপ্তাহিক ড্রিল${selectedSubject !== 'All' ? ` (${SUBJECT_BN[selectedSubject] || selectedSubject})` : ''}`,
         questions: qs,
       });
     } finally {
@@ -243,6 +269,43 @@ export const PaperBankView: React.FC<PaperBankViewProps> = ({
           ))}
         </div>
       </div>
+
+      {/* Active Week / Subject Filter Banner */}
+      {(selectedWeek !== 'all' || selectedSubject !== 'All') && (
+        <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="text-xs font-bold text-emerald-900 dark:text-emerald-200 flex flex-wrap items-center gap-2">
+            <span>সক্রিয় ফিল্টার:</span>
+            {selectedWeek !== 'all' && (
+              <span className="px-2.5 py-1 rounded-lg bg-emerald-600 text-white">
+                Week 0{selectedWeek.replace('week_', '')}
+              </span>
+            )}
+            {selectedSubject !== 'All' && (
+              <span className="px-2.5 py-1 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900">
+                {SUBJECT_BN[selectedSubject] || selectedSubject}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            {selectedWeek !== 'all' && onSelectWeek && (
+              <button
+                onClick={() => onSelectWeek('all')}
+                className="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300 cursor-pointer"
+              >
+                সব সপ্তাহ দেখো
+              </button>
+            )}
+            <button
+              onClick={handleOpenFilteredDrill}
+              disabled={loadingPath === '__filtered__'}
+              className="px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            >
+              <Play className="w-3.5 h-3.5" />
+              {loadingPath === '__filtered__' ? 'লোড হচ্ছে...' : 'এই ফিল্টারের সব প্রশ্ন ড্রিল করো'}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Exam Filter Pills */}
       <div className="flex flex-wrap gap-1.5">

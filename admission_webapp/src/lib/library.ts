@@ -288,8 +288,7 @@ export async function loadPapersByFilter(opts: {
         return false;
       }
     } else if (opts.exam && opts.exam !== 'all') {
-      if (opts.exam === 'du_ka' && !p.exams.includes('du_ka') && !p.exams.includes('other')) return false;
-      if (opts.exam === 'mat' && !p.exams.includes('mat') && !p.exams.includes('other')) return false;
+      if (!p.exams.includes(opts.exam)) return false;
     }
     if (opts.sourceType && opts.sourceType !== 'all' && !p.source_types.includes(opts.sourceType)) {
       return false;
@@ -303,6 +302,12 @@ export async function loadPapersByFilter(opts: {
   const chunks = await Promise.all(matchingPapers.map((p) => loadPaper(p.path)));
   let all = dedupe(chunks.flat());
 
+  if (opts.exam && opts.exam !== 'all') {
+    all = all.filter((q) => q.exam === opts.exam);
+  }
+  if (opts.sourceType && opts.sourceType !== 'all') {
+    all = all.filter((q) => q.source_type === opts.sourceType);
+  }
   if (opts.subject && opts.subject !== 'All') {
     all = all.filter((q) => q.subject === opts.subject);
   }
