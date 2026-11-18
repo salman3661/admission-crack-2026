@@ -17,6 +17,9 @@ import type {
 // Route-level code splitting (Rule 2: < 500 KB gzip initial payload)
 const HomeHubView = lazy(() => import('./components/HomeHubView').then((m) => ({ default: m.HomeHubView })));
 const RealExamSimulator = lazy(() => import('./components/RealExamSimulator').then((m) => ({ default: m.RealExamSimulator })));
+const FullMockView = lazy(() => import('./components/FullMockView').then((m) => ({ default: m.FullMockView })));
+const PaperFinalView = lazy(() => import('./components/PaperFinalView').then((m) => ({ default: m.PaperFinalView })));
+const SubjectFinalView = lazy(() => import('./components/SubjectFinalView').then((m) => ({ default: m.SubjectFinalView })));
 const MasterSetView = lazy(() => import('./components/MasterSetView').then((m) => ({ default: m.MasterSetView })));
 const MistakeBookView = lazy(() => import('./components/MistakeBookView').then((m) => ({ default: m.MistakeBookView })));
 const WeaknessRadarView = lazy(() => import('./components/WeaknessRadarView').then((m) => ({ default: m.WeaknessRadarView })));
@@ -281,8 +284,9 @@ export function App() {
       case '/':
         return <HomeHubView activeTrack={activeTrack} onNavigate={navigate} />;
       case '/simulator':
-      case '/full-mock':
         return <RealExamSimulator activeTrack={activeTrack} onOpenMockTracker={() => navigate('/mock-tracker')} />;
+      case '/full-mock':
+        return <FullMockView activeTrack={activeTrack} />;
       case '/master-set':
       case '/predictor':
         return <MasterSetView activeTrack={activeTrack} />;
@@ -325,25 +329,13 @@ export function App() {
           />
         );
       case '/paper-final':
-        return (
-          <PaperBankView
-            title="Paper Final"
-            description="কোচিং এর পেপার ফাইনাল প্রশ্নব্যাংক।"
-            path="/paper-final"
-            defaultSourceType="paper_final"
-            activeTrack={activeTrack}
-            selectedSubject={selectedSubject}
-          />
-        );
+        return <PaperFinalView activeTrack={activeTrack} />;
       case '/subject-final':
         return (
-          <PaperBankView
-            title="Subject Final"
-            description="বিষয়ভিত্তিক ফাইনাল প্রশ্নব্যাংক।"
-            path="/subject-final"
-            defaultSourceType="subject_final"
+          <SubjectFinalView
             activeTrack={activeTrack}
             selectedSubject={selectedSubject}
+            onSelectSubject={setSelectedSubject}
           />
         );
       case '/bank':
