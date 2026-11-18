@@ -101,7 +101,10 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
   initialMonth = 'all'
 }) => {
   const [gkData, setGkData] = useState<MonthlyGKData>({ months: [], total_cards: 0, data: {}, cards: [] });
-  const [englishData, setEnglishData] = useState<EnglishBlueprintData>({ total_predictors: 0, clusters: {}, predictors: [] } as unknown as EnglishBlueprintData);
+  const [englishData, setEnglishData] = useState<EnglishBlueprintData>({
+    metadata: { title: '', subtitle: '', total_predictors: 0, clusters: [] },
+    predictors: [],
+  });
 
   useEffect(() => {
     import('../data/recent_gk_monthly.json').then((m) => setGkData(m.default as MonthlyGKData));
@@ -390,9 +393,9 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
           <div>
             <div className="text-[10px] text-slate-500 font-bold">মোট আয়ত্ত</div>
             <div className="text-xs font-black text-slate-900 dark:text-white font-mono">
-              {deckType === 'gk' 
-                ? `${masteredGkIds.size} / ${gkData.total_cards} (${Math.round((masteredGkIds.size / gkData.total_cards) * 100)}%)`
-                : `${masteredEngIds.size} / ${englishData.metadata.total_predictors} (${Math.round((masteredEngIds.size / englishData.metadata.total_predictors) * 100)}%)`}
+              {deckType === 'gk'
+                ? `${masteredGkIds.size} / ${gkData.total_cards || 0} (${gkData.total_cards ? Math.round((masteredGkIds.size / gkData.total_cards) * 100) : 0}%)`
+                : `${masteredEngIds.size} / ${englishData.metadata?.total_predictors ?? 0} (${englishData.metadata?.total_predictors ? Math.round((masteredEngIds.size / englishData.metadata.total_predictors) * 100) : 0}%)`}
             </div>
           </div>
         </div>
@@ -413,7 +416,7 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
         >
           <span>🇧🇩 সাম্প্রতিক সাধারণ জ্ঞান</span>
           <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${deckType === 'gk' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}>
-            {gkData.total_cards} কার্ডস
+            {gkData.total_cards || 0} কার্ডস
           </span>
         </button>
 
@@ -430,7 +433,7 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
         >
           <span>🇬🇧 শিওর-শট ইংলিশ প্রেডিক্টর</span>
           <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${deckType === 'english' ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'}`}>
-            {englishData.metadata.total_predictors} প্রশ্ন
+            {englishData.metadata?.total_predictors ?? 0} প্রশ্ন
           </span>
         </button>
       </div>
