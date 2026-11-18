@@ -49,6 +49,13 @@ export const PaperFinalView: React.FC<PaperFinalViewProps> = ({ activeTrack }) =
     setSelectedPaper('All');
   }, [activeTrack]);
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: Boolean(activeTest) }));
+    return () => {
+      window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: false }));
+    };
+  }, [activeTest]);
+
   const trackTests = useMemo(() => {
     return (bank.tests || []).filter((t) => t.track === activeTrack);
   }, [bank.tests, activeTrack]);

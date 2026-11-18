@@ -1,12 +1,89 @@
-import React, { useState, useMemo } from 'react';
-import { Layers, Search, Play, Sparkles, Calendar } from 'lucide-react';
-import { BANK_INDEX, loadPapersByFilter, type Question } from '../lib/library';
+import React, { useState, useMemo, useEffect } from 'react';
+import {
+  Layers,
+  Search,
+  Play,
+  Sparkles,
+  Calendar,
+  ArrowLeft,
+  GraduationCap,
+  Stethoscope,
+  TrendingUp,
+  Sigma,
+  Ruler,
+  AlertTriangle,
+  ChevronRight,
+} from 'lucide-react';
+import {
+  BANK_INDEX,
+  loadPapersByFilter,
+  type Question,
+  type ChapterIndexEntry,
+} from '../lib/library';
 import { DrillRunner } from './DrillRunner';
+import { MathText } from './MathText';
 import { useSEO } from '../lib/seo';
 
 interface ChapterExplorerViewProps {
   activeTrack: 'varsity' | 'medical';
   initialTab?: 'chapters' | 'topics' | 'weeks';
+}
+
+interface FormulaEntry {
+  formula: string;
+  count: number;
+  years_hit: number;
+  papers_hit: number;
+  confidence: string;
+  trap?: string;
+}
+
+interface FormulaChapterEntry {
+  chapter: string;
+  subject: string;
+  subjects?: string[];
+  formula_count: number;
+  formulas: FormulaEntry[];
+}
+
+const normalizeName = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[\s\-_()[\].,:।]+/g, '')
+    .trim();
+
+/** Extract dimension & unit snippets from chapter questions and formulas */
+function extractDimensionsAndUnits(questions: Question[], formulas: FormulaEntry[]): string[] {
+  const results = new Set<string>();
+  const dimPattern = /(\[?\s*M\s*\^?\{?-?\d*\}?\s*L\s*\^?\{?-?\d*\}?\s*T\s*\^?\{?-?\d*\}?[^\n।,;]*\]?)/gi;
+
+  for (const q of questions) {
+    const combined = `${q.question || ''}\n${q.explanation || ''}\n${q.trap || ''}`;
+    const lines = combined.split(/\r?\n|।/);
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+      if (!line || line.length > 160) continue;
+      if (
+        line.includes('মাত্রা') ||
+        line.includes('একক') ||
+        /\[M\s*L/i.test(line) ||
+        /ML\^?\{?-?\d/i.test(line)
+      ) {
+        results.add(line);
+      }
+      if (results.size >= 12) break;
+    }
+    if (results.size >= 12) break;
+  }
+
+  for (const f of formulas) {
+    if (dimPattern.test(f.formula) || (f.trap && (f.trap.includes('মাত্রা') || f.trap.includes('একক')))) {
+      results.add(`$${f.formula}$`);
+    }
+    if (results.size >= 15) break;
+  }
+
+  return Array.from(results).slice(0, 12);
 }
 
 export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
@@ -19,6 +96,12 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
   const [drill, setDrill] = useState<{ title: string; questions: Question[] } | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // Selected Chapter Hub state
+  const [selectedChapter, setSelectedChapter] = useState<ChapterIndexEntry | null>(null);
+  const [chapterQuestions, setChapterQuestions] = useState<Question[]>([]);
+  const [chapterLoading, setChapterLoading] = useState(false);
+  const [formulaChapters, setFormulaChapters] = useState<FormulaChapterEntry[] | null>(null);
+
   const megaEntries = useMemo(() => {
     const map = BANK_INDEX.by_mega_type || {};
     return Object.entries(map).map(([name, meta]) => ({
@@ -29,9 +112,38 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
 
   useSEO({
     title: 'Chapter & Topic Explorer (অধ্যায়, টপিক ও সপ্তাহভিত্তিক ড্রিল) | Admission Crack 2026',
-    description: `${BANK_INDEX.chapters.length}টি অধ্যায় এবং ${megaEntries.length}টি টপিক (mega_type) ভিত্তিক প্রশ্নসংখ্যা, কত বছরে এসেছে এবং ২৬–২৭ প্রত্যাশিত MCQ।`,
+    description: `${BANK_INDEX.chapters.length}টি অধ্যায় এবং ${megaEntries.length}টি টপিক (mega_type) ভিত্তিক প্রশ্নসংখ্যা, Varsity/MAT/Predictor ড্রিল এবং সূত্র ও মাত্রা এক নজরে।`,
     path: '/chapters',
   });
+
+  // Load chapter questions + formulas.json when a chapter grid box is clicked
+  useEffect(() => {
+    if (!selectedChapter) return;
+    let cancelled = false;
+    setChapterLoading(true);
+    setChapterQuestions([]);
+
+    Promise.all([
+      loadPapersByFilter({ chapterId: selectedChapter.chapter_id }),
+      formulaChapters
+        ? Promise.resolve(formulaChapters)
+        : import('../data/formulas.json').then((m) => (m.default?.chapters || m.chapters || []) as FormulaChapterEntry[]),
+    ])
+      .then(([qs, fChapters]) => {
+        if (cancelled) return;
+        setChapterQuestions(qs);
+        if (!formulaChapters) {
+          setFormulaChapters(fChapters);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setChapterLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedChapter, formulaChapters]);
 
   const subjects = useMemo(() => ['All', ...new Set(BANK_INDEX.chapters.map((c) => c.subject))], []);
 
@@ -63,15 +175,44 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
       .sort((a, b) => b.count - a.count || b.years_hit - a.years_hit);
   }, [megaEntries, query, subject]);
 
-  const handleDrillChapter = async (chapterId: string, chapterName: string) => {
-    setLoading(true);
-    try {
-      const qs = await loadPapersByFilter({ chapterId });
-      setDrill({ title: chapterName, questions: qs });
-    } finally {
-      setLoading(false);
+  // 3-category breakdown for selected chapter
+  const chapterCategories = useMemo(() => {
+    const varsity = chapterQuestions.filter((q) => q.exam !== 'mat');
+    const mat = chapterQuestions.filter((q) => q.exam === 'mat');
+    const predictor = chapterQuestions.filter(
+      (q) => (q.years_hit ?? 0) >= 2 || (q.likelihood_pct ?? 0) > 0 || q.source_type === 'paper_final'
+    );
+    return { varsity, mat, predictor };
+  }, [chapterQuestions]);
+
+  // Match formulas for selected chapter
+  const matchedFormulas = useMemo(() => {
+    if (!selectedChapter || !formulaChapters) return [];
+    const targetName = normalizeName(selectedChapter.chapter_name);
+    const matched = formulaChapters.find(
+      (fc) =>
+        normalizeName(fc.chapter) === targetName &&
+        (fc.subject === selectedChapter.subject || fc.subjects?.includes(selectedChapter.subject))
+    ) || formulaChapters.find((fc) => normalizeName(fc.chapter).includes(targetName) || targetName.includes(normalizeName(fc.chapter)));
+
+    return matched?.formulas || [];
+  }, [selectedChapter, formulaChapters]);
+
+  const dimensionsAndUnits = useMemo(
+    () => extractDimensionsAndUnits(chapterQuestions, matchedFormulas),
+    [chapterQuestions, matchedFormulas]
+  );
+
+  const uniqueTraps = useMemo(() => {
+    const set = new Set<string>();
+    for (const f of matchedFormulas) {
+      if (f.trap && f.trap.trim()) set.add(f.trap.trim());
     }
-  };
+    for (const q of chapterQuestions) {
+      if (q.trap && q.trap.trim() && set.size < 8) set.add(q.trap.trim());
+    }
+    return Array.from(set).slice(0, 6);
+  }, [matchedFormulas, chapterQuestions]);
 
   const handleDrillTopic = async (megaType: string) => {
     setLoading(true);
@@ -109,6 +250,228 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
     );
   }
 
+  // Chapter Hub View (when a chapter grid box is clicked)
+  if (selectedChapter) {
+    return (
+      <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <button
+            onClick={() => setSelectedChapter(null)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" /> সকল অধ্যায় (Grid)
+          </button>
+
+          <div className="flex items-center gap-2 text-xs font-bold">
+            <span className="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">
+              {selectedChapter.subject}
+            </span>
+            <span className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              মোট {selectedChapter.count}টি প্রশ্ন • {selectedChapter.years_hit} বছর
+            </span>
+          </div>
+        </div>
+
+        {/* Chapter Hero */}
+        <div className="bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-indigo-500/10 border border-emerald-500/20 rounded-3xl p-5 sm:p-6">
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+            {selectedChapter.chapter_name}
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+            প্রত্যাশিত MCQ: <strong className="text-emerald-600 dark:text-emerald-400">{activeTrack === 'medical' ? selectedChapter.expected_mcq_mat : selectedChapter.expected_mcq_du_ka}</strong> ({selectedChapter.predicted_pct}%) • নিচে ৩টি ক্যাটাগরি থেকে ড্রিল শুরু করুন অথবা এক নজরে সূত্র ও মাত্রা দেখুন।
+          </p>
+        </div>
+
+        {/* 3 Categories: Varsity / MAT / Predictor */}
+        <div>
+          <h2 className="text-sm font-extrabold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-emerald-600" /> ৩টি ক্যাটাগরিতে অনুশীলন
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            {/* Varsity */}
+            <div className="bg-white dark:bg-slate-900 border border-indigo-200 dark:border-indigo-900/50 rounded-2xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5" />
+                  </span>
+                  <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300">
+                    {chapterLoading ? '...' : `${chapterCategories.varsity.length} প্রশ্ন`}
+                  </span>
+                </div>
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Varsity (DU / RU / CU / GST)</h3>
+                <p className="text-[11px] text-slate-500 mt-1">বিশ্ববিদ্যালয় ভর্তি পরীক্ষার বিগত ও মডেল প্রশ্ন</p>
+              </div>
+              <button
+                disabled={chapterLoading || chapterCategories.varsity.length === 0}
+                onClick={() =>
+                  setDrill({
+                    title: `${selectedChapter.chapter_name} — Varsity`,
+                    questions: chapterCategories.varsity,
+                  })
+                }
+                className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40"
+              >
+                <Play className="w-3.5 h-3.5" /> Varsity ড্রিল
+              </button>
+            </div>
+
+            {/* MAT */}
+            <div className="bg-white dark:bg-slate-900 border border-rose-200 dark:border-rose-900/50 rounded-2xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+                    <Stethoscope className="w-5 h-5" />
+                  </span>
+                  <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300">
+                    {chapterLoading ? '...' : `${chapterCategories.mat.length} প্রশ্ন`}
+                  </span>
+                </div>
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">MAT (Medical)</h3>
+                <p className="text-[11px] text-slate-500 mt-1">মেডিকেল ও ডেন্টাল ভর্তি পরীক্ষার প্রশ্নাবলি</p>
+              </div>
+              <button
+                disabled={chapterLoading || chapterCategories.mat.length === 0}
+                onClick={() =>
+                  setDrill({
+                    title: `${selectedChapter.chapter_name} — MAT`,
+                    questions: chapterCategories.mat,
+                  })
+                }
+                className="w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40"
+              >
+                <Play className="w-3.5 h-3.5" /> MAT ড্রিল
+              </button>
+            </div>
+
+            {/* Predictor */}
+            <div className="bg-white dark:bg-slate-900 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5" />
+                  </span>
+                  <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300">
+                    {chapterLoading ? '...' : `${chapterCategories.predictor.length} প্রশ্ন`}
+                  </span>
+                </div>
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Predictor (২৬–২৭)</h3>
+                <p className="text-[11px] text-slate-500 mt-1">বারবার আসা ও হাই-ইয়েল্ড সম্ভাব্য প্রশ্ন</p>
+              </div>
+              <button
+                disabled={chapterLoading || chapterCategories.predictor.length === 0}
+                onClick={() =>
+                  setDrill({
+                    title: `${selectedChapter.chapter_name} — Predictor`,
+                    questions: chapterCategories.predictor,
+                  })
+                }
+                className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40"
+              >
+                <Play className="w-3.5 h-3.5" /> Predictor ড্রিল
+              </button>
+            </div>
+          </div>
+
+          {chapterQuestions.length > 0 && (
+            <button
+              onClick={() =>
+                setDrill({
+                  title: `${selectedChapter.chapter_name} — সব প্রশ্ন`,
+                  questions: chapterQuestions,
+                })
+              }
+              className="mt-3 w-full py-2.5 rounded-xl bg-slate-900 dark:bg-emerald-600 hover:opacity-95 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <Play className="w-3.5 h-3.5" /> এই অধ্যায়ের সব প্রশ্ন একসাথে ড্রিল ({chapterQuestions.length}টি)
+            </button>
+          )}
+        </div>
+
+        {/* At-a-Glance Dimensions & Units (মাত্রা ও একক) */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-3">
+          <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+            <Ruler className="w-4 h-4 text-cyan-600" /> মাত্রা ও একক এক নজরে (Dimensions & Units)
+          </h2>
+          {chapterLoading ? (
+            <p className="text-xs text-slate-500">লোড হচ্ছে...</p>
+          ) : dimensionsAndUnits.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {dimensionsAndUnits.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 rounded-xl bg-cyan-50/60 dark:bg-cyan-950/20 border border-cyan-200/70 dark:border-cyan-900/40 text-xs text-slate-800 dark:text-slate-200 leading-relaxed"
+                >
+                  <MathText content={item} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-slate-500">
+              এই অধ্যায়ে আলাদা মাত্রা/একক তথ্য নেই — নিচের সূত্রগুলো দেখুন।
+            </p>
+          )}
+        </div>
+
+        {/* At-a-Glance Formulas (সূত্র এক নজরে) */}
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+              <Sigma className="w-4 h-4 text-emerald-600" /> অধ্যায়ের গুরুত্বপূর্ণ সূত্র এক নজরে
+            </h2>
+            <span className="text-[11px] font-bold text-slate-500">
+              {matchedFormulas.length}টি সূত্র
+            </span>
+          </div>
+
+          {chapterLoading ? (
+            <p className="text-xs text-slate-500">সূত্র লোড হচ্ছে...</p>
+          ) : matchedFormulas.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              {matchedFormulas.slice(0, 18).map((f, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700/80 flex flex-col justify-between gap-1.5"
+                >
+                  <div className="text-sm font-bold text-slate-900 dark:text-white overflow-x-auto">
+                    <MathText content={`$${f.formula}$`} />
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-slate-500 font-semibold">
+                    <span>{f.years_hit} বছর এসেছে</span>
+                    <span className="px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                      ×{f.count}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-slate-500">এই অধ্যায়ের জন্য সংরক্ষিত সূত্র এখনো যুক্ত হয়নি।</p>
+          )}
+        </div>
+
+        {/* Common Traps */}
+        {uniqueTraps.length > 0 && (
+          <div className="bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 rounded-3xl p-5 space-y-2.5">
+            <h2 className="text-sm font-extrabold text-amber-900 dark:text-amber-300 flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4" /> পরীক্ষার সাধারণ ভুল (Common Traps)
+            </h2>
+            <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+              {uniqueTraps.map((t, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-amber-600 font-black">•</span>
+                  <div className="flex-1">
+                    <MathText content={t} />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   const maxTopicCount = Math.max(25, ...filteredTopics.map((t) => t.count));
 
   return (
@@ -119,11 +482,11 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
             <Layers className="w-6 h-6 text-emerald-600" /> অধ্যায় · টপিক · সপ্তাহ ড্রিল
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            {BANK_INDEX.chapters.length}টি অধ্যায় • {megaEntries.length}টি টপিক (mega_type) • ৯টি সপ্তাহ — সরাসরি ড্রিল করো।
+            যেকোনো অধ্যায় বক্সে ক্লিক করলে Varsity / MAT / Predictor ৩ ক্যাটাগরি এবং সূত্র ও মাত্রা এক নজরে পাবেন।
           </p>
         </div>
 
-        {/* F21: 3-way Switcher (Chapters / Topics / Weeks) */}
+        {/* 3-way Switcher (Chapters / Topics / Weeks) */}
         <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl">
           <button
             onClick={() => setViewTab('chapters')}
@@ -131,7 +494,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
               viewTab === 'chapters' ? 'bg-emerald-600 text-white' : 'text-slate-600 dark:text-slate-300'
             }`}
           >
-            🗂 অধ্যায় ({BANK_INDEX.chapters.length})
+            🗂 অধ্যায় গ্রিড ({BANK_INDEX.chapters.length})
           </button>
           <button
             onClick={() => setViewTab('topics')}
@@ -139,7 +502,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
               viewTab === 'topics' ? 'bg-emerald-600 text-white' : 'text-slate-600 dark:text-slate-300'
             }`}
           >
-            🧩 টপিক অনুযায়ী ({megaEntries.length})
+            🧩 টপিক ({megaEntries.length})
           </button>
           <button
             onClick={() => setViewTab('weeks')}
@@ -147,7 +510,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
               viewTab === 'weeks' ? 'bg-emerald-600 text-white' : 'text-slate-600 dark:text-slate-300'
             }`}
           >
-            📅 সপ্তাহভিত্তিক (৯)
+            📅 সপ্তাহ (৯)
           </button>
         </div>
       </div>
@@ -185,39 +548,32 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
       </div>
 
       {viewTab === 'chapters' && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {chapters.map((c) => (
-            <div
+            <button
               key={`${c.subject}||${c.chapter_id}`}
-              className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between gap-3"
+              onClick={() => setSelectedChapter(c)}
+              className="group text-left bg-white dark:bg-slate-900 hover:border-emerald-500 dark:hover:border-emerald-500 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between gap-3 transition-all shadow-sm hover:shadow-md cursor-pointer"
             >
-              <div>
-                <div className="flex items-center justify-between text-[11px] mb-1.5">
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-bold">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between gap-1 text-[10px]">
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-bold truncate">
                     {c.subject}
                   </span>
-                  <span className="text-slate-500 font-semibold">{c.count} প্রশ্ন</span>
+                  <span className="text-slate-500 font-bold shrink-0">{c.count} Q</span>
                 </div>
-                <h2 className="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">
+                <h2 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white leading-snug line-clamp-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
                   {c.chapter_name}
                 </h2>
-                <div className="text-[11px] text-slate-500 mt-1.5">
-                  এসেছে: <strong>{c.years_hit}</strong> বছরে · <strong>{c.papers_hit}</strong> পেপারে
-                </div>
-                <div className="text-[11px] text-emerald-700 dark:text-emerald-400 font-bold mt-1">
-                  প্রত্যাশিত MCQ: {activeTrack === 'medical' ? c.expected_mcq_mat : c.expected_mcq_du_ka} (
-                  {c.predicted_pct}%)
-                </div>
               </div>
 
-              <button
-                disabled={loading}
-                onClick={() => handleDrillChapter(c.chapter_id, c.chapter_name)}
-                className="w-full py-2 rounded-xl bg-slate-900 dark:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
-              >
-                <Play className="w-3.5 h-3.5" /> এই chapter ড্রিল করো
-              </button>
-            </div>
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold">
+                <span className="text-emerald-700 dark:text-emerald-400">
+                  MCQ: {activeTrack === 'medical' ? c.expected_mcq_mat : c.expected_mcq_du_ka} ({c.predicted_pct}%)
+                </span>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </button>
           ))}
         </div>
       )}

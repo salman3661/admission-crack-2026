@@ -175,11 +175,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white font-['Outfit'] whitespace-nowrap">
+          <div className="flex items-center gap-1 min-w-0">
+            <span className="text-xs sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white font-['Outfit'] whitespace-nowrap truncate">
               Admission Crack
             </span>
-            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-['Outfit']">
+            <span className="hidden sm:inline-block px-1.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-['Outfit']">
               2026
             </span>
           </div>
@@ -190,27 +190,27 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center bg-slate-100/90 dark:bg-slate-800/90 p-1 rounded-2xl border border-slate-200/90 dark:border-slate-700/80 shadow-xs">
             <button
               onClick={() => onSelectTrack('varsity')}
-              className={`px-2.5 sm:px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+              className={`px-2 sm:px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95 ${
                 activeTrack === 'varsity'
                   ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm shadow-emerald-600/30 ring-1 ring-emerald-400/40'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="ভার্সিটি 'ক' ট্র্যাক (DU 'Ka')"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
               <span className="hidden sm:inline">ভার্সিটি 'ক'</span>
               <span className="sm:hidden text-[11px]">ভার্সিটি</span>
             </button>
             <button
               onClick={() => onSelectTrack('medical')}
-              className={`px-2.5 sm:px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+              className={`px-2 sm:px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95 ${
                 activeTrack === 'medical'
                   ? 'bg-gradient-to-r from-rose-600 to-red-600 text-white shadow-sm shadow-rose-600/30 ring-1 ring-rose-400/40'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="মেডিকেল ট্র্যাক (MAT)"
             >
-              <span className="w-2 h-2 rounded-full bg-rose-300 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-300 animate-pulse" />
               <span className="hidden sm:inline">মেডিকেল</span>
               <span className="sm:hidden text-[11px]">মেডি</span>
             </button>
@@ -261,7 +261,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Right Controls: Theme Toggle + F18 Account Corner Dropdown */}
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           <button
             onClick={onToggleTheme}
             className="p-2 rounded-xl bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-amber-400 hover:text-slate-900 dark:hover:text-amber-300 ring-1 ring-slate-200/80 dark:ring-slate-700 transition-all shadow-xs active:scale-95 cursor-pointer"
@@ -279,19 +279,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsDropdownOpen((prev) => !prev)}
-              className="flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-slate-100/90 dark:bg-slate-800/90 ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-[#056839] dark:hover:ring-emerald-500/50 transition-all shadow-xs active:scale-95 cursor-pointer"
+              className="flex items-center gap-1.5 py-1 px-2 sm:px-2.5 rounded-full bg-slate-100/90 dark:bg-slate-800/90 ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-[#056839] dark:hover:ring-emerald-500/50 transition-all shadow-xs active:scale-95 cursor-pointer"
               title="অ্যাকাউন্ট ও প্রগতি (F18)"
             >
-              <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-extrabold">
+              <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-extrabold shrink-0">
                 <User className="w-3.5 h-3.5" />
               </div>
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[75px] truncate">
+              <span className="hidden sm:inline text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[75px] truncate">
                 {user.name ? user.name.split(' ')[0] : 'সালমান'}
               </span>
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 w-80 backdrop-blur-2xl bg-white/95 dark:bg-slate-900/95 rounded-3xl shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 p-4 z-50 space-y-3 text-xs">
+              <div className="fixed sm:absolute right-3 sm:right-0 top-14 sm:top-full sm:mt-2 w-[calc(100vw-1.5rem)] max-w-80 backdrop-blur-2xl bg-white/95 dark:bg-slate-900/95 rounded-3xl shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 p-4 z-50 space-y-3 text-xs">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
                   <div>
                     <div className="font-extrabold text-sm text-slate-900 dark:text-white">

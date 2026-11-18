@@ -154,9 +154,12 @@ export function App() {
     return normalizePath(window.location.pathname);
   });
 
+  const [isExamFocus, setIsExamFocus] = useState(false);
+
   const navigate = (path: string) => {
     const clean = normalizePath(path);
     setCurrentPath(clean);
+    setIsExamFocus(false);
     if (normalizePath(window.location.pathname) !== clean) {
       window.history.pushState(null, '', clean);
     }
@@ -168,9 +171,20 @@ export function App() {
   };
 
   useEffect(() => {
-    const onPop = () => setCurrentPath(normalizePath(window.location.pathname));
+    const onPop = () => {
+      setCurrentPath(normalizePath(window.location.pathname));
+      setIsExamFocus(false);
+    };
+    const onFocus = (e: Event) => {
+      const custom = e as CustomEvent<boolean>;
+      setIsExamFocus(Boolean(custom.detail));
+    };
     window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    window.addEventListener('ac-exam-focus', onFocus);
+    return () => {
+      window.removeEventListener('popstate', onPop);
+      window.removeEventListener('ac-exam-focus', onFocus);
+    };
   }, []);
 
   const [selectedWeek, setSelectedWeek] = useState<WeekFilterType>('all');
@@ -385,24 +399,26 @@ export function App() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F6F8F6] dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-['Hind_Siliguri'] antialiased transition-colors duration-200">
-      <Navbar
-        currentMode={currentMode}
-        onSelectMode={handleSelectMode}
-        onNavigate={navigate}
-        selectedWeek={selectedWeek}
-        onSelectWeek={setSelectedWeek}
-        selectedSubject={selectedSubject}
-        onSelectSubject={setSelectedSubject}
-        theme={theme}
-        onToggleTheme={() => setTheme((p) => (p === 'dark' ? 'light' : 'dark'))}
-        user={user}
-        onOpenAuth={() => setIsAuthModalOpen(true)}
-        onLogout={handleLogout}
-        activeTrack={activeTrack}
-        onSelectTrack={handleSelectTrack}
-      />
+      {!isExamFocus && (
+        <Navbar
+          currentMode={currentMode}
+          onSelectMode={handleSelectMode}
+          onNavigate={navigate}
+          selectedWeek={selectedWeek}
+          onSelectWeek={setSelectedWeek}
+          selectedSubject={selectedSubject}
+          onSelectSubject={setSelectedSubject}
+          theme={theme}
+          onToggleTheme={() => setTheme((p) => (p === 'dark' ? 'light' : 'dark'))}
+          user={user}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
+          onLogout={handleLogout}
+          activeTrack={activeTrack}
+          onSelectTrack={handleSelectTrack}
+        />
+      )}
 
-      <main className="flex-1 overflow-x-hidden pb-32">
+      <main className={`flex-1 overflow-x-hidden ${isExamFocus ? 'pb-4' : 'pb-28'}`}>
         <Suspense
           fallback={
             <div className="max-w-3xl mx-auto px-4 py-16 text-center text-sm text-slate-500">
@@ -414,7 +430,14 @@ export function App() {
         </Suspense>
       </main>
 
-      <BottomNav currentMode={currentMode} onSelectMode={handleSelectMode} />
+      {!isExamFocus && (
+        <BottomNav
+          currentMode={currentMode}
+          currentPath={currentPath}
+          onSelectMode={handleSelectMode}
+          onNavigate={navigate}
+        />
+      )}
 
       <AuthModal
         isOpen={isAuthModalOpen}

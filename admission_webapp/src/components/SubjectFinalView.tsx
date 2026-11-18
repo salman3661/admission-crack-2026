@@ -89,6 +89,13 @@ export const SubjectFinalView: React.FC<SubjectFinalViewProps> = ({
     setPage(0);
   }, [selectedChapter, searchQuery]);
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: isMockActive }));
+    return () => {
+      window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: false }));
+    };
+  }, [isMockActive]);
+
   // Extract chapters for current subject
   const availableChapters = useMemo(() => {
     const base =

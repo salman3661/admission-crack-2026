@@ -61,6 +61,14 @@ export const RealExamSimulator: React.FC<RealExamSimulatorProps> = ({ activeTrac
   });
 
   useEffect(() => {
+    const isRunning = phase !== 'setup';
+    window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: isRunning }));
+    return () => {
+      window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: false }));
+    };
+  }, [phase]);
+
+  useEffect(() => {
     if (phase !== 'mcq') return;
     const t = setInterval(() => {
       setMcqSecondsLeft((s) => {

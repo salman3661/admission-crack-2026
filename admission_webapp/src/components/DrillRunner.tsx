@@ -63,6 +63,13 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
   const bookmarked = q ? isBookmarked(q.id) : false;
 
   useEffect(() => {
+    window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: true }));
+    return () => {
+      window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: false }));
+    };
+  }, []);
+
+  useEffect(() => {
     setElapsed(0);
     if (!q || showSummary) return;
     const t = setInterval(() => setElapsed((s) => s + 1), 1000);
@@ -181,52 +188,56 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
   const overTime = !q.is_written && elapsed > softTimerSec;
 
   return (
-    <div className="max-w-3xl mx-auto px-3 sm:px-4 py-6">
-      {/* Header */}
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <div className="flex items-center gap-2 min-w-0">
-          {onBack && (
-            <button
-              onClick={onBack}
-              className="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 cursor-pointer shrink-0"
-              title="ফিরে যাও"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-          )}
-          <div className="min-w-0">
-            <h1 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white truncate">{title}</h1>
-            {subtitle && <p className="text-xs text-slate-500 truncate">{subtitle}</p>}
+    <div className="min-h-screen flex flex-col">
+      {/* Sticky Compact Exam Header */}
+      <div className="sticky top-0 z-30 backdrop-blur-md bg-white/95 dark:bg-slate-950/95 border-b border-slate-200/80 dark:border-slate-800/80">
+        <div className="max-w-3xl mx-auto px-3 sm:px-4 py-2.5">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <div className="flex items-center gap-2 min-w-0">
+              {onBack && (
+                <button
+                  onClick={onBack}
+                  className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-200/70 cursor-pointer shrink-0"
+                  title="ফিরে যাও"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+              )}
+              <div className="min-w-0">
+                <h1 className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white truncate">{title}</h1>
+                {subtitle && <p className="text-[11px] text-slate-500 truncate">{subtitle}</p>}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 shrink-0">
+              <span
+                className={`flex items-center gap-1 px-2 py-1 rounded-xl text-[11px] font-bold border ${
+                  overTime
+                    ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-300'
+                    : 'bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800'
+                }`}
+              >
+                <Clock className="w-3 h-3" />
+                {elapsed}s {!q.is_written && `/ ${softTimerSec}s`}
+              </span>
+              <span className="px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-extrabold border border-emerald-200 dark:border-emerald-800/50">
+                {idx + 1} / {questions.length}
+              </span>
+            </div>
+          </div>
+
+          <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
+              style={{ width: `${((idx + 1) / questions.length) * 100}%` }}
+            />
           </div>
         </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          <span
-            className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-bold border ${
-              overTime
-                ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-300'
-                : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            <Clock className="w-3.5 h-3.5" />
-            {elapsed}s {!q.is_written && `/ ${softTimerSec}s`}
-          </span>
-          <span className="px-2.5 py-1 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-extrabold border border-emerald-200 dark:border-emerald-800/50">
-            {idx + 1} / {questions.length}
-          </span>
-        </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden mb-5">
-        <div
-          className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
-          style={{ width: `${((idx + 1) / questions.length) * 100}%` }}
-        />
-      </div>
-
-      {/* Question Card */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-5 sm:p-7 shadow-sm">
+      <div className="max-w-3xl w-full mx-auto px-3 sm:px-4 py-4 pb-24 flex-1">
+        {/* Question Card */}
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-4 sm:p-7 shadow-sm">
         {/* F13 + F19: Provenance / Theory of the question + Bookmark Star */}
         <div className="flex items-start justify-between gap-2 mb-4">
           <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
@@ -386,19 +397,36 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
           </div>
         )}
 
-        {/* Navigation Footer */}
-        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+        </div>
+      </div>
+
+      {/* Fixed Bottom Navigation Bar (Never Jumps) */}
+      <div className="fixed bottom-0 inset-x-0 z-30 backdrop-blur-md bg-white/95 dark:bg-slate-950/95 border-t border-slate-200/80 dark:border-slate-800/80 pb-[env(safe-area-inset-bottom)]">
+        <div className="max-w-3xl mx-auto px-3 sm:px-4 py-2.5 flex items-center justify-between gap-3">
           <button
-            onClick={() => setIdx((i) => Math.max(0, i - 1))}
+            onClick={() => {
+              setIdx((i) => Math.max(0, i - 1));
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             disabled={idx === 0}
             className="flex items-center gap-1 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold disabled:opacity-40 cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" /> আগেরটি
           </button>
 
+          <button
+            onClick={() => setShowSummary(true)}
+            className="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer"
+          >
+            ফলাফল ({answeredMcqs.length}/{mcqQuestions.length})
+          </button>
+
           {idx < questions.length - 1 ? (
             <button
-              onClick={() => setIdx((i) => Math.min(questions.length - 1, i + 1))}
+              onClick={() => {
+                setIdx((i) => Math.min(questions.length - 1, i + 1));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="flex items-center gap-1 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold cursor-pointer"
             >
               পরেরটি <ChevronRight className="w-4 h-4" />
@@ -408,7 +436,7 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
               onClick={() => setShowSummary(true)}
               className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold cursor-pointer"
             >
-              ফলাফল দেখো
+              শেষ করো
             </button>
           )}
         </div>

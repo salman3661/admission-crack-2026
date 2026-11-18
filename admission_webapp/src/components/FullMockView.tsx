@@ -46,6 +46,13 @@ export const FullMockView: React.FC<FullMockViewProps> = ({ activeTrack }) => {
     setActiveMock(null);
   }, [activeTrack]);
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: Boolean(activeMock) }));
+    return () => {
+      window.dispatchEvent(new CustomEvent('ac-exam-focus', { detail: false }));
+    };
+  }, [activeMock]);
+
   const startMock = (mock: PredictorSet) => {
     setActiveMock(mock);
     setExamTab('mcq');
