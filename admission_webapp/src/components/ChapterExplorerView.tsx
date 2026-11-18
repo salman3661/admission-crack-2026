@@ -19,8 +19,8 @@ import {
   loadPapersByFilter,
   loadChapterQuestionsComplete,
   type Question,
-  type ChapterIndexEntry,
 } from '../lib/library';
+import { buildCanonicalChapters, type CanonicalChapterGroup } from '../lib/chapterCatalog';
 import { DrillRunner } from './DrillRunner';
 import { MathText } from './MathText';
 import { useSEO } from '../lib/seo';
@@ -98,7 +98,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
   const [loading, setLoading] = useState(false);
 
   // Selected Chapter Hub state
-  const [selectedChapter, setSelectedChapter] = useState<ChapterIndexEntry | null>(null);
+  const [selectedChapter, setSelectedChapter] = useState<CanonicalChapterGroup | null>(null);
   const [chapterQuestions, setChapterQuestions] = useState<Question[]>([]);
   const [chapterCategories, setChapterCategories] = useState<{
     varsity: Question[];
@@ -107,6 +107,8 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
   }>({ varsity: [], mat: [], predictor: [] });
   const [chapterLoading, setChapterLoading] = useState(false);
   const [formulaChapters, setFormulaChapters] = useState<FormulaChapterEntry[] | null>(null);
+
+  const canonicalChapters = useMemo(() => buildCanonicalChapters(), []);
 
   const megaEntries = useMemo(() => {
     const map = BANK_INDEX.by_mega_type || {};
@@ -118,7 +120,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
 
   useSEO({
     title: 'Chapter & Topic Explorer (অধ্যায়, টপিক ও সপ্তাহভিত্তিক ড্রিল) | Admission Crack 2026',
-    description: `${BANK_INDEX.chapters.length}টি অধ্যায় এবং ${megaEntries.length}টি টপিক (mega_type) ভিত্তিক প্রশ্নসংখ্যা, Varsity/MAT/Predictor ড্রিল এবং সূত্র ও মাত্রা এক নজরে।`,
+    description: `${canonicalChapters.length}টি সুবিন্যস্ত অধ্যায় এবং ${megaEntries.length}টি টপিক (mega_type) ভিত্তিক প্রশ্নসংখ্যা, Varsity/MAT/Predictor ড্রিল এবং সূত্র ও মাত্রা এক নজরে।`,
     path: '/chapters',
   });
 
@@ -132,9 +134,10 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
 
     Promise.all([
       loadChapterQuestionsComplete(
-        selectedChapter.chapter_id,
+        selectedChapter.merged_chapter_ids,
         selectedChapter.chapter_name,
-        selectedChapter.subject
+        selectedChapter.subject,
+        selectedChapter.match_keywords
       ),
       formulaChapters
         ? Promise.resolve(formulaChapters)
@@ -157,18 +160,22 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
     };
   }, [selectedChapter, formulaChapters]);
 
-  const subjects = useMemo(() => ['All', ...new Set(BANK_INDEX.chapters.map((c) => c.subject))], []);
+  const subjects = useMemo(() => ['All', ...new Set(canonicalChapters.map((c) => c.subject))], [canonicalChapters]);
 
   const chapters = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return BANK_INDEX.chapters
-      .filter((c) => {
-        if (subject !== 'All' && c.subject !== subject) return false;
-        if (q && !c.chapter_name.toLowerCase().includes(q) && !c.chapter_id.toLowerCase().includes(q)) return false;
-        return true;
-      })
-      .sort((a, b) => b.predicted_pct - a.predicted_pct || b.count - a.count);
-  }, [query, subject]);
+    return canonicalChapters.filter((c) => {
+      if (subject !== 'All' && c.subject !== subject) return false;
+      if (
+        q &&
+        !c.chapter_name.toLowerCase().includes(q) &&
+        !c.match_keywords.some((kw) => kw.toLowerCase().includes(q))
+      ) {
+        return false;
+      }
+      return true;
+    });
+  }, [canonicalChapters, query, subject]);
 
   const filteredTopics = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -496,7 +503,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
               viewTab === 'chapters' ? 'bg-emerald-600 text-white' : 'text-slate-600 dark:text-slate-300'
             }`}
           >
-            🗂 অধ্যায় গ্রিড ({BANK_INDEX.chapters.length})
+            🗂 অধ্যায় গ্রিড ({canonicalChapters.length})
           </button>
           <button
             onClick={() => setViewTab('topics')}
@@ -553,7 +560,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {chapters.map((c) => (
             <button
-              key={`${c.subject}||${c.chapter_id}`}
+              key={c.key}
               onClick={() => setSelectedChapter(c)}
               className="group text-left bg-white dark:bg-slate-900 hover:border-emerald-500 dark:hover:border-emerald-500 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between gap-3 transition-all shadow-sm hover:shadow-md cursor-pointer"
             >
@@ -562,7 +569,9 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
                   <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-bold truncate">
                     {c.subject}
                   </span>
-                  <span className="text-slate-500 font-bold shrink-0">{c.count} Q</span>
+                  <span className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold shrink-0">
+                    {c.paper}
+                  </span>
                 </div>
                 <h2 className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white leading-snug line-clamp-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
                   {c.chapter_name}
@@ -571,7 +580,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
 
               <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold">
                 <span className="text-emerald-700 dark:text-emerald-400">
-                  MCQ: {activeTrack === 'medical' ? c.expected_mcq_mat : c.expected_mcq_du_ka} ({c.predicted_pct}%)
+                  {c.count}+ Q • MCQ: {activeTrack === 'medical' ? c.expected_mcq_mat : c.expected_mcq_du_ka}
                 </span>
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-transform" />
               </div>

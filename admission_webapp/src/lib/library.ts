@@ -990,9 +990,10 @@ const cleanBnChapter = (s: string) =>
     .toLowerCase();
 
 export async function loadChapterQuestionsComplete(
-  chapterId: string,
+  chapterIds: string | string[],
   chapterName: string,
-  subject: string
+  subject: string,
+  matchKeywords: string[] = []
 ): Promise<{
   all: Question[];
   varsity: Question[];
@@ -1001,14 +1002,20 @@ export async function loadChapterQuestionsComplete(
 }> {
   const [bankAll, extPool] = await Promise.all([loadAllBankQuestions(), loadExtendedBankPool()]);
   const targetClean = cleanBnChapter(chapterName);
-  const targetId = chapterId.trim().toLowerCase();
+  const idSet = new Set(
+    (Array.isArray(chapterIds) ? chapterIds : [chapterIds]).map((id) => id.trim().toLowerCase())
+  );
+  const kwList = matchKeywords.map((k) => cleanBnChapter(k)).filter((k) => k.length >= 2);
 
   const matchesChapter = (qChapterId: string, qChapterName: string, qSubject: string) => {
-    if (qChapterId.trim().toLowerCase() === targetId) return true;
     if (normalizeSubject(qSubject) !== normalizeSubject(subject)) return false;
+    if (idSet.has(qChapterId.trim().toLowerCase())) return true;
     const cand = cleanBnChapter(qChapterName);
-    if (!cand || !targetClean) return false;
-    return cand === targetClean || cand.includes(targetClean) || targetClean.includes(cand);
+    if (!cand) return false;
+    if (targetClean && (cand === targetClean || cand.includes(targetClean) || targetClean.includes(cand))) {
+      return true;
+    }
+    return kwList.some((kw) => cand.includes(kw));
   };
 
   const bankMatches = bankAll
