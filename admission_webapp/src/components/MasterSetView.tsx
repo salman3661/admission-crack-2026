@@ -44,6 +44,20 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
     }
   };
 
+  const handleOpenPhysics1Master = async () => {
+    setLoading(true);
+    try {
+      const mod = await import('../data/master/physics_1st_master.json');
+      const raw = (mod.default || []) as Question[];
+      setActiveSet({
+        label: "Physics 1st Paper Master Set — Udvash + DU + MAT Upgrade (50 MCQ)",
+        questions: raw,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (activeSet) {
     return (
       <DrillRunner
@@ -132,7 +146,33 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
         </div>
       </div>
 
-      {/* Calibrated Physics 2nd Paper Master Set */}
+      {/* Calibrated Physics 1st & 2nd Paper Master Sets */}
+      <div className="bg-gradient-to-r from-indigo-50 to-emerald-50 dark:from-indigo-950/40 dark:to-emerald-950/30 rounded-3xl border border-indigo-200 dark:border-indigo-800/60 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-600 text-white">
+              Upgraded • Udvash + DU + MAT
+            </span>
+            <span className="text-xs font-black text-indigo-700 dark:text-indigo-300">
+              ৫০ হাই-ইয়েল্ড MCQ
+            </span>
+          </div>
+          <h2 className="text-base font-extrabold text-slate-900 dark:text-white">
+            ⚛️ Physics 1st Paper Master Set (গ্যাপ-ফিলড আপগ্রেড)
+          </h2>
+          <p className="text-xs text-slate-600 dark:text-slate-300 max-w-2xl">
+            আসল Udvash Physics-I Paper Final বিশ্লেষণ করে মিসিং প্যাটার্ন (স্ক্রু গজ, পুলি, দড়ির টান, সাবানের ফিল্ম, ট্যাংক খালি, স্যাটেলাইট ও তরঙ্গ) সহ সব ১০ অধ্যায়ের আপগ্রেডেড সেট।
+          </p>
+        </div>
+        <button
+          onClick={handleOpenPhysics1Master}
+          disabled={loading}
+          className="px-5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shrink-0 disabled:opacity-50"
+        >
+          <Play className="w-3.5 h-3.5" /> ১ম পত্র সেট শুরু করো
+        </button>
+      </div>
+
       {exam === 'du_ka' && (
         <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/30 rounded-3xl border border-emerald-200 dark:border-emerald-800/60 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
