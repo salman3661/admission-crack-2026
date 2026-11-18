@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/Navbar';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
@@ -446,6 +447,8 @@ export function App() {
         onLogin={handleLogin}
         onLogout={handleLogout}
       />
+
+      <Analytics />
     </div>
   );
 }
