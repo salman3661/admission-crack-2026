@@ -65,9 +65,17 @@ def quota(w, caps, total=60):
 def interleave(items, key, rnd):
     items = items[:]; rnd.shuffle(items); out = []
     while items:
+        rem = collections.Counter(key(x) for x in items)
+        best_i = None
+        best_cnt = -1
         for i, it in enumerate(items):
-            if len(out) < 2 or not (key(out[-1]) == key(it) == key(out[-2])) and key(out[-1]) != key(it):
-                out.append(items.pop(i)); break
+            k = key(it)
+            if not out or k != key(out[-1]):
+                if rem[k] > best_cnt:
+                    best_cnt = rem[k]
+                    best_i = i
+        if best_i is not None:
+            out.append(items.pop(best_i))
         else:
             out.append(items.pop(0))
     return out

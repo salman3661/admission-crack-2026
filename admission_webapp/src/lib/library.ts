@@ -19,6 +19,7 @@ export interface Question {
   exam: ExamSlug;
   exam_year: number | null;
   exam_date?: string | null;
+  week?: number | null;
   subject: CanonicalSubject;
   chapter_id: string;
   chapter_name: string;
@@ -49,6 +50,7 @@ export interface PaperIndexEntry {
   exams: string[];
   subjects: string[];
   source_types: string[];
+  weeks?: number[];
 }
 
 export interface ChapterIndexEntry {
@@ -64,6 +66,14 @@ export interface ChapterIndexEntry {
   expected_mcq_mat: number;
 }
 
+export interface MegaTypeIndexEntry {
+  count: number;
+  years_hit: number;
+  chapter: string;
+  chapter_id: string;
+  subject: string;
+}
+
 export interface BankIndex {
   generated_at: string;
   total_questions: number;
@@ -73,6 +83,7 @@ export interface BankIndex {
   by_subject: Record<string, number>;
   by_source_type: Record<string, number>;
   by_week: Record<string, number>;
+  by_mega_type?: Record<string, MegaTypeIndexEntry>;
   master_sets: Record<string, number>;
   papers: PaperIndexEntry[];
   chapters: ChapterIndexEntry[];
@@ -86,6 +97,7 @@ const masterModules = import.meta.glob('../data/master/*.json');
 
 const paperCache = new Map<string, Question[]>();
 const masterCache = new Map<string, Question[]>();
+let allBankCache: Question[] | null = null;
 
 const SUBJECT_MAP: Record<string, CanonicalSubject> = {
   physics: 'Physics',
@@ -124,6 +136,19 @@ export function normalizeExam(raw?: string): ExamSlug {
   return EXAM_MAP[key] || 'other';
 }
 
+// A1: Authoritative week extractor (id-prefix first, source_name fallback)
+export function questionWeek(q: Partial<Question>): number | null {
+  if (typeof q.week === 'number' && q.week >= 1 && q.week <= 9) return q.week;
+  const m = /^w(\d)(?:_|\b)/i.exec(String(q.id || ''));
+  if (m) return parseInt(m[1], 10);
+  const s = /(?:^|[\s\-/])(?:week(?:ly)?[\s\-]*0?(\d)|w[\-\s]?0?(\d)|[\w]0(\d)\b)/i.exec(String(q.source_name || ''));
+  if (s) {
+    const n = parseInt(s[1] || s[2] || s[3], 10);
+    if (n >= 1 && n <= 9) return n;
+  }
+  return null;
+}
+
 export function normalize(rows: Partial<Question>[]): Question[] {
   return rows.map((r, idx) => {
     const options = Array.isArray(r.options) ? r.options.filter((o) => String(o).trim().length > 0) : [];
@@ -141,6 +166,7 @@ export function normalize(rows: Partial<Question>[]): Question[] {
       exam: normalizeExam(r.exam),
       exam_year: typeof r.exam_year === 'number' ? r.exam_year : null,
       exam_date: r.exam_date ?? null,
+      week: questionWeek(r),
       subject: normalizeSubject(r.subject),
       chapter_id: String(r.chapter_id || 'unclassified').trim().toLowerCase(),
       chapter_name: String(r.chapter_name || r.chapter_id || 'অনির্ধারিত'),
@@ -176,8 +202,8 @@ export function dedupe(rows: Question[]): Question[] {
       continue;
     }
 
-    const textKey = row.question.replace(/\s+/g, ' ').trim().toLowerCase();
-    if (textKey.length > 30 && byText.has(textKey)) {
+    const textKey = row.question.replace(/\s+/g, ' ').trim().toLowerCase().slice(0, 140);
+    if (textKey.length > 0 && byText.has(textKey)) {
       const existing = byText.get(textKey)!;
       const merged = new Set([...(existing.appears_in || [existing.source_name]), ...(row.appears_in || [row.source_name])]);
       existing.appears_in = [...merged];
@@ -186,7 +212,7 @@ export function dedupe(rows: Question[]): Question[] {
 
     const copy = { ...row };
     byId.set(copy.id, copy);
-    if (textKey.length > 30) {
+    if (textKey.length > 0) {
       byText.set(textKey, copy);
     }
   }
@@ -229,15 +255,39 @@ export async function loadMasterSet(exam: 'du_ka' | 'mat', set: 'set_a' | 'set_b
   return processed;
 }
 
+export async function loadAllBankQuestions(): Promise<Question[]> {
+  if (allBankCache) return allBankCache;
+  const chunks = await Promise.all(BANK_INDEX.papers.map((p) => loadPaper(p.path)));
+  const userAdded = getUserAddedQuestions();
+  allBankCache = dedupe([...chunks.flat(), ...userAdded]);
+  return allBankCache;
+}
+
 export async function loadPapersByFilter(opts: {
   exam?: string;
   sourceType?: SourceType | 'all';
   subject?: string;
   chapterId?: string;
+  megaType?: string;
   week?: string;
+  questionIds?: string[];
 }): Promise<Question[]> {
+  if (opts.questionIds && opts.questionIds.length > 0) {
+    const allQ = await loadAllBankQuestions();
+    const idSet = new Set(opts.questionIds);
+    return allQ.filter((q) => idSet.has(q.id));
+  }
+
+  const targetWeekNum =
+    opts.week && opts.week !== 'all' ? parseInt(opts.week.replace('week_', ''), 10) : null;
+
   const matchingPapers = BANK_INDEX.papers.filter((p) => {
-    if (opts.exam && opts.exam !== 'all') {
+    // When filtering by a specific week, include all papers that contain that week
+    if (targetWeekNum) {
+      if (Array.isArray(p.weeks) && p.weeks.length > 0 && !p.weeks.includes(targetWeekNum)) {
+        return false;
+      }
+    } else if (opts.exam && opts.exam !== 'all') {
       if (opts.exam === 'du_ka' && !p.exams.includes('du_ka') && !p.exams.includes('other')) return false;
       if (opts.exam === 'mat' && !p.exams.includes('mat') && !p.exams.includes('other')) return false;
     }
@@ -259,10 +309,11 @@ export async function loadPapersByFilter(opts: {
   if (opts.chapterId) {
     all = all.filter((q) => q.chapter_id === opts.chapterId);
   }
-  if (opts.week && opts.week !== 'all') {
-    const wkNum = opts.week.replace('week_', '');
-    const re = new RegExp(`Week\\s*0?${parseInt(wkNum, 10)}\\b`, 'i');
-    all = all.filter((q) => re.test(q.source_name));
+  if (opts.megaType) {
+    all = all.filter((q) => String(q.mega_type || '').trim() === opts.megaType);
+  }
+  if (targetWeekNum) {
+    all = all.filter((q) => questionWeek(q) === targetWeekNum);
   }
   return all;
 }
@@ -469,6 +520,7 @@ export interface ChapterStat {
   attempted: number;
   correct: number;
   marksLost: number;
+  week?: number | null;
 }
 
 export function getAttemptStats(): Record<string, ChapterStat> {
@@ -490,6 +542,7 @@ export function recordAttemptStat(q: Question, isCorrect: boolean, negativePenal
     attempted: 0,
     correct: 0,
     marksLost: 0,
+    week: questionWeek(q),
   };
   cur.attempted += 1;
   if (isCorrect) {
@@ -500,8 +553,24 @@ export function recordAttemptStat(q: Question, isCorrect: boolean, negativePenal
   stats[key] = cur;
   try {
     localStorage.setItem(ATTEMPT_STATS_KEY, JSON.stringify(stats));
+    // Also record per-question solved ID for progress bar
+    const solvedRaw = localStorage.getItem('ac_solved_qids_v1');
+    const solved: Record<string, { correct: boolean; week: number | null; ts: number }> = solvedRaw
+      ? JSON.parse(solvedRaw)
+      : {};
+    solved[q.id] = { correct: isCorrect, week: questionWeek(q), ts: Date.now() };
+    localStorage.setItem('ac_solved_qids_v1', JSON.stringify(solved));
   } catch {
     // ignore
+  }
+}
+
+export function getSolvedQuestionsMap(): Record<string, { correct: boolean; week: number | null; ts: number }> {
+  try {
+    const raw = localStorage.getItem('ac_solved_qids_v1');
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
   }
 }
 
@@ -562,4 +631,231 @@ export function deleteMockTrackerEntry(id: string): MockTrackerEntry[] {
     // ignore
   }
   return list;
+}
+
+// ── F19: BOOKMARKS ──
+const BOOKMARKS_KEY = 'ac_bookmarks_v1';
+
+export interface Bookmark {
+  questionId: string;
+  createdAt: number;
+  source: 'drill' | 'master_set' | 'bank' | 'simulator' | 'matcher' | 'formula';
+  setId?: string;
+  exam: 'du_ka' | 'mat';
+  subject: string;
+  chapter: string;
+  chapter_id?: string;
+  question: string;
+  options: string[];
+  correct_index: number | null;
+  explanation: string;
+  trap: string;
+  is_written: boolean;
+  source_name: string;
+  exam_year: number | null;
+  mega_type?: string | null;
+  note?: string;
+  tags: string[];
+}
+
+export function getBookmarks(): Bookmark[] {
+  try {
+    const raw = localStorage.getItem(BOOKMARKS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveBookmarks(list: Bookmark[]) {
+  try {
+    localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(list));
+  } catch {
+    // ignore
+  }
+}
+
+export function isBookmarked(questionId: string): boolean {
+  return getBookmarks().some((b) => b.questionId === questionId);
+}
+
+export function toggleBookmark(
+  q: Question,
+  source: Bookmark['source'] = 'drill',
+  setId?: string
+): { bookmarks: Bookmark[]; added: boolean } {
+  const list = getBookmarks();
+  const idx = list.findIndex((b) => b.questionId === q.id);
+  if (idx >= 0) {
+    const next = list.filter((b) => b.questionId !== q.id);
+    saveBookmarks(next);
+    return { bookmarks: next, added: false };
+  }
+  const item: Bookmark = {
+    questionId: q.id,
+    createdAt: Date.now(),
+    source,
+    setId,
+    exam: q.exam === 'mat' ? 'mat' : 'du_ka',
+    subject: q.subject,
+    chapter: q.chapter_name,
+    chapter_id: q.chapter_id,
+    question: q.question,
+    options: q.options,
+    correct_index: q.correct_index,
+    explanation: q.explanation,
+    trap: q.trap,
+    is_written: q.is_written,
+    source_name: q.source_name,
+    exam_year: q.exam_year,
+    mega_type: q.mega_type,
+    note: '',
+    tags: [],
+  };
+  const next = [item, ...list];
+  saveBookmarks(next);
+  return { bookmarks: next, added: true };
+}
+
+export function updateBookmarkMeta(
+  questionId: string,
+  patch: { note?: string; tags?: string[] }
+): Bookmark[] {
+  const list = getBookmarks().map((b) =>
+    b.questionId === questionId ? { ...b, ...patch } : b
+  );
+  saveBookmarks(list);
+  return list;
+}
+
+export function removeBookmark(questionId: string): Bookmark[] {
+  const next = getBookmarks().filter((b) => b.questionId !== questionId);
+  saveBookmarks(next);
+  return next;
+}
+
+export function bookmarkToQuestion(b: Bookmark): Question {
+  return {
+    id: b.questionId,
+    source_type: 'past_paper',
+    source_name: b.source_name || 'Bookmark',
+    exam: b.exam,
+    exam_year: b.exam_year ?? null,
+    subject: normalizeSubject(b.subject),
+    chapter_id: b.chapter_id || 'unclassified',
+    chapter_name: b.chapter || 'অনির্ধারিত',
+    mega_type: b.mega_type ?? null,
+    question: b.question,
+    options: b.options || [],
+    correct_index: b.correct_index,
+    explanation: b.explanation || '',
+    trap: b.trap || '',
+    is_written: Boolean(b.is_written) || (b.options || []).length === 0,
+    marks: b.is_written ? 5 : 1,
+    duration_sec: b.is_written ? 240 : 45,
+  };
+}
+
+// ── F17: USER-ADDED QUESTIONS (from Practice-Question Matcher) ──
+const USER_QUESTIONS_KEY = 'ac_user_added_questions_v1';
+
+export function getUserAddedQuestions(): Question[] {
+  try {
+    const raw = localStorage.getItem(USER_QUESTIONS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function addUserQuestion(q: Question): Question[] {
+  const list = getUserAddedQuestions();
+  const next = [q, ...list.filter((x) => x.id !== q.id)];
+  try {
+    localStorage.setItem(USER_QUESTIONS_KEY, JSON.stringify(next));
+    allBankCache = null;
+  } catch {
+    // ignore
+  }
+  return next;
+}
+
+// ── F18: SYNC ADAPTER INTERFACE (Local-first, honest status) ──
+export interface SyncState {
+  updatedAt: number;
+  targetExam: 'du_ka' | 'mat';
+  targetScore: number;
+  bookmarks: Bookmark[];
+  errorLog: ErrorLogEntry[];
+  attemptStats: Record<string, ChapterStat>;
+  mockTracker: MockTrackerEntry[];
+  userAddedQuestions: Question[];
+}
+
+export interface SyncAdapter {
+  id: string;
+  labelBn: string;
+  get(): Promise<SyncState>;
+  put(state: SyncState): Promise<void>;
+  user(): { id: string; name: string } | null;
+}
+
+export const LocalStorageAdapter: SyncAdapter = {
+  id: 'local',
+  labelBn: 'স্থানীয় (এই ডিভাইসে)',
+  async get(): Promise<SyncState> {
+    const targetExam = localStorage.getItem('admission_track') === 'medical' ? 'mat' : 'du_ka';
+    const targetScore = Number(localStorage.getItem('ac_target_score_v1') || 80);
+    const updatedAt = Number(localStorage.getItem('ac_last_sync_ts') || Date.now());
+    return {
+      updatedAt,
+      targetExam,
+      targetScore,
+      bookmarks: getBookmarks(),
+      errorLog: getErrorLog(),
+      attemptStats: getAttemptStats(),
+      mockTracker: getMockTracker(),
+      userAddedQuestions: getUserAddedQuestions(),
+    };
+  },
+  async put(state: SyncState): Promise<void> {
+    const now = Date.now();
+    localStorage.setItem('ac_last_sync_ts', String(now));
+    localStorage.setItem('admission_track', state.targetExam === 'mat' ? 'medical' : 'varsity');
+    localStorage.setItem('ac_target_score_v1', String(state.targetScore || 80));
+    saveBookmarks(state.bookmarks || []);
+    saveErrorLog(state.errorLog || []);
+    localStorage.setItem(ATTEMPT_STATS_KEY, JSON.stringify(state.attemptStats || {}));
+    localStorage.setItem(MOCK_TRACKER_KEY, JSON.stringify(state.mockTracker || []));
+    localStorage.setItem(USER_QUESTIONS_KEY, JSON.stringify(state.userAddedQuestions || []));
+  },
+  user() {
+    try {
+      const raw = localStorage.getItem('admission_user');
+      if (!raw) return null;
+      const u = JSON.parse(raw);
+      return u?.name ? { id: u.email || 'local', name: u.name } : null;
+    } catch {
+      return null;
+    }
+  },
+};
+
+export const adapters: Record<string, SyncAdapter> = {
+  local: LocalStorageAdapter,
+};
+
+export function resetAllLocalProgress() {
+  const keys = [
+    BOOKMARKS_KEY,
+    ERROR_LOG_KEY,
+    ATTEMPT_STATS_KEY,
+    MOCK_TRACKER_KEY,
+    USER_QUESTIONS_KEY,
+    'ac_solved_qids_v1',
+    'ac_written_drafts_v1',
+    'ac_last_sync_ts',
+  ];
+  keys.forEach((k) => localStorage.removeItem(k));
+  allBankCache = null;
 }

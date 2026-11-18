@@ -5,6 +5,7 @@
   "source_name": "DU '13-14",
   "exam": "du_ka",
   "exam_year": 2013,
+  "week": 1,
   "subject": "Physics",
   "chapter_id": "ন_উটন_য_বলব_দ_য",
   "chapter_name": "নিউটনীয় বলবিদ্যা",
@@ -26,6 +27,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '13-14"
+  ],
   "set": "set_b",
   "slot": "Physics #1",
   "likelihood_pct": 13.71,
@@ -40,6 +44,7 @@
   "source_name": "DU '13-14",
   "exam": "du_ka",
   "exam_year": 2013,
+  "week": 2,
   "subject": "Physics",
   "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
   "chapter_name": "মহাকর্ষ ও অভিকর্ষ",
@@ -61,6 +66,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '13-14"
+  ],
   "set": "set_b",
   "slot": "Physics #2",
   "likelihood_pct": 12.62,
@@ -75,6 +83,7 @@
   "source_name": "DU '17-18 Hubohu",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 5,
   "subject": "Physics",
   "chapter_id": "তরঙ_গ",
   "chapter_name": "তরঙ্গ",
@@ -96,6 +105,9 @@
   "probability_label": "94%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '17-18 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Physics #3",
   "likelihood_pct": 11.93,
@@ -110,6 +122,7 @@
   "source_name": "CU '20",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 3,
   "subject": "Physics",
   "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
   "chapter_name": "কাজ, শক্তি ও ক্ষমতা",
@@ -131,6 +144,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "CU '20"
+  ],
   "set": "set_b",
   "slot": "Physics #4",
   "likelihood_pct": 11.61,
@@ -145,6 +161,7 @@
   "source_name": "CU '20",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 1,
   "subject": "Physics",
   "chapter_id": "ভ_ক_টর",
   "chapter_name": "ভেক্টর",
@@ -166,6 +183,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "CU '20"
+  ],
   "set": "set_b",
   "slot": "Physics #5",
   "likelihood_pct": 11.03,
@@ -175,39 +195,43 @@
   "source_weight": 0.85
  },
  {
-  "id": "w3_phy_q18",
-  "source_type": "past_paper",
-  "source_name": "MAT '18 Direct",
+  "id": "w7_var_phy_07",
+  "source_type": "weekly_solve",
+  "source_name": "W-07 Daily Exam P-07 Set-A Q19",
   "exam": "du_ka",
-  "exam_year": 2018,
+  "exam_year": null,
+  "week": 7,
   "subject": "Physics",
   "chapter_id": "আধ_ন_ক_পদ_র_থব_জ_ঞ_ন_র_স_চন",
   "chapter_name": "আধুনিক পদার্থবিজ্ঞানের সূচনা",
   "chapter_raw": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)",
-  "mega_type": "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)",
-  "question": "[MAT '18 Direct] ইলেকট্রনের গতিশক্তি দ্বিগুণ করলে তার ডি-ব্রগলি তরঙ্গদৈর্ঘ্য কত গুণ হবে?",
+  "mega_type": "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)",
+  "question": "যদি একটি প্রোটনের গতিশক্তি তার নিশ্চল ভরশক্তি $m_0 c^2$ এর সমান হয়, তবে প্রোটনটির ভরবেগের মান কত হবে?",
   "options": [
-   "$\\sqrt{2}$ গুণ",
-   "$1/\\sqrt{2}$ গুণ",
-   "২ গুণ",
-   "৪ গুণ"
+   "$\\sqrt{2}m_0 c$",
+   "$2m_0 c$",
+   "$\\sqrt{3}m_0 c$",
+   "$m_0 c$"
   ],
-  "correct_index": 1,
-  "explanation": "$\\lambda \\propto 1/\\sqrt{E_k}$।",
-  "trap": "ব্যস্তানুপাতিক সম্পর্ক ভুলে সমানুপাতিক ধরে $\\sqrt{2}$ গুণ দাগানো।",
+  "correct_index": 2,
+  "explanation": "মোট শক্তি $E = E_k + E_0 = m_0 c^2 + m_0 c^2 = 2m_0 c^2$। আবার আইনস্টাইনের ভর-শক্তি-ভরবেগ সম্পর্ক: $E^2 = p^2 c^2 + E_0^2 \\implies (2m_0 c^2)^2 = p^2 c^2 + (m_0 c^2)^2 \\implies 4m_0^2 c^4 = p^2 c^2 + m_0^2 c^4 \\implies p^2 c^2 = 3m_0^2 c^4 \\implies p = \\sqrt{3}m_0 c$।",
+  "trap": "আপেক্ষিক সূত্রের বদলে চিরায়ত গতিশক্তির সূত্র $p = \\sqrt{2m_0 E_k}$ বসিয়ে ভুলবশত $\\sqrt{2}m_0 c$ দাগানো।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
-  "probability_label": "90% Varsity Standard Repeat",
-  "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
+  "probability_label": "98% Speed Hack",
+  "source_book": "W-07 Varsity (Udvash).pdf",
   "bank_type": "varsity",
+  "appears_in": [
+   "W-07 Daily Exam P-07 Set-A Q19"
+  ],
   "set": "set_b",
   "slot": "Physics #6",
   "likelihood_pct": 10.18,
   "expected_mcq_in_paper": 1.53,
   "years_hit": 5,
   "papers_hit": 5,
-  "source_weight": 0.85
+  "source_weight": 0.7
  },
  {
   "id": "w5_var_002",
@@ -215,6 +239,7 @@
   "source_name": "DU '20-21 / RU '23-24",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 5,
   "subject": "Physics",
   "chapter_id": "পর_য_য_ব_ত_ত_গত",
   "chapter_name": "পর্যায়বৃত্ত গতি",
@@ -236,6 +261,9 @@
   "probability_label": "95%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '20-21 / RU '23-24"
+  ],
   "set": "set_b",
   "slot": "Physics #7",
   "likelihood_pct": 7.41,
@@ -250,6 +278,7 @@
   "source_name": "DU '14-15",
   "exam": "du_ka",
   "exam_year": 2014,
+  "week": 1,
   "subject": "Physics",
   "chapter_id": "গত_ব_দ_য_ও_প_রক_ষ_পক",
   "chapter_name": "গতিবিদ্যা ও প্রক্ষেপক",
@@ -271,6 +300,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '14-15"
+  ],
   "set": "set_b",
   "slot": "Physics #8",
   "likelihood_pct": 6.1,
@@ -285,6 +317,7 @@
   "source_name": "DU '17-18 Repeat",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 4,
   "subject": "Physics",
   "chapter_id": "পদ_র_থ_র_গ_ঠন_ক_ধর_ম",
   "chapter_name": "পদার্থের গাঠনিক ধর্ম",
@@ -306,6 +339,9 @@
   "probability_label": "94%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '17-18 Repeat"
+  ],
   "set": "set_b",
   "slot": "Physics #9",
   "likelihood_pct": 3.16,
@@ -315,39 +351,43 @@
   "source_weight": 0.85
  },
  {
-  "id": "w7_med_phy_02",
-  "source_type": "past_paper",
-  "source_name": "MAT '22 Direct Line",
+  "id": "w7_var_phy_03",
+  "source_type": "weekly_solve",
+  "source_name": "W-07 Weekly Exam Set-C Q09",
   "exam": "du_ka",
-  "exam_year": 2022,
+  "exam_year": null,
+  "week": 7,
   "subject": "Physics",
   "chapter_id": "স_থ_র_তড_ৎ",
   "chapter_name": "স্থির তড়িৎ",
   "chapter_raw": "স্থির তড়িৎ (Electrostatics)",
-  "mega_type": "Type 4: তড়িৎ নিরপেক্ষ বিন্দু ও বিভব/প্রাবল্যের শূন্যমান",
-  "question": "[MAT '22 Direct] একটি আহিত পরিবাহী গোলকের অভ্যন্তরে যেকোনো বিন্দুতে তড়িৎ প্রাবল্য ও তড়িৎ বিভব কীরূপ থাকে?",
+  "mega_type": "Type 1: সমান্তরাল পাত ধারক ও ধাতব পাত স্থাপন",
+  "question": "একটি ধারকের ধারকত্বের মান অপর একটি ধারকের মানের অর্ধেক। ধারক দুটি সমান্তরাল সমবায়ে যুক্ত থাকাকালীন তুল্য ধারকত্ব, শ্রেণি সমবায়ে থাকাকালীন তুল্য ধারকত্বের কত গুণ হবে?",
   "options": [
-   "প্রাবল্য ও বিভব উভয়ই অসীম",
-   "প্রাবল্য সর্বোচ্চ কিন্তু বিভব শূন্য",
-   "প্রাবল্য ও বিভব উভয়ই শূন্য",
-   "প্রাবল্য শূন্য ($E=0$) কিন্তু বিভব পৃষ্ঠের বিভবের সমান ও ধ্রুবক"
+   "$9.0$ গুণ",
+   "$2.0$ গুণ",
+   "$4.5$ গুণ",
+   "$3.0$ গুণ"
   ],
-  "correct_index": 3,
-  "explanation": "চার্জ সর্বদা পরিবাহীর বাইরের পৃষ্ঠে অবস্থান করে। ফলে অভ্যন্তরে কোনো বলরেখা বা মুক্ত চার্জ থাকে না ($E=0$)। যেহেতু $E = -\\frac{dV}{dr} = 0$, তাই গোলকের ভেতরে কেন্দ্র হতে পৃষ্ঠ পর্যন্ত বিভব সর্বত্র সমান ও পৃষ্ঠের বিভবের সমান থাকে। [ইসহাক স্যার-২০২৬, পৃ-৯৫]",
-  "trap": "গোলকের অভ্যন্তরে তড়িৎ প্রাবল্য শূন্য দেখে তড়িৎ বিভবও শূন্য হবে ভেবে ৩য় অপশন দাগানো।",
+  "correct_index": 2,
+  "explanation": "ধরি ধারক দুটির মান $C$ এবং $2C$। সমান্তরাল সমবায়ে তুল্য ধারকত্ব $C_p = C + 2C = 3C$। শ্রেণি সমবায়ে তুল্য ধারকত্ব $C_s = \\frac{C \\times 2C}{C + 2C} = \\frac{2}{3}C$। অনুপাত $\\frac{C_p}{C_s} = \\frac{3C}{\\frac{2}{3}C} = \\frac{9}{2} = 4.5$ গুণ।",
+  "trap": "দুটি সমান ধারকের অনুপাত ($2^2 = 4$ গুণ)-এর সাথে গুলিয়ে অথবা হরের $2$ দিয়ে ভাগ না করে সরাসরি $9.0$ গুণ দাগানো।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
-  "probability_label": "99% Direct MAT Line",
-  "source_book": "আমীর হোসেন খান ও ইসহাক স্যার",
-  "bank_type": "medical",
+  "probability_label": "97% Speed Hack",
+  "source_book": "W-07 Varsity (Udvash).pdf",
+  "bank_type": "varsity",
+  "appears_in": [
+   "W-07 Weekly Exam Set-C Q09"
+  ],
   "set": "set_b",
   "slot": "Physics #10",
   "likelihood_pct": 2.91,
   "expected_mcq_in_paper": 0.44,
   "years_hit": 2,
   "papers_hit": 2,
-  "source_weight": 0.85
+  "source_weight": 0.7
  },
  {
   "id": "du_rep_phy_04",
@@ -355,6 +395,7 @@
   "source_name": "DU '21-22 Repeat",
   "exam": "du_ka",
   "exam_year": 2021,
+  "week": null,
   "subject": "Physics",
   "chapter_id": "ন_উটন_য_বলব_দ_য",
   "chapter_name": "নিউটনীয় বলবিদ্যা",
@@ -376,6 +417,9 @@
   "probability_label": "96% Repeat Rate",
   "source_book": "ইসহাক স্যার (পদার্থবিজ্ঞান ১ম পত্র)",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '21-22 Repeat"
+  ],
   "set": "set_b",
   "slot": "Physics #11",
   "likelihood_pct": 13.71,
@@ -385,32 +429,36 @@
   "source_weight": 0.85
  },
  {
-  "id": "w3_var_sol_019",
+  "id": "w5_rep_018",
   "source_type": "past_paper",
-  "source_name": "Daily Exam P-03 Set-A Q08",
+  "source_name": "MAT '22 / DU '23-24 Repeat",
   "exam": "du_ka",
-  "exam_year": null,
+  "exam_year": 2022,
+  "week": 5,
   "subject": "Physics",
   "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
   "chapter_name": "মহাকর্ষ ও অভিকর্ষ",
   "chapter_raw": "মহাকর্ষ ও অভিকর্ষ (Gravitation & Gravity)",
   "mega_type": "Type 1: উচ্চতা ও গভীরতায় অভিকর্ষজ ত্বরণ ($g$)",
-  "question": "পৃথিবীর অভ্যন্তরে কত গভীরতায় গেলে অভিকর্ষজ ত্বরণের মান ভূপৃষ্ঠের মানের অর্ধেক ($g/2$) হবে? ($R = \\text{ব্যাসার্ধ}$)",
+  "question": "[DU-MAT Repeat] প্রকৃতিতে বিদ্যমান চারটি মৌলিক বলের মধ্যে কোনটির পাল্লা অসীম (Infinite) কিন্তু আপেক্ষিক তীব্রতা সবচেয়ে দুর্বল?",
   "options": [
-   "$\\frac{R}{2}$",
-   "$\\frac{R}{4}$",
-   "$\\frac{3R}{4}$",
-   "$R$"
+   "মহাকর্ষ বল (Gravitational force)",
+   "দুর্বল নিউক্লীয় বল",
+   "তড়িৎচৌম্বক বল",
+   "সবল নিউক্লীয় বল"
   ],
   "correct_index": 0,
-  "explanation": "$g_d = g(1 - d/R)$। $\\frac{g}{2} = g(1 - d/R) \\implies 1 - d/R = 1/2 \\implies d = R/2$।",
-  "trap": "উচ্চতার বর্গের ব্যস্তানুপাতিক সম্পর্কের সাথে গভীরতার রৈখিক সম্পর্ক গুলিয়ে ফেলা।",
+  "explanation": "মৌলিক বলের তুলনা সারণি: ১. মহাকর্ষ বল: আপেক্ষিক সবলতা ১ (সবচেয়ে দুর্বল), পাল্লা অসীম, মধ্যস্থতাকারী কণা গ্র্যাভিটন; ২. দুর্বল নিউক্লীয় বল: সবলতা $10^{30}$, পাল্লা $10^{-18}\\text{ m}$, কণা বোসন ($W^+, W^-, Z^0$); ৩. তড়িৎচৌম্বক বল: সবলতা $10^{39}$, পাল্লা অসীম, কণা ফোটন; ৪. সবল নিউক্লীয় বল: সবলতা $10^{41}$ (সবচেয়ে শক্তিশালী), পাল্লা $10^{-15}\\text{ m}$, কণা মেসন ও গ্লুয়ন।",
+  "trap": "নামের সাথে মিল রেখে 'দুর্বল নিউক্লীয় বল' দাগানো, যার পাল্লা আসলে ক্ষুদ্র ($10^{-18}\\text{ m}$) এবং মহাকর্ষের চেয়ে শক্তিশালী।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
-  "probability_label": "99% DU Hotspot",
-  "source_book": "Varsoty_W03_Solution.pdf",
+  "probability_label": "100%",
+  "source_book": "Isahaq",
   "bank_type": "varsity",
+  "appears_in": [
+   "MAT '22 / DU '23-24 Repeat"
+  ],
   "set": "set_b",
   "slot": "Physics #12",
   "likelihood_pct": 12.62,
@@ -420,32 +468,36 @@
   "source_weight": 0.85
  },
  {
-  "id": "w5_med_016",
+  "id": "w5_var_008",
   "source_type": "past_paper",
-  "source_name": "MAT '23 / ইসহাক স্যার পদার্থবিজ্ঞান ১ম পত্র ৯ম অধ্যায়",
+  "source_name": "DU '19-20 Hubohu",
   "exam": "du_ka",
-  "exam_year": 2023,
+  "exam_year": 2019,
+  "week": 5,
   "subject": "Physics",
   "chapter_id": "তরঙ_গ",
   "chapter_name": "তরঙ্গ",
   "chapter_raw": "তরঙ্গ (Waves)",
-  "mega_type": "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি",
-  "question": "[MAT Line] বায়ুতে প্রতি $1^\\circ\\text{C}$ তাপমাত্রা বৃদ্ধির জন্য শব্দের বেগ কতটুকু বৃদ্ধি পায়?",
+  "mega_type": "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)",
+  "question": "[DU '19-20 Hubohu] দুটি সুরশলাকা $A$ ও $B$ একত্রে বাজালে প্রতি সেকেন্ডে $5$টি বিট উৎপন্ন হয়। $B$-এর কম্পাঙ্ক $256\\text{ Hz}$। $A$-তে সামান্য মোম লাগালে বিট সংখ্যা হ্রাস পেয়ে $3$ হয়। $A$-এর আদি কম্পাঙ্ক কত ছিল?",
   "options": [
-   "$0.6\\text{ m/s}$ বা $0.61\\text{ m/s}$",
-   "$0.33\\text{ m/s}$",
-   "$1.2\\text{ m/s}$",
-   "$6.0\\text{ m/s}$"
+   "$261\\text{ Hz}$",
+   "$251\\text{ Hz}$",
+   "$253\\text{ Hz}$",
+   "$259\\text{ Hz}$"
   ],
   "correct_index": 0,
-  "explanation": "বায়ুতে শব্দের বেগ $v = v_0 + 0.61 \\theta$। সুতরাং প্রতি $1^\\circ\\text{C}$ তাপমাত্রা বৃদ্ধির ফলে শব্দের বেগ প্রায় $0.6\\text{ m/s}$ (বা $0.61\\text{ m/s}$) বৃদ্ধি পায়। $0^\\circ\\text{C}$ এ বাতাসে শব্দের বেগ $332\\text{ m/s}$।",
-  "trap": "$0.61\\text{ m/s}$-এর দশমিক স্থান ভুলে $6.0\\text{ m/s}$ অথবা অর্ধেক মান $0.33\\text{ m/s}$ দাগানো।",
+  "explanation": "বিট সমীকরণ: $f_A = f_B \\pm N = 256 \\pm 5 = 261\\text{ Hz}$ অথবা $251\\text{ Hz}$। মোম লাগালে ভর বাড়ে, ফলে কম্পাঙ্ক $f_A$ হ্রাস পায়। যদি $f_A = 261$ হয়, মোম লাগালে তা কমে ২৬১ হতে ২৬০, ২৫৯ হবে এবং বিট সংখ্যা $|f_A - 256| = 4, 3$ অর্থাৎ হ্রাস পাবে (শর্ত মেলে)। যদি ২৫১ হতো, তবে কমে ২৫০ হলে বিট সংখ্যা বেড়ে ৬ হতো। সুতরাং সঠিক আদি কম্পাঙ্ক $261\\text{ Hz}$।",
+  "trap": "মোম লাগানোর পরের পরিবর্তিত বিট সংখ্যা $3$ যোগ/বিয়োগ করে $259\\text{ Hz}$ বা $253\\text{ Hz}$ দাগানো অথবা বিয়োগ করে $251\\text{ Hz}$ দাগানো।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
-  "probability_label": "99%",
-  "source_book": "আমীর হোসেন ও ইসহাক পদার্থ ১ম পত্র",
-  "bank_type": "medical",
+  "probability_label": "98%",
+  "source_book": "Varsity Master QB",
+  "bank_type": "varsity",
+  "appears_in": [
+   "DU '19-20 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Physics #13",
   "likelihood_pct": 11.93,
@@ -455,32 +507,36 @@
   "source_weight": 0.85
  },
  {
-  "id": "w3_phy_q03",
+  "id": "w2_phy_q02",
   "source_type": "past_paper",
-  "source_name": "DU '19-20",
+  "source_name": "DU '18-19 Hubohu",
   "exam": "du_ka",
-  "exam_year": 2019,
+  "exam_year": 2018,
+  "week": 2,
   "subject": "Physics",
   "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
   "chapter_name": "কাজ, শক্তি ও ক্ষমতা",
   "chapter_raw": "কাজ, শক্তি ও ক্ষমতা (Work, Energy & Power)",
-  "mega_type": "Type 1: কুয়া ও চৌবাচ্চা খালি করতে কৃতকাজ",
-  "question": "[DU '19-20] সম্পূর্ণ পানিপূর্ণ কুয়া সম্পূর্ণ খালি করতে কৃতকাজ $W$ হলে, কুয়াটির ওপরের অর্ধেক খালি করতে কৃতকাজ কত?",
+  "mega_type": "Type 1: জড়তার ভ্রামক ও চক্রগতির ব্যাসার্ধ (দণ্ড, চাকতি, গোলক)",
+  "question": "[DU '18-19 Hubohu] নিচের কোন রাশি জোড়ার মাত্রা অভিন্ন?",
   "options": [
-   "$W/2$",
-   "$W/4$",
-   "$W/8$",
-   "$3W/8$"
+   "কাজ ও ক্ষমতা",
+   "কৌণিক ভরবেগ ও প্ল্যাঙ্কের ধ্রুবক",
+   "বলের ঘাত ও গতিশক্তি",
+   "টর্ক ও কৌণিক ভরবেগ"
   ],
   "correct_index": 1,
-  "explanation": "পূর্ণ কুয়া খালি করতে কৃতকাজ $W = mg\\left(\\frac{H}{2}\\right) = \\frac{1}{2}mgH$। ওপরের অর্ধেক খালি করতে কৃতকাজ $W_1 = \\frac{m}{2}g\\left(\\frac{H}{4}\\right) = \\frac{1}{8}mgH = \\frac{W}{4}$।",
-  "trap": "অর্ধেক কুয়া শুনে কাজও অর্ধেক ($W/2$) ভাবা অথবা $\\frac{1}{8}mgH$ দেখে মোট কাজ $W = \\frac{1}{2}mgH$-এর অনুপাতে রূপান্তর না করে $W/8$ দাগানো।",
+  "explanation": "$L = mvr \\implies [ML^2T^{-1}]$ এবং $E = hf \\implies h = \\frac{E}{f} \\implies \\frac{[ML^2T^{-2}]}{[T^{-1}]} = [ML^2T^{-1}]$।",
+  "trap": "টর্ক ($[ML^2T^{-2}]$) ও কৌণিক ভরবেগ ($[ML^2T^{-1}]$)-এর নাম কাছাকাছি দেখে এদের মাত্রা অভিন্ন মনে করা।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "DU Ka 15-Year Question Bank & ইসহাক স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '18-19 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Physics #14",
   "likelihood_pct": 11.61,
@@ -490,38 +546,42 @@
   "source_weight": 0.85
  },
  {
-  "id": "du_rep_phy_01",
+  "id": "w7_med_phy_04",
   "source_type": "past_paper",
-  "source_name": "DU '22-23 Repeat",
+  "source_name": "MAT '23 Direct Line",
   "exam": "du_ka",
-  "exam_year": 2022,
+  "exam_year": 2023,
+  "week": 7,
   "subject": "Physics",
-  "chapter_id": "ভ_ক_টর",
-  "chapter_name": "ভেক্টর",
-  "chapter_raw": "ভেক্টর (Vector)",
-  "mega_type": "Type 1: ডট ও ক্রস গুণনের শর্ত (লম্ব ও সমান্তরাল ভেক্টর)",
-  "question": "[DU '22-23 Repeat] $\\vec{A} = 2\\hat{i} + a\\hat{j} + \\hat{k}$ এবং $\\vec{B} = 4\\hat{i} - 2\\hat{j} - 2\\hat{k}$ ভেক্টরদ্বয় পরস্পর লম্ব হলে $a$-এর মান কত?",
+  "chapter_id": "আধ_ন_ক_পদ_র_থব_জ_ঞ_ন_র_স_চন",
+  "chapter_name": "আধুনিক পদার্থবিজ্ঞানের সূচনা",
+  "chapter_raw": "আধুনিক পদার্থবিজ্ঞানের সূচনা (Modern Physics)",
+  "mega_type": "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)",
+  "question": "[MAT '23 Direct] বিশেষ আপেক্ষিকতা তত্ত্ব অনুসারে স্থির কাঠামোর ঘড়ির তুলনায় গতিশীল কাঠামোর ঘড়ি কেমন চলে?",
   "options": [
-   "$3$",
-   "$2$",
-   "$1$",
-   "$4$"
+   "একই গতিতে চলে",
+   "সম্পূর্ণ বন্ধ হয়ে যায়",
+   "ধীরগতিতে চলে (সময় দীর্ঘায়িত হয়)",
+   "দ্রুতগতিতে চলে"
   ],
-  "correct_index": 0,
-  "explanation": "দুটি ভেক্টর পরস্পর লম্ব হওয়ার শর্ত: $\\vec{A} \\cdot \\vec{B} = 0 \\implies (2)(4) + (a)(-2) + (1)(-2) = 0 \\implies 8 - 2a - 2 = 0 \\implies 2a = 6 \\implies a = 3$।",
-  "trap": "সমান্তরাল ভেক্টরের শর্ত ($\\frac{A_x}{B_x} = \\frac{A_y}{B_y}$) প্রয়োগ করে ভুল মান বের করা; লম্ব হলে সর্বদা ডট গুণফল শূন্য ($\\vec{A}\\cdot\\vec{B} = 0$) হবে।",
+  "correct_index": 2,
+  "explanation": "কাল দীর্ঘায়ন (Time Dilation) সূত্রমতে $t = \\frac{t_0}{\\sqrt{1 - v^2/c^2}}$। যেহেতু হর ১ এর চেয়ে ছোট, তাই গতিশীল কাঠামোতে পরিমাপকৃত সময় $t > t_0$। অর্থাৎ স্থির পর্যবেক্ষকের কাছে গতিশীল কাঠামোর ঘড়ি ধীরগতিতে চলে মনে হয়। [ইসহাক স্যার-২০২৬, পৃ-৩৮৯]",
+  "trap": "কাঠামো দ্রুতগতিতে চলছে দেখে ঘড়িও দ্রুতগতিতে চলবে ভেবে ৪র্থ অপশন দাগানো।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
-  "probability_label": "99% DU 'Ka' Pattern Repeat",
-  "source_book": "DU 15-Year Question Bank & ইসহাক স্যার",
-  "bank_type": "varsity",
+  "probability_label": "98% Direct MAT Line",
+  "source_book": "আমীর হোসেন খান ও ইসহাক স্যার",
+  "bank_type": "medical",
+  "appears_in": [
+   "MAT '23 Direct Line"
+  ],
   "set": "set_b",
   "slot": "Physics #15",
-  "likelihood_pct": 11.03,
-  "expected_mcq_in_paper": 1.65,
-  "years_hit": 8,
-  "papers_hit": 14,
+  "likelihood_pct": 10.18,
+  "expected_mcq_in_paper": 1.53,
+  "years_hit": 5,
+  "papers_hit": 5,
   "source_weight": 0.85
  },
  {
@@ -530,6 +590,7 @@
   "source_name": "DU '19-20",
   "exam": "du_ka",
   "exam_year": 2019,
+  "week": 1,
   "subject": "Chemistry",
   "chapter_id": "পর_ম_ণগত_রস_য_ন",
   "chapter_name": "পরিমাণগত রসায়ন",
@@ -551,6 +612,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '19-20"
+  ],
   "set": "set_b",
   "slot": "Chemistry #16",
   "likelihood_pct": 19.62,
@@ -565,6 +629,7 @@
   "source_name": "DU '21-22 Hubohu",
   "exam": "du_ka",
   "exam_year": 2021,
+  "week": 5,
   "subject": "Chemistry",
   "chapter_id": "তড_ৎ_রস_য_ন",
   "chapter_name": "তড়িৎ রসায়ন",
@@ -586,6 +651,9 @@
   "probability_label": "98%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '21-22 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Chemistry #17",
   "likelihood_pct": 19.44,
@@ -600,6 +668,7 @@
   "source_name": "DU '18-19 Hubohu",
   "exam": "du_ka",
   "exam_year": 2018,
+  "week": 3,
   "subject": "Chemistry",
   "chapter_id": "গ_ণগত_রস_য_ন",
   "chapter_name": "গুণগত রসায়ন",
@@ -621,6 +690,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '18-19 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Chemistry #18",
   "likelihood_pct": 16.27,
@@ -635,6 +707,7 @@
   "source_name": "DU '19-20",
   "exam": "du_ka",
   "exam_year": 2019,
+  "week": 2,
   "subject": "Chemistry",
   "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
   "chapter_name": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
@@ -656,6 +729,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '19-20"
+  ],
   "set": "set_b",
   "slot": "Chemistry #19",
   "likelihood_pct": 10.72,
@@ -670,6 +746,7 @@
   "source_name": "CU 22-23",
   "exam": "du_ka",
   "exam_year": null,
+  "week": 8,
   "subject": "Chemistry",
   "chapter_id": "জ_ব_রস_য_ন",
   "chapter_name": "জৈব রসায়ন",
@@ -691,6 +768,9 @@
   "probability_label": "99% DU & Varsity Hotspot",
   "source_book": "প্রফেসর হাজারী ও নাগ (২য় পত্র, পৃ-১৬২)",
   "bank_type": "varsity",
+  "appears_in": [
+   "CU 22-23"
+  ],
   "set": "set_b",
   "slot": "Chemistry #20",
   "likelihood_pct": 10,
@@ -705,6 +785,7 @@
   "source_name": "DU '16-17",
   "exam": "du_ka",
   "exam_year": 2016,
+  "week": 2,
   "subject": "Chemistry",
   "chapter_id": "র_স_য_ন_ক_পর_বর_তন",
   "chapter_name": "রাসায়নিক পরিবর্তন",
@@ -726,6 +807,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '16-17"
+  ],
   "set": "set_b",
   "slot": "Chemistry #21",
   "likelihood_pct": 8.53,
@@ -740,6 +824,7 @@
   "source_name": "CU '20",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 2,
   "subject": "Chemistry",
   "chapter_id": "পর_ব_শ_রস_য_ন",
   "chapter_name": "পরিবেশ রসায়ন",
@@ -761,6 +846,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "CU '20"
+  ],
   "set": "set_b",
   "slot": "Chemistry #22",
   "likelihood_pct": 7.8,
@@ -775,6 +863,7 @@
   "source_name": "MAT '20 Direct",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 1,
   "subject": "Chemistry",
   "chapter_id": "ল_য_বর_টর_র_ন_র_পদ_ব_যবহ_র",
   "chapter_name": "ল্যাবরেটরির নিরাপদ ব্যবহার",
@@ -796,6 +885,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "MAT '20 Direct"
+  ],
   "set": "set_b",
   "slot": "Chemistry #23",
   "likelihood_pct": 7.61,
@@ -810,6 +902,7 @@
   "source_name": "MAT '23 / হাজারী স্যার রসায়ন ২য় পত্র ৪র্থ অধ্যায়",
   "exam": "du_ka",
   "exam_year": 2023,
+  "week": 5,
   "subject": "Chemistry",
   "chapter_id": "তড_ৎ_রস_য_ন",
   "chapter_name": "তড়িৎ রসায়ন",
@@ -831,6 +924,9 @@
   "probability_label": "97%",
   "source_book": "হাজারী ও নাগ রসায়ন ২য় পত্র",
   "bank_type": "medical",
+  "appears_in": [
+   "MAT '23 / হাজারী স্যার রসায়ন ২য় পত্র ৪র্থ অধ্যায়"
+  ],
   "set": "set_b",
   "slot": "Chemistry #24",
   "likelihood_pct": 19.44,
@@ -845,6 +941,7 @@
   "source_name": "DU '17-18",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 1,
   "subject": "Chemistry",
   "chapter_id": "পর_ম_ণগত_রস_য_ন",
   "chapter_name": "পরিমাণগত রসায়ন",
@@ -866,6 +963,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '17-18"
+  ],
   "set": "set_b",
   "slot": "Chemistry #25",
   "likelihood_pct": 19.62,
@@ -880,6 +980,7 @@
   "source_name": "Hazari-Nag High-Yield",
   "exam": "du_ka",
   "exam_year": null,
+  "week": 3,
   "subject": "Chemistry",
   "chapter_id": "গ_ণগত_রস_য_ন",
   "chapter_name": "গুণগত রসায়ন",
@@ -901,6 +1002,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "Hazari-Nag High-Yield"
+  ],
   "set": "set_b",
   "slot": "Chemistry #26",
   "likelihood_pct": 16.27,
@@ -915,6 +1019,7 @@
   "source_name": "MAT '22 / হাজারী স্যার রসায়ন ২য় পত্র ৪র্থ অধ্যায়",
   "exam": "du_ka",
   "exam_year": 2022,
+  "week": 5,
   "subject": "Chemistry",
   "chapter_id": "তড_ৎ_রস_য_ন",
   "chapter_name": "তড়িৎ রসায়ন",
@@ -936,6 +1041,9 @@
   "probability_label": "98%",
   "source_book": "হাজারী ও নাগ রসায়ন ২য় পত্র",
   "bank_type": "medical",
+  "appears_in": [
+   "MAT '22 / হাজারী স্যার রসায়ন ২য় পত্র ৪র্থ অধ্যায়"
+  ],
   "set": "set_b",
   "slot": "Chemistry #27",
   "likelihood_pct": 19.44,
@@ -950,6 +1058,7 @@
   "source_name": "DU '21-22 Repeat",
   "exam": "du_ka",
   "exam_year": 2021,
+  "week": null,
   "subject": "Chemistry",
   "chapter_id": "পর_ম_ণগত_রস_য_ন",
   "chapter_name": "পরিমাণগত রসায়ন",
@@ -971,6 +1080,9 @@
   "probability_label": "98% DU Repeat",
   "source_book": "DU Ka Question Bank",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '21-22 Repeat"
+  ],
   "set": "set_b",
   "slot": "Chemistry #28",
   "likelihood_pct": 19.62,
@@ -985,6 +1097,7 @@
   "source_name": "DU '23-24 Hubohu",
   "exam": "du_ka",
   "exam_year": 2023,
+  "week": 4,
   "subject": "Chemistry",
   "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
   "chapter_name": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
@@ -1006,6 +1119,9 @@
   "probability_label": "99%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '23-24 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Chemistry #29",
   "likelihood_pct": 10.72,
@@ -1020,6 +1136,7 @@
   "source_name": "DU '15-16",
   "exam": "du_ka",
   "exam_year": 2015,
+  "week": 3,
   "subject": "Chemistry",
   "chapter_id": "গ_ণগত_রস_য_ন",
   "chapter_name": "গুণগত রসায়ন",
@@ -1041,6 +1158,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "হাজারী-নাগ ও ঢাবি প্রশ্নব্যাংক",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '15-16"
+  ],
   "set": "set_b",
   "slot": "Chemistry #30",
   "likelihood_pct": 16.27,
@@ -1055,6 +1175,7 @@
   "source_name": "CU '17",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 3,
   "subject": "Higher Math",
   "chapter_id": "কন_ক_স",
   "chapter_name": "কনিক্স",
@@ -1076,6 +1197,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "CU '17"
+  ],
   "set": "set_b",
   "slot": "Higher Math #31",
   "likelihood_pct": 20.17,
@@ -1090,6 +1214,7 @@
   "source_name": "CU '20",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 1,
   "subject": "Higher Math",
   "chapter_id": "math_1st_03",
   "chapter_name": "বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
@@ -1111,6 +1236,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "CU '20"
+  ],
   "set": "set_b",
   "slot": "Higher Math #32",
   "likelihood_pct": 13.62,
@@ -1125,6 +1253,7 @@
   "source_name": "DU '22-23 Hubohu",
   "exam": "du_ka",
   "exam_year": 2022,
+  "week": 4,
   "subject": "Higher Math",
   "chapter_id": "ব_ন_য_স_ও_সম_ব_শ",
   "chapter_name": "বিন্যাস ও সমাবেশ",
@@ -1146,6 +1275,9 @@
   "probability_label": "97%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '22-23 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Higher Math #33",
   "likelihood_pct": 12.82,
@@ -1160,6 +1292,7 @@
   "source_name": "DU '23-24 Hubohu",
   "exam": "du_ka",
   "exam_year": 2023,
+  "week": 5,
   "subject": "Higher Math",
   "chapter_id": "বহ_পদ_ও_বহ_পদ_সম_করণ",
   "chapter_name": "বহুপদী ও বহুপদী সমীকরণ",
@@ -1181,6 +1314,9 @@
   "probability_label": "98%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '23-24 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Higher Math #34",
   "likelihood_pct": 12.37,
@@ -1195,6 +1331,7 @@
   "source_name": "DU '17-18",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 1,
   "subject": "Higher Math",
   "chapter_id": "সরলর_খ",
   "chapter_name": "সরলরেখা",
@@ -1216,6 +1353,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '17-18"
+  ],
   "set": "set_b",
   "slot": "Higher Math #35",
   "likelihood_pct": 9.77,
@@ -1230,6 +1370,7 @@
   "source_name": "DU '21-22 Hubohu",
   "exam": "du_ka",
   "exam_year": 2021,
+  "week": 2,
   "subject": "Higher Math",
   "chapter_id": "স_য_ক_ত_ক_ণ_র_ত_র_ক_ণম_ত_ক_অন_প_ত",
   "chapter_name": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত",
@@ -1251,6 +1392,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '21-22 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Higher Math #36",
   "likelihood_pct": 7.21,
@@ -1265,6 +1409,7 @@
   "source_name": "DU '18-19 Hubohu",
   "exam": "du_ka",
   "exam_year": 2018,
+  "week": 2,
   "subject": "Higher Math",
   "chapter_id": "ব_ত_ত",
   "chapter_name": "বৃত্ত",
@@ -1286,6 +1431,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '18-19 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Higher Math #37",
   "likelihood_pct": 6.12,
@@ -1300,6 +1448,7 @@
   "source_name": "DU '14-15",
   "exam": "du_ka",
   "exam_year": 2014,
+  "week": 2,
   "subject": "Higher Math",
   "chapter_id": "জট_ল_স_খ_য",
   "chapter_name": "জটিল সংখ্যা",
@@ -1321,6 +1470,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '14-15"
+  ],
   "set": "set_b",
   "slot": "Higher Math #38",
   "likelihood_pct": 4.38,
@@ -1335,6 +1487,7 @@
   "source_name": "DU '22-23 Speed Hack",
   "exam": "du_ka",
   "exam_year": 2022,
+  "week": null,
   "subject": "Higher Math",
   "chapter_id": "অন_তর_করণ",
   "chapter_name": "অন্তরীকরণ",
@@ -1356,6 +1509,9 @@
   "probability_label": "99% High-Yield",
   "source_book": "Global Varsity Vault",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '22-23 Speed Hack"
+  ],
   "set": "set_b",
   "slot": "Higher Math #39",
   "likelihood_pct": 4.23,
@@ -1370,6 +1526,7 @@
   "source_name": "Daily Exam M-03 Set-A Q01",
   "exam": "du_ka",
   "exam_year": null,
+  "week": 3,
   "subject": "Higher Math",
   "chapter_id": "কন_ক_স",
   "chapter_name": "কনিক্স",
@@ -1391,6 +1548,9 @@
   "probability_label": "99% DU Hotspot",
   "source_book": "Varsoty_W03_Solution.pdf",
   "bank_type": "varsity",
+  "appears_in": [
+   "Daily Exam M-03 Set-A Q01"
+  ],
   "set": "set_b",
   "slot": "Higher Math #40",
   "likelihood_pct": 20.17,
@@ -1405,6 +1565,7 @@
   "source_name": "DU '19-20",
   "exam": "du_ka",
   "exam_year": 2019,
+  "week": 3,
   "subject": "Higher Math",
   "chapter_id": "কন_ক_স",
   "chapter_name": "কনিক্স",
@@ -1426,6 +1587,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '19-20"
+  ],
   "set": "set_b",
   "slot": "Higher Math #41",
   "likelihood_pct": 20.17,
@@ -1440,6 +1604,7 @@
   "source_name": "RU '21",
   "exam": "du_ka",
   "exam_year": 2021,
+  "week": 1,
   "subject": "Higher Math",
   "chapter_id": "math_1st_03",
   "chapter_name": "লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
@@ -1461,6 +1626,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "RU '21"
+  ],
   "set": "set_b",
   "slot": "Higher Math #42",
   "likelihood_pct": 13.62,
@@ -1475,6 +1643,7 @@
   "source_name": "Engineering Bridge 2026",
   "exam": "du_ka",
   "exam_year": 2026,
+  "week": 4,
   "subject": "Higher Math",
   "chapter_id": "ব_ন_য_স_ও_সম_ব_শ",
   "chapter_name": "বিন্যাস ও সমাবেশ",
@@ -1496,6 +1665,9 @@
   "probability_label": "95%",
   "source_book": "Engineering Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "Engineering Bridge 2026"
+  ],
   "set": "set_b",
   "slot": "Higher Math #43",
   "likelihood_pct": 12.82,
@@ -1510,6 +1682,7 @@
   "source_name": "DU '20-21",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 1,
   "subject": "Higher Math",
   "chapter_id": "সরলর_খ",
   "chapter_name": "সরলরেখা",
@@ -1531,6 +1704,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '20-21"
+  ],
   "set": "set_b",
   "slot": "Higher Math #44",
   "likelihood_pct": 9.77,
@@ -1545,6 +1721,7 @@
   "source_name": "DU '16-17",
   "exam": "du_ka",
   "exam_year": 2016,
+  "week": 3,
   "subject": "Higher Math",
   "chapter_id": "কন_ক_স",
   "chapter_name": "কনিক্স",
@@ -1566,6 +1743,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "কেতাব উদ্দীন ও এস ইউ আহাম্মদ",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '16-17"
+  ],
   "set": "set_b",
   "slot": "Higher Math #45",
   "likelihood_pct": 20.17,
@@ -1580,6 +1760,7 @@
   "source_name": "DU '16-17 Hubohu",
   "exam": "du_ka",
   "exam_year": 2016,
+  "week": 5,
   "subject": "Biology",
   "chapter_id": "bio_zoo_01",
   "chapter_name": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
@@ -1601,6 +1782,9 @@
   "probability_label": "98%",
   "source_book": "Gazi Azmal",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '16-17 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #46",
   "likelihood_pct": 10.53,
@@ -1615,6 +1799,7 @@
   "source_name": "DU '19-20",
   "exam": "du_ka",
   "exam_year": 2019,
+  "week": 1,
   "subject": "Biology",
   "chapter_id": "bio_zoo_04",
   "chapter_name": "হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
@@ -1636,6 +1821,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "ড. আবুল হাসান ও গাজী আজমল স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '19-20"
+  ],
   "set": "set_b",
   "slot": "Biology #47",
   "likelihood_pct": 10.22,
@@ -1650,6 +1838,7 @@
   "source_name": "DU '20-21 Hubohu",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 4,
   "subject": "Biology",
   "chapter_id": "bio_zoo_10",
   "chapter_name": "ম্যালেরিয়ার জীবাণু প্লাজমোডিয়ামের জীবনচক্র",
@@ -1671,6 +1860,9 @@
   "probability_label": "96%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '20-21 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #48",
   "likelihood_pct": 10.02,
@@ -1685,6 +1877,7 @@
   "source_name": "DU '22-23 Hubohu",
   "exam": "du_ka",
   "exam_year": 2022,
+  "week": 5,
   "subject": "Biology",
   "chapter_id": "bio_bot_03",
   "chapter_name": "কোষ অঙ্গাণু ও তাদের বিশেষ উপাধি/কাজ",
@@ -1706,6 +1899,9 @@
   "probability_label": "100%",
   "source_book": "Abul Hasan",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '22-23 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #49",
   "likelihood_pct": 9.37,
@@ -1720,6 +1916,7 @@
   "source_name": "DU '22-23 Repeat",
   "exam": "du_ka",
   "exam_year": 2022,
+  "week": null,
   "subject": "Biology",
   "chapter_id": "bio_bot_05",
   "chapter_name": "মায়োসিস-১ প্রোফেজ-১ এর উপপর্যায়সমূহ",
@@ -1741,6 +1938,9 @@
   "probability_label": "99% DU Repeat",
   "source_book": "আবুল হাসান স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '22-23 Repeat"
+  ],
   "set": "set_b",
   "slot": "Biology #50",
   "likelihood_pct": 8.37,
@@ -1755,6 +1955,7 @@
   "source_name": "DU '19-20",
   "exam": "du_ka",
   "exam_year": 2019,
+  "week": 3,
   "subject": "Biology",
   "chapter_id": "bio_bot_09",
   "chapter_name": "সালোকসংশ্লেষণ (C_3 বনাম C_4 উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)",
@@ -1776,6 +1977,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "ড. আবুল হাসান ও গাজী আজমল স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '19-20"
+  ],
   "set": "set_b",
   "slot": "Biology #51",
   "likelihood_pct": 7.82,
@@ -1790,6 +1994,7 @@
   "source_name": "DU '17-18",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 2,
   "subject": "Biology",
   "chapter_id": "bio_zoo_03",
   "chapter_name": "পরিপাক নালীর এনজাইম ও পাচক রস",
@@ -1811,6 +2016,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "ড. আবুল হাসান ও গাজী আজমল স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '17-18"
+  ],
   "set": "set_b",
   "slot": "Biology #52",
   "likelihood_pct": 6.72,
@@ -1825,6 +2033,7 @@
   "source_name": "DU '17-18",
   "exam": "du_ka",
   "exam_year": 2017,
+  "week": 3,
   "subject": "Biology",
   "chapter_id": "bio_bot_10",
   "chapter_name": "অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ",
@@ -1846,6 +2055,9 @@
   "probability_label": "90% Varsity Standard Repeat",
   "source_book": "ড. আবুল হাসান ও গাজী আজমল স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '17-18"
+  ],
   "set": "set_b",
   "slot": "Biology #53",
   "likelihood_pct": 6.56,
@@ -1855,39 +2067,43 @@
   "source_weight": 0.85
  },
  {
-  "id": "w1_bio_q03",
-  "source_type": "past_paper",
-  "source_name": "MAT '19 Direct",
+  "id": "w6_var_065",
+  "source_type": "weekly_solve",
+  "source_name": "Weekly 06 Varsity (Udvash) Daily Bio-06 Set-A",
   "exam": "du_ka",
-  "exam_year": 2019,
+  "exam_year": null,
+  "week": 6,
   "subject": "Biology",
   "chapter_id": "bio_zoo_08",
-  "chapter_name": "রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
+  "chapter_name": "পরিপাক নালীর এনজাইম ও পাচক রস",
   "chapter_raw": "bio_zoo_08",
-  "mega_type": "Type 4: রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
-  "question": "[MAT '19 Direct] লোহিত রক্তকণিকা (RBC) তৈরিতে প্রধান নিয়ন্ত্রণকারী হরমোন কোনটি?",
+  "mega_type": "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস",
+  "question": "খাদ্য গ্রহণের পূর্বে রক্তে কোন হরমোনের মাত্রা বৃদ্ধি পেলে মস্তিষ্কে ক্ষুধার অনুভূতি সৃষ্টি হয়?",
   "options": [
-   "ইনসুলিন",
-   "থাইরক্সিন",
-   "ইরিথ্রোপয়েটিন",
-   "অ্যানজিওটেনসিন"
+   "লেপটিন",
+   "গ্রিলিন (Ghrelin)",
+   "পেপটাইড YY",
+   "ইনসুলিন"
   ],
-  "correct_index": 2,
-  "explanation": "কিডনি নিঃসৃত ইরিথ্রোপয়েটিন RBC সংশ্লেষণ নিয়ন্ত্রণ করে।",
-  "trap": "রক্তচাপ নিয়ন্ত্রক রেনিন-অ্যানজিওটেনসিন বা যকৃতের সাধারণ হরমোনের সাথে বৃক্ক নিঃসৃত লোহিত কণিকা উৎপাদনকারী ইরিথ্রোপয়েটিন গুলিয়ে ফেলা।",
+  "correct_index": 1,
+  "explanation": "পাকস্থলী থেকে ক্ষরিত গ্রিলিন হলো 'ক্ষুধা হরমোন' যা হাইপোথ্যালামাসকে ক্ষুধার সংকেত দেয়; অন্যদিকে পেপটাইড YY ও লেপটিন তৃপ্তির সংকেত দেয়।",
+  "trap": "খাদ্য গ্রহণের পর তৃপ্তি দানকারী লেপটিন ও পেপটাইড YY এর সাথে খালি পেটে পাকস্থলী থেকে ক্ষরিত ক্ষুধা উদ্দীপক হরমোন গ্রিলিন (Ghrelin) গুলিয়ে ফেলা।",
   "is_written": false,
   "marks": 1,
   "duration_sec": 45,
-  "probability_label": "90% Varsity Standard Repeat",
-  "source_book": "ড. আবুল হাসান ও গাজী আজমল স্যার",
+  "probability_label": "94%",
+  "source_book": "Udvash Weekly 06",
   "bank_type": "varsity",
+  "appears_in": [
+   "Weekly 06 Varsity (Udvash) Daily Bio-06 Set-A"
+  ],
   "set": "set_b",
   "slot": "Biology #54",
   "likelihood_pct": 5.16,
   "expected_mcq_in_paper": 0.77,
   "years_hit": 4,
   "papers_hit": 5,
-  "source_weight": 0.85
+  "source_weight": 0.7
  },
  {
   "id": "w2_bio_q13",
@@ -1895,6 +2111,7 @@
   "source_name": "DU '20-21",
   "exam": "du_ka",
   "exam_year": 2020,
+  "week": 2,
   "subject": "Biology",
   "chapter_id": "bio_zoo_02",
   "chapter_name": "ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
@@ -1916,6 +2133,9 @@
   "probability_label": "98% DU 'Ka' Pattern Repeat",
   "source_book": "ড. আবুল হাসান ও গাজী আজমল স্যার",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '20-21"
+  ],
   "set": "set_b",
   "slot": "Biology #55",
   "likelihood_pct": 4.12,
@@ -1930,6 +2150,7 @@
   "source_name": "DU '23-24 Hubohu",
   "exam": "du_ka",
   "exam_year": 2023,
+  "week": 5,
   "subject": "Biology",
   "chapter_id": "bio_bot_07",
   "chapter_name": "মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্",
@@ -1951,6 +2172,9 @@
   "probability_label": "95%",
   "source_book": "Abul Hasan",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '23-24 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #56",
   "likelihood_pct": 4.08,
@@ -1965,6 +2189,7 @@
   "source_name": "DU Hubohu",
   "exam": "du_ka",
   "exam_year": null,
+  "week": null,
   "subject": "Biology",
   "chapter_id": "bio_zoo_05",
   "chapter_name": "ফুসফুসের শারীরস্থান",
@@ -1986,6 +2211,9 @@
   "probability_label": "Very High",
   "source_book": "Abul Hasan / Gazi Azmal",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #57",
   "likelihood_pct": 3.02,
@@ -2000,6 +2228,7 @@
   "source_name": "DU Hubohu",
   "exam": "du_ka",
   "exam_year": null,
+  "week": null,
   "subject": "Biology",
   "chapter_id": "bio_zoo_12",
   "chapter_name": "শিখন আচরণের প্রকারভেদ",
@@ -2021,6 +2250,9 @@
   "probability_label": "Very High",
   "source_book": "Abul Hasan / Gazi Azmal",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #58",
   "likelihood_pct": 2.83,
@@ -2035,6 +2267,7 @@
   "source_name": "DU '21-22 Hubohu",
   "exam": "du_ka",
   "exam_year": 2021,
+  "week": 4,
   "subject": "Biology",
   "chapter_id": "bio_zoo_01",
   "chapter_name": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
@@ -2056,6 +2289,9 @@
   "probability_label": "96%",
   "source_book": "Varsity Master QB",
   "bank_type": "varsity",
+  "appears_in": [
+   "DU '21-22 Hubohu"
+  ],
   "set": "set_b",
   "slot": "Biology #59",
   "likelihood_pct": 10.53,
@@ -2070,6 +2306,7 @@
   "source_name": "MAT '23 Direct Line",
   "exam": "du_ka",
   "exam_year": 2023,
+  "week": null,
   "subject": "Biology",
   "chapter_id": "bio_zoo_04",
   "chapter_name": "রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
@@ -2091,6 +2328,9 @@
   "probability_label": "98% MAT Repeat",
   "source_book": "গাজী আজমল স্যার (প্রাণিবিজ্ঞান)",
   "bank_type": "medical",
+  "appears_in": [
+   "MAT '23 Direct Line"
+  ],
   "set": "set_b",
   "slot": "Biology #60",
   "likelihood_pct": 10.22,

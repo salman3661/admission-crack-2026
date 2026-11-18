@@ -58,9 +58,11 @@ const ciDist = [0, 0, 0, 0];
 
 for (const r of rows) {
   const at = `${r.__file}[${r.__i}]`;
+  const examScope = r.set ? `${r.exam}:` : '';
+  const idKey = `${examScope}${r.id}`;
   if (!r.id) errors.push(`${at}: id নেই`);
-  else if (idSeen.has(r.id)) errors.push(`${at}: duplicate id "${r.id}" — আগে ${idSeen.get(r.id)}`);
-  else idSeen.set(r.id, at);
+  else if (idSeen.has(idKey)) errors.push(`${at}: duplicate id "${r.id}" — আগে ${idSeen.get(idKey)}`);
+  else idSeen.set(idKey, at);
 
   if (!SOURCE_TYPES.includes(r.source_type)) errors.push(`${at}: source_type "${r.source_type}" অবৈধ (চলবে: ${SOURCE_TYPES.join(', ')})`);
   if (!SUBJECTS.includes(r.subject)) warns.push(`${at}: subject "${r.subject}" তালিকার বাইরে`);
@@ -85,8 +87,8 @@ for (const r of rows) {
   }
   if (o.some(x => !String(x).trim())) errors.push(`${at}: ফাঁকা option আছে`);
 
-  const key = String(r.question || '').replace(/\s+/g, ' ').trim().toLowerCase();
-  if (key.length > 30) {
+  const key = `${examScope}${String(r.question || '').replace(/\s+/g, ' ').trim().toLowerCase()}`;
+  if (key.length > 30 + examScope.length) {
     if (textSeen.has(key)) warns.push(`${at}: একই প্রশ্ন আরেক জায়গায় — appears_in merge করো`);
     else textSeen.set(key, at);
   }

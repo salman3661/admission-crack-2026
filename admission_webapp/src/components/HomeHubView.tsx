@@ -48,6 +48,14 @@ export const HomeHubView: React.FC<HomeHubViewProps> = ({ activeTrack, onNavigat
       primary: true,
     },
     {
+      path: '/weekly',
+      title: '📅 সপ্তাহভিত্তিক ড্রিল (W01–09)',
+      badge: `${Object.values(BANK_INDEX.by_week || {}).reduce((a, b) => a + b, 0)} প্রশ্ন`,
+      desc: 'Week 01 থেকে Week 09 পর্যন্ত প্রতিটি সপ্তাহের ডেইলি ও সাপ্তাহিক সলভ শিট।',
+      accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
+      icon: Clock,
+    },
+    {
       path: '/master-set',
       title: '⚡ Master Sets (SET A / B / C)',
       badge: isMedical
@@ -56,6 +64,30 @@ export const HomeHubView: React.FC<HomeHubViewProps> = ({ activeTrack, onNavigat
       desc: 'LEARN→PREDICT→SELECT মডেলের ভিত্তিতে নির্বাচিত ২৬–২৭ এর সম্ভাব্য প্রশ্ন সেট।',
       accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
       icon: Sparkles,
+    },
+    {
+      path: '/matcher',
+      title: '🔍 প্রশ্ন ম্যাচার (কমনতা চেক)',
+      badge: 'কোচিং শিট মিলিয়ে দেখো',
+      desc: 'যেকোনো প্রশ্ন পেস্ট করে দেখো আগে কত বছরে, কত পেপারে এসেছে ও এর ট্র্যাপ কী।',
+      accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
+      icon: Target,
+    },
+    {
+      path: '/formulas',
+      title: '📐 সূত্র কার্ড + ট্র্যাপ (লিখিত)',
+      badge: 'Unified Formula + Trap',
+      desc: 'ব্যাংক থেকে সংগৃহীত সূত্র, EASY/POSSIBLE ব্যাজ, ট্র্যাপ ও সংযুক্ত প্রশ্ন ড্রিল।',
+      accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
+      icon: BookMarked,
+    },
+    {
+      path: '/chapters',
+      title: '🗂 অধ্যায় · টপিক · সপ্তাহ',
+      badge: `${BANK_INDEX.chapters.length} অধ্যায় · ${Object.keys(BANK_INDEX.by_mega_type || {}).length} টপিক`,
+      desc: 'প্রতিটি অধ্যায় ও টপিক (mega_type) অনুযায়ী সরাসরি ড্রিল এবং ২৬–২৭ সম্ভাবনা।',
+      accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
+      icon: Layers,
     },
     {
       path: '/mistake-book',
@@ -82,12 +114,12 @@ export const HomeHubView: React.FC<HomeHubViewProps> = ({ activeTrack, onNavigat
       icon: ClipboardList,
     },
     {
-      path: '/chapters',
-      title: '🗂 Chapter Explorer',
-      badge: `${BANK_INDEX.chapters.length}টি অধ্যায়`,
-      desc: 'প্রতিটি অধ্যায়ের প্রশ্নসংখ্যা, কত বছরে এসেছে ও ২৬–২৭ প্রত্যাশিত MCQ।',
+      path: '/bookmarks',
+      title: '🔖 বুকমার্ক ও কাস্টম সেট',
+      badge: 'সংরক্ষিত প্রশ্ন',
+      desc: 'গুরুত্বপূর্ণ প্রশ্ন সংরক্ষণ, ট্যাগ/নোট, কাস্টম প্র্যাকটিস সেট ও Anki এক্সপোর্ট।',
       accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
-      icon: Layers,
+      icon: BookMarked,
     },
     {
       path: '/bank',
@@ -96,14 +128,6 @@ export const HomeHubView: React.FC<HomeHubViewProps> = ({ activeTrack, onNavigat
       desc: 'Past Paper, Weekly Solve, Paper Final ও Model Test — শুধু খোলা পেপারই ডাউনলোড হবে।',
       accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
       icon: FileJson,
-    },
-    {
-      path: '/formulas',
-      title: '📐 Formula Cards (লিখিত + MCQ)',
-      badge: '৩৬৬ সূত্র কার্ড',
-      desc: 'অধ্যায়ভিত্তিক সার্চ ও প্রিন্টযোগ্য সূত্র শিট — প্রতিদিন ৩০ মিনিট রিভিশন।',
-      accent: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800',
-      icon: BookMarked,
     },
     {
       path: '/recall',

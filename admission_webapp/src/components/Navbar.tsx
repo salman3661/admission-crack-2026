@@ -1,19 +1,31 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  GraduationCap, 
-  Sun, 
-  Moon, 
-  Flame, 
-  LogOut, 
+import {
+  GraduationCap,
+  Sun,
+  Moon,
+  LogOut,
   Settings,
   Sparkles,
-  Layers
+  Layers,
+  Target,
+  Bookmark as BookmarkIcon,
+  User,
+  RefreshCw,
 } from 'lucide-react';
+import {
+  BANK_INDEX,
+  LocalStorageAdapter,
+  getSolvedQuestionsMap,
+  getMockTracker,
+  getBookmarks,
+  type SourceType,
+} from '../lib/library';
 import type { AppMode, SubjectType, WeekFilterType, UserProfile, TrackType } from '../types';
 
 interface NavbarProps {
   currentMode: AppMode;
   onSelectMode: (mode: AppMode) => void;
+  onNavigate?: (path: string) => void;
   selectedWeek: WeekFilterType;
   onSelectWeek: (week: WeekFilterType) => void;
   selectedSubject: SubjectType;
@@ -30,6 +42,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   currentMode,
   onSelectMode,
+  onNavigate,
   selectedWeek,
   onSelectWeek,
   selectedSubject,
@@ -43,9 +56,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectTrack,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [syncLabel, setSyncLabel] = useState('স্থানীয় (এই ডিভাইসে)');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -58,54 +71,98 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isDropdownOpen]);
 
-  // Level 1: Week Selector Pills
-  const weeks: { id: WeekFilterType; label: string }[] = [
-    { id: 'all', label: '📅 All' },
-    { id: 'week_01', label: '1️⃣ Week 01' },
-    { id: 'week_02', label: '2️⃣ Week 02' },
-    { id: 'week_03', label: '3️⃣ Week 03' },
-    { id: 'week_04', label: '4️⃣ Week 04' },
-    { id: 'week_05', label: '5️⃣ Week 05' },
-    { id: 'week_06', label: '6️⃣ Week 06' },
-    { id: 'week_07', label: '7️⃣ Week 07' },
-    { id: 'week_08', label: '8️⃣ Week 08' },
-    { id: 'week_09', label: '9️⃣ Week 09' },
+  // Level 1: Week Selector Pills with runtime counts from BANK_INDEX.by_week
+  const weeks: { id: WeekFilterType; label: string; count: number }[] = [
+    {
+      id: 'all',
+      label: '📅 All',
+      count: Object.values(BANK_INDEX.by_week || {}).reduce((a, b) => a + b, 0),
+    },
+    { id: 'week_01', label: 'Week 01', count: BANK_INDEX.by_week.week_01 || 0 },
+    { id: 'week_02', label: 'Week 02', count: BANK_INDEX.by_week.week_02 || 0 },
+    { id: 'week_03', label: 'Week 03', count: BANK_INDEX.by_week.week_03 || 0 },
+    { id: 'week_04', label: 'Week 04', count: BANK_INDEX.by_week.week_04 || 0 },
+    { id: 'week_05', label: 'Week 05', count: BANK_INDEX.by_week.week_05 || 0 },
+    { id: 'week_06', label: 'Week 06', count: BANK_INDEX.by_week.week_06 || 0 },
+    { id: 'week_07', label: 'Week 07', count: BANK_INDEX.by_week.week_07 || 0 },
+    { id: 'week_08', label: 'Week 08', count: BANK_INDEX.by_week.week_08 || 0 },
+    { id: 'week_09', label: 'Week 09', count: BANK_INDEX.by_week.week_09 || 0 },
   ];
 
-  // Subject Selector Horizontal Slider - Strictly isolated by Track
-  const subjects: { label: SubjectType; bn: string; icon: string }[] = activeTrack === 'medical'
-    ? [
-        { label: 'All', bn: 'সব বিষয়', icon: '🌐' },
-        { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
-        { label: 'Chemistry', bn: 'কেমিস্ট্রি', icon: '🧪' },
-        { label: 'Physics', bn: 'ফিজিক্স', icon: '⚛️' },
-        { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
-        { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
-        { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
-      ]
-    : [
-        { label: 'All', bn: 'সব বিষয়', icon: '🌐' },
-        { label: 'Physics', bn: 'ফিজিক্স', icon: '⚛️' },
-        { label: 'Chemistry', bn: 'কেমিস্ট্রি', icon: '🧪' },
-        { label: 'Higher Math', bn: 'উচ্চতর গণিত', icon: '📐' },
-        { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
-        { label: 'Bangla', bn: 'বাংলা', icon: '📖' },
-        { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
-        { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
-        { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
-      ];
+  const subjects: { label: SubjectType; bn: string; icon: string }[] =
+    activeTrack === 'medical'
+      ? [
+          { label: 'All', bn: 'সব বিষয়', icon: '🌐' },
+          { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
+          { label: 'Chemistry', bn: 'কেমিস্ট্রি', icon: '🧪' },
+          { label: 'Physics', bn: 'ফিজিক্স', icon: '⚛️' },
+          { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
+          { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+          { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
+        ]
+      : [
+          { label: 'All', bn: 'সব বিষয়', icon: '🌐' },
+          { label: 'Physics', bn: 'ফিজিক্স', icon: '⚛️' },
+          { label: 'Chemistry', bn: 'কেমিস্ট্রি', icon: '🧪' },
+          { label: 'Higher Math', bn: 'উচ্চতর গণিত', icon: '📐' },
+          { label: 'Biology', bn: 'বায়োলজি', icon: '🧬' },
+          { label: 'Bangla', bn: 'বাংলা', icon: '📖' },
+          { label: 'English', bn: 'ইংরেজি', icon: '🇬🇧' },
+          { label: 'GK', bn: 'সাধারণ জ্ঞান', icon: '🇧🇩' },
+          { label: 'ICT', bn: 'আইসিটি', icon: '💻' },
+        ];
 
-  // Condition: Only show Weekly filter and Subject pills when inside "প্রশ্নব্যাংক" or "ডেক" (or "slides")
-  const showFilters = currentMode === 'exam' || currentMode === 'decks' || currentMode === 'slides';
+  const showFilters =
+    currentMode === 'weekly' ||
+    currentMode === 'exam' ||
+    currentMode === 'decks' ||
+    currentMode === 'slides';
+
+  // Fix 4: Dynamic Tier badge counts from BANK_INDEX.papers (hide when 0)
+  const countByType = (t: SourceType) =>
+    BANK_INDEX.papers
+      .filter((p) => p.source_types.includes(t))
+      .reduce((n, p) => n + p.count, 0);
+
+  const weeklyCount = countByType('weekly_solve');
+  const pfCount = countByType('paper_final');
+  const sfCount = countByType('subject_final');
+  const mtCount = countByType('model_test');
+
+  // Account corner live progress stats
+  const solvedCount = Object.keys(getSolvedQuestionsMap()).length;
+  const mcqPct = BANK_INDEX.total_mcqs
+    ? Math.min(100, Math.round((solvedCount / BANK_INDEX.total_mcqs) * 100))
+    : 0;
+  const writtenCount = (() => {
+    try {
+      const raw = localStorage.getItem('ac_written_drafts_v1');
+      return raw ? Object.values(JSON.parse(raw)).filter((v) => String(v || '').trim()).length : 0;
+    } catch {
+      return 0;
+    }
+  })();
+  const writtenPct = BANK_INDEX.total_written
+    ? Math.min(100, Math.round((writtenCount / BANK_INDEX.total_written) * 100))
+    : 0;
+  const mocks = getMockTracker();
+  const pfTaken = mocks.filter((m) => /paper\s*final|pf/i.test(m.name)).length;
+  const sfTaken = mocks.filter((m) => /subject\s*final|sf/i.test(m.name)).length;
+  const mtTaken = mocks.filter((m) => /model\s*test|mt/i.test(m.name)).length;
+  const bmCount = getBookmarks().length;
+
+  const handleSyncNow = async () => {
+    const st = await LocalStorageAdapter.get();
+    await LocalStorageAdapter.put(st);
+    setSyncLabel('এইমাত্র সিঙ্ক হয়েছে (স্থানীয়)');
+  };
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-200">
-      
-      {/* 1. TOP BAR (COMPACT H-14, SINGLE-LINE ALIGNED) */}
+      {/* 1. TOP BAR */}
       <div className="max-w-6xl mx-auto px-3 sm:px-4 h-14 flex items-center justify-between gap-1.5 sm:gap-2">
-        
-        {/* Logo & 2026 Badge (Clicking opens Home Decks) */}
-        <div 
+        {/* Logo */}
+        <div
           onClick={() => onSelectMode('decks')}
           className="flex items-center gap-2 cursor-pointer group select-none shrink-0"
         >
@@ -114,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <GraduationCap className="w-4 h-4 text-[#056839] dark:text-emerald-400" />
             </div>
           </div>
-          
+
           <div className="flex items-center gap-1.5">
             <span className="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 dark:text-white font-['Outfit'] whitespace-nowrap">
               Admission Crack
@@ -125,9 +182,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Center: Track Switcher & Predictor Vault Pill */}
+        {/* Center: Track Switcher & Quick Feature Pills */}
         <div className="flex items-center gap-1.5 shrink-0">
-          {/* Active Stream Switcher */}
           <div className="flex items-center bg-slate-100/90 dark:bg-slate-800/90 p-1 rounded-2xl border border-slate-200/90 dark:border-slate-700/80 shadow-xs">
             <button
               onClick={() => onSelectTrack('varsity')}
@@ -157,7 +213,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Quick Master QB Blueprint Button */}
+          <button
+            onClick={() => (onNavigate ? onNavigate('/matcher') : onSelectMode('decks'))}
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 bg-indigo-500/10 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-300 border-indigo-300/60 dark:border-indigo-800/60 hover:bg-indigo-500/20"
+            title="প্রশ্ন ম্যাচার (F17)"
+          >
+            <Target className="w-3.5 h-3.5" />
+            <span>প্রশ্ন ম্যাচার</span>
+          </button>
+
           <button
             onClick={() => onSelectMode('blueprint')}
             className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 ${
@@ -165,42 +229,36 @@ export const Navbar: React.FC<NavbarProps> = ({
                 ? 'bg-emerald-600 text-white border-emerald-700 shadow-sm'
                 : 'bg-emerald-500/10 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-300/60 dark:border-emerald-800/60 hover:bg-emerald-500/20'
             }`}
-            title="মাস্টার কিউবি ব্লুপ্রিন্ট ও প্রেডিক্টর"
+            title="অধ্যায় ও টপিক ড্রিল"
           >
             <Layers className="w-3.5 h-3.5" />
-            <span>মাস্টার ব্লুপ্রিন্ট</span>
+            <span>অধ্যায় ও টপিক</span>
           </button>
 
-          {/* Quick Predictor Vault Button */}
           <button
             onClick={() => onSelectMode('predictor')}
-            className={`hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 ${
+            className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 ${
               currentMode === 'predictor'
                 ? 'bg-amber-500 text-white border-amber-600 shadow-sm'
                 : 'bg-amber-500/10 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300/60 dark:border-amber-800/60 hover:bg-amber-500/20'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 fill-current" />
-            <span>প্রেডিকশন ভল্ট</span>
+            <span>Master Sets</span>
           </button>
 
-          {/* Quick Recent GK Recall Button */}
           <button
-            onClick={() => onSelectMode('recall')}
-            className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 ${
-              currentMode === 'recall'
-                ? 'bg-teal-600 text-white border-teal-700 shadow-sm'
-                : 'bg-teal-500/10 dark:bg-teal-950/30 text-teal-700 dark:text-teal-300 border-teal-300/60 dark:border-teal-800/60 hover:bg-teal-500/20'
-            }`}
+            onClick={() => (onNavigate ? onNavigate('/bookmarks') : onSelectMode('decks'))}
+            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer active:scale-95 bg-amber-500/10 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border-amber-300/60 dark:border-amber-800/60"
+            title="বুকমার্ক (F19)"
           >
-            <span>📅 সাম্প্রতিক জিকে</span>
+            <BookmarkIcon className="w-3.5 h-3.5" />
+            <span>বুকমার্ক ({bmCount})</span>
           </button>
         </div>
 
-        {/* Right Controls: Theme Toggle + User Avatar with Dropdown */}
+        {/* Right Controls: Theme Toggle + F18 Account Corner Dropdown */}
         <div className="flex items-center gap-1.5 shrink-0">
-          
-          {/* Theme Toggle Button */}
           <button
             onClick={onToggleTheme}
             className="p-2 rounded-xl bg-slate-100/80 dark:bg-slate-800/80 text-slate-700 dark:text-amber-400 hover:text-slate-900 dark:hover:text-amber-300 ring-1 ring-slate-200/80 dark:ring-slate-700 transition-all shadow-xs active:scale-95 cursor-pointer"
@@ -214,112 +272,179 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* User Profile Avatar with Dropdown */}
-          {user.isLoggedIn ? (
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setIsDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-1.5 p-1 pr-2 rounded-full bg-slate-100/90 dark:bg-slate-800/90 ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-[#056839] dark:hover:ring-emerald-500/50 transition-all shadow-xs active:scale-95 cursor-pointer"
-                title="প্রোফাইল মেনু"
-              >
-                <div className="relative">
-                  <img
-                    src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email || 'user')}`}
-                    alt={user.name}
-                    className="w-7 h-7 rounded-full object-cover ring-1 ring-[#056839]"
-                  />
-                  <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white dark:ring-slate-900" />
+          {/* F18: Account Corner Button & Dropdown Panel */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              className="flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-slate-100/90 dark:bg-slate-800/90 ring-1 ring-slate-200 dark:ring-slate-700 hover:ring-[#056839] dark:hover:ring-emerald-500/50 transition-all shadow-xs active:scale-95 cursor-pointer"
+              title="অ্যাকাউন্ট ও প্রগতি (F18)"
+            >
+              <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-extrabold">
+                <User className="w-3.5 h-3.5" />
+              </div>
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[75px] truncate">
+                {user.name ? user.name.split(' ')[0] : 'সালমান'}
+              </span>
+            </button>
+
+            {isDropdownOpen && (
+              <div className="absolute right-0 top-full mt-2 w-80 backdrop-blur-2xl bg-white/95 dark:bg-slate-900/95 rounded-3xl shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 p-4 z-50 space-y-3 text-xs">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+                  <div>
+                    <div className="font-extrabold text-sm text-slate-900 dark:text-white">
+                      👤 {user.name || 'সালমান'} · {activeTrack === 'medical' ? 'MAT ২০২৬' : "ঢাবি 'ক' ২০২৬"}
+                    </div>
+                    <div className="text-[11px] text-slate-500">টার্গেট ৭৮–৮০+ · ২৫ দিনের রোডম্যাপ</div>
+                  </div>
                 </div>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[65px] sm:max-w-[85px] truncate">
-                  {user.name.split(' ')[0] || 'শিক্ষার্থী'}
-                </span>
-                {user.streakDays > 0 && (
-                  <span className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-bold text-amber-500 font-mono">
-                    <Flame className="w-3 h-3 fill-current" />
-                    {user.streakDays}d
-                  </span>
-                )}
-              </button>
 
-              {/* Clean Sign Out Dropdown Menu */}
-              {isDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 backdrop-blur-2xl bg-white/95 dark:bg-slate-900/95 rounded-2xl shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 p-3 z-50 animate-in fade-in zoom-in-95 duration-150">
-                  <div className="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-800/60 rounded-xl mb-2 border border-slate-200/60 dark:border-slate-700/60">
-                    <img
-                      src={user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.email || 'user')}`}
-                      alt={user.name}
-                      className="w-10 h-10 rounded-xl object-cover ring-1 ring-[#056839]"
-                    />
-                    <div className="overflow-hidden flex-1">
-                      <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                        {user.name}
-                      </div>
-                      <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
-                        {user.email}
-                      </div>
+                {/* Progress Bars */}
+                <div className="space-y-2">
+                  <div className="font-bold text-slate-700 dark:text-slate-200">📊 অগ্রগতি</div>
+                  <div>
+                    <div className="flex justify-between text-[11px] mb-0.5">
+                      <span>MCQ</span>
+                      <span className="font-bold">
+                        {mcqPct}% ({solvedCount}/{BANK_INDEX.total_mcqs})
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${mcqPct}%` }} />
                     </div>
                   </div>
-
-                  <div className="px-2 py-1 mb-2">
-                    <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">টার্গেট</div>
-                    <div className="text-xs font-bold text-[#056839] dark:text-emerald-400 truncate">
-                      {user.target}
+                  <div>
+                    <div className="flex justify-between text-[11px] mb-0.5">
+                      <span>Written</span>
+                      <span className="font-bold">
+                        {writtenPct}% ({writtenCount}/{BANK_INDEX.total_written})
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-full bg-purple-500 rounded-full" style={{ width: `${writtenPct}%` }} />
                     </div>
                   </div>
+                  <div>
+                    <div className="flex justify-between text-[11px] mb-0.5">
+                      <span>Mock</span>
+                      <span className="font-bold">{mocks.length}/7</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-teal-500 rounded-full"
+                        style={{ width: `${Math.min(100, Math.round((mocks.length / 7) * 100))}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
 
-                  <div className="h-px bg-slate-200 dark:bg-slate-800 my-1" />
+                {/* Exam Breakdown */}
+                <div className="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/70 space-y-1 text-[11px]">
+                  <div className="font-extrabold text-slate-800 dark:text-slate-200">
+                    🗓 কতগুলো exam দিয়েছে: {mocks.length} টি
+                  </div>
+                  <div className="flex justify-between text-slate-600 dark:text-slate-300">
+                    <span>Paper Final 1–10</span>
+                    <span className="font-bold">{pfTaken}/10 দিয়েছে</span>
+                  </div>
+                  <div className="flex justify-between text-slate-600 dark:text-slate-300">
+                    <span>Subject Final 4টি</span>
+                    <span className="font-bold">{sfTaken}/4 দিয়েছে</span>
+                  </div>
+                  <div className="flex justify-between text-slate-600 dark:text-slate-300">
+                    <span>Model Test 1–5</span>
+                    <span className="font-bold">{mtTaken}/5 দিয়েছে</span>
+                  </div>
+                </div>
 
+                {/* Sync Status */}
+                <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-300 pt-1">
+                  <span>🔄 সিঙ্ক: {syncLabel}</span>
+                  <button
+                    onClick={handleSyncNow}
+                    className="px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold flex items-center gap-1 cursor-pointer"
+                  >
+                    <RefreshCw className="w-3 h-3" /> এখনই সিঙ্ক
+                  </button>
+                </div>
+
+                {/* Quick Links */}
+                <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-slate-200 dark:border-slate-800">
+                  <button
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      if (onNavigate) onNavigate('/account');
+                    }}
+                    className="py-2 px-3 rounded-xl bg-emerald-600 text-white font-bold text-center cursor-pointer"
+                  >
+                    পূর্ণ অ্যাকাউন্ট পেজ
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      if (onNavigate) onNavigate('/bookmarks');
+                    }}
+                    className="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-center cursor-pointer"
+                  >
+                    🔖 বুকমার্ক ({bmCount})
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-between pt-1">
                   <button
                     onClick={() => {
                       setIsDropdownOpen(false);
                       onOpenAuth();
                     }}
-                    className="w-full px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl flex items-center gap-2 transition-colors text-left cursor-pointer"
+                    className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 hover:underline flex items-center gap-1 cursor-pointer"
                   >
-                    <Settings className="w-4 h-4 text-slate-500" />
-                    <span>প্রোফাইল সেটিংস</span>
+                    <Settings className="w-3.5 h-3.5" /> Google প্রোফাইল সেটিংস
                   </button>
-
-                  <button
-                    onClick={() => {
-                      setIsDropdownOpen(false);
-                      onLogout();
-                    }}
-                    className="w-full px-3 py-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl flex items-center gap-2 transition-colors text-left cursor-pointer"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>সাইন আউট (Sign Out)</span>
-                  </button>
+                  {user.isLoggedIn && (
+                    <button
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        onLogout();
+                      }}
+                      className="text-[11px] font-bold text-rose-600 flex items-center gap-1 cursor-pointer"
+                    >
+                      <LogOut className="w-3.5 h-3.5" /> সাইন আউট
+                    </button>
+                  )}
                 </div>
-              )}
-            </div>
-          ) : (
-            <button
-              onClick={onOpenAuth}
-              className="py-1 px-3 rounded-full bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 ring-1 ring-slate-200/90 dark:ring-slate-700 text-slate-800 dark:text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all active:scale-95 cursor-pointer"
-              title="Google দিয়ে সাইন ইন করুন"
-            >
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-              </svg>
-              <span className="hidden xs:inline">Google</span>
-              <span>লগইন</span>
-            </button>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* 1.5. 4-TIER ADMISSION ARCHITECTURE NAVIGATION STRIP */}
+      {/* 1.5. 4-TIER ADMISSION ARCHITECTURE NAVIGATION STRIP (Fix 4: dynamic counts, no false hardcoded badges) */}
       <div className="bg-slate-50/90 dark:bg-slate-900/90 border-t border-slate-200/80 dark:border-slate-800/80">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           {[
-            { id: 'weekly' as AppMode, label: 'Tier 1: Weekly Mode', badge: 'W01-09', activeCls: 'bg-emerald-600 text-white shadow-xs' },
-            { id: 'paper_final' as AppMode, label: 'Tier 2: Paper Final', badge: '60+16', activeCls: 'bg-indigo-600 text-white shadow-xs' },
-            { id: 'subject_final' as AppMode, label: 'Tier 3: Subject Final', badge: 'QB', activeCls: 'bg-teal-600 text-white shadow-xs' },
-            { id: 'full_mock' as AppMode, label: 'Tier 4: Final Model Test', badge: 'MOCK', activeCls: 'bg-rose-600 text-white shadow-xs' },
+            {
+              id: 'weekly' as AppMode,
+              label: 'Tier 1: Weekly Mode',
+              count: weeklyCount,
+              activeCls: 'bg-emerald-600 text-white shadow-xs',
+            },
+            {
+              id: 'paper_final' as AppMode,
+              label: 'Tier 2: Paper Final',
+              count: pfCount,
+              activeCls: 'bg-indigo-600 text-white shadow-xs',
+            },
+            {
+              id: 'subject_final' as AppMode,
+              label: 'Tier 3: Subject Final',
+              count: sfCount,
+              activeCls: 'bg-teal-600 text-white shadow-xs',
+            },
+            {
+              id: 'full_mock' as AppMode,
+              label: 'Tier 4: Final Model Test',
+              count: mtCount,
+              activeCls: 'bg-rose-600 text-white shadow-xs',
+            },
           ].map((tier) => {
             const isActive = currentMode === tier.id;
             return (
@@ -333,22 +458,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <span>{tier.label}</span>
-                <span
-                  className={`px-1.5 py-0.5 rounded-md text-[10px] font-black ${
-                    isActive
-                      ? 'bg-white/20 text-white'
-                      : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
-                  }`}
-                >
-                  {tier.badge}
-                </span>
+                {tier.count > 0 && (
+                  <span
+                    className={`px-1.5 py-0.5 rounded-md text-[10px] font-black ${
+                      isActive
+                        ? 'bg-white/20 text-white'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                    }`}
+                  >
+                    {tier.count}
+                  </span>
+                )}
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* 2. LEVEL 1: WEEK SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ডেক") */}
+      {/* 2. LEVEL 1: WEEK SELECTOR (WITH RUNTIME QUESTION COUNTS) */}
       {showFilters && (
         <div className="backdrop-blur-md bg-slate-50/80 dark:bg-slate-900/80 border-t border-b border-slate-200/80 dark:border-slate-800/80 animate-in fade-in duration-150">
           <div className="max-w-6xl mx-auto px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
@@ -360,14 +487,22 @@ export const Navbar: React.FC<NavbarProps> = ({
               return (
                 <button
                   key={w.id}
-                  onClick={() => onSelectWeek(w.id)}
-                  className={`px-3 py-1 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer active:scale-95 ${
+                  onClick={() => {
+                    onSelectWeek(w.id);
+                    if (currentMode !== 'weekly' && w.id !== 'all') {
+                      onSelectMode('weekly');
+                    }
+                  }}
+                  className={`px-3 py-1 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer active:scale-95 flex items-center gap-1 ${
                     isActive
                       ? 'bg-[#056839] text-white shadow-xs'
                       : 'bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 ring-1 ring-slate-200/80 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
                   }`}
                 >
-                  {w.label}
+                  <span>{w.label}</span>
+                  <span className={`text-[10px] ${isActive ? 'text-emerald-100' : 'text-slate-400'}`}>
+                    ({w.count})
+                  </span>
                 </button>
               );
             })}
@@ -375,7 +510,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       )}
 
-      {/* 3. SUBJECT SELECTOR (ONLY SHOWN INSIDE "প্রশ্নব্যাংক" OR "ডেক") */}
+      {/* 3. SUBJECT SELECTOR */}
       {showFilters && (
         <div className="backdrop-blur-md bg-white/70 dark:bg-slate-950/70 border-b border-slate-200/80 dark:border-slate-800/80 animate-in fade-in duration-150">
           <div className="max-w-6xl mx-auto px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
@@ -402,7 +537,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
       )}
-
     </header>
   );
 };

@@ -29,6 +29,9 @@ const FlashcardsView = lazy(() => import('./components/FlashcardsView').then((m)
 const SlidesView = lazy(() => import('./components/SlidesView').then((m) => ({ default: m.SlidesView })));
 const VaultView = lazy(() => import('./components/VaultView').then((m) => ({ default: m.VaultView })));
 const AnalyticsView = lazy(() => import('./components/AnalyticsView').then((m) => ({ default: m.AnalyticsView })));
+const QuestionMatcherView = lazy(() => import('./components/QuestionMatcherView').then((m) => ({ default: m.QuestionMatcherView })));
+const BookmarksView = lazy(() => import('./components/BookmarksView').then((m) => ({ default: m.BookmarksView })));
+const AccountCornerView = lazy(() => import('./components/AccountCornerView').then((m) => ({ default: m.AccountCornerView })));
 const NotFoundView = lazy(() => import('./components/NotFoundView').then((m) => ({ default: m.NotFoundView })));
 
 const MODE_TO_PATH: Record<AppMode, string> = {
@@ -87,6 +90,9 @@ const KNOWN_PATHS = new Set([
   '/chapters',
   '/blueprint',
   '/formulas',
+  '/matcher',
+  '/bookmarks',
+  '/account',
   '/recall',
   '/flashcards',
   '/slides',
@@ -291,6 +297,20 @@ export function App() {
         return <ChapterExplorerView activeTrack={activeTrack} />;
       case '/formulas':
         return <FormulaCardsView />;
+      case '/matcher':
+        return <QuestionMatcherView />;
+      case '/bookmarks':
+        return <BookmarksView />;
+      case '/account':
+        return (
+          <AccountCornerView
+            user={user}
+            activeTrack={activeTrack}
+            onSelectTrack={handleSelectTrack}
+            onNavigate={navigate}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
+          />
+        );
       case '/weekly':
         return (
           <PaperBankView
@@ -300,6 +320,8 @@ export function App() {
             defaultSourceType="weekly_solve"
             activeTrack={activeTrack}
             selectedSubject={selectedSubject}
+            selectedWeek={selectedWeek}
+            onSelectWeek={setSelectedWeek}
           />
         );
       case '/paper-final':
@@ -334,6 +356,8 @@ export function App() {
             defaultSourceType="all"
             activeTrack={activeTrack}
             selectedSubject={selectedSubject}
+            selectedWeek={selectedWeek}
+            onSelectWeek={setSelectedWeek}
           />
         );
       case '/recall':
@@ -372,6 +396,7 @@ export function App() {
       <Navbar
         currentMode={currentMode}
         onSelectMode={handleSelectMode}
+        onNavigate={navigate}
         selectedWeek={selectedWeek}
         onSelectWeek={setSelectedWeek}
         selectedSubject={selectedSubject}

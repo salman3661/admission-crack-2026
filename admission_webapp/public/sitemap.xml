@@ -12,6 +12,9 @@
   <url><loc>https://admissionwebapp.vercel.app/weakness-radar</loc><priority>0.8</priority></url>
   <url><loc>https://admissionwebapp.vercel.app/mock-tracker</loc><priority>0.8</priority></url>
   <url><loc>https://admissionwebapp.vercel.app/formulas</loc><priority>0.8</priority></url>
+  <url><loc>https://admissionwebapp.vercel.app/matcher</loc><priority>0.8</priority></url>
+  <url><loc>https://admissionwebapp.vercel.app/bookmarks</loc><priority>0.8</priority></url>
+  <url><loc>https://admissionwebapp.vercel.app/account</loc><priority>0.7</priority></url>
   <url><loc>https://admissionwebapp.vercel.app/recall</loc><priority>0.7</priority></url>
   <url><loc>https://admissionwebapp.vercel.app/flashcards</loc><priority>0.7</priority></url>
   <url><loc>https://admissionwebapp.vercel.app/slides</loc><priority>0.7</priority></url>

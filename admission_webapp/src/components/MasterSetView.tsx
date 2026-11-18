@@ -37,6 +37,8 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
         title={activeSet.label}
         subtitle={`${activeSet.questions.length}টি যাচাইকৃত প্রশ্ন • প্রোভেন্যান্সসহ`}
         onBack={() => setActiveSet(null)}
+        bookmarkSource="master_set"
+        setId={activeSet.label}
       />
     );
   }

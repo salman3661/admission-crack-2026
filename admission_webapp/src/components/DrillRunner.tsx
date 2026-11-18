@@ -10,13 +10,17 @@ import {
   Sparkles,
   FileText,
   RotateCcw,
+  Star,
 } from 'lucide-react';
 import { MathText } from './MathText';
 import {
   type Question,
+  type Bookmark,
   getShuffledOptions,
   addErrorLogEntry,
   recordAttemptStat,
+  isBookmarked,
+  toggleBookmark,
 } from '../lib/library';
 
 interface DrillRunnerProps {
@@ -25,6 +29,8 @@ interface DrillRunnerProps {
   subtitle?: string;
   onBack?: () => void;
   softTimerSec?: number;
+  bookmarkSource?: Bookmark['source'];
+  setId?: string;
 }
 
 const OPTION_LABELS = ['ক', 'খ', 'গ', 'ঘ', 'ঙ'];
@@ -35,6 +41,8 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
   subtitle,
   onBack,
   softTimerSec = 45,
+  bookmarkSource = 'drill',
+  setId,
 }) => {
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -49,8 +57,10 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
   const [revealedWritten, setRevealedWritten] = useState<Record<string, boolean>>({});
   const [elapsed, setElapsed] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
+  const [, setBookmarkTick] = useState(0);
 
   const q = questions[idx];
+  const bookmarked = q ? isBookmarked(q.id) : false;
 
   useEffect(() => {
     setElapsed(0);
@@ -217,30 +227,53 @@ export const DrillRunner: React.FC<DrillRunnerProps> = ({
 
       {/* Question Card */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-5 sm:p-7 shadow-sm">
-        {/* F13: Provenance / Theory of the question */}
-        <div className="flex flex-wrap items-center gap-1.5 mb-4 text-[11px]">
-          <span className="px-2.5 py-0.5 rounded-full font-bold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/60">
-            📌 {q.subject} · {q.chapter_name}
-          </span>
-          <span className="px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-            উৎস: {q.source_name}
-            {q.exam_year ? ` (${q.exam_year})` : ''}
-          </span>
-          {q.years_hit && (
-            <span className="px-2.5 py-0.5 rounded-full font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300">
-              এসেছে: {q.years_hit}টি বছরে{q.papers_hit ? `, ${q.papers_hit}টি paper-এ` : ''}
+        {/* F13 + F19: Provenance / Theory of the question + Bookmark Star */}
+        <div className="flex items-start justify-between gap-2 mb-4">
+          <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span className="px-2.5 py-0.5 rounded-full font-bold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/60">
+              📌 {q.subject} · {q.chapter_name}
             </span>
-          )}
-          {q.likelihood_pct !== undefined && q.likelihood_pct > 0 && (
-            <span className="px-2.5 py-0.5 rounded-full font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300">
-              সম্ভাবনা: {q.likelihood_pct}%
+            <span className="px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              উৎস: {q.source_name}
+              {q.exam_year ? ` (${q.exam_year})` : ''}
             </span>
-          )}
-          {q.is_written && (
-            <span className="px-2.5 py-0.5 rounded-full font-extrabold bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300">
-              ✍️ লিখিত ({q.marks} নম্বর)
-            </span>
-          )}
+            {q.appears_in && q.appears_in.length > 1 && (
+              <span className="px-2.5 py-0.5 rounded-full font-semibold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300">
+                {q.appears_in.length}টি পেপারে কমন
+              </span>
+            )}
+            {q.years_hit && (
+              <span className="px-2.5 py-0.5 rounded-full font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300">
+                এসেছে: {q.years_hit}টি বছরে{q.papers_hit ? `, ${q.papers_hit}টি paper-এ` : ''}
+              </span>
+            )}
+            {q.likelihood_pct !== undefined && q.likelihood_pct > 0 && (
+              <span className="px-2.5 py-0.5 rounded-full font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300">
+                সম্ভাবনা: {q.likelihood_pct}%
+              </span>
+            )}
+            {q.is_written && (
+              <span className="px-2.5 py-0.5 rounded-full font-extrabold bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300">
+                ✍️ লিখিত ({q.marks} নম্বর)
+              </span>
+            )}
+          </div>
+
+          <button
+            onClick={() => {
+              toggleBookmark(q, bookmarkSource, setId);
+              setBookmarkTick((t) => t + 1);
+            }}
+            className={`p-2 rounded-xl border transition-all cursor-pointer shrink-0 flex items-center gap-1 text-xs font-bold ${
+              bookmarked
+                ? 'bg-amber-50 dark:bg-amber-950/50 border-amber-300 dark:border-amber-700 text-amber-600 dark:text-amber-400'
+                : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400 hover:text-amber-500'
+            }`}
+            title={bookmarked ? 'বুকমার্ক সরান' : 'বুকমার্ক করুন'}
+            aria-label="Bookmark question"
+          >
+            <Star className={`w-4 h-4 ${bookmarked ? 'fill-current' : ''}`} />
+          </button>
         </div>
 
         {q.mega_type && (

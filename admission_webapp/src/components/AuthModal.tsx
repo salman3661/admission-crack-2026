@@ -153,14 +153,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </div>
               </div>
 
-              {/* Cloud Sync Status */}
+              {/* Local Sync Status (Honest per F18) */}
               <div className="flex items-center justify-between p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 mb-6 text-xs text-emerald-800 dark:text-emerald-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>Firebase ক্লাউড অথেনটিকেশন অ্যাক্টিভ</span>
+                  <span>সিঙ্ক: স্থানীয় (এই ডিভাইসে)</span>
                 </div>
                 <span className="font-mono text-[10px] bg-emerald-100 dark:bg-emerald-900/60 px-1.5 py-0.5 rounded text-emerald-700 dark:text-emerald-300">
-                  Verified
+                  LocalStorage
                 </span>
               </div>
 

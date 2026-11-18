@@ -1,34 +1,1815 @@
 {
-  "generated_at": "2026-11-18T02:07:36.648Z",
-  "total_questions": 1442,
-  "total_mcqs": 1426,
+  "generated_at": "2026-11-18T05:00:11.801Z",
+  "total_questions": 1294,
+  "total_mcqs": 1278,
   "total_written": 16,
   "by_exam": {
     "cu": 33,
-    "du_ka": 349,
+    "du_ka": 598,
     "eng_bridge": 19,
     "gst": 33,
     "ju": 29,
-    "mat": 440,
-    "other": 495,
+    "mat": 386,
+    "other": 152,
     "ru": 44
   },
   "by_subject": {
-    "Biology": 489,
-    "Chemistry": 270,
+    "Biology": 406,
+    "Chemistry": 246,
     "English": 51,
     "GK": 51,
-    "Higher Math": 276,
-    "Physics": 269,
+    "Higher Math": 258,
+    "Physics": 246,
     "Bangla": 18,
     "ICT": 18
   },
   "by_source_type": {
-    "past_paper": 917,
-    "weekly_solve": 525
+    "past_paper": 865,
+    "weekly_solve": 429
   },
   "by_week": {
-    "week_08": 62
+    "week_01": 100,
+    "week_02": 100,
+    "week_03": 180,
+    "week_04": 96,
+    "week_05": 96,
+    "week_06": 120,
+    "week_07": 84,
+    "week_08": 120,
+    "week_09": 76
+  },
+  "by_mega_type": {
+    "Type 1: কোষ অঙ্গাণু ও তাদের বিশেষ উপাধি/কাজ": {
+      "count": 23,
+      "years_hit": 7,
+      "chapter": "কোষ অঙ্গাণু ও তাদের বিশেষ উপাধি/কাজ",
+      "chapter_id": "bio_bot_03",
+      "subject": "Biology"
+    },
+    "Type 1: পরিপাক নালীর এনজাইম ও পাচক রস": {
+      "count": 20,
+      "years_hit": 4,
+      "chapter": "পরিপাক নালীর এনজাইম ও পাচক রস",
+      "chapter_id": "bio_zoo_03",
+      "subject": "Biology"
+    },
+    "Type 1: নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য": {
+      "count": 19,
+      "years_hit": 7,
+      "chapter": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
+      "chapter_id": "bio_zoo_03",
+      "subject": "Biology"
+    },
+    "Type 4: নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম": {
+      "count": 18,
+      "years_hit": 5,
+      "chapter": "বিন্যাস ও সমাবেশ",
+      "chapter_id": "ব_ন_য_স_ও_সম_ব_শ",
+      "subject": "Higher Math"
+    },
+    "Type 2: নেফ্রনের অংশ ও মূত্র তৈরির কৌশল": {
+      "count": 18,
+      "years_hit": 1,
+      "chapter": "নেফ্রনের অংশ ও মূত্র তৈরির কৌশল",
+      "chapter_id": "bio_zoo_06",
+      "subject": "Biology"
+    },
+    "Type 1: সালোকসংশ্লেষণ ($C_3$ বনাম $C_4$ উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)": {
+      "count": 16,
+      "years_hit": 4,
+      "chapter": "সালোকসংশ্লেষণ (C_3 বনাম C_4 উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)",
+      "chapter_id": "bio_zoo_04",
+      "subject": "Biology"
+    },
+    "Type 1: অ্যাসিড-ক্ষার টাইট্রেশন ও মোলারিটি-শতকরা সম্পর্ক": {
+      "count": 16,
+      "years_hit": 9,
+      "chapter": "পরিবেশ রসায়ন",
+      "chapter_id": "পর_ব_শ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 3: করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)": {
+      "count": 16,
+      "years_hit": 5,
+      "chapter": "করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 4: জেনেটিক কোড, স্টার্ট ও স্টপ কোডন": {
+      "count": 15,
+      "years_hit": 2,
+      "chapter": "জেনেটিক কোড, স্টার্ট ও স্টপ কোডন",
+      "chapter_id": "bio_bot_03",
+      "subject": "Biology"
+    },
+    "Type 2: পর্যায়বৃত্ত ধর্মের ব্যতিক্রমী ক্রম (ইলেকট্রন আসক্তি ও আয়নীকরণ শক্তি)": {
+      "count": 15,
+      "years_hit": 7,
+      "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+      "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
+      "subject": "Chemistry"
+    },
+    "Type 1: কোয়ান্টাম সংখ্যা সেট ও অরবিটাল ধারণক্ষমতা": {
+      "count": 15,
+      "years_hit": 6,
+      "chapter": "গুণগত রসায়ন",
+      "chapter_id": "গ_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 1: সমাণুতা (জ্যামিতিক সিস-ট্রান্স ও আলোক সমাণুতা)": {
+      "count": 15,
+      "years_hit": 2,
+      "chapter": "জৈব রসায়ন",
+      "chapter_id": "জ_ব_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: বিপরীত ত্রিকোণমিতিক রূপান্তর ($\\\\tan^{-1}$ সূত্র)": {
+      "count": 15,
+      "years_hit": 4,
+      "chapter": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত",
+      "chapter_id": "স_য_ক_ত_ক_ণ_র_ত_র_ক_ণম_ত_ক_অন_প_ত",
+      "subject": "Higher Math"
+    },
+    "Type 5: সেমিকন্ডাক্টর ডায়োড, ট্রানজিস্টর (α, β) ও লজিক গেট/সংখ্যা পদ্ধতি": {
+      "count": 15,
+      "years_hit": 1,
+      "chapter": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স",
+      "chapter_id": "স_ম_কন_ড_ক_টর_ও_ইল_কট_রন_ক_স",
+      "subject": "Physics"
+    },
+    "Type 4: কার্যকরী মূলক শনাক্তকারী পরীক্ষা": {
+      "count": 14,
+      "years_hit": 1,
+      "chapter": "জৈব রসায়ন",
+      "chapter_id": "জ_ব_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 1: পরাবৃত্তের উপকেন্দ্র, শীর্ষবিন্দু ও দ্বিকাক্ষের সমীকরণ": {
+      "count": 14,
+      "years_hit": 5,
+      "chapter": "কনিক্স",
+      "chapter_id": "কন_ক_স",
+      "subject": "Higher Math"
+    },
+    "Type 4: রুদ্ধতাপীয় বনাম সমোষ্ণ প্রক্রিয়া ও এন্ট্রপি": {
+      "count": 14,
+      "years_hit": 4,
+      "chapter": "তাপগতিবিদ্যা",
+      "chapter_id": "ত_পগত_ব_দ_য",
+      "subject": "Physics"
+    },
+    "Type 4: শিখা পরীক্ষা ও ক্যাটায়ন-অ্যানায়ন শনাক্তকরণ": {
+      "count": 13,
+      "years_hit": 7,
+      "chapter": "গুণগত রসায়ন",
+      "chapter_id": "গ_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: মূল গড় বর্গবেগ (RMS বেগ) ও গতিশক্তি": {
+      "count": 13,
+      "years_hit": 5,
+      "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব",
+      "chapter_id": "আদর_শ_গ_য_স_ও_গ_য_স_র_গত_তত_ত_ব",
+      "subject": "Physics"
+    },
+    "Type 2: ডাল্টনের আংশিক চাপ সূত্র ($P_i = X_i P_{total}$)": {
+      "count": 12,
+      "years_hit": 3,
+      "chapter": "পরিবেশ রসায়ন",
+      "chapter_id": "পর_ব_শ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: ভরবেগ ও গতিশক্তির আন্তঃসম্পর্ক ও শতকরা পরিবর্তন": {
+      "count": 12,
+      "years_hit": 3,
+      "chapter": "কাজ, শক্তি ও ক্ষমতা",
+      "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
+      "subject": "Physics"
+    },
+    "Type 4: লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন": {
+      "count": 11,
+      "years_hit": 8,
+      "chapter": "লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
+      "chapter_id": "math_1st_03",
+      "subject": "Higher Math"
+    },
+    "Type 1: জড়তার ভ্রামক ও চক্রগতির ব্যাসার্ধ (দণ্ড, চাকতি, গোলক)": {
+      "count": 11,
+      "years_hit": 6,
+      "chapter": "নিউটনীয় বলবিদ্যা",
+      "chapter_id": "ন_উটন_য_বলব_দ_য",
+      "subject": "Physics"
+    },
+    "Type 2: বেনজিন বলয় সক্রিয়কারী (অর্থো-প্যারা) বনাম নিষ্ক্রিয়কারী (মেটা)": {
+      "count": 11,
+      "years_hit": 1,
+      "chapter": "জৈব রসায়ন",
+      "chapter_id": "জ_ব_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 3: অধিবৃত্তের উৎকেন্দ্রিকতা ও অসীম তটের সমীকরণ": {
+      "count": 11,
+      "years_hit": 5,
+      "chapter": "কনিক্স",
+      "chapter_id": "কন_ক_স",
+      "subject": "Higher Math"
+    },
+    "Type 1: $e^x[f(x) + f'(x)]$ ও প্রতিস্থাপন সূত্র": {
+      "count": 11,
+      "years_hit": 1,
+      "chapter": "যোগজীকরণ",
+      "chapter_id": "য_গজ_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 4: রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)": {
+      "count": 11,
+      "years_hit": 6,
+      "chapter": "রক্তকণিকা ও রক্ত তঞ্চন ফ্যাক্টর (Clotting Factors)",
+      "chapter_id": "bio_zoo_04",
+      "subject": "Biology"
+    },
+    "Type 2: উপবৃত্তের উৎকেন্দ্রিকতা ($e$) ও উপকেন্দ্রিক লম্বের দৈর্ঘ্য": {
+      "count": 10,
+      "years_hit": 5,
+      "chapter": "কনিক্স",
+      "chapter_id": "কন_ক_স",
+      "subject": "Higher Math"
+    },
+    "Type 3: হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ": {
+      "count": 10,
+      "years_hit": 5,
+      "chapter": "হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
+      "chapter_id": "bio_zoo_10",
+      "subject": "Biology"
+    },
+    "Type 3: পানির বিশুদ্ধতার মানদণ্ড (DO, BOD, COD, TDS)": {
+      "count": 10,
+      "years_hit": 3,
+      "chapter": "পরিবেশ রসায়ন",
+      "chapter_id": "পর_ব_শ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 1: উচ্চতা ও গভীরতায় অভিকর্ষজ ত্বরণ ($g$)": {
+      "count": 10,
+      "years_hit": 5,
+      "chapter": "মহাকর্ষ ও অভিকর্ষ",
+      "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
+      "subject": "Physics"
+    },
+    "Type 1: বিশেষ আপেক্ষিকতা (কাল দীর্ঘায়ন, দৈর্ঘ্য সংকোচন ও ভর বৃদ্ধি)": {
+      "count": 10,
+      "years_hit": 2,
+      "chapter": "জ্যোতির্বিজ্ঞান",
+      "chapter_id": "জ_য_ত_র_ব_জ_ঞ_ন",
+      "subject": "Physics"
+    },
+    "Type 2: সরল ছন্দিত স্পন্দনে বেগ ও ত্বরণ ($v, a_{max}$)": {
+      "count": 10,
+      "years_hit": 6,
+      "chapter": "পর্যায়বৃত্ত গতি",
+      "chapter_id": "পর_য_য_ব_ত_ত_গত",
+      "subject": "Physics"
+    },
+    "Type 3: বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু": {
+      "count": 9,
+      "years_hit": 8,
+      "chapter": "বিন্দু হতে রেখার লম্ব দূরত্ব ও প্রতিবিম্ব বিন্দু",
+      "chapter_id": "math_1st_03",
+      "subject": "Higher Math"
+    },
+    "Type 2: শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)": {
+      "count": 9,
+      "years_hit": 4,
+      "chapter": "শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)",
+      "chapter_id": "bio_zoo_01",
+      "subject": "Biology"
+    },
+    "Type 3: বর্ণালী সিরিজ ও রিডবার্গ সমীকরণ": {
+      "count": 9,
+      "years_hit": 4,
+      "chapter": "গুণগত রসায়ন",
+      "chapter_id": "গ_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 3: দ্বিঘাত সমীকরণের মূলের সম্পর্ক ও এক মূল অপরটির $n$ গুণ": {
+      "count": 9,
+      "years_hit": 6,
+      "chapter": "দ্বিঘাত সমীকরণের মূলের সম্পর্ক ও এক মূল অপরটির n গুণ",
+      "chapter_id": "math_2nd_04",
+      "subject": "Higher Math"
+    },
+    "Type 1: কুয়া ও চৌবাচ্চা খালি করতে কৃতকাজ": {
+      "count": 9,
+      "years_hit": 5,
+      "chapter": "কাজ, শক্তি ও ক্ষমতা",
+      "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
+      "subject": "Physics"
+    },
+    "Type 2: তার টানার ক্ষেত্রে রোধের পরিবর্তন শর্টকাট": {
+      "count": 9,
+      "years_hit": 1,
+      "chapter": "চল তড়িৎ",
+      "chapter_id": "চল_তড_ৎ",
+      "subject": "Physics"
+    },
+    "Type 2: ফটোইলেকট্রিক সমীকরণ ও নিবৃত্তি বিভব ($V_s$)": {
+      "count": 9,
+      "years_hit": 4,
+      "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
+      "chapter_id": "পরম_ণ_র_মড_ল_ও_ন_উক_ল_য_র_পদ_র_থব_জ_ঞ_ন",
+      "subject": "Physics"
+    },
+    "Type 1: ভাইরাস গঠন ও বৈশিষ্ট্য": {
+      "count": 8,
+      "years_hit": 1,
+      "chapter": "ভাইরাস গঠন ও বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_04",
+      "subject": "Biology"
+    },
+    "Type 1: সংকরায়ন (Hybridization) ও অণুর জ্যামিতিক আকৃতি": {
+      "count": 8,
+      "years_hit": 2,
+      "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+      "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
+      "subject": "Chemistry"
+    },
+    "Type 4: পৃষ্ঠটান, সাবানের বুদবুদ ও কৈশিক নলে আরোহণ": {
+      "count": 8,
+      "years_hit": 1,
+      "chapter": "পদার্থের গাঠনিক ধর্ম",
+      "chapter_id": "পদ_র_থ_র_গ_ঠন_ক_ধর_ম",
+      "subject": "Physics"
+    },
+    "Type 4: গ্রিনহাউস গ্যাস ও ওজোন স্তর ক্ষয়": {
+      "count": 8,
+      "years_hit": 1,
+      "chapter": "পরিবেশ রসায়ন",
+      "chapter_id": "পর_ব_শ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 4: অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ": {
+      "count": 7,
+      "years_hit": 5,
+      "chapter": "অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 3: আবদ্ধ ক্ষেত্রফল শর্টকাট (পরাবৃত্ত ও সরলরেখা)": {
+      "count": 7,
+      "years_hit": 1,
+      "chapter": "যোগজীকরণ",
+      "chapter_id": "য_গজ_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 3: স্প্রিং-এর সঞ্চিত শক্তি ও স্প্রিং কেটে টুকরো করার অনুপাত": {
+      "count": 7,
+      "years_hit": 4,
+      "chapter": "কাজ, শক্তি ও ক্ষমতা",
+      "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
+      "subject": "Physics"
+    },
+    "Type 3: হুইটস্টোন ব্রিজ ও গ্যালভানোমিটারের শান্ট সমীকরণ": {
+      "count": 7,
+      "years_hit": 1,
+      "chapter": "চল তড়িৎ",
+      "chapter_id": "চল_তড_ৎ",
+      "subject": "Physics"
+    },
+    "Type 3: প্রস্বেদন ও পত্ররন্ধ্র খোলা-বন্ধ হওয়ার কৌশল": {
+      "count": 7,
+      "years_hit": 3,
+      "chapter": "প্রস্বেদন ও পত্ররন্ধ্র খোলা-বন্ধ হওয়ার কৌশল",
+      "chapter_id": "bio_bot_09",
+      "subject": "Biology"
+    },
+    "Type 2: নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য": {
+      "count": 7,
+      "years_hit": 4,
+      "chapter": "নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_07",
+      "subject": "Biology"
+    },
+    "Type 4: প্রাইমারি স্ট্যান্ডার্ড বনাম সেকেন্ডারি স্ট্যান্ডার্ড পদার্থ": {
+      "count": 7,
+      "years_hit": 4,
+      "chapter": "পরিমাণগত রসায়ন",
+      "chapter_id": "পর_ম_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: দ্রাব্যতা ও দ্রাব্যতা গুণফল ($K_{sp}$ ও সমআয়ন প্রভাব)": {
+      "count": 7,
+      "years_hit": 3,
+      "chapter": "গুণগত রসায়ন",
+      "chapter_id": "গ_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 1: কোষ বিভব ($E^\\circ_{cell}$) ও বিক্রিয়ার স্বতঃস্ফূর্ততা": {
+      "count": 7,
+      "years_hit": 4,
+      "chapter": "তড়িৎ রসায়ন",
+      "chapter_id": "তড_ৎ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: $\\int \\frac{f'(x)}{f(x)}dx = \\ln|f(x)|$ ও ত্রিকোণমিতিক যোগজ": {
+      "count": 7,
+      "years_hit": 1,
+      "chapter": "যোগজীকরণ",
+      "chapter_id": "য_গজ_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 1: কার্নো ইঞ্জিনের কর্মদক্ষতা ও গ্রাহকের তাপমাত্রা": {
+      "count": 7,
+      "years_hit": 1,
+      "chapter": "তাপগতিবিদ্যা",
+      "chapter_id": "ত_পগত_ব_দ_য",
+      "subject": "Physics"
+    },
+    "Type 3: তেজস্ক্রিয় ক্ষয় সূত্র, অর্ধায়ু ও গড় আয়ু": {
+      "count": 7,
+      "years_hit": 2,
+      "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
+      "chapter_id": "পরম_ণ_র_মড_ল_ও_ন_উক_ল_য_র_পদ_র_থব_জ_ঞ_ন",
+      "subject": "Physics"
+    },
+    "Type 4: শৈবালের খাদ্য সঞ্চয় ও পিগমেন্ট": {
+      "count": 7,
+      "years_hit": 6,
+      "chapter": "শৈবালের খাদ্য সঞ্চয় ও পিগমেন্ট",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 4: প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন": {
+      "count": 6,
+      "years_hit": 2,
+      "chapter": "প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
+      "chapter_id": "bio_zoo_03",
+      "subject": "Biology"
+    },
+    "Type 3: জারণ সংখ্যা নির্ণয়ের ব্যতিক্রমী ক্ষেত্র": {
+      "count": 6,
+      "years_hit": 4,
+      "chapter": "পরিমাণগত রসায়ন",
+      "chapter_id": "পর_ম_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল": {
+      "count": 6,
+      "years_hit": 4,
+      "chapter": "অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল",
+      "chapter_id": "math_1st_03",
+      "subject": "Higher Math"
+    },
+    "Type 1: জটিল সংখ্যার মডুলাস, মুখ্য আর্গুমেন্ট ও সঞ্চারপথ": {
+      "count": 6,
+      "years_hit": 6,
+      "chapter": "ফাংশন ও ফাংশনের লেখচিত্র",
+      "chapter_id": "ফ_শন_ও_ফ_শন_র_ল_খচ_ত_র",
+      "subject": "Higher Math"
+    },
+    "Type 3: ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)": {
+      "count": 6,
+      "years_hit": 3,
+      "chapter": "ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
+      "chapter_id": "bio_zoo_02",
+      "subject": "Biology"
+    },
+    "Type 2: জারণ-বিজারণ টাইট্রেশন ($KMnO_4, K_2Cr_2O_7, Fe^{2+}$)": {
+      "count": 6,
+      "years_hit": 3,
+      "chapter": "পরিমাণগত রসায়ন",
+      "chapter_id": "পর_ম_ণগত_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 4: নিশ্চয়ক ($D = b^2-4ac$) ও মূলের প্রকৃতি": {
+      "count": 6,
+      "years_hit": 4,
+      "chapter": "বাস্তব সংখ্যা ও অসমতা",
+      "chapter_id": "ব_স_তব_স_খ_য_ও_অসমত",
+      "subject": "Higher Math"
+    },
+    "Type 4: নির্দিষ্ট যোগজের প্রতিসাম্য ধর্ম (Symmetry Property)": {
+      "count": 6,
+      "years_hit": 1,
+      "chapter": "যোগজীকরণ",
+      "chapter_id": "য_গজ_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 1: সরল দোলকের পর্যায়কাল ও পাহাড়ের চূড়ায় সময় হারানো": {
+      "count": 6,
+      "years_hit": 4,
+      "chapter": "পর্যায়বৃত্ত গতি",
+      "chapter_id": "পর_য_য_ব_ত_ত_গত",
+      "subject": "Physics"
+    },
+    "Type 2: যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা": {
+      "count": 6,
+      "years_hit": 1,
+      "chapter": "যকৃতের সঞ্চয়ী ও বিপাকীয় ভূমিকা",
+      "chapter_id": "bio_zoo_03",
+      "subject": "Biology"
+    },
+    "Type 3: মাইটোসিসের বিভিন্ন ধাপের বৈশিষ্ট্য": {
+      "count": 6,
+      "years_hit": 2,
+      "chapter": "মাইটোসিসের বিভিন্ন ধাপের বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_02",
+      "subject": "Biology"
+    },
+    "Type 1: $A\\sin\\theta + B\\cos\\theta$ এর সর্বোচ্চ ও সর্বনিম্ন মান": {
+      "count": 5,
+      "years_hit": 2,
+      "chapter": "অন্তরীকরণ",
+      "chapter_id": "অন_তর_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 1: গ্যাসীয় পরিবহন ($O_2$ ও $CO_2$ পরিবহন এবং ক্লোরাইড শিফট)": {
+      "count": 5,
+      "years_hit": 3,
+      "chapter": "গ্যাসীয় পরিবহন (O_2 ও CO_2 পরিবহন এবং ক্লোরাইড শিফট)",
+      "chapter_id": "bio_zoo_05",
+      "subject": "Biology"
+    },
+    "Type 3: ম্যালেরিয়ার জীবাণু প্লাজমোডিয়ামের জীবনচক্র": {
+      "count": 5,
+      "years_hit": 3,
+      "chapter": "ম্যালেরিয়ার জীবাণু প্লাজমোডিয়ামের জীবনচক্র",
+      "chapter_id": "bio_zoo_10",
+      "subject": "Biology"
+    },
+    "Type 2: ফ্যারাডের তড়িৎ বিশ্লেষণ সূত্র ও চার্জ গণনা": {
+      "count": 5,
+      "years_hit": 3,
+      "chapter": "তড়িৎ রসায়ন",
+      "chapter_id": "তড_ৎ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 4: বাণিজ্যিক ব্যাটারি (লেড-এসিড স্টোরেজ ও লিথিয়াম ব্যাটারি)": {
+      "count": 5,
+      "years_hit": 4,
+      "chapter": "তড়িৎ রসায়ন",
+      "chapter_id": "তড_ৎ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 1: সাধারণ সমীকরণ হতে কেন্দ্র ও ব্যাসার্ধ নির্ণয়": {
+      "count": 5,
+      "years_hit": 5,
+      "chapter": "বৃত্ত",
+      "chapter_id": "ব_ত_ত",
+      "subject": "Higher Math"
+    },
+    "Type 4: একক ভেক্টর, অভিক্ষেপ ও উপাংশ নির্ণয়": {
+      "count": 5,
+      "years_hit": 4,
+      "chapter": "ভেক্টর",
+      "chapter_id": "ভ_ক_টর",
+      "subject": "Physics"
+    },
+    "Type 3: ভরবেগের সংরক্ষণ ও রকেট/বন্দুকের ধাক্কা": {
+      "count": 5,
+      "years_hit": 4,
+      "chapter": "নিউটনীয় বলবিদ্যা",
+      "chapter_id": "ন_উটন_য_বলব_দ_য",
+      "subject": "Physics"
+    },
+    "Type 2: মুক্তিবেগ ও কৃত্তিম উপগ্রহের বেগ": {
+      "count": 5,
+      "years_hit": 3,
+      "chapter": "মহাকর্ষ ও অভিকর্ষ",
+      "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
+      "subject": "Physics"
+    },
+    "Type 1: ব্রায়োফাইটা (রিকসিয়া) ও টেরিডোফাইটা (টেরিস) বৈশিষ্ট্য": {
+      "count": 5,
+      "years_hit": 2,
+      "chapter": "ব্রায়োফাইটা (রিকসিয়া) ও টেরিডোফাইটা (টেরিস) বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 4: তড়িৎ নিরপেক্ষ বিন্দু ও বিভব/প্রাবল্যের শূন্যমান": {
+      "count": 5,
+      "years_hit": 2,
+      "chapter": "স্থির তড়িৎ",
+      "chapter_id": "স_থ_র_তড_ৎ",
+      "subject": "Physics"
+    },
+    "Type 4: বলের ঘাত ও ভরবেগের পরিবর্তন ($J = F\\Delta t = \\Delta p$)": {
+      "count": 5,
+      "years_hit": 3,
+      "chapter": "নিউটনীয় বলবিদ্যা",
+      "chapter_id": "ন_উটন_য_বলব_দ_য",
+      "subject": "Physics"
+    },
+    "Type 5: মার্কনিকভ ও অ্যান্টি-মার্কনিকভ নীতি (পারঅক্সাইড প্রভাব)": {
+      "count": 5,
+      "years_hit": 1,
+      "chapter": "জৈব রসায়ন",
+      "chapter_id": "জ_ব_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: হাইড্রার নেমাটোসিস্ট ও পরিপাক": {
+      "count": 4,
+      "years_hit": 4,
+      "chapter": "হাইড্রার নেমাটোসিস্ট ও পরিপাক",
+      "chapter_id": "bio_zoo_02",
+      "subject": "Biology"
+    },
+    "Type 1: ডট ও ক্রস গুণনের শর্ত (লম্ব ও সমান্তরাল ভেক্টর)": {
+      "count": 4,
+      "years_hit": 4,
+      "chapter": "ভেক্টর",
+      "chapter_id": "ভ_ক_টর",
+      "subject": "Physics"
+    },
+    "Type 3: কেপলারের ৩য় সূত্র ও ভূ-স্থির উপগ্রহের শর্ত": {
+      "count": 4,
+      "years_hit": 2,
+      "chapter": "মহাকর্ষ ও অভিকর্ষ",
+      "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
+      "subject": "Physics"
+    },
+    "Type 4: ইঞ্জিনের ক্ষমতা ও কর্মদক্ষতা (পাম্পের ক্ষমতা)": {
+      "count": 4,
+      "years_hit": 2,
+      "chapter": "কাজ, শক্তি ও ক্ষমতা",
+      "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
+      "subject": "Physics"
+    },
+    "Type 3: মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্তকারী বৈশিষ্ট্য": {
+      "count": 4,
+      "years_hit": 3,
+      "chapter": "মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্",
+      "chapter_id": "bio_zoo_06",
+      "subject": "Biology"
+    },
+    "Type 2: ব্যাকটেরিয়ার গঠন ও বৈশিষ্ট্য": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "ব্যাকটেরিয়ার গঠন ও বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_04",
+      "subject": "Biology"
+    },
+    "Type 1: ব্রায়োফাইটার বৈশিষ্ট্য ও রিকসিয়া": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "ব্রায়োফাইটার বৈশিষ্ট্য ও রিকসিয়া",
+      "chapter_id": "bio_bot_06",
+      "subject": "Biology"
+    },
+    "Type 1: ভাজক টিস্যুর কোষ বিভাজন তল": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "ভাজক টিস্যুর কোষ বিভাজন তল",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 2: pH গণনা ও তীব্র এসিড-ক্ষারের মিশ্রণ": {
+      "count": 4,
+      "years_hit": 3,
+      "chapter": "রাসায়নিক পরিবর্তন",
+      "chapter_id": "র_স_য_ন_ক_পর_বর_তন",
+      "subject": "Chemistry"
+    },
+    "Type 3: ফাজানের নীতি ও পোলারায়ন (সমযোজী বনাম আয়নিক বৈশিষ্ট্য)": {
+      "count": 4,
+      "years_hit": 3,
+      "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+      "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
+      "subject": "Chemistry"
+    },
+    "Type 4: হাইড্রোজেন বন্ধন ও স্ফুটনাঙ্কের অস্বাভাবিকতা": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+      "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
+      "subject": "Chemistry"
+    },
+    "Type 1: লিমিট ও লা'হস্পিটাল রুল (L'Hôpital's Rule)": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "অন্তরীকরণ",
+      "chapter_id": "অন_তর_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 3: ইয়ং-এর গুণাঙ্ক ও সঞ্চিত স্থিতিস্থাপক শক্তি": {
+      "count": 4,
+      "years_hit": 3,
+      "chapter": "পদার্থের গাঠনিক ধর্ম",
+      "chapter_id": "পদ_র_থ_র_গ_ঠন_ক_ধর_ম",
+      "subject": "Physics"
+    },
+    "Type 2: সেক্স-লিংকড ডিসঅর্ডার (হিমোফিলিয়া ও বর্ণান্ধতা)": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "সেক্স-লিংকড ডিসঅর্ডার (হিমোফিলিয়া ও বর্ণান্ধতা)",
+      "chapter_id": "bio_zoo_11",
+      "subject": "Biology"
+    },
+    "Type 4: ত্রিভুজের কোণ ও বাহুর সম্পর্ক (সাইন ও কোসাইন সূত্র)": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "বৃত্ত",
+      "chapter_id": "ব_ত_ত",
+      "subject": "Higher Math"
+    },
+    "Type 4: অব্যক্ত ফাংশন (Implicit) দ্রুত ডিফারেনশিয়েশন ট্রিক": {
+      "count": 4,
+      "years_hit": 1,
+      "chapter": "অন্তরীকরণ",
+      "chapter_id": "অন_তর_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 1: $K_p$ ও $K_c$ এর সম্পর্ক ও একক": {
+      "count": 3,
+      "years_hit": 3,
+      "chapter": "রাসায়নিক পরিবর্তন",
+      "chapter_id": "র_স_য_ন_ক_পর_বর_তন",
+      "subject": "Chemistry"
+    },
+    "Type 1: মাইটোসিসের পর্যায়সমূহ ও ক্রোমোজোমীয় আচরণ": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "মাইটোসিসের পর্যায়সমূহ ও ক্রোমোজোমীয় আচরণ",
+      "chapter_id": "bio_bot_02",
+      "subject": "Biology"
+    },
+    "Type 3: তড়িৎ রাসায়নিক সারি ও সক্রিয়তার ক্রম": {
+      "count": 3,
+      "years_hit": 3,
+      "chapter": "তড়িৎ রসায়ন",
+      "chapter_id": "তড_ৎ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 4: কনিকের সাধারণ সমীকরণ হতে সনাক্তকরণ": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "কনিক্স",
+      "chapter_id": "কন_ক_স",
+      "subject": "Higher Math"
+    },
+    "Type 2: নদী-নৌকা ও ন্যূনতম সময় বনাম ন্যূনতম দূরত্ব": {
+      "count": 3,
+      "years_hit": 3,
+      "chapter": "ভেক্টর",
+      "chapter_id": "ভ_ক_টর",
+      "subject": "Physics"
+    },
+    "Type 1: প্রক্ষেপকের পাল্লা ও সর্বোচ্চ উচ্চতার সম্পর্ক": {
+      "count": 3,
+      "years_hit": 3,
+      "chapter": "গতিবিদ্যা ও প্রক্ষেপক",
+      "chapter_id": "গত_ব_দ_য_ও_প_রক_ষ_পক",
+      "subject": "Physics"
+    },
+    "Type 5: ভেক্টরের ক্যালকুলাস (গ্র্যাডিয়েন্ট, ডাইভারজেন্স ও কার্ল)": {
+      "count": 3,
+      "years_hit": 3,
+      "chapter": "ভেক্টর",
+      "chapter_id": "ভ_ক_টর",
+      "subject": "Physics"
+    },
+    "Type 2: রাস্তার ব্যাংকিং কোণ ও সর্বোচ্চ নিরাপদ বেগ": {
+      "count": 3,
+      "years_hit": 2,
+      "chapter": "নিউটনীয় বলবিদ্যা",
+      "chapter_id": "ন_উটন_য_বলব_দ_য",
+      "subject": "Physics"
+    },
+    "Type 1: গ্রাহামের গ্যাস ব্যাপন সূত্র ($r \\propto \\frac{1}{\\sqrt{M}}$)": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "পরিবেশ রসায়ন",
+      "chapter_id": "পর_ব_শ_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 3: ত্রিকোণমিতিক সমীকরণের সাধারণ সমাধান": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত",
+      "chapter_id": "স_য_ক_ত_ক_ণ_র_ত_র_ক_ণম_ত_ক_অন_প_ত",
+      "subject": "Higher Math"
+    },
+    "Type 2: গুরুমান ও লঘুমান (চরম মান নির্ণয়)": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "অন্তরীকরণ",
+      "chapter_id": "অন_তর_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 3: স্পর্শকের ঢাল ও স্পর্শক/অভিলম্বের সমীকরণ": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "অন্তরীকরণ",
+      "chapter_id": "অন_তর_করণ",
+      "subject": "Higher Math"
+    },
+    "Type 1: বাস্তব সংখ্যা ও পরমমান অসমতা সমাধান": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "বাস্তব সংখ্যা ও অসমতা",
+      "chapter_id": "ব_স_তব_স_খ_য_ও_অসমত",
+      "subject": "Higher Math"
+    },
+    "Type 1: সমান্তরাল পাত ধারক ও ধাতব পাত স্থাপন": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "স্থির তড়িৎ",
+      "chapter_id": "স_থ_র_তড_ৎ",
+      "subject": "Physics"
+    },
+    "Type 3: $S_N1$ বনাম $S_N2$ বিক্রিয়া কৌশল ও সক্রিয়তার ক্রম": {
+      "count": 3,
+      "years_hit": 1,
+      "chapter": "জৈব রসায়ন",
+      "chapter_id": "জ_ব_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 2: মায়োসিস-১ প্রোফেজ-১ এর উপপর্যায়সমূহ": {
+      "count": 2,
+      "years_hit": 2,
+      "chapter": "মায়োসিস-১ প্রোফেজ-১ এর উপপর্যায়সমূহ",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 1: মেন্ডেলের সূত্রের ব্যতিক্রম ও অনুপাতসমূহ": {
+      "count": 2,
+      "years_hit": 2,
+      "chapter": "মেন্ডেলের সূত্রের ব্যতিক্রম ও অনুপাতসমূহ",
+      "chapter_id": "bio_zoo_11",
+      "subject": "Biology"
+    },
+    "Type 2: মায়োসিস-১ এর প্রফেজ-১ এর ৫টি উপপর্যায়": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "মায়োসিস-১ এর প্রফেজ-১ এর ৫টি উপপর্যায়",
+      "chapter_id": "bio_bot_02",
+      "subject": "Biology"
+    },
+    "Type 3: কোষ চক্র ও চেকপয়েন্ট নিয়ন্ত্রণ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "কোষ চক্র ও চেকপয়েন্ট নিয়ন্ত্রণ",
+      "chapter_id": "bio_bot_02",
+      "subject": "Biology"
+    },
+    "Type 2: ব্যাকটেরিয়ার রোগ ও গুরুত্ব": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ব্যাকটেরিয়ার রোগ ও গুরুত্ব",
+      "chapter_id": "bio_bot_04",
+      "subject": "Biology"
+    },
+    "Type 1: শৈবালের কোষীয় গঠন ও ক্লোরোপ্লাস্টের রূপ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "শৈবালের কোষীয় গঠন ও ক্লোরোপ্লাস্টের রূপ",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 1: ইউলোথ্রিক্সের অঙ্গসংস্থান": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ইউলোথ্রিক্সের অঙ্গসংস্থান",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 2: ছত্রাকের বৈশিষ্ট্য ও কোষপ্রাচীর": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ছত্রাকের বৈশিষ্ট্য ও কোষপ্রাচীর",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 2: অ্যাগারিকাসের দৈহিক গঠন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "অ্যাগারিকাসের দৈহিক গঠন",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 1: রিকসিয়ার গঠন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "রিকসিয়ার গঠন",
+      "chapter_id": "bio_bot_06",
+      "subject": "Biology"
+    },
+    "Type 1: রিকসিয়ার জনন অঙ্গ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "রিকসিয়ার জনন অঙ্গ",
+      "chapter_id": "bio_bot_06",
+      "subject": "Biology"
+    },
+    "Type 1: রিকসিয়ার স্পোরোফাইট": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "রিকসিয়ার স্পোরোফাইট",
+      "chapter_id": "bio_bot_06",
+      "subject": "Biology"
+    },
+    "Type 2: টেরিসের অঙ্গসংস্থান": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "টেরিসের অঙ্গসংস্থান",
+      "chapter_id": "bio_bot_06",
+      "subject": "Biology"
+    },
+    "Type 1: সাইকাসের বৈশিষ্ট্য": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "সাইকাসের বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_07",
+      "subject": "Biology"
+    },
+    "Type 1: সাইকাসের কোরালয়েড মূল": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "সাইকাসের কোরালয়েড মূল",
+      "chapter_id": "bio_bot_07",
+      "subject": "Biology"
+    },
+    "Type 1: নগ্নবীজীর এন্ডোস্পার্ম": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "নগ্নবীজীর এন্ডোস্পার্ম",
+      "chapter_id": "bio_bot_07",
+      "subject": "Biology"
+    },
+    "Type 1: জীবন্ত জীবাশ্ম": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "জীবন্ত জীবাশ্ম",
+      "chapter_id": "bio_bot_07",
+      "subject": "Biology"
+    },
+    "Type 1: ভাজক টিস্যুর অবস্থানভিত্তিক প্রকারভেদ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ভাজক টিস্যুর অবস্থানভিত্তিক প্রকারভেদ",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 2: ভাস্কুলার বান্ডলের প্রকারভেদ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ভাস্কুলার বান্ডলের প্রকারভেদ",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 2: মূলের ভাস্কুলার বান্ডল": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "মূলের ভাস্কুলার বান্ডল",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 2: কেন্দ্রিক ভাস্কুলার বান্ডল": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "কেন্দ্রিক ভাস্কুলার বান্ডল",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 3: স্টোমাটার গঠন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "স্টোমাটার গঠন",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 1: টিস্যু কালচার ধারণা ও জনক": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "টিস্যু কালচার ধারণা ও জনক",
+      "chapter_id": "bio_bot_11",
+      "subject": "Biology"
+    },
+    "Type 1: টিস্যু কালচার জীবাণুমুক্তকরণ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "টিস্যু কালচার জীবাণুমুক্তকরণ",
+      "chapter_id": "bio_bot_11",
+      "subject": "Biology"
+    },
+    "Type 1: মেরিস্টেম কালচার": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "মেরিস্টেম কালচার",
+      "chapter_id": "bio_bot_11",
+      "subject": "Biology"
+    },
+    "Type 2: রিকম্বিনেন্ট ডিএনএ প্রযুক্তি ও এনজাইম": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "রিকম্বিনেন্ট ডিএনএ প্রযুক্তি ও এনজাইম",
+      "chapter_id": "bio_bot_11",
+      "subject": "Biology"
+    },
+    "Type 2: ডিএনএ লাইগেজ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ডিএনএ লাইগেজ",
+      "chapter_id": "bio_bot_11",
+      "subject": "Biology"
+    },
+    "Type 2: ক্লোনিং প্লাজমিড": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ক্লোনিং প্লাজমিড",
+      "chapter_id": "bio_bot_11",
+      "subject": "Biology"
+    },
+    "Type 1: বাস্তুতন্ত্রের শক্তির প্রবাহ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "বাস্তুতন্ত্রের শক্তির প্রবাহ",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 1: ইকোলজিক্যাল পিরামিড": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ইকোলজিক্যাল পিরামিড",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 2: সুন্দরবনের ম্যানগ্রোভ অভিযোজন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "সুন্দরবনের ম্যানগ্রোভ অভিযোজন",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 2: জরায়ুজ অঙ্কুরোদ্গম": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "জরায়ুজ অঙ্কুরোদ্গম",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 3: ইন-সিটু বনাম এক্স-সিটু সংরক্ষণ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ইন-সিটু বনাম এক্স-সিটু সংরক্ষণ",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 3: ক্রায়োপ্রিজারভেশন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ক্রায়োপ্রিজারভেশন",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 2: সুন্দরবনের মর্যাদা": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "সুন্দরবনের মর্যাদা",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 1: ফুসফুসের শারীরস্থান": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ফুসফুসের শারীরস্থান",
+      "chapter_id": "bio_zoo_05",
+      "subject": "Biology"
+    },
+    "Type 1: অ্যালভিওলাস ও সারফ্যাক্ট্যান্ট": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "অ্যালভিওলাস ও সারফ্যাক্ট্যান্ট",
+      "chapter_id": "bio_zoo_05",
+      "subject": "Biology"
+    },
+    "Type 2: কার্বন ডাই-অক্সাইড পরিবহন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "কার্বন ডাই-অক্সাইড পরিবহন",
+      "chapter_id": "bio_zoo_05",
+      "subject": "Biology"
+    },
+    "Type 2: বোর প্রভাব": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "বোর প্রভাব",
+      "chapter_id": "bio_zoo_05",
+      "subject": "Biology"
+    },
+    "Type 1: কঙ্কালতন্ত্রের অস্থির বিভাজন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "কঙ্কালতন্ত্রের অস্থির বিভাজন",
+      "chapter_id": "bio_zoo_07",
+      "subject": "Biology"
+    },
+    "Type 1: মেরুদণ্ডের কশেরুকা গণনা": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "মেরুদণ্ডের কশেরুকা গণনা",
+      "chapter_id": "bio_zoo_07",
+      "subject": "Biology"
+    },
+    "Type 1: শুক্রাশয়ের কলাস্থান": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "শুক্রাশয়ের কলাস্থান",
+      "chapter_id": "bio_zoo_09",
+      "subject": "Biology"
+    },
+    "Type 1: পুরুষ হরমোন": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "পুরুষ হরমোন",
+      "chapter_id": "bio_zoo_09",
+      "subject": "Biology"
+    },
+    "Type 2: ডিম্বপাত ও এলএইচ সার্জ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "ডিম্বপাত ও এলএইচ সার্জ",
+      "chapter_id": "bio_zoo_09",
+      "subject": "Biology"
+    },
+    "Type 2: করপাস লুটিয়াম ও গর্ভাবস্থা রক্ষা": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "করপাস লুটিয়াম ও গর্ভাবস্থা রক্ষা",
+      "chapter_id": "bio_zoo_09",
+      "subject": "Biology"
+    },
+    "Type 1: ১ম সূত্রের ব্যতিক্রম": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "১ম সূত্রের ব্যতিক্রম",
+      "chapter_id": "bio_zoo_11",
+      "subject": "Biology"
+    },
+    "Type 1: লিথাল জিন ও অনুপাত ২:১": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "লিথাল জিন ও অনুপাত ২:১",
+      "chapter_id": "bio_zoo_11",
+      "subject": "Biology"
+    },
+    "Type 2: পরিপূরক জিন অনুপাত ৯:৭": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "পরিপূরক জিন অনুপাত ৯:৭",
+      "chapter_id": "bio_zoo_11",
+      "subject": "Biology"
+    },
+    "Type 2: শিখন আচরণের প্রকারভেদ": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "শিখন আচরণের প্রকারভেদ",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 2: প্যাভলভের সাপেক্ষ প্রতিবর্ত": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "প্যাভলভের সাপেক্ষ প্রতিবর্ত",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 3: বাফার দ্রবণ ও হেন্ডারসন-হ্যাসেলবালখ সমীকরণ": {
+      "count": 2,
+      "years_hit": 2,
+      "chapter": "রাসায়নিক পরিবর্তন",
+      "chapter_id": "র_স_য_ন_ক_পর_বর_তন",
+      "subject": "Chemistry"
+    },
+    "Type 2: অক্ষদ্বয় স্পর্শ করার শর্ত ও ছেদিতাংশের দৈর্ঘ্য": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "বৃত্ত",
+      "chapter_id": "ব_ত_ত",
+      "subject": "Higher Math"
+    },
+    "Type 3: রক্তের এবিও গ্রুপ ও আরএইচ অসামঞ্জস্যতা": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "রক্তের এবিও গ্রুপ ও আরএইচ অসামঞ্জস্যতা",
+      "chapter_id": "bio_zoo_10",
+      "subject": "Biology"
+    },
+    "Type 1: ভিনেগার প্রস্তুতি ও খাদ্য সংরক্ষণে ভূমিকা": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "অর্থনৈতিক রসায়ন",
+      "chapter_id": "অর_থন_ত_ক_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 3: প্রসাধনী সামগ্রী ও উপাদান (টয়লেট্রিজ)": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "অর্থনৈতিক রসায়ন",
+      "chapter_id": "অর_থন_ত_ক_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 4: ভর ত্রুটি ও নিউক্লীয় বন্ধন শক্তি": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
+      "chapter_id": "পরম_ণ_র_মড_ল_ও_ন_উক_ল_য_র_পদ_র_থব_জ_ঞ_ন",
+      "subject": "Physics"
+    },
+    "Type 4: রুই মাছের ফুলকা ও রক্ত সংবহনতন্ত্র": {
+      "count": 2,
+      "years_hit": 1,
+      "chapter": "রুই মাছের ফুলকা ও রক্ত সংবহনতন্ত্র",
+      "chapter_id": "bio_zoo_02",
+      "subject": "Biology"
+    },
+    "Type 4: খাড়া নিক্ষিপ্ত বস্তু ও পর্যায়ক্রমিক সময়": {
+      "count": 2,
+      "years_hit": 2,
+      "chapter": "পর্যায়বৃত্ত গতি",
+      "chapter_id": "পর_য_য_ব_ত_ত_গত",
+      "subject": "Physics"
+    },
+    "Type 4: লা-শাতেলিয়ার নীতি ও তাপমাত্রার প্রভাব": {
+      "count": 2,
+      "years_hit": 2,
+      "chapter": "রাসায়নিক পরিবর্তন",
+      "chapter_id": "র_স_য_ন_ক_পর_বর_তন",
+      "subject": "Chemistry"
+    },
+    "Type 3: বৃত্তের স্পর্শক হওয়ার শর্ত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বৃত্ত",
+      "chapter_id": "ব_ত_ত",
+      "subject": "Higher Math"
+    },
+    "Type 4: টিস্যু কালচার ও রিকম্বিনেন্ট ডিএনএ প্রযুক্তি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "টিস্যু কালচার ও রিকম্বিনেন্ট ডিএনএ প্রযুক্তি",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 2: অ্যাগারিকাসের জনন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "অ্যাগারিকাসের জনন",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 2: বিষাক্ত মাশরুম ও সনাক্তকরণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বিষাক্ত মাশরুম ও সনাক্তকরণ",
+      "chapter_id": "bio_bot_05",
+      "subject": "Biology"
+    },
+    "Type 2: টেরিডোফাইটা ও টেরিসের অঙ্গসংস্থান": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "টেরিডোফাইটা ও টেরিসের অঙ্গসংস্থান",
+      "chapter_id": "bio_bot_06",
+      "subject": "Biology"
+    },
+    "Type 3: রামসার সাইট": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "রামসার সাইট",
+      "chapter_id": "bio_bot_12",
+      "subject": "Biology"
+    },
+    "Type 4: সাধারণ জ্যা এর সমীকরণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বৃত্ত",
+      "chapter_id": "ব_ত_ত",
+      "subject": "Higher Math"
+    },
+    "Type 2: এককের কাল্পনিক ঘনমূল $\\omega$ এর ধর্মাবলী": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "জটিল সংখ্যা",
+      "chapter_id": "জট_ল_স_খ_য",
+      "subject": "Higher Math"
+    },
+    "Type 3: তক্তা ভেদ ও ব্রেক কষার স্টপিং ডিসট্যান্স": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "গতিবিদ্যা ও প্রক্ষেপক",
+      "chapter_id": "গত_ব_দ_য_ও_প_রক_ষ_পক",
+      "subject": "Physics"
+    },
+    "Type 3: হ্রদের তলদেশ থেকে বুদবুদ ওঠার আয়তন পরিবর্তন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব",
+      "chapter_id": "আদর_শ_গ_য_স_ও_গ_য_স_র_গত_তত_ত_ব",
+      "subject": "Physics"
+    },
+    "Type 2: অনুমোদিত ফুড প্রিজারভেটিভস ও অ্যান্টিঅক্সিডেন্ট": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "অর্থনৈতিক রসায়ন",
+      "chapter_id": "অর_থন_ত_ক_রস_য_ন",
+      "subject": "Chemistry"
+    },
+    "Type 4: পৃথিবীর আবর্তন গতির কারণে অক্ষাংশে $g$ হ্রাস": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "মহাকর্ষ ও অভিকর্ষ",
+      "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
+      "subject": "Physics"
+    },
+    "Type 3: মালভেসি গোত্রের বৈশিষ্ট্য": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "মালভেসি গোত্রের বৈশিষ্ট্য",
+      "chapter_id": "bio_bot_07",
+      "subject": "Biology"
+    },
+    "Type 3: মূলের অন্তর্গঠন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "মূলের অন্তর্গঠন",
+      "chapter_id": "bio_bot_08",
+      "subject": "Biology"
+    },
+    "Type 1: স্ত্রী গ্যামিটোফাইটের গঠন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "স্ত্রী গ্যামিটোফাইটের গঠন",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 1: ভ্রূণথলির কোষসমূহ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ভ্রূণথলির কোষসমূহ",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 2: দ্বি-নিষেক প্রক্রিয়া": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "দ্বি-নিষেক প্রক্রিয়া",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 2: সস্যের প্লয়েডী": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সস্যের প্লয়েডী",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 3: বিশেষ প্রজনন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বিশেষ প্রজনন",
+      "chapter_id": "bio_bot_10",
+      "subject": "Biology"
+    },
+    "Type 1: সিলোমভিত্তিক শ্রেণিবিন্যাস": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সিলোমভিত্তিক শ্রেণিবিন্যাস",
+      "chapter_id": "bio_zoo_01",
+      "subject": "Biology"
+    },
+    "Type 1: প্রাণীর প্রতিসাম্যতা": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "প্রাণীর প্রতিসাম্যতা",
+      "chapter_id": "bio_zoo_01",
+      "subject": "Biology"
+    },
+    "Type 1: হাইড্রার নেমাটোসিস্ট": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "হাইড্রার নেমাটোসিস্ট",
+      "chapter_id": "bio_zoo_02",
+      "subject": "Biology"
+    },
+    "Type 1: হাইড্রার চলন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "হাইড্রার চলন",
+      "chapter_id": "bio_zoo_02",
+      "subject": "Biology"
+    },
+    "Type 2: ক্লোরাইড শিফট বা হ্যামবার্গার শিফট": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ক্লোরাইড শিফট বা হ্যামবার্গার শিফট",
+      "chapter_id": "bio_zoo_05",
+      "subject": "Biology"
+    },
+    "Type 1: উপাঙ্গীয় কঙ্কাল": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "উপাঙ্গীয় কঙ্কাল",
+      "chapter_id": "bio_zoo_07",
+      "subject": "Biology"
+    },
+    "Type 2: প্রকট এপিস্ট্যাসিস অনুপাত ১৩:৩": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "প্রকট এপিস্ট্যাসিস অনুপাত ১৩:৩",
+      "chapter_id": "bio_zoo_11",
+      "subject": "Biology"
+    },
+    "Type 2: ইমপ্রিন্টিং শিখন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ইমপ্রিন্টিং শিখন",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 1: ট্যাক্সিস চলন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ট্যাক্সিস চলন",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 1: ফিক্সড অ্যাকশন প্যাটার্ন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ফিক্সড অ্যাকশন প্যাটার্ন",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 3: মৌমাছির সামাজিক যোগাযোগ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "মৌমাছির সামাজিক যোগাযোগ",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 3: মৌমাছির সামাজিক সংগঠন": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "মৌমাছির সামাজিক সংগঠন",
+      "chapter_id": "bio_zoo_12",
+      "subject": "Biology"
+    },
+    "Type 1: ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান (DU Repeated)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান (DU Repeate",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 2: বিপরীত ম্যাট্রিক্স নির্ণয় ($2 \\times 2$ ফাস্ট ট্রিক)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বিপরীত ম্যাট্রিক্স নির্ণয় (2 \\times 2 ফাস্ট ট্রিক)",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 3: ম্যাট্রিক্সের গুণন ও মাত্রার শর্ত (DU Speed-Hack)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ম্যাট্রিক্সের গুণন ও মাত্রার শর্ত (DU Speed-Hack)",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 3: নির্ণায়কের ধর্মাবলী ও স্কেলার গুণিতক": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "নির্ণায়কের ধর্মাবলী ও স্কেলার গুণিতক",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 3: নির্ণায়কের ধর্মাবলী ও $|A|=0$ ট্রিক (DU Speed-Hack)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "নির্ণায়কের ধর্মাবলী ও |A|=0 ট্রিক (DU Speed-Hack)",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 1: বিশেষ ধরনের ম্যাট্রিক্স": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বিশেষ ধরনের ম্যাট্রিক্স",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 2: বিপরীত ম্যাট্রিক্স": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বিপরীত ম্যাট্রিক্স",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 2: অ্যাডজয়েন্ট ম্যাট্রিক্সের ধর্ম": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "অ্যাডজয়েন্ট ম্যাট্রিক্সের ধর্ম",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 3: ক্র্যামারের নিয়ম ও সমাধানের শর্ত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ক্র্যামারের নিয়ম ও সমাধানের শর্ত",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 1: ম্যাট্রিক্সের ট্রেস ও নির্ণায়ক": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ম্যাট্রিক্সের ট্রেস ও নির্ণায়ক",
+      "chapter_id": "math_1st_01",
+      "subject": "Higher Math"
+    },
+    "Type 1: ডট গুণন ও লম্ব হওয়ার শর্ত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ডট গুণন ও লম্ব হওয়ার শর্ত",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 1: একক ভেক্টর নির্ণয়": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "একক ভেক্টর নির্ণয়",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 1: ভেক্টরের স্কেলার অভিক্ষেপ (DU Speed-Hack)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ভেক্টরের স্কেলার অভিক্ষেপ (DU Speed-Hack)",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 2: সমান্তরাল ভেক্টরের শর্ত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সমান্তরাল ভেক্টরের শর্ত",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 2: ক্রস গুণন ও জ্যামিতিক ক্ষেত্রফল": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ক্রস গুণন ও জ্যামিতিক ক্ষেত্রফল",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 2: সমতলীয় ভেক্টর ও রৈখিক নির্ভরশীলতা (DU Speed-Hack)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সমতলীয় ভেক্টর ও রৈখিক নির্ভরশীলতা (DU Speed-Hack)",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 1: ভেক্টরের মধ্যবর্তী কোণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ভেক্টরের মধ্যবর্তী কোণ",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 1: দিক কোসাইন (Direction Cosines)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "দিক কোসাইন (Direction Cosines)",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 2: লম্ব একক ভেক্টর": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "লম্ব একক ভেক্টর",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 1: ডট ও ক্রস গুণনের সম্পর্ক": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ডট ও ক্রস গুণনের সম্পর্ক",
+      "chapter_id": "math_1st_02",
+      "subject": "Higher Math"
+    },
+    "Type 1: বৃত্তচাপ, ব্যাসার্ধ ও কোণ ($s = r\\theta$)": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বৃত্তচাপ, ব্যাসার্ধ ও কোণ (s = r\\theta)",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 1: ঘড়ির কাঁটা সংক্রান্ত কোণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ঘড়ির কাঁটা সংক্রান্ত কোণ",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 2: ত্রিকোণমিতিক অভেদাবলী ও অনুপাত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ত্রিকোণমিতিক অভেদাবলী ও অনুপাত",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 2: চতুর্ভাগে চিহ্নের নিয়ম ও অনুপাত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "চতুর্ভাগে চিহ্নের নিয়ম ও অনুপাত",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 2: পূরক কোণের রূপান্তর": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "পূরক কোণের রূপান্তর",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 2: বর্গের সমষ্টি ও পূরক কোণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বর্গের সমষ্টি ও পূরক কোণ",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 1: চাকার ঘূর্ণন ও পরিধি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "চাকার ঘূর্ণন ও পরিধি",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 2: ঋণাত্মক ও বৃহৎ কোণের অনুপাত": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ঋণাত্মক ও বৃহৎ কোণের অনুপাত",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 1: বৃত্তকলার ক্ষেত্রফল": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বৃত্তকলার ক্ষেত্রফল",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "Type 2: ত্রিকোণমিতিক রূপান্তর": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ত্রিকোণমিতিক রূপান্তর",
+      "chapter_id": "math_1st_06",
+      "subject": "Higher Math"
+    },
+    "দুটি সমান বলের লব্ধি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "দুটি সমান বলের লব্ধি",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "লামির উপপাদ্যের বিবৃতি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "লামির উপপাদ্যের বিবৃতি",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "সর্বোচ্চ ও সর্বনিম্ন লব্ধি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সর্বোচ্চ ও সর্বনিম্ন লব্ধি",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "পরস্পর লম্ব বলের লব্ধি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "পরস্পর লম্ব বলের লব্ধি",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "সমান্তরাল বলের লব্ধির অবস্থান": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সমান্তরাল বলের লব্ধির অবস্থান",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "লব্ধি ক্ষুদ্রতর বলের ওপর লম্ব": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "লব্ধি ক্ষুদ্রতর বলের ওপর লম্ব",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "সমান কোণে সাম্যাবস্থা": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সমান কোণে সাম্যাবস্থা",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "বিসদৃশ সমান্তরাল বলের লব্ধি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "বিসদৃশ সমান্তরাল বলের লব্ধি",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "যুগলের ভ্রামকের বৈশিষ্ট্য": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "যুগলের ভ্রামকের বৈশিষ্ট্য",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "লব্ধির প্রতিসাম্য ধর্ম": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "লব্ধির প্রতিসাম্য ধর্ম",
+      "chapter_id": "math_2nd_08",
+      "subject": "Higher Math"
+    },
+    "প্রক্ষেপকের অনুভূমিক পাল্লা সূত্র": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "প্রক্ষেপকের অনুভূমিক পাল্লা সূত্র",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "সর্বাধিক পাল্লার কোণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সর্বাধিক পাল্লার কোণ",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "খাড়া নিক্ষিপ্ত বস্তুর উড্ডয়নকাল": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "খাড়া নিক্ষিপ্ত বস্তুর উড্ডয়নকাল",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "সুষম ত্বরণে রৈখিক গতি": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সুষম ত্বরণে রৈখিক গতি",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "$t$-তম সেকেন্ডের দূরত্ব সূত্র": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "t-তম সেকেন্ডের দূরত্ব সূত্র",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "পাল্লা ও সর্বোচ্চ উচ্চতার সম্পর্ক": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "পাল্লা ও সর্বোচ্চ উচ্চতার সম্পর্ক",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "তক্তায় গুলির প্রবেশ সংক্রান্ত শর্টকাট": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "তক্তায় গুলির প্রবেশ সংক্রান্ত শর্টকাট",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "ব্যবকলনের সাহায্যে ত্বরণ নির্ণয়": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "ব্যবকলনের সাহায্যে ত্বরণ নির্ণয়",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "নদী ও নৌকার ন্যূনতম দূরত্বে পারাপার": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "নদী ও নৌকার ন্যূনতম দূরত্বে পারাপার",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "সমান পাল্লার নিক্ষেপণ কোণ": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সমান পাল্লার নিক্ষেপণ কোণ",
+      "chapter_id": "math_2nd_09",
+      "subject": "Higher Math"
+    },
+    "Type 1: দুটি সমান্তরাল সরলরেখার মধ্যবর্তী লম্ব দূরত্ব": {
+      "count": 1,
+      "years_hit": 1,
+      "chapter": "সরলরেখা",
+      "chapter_id": "সরলর_খ",
+      "subject": "Higher Math"
+    }
   },
   "master_sets": {
     "du_ka_set_a": 60,
@@ -52,6 +1833,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        2,
+        3,
+        8
       ]
     },
     {
@@ -67,6 +1853,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -82,7 +1874,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/cu/past_paper/gk.json",
@@ -97,7 +1890,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/cu/past_paper/higher_math.json",
@@ -112,6 +1906,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -127,6 +1927,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -142,12 +1948,13 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/du_ka/past_paper/biology.json",
-      "count": 129,
-      "mcqs": 129,
+      "count": 107,
+      "mcqs": 107,
       "written": 0,
       "exams": [
         "du_ka"
@@ -157,6 +1964,14 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8
       ]
     },
     {
@@ -172,6 +1987,14 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8
       ]
     },
     {
@@ -187,7 +2010,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/du_ka/past_paper/gk.json",
@@ -202,7 +2026,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/du_ka/past_paper/higher_math.json",
@@ -217,6 +2042,14 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8
       ]
     },
     {
@@ -232,7 +2065,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/du_ka/past_paper/physics.json",
@@ -247,6 +2081,106 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8
+      ]
+    },
+    {
+      "path": "bank/du_ka/weekly_solve/biology.json",
+      "count": 68,
+      "mcqs": 64,
+      "written": 4,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ],
+      "weeks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "path": "bank/du_ka/weekly_solve/chemistry.json",
+      "count": 69,
+      "mcqs": 65,
+      "written": 4,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ],
+      "weeks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "path": "bank/du_ka/weekly_solve/higher_math.json",
+      "count": 68,
+      "mcqs": 64,
+      "written": 4,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ],
+      "weeks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "path": "bank/du_ka/weekly_solve/physics.json",
+      "count": 66,
+      "mcqs": 62,
+      "written": 4,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ],
+      "weeks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
       ]
     },
     {
@@ -262,6 +2196,10 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        4,
+        5
       ]
     },
     {
@@ -277,6 +2215,10 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        4,
+        5
       ]
     },
     {
@@ -292,6 +2234,10 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        4,
+        5
       ]
     },
     {
@@ -307,6 +2253,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        2,
+        3,
+        8
       ]
     },
     {
@@ -322,6 +2273,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -337,7 +2294,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/gst/past_paper/gk.json",
@@ -352,7 +2310,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/gst/past_paper/higher_math.json",
@@ -367,6 +2326,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -382,6 +2347,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -397,6 +2368,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        2,
+        3,
+        8
       ]
     },
     {
@@ -412,6 +2388,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -427,7 +2409,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/ju/past_paper/gk.json",
@@ -442,7 +2425,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/ju/past_paper/higher_math.json",
@@ -457,6 +2441,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -472,12 +2462,18 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
       "path": "bank/mat/past_paper/biology.json",
-      "count": 175,
-      "mcqs": 175,
+      "count": 145,
+      "mcqs": 145,
       "written": 0,
       "exams": [
         "mat"
@@ -487,6 +2483,14 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8
       ]
     },
     {
@@ -502,6 +2506,14 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8
       ]
     },
     {
@@ -517,6 +2529,10 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        5,
+        7
       ]
     },
     {
@@ -532,6 +2548,10 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        5,
+        7
       ]
     },
     {
@@ -547,7 +2567,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/mat/past_paper/physics.json",
@@ -562,12 +2583,20 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8
       ]
     },
     {
       "path": "bank/mat/weekly_solve/biology.json",
-      "count": 49,
-      "mcqs": 49,
+      "count": 36,
+      "mcqs": 36,
       "written": 0,
       "exams": [
         "mat"
@@ -577,12 +2606,16 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        4,
+        6
       ]
     },
     {
       "path": "bank/mat/weekly_solve/chemistry.json",
-      "count": 30,
-      "mcqs": 30,
+      "count": 24,
+      "mcqs": 24,
       "written": 0,
       "exams": [
         "mat"
@@ -592,6 +2625,10 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        4,
+        6
       ]
     },
     {
@@ -607,6 +2644,9 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        4
       ]
     },
     {
@@ -622,6 +2662,9 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        4
       ]
     },
     {
@@ -637,12 +2680,15 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        4
       ]
     },
     {
       "path": "bank/mat/weekly_solve/physics.json",
-      "count": 29,
-      "mcqs": 29,
+      "count": 24,
+      "mcqs": 24,
       "written": 0,
       "exams": [
         "mat"
@@ -652,6 +2698,10 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        4,
+        6
       ]
     },
     {
@@ -667,6 +2717,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -682,6 +2737,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3
       ]
     },
     {
@@ -697,6 +2757,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        2,
+        3,
+        8
       ]
     },
     {
@@ -712,13 +2777,17 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        3,
+        8
       ]
     },
     {
       "path": "bank/other/weekly_solve/biology.json",
-      "count": 101,
-      "mcqs": 97,
-      "written": 4,
+      "count": 15,
+      "mcqs": 15,
+      "written": 0,
       "exams": [
         "other"
       ],
@@ -727,13 +2796,16 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        8
       ]
     },
     {
       "path": "bank/other/weekly_solve/chemistry.json",
-      "count": 104,
-      "mcqs": 100,
-      "written": 4,
+      "count": 17,
+      "mcqs": 17,
+      "written": 0,
       "exams": [
         "other"
       ],
@@ -742,13 +2814,16 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        8
       ]
     },
     {
       "path": "bank/other/weekly_solve/higher_math.json",
-      "count": 103,
-      "mcqs": 99,
-      "written": 4,
+      "count": 17,
+      "mcqs": 17,
+      "written": 0,
       "exams": [
         "other"
       ],
@@ -757,13 +2832,16 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        8
       ]
     },
     {
       "path": "bank/other/weekly_solve/physics.json",
-      "count": 97,
-      "mcqs": 93,
-      "written": 4,
+      "count": 13,
+      "mcqs": 13,
+      "written": 0,
       "exams": [
         "other"
       ],
@@ -772,6 +2850,9 @@
       ],
       "source_types": [
         "weekly_solve"
+      ],
+      "weeks": [
+        8
       ]
     },
     {
@@ -787,6 +2868,11 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        2,
+        3,
+        8
       ]
     },
     {
@@ -802,6 +2888,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -817,7 +2909,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/ru/past_paper/gk.json",
@@ -832,7 +2925,8 @@
       ],
       "source_types": [
         "past_paper"
-      ]
+      ],
+      "weeks": []
     },
     {
       "path": "bank/ru/past_paper/higher_math.json",
@@ -847,6 +2941,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     },
     {
@@ -862,6 +2962,12 @@
       ],
       "source_types": [
         "past_paper"
+      ],
+      "weeks": [
+        1,
+        2,
+        3,
+        8
       ]
     }
   ],
@@ -889,7 +2995,7 @@
       "chapter_id": "bio_zoo_03",
       "chapter_name": "প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
       "subject": "Biology",
-      "count": 40,
+      "count": 28,
       "years_hit": 7,
       "papers_hit": 15,
       "exams": [
@@ -898,7 +3004,6 @@
         "gst",
         "ju",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 6.72,
@@ -909,7 +3014,7 @@
       "chapter_id": "bio_zoo_04",
       "chapter_name": "সালোকসংশ্লেষণ (C_3 বনাম C_4 উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)",
       "subject": "Biology",
-      "count": 20,
+      "count": 19,
       "years_hit": 5,
       "papers_hit": 15,
       "exams": [
@@ -935,7 +3040,6 @@
         "gst",
         "ju",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 6.56,
@@ -964,7 +3068,7 @@
       "chapter_id": "পর_ব_শ_রস_য_ন",
       "chapter_name": "পরিবেশ রসায়ন",
       "subject": "Chemistry",
-      "count": 47,
+      "count": 31,
       "years_hit": 7,
       "papers_hit": 16,
       "exams": [
@@ -973,7 +3077,6 @@
         "gst",
         "ju",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 7.8,
@@ -1041,7 +3144,7 @@
       "chapter_id": "পর_ম_ণগত_রস_য_ন",
       "chapter_name": "পরিমাণগত রসায়ন",
       "subject": "Chemistry",
-      "count": 26,
+      "count": 25,
       "years_hit": 11,
       "papers_hit": 23,
       "exams": [
@@ -1050,7 +3153,6 @@
         "gst",
         "ju",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 19.62,
@@ -1117,7 +3219,7 @@
       "chapter_id": "ব_ত_ত",
       "chapter_name": "বৃত্ত",
       "subject": "Higher Math",
-      "count": 10,
+      "count": 9,
       "years_hit": 5,
       "papers_hit": 9,
       "exams": [
@@ -1140,8 +3242,7 @@
       "papers_hit": 4,
       "exams": [
         "cu",
-        "du_ka",
-        "other"
+        "du_ka"
       ],
       "predicted_pct": 1.61,
       "expected_mcq_du_ka": 0.24,
@@ -1156,8 +3257,7 @@
       "papers_hit": 15,
       "exams": [
         "cu",
-        "du_ka",
-        "other"
+        "du_ka"
       ],
       "predicted_pct": 4.23,
       "expected_mcq_du_ka": 0.63,
@@ -1231,7 +3331,6 @@
         "gst",
         "ju",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 13.71,
@@ -1525,13 +3624,12 @@
       "chapter_id": "bio_zoo_10",
       "chapter_name": "হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
       "subject": "Biology",
-      "count": 16,
+      "count": 14,
       "years_hit": 8,
       "papers_hit": 14,
       "exams": [
         "du_ka",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 10.02,
       "expected_mcq_du_ka": 1.5,
@@ -1541,7 +3639,7 @@
       "chapter_id": "bio_zoo_05",
       "chapter_name": "গ্যাসীয় পরিবহন (O_2 ও CO_2 পরিবহন এবং ক্লোরাইড শিফট)",
       "subject": "Biology",
-      "count": 17,
+      "count": 13,
       "years_hit": 3,
       "papers_hit": 6,
       "exams": [
@@ -1574,7 +3672,7 @@
       "chapter_id": "bio_bot_05",
       "chapter_name": "মায়োসিস-১ প্রোফেজ-১ এর উপপর্যায়সমূহ",
       "subject": "Biology",
-      "count": 18,
+      "count": 16,
       "years_hit": 5,
       "papers_hit": 8,
       "exams": [
@@ -1589,13 +3687,12 @@
       "chapter_id": "bio_zoo_12",
       "chapter_name": "করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
       "subject": "Biology",
-      "count": 17,
+      "count": 15,
       "years_hit": 2,
       "papers_hit": 8,
       "exams": [
         "du_ka",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 2.83,
       "expected_mcq_du_ka": 0.42,
@@ -1627,8 +3724,7 @@
       "papers_hit": 14,
       "exams": [
         "du_ka",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 10.53,
       "expected_mcq_du_ka": 1.58,
@@ -1638,7 +3734,7 @@
       "chapter_id": "bio_zoo_06",
       "chapter_name": "মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্",
       "subject": "Biology",
-      "count": 29,
+      "count": 18,
       "years_hit": 1,
       "papers_hit": 9,
       "exams": [
@@ -1654,7 +3750,7 @@
       "chapter_id": "bio_bot_07",
       "chapter_name": "নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য",
       "subject": "Biology",
-      "count": 18,
+      "count": 14,
       "years_hit": 4,
       "papers_hit": 7,
       "exams": [
@@ -1669,7 +3765,7 @@
       "chapter_id": "bio_zoo_07",
       "chapter_name": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
       "subject": "Biology",
-      "count": 13,
+      "count": 12,
       "years_hit": 2,
       "papers_hit": 8,
       "exams": [
@@ -1685,7 +3781,7 @@
       "chapter_id": "bio_zoo_11",
       "chapter_name": "মেন্ডেলের সূত্রের ব্যতিক্রম ও অনুপাতসমূহ",
       "subject": "Biology",
-      "count": 15,
+      "count": 14,
       "years_hit": 2,
       "papers_hit": 7,
       "exams": [
@@ -1701,7 +3797,7 @@
       "chapter_id": "bio_zoo_09",
       "chapter_name": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
       "subject": "Biology",
-      "count": 16,
+      "count": 13,
       "years_hit": 2,
       "papers_hit": 7,
       "exams": [
@@ -1717,7 +3813,7 @@
       "chapter_id": "bio_bot_02",
       "chapter_name": "মায়োসিস-১ এর প্রফেজ-১ এর ৫টি উপপর্যায়",
       "subject": "Biology",
-      "count": 15,
+      "count": 12,
       "years_hit": 2,
       "papers_hit": 7,
       "exams": [
@@ -1735,7 +3831,7 @@
       "chapter_id": "bio_bot_04",
       "chapter_name": "ভাইরাস গঠন ও বৈশিষ্ট্য",
       "subject": "Biology",
-      "count": 22,
+      "count": 15,
       "years_hit": 0,
       "papers_hit": 3,
       "exams": [
@@ -1751,7 +3847,7 @@
       "chapter_id": "bio_bot_06",
       "chapter_name": "ব্রায়োফাইটার বৈশিষ্ট্য ও রিকসিয়া",
       "subject": "Biology",
-      "count": 21,
+      "count": 16,
       "years_hit": 3,
       "papers_hit": 5,
       "exams": [
@@ -1766,13 +3862,12 @@
       "chapter_id": "bio_bot_08",
       "chapter_name": "ভাজক টিস্যুর অবস্থানভিত্তিক প্রকারভেদ",
       "subject": "Biology",
-      "count": 23,
+      "count": 16,
       "years_hit": 0,
       "papers_hit": 3,
       "exams": [
         "du_ka",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 0,
       "expected_mcq_du_ka": 0,
@@ -1782,7 +3877,7 @@
       "chapter_id": "bio_bot_11",
       "chapter_name": "টিস্যু কালচার ধারণা ও জনক",
       "subject": "Biology",
-      "count": 20,
+      "count": 14,
       "years_hit": 0,
       "papers_hit": 4,
       "exams": [
@@ -1798,7 +3893,7 @@
       "chapter_id": "bio_bot_12",
       "chapter_name": "বাস্তুতন্ত্রের শক্তির প্রবাহ",
       "subject": "Biology",
-      "count": 24,
+      "count": 16,
       "years_hit": 0,
       "papers_hit": 3,
       "exams": [
@@ -1853,8 +3948,7 @@
       "exams": [
         "du_ka",
         "eng_bridge",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 19.44,
       "expected_mcq_du_ka": 2.92,
@@ -2035,7 +4129,7 @@
       "chapter_id": "স_য_ক_ত_ক_ণ_র_ত_র_ক_ণম_ত_ক_অন_প_ত",
       "chapter_name": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত",
       "subject": "Higher Math",
-      "count": 31,
+      "count": 20,
       "years_hit": 5,
       "papers_hit": 15,
       "exams": [
@@ -2073,8 +4167,7 @@
       "years_hit": 4,
       "papers_hit": 4,
       "exams": [
-        "du_ka",
-        "other"
+        "du_ka"
       ],
       "predicted_pct": 12.37,
       "expected_mcq_du_ka": 1.86,
@@ -2104,8 +4197,7 @@
       "papers_hit": 4,
       "exams": [
         "du_ka",
-        "eng_bridge",
-        "other"
+        "eng_bridge"
       ],
       "predicted_pct": 1.44,
       "expected_mcq_du_ka": 0.22,
@@ -2121,8 +4213,7 @@
       "exams": [
         "du_ka",
         "eng_bridge",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 12.82,
       "expected_mcq_du_ka": 1.92,
@@ -2274,13 +4365,12 @@
       "chapter_id": "গত_ব_দ_য_ও_প_রক_ষ_পক",
       "chapter_name": "গতিবিদ্যা ও প্রক্ষেপক",
       "subject": "Physics",
-      "count": 9,
+      "count": 8,
       "years_hit": 6,
-      "papers_hit": 9,
+      "papers_hit": 8,
       "exams": [
         "du_ka",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 6.1,
@@ -2305,13 +4395,12 @@
       "chapter_id": "ত_পগত_ব_দ_য",
       "chapter_name": "তাপগতিবিদ্যা",
       "subject": "Physics",
-      "count": 28,
+      "count": 16,
       "years_hit": 4,
       "papers_hit": 8,
       "exams": [
         "du_ka",
         "mat",
-        "other",
         "ru"
       ],
       "predicted_pct": 2.31,
@@ -2322,13 +4411,12 @@
       "chapter_id": "জ_য_ত_র_ব_জ_ঞ_ন",
       "chapter_name": "জ্যোতির্বিজ্ঞান",
       "subject": "Physics",
-      "count": 9,
+      "count": 5,
       "years_hit": 1,
       "papers_hit": 4,
       "exams": [
         "du_ka",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 1.4,
       "expected_mcq_du_ka": 0.21,
@@ -2361,8 +4449,7 @@
       "exams": [
         "du_ka",
         "eng_bridge",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 11.93,
       "expected_mcq_du_ka": 1.79,
@@ -2394,8 +4481,7 @@
       "exams": [
         "du_ka",
         "eng_bridge",
-        "mat",
-        "other"
+        "mat"
       ],
       "predicted_pct": 1.46,
       "expected_mcq_du_ka": 0.22,
@@ -2421,29 +4507,14 @@
       "expected_mcq_mat": 0
     },
     {
-      "chapter_id": "ব_স_ত_র_পর_ম_প_ও_সম_ভ_বন",
-      "chapter_name": "বিস্তার পরিমাপ ও সম্ভাবনা",
-      "subject": "Higher Math",
-      "count": 7,
-      "years_hit": 1,
-      "papers_hit": 3,
-      "exams": [
-        "eng_bridge",
-        "mat",
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
       "chapter_id": "bio_zoo_08",
-      "chapter_name": "ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
+      "chapter_name": "প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
       "subject": "Biology",
-      "count": 21,
+      "count": 17,
       "years_hit": 4,
       "papers_hit": 13,
       "exams": [
+        "du_ka",
         "gst",
         "mat",
         "other"
@@ -2451,6 +4522,209 @@
       "predicted_pct": 5.16,
       "expected_mcq_du_ka": 0.77,
       "expected_mcq_mat": 1.55
+    },
+    {
+      "chapter_id": "অণ_জ_ব",
+      "chapter_name": "অণুজীব",
+      "subject": "Biology",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 10,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "শ_ব_ল_ও_ছত_র_ক",
+      "chapter_name": "শৈবাল ও ছত্রাক",
+      "subject": "Biology",
+      "count": 5,
+      "years_hit": 0,
+      "papers_hit": 5,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ব_র_য_ফ_ইট_ও_ট_র_ড_ফ_ইট",
+      "chapter_name": "ব্রায়োফাইটা ও টেরিডোফাইটা",
+      "subject": "Biology",
+      "count": 4,
+      "years_hit": 0,
+      "papers_hit": 4,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "অর_থন_ত_ক_রস_য_ন",
+      "chapter_name": "অর্থনৈতিক রসায়ন",
+      "subject": "Chemistry",
+      "count": 8,
+      "years_hit": 0,
+      "papers_hit": 5,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ব_স_ত_র_পর_ম_প_ও_সম_ভ_বন",
+      "chapter_name": "বিস্তার পরিমাপ ও সম্ভাবনা",
+      "subject": "Higher Math",
+      "count": 7,
+      "years_hit": 1,
+      "papers_hit": 3,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ব_পর_ত_ত_র_ক_ণম_ত_ক_ফ_শন_ও_সম_করণ",
+      "chapter_name": "বিপরীত ত্রিকোণমিতিক ফাংশন ও সমীকরণ",
+      "subject": "Higher Math",
+      "count": 4,
+      "years_hit": 0,
+      "papers_hit": 3,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_2nd_06",
+      "chapter_name": "অধিবৃত্তের উৎকেন্দ্রিকতা ও অসীম তটের সমীকরণ",
+      "subject": "Higher Math",
+      "count": 1,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ম_য_ট_র_ক_স_ও_ন_র_ণ_য_ক",
+      "chapter_name": "ম্যাট্রিক্স ও নির্ণায়ক",
+      "subject": "Higher Math",
+      "count": 9,
+      "years_hit": 0,
+      "papers_hit": 9,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "স_থ_ত_ব_দ_য",
+      "chapter_name": "স্থিতিবিদ্যা",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 10,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "পরম_ণ_র_মড_ল_ও_ন_উক_ল_য_র_পদ_র_থব_জ_ঞ_ন",
+      "chapter_name": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
+      "subject": "Physics",
+      "count": 12,
+      "years_hit": 2,
+      "papers_hit": 9,
+      "exams": [
+        "du_ka",
+        "mat",
+        "ru"
+      ],
+      "predicted_pct": 1.02,
+      "expected_mcq_du_ka": 0.15,
+      "expected_mcq_mat": 0.2
+    },
+    {
+      "chapter_id": "স_থ_র_তড_ৎ",
+      "chapter_name": "স্থির তড়িৎ",
+      "subject": "Physics",
+      "count": 8,
+      "years_hit": 2,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 2.91,
+      "expected_mcq_du_ka": 0.44,
+      "expected_mcq_mat": 0.58
+    },
+    {
+      "chapter_id": "আধ_ন_ক_পদ_র_থব_জ_ঞ_ন_র_স_চন",
+      "chapter_name": "আধুনিক পদার্থবিজ্ঞানের সূচনা",
+      "subject": "Physics",
+      "count": 11,
+      "years_hit": 5,
+      "papers_hit": 11,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 10.18,
+      "expected_mcq_du_ka": 1.53,
+      "expected_mcq_mat": 2.04
+    },
+    {
+      "chapter_id": "তড_ৎ_প_রব_হ_র_চ_ম_বক_ক_র_য_ও_চ_ম_বকত_ব",
+      "chapter_name": "তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব",
+      "subject": "Physics",
+      "count": 12,
+      "years_hit": 0,
+      "papers_hit": 12,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ত_ড_ৎচ_ম_বক_য_আব_শ_ও_পর_বর_ত_প_রব_হ",
+      "chapter_name": "তাড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ",
+      "subject": "Physics",
+      "count": 7,
+      "years_hit": 0,
+      "papers_hit": 7,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
     },
     {
       "chapter_id": "math_2nd_02",
@@ -2790,67 +5064,6 @@
       "expected_mcq_mat": 0.51
     },
     {
-      "chapter_id": "আধ_ন_ক_পদ_র_থব_জ_ঞ_ন_র_স_চন",
-      "chapter_name": "আধুনিক পদার্থবিজ্ঞানের সূচনা",
-      "subject": "Physics",
-      "count": 11,
-      "years_hit": 5,
-      "papers_hit": 11,
-      "exams": [
-        "mat",
-        "other"
-      ],
-      "predicted_pct": 10.18,
-      "expected_mcq_du_ka": 1.53,
-      "expected_mcq_mat": 2.04
-    },
-    {
-      "chapter_id": "স_থ_র_তড_ৎ",
-      "chapter_name": "স্থির তড়িৎ",
-      "subject": "Physics",
-      "count": 8,
-      "years_hit": 2,
-      "papers_hit": 8,
-      "exams": [
-        "mat",
-        "other"
-      ],
-      "predicted_pct": 2.91,
-      "expected_mcq_du_ka": 0.44,
-      "expected_mcq_mat": 0.58
-    },
-    {
-      "chapter_id": "পরম_ণ_র_মড_ল_ও_ন_উক_ল_য_র_পদ_র_থব_জ_ঞ_ন",
-      "chapter_name": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
-      "subject": "Physics",
-      "count": 18,
-      "years_hit": 2,
-      "papers_hit": 9,
-      "exams": [
-        "mat",
-        "other",
-        "ru"
-      ],
-      "predicted_pct": 1.02,
-      "expected_mcq_du_ka": 0.15,
-      "expected_mcq_mat": 0.2
-    },
-    {
-      "chapter_id": "অর_থন_ত_ক_রস_য_ন",
-      "chapter_name": "অর্থনৈতিক রসায়ন",
-      "subject": "Chemistry",
-      "count": 15,
-      "years_hit": 0,
-      "papers_hit": 5,
-      "exams": [
-        "mat",
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
       "chapter_id": "math_1st_01",
       "chapter_name": "ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান (DU Repeate",
       "subject": "Higher Math",
@@ -2913,146 +5126,6 @@
       "count": 10,
       "years_hit": 0,
       "papers_hit": 1,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "অণ_জ_ব",
-      "chapter_name": "অণুজীব",
-      "subject": "Biology",
-      "count": 10,
-      "years_hit": 0,
-      "papers_hit": 10,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "শ_ব_ল_ও_ছত_র_ক",
-      "chapter_name": "শৈবাল ও ছত্রাক",
-      "subject": "Biology",
-      "count": 5,
-      "years_hit": 0,
-      "papers_hit": 5,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "ব_র_য_ফ_ইট_ও_ট_র_ড_ফ_ইট",
-      "chapter_name": "ব্রায়োফাইটা ও টেরিডোফাইটা",
-      "subject": "Biology",
-      "count": 4,
-      "years_hit": 0,
-      "papers_hit": 4,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "ব_পর_ত_ত_র_ক_ণম_ত_ক_ফ_শন_ও_সম_করণ",
-      "chapter_name": "বিপরীত ত্রিকোণমিতিক ফাংশন ও সমীকরণ",
-      "subject": "Higher Math",
-      "count": 8,
-      "years_hit": 0,
-      "papers_hit": 3,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "math_2nd_06",
-      "chapter_name": "অধিবৃত্তের উৎকেন্দ্রিকতা ও অসীম তটের সমীকরণ",
-      "subject": "Higher Math",
-      "count": 1,
-      "years_hit": 0,
-      "papers_hit": 1,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "ম_য_ট_র_ক_স_ও_ন_র_ণ_য_ক",
-      "chapter_name": "ম্যাট্রিক্স ও নির্ণায়ক",
-      "subject": "Higher Math",
-      "count": 9,
-      "years_hit": 0,
-      "papers_hit": 9,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "স_থ_ত_ব_দ_য",
-      "chapter_name": "স্থিতিবিদ্যা",
-      "subject": "Higher Math",
-      "count": 10,
-      "years_hit": 0,
-      "papers_hit": 10,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "math_1st_07",
-      "chapter_name": "ত্রিভুজের কোণ ও বাহুর সম্পর্ক (সাইন ও কোসাইন সূত্র)",
-      "subject": "Higher Math",
-      "count": 2,
-      "years_hit": 0,
-      "papers_hit": 2,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "তড_ৎ_প_রব_হ_র_চ_ম_বক_ক_র_য_ও_চ_ম_বকত_ব",
-      "chapter_name": "তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব",
-      "subject": "Physics",
-      "count": 12,
-      "years_hit": 0,
-      "papers_hit": 12,
-      "exams": [
-        "other"
-      ],
-      "predicted_pct": 0,
-      "expected_mcq_du_ka": 0,
-      "expected_mcq_mat": 0
-    },
-    {
-      "chapter_id": "ত_ড_ৎচ_ম_বক_য_আব_শ_ও_পর_বর_ত_প_রব_হ",
-      "chapter_name": "তাড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ",
-      "subject": "Physics",
-      "count": 7,
-      "years_hit": 0,
-      "papers_hit": 7,
       "exams": [
         "other"
       ],

@@ -280,8 +280,22 @@ console.log(`📊 backtest.json: top-8 coverage=${backtestSummary.overall_top8_c
 // ── RUNTIME INDEX (lightweight metadata for 0-MB initial load) ──
 const bankRoot = path.join(DATA_DIR, 'bank');
 const papers = [];
-const byExam = {}, bySubject = {}, bySourceType = {}, byWeek = {};
+const byExam = {}, bySubject = {}, bySourceType = {}, byWeek = {}, byMegaType = {};
 const chapterStats = new Map();
+const megaStats = new Map();
+
+function inferWeek(q) {
+  if (typeof q.week === 'number' && q.week >= 1 && q.week <= 9) return q.week;
+  const m = /^w(\d)(?:_|\b)/i.exec(String(q.id || ''));
+  if (m) return parseInt(m[1], 10);
+  const s = /(?:^|[\s\-/])(?:week(?:ly)?[\s\-]*0?(\d)|w[\-\s]?0?(\d)|[\w]0(\d)\b)/i.exec(String(q.source_name || ''));
+  if (s) {
+    const n = parseInt(s[1] || s[2] || s[3], 10);
+    if (n >= 1 && n <= 9) return n;
+  }
+  return null;
+}
+
 function scanBank(d) {
   if (!fs.existsSync(d)) return;
   for (const e of fs.readdirSync(d, { withFileTypes: true })) {
@@ -291,7 +305,7 @@ function scanBank(d) {
       const rel = path.relative(DATA_DIR, p).replace(/\\/g, '/');
       const arr = JSON.parse(fs.readFileSync(p, 'utf8'));
       if (!Array.isArray(arr) || !arr.length) continue;
-      const exams = new Set(), subjects = new Set(), sourceTypes = new Set();
+      const exams = new Set(), subjects = new Set(), sourceTypes = new Set(), weeks = new Set();
       let mcqs = 0, written = 0;
       for (const q of arr) {
         exams.add(q.exam || 'other');
@@ -301,10 +315,11 @@ function scanBank(d) {
         byExam[q.exam || 'other'] = (byExam[q.exam || 'other'] || 0) + 1;
         bySubject[q.subject || 'Physics'] = (bySubject[q.subject || 'Physics'] || 0) + 1;
         bySourceType[q.source_type || 'past_paper'] = (bySourceType[q.source_type || 'past_paper'] || 0) + 1;
-        const wkMatch = String(q.source_name || '').match(/Week\s*0?(\d+)/i);
-        if (wkMatch) {
-          const wkKey = `week_${wkMatch[1].padStart(2, '0')}`;
+        const wkNum = inferWeek(q);
+        if (wkNum) {
+          const wkKey = `week_${String(wkNum).padStart(2, '0')}`;
           byWeek[wkKey] = (byWeek[wkKey] || 0) + 1;
+          weeks.add(wkNum);
         }
         const chKey = `${q.subject}||${q.chapter_id}`;
         if (!chapterStats.has(chKey)) {
@@ -323,6 +338,22 @@ function scanBank(d) {
         if (q.exam_year) cs.years.add(q.exam_year);
         if (q.source_name) cs.papers.add(q.source_name);
         if (q.exam) cs.exams.add(q.exam);
+
+        if (q.mega_type && String(q.mega_type).trim()) {
+          const mt = String(q.mega_type).trim();
+          if (!megaStats.has(mt)) {
+            megaStats.set(mt, {
+              count: 0,
+              years: new Set(),
+              chapter: q.chapter_name || q.chapter_id,
+              chapter_id: q.chapter_id,
+              subject: q.subject || 'Physics',
+            });
+          }
+          const ms = megaStats.get(mt);
+          ms.count++;
+          if (q.exam_year) ms.years.add(q.exam_year);
+        }
       }
       papers.push({
         path: rel,
@@ -332,11 +363,26 @@ function scanBank(d) {
         exams: [...exams],
         subjects: [...subjects],
         source_types: [...sourceTypes],
+        weeks: [...weeks].sort((a, b) => a - b),
       });
     }
   }
 }
 scanBank(bankRoot);
+for (const [mt, ms] of [...megaStats.entries()].sort((a, b) => b[1].count - a[1].count)) {
+  byMegaType[mt] = {
+    count: ms.count,
+    years_hit: ms.years.size || 1,
+    chapter: ms.chapter,
+    chapter_id: ms.chapter_id,
+    subject: ms.subject,
+  };
+}
+const sortedByWeek = {};
+for (let w = 1; w <= 9; w++) {
+  const k = `week_0${w}`;
+  sortedByWeek[k] = byWeek[k] || 0;
+}
 const indexPayload = {
   generated_at: new Date().toISOString(),
   total_questions: rows.length,
@@ -345,7 +391,8 @@ const indexPayload = {
   by_exam: byExam,
   by_subject: bySubject,
   by_source_type: bySourceType,
-  by_week: byWeek,
+  by_week: sortedByWeek,
+  by_mega_type: byMegaType,
   master_sets: {
     du_ka_set_a: duka.A.length,
     du_ka_set_b: duka.B.length,
@@ -369,7 +416,7 @@ const indexPayload = {
   })),
 };
 fs.writeFileSync(path.join(DATA_DIR, 'index.json'), JSON.stringify(indexPayload, null, 2));
-console.log(`📇 src/data/index.json: ${papers.length} papers, ${indexPayload.chapters.length} chapters`);
+console.log(`📇 src/data/index.json: ${papers.length} papers, ${indexPayload.chapters.length} chapters, ${Object.keys(byMegaType).length} mega_types`);
 
 // stats
 for (const [name, set] of [['DU Ka A', duka.A], ['DU Ka B', duka.B], ['MAT A', mat.A], ['MAT B', mat.B]]) {
