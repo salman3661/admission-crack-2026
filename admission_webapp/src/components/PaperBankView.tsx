@@ -106,10 +106,17 @@ export const PaperBankView: React.FC<PaperBankViewProps> = ({
   const [loadingPath, setLoadingPath] = useState<string | null>(null);
 
   useEffect(() => {
-    setSourceFilter(computeInitialSource(defaultSourceType));
+    const initial = computeInitialSource(defaultSourceType);
+    const hasMatches = BANK_INDEX.papers.some(
+      (p) =>
+        (initial === 'all' || p.source_types.includes(initial)) &&
+        (selectedSubject === 'All' || p.subjects.includes(selectedSubject)) &&
+        matchesExam(p.exams, 'track')
+    );
+    setSourceFilter(hasMatches ? initial : 'all');
     setExamFilter('track');
     setActiveDrill(null);
-  }, [defaultSourceType, path, activeTrack]);
+  }, [defaultSourceType, path, activeTrack, selectedSubject]);
 
   useSEO({
     title: `${title} | Admission Crack 2026`,

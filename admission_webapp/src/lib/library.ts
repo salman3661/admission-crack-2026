@@ -959,8 +959,17 @@ async function loadExtendedBankPool(): Promise<Array<Question & { __isPredictor?
   };
 
   pushTestContainer(pfMod, 'paper_final', true);
-  pushTestContainer(sfMod, 'subject_final', true);
   pushTestContainer(fmMod, 'model_test', true);
+
+  const sfData = (sfMod as { default?: { varsity?: Record<string, unknown>[]; medical?: Record<string, unknown>[] } } | null)?.default || (sfMod as { varsity?: Record<string, unknown>[]; medical?: Record<string, unknown>[] } | null);
+  if (sfData) {
+    (sfData.varsity || []).forEach((item, idx) => {
+      collected.push(mapLegacyToQuestion(item, idx, { defaultExam: 'du_ka', defaultSourceType: 'subject_final', sourceName: 'Subject Final Varsity', isPredictor: true }));
+    });
+    (sfData.medical || []).forEach((item, idx) => {
+      collected.push(mapLegacyToQuestion(item, idx, { defaultExam: 'mat', defaultSourceType: 'subject_final', sourceName: 'Subject Final Medical', isPredictor: true }));
+    });
+  }
 
   const pushArray = (mod: unknown, defaultExam: ExamSlug, isPredictor: boolean, sourceName: string) => {
     const raw = (mod as { default?: Record<string, unknown>[] } | null)?.default || (mod as Record<string, unknown>[] | null);

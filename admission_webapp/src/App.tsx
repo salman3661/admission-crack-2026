@@ -1,8 +1,41 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { Component, useState, useEffect, Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
 import { auth, onAuthStateChanged, logoutFirebase } from './lib/firebase';
+
+class RouteErrorBoundary extends Component<
+  { children: React.ReactNode; onReset: () => void },
+  { hasError: boolean; message: string }
+> {
+  constructor(props: { children: React.ReactNode; onReset: () => void }) {
+    super(props);
+    this.state = { hasError: false, message: '' };
+  }
+  static getDerivedStateFromError(err: Error) {
+    return { hasError: true, message: err?.message || 'Unknown error' };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
+          <div className="text-lg font-extrabold text-rose-600">কিছু একটা লোড হতে সমস্যা হয়েছে</div>
+          <p className="text-xs text-slate-500">{this.state.message}</p>
+          <button
+            onClick={() => {
+              this.setState({ hasError: false, message: '' });
+              this.props.onReset();
+            }}
+            className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold cursor-pointer"
+          >
+            হোমে ফিরে যান
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 import type {
   AppMode,
   SubjectType,
@@ -419,15 +452,17 @@ export function App() {
       )}
 
       <main className={`flex-1 overflow-x-hidden ${isExamFocus ? 'pb-4' : 'pb-28'}`}>
-        <Suspense
-          fallback={
-            <div className="max-w-3xl mx-auto px-4 py-16 text-center text-sm text-slate-500">
-              লোড হচ্ছে...
-            </div>
-          }
-        >
-          {renderRoute()}
-        </Suspense>
+        <RouteErrorBoundary key={currentPath} onReset={() => navigate('/')}>
+          <Suspense
+            fallback={
+              <div className="max-w-3xl mx-auto px-4 py-16 text-center text-sm text-slate-500">
+                লোড হচ্ছে...
+              </div>
+            }
+          >
+            {renderRoute()}
+          </Suspense>
+        </RouteErrorBoundary>
       </main>
 
       {!isExamFocus && (
