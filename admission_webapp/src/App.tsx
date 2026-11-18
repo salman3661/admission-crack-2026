@@ -1,107 +1,176 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
-import { DecksView } from './components/DecksView';
-import { SlidesView } from './components/SlidesView';
-import { FlashcardsView } from './components/FlashcardsView';
-import { ActiveRecallView } from './components/ActiveRecallView';
-import { ExamView } from './components/ExamView';
-import { VaultView } from './components/VaultView';
-import { AnalyticsView } from './components/AnalyticsView';
-import { PredictorView } from './components/PredictorView';
-import { ChapterBlueprintView } from './components/ChapterBlueprintView';
-import { PaperFinalView } from './components/PaperFinalView';
-import { SubjectFinalView } from './components/SubjectFinalView';
-import { FullMockView } from './components/FullMockView';
 import { BottomNav } from './components/BottomNav';
 import { AuthModal } from './components/AuthModal';
-import { CategorySwitcher } from './components/CategorySwitcher';
 import { auth, onAuthStateChanged, logoutFirebase } from './lib/firebase';
-
-import slidesData from './data/slides.json';
-import flashcardsData from './data/flashcards.json';
-import weeklyExamsData from './data/weekly_exams.json';
-import subjectFinalData from './data/subject_final_bank.json';
-import predictorSetsData from './data/predictor_sets.json';
-import vaultData from './data/vault.json';
-
-import type { 
-  AppMode, 
-  SubjectType, 
-  WeekFilterType, 
-  SlideItem, 
-  FlashcardItem, 
-  QuizQuestion, 
-  VaultData as VaultDataType,
+import type {
+  AppMode,
+  SubjectType,
+  WeekFilterType,
   UserProfile,
   TrackType,
-  PredictorSet,
-  SubjectFinalBank
+  SlideItem,
+  FlashcardItem,
+  VaultData as VaultDataType,
 } from './types';
 
-export function App() {
-  // URL Hash Synchronized Mode Routing (SPA 0ms speed + Real Browser URLs & Phone Back-Button support)
-  const resolveModeFromHash = (rawHash: string): AppMode => {
-    const hash = rawHash.replace('#', '').toLowerCase();
-    if (hash === 'activerecall' || hash === 'active-recall' || hash === 'recall') return 'recall';
-    if (hash === 'weekly' || hash === 'weeks' || hash === 'weekly-mastery') return 'weekly';
-    if (hash === 'paper-final' || hash === 'paper_final' || hash === 'paperfinal') return 'paper_final';
-    if (hash === 'subject-final' || hash === 'subject_final' || hash === 'subjectfinal') return 'subject_final';
-    if (hash === 'full-mock' || hash === 'full_mock' || hash === 'fullmock') return 'full_mock';
-    const validModes: AppMode[] = [
-      'decks', 'weekly', 'paper_final', 'subject_final', 'full_mock',
-      'exam', 'predictor', 'slides', 'flashcards', 'analytics', 'vault', 'recall', 'blueprint'
-    ];
-    if (validModes.includes(hash as AppMode)) {
-      return hash as AppMode;
-    }
-    return 'decks';
-  };
+// Route-level code splitting (Rule 2: < 500 KB gzip initial payload)
+const HomeHubView = lazy(() => import('./components/HomeHubView').then((m) => ({ default: m.HomeHubView })));
+const RealExamSimulator = lazy(() => import('./components/RealExamSimulator').then((m) => ({ default: m.RealExamSimulator })));
+const MasterSetView = lazy(() => import('./components/MasterSetView').then((m) => ({ default: m.MasterSetView })));
+const MistakeBookView = lazy(() => import('./components/MistakeBookView').then((m) => ({ default: m.MistakeBookView })));
+const WeaknessRadarView = lazy(() => import('./components/WeaknessRadarView').then((m) => ({ default: m.WeaknessRadarView })));
+const MockTrackerView = lazy(() => import('./components/MockTrackerView').then((m) => ({ default: m.MockTrackerView })));
+const ChapterExplorerView = lazy(() => import('./components/ChapterExplorerView').then((m) => ({ default: m.ChapterExplorerView })));
+const FormulaCardsView = lazy(() => import('./components/FormulaCardsView').then((m) => ({ default: m.FormulaCardsView })));
+const PaperBankView = lazy(() => import('./components/PaperBankView').then((m) => ({ default: m.PaperBankView })));
+const ActiveRecallView = lazy(() => import('./components/ActiveRecallView').then((m) => ({ default: m.ActiveRecallView })));
+const FlashcardsView = lazy(() => import('./components/FlashcardsView').then((m) => ({ default: m.FlashcardsView })));
+const SlidesView = lazy(() => import('./components/SlidesView').then((m) => ({ default: m.SlidesView })));
+const VaultView = lazy(() => import('./components/VaultView').then((m) => ({ default: m.VaultView })));
+const AnalyticsView = lazy(() => import('./components/AnalyticsView').then((m) => ({ default: m.AnalyticsView })));
+const NotFoundView = lazy(() => import('./components/NotFoundView').then((m) => ({ default: m.NotFoundView })));
 
-  const getInitialMode = (): AppMode => {
-    try {
-      return resolveModeFromHash(window.location.hash);
-    } catch {
-      return 'decks';
-    }
-  };
+const MODE_TO_PATH: Record<AppMode, string> = {
+  decks: '/',
+  weekly: '/weekly',
+  paper_final: '/paper-final',
+  subject_final: '/subject-final',
+  full_mock: '/simulator',
+  exam: '/bank',
+  predictor: '/master-set',
+  slides: '/slides',
+  flashcards: '/flashcards',
+  analytics: '/analytics',
+  vault: '/vault',
+  recall: '/recall',
+  blueprint: '/chapters',
+};
 
-  const [currentMode, setCurrentMode] = useState<AppMode>(getInitialMode);
+function normalizePath(rawPath: string): string {
+  const clean = rawPath.replace(/\/+$/, '') || '/';
+  return clean.toLowerCase();
+}
 
-  // Sync mode changes to browser URL hash without page reload
-  const handleSelectMode = (mode: AppMode) => {
-    setCurrentMode(mode);
-    try {
-      if (window.location.hash.replace('#', '') !== mode) {
-        window.history.pushState(null, '', `#${mode}`);
-      }
-    } catch {
-      // fallback
-    }
-  };
+function pathToMode(path: string): AppMode {
+  const p = normalizePath(path);
+  if (p === '/') return 'decks';
+  if (p === '/weekly') return 'weekly';
+  if (p === '/paper-final') return 'paper_final';
+  if (p === '/subject-final') return 'subject_final';
+  if (p === '/simulator' || p === '/full-mock') return 'full_mock';
+  if (p === '/bank' || p === '/exam') return 'exam';
+  if (p === '/master-set' || p === '/predictor') return 'predictor';
+  if (p === '/slides') return 'slides';
+  if (p === '/flashcards') return 'flashcards';
+  if (p === '/analytics') return 'analytics';
+  if (p === '/vault') return 'vault';
+  if (p === '/recall') return 'recall';
+  if (p === '/chapters' || p === '/blueprint') return 'blueprint';
+  return 'decks';
+}
 
-  // Listen to browser Back / Forward navigation (popstate)
+const KNOWN_PATHS = new Set([
+  '/',
+  '/weekly',
+  '/paper-final',
+  '/subject-final',
+  '/simulator',
+  '/full-mock',
+  '/bank',
+  '/exam',
+  '/master-set',
+  '/predictor',
+  '/mistake-book',
+  '/weakness-radar',
+  '/mock-tracker',
+  '/chapters',
+  '/blueprint',
+  '/formulas',
+  '/recall',
+  '/flashcards',
+  '/slides',
+  '/vault',
+  '/analytics',
+]);
+
+// Lazy wrappers for legacy JSON-backed P1 views
+const LazySlidesWrapper: React.FC<{ selectedWeek: WeekFilterType; selectedSubject: SubjectType }> = ({
+  selectedWeek,
+  selectedSubject,
+}) => {
+  const [slides, setSlides] = useState<SlideItem[]>([]);
   useEffect(() => {
-    const handlePopState = () => {
-      try {
-        setCurrentMode(resolveModeFromHash(window.location.hash));
-      } catch {
-        setCurrentMode('decks');
-      }
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    import('./data/slides.json').then((m) => setSlides((m.default || []) as SlideItem[]));
   }, []);
+  return <SlidesView slides={slides} selectedWeek={selectedWeek} selectedSubject={selectedSubject} />;
+};
 
+const LazyFlashcardsWrapper: React.FC<{
+  selectedWeek: WeekFilterType;
+  onSelectWeek: (w: WeekFilterType) => void;
+  selectedSubject: SubjectType;
+  onSelectSubject: (s: SubjectType) => void;
+  activeTrack: TrackType;
+  onSelectMode: (m: AppMode) => void;
+}> = (props) => {
+  const [flashcards, setFlashcards] = useState<FlashcardItem[]>([]);
+  useEffect(() => {
+    import('./data/flashcards.json').then((m) => setFlashcards((m.default || []) as FlashcardItem[]));
+  }, []);
+  return <FlashcardsView flashcards={flashcards} {...props} />;
+};
+
+const LazyVaultWrapper: React.FC<{ selectedWeek: WeekFilterType; selectedSubject: SubjectType }> = ({
+  selectedWeek,
+  selectedSubject,
+}) => {
+  const [vault, setVault] = useState<VaultDataType | null>(null);
+  useEffect(() => {
+    import('./data/vault.json').then((m) => setVault(m.default as VaultDataType));
+  }, []);
+  if (!vault) return <div className="p-10 text-center text-sm text-slate-500">ভল্ট লোড হচ্ছে...</div>;
+  return <VaultView vault={vault} selectedWeek={selectedWeek} selectedSubject={selectedSubject} />;
+};
+
+export function App() {
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    // Support legacy #hash URLs by normalizing to pathname
+    if (window.location.hash && window.location.hash.length > 1) {
+      const h = window.location.hash.replace('#', '').toLowerCase().replace(/_/g, '-');
+      const mapped = `/${h === 'decks' ? '' : h}`;
+      window.history.replaceState(null, '', mapped);
+      return normalizePath(mapped);
+    }
+    return normalizePath(window.location.pathname);
+  });
+
+  const navigate = (path: string) => {
+    const clean = normalizePath(path);
+    setCurrentPath(clean);
+    if (normalizePath(window.location.pathname) !== clean) {
+      window.history.pushState(null, '', clean);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectMode = (mode: AppMode) => {
+    navigate(MODE_TO_PATH[mode] || '/');
+  };
+
+  useEffect(() => {
+    const onPop = () => setCurrentPath(normalizePath(window.location.pathname));
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   const [selectedWeek, setSelectedWeek] = useState<WeekFilterType>('all');
   const [selectedSubject, setSelectedSubject] = useState<SubjectType>('All');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  // Active Track Isolation: 'varsity' (Varsity 'Ka') vs 'medical' (Medical MAT)
   const [activeTrack, setActiveTrack] = useState<TrackType>(() => {
     const saved = localStorage.getItem('admission_track');
-    if (saved === 'medical' || saved === 'varsity') return saved;
-    return 'varsity';
+    return saved === 'medical' || saved === 'varsity' ? saved : 'varsity';
   });
 
   const handleSelectTrack = (track: TrackType) => {
@@ -114,29 +183,19 @@ export function App() {
       target: track === 'medical' ? 'মেডিকেল ভর্তি পরীক্ষা (MAT)' : "ঢাকা বিশ্ববিদ্যালয় 'ক' ইউনিট",
     }));
   };
-  
-  // Theme state: defaults to light for the ultra-clean Chorcha look, with toggleable dark mode
+
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem('admission_theme');
-    if (saved === 'light' || saved === 'dark') return saved;
-    return 'light';
+    return saved === 'light' || saved === 'dark' ? saved : 'light';
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
+    if (theme === 'dark') root.classList.add('dark');
+    else root.classList.remove('dark');
     localStorage.setItem('admission_theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
-  // User Profile state with Google authentication support
   const [user, setUser] = useState<UserProfile>(() => {
     const savedUser = localStorage.getItem('admission_user');
     if (savedUser) {
@@ -146,7 +205,6 @@ export function App() {
         // fallback
       }
     }
-    // Default guest profile
     return {
       name: '',
       email: '',
@@ -159,7 +217,6 @@ export function App() {
     };
   });
 
-  // Listen to Firebase Auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
@@ -168,7 +225,9 @@ export function App() {
             ...prev,
             name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'শিক্ষার্থী',
             email: firebaseUser.email || '',
-            avatar: firebaseUser.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(firebaseUser.email || 'user')}`,
+            avatar:
+              firebaseUser.photoURL ||
+              `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(firebaseUser.email || 'user')}`,
             isLoggedIn: true,
           };
           localStorage.setItem('admission_user', JSON.stringify(updated));
@@ -190,8 +249,8 @@ export function App() {
   const handleLogout = async () => {
     try {
       await logoutFirebase();
-    } catch (e) {
-      console.warn('Firebase logout notice:', e);
+    } catch {
+      // ignore
     }
     setUser({
       name: '',
@@ -206,31 +265,110 @@ export function App() {
     localStorage.removeItem('admission_user');
   };
 
-  const slides = slidesData as SlideItem[];
-  const flashcards = flashcardsData as FlashcardItem[];
-  const vault = vaultData as VaultDataType;
+  const currentMode = pathToMode(currentPath);
 
-  // Tier 3: Strict Track Question Isolation (Medical vs Varsity 'Ka')
-  const subjectBank = subjectFinalData as unknown as SubjectFinalBank;
-  const currentQuizzes = useMemo(() => {
-    return (activeTrack === 'medical' ? subjectBank.medical : subjectBank.varsity) as QuizQuestion[];
-  }, [activeTrack, subjectBank]);
-
-  // Tier 1: Strictly isolated Weekly Solve Sheet pool for Practice Drill when a week is selected
-  const weeklyQuizzes = useMemo(() => {
-    return weeklyExamsData as QuizQuestion[];
-  }, []);
-
-  // Combined predictor sets
-  const allPredictorSets = useMemo(() => {
-    const data = predictorSetsData as { varsity_sets: PredictorSet[]; medical_sets: PredictorSet[] };
-    return [...(data.varsity_sets || []), ...(data.medical_sets || [])];
-  }, []);
+  const renderRoute = () => {
+    if (!KNOWN_PATHS.has(currentPath)) {
+      return <NotFoundView onGoHome={() => navigate('/')} />;
+    }
+    switch (currentPath) {
+      case '/':
+        return <HomeHubView activeTrack={activeTrack} onNavigate={navigate} />;
+      case '/simulator':
+      case '/full-mock':
+        return <RealExamSimulator activeTrack={activeTrack} onOpenMockTracker={() => navigate('/mock-tracker')} />;
+      case '/master-set':
+      case '/predictor':
+        return <MasterSetView activeTrack={activeTrack} />;
+      case '/mistake-book':
+        return <MistakeBookView />;
+      case '/weakness-radar':
+        return <WeaknessRadarView />;
+      case '/mock-tracker':
+        return <MockTrackerView />;
+      case '/chapters':
+      case '/blueprint':
+        return <ChapterExplorerView activeTrack={activeTrack} />;
+      case '/formulas':
+        return <FormulaCardsView />;
+      case '/weekly':
+        return (
+          <PaperBankView
+            title="Weekly Solve Sheets"
+            description="কোচিং এর সাপ্তাহিক সলভ শিট — অন-ডিমান্ড লোড।"
+            path="/weekly"
+            defaultSourceType="weekly_solve"
+            activeTrack={activeTrack}
+            selectedSubject={selectedSubject}
+          />
+        );
+      case '/paper-final':
+        return (
+          <PaperBankView
+            title="Paper Final"
+            description="কোচিং এর পেপার ফাইনাল প্রশ্নব্যাংক।"
+            path="/paper-final"
+            defaultSourceType="paper_final"
+            activeTrack={activeTrack}
+            selectedSubject={selectedSubject}
+          />
+        );
+      case '/subject-final':
+        return (
+          <PaperBankView
+            title="Subject Final"
+            description="বিষয়ভিত্তিক ফাইনাল প্রশ্নব্যাংক।"
+            path="/subject-final"
+            defaultSourceType="subject_final"
+            activeTrack={activeTrack}
+            selectedSubject={selectedSubject}
+          />
+        );
+      case '/bank':
+      case '/exam':
+        return (
+          <PaperBankView
+            title="প্রশ্নব্যাংক (Paper Bank)"
+            description="সকল Past Paper, Weekly Solve, Paper Final ও Model Test।"
+            path="/bank"
+            defaultSourceType="all"
+            activeTrack={activeTrack}
+            selectedSubject={selectedSubject}
+          />
+        );
+      case '/recall':
+        return <ActiveRecallView onSelectMode={handleSelectMode} />;
+      case '/flashcards':
+        return (
+          <LazyFlashcardsWrapper
+            selectedWeek={selectedWeek}
+            onSelectWeek={setSelectedWeek}
+            selectedSubject={selectedSubject}
+            onSelectSubject={setSelectedSubject}
+            activeTrack={activeTrack}
+            onSelectMode={handleSelectMode}
+          />
+        );
+      case '/slides':
+        return <LazySlidesWrapper selectedWeek={selectedWeek} selectedSubject={selectedSubject} />;
+      case '/vault':
+        return <LazyVaultWrapper selectedWeek={selectedWeek} selectedSubject={selectedSubject} />;
+      case '/analytics':
+        return (
+          <AnalyticsView
+            user={user}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
+            onSelectMode={handleSelectMode}
+            activeTrack={activeTrack}
+          />
+        );
+      default:
+        return <NotFoundView onGoHome={() => navigate('/')} />;
+    }
+  };
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#F6F8F6] dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-['Hind_Siliguri'] antialiased transition-colors duration-200">
-      
-      {/* Top Navbar with Chorcha Pill Controls, Track Switcher, Google Login, & Dark/Light Toggle */}
       <Navbar
         currentMode={currentMode}
         onSelectMode={handleSelectMode}
@@ -239,7 +377,7 @@ export function App() {
         selectedSubject={selectedSubject}
         onSelectSubject={setSelectedSubject}
         theme={theme}
-        onToggleTheme={toggleTheme}
+        onToggleTheme={() => setTheme((p) => (p === 'dark' ? 'light' : 'dark'))}
         user={user}
         onOpenAuth={() => setIsAuthModalOpen(true)}
         onLogout={handleLogout}
@@ -247,141 +385,20 @@ export function App() {
         onSelectTrack={handleSelectTrack}
       />
 
-      {/* Main Mode View Area */}
       <main className="flex-1 overflow-x-hidden pb-32">
-        {currentMode === 'decks' && (
-          <DecksView
-            onSelectMode={handleSelectMode}
-            onSelectSubject={setSelectedSubject}
-            selectedWeek={selectedWeek}
-            onSelectWeek={setSelectedWeek}
-            user={user}
-            onOpenAuth={() => setIsAuthModalOpen(true)}
-            totalSlides={slides.length}
-            totalFlashcards={flashcards.length}
-            totalQuizzes={currentQuizzes.length}
-            activeTrack={activeTrack}
-            onSelectTrack={handleSelectTrack}
-          />
-        )}
-
-        {/* TIER 1: WEEKLY MODE (weekly_exams.json) */}
-        {currentMode === 'weekly' && (
-          <ChapterBlueprintView
-            onSelectMode={handleSelectMode}
-            onSelectWeek={setSelectedWeek}
-            onSelectSubject={setSelectedSubject}
-            forcedWorkflowMode="weekly"
-          />
-        )}
-
-        {/* TIER 2: PAPER FINAL SECTION (paper_final_bank.json) */}
-        {currentMode === 'paper_final' && (
-          <PaperFinalView activeTrack={activeTrack} />
-        )}
-
-        {/* TIER 3: SUBJECT-WISE FINAL MODEL (subject_final_bank.json) */}
-        {currentMode === 'subject_final' && (
-          <SubjectFinalView
-            activeTrack={activeTrack}
-            selectedSubject={selectedSubject}
-            onSelectSubject={setSelectedSubject}
-          />
-        )}
-
-        {/* TIER 4: FINAL MODEL TEST (full_mock_bank.json) */}
-        {currentMode === 'full_mock' && (
-          <FullMockView activeTrack={activeTrack} />
-        )}
-
-        {currentMode === 'exam' && (
-          <ExamView
-            quizzes={selectedWeek !== 'all' ? weeklyQuizzes : currentQuizzes}
-            selectedWeek={selectedWeek}
-            selectedSubject={selectedSubject}
-            activeTrack={activeTrack}
-          />
-        )}
-
-        {currentMode === 'predictor' && (
-          <PredictorView
-            activeTrack={activeTrack}
-            questions={currentQuizzes}
-            predictorSets={allPredictorSets}
-            onSelectTrack={handleSelectTrack}
-          />
-        )}
-
-        {currentMode === 'vault' && (
-          <VaultView 
-            vault={vault} 
-            selectedWeek={selectedWeek}
-            selectedSubject={selectedSubject}
-          />
-        )}
-
-        {currentMode === 'slides' && (
-          <SlidesView
-            slides={slides}
-            selectedWeek={selectedWeek}
-            selectedSubject={selectedSubject}
-          />
-        )}
-
-        {currentMode === 'flashcards' && (
-          <FlashcardsView
-            flashcards={flashcards}
-            selectedWeek={selectedWeek}
-            onSelectWeek={setSelectedWeek}
-            selectedSubject={selectedSubject}
-            onSelectSubject={setSelectedSubject}
-            activeTrack={activeTrack}
-            onSelectMode={handleSelectMode}
-          />
-        )}
-
-        {currentMode === 'recall' && (
-          <ActiveRecallView onSelectMode={handleSelectMode} />
-        )}
-
-        {currentMode === 'blueprint' && (
-          <ChapterBlueprintView
-            onSelectMode={handleSelectMode}
-            onSelectWeek={setSelectedWeek}
-            onSelectSubject={setSelectedSubject}
-            forcedWorkflowMode="blueprint"
-          />
-        )}
-
-
-        {currentMode === 'analytics' && (
-          <AnalyticsView
-            user={user}
-            onOpenAuth={() => setIsAuthModalOpen(true)}
-            onSelectMode={handleSelectMode}
-            activeTrack={activeTrack}
-          />
-        )}
-
-        {/* Section-Based Quick Category Switcher (shown when studying concepts/formula/vault) */}
-        {(currentMode === 'slides' || currentMode === 'vault') && (
-          <CategorySwitcher
-            currentMode={currentMode}
-            onSelectMode={handleSelectMode}
-          />
-        )}
+        <Suspense
+          fallback={
+            <div className="max-w-3xl mx-auto px-4 py-16 text-center text-sm text-slate-500">
+              লোড হচ্ছে...
+            </div>
+          }
+        >
+          {renderRoute()}
+        </Suspense>
       </main>
 
-      
-      {/* 4. MOBILE-FIRST BOTTOM NAVIGATION DOCK:
-          Sticky bottom navigation bar with rounded icons and micro-labels:
-          [ 🏠 ডেক ]  [ 📚 প্রশ্নব্যাংক ]  [ ⚡ এক্সপেক্টেড ]  [ 🃏 কার্ডস ]  [ 📊 অ্যানালিটিক্স ] */}
-      <BottomNav
-        currentMode={currentMode}
-        onSelectMode={handleSelectMode}
-      />
+      <BottomNav currentMode={currentMode} onSelectMode={handleSelectMode} />
 
-      {/* Google Authentication & Profile Modal */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}

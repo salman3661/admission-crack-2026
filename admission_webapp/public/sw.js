@@ -1,5 +1,6 @@
-// Service Worker for Admission Crack 2026 PWA Standalone Mode
-const CACHE_NAME = 'admission-crack-pwa-v1';
+// Service Worker for Admission Crack 2026 PWA (Rule 12)
+const CACHE_NAME = 'admission-crack-shell-v2';
+const DATA_CACHE = 'admission-crack-data-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -9,61 +10,69 @@ const STATIC_ASSETS = [
   '/logo512.png'
 ];
 
-// Install event - pre-cache shell and activate immediately
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch((err) => {
-        console.warn('Pre-caching asset failure:', err);
-      });
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS).catch(() => {}))
   );
   self.skipWaiting();
 });
 
-// Activate event - claim all clients and clean old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-      );
-    }).then(() => self.clients.claim())
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+          .filter((key) => key !== CACHE_NAME && key !== DATA_CACHE)
+          .map((key) => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
-// Fetch event - network-first with cache fallback
 self.addEventListener('fetch', (event) => {
-  // Only handle HTTP/HTTPS GET requests
   if (event.request.method !== 'GET') return;
-  if (!event.request.url.startsWith('http')) return;
+  if (!event.request.url.startsWith(self.location.origin)) return;
 
+  const url = new URL(event.request.url);
+
+  // Stale-while-revalidate for on-demand JSON chunks/data
+  if (url.pathname.endsWith('.json')) {
+    event.respondWith(
+      caches.open(DATA_CACHE).then(async (cache) => {
+        const cached = await cache.match(event.request);
+        const networkFetch = fetch(event.request)
+          .then((res) => {
+            if (res && res.status === 200) {
+              cache.put(event.request, res.clone());
+            }
+            return res;
+          })
+          .catch(() => cached);
+        return cached || networkFetch;
+      })
+    );
+    return;
+  }
+
+  // App shell: network-first, do NOT cache unknown-URL HTML fallbacks
   event.respondWith(
     fetch(event.request)
-      .then((networkResponse) => {
-        // Cache successful responses for local static files
+      .then((res) => {
         if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          event.request.url.startsWith(self.location.origin) &&
-          !event.request.url.includes('/api/')
+          res &&
+          res.status === 200 &&
+          (url.pathname.startsWith('/assets/') || STATIC_ASSETS.includes(url.pathname))
         ) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
-        return networkResponse;
+        return res;
       })
       .catch(async () => {
-        // Offline fallback from cache
-        const cachedResponse = await caches.match(event.request);
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        // If navigating to a page while offline, return the cached index.html
+        const cached = await caches.match(event.request);
+        if (cached) return cached;
         if (event.request.mode === 'navigate') {
-          return caches.match('/');
+          return caches.match('/index.html');
         }
         return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
       })

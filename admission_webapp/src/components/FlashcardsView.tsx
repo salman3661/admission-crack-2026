@@ -18,7 +18,6 @@ import {
 import katex from 'katex';
 import type { FlashcardItem, SubjectType, WeekFilterType, TrackType, AppMode } from '../types';
 import { MathText, parseMarkdownTable } from './MathText';
-import vaultItemsData from '../data/vault_items.json';
 
 export interface FlashcardsViewProps {
   flashcards?: FlashcardItem[];
@@ -351,6 +350,13 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
       console.error('Failed to save mastered flashcards', e);
     }
   }, [masteredIds]);
+
+  const [vaultItemsData, setVaultItemsData] = useState<any[]>([]);
+  useEffect(() => {
+    import('../data/vault_items.json').then((m) => {
+      setVaultItemsData(Array.isArray(m.default) ? m.default : []);
+    });
+  }, []);
 
   // Build unified cards from vault_items.json
   const vaultCards: UnifiedFlashcard[] = useMemo(() => {

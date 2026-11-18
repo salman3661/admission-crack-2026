@@ -1,32 +1,26 @@
-# React + TypeScript + Vite
+# Admission Crack 2026 — Webapp
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+DU 'Ka' (Science Unit) এবং Medical (MAT) ভর্তি পরীক্ষার প্র্যাকটিস ও প্রেডিকশন ইঞ্জিন।
 
-Currently, two official plugins are available:
+## নতুন Coaching Paper যোগ করার নিয়ম
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+1. `src/data/bank/<exam>/<source_type>/<name>.json` ফাইল তৈরি করো (যেমন `src/data/bank/du_ka/model_test/model_test_03.json`)।
+   - প্রতিটি প্রশ্নে `id`, `source_type` (`model_test` | `paper_final` | `subject_final` | `past_paper` | `weekly_solve`), `source_name`, `exam`, `exam_year`, `exam_date`, `subject`, `chapter_id`, `chapter_name`, `question`, `options`, `correct_index`, `is_written`, `marks`, `duration_sec` থাকতে হবে।
+   - লিখিত প্রশ্নের ক্ষেত্রে `options: []`, `correct_index: null`, `is_written: true` দাও।
+2. ডেটা যাচাই করো (0 error নিশ্চিত করো):
+   ```bash
+   node scripts/validate-data.mjs src/data/bank
+   ```
+3. Master Set, Index ও Backtest পুনর্গঠন করো:
+   ```bash
+   node scripts/build-master-set.mjs src/data/bank
+   ```
+4. Master Set যাচাই করো:
+   ```bash
+   node scripts/coverage-scorer.cjs src/data/master/du_ka_set_a.json
+   node scripts/coverage-scorer.cjs src/data/master/mat_set_a.json
+   ```
+5. প্রোডাকশন বিল্ড করো:
+   ```bash
+   npm run build
+   ```

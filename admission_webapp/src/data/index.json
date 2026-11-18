@@ -1,0 +1,3078 @@
+{
+  "generated_at": "2026-11-18T02:07:36.648Z",
+  "total_questions": 1442,
+  "total_mcqs": 1426,
+  "total_written": 16,
+  "by_exam": {
+    "cu": 33,
+    "du_ka": 349,
+    "eng_bridge": 19,
+    "gst": 33,
+    "ju": 29,
+    "mat": 440,
+    "other": 495,
+    "ru": 44
+  },
+  "by_subject": {
+    "Biology": 489,
+    "Chemistry": 270,
+    "English": 51,
+    "GK": 51,
+    "Higher Math": 276,
+    "Physics": 269,
+    "Bangla": 18,
+    "ICT": 18
+  },
+  "by_source_type": {
+    "past_paper": 917,
+    "weekly_solve": 525
+  },
+  "by_week": {
+    "week_08": 62
+  },
+  "master_sets": {
+    "du_ka_set_a": 60,
+    "du_ka_set_b": 60,
+    "du_ka_set_c": 24,
+    "mat_set_a": 100,
+    "mat_set_b": 100,
+    "mat_set_c": 40
+  },
+  "papers": [
+    {
+      "path": "bank/cu/past_paper/biology.json",
+      "count": 5,
+      "mcqs": 5,
+      "written": 0,
+      "exams": [
+        "cu"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/cu/past_paper/chemistry.json",
+      "count": 7,
+      "mcqs": 7,
+      "written": 0,
+      "exams": [
+        "cu"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/cu/past_paper/english.json",
+      "count": 2,
+      "mcqs": 2,
+      "written": 0,
+      "exams": [
+        "cu"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/cu/past_paper/gk.json",
+      "count": 2,
+      "mcqs": 2,
+      "written": 0,
+      "exams": [
+        "cu"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/cu/past_paper/higher_math.json",
+      "count": 10,
+      "mcqs": 10,
+      "written": 0,
+      "exams": [
+        "cu"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/cu/past_paper/physics.json",
+      "count": 7,
+      "mcqs": 7,
+      "written": 0,
+      "exams": [
+        "cu"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/bangla.json",
+      "count": 18,
+      "mcqs": 18,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Bangla"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/biology.json",
+      "count": 129,
+      "mcqs": 129,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/chemistry.json",
+      "count": 53,
+      "mcqs": 53,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/english.json",
+      "count": 9,
+      "mcqs": 9,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/gk.json",
+      "count": 10,
+      "mcqs": 10,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/higher_math.json",
+      "count": 60,
+      "mcqs": 60,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/ict.json",
+      "count": 9,
+      "mcqs": 9,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "ICT"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/du_ka/past_paper/physics.json",
+      "count": 61,
+      "mcqs": 61,
+      "written": 0,
+      "exams": [
+        "du_ka"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/eng_bridge/past_paper/chemistry.json",
+      "count": 5,
+      "mcqs": 5,
+      "written": 0,
+      "exams": [
+        "eng_bridge"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/eng_bridge/past_paper/higher_math.json",
+      "count": 7,
+      "mcqs": 7,
+      "written": 0,
+      "exams": [
+        "eng_bridge"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/eng_bridge/past_paper/physics.json",
+      "count": 7,
+      "mcqs": 7,
+      "written": 0,
+      "exams": [
+        "eng_bridge"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/gst/past_paper/biology.json",
+      "count": 6,
+      "mcqs": 6,
+      "written": 0,
+      "exams": [
+        "gst"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/gst/past_paper/chemistry.json",
+      "count": 8,
+      "mcqs": 8,
+      "written": 0,
+      "exams": [
+        "gst"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/gst/past_paper/english.json",
+      "count": 2,
+      "mcqs": 2,
+      "written": 0,
+      "exams": [
+        "gst"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/gst/past_paper/gk.json",
+      "count": 2,
+      "mcqs": 2,
+      "written": 0,
+      "exams": [
+        "gst"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/gst/past_paper/higher_math.json",
+      "count": 7,
+      "mcqs": 7,
+      "written": 0,
+      "exams": [
+        "gst"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/gst/past_paper/physics.json",
+      "count": 8,
+      "mcqs": 8,
+      "written": 0,
+      "exams": [
+        "gst"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ju/past_paper/biology.json",
+      "count": 4,
+      "mcqs": 4,
+      "written": 0,
+      "exams": [
+        "ju"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ju/past_paper/chemistry.json",
+      "count": 5,
+      "mcqs": 5,
+      "written": 0,
+      "exams": [
+        "ju"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ju/past_paper/english.json",
+      "count": 1,
+      "mcqs": 1,
+      "written": 0,
+      "exams": [
+        "ju"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ju/past_paper/gk.json",
+      "count": 1,
+      "mcqs": 1,
+      "written": 0,
+      "exams": [
+        "ju"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ju/past_paper/higher_math.json",
+      "count": 10,
+      "mcqs": 10,
+      "written": 0,
+      "exams": [
+        "ju"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ju/past_paper/physics.json",
+      "count": 8,
+      "mcqs": 8,
+      "written": 0,
+      "exams": [
+        "ju"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/past_paper/biology.json",
+      "count": 175,
+      "mcqs": 175,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/past_paper/chemistry.json",
+      "count": 40,
+      "mcqs": 40,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/past_paper/english.json",
+      "count": 32,
+      "mcqs": 32,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/past_paper/gk.json",
+      "count": 30,
+      "mcqs": 30,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/past_paper/ict.json",
+      "count": 9,
+      "mcqs": 9,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "ICT"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/past_paper/physics.json",
+      "count": 34,
+      "mcqs": 34,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/mat/weekly_solve/biology.json",
+      "count": 49,
+      "mcqs": 49,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/mat/weekly_solve/chemistry.json",
+      "count": 30,
+      "mcqs": 30,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/mat/weekly_solve/english.json",
+      "count": 3,
+      "mcqs": 3,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/mat/weekly_solve/gk.json",
+      "count": 3,
+      "mcqs": 3,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/mat/weekly_solve/higher_math.json",
+      "count": 6,
+      "mcqs": 6,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/mat/weekly_solve/physics.json",
+      "count": 29,
+      "mcqs": 29,
+      "written": 0,
+      "exams": [
+        "mat"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/other/past_paper/biology.json",
+      "count": 14,
+      "mcqs": 14,
+      "written": 0,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/other/past_paper/chemistry.json",
+      "count": 9,
+      "mcqs": 9,
+      "written": 0,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/other/past_paper/higher_math.json",
+      "count": 61,
+      "mcqs": 61,
+      "written": 0,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/other/past_paper/physics.json",
+      "count": 6,
+      "mcqs": 6,
+      "written": 0,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/other/weekly_solve/biology.json",
+      "count": 101,
+      "mcqs": 97,
+      "written": 4,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/other/weekly_solve/chemistry.json",
+      "count": 104,
+      "mcqs": 100,
+      "written": 4,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/other/weekly_solve/higher_math.json",
+      "count": 103,
+      "mcqs": 99,
+      "written": 4,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/other/weekly_solve/physics.json",
+      "count": 97,
+      "mcqs": 93,
+      "written": 4,
+      "exams": [
+        "other"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "weekly_solve"
+      ]
+    },
+    {
+      "path": "bank/ru/past_paper/biology.json",
+      "count": 6,
+      "mcqs": 6,
+      "written": 0,
+      "exams": [
+        "ru"
+      ],
+      "subjects": [
+        "Biology"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ru/past_paper/chemistry.json",
+      "count": 9,
+      "mcqs": 9,
+      "written": 0,
+      "exams": [
+        "ru"
+      ],
+      "subjects": [
+        "Chemistry"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ru/past_paper/english.json",
+      "count": 2,
+      "mcqs": 2,
+      "written": 0,
+      "exams": [
+        "ru"
+      ],
+      "subjects": [
+        "English"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ru/past_paper/gk.json",
+      "count": 3,
+      "mcqs": 3,
+      "written": 0,
+      "exams": [
+        "ru"
+      ],
+      "subjects": [
+        "GK"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ru/past_paper/higher_math.json",
+      "count": 12,
+      "mcqs": 12,
+      "written": 0,
+      "exams": [
+        "ru"
+      ],
+      "subjects": [
+        "Higher Math"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    },
+    {
+      "path": "bank/ru/past_paper/physics.json",
+      "count": 12,
+      "mcqs": 12,
+      "written": 0,
+      "exams": [
+        "ru"
+      ],
+      "subjects": [
+        "Physics"
+      ],
+      "source_types": [
+        "past_paper"
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "chapter_id": "bio_zoo_02",
+      "chapter_name": "হাইড্রার নেমাটোসিস্ট ও পরিপাক",
+      "subject": "Biology",
+      "count": 12,
+      "years_hit": 5,
+      "papers_hit": 10,
+      "exams": [
+        "cu",
+        "du_ka",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 4.12,
+      "expected_mcq_du_ka": 0.62,
+      "expected_mcq_mat": 1.24
+    },
+    {
+      "chapter_id": "bio_zoo_03",
+      "chapter_name": "প্রধান অন্তক্ষরা গ্রন্থি ও হরমোন",
+      "subject": "Biology",
+      "count": 40,
+      "years_hit": 7,
+      "papers_hit": 15,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 6.72,
+      "expected_mcq_du_ka": 1.01,
+      "expected_mcq_mat": 2.02
+    },
+    {
+      "chapter_id": "bio_zoo_04",
+      "chapter_name": "সালোকসংশ্লেষণ (C_3 বনাম C_4 উদ্ভিদ ও হ্যাচ-স্ল্যাক চক্র)",
+      "subject": "Biology",
+      "count": 20,
+      "years_hit": 5,
+      "papers_hit": 15,
+      "exams": [
+        "cu",
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 10.22,
+      "expected_mcq_du_ka": 1.53,
+      "expected_mcq_mat": 3.07
+    },
+    {
+      "chapter_id": "bio_bot_10",
+      "chapter_name": "অমরাবিন্যাস (Placentation) এর প্রকারভেদ ও উদাহরণ",
+      "subject": "Biology",
+      "count": 20,
+      "years_hit": 5,
+      "papers_hit": 16,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 6.56,
+      "expected_mcq_du_ka": 0.98,
+      "expected_mcq_mat": 1.97
+    },
+    {
+      "chapter_id": "bio_bot_03",
+      "chapter_name": "জেনেটিক কোড, স্টার্ট ও স্টপ কোডন",
+      "subject": "Biology",
+      "count": 19,
+      "years_hit": 7,
+      "papers_hit": 18,
+      "exams": [
+        "cu",
+        "du_ka",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 9.37,
+      "expected_mcq_du_ka": 1.41,
+      "expected_mcq_mat": 2.81
+    },
+    {
+      "chapter_id": "পর_ব_শ_রস_য_ন",
+      "chapter_name": "পরিবেশ রসায়ন",
+      "subject": "Chemistry",
+      "count": 47,
+      "years_hit": 7,
+      "papers_hit": 16,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 7.8,
+      "expected_mcq_du_ka": 1.17,
+      "expected_mcq_mat": 1.95
+    },
+    {
+      "chapter_id": "জ_ব_রস_য_ন",
+      "chapter_name": "জৈব রসায়ন",
+      "subject": "Chemistry",
+      "count": 68,
+      "years_hit": 5,
+      "papers_hit": 52,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 10,
+      "expected_mcq_du_ka": 1.5,
+      "expected_mcq_mat": 2.5
+    },
+    {
+      "chapter_id": "র_স_য_ন_ক_পর_বর_তন",
+      "chapter_name": "রাসায়নিক পরিবর্তন",
+      "subject": "Chemistry",
+      "count": 11,
+      "years_hit": 7,
+      "papers_hit": 11,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat"
+      ],
+      "predicted_pct": 8.53,
+      "expected_mcq_du_ka": 1.28,
+      "expected_mcq_mat": 2.13
+    },
+    {
+      "chapter_id": "গ_ণগত_রস_য_ন",
+      "chapter_name": "গুণগত রসায়ন",
+      "subject": "Chemistry",
+      "count": 43,
+      "years_hit": 9,
+      "papers_hit": 41,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 16.27,
+      "expected_mcq_du_ka": 2.44,
+      "expected_mcq_mat": 4.07
+    },
+    {
+      "chapter_id": "পর_ম_ণগত_রস_য_ন",
+      "chapter_name": "পরিমাণগত রসায়ন",
+      "subject": "Chemistry",
+      "count": 26,
+      "years_hit": 11,
+      "papers_hit": 23,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 19.62,
+      "expected_mcq_du_ka": 2.94,
+      "expected_mcq_mat": 4.91
+    },
+    {
+      "chapter_id": "unclassified",
+      "chapter_name": "UNCLASSIFIED",
+      "subject": "English",
+      "count": 35,
+      "years_hit": 12,
+      "papers_hit": 28,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "ru"
+      ],
+      "predicted_pct": 60.92,
+      "expected_mcq_du_ka": 9.14,
+      "expected_mcq_mat": 9.14
+    },
+    {
+      "chapter_id": "unclassified",
+      "chapter_name": "UNCLASSIFIED",
+      "subject": "GK",
+      "count": 35,
+      "years_hit": 9,
+      "papers_hit": 28,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "ru"
+      ],
+      "predicted_pct": 62.47,
+      "expected_mcq_du_ka": 9.37,
+      "expected_mcq_mat": 6.25
+    },
+    {
+      "chapter_id": "math_1st_03",
+      "chapter_name": "লম্ব ও সমান্তরাল রেখার সমীকরণ গঠন",
+      "subject": "Higher Math",
+      "count": 14,
+      "years_hit": 10,
+      "papers_hit": 14,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "ru"
+      ],
+      "predicted_pct": 13.62,
+      "expected_mcq_du_ka": 2.04,
+      "expected_mcq_mat": 1.36
+    },
+    {
+      "chapter_id": "ব_ত_ত",
+      "chapter_name": "বৃত্ত",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 5,
+      "papers_hit": 9,
+      "exams": [
+        "cu",
+        "du_ka",
+        "ju",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 6.12,
+      "expected_mcq_du_ka": 0.92,
+      "expected_mcq_mat": 0.61
+    },
+    {
+      "chapter_id": "ফ_শন_ও_ফ_শন_র_ল_খচ_ত_র",
+      "chapter_name": "ফাংশন ও ফাংশনের লেখচিত্র",
+      "subject": "Higher Math",
+      "count": 4,
+      "years_hit": 2,
+      "papers_hit": 4,
+      "exams": [
+        "cu",
+        "du_ka",
+        "other"
+      ],
+      "predicted_pct": 1.61,
+      "expected_mcq_du_ka": 0.24,
+      "expected_mcq_mat": 0.16
+    },
+    {
+      "chapter_id": "অন_তর_করণ",
+      "chapter_name": "অন্তরীকরণ",
+      "subject": "Higher Math",
+      "count": 15,
+      "years_hit": 2,
+      "papers_hit": 15,
+      "exams": [
+        "cu",
+        "du_ka",
+        "other"
+      ],
+      "predicted_pct": 4.23,
+      "expected_mcq_du_ka": 0.63,
+      "expected_mcq_mat": 0.42
+    },
+    {
+      "chapter_id": "কন_ক_স",
+      "chapter_name": "কনিক্স",
+      "subject": "Higher Math",
+      "count": 39,
+      "years_hit": 10,
+      "papers_hit": 37,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 20.17,
+      "expected_mcq_du_ka": 3.03,
+      "expected_mcq_mat": 2.02
+    },
+    {
+      "chapter_id": "য_গজ_করণ",
+      "chapter_name": "যোগজীকরণ",
+      "subject": "Higher Math",
+      "count": 31,
+      "years_hit": 1,
+      "papers_hit": 17,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 0.63,
+      "expected_mcq_du_ka": 0.09,
+      "expected_mcq_mat": 0.06
+    },
+    {
+      "chapter_id": "ভ_ক_টর",
+      "chapter_name": "ভেক্টর",
+      "subject": "Physics",
+      "count": 14,
+      "years_hit": 8,
+      "papers_hit": 14,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ru"
+      ],
+      "predicted_pct": 11.03,
+      "expected_mcq_du_ka": 1.65,
+      "expected_mcq_mat": 2.21
+    },
+    {
+      "chapter_id": "ন_উটন_য_বলব_দ_য",
+      "chapter_name": "নিউটনীয় বলবিদ্যা",
+      "subject": "Physics",
+      "count": 21,
+      "years_hit": 9,
+      "papers_hit": 20,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 13.71,
+      "expected_mcq_du_ka": 2.06,
+      "expected_mcq_mat": 2.74
+    },
+    {
+      "chapter_id": "ক_জ_শক_ত_ও_ক_ষমত",
+      "chapter_name": "কাজ, শক্তি ও ক্ষমতা",
+      "subject": "Physics",
+      "count": 33,
+      "years_hit": 8,
+      "papers_hit": 30,
+      "exams": [
+        "cu",
+        "du_ka",
+        "eng_bridge",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 11.61,
+      "expected_mcq_du_ka": 1.74,
+      "expected_mcq_mat": 2.32
+    },
+    {
+      "chapter_id": "মহ_কর_ষ_ও_অভ_কর_ষ",
+      "chapter_name": "মহাকর্ষ ও অভিকর্ষ",
+      "subject": "Physics",
+      "count": 22,
+      "years_hit": 10,
+      "papers_hit": 22,
+      "exams": [
+        "cu",
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 12.62,
+      "expected_mcq_du_ka": 1.89,
+      "expected_mcq_mat": 2.52
+    },
+    {
+      "chapter_id": "চল_তড_ৎ",
+      "chapter_name": "চল তড়িৎ",
+      "subject": "Physics",
+      "count": 15,
+      "years_hit": 1,
+      "papers_hit": 10,
+      "exams": [
+        "cu",
+        "du_ka",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 2.34,
+      "expected_mcq_du_ka": 0.35,
+      "expected_mcq_mat": 0.47
+    },
+    {
+      "chapter_id": "ধ_বন_তত_ত_ব_ও_ব_ল_বর_ণম_ল",
+      "chapter_name": "ধ্বনিতত্ত্ব ও বাংলা বর্ণমালা",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 3.97,
+      "expected_mcq_du_ka": 0.6,
+      "expected_mcq_mat": 0.4
+    },
+    {
+      "chapter_id": "ধ_বন_পর_বর_তন",
+      "chapter_name": "ধ্বনি পরিবর্তন",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 5.87,
+      "expected_mcq_du_ka": 0.88,
+      "expected_mcq_mat": 0.59
+    },
+    {
+      "chapter_id": "সন_ধ",
+      "chapter_name": "সন্ধি",
+      "subject": "Bangla",
+      "count": 2,
+      "years_hit": 2,
+      "papers_hit": 2,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 9.6,
+      "expected_mcq_du_ka": 1.44,
+      "expected_mcq_mat": 0.96
+    },
+    {
+      "chapter_id": "সম_স",
+      "chapter_name": "সমাস",
+      "subject": "Bangla",
+      "count": 2,
+      "years_hit": 2,
+      "papers_hit": 2,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 13.3,
+      "expected_mcq_du_ka": 2,
+      "expected_mcq_mat": 1.33
+    },
+    {
+      "chapter_id": "উপসর_গ_ও_প_রত_যয",
+      "chapter_name": "উপসর্গ ও প্রত্যয়",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 3.97,
+      "expected_mcq_du_ka": 0.6,
+      "expected_mcq_mat": 0.4
+    },
+    {
+      "chapter_id": "ক_রক_ও_ব_ভক_ত",
+      "chapter_name": "কারক ও বিভক্তি",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 5.87,
+      "expected_mcq_du_ka": 0.88,
+      "expected_mcq_mat": 0.59
+    },
+    {
+      "chapter_id": "গদ_য_ও_প_রবন_ধ",
+      "chapter_name": "গদ্য ও প্রবন্ধ",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.62,
+      "expected_mcq_du_ka": 0.69,
+      "expected_mcq_mat": 0.46
+    },
+    {
+      "chapter_id": "কব_ত_ও_ছন_দ",
+      "chapter_name": "কবিতা ও ছন্দ",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.55,
+      "expected_mcq_du_ka": 0.68,
+      "expected_mcq_mat": 0.46
+    },
+    {
+      "chapter_id": "ব_ল_ব_য_করণ_পদ_প_রকরণ",
+      "chapter_name": "বাংলা ব্যাকরণ: পদ প্রকরণ",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 3.97,
+      "expected_mcq_du_ka": 0.6,
+      "expected_mcq_mat": 0.4
+    },
+    {
+      "chapter_id": "ব_ন_ন_ও_ব_ক_যশ_দ_ধ",
+      "chapter_name": "বানান ও বাক্যশুদ্ধি",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 10.74,
+      "expected_mcq_du_ka": 1.61,
+      "expected_mcq_mat": 1.07
+    },
+    {
+      "chapter_id": "ব_গধ_র_ও_প_রব_দ",
+      "chapter_name": "বাগধারা ও প্রবাদ",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 5.05,
+      "expected_mcq_du_ka": 0.76,
+      "expected_mcq_mat": 0.51
+    },
+    {
+      "chapter_id": "প_র_ভ_ষ_ক_শব_দ",
+      "chapter_name": "পারিভাষিক শব্দ",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.55,
+      "expected_mcq_du_ka": 0.68,
+      "expected_mcq_mat": 0.46
+    },
+    {
+      "chapter_id": "ম_ক_ত_য_দ_ধভ_ত_ত_ক_স_হ_ত_য",
+      "chapter_name": "মুক্তিযুদ্ধভিত্তিক সাহিত্য",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.62,
+      "expected_mcq_du_ka": 0.69,
+      "expected_mcq_mat": 0.46
+    },
+    {
+      "chapter_id": "শব_দভ_ণ_ড_র",
+      "chapter_name": "শব্দভাণ্ডার",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 3.97,
+      "expected_mcq_du_ka": 0.6,
+      "expected_mcq_mat": 0.4
+    },
+    {
+      "chapter_id": "ব_ল_স_হ_ত_য_ও_ব_য_করণ_ফ_ইন_ল",
+      "chapter_name": "বাংলা সাহিত্য ও ব্যাকরণ ফাইনাল",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 10.74,
+      "expected_mcq_du_ka": 1.61,
+      "expected_mcq_mat": 1.07
+    },
+    {
+      "chapter_id": "ব_ল_ব_য_করণ_ফ_ইন_ল",
+      "chapter_name": "বাংলা ব্যাকরণ ফাইনাল",
+      "subject": "Bangla",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.62,
+      "expected_mcq_du_ka": 0.69,
+      "expected_mcq_mat": 0.46
+    },
+    {
+      "chapter_id": "bio_zoo_10",
+      "chapter_name": "হৃদপিণ্ডের কপাটিকা ও রক্ত সঞ্চালনের গতিপথ",
+      "subject": "Biology",
+      "count": 16,
+      "years_hit": 8,
+      "papers_hit": 14,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 10.02,
+      "expected_mcq_du_ka": 1.5,
+      "expected_mcq_mat": 3.01
+    },
+    {
+      "chapter_id": "bio_zoo_05",
+      "chapter_name": "গ্যাসীয় পরিবহন (O_2 ও CO_2 পরিবহন এবং ক্লোরাইড শিফট)",
+      "subject": "Biology",
+      "count": 17,
+      "years_hit": 3,
+      "papers_hit": 6,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 3.02,
+      "expected_mcq_du_ka": 0.45,
+      "expected_mcq_mat": 0.91
+    },
+    {
+      "chapter_id": "bio_bot_01",
+      "chapter_name": "জেনেটিক কোড, স্টার্ট ও স্টপ কোডন",
+      "subject": "Biology",
+      "count": 14,
+      "years_hit": 4,
+      "papers_hit": 11,
+      "exams": [
+        "du_ka",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 1.56,
+      "expected_mcq_du_ka": 0.23,
+      "expected_mcq_mat": 0.47
+    },
+    {
+      "chapter_id": "bio_bot_05",
+      "chapter_name": "মায়োসিস-১ প্রোফেজ-১ এর উপপর্যায়সমূহ",
+      "subject": "Biology",
+      "count": 18,
+      "years_hit": 5,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 8.37,
+      "expected_mcq_du_ka": 1.25,
+      "expected_mcq_mat": 2.51
+    },
+    {
+      "chapter_id": "bio_zoo_12",
+      "chapter_name": "করোটিক স্নায়ুসমূহ (১২ জোড়া করোটিক স্নায়ুর নাম ও প্রকৃতি)",
+      "subject": "Biology",
+      "count": 17,
+      "years_hit": 2,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 2.83,
+      "expected_mcq_du_ka": 0.42,
+      "expected_mcq_mat": 0.85
+    },
+    {
+      "chapter_id": "bio_bot_09",
+      "chapter_name": "প্রস্বেদন ও পত্ররন্ধ্র খোলা-বন্ধ হওয়ার কৌশল",
+      "subject": "Biology",
+      "count": 23,
+      "years_hit": 6,
+      "papers_hit": 22,
+      "exams": [
+        "du_ka",
+        "gst",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 7.82,
+      "expected_mcq_du_ka": 1.17,
+      "expected_mcq_mat": 2.35
+    },
+    {
+      "chapter_id": "bio_zoo_01",
+      "chapter_name": "শ্বসন (গ্লাইকোলাইসিস, ক্রেবস চক্র ও ATP হিসাব)",
+      "subject": "Biology",
+      "count": 17,
+      "years_hit": 7,
+      "papers_hit": 14,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 10.53,
+      "expected_mcq_du_ka": 1.58,
+      "expected_mcq_mat": 3.16
+    },
+    {
+      "chapter_id": "bio_zoo_06",
+      "chapter_name": "মালভেসি (জবা) বনাম পোয়াসি (ঘাস) গোত্রের পুষ্প সংকেত ও শনাক্",
+      "subject": "Biology",
+      "count": 29,
+      "years_hit": 1,
+      "papers_hit": 9,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 0.98,
+      "expected_mcq_du_ka": 0.15,
+      "expected_mcq_mat": 0.29
+    },
+    {
+      "chapter_id": "bio_bot_07",
+      "chapter_name": "নগ্নবীজী উদ্ভিদ (সাইকাস) এর বৈশিষ্ট্য",
+      "subject": "Biology",
+      "count": 18,
+      "years_hit": 4,
+      "papers_hit": 7,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 4.08,
+      "expected_mcq_du_ka": 0.61,
+      "expected_mcq_mat": 1.22
+    },
+    {
+      "chapter_id": "bio_zoo_07",
+      "chapter_name": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
+      "subject": "Biology",
+      "count": 13,
+      "years_hit": 2,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 2.5,
+      "expected_mcq_du_ka": 0.38,
+      "expected_mcq_mat": 0.75
+    },
+    {
+      "chapter_id": "bio_zoo_11",
+      "chapter_name": "মেন্ডেলের সূত্রের ব্যতিক্রম ও অনুপাতসমূহ",
+      "subject": "Biology",
+      "count": 15,
+      "years_hit": 2,
+      "papers_hit": 7,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 2.15,
+      "expected_mcq_du_ka": 0.32,
+      "expected_mcq_mat": 0.64
+    },
+    {
+      "chapter_id": "bio_zoo_09",
+      "chapter_name": "নন-কর্ডাটার প্রধান পর্বের শনাক্তকারী বৈশিষ্ট্য",
+      "subject": "Biology",
+      "count": 16,
+      "years_hit": 2,
+      "papers_hit": 7,
+      "exams": [
+        "du_ka",
+        "gst",
+        "mat"
+      ],
+      "predicted_pct": 1.51,
+      "expected_mcq_du_ka": 0.23,
+      "expected_mcq_mat": 0.45
+    },
+    {
+      "chapter_id": "bio_bot_02",
+      "chapter_name": "মায়োসিস-১ এর প্রফেজ-১ এর ৫টি উপপর্যায়",
+      "subject": "Biology",
+      "count": 15,
+      "years_hit": 2,
+      "papers_hit": 7,
+      "exams": [
+        "du_ka",
+        "gst",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 1,
+      "expected_mcq_du_ka": 0.15,
+      "expected_mcq_mat": 0.3
+    },
+    {
+      "chapter_id": "bio_bot_04",
+      "chapter_name": "ভাইরাস গঠন ও বৈশিষ্ট্য",
+      "subject": "Biology",
+      "count": 22,
+      "years_hit": 0,
+      "papers_hit": 3,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "bio_bot_06",
+      "chapter_name": "ব্রায়োফাইটার বৈশিষ্ট্য ও রিকসিয়া",
+      "subject": "Biology",
+      "count": 21,
+      "years_hit": 3,
+      "papers_hit": 5,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 1.49,
+      "expected_mcq_du_ka": 0.22,
+      "expected_mcq_mat": 0.45
+    },
+    {
+      "chapter_id": "bio_bot_08",
+      "chapter_name": "ভাজক টিস্যুর অবস্থানভিত্তিক প্রকারভেদ",
+      "subject": "Biology",
+      "count": 23,
+      "years_hit": 0,
+      "papers_hit": 3,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "bio_bot_11",
+      "chapter_name": "টিস্যু কালচার ধারণা ও জনক",
+      "subject": "Biology",
+      "count": 20,
+      "years_hit": 0,
+      "papers_hit": 4,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "bio_bot_12",
+      "chapter_name": "বাস্তুতন্ত্রের শক্তির প্রবাহ",
+      "subject": "Biology",
+      "count": 24,
+      "years_hit": 0,
+      "papers_hit": 3,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ল_য_বর_টর_র_ন_র_পদ_ব_যবহ_র",
+      "chapter_name": "ল্যাবরেটরির নিরাপদ ব্যবহার",
+      "subject": "Chemistry",
+      "count": 8,
+      "years_hit": 4,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 7.61,
+      "expected_mcq_du_ka": 1.14,
+      "expected_mcq_mat": 1.9
+    },
+    {
+      "chapter_id": "ম_ল_র_পর_য_য_ব_ত_ত_ধর_ম_ও_র_স_য_ন_ক_বন_ধন",
+      "chapter_name": "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+      "subject": "Chemistry",
+      "count": 32,
+      "years_hit": 8,
+      "papers_hit": 17,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 10.72,
+      "expected_mcq_du_ka": 1.61,
+      "expected_mcq_mat": 2.68
+    },
+    {
+      "chapter_id": "তড_ৎ_রস_য_ন",
+      "chapter_name": "তড়িৎ রসায়ন",
+      "subject": "Chemistry",
+      "count": 20,
+      "years_hit": 9,
+      "papers_hit": 17,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 19.44,
+      "expected_mcq_du_ka": 2.92,
+      "expected_mcq_mat": 4.86
+    },
+    {
+      "chapter_id": "Dangling_Modifiers_Conditionals",
+      "chapter_name": "Dangling Modifiers & Conditionals",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 1.76,
+      "expected_mcq_du_ka": 0.26,
+      "expected_mcq_mat": 0.26
+    },
+    {
+      "chapter_id": "Subjunctive_Inversion",
+      "chapter_name": "Subjunctive & Inversion",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 2.05,
+      "expected_mcq_du_ka": 0.31,
+      "expected_mcq_mat": 0.31
+    },
+    {
+      "chapter_id": "Literature_Figurative_Language",
+      "chapter_name": "Literature & Figurative Language",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 1.71,
+      "expected_mcq_du_ka": 0.26,
+      "expected_mcq_mat": 0.26
+    },
+    {
+      "chapter_id": "Grammar_Synthesis_Voice_Clause",
+      "chapter_name": "Grammar Synthesis: Voice & Clause",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 1.47,
+      "expected_mcq_du_ka": 0.22,
+      "expected_mcq_mat": 0.22
+    },
+    {
+      "chapter_id": "DU_Kha_Grammar_Final",
+      "chapter_name": "DU 'Kha' Grammar Final",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.29,
+      "expected_mcq_du_ka": 0.64,
+      "expected_mcq_mat": 0.64
+    },
+    {
+      "chapter_id": "স_ব_ধ_ন_ও_শ_সনব_যবস_থ",
+      "chapter_name": "সংবিধান ও শাসনব্যবস্থা",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 1.32,
+      "expected_mcq_du_ka": 0.2,
+      "expected_mcq_mat": 0.13
+    },
+    {
+      "chapter_id": "আন_তর_জ_ত_ক_স_স_থ_ও_ভ_-র_জন_ত",
+      "chapter_name": "আন্তর্জাতিক সংস্থা ও ভূ-রাজনীতি",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 2.31,
+      "expected_mcq_du_ka": 0.35,
+      "expected_mcq_mat": 0.23
+    },
+    {
+      "chapter_id": "ম_ক_ত_য_দ_ধ_ও_ইত_হ_স",
+      "chapter_name": "মুক্তিযুদ্ধ ও ইতিহাস",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 1.52,
+      "expected_mcq_du_ka": 0.23,
+      "expected_mcq_mat": 0.15
+    },
+    {
+      "chapter_id": "অর_থন_ত_ও_ভ_গ_ল_ক_তথ_য",
+      "chapter_name": "অর্থনীতি ও ভৌগোলিক তথ্য",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 1.47,
+      "expected_mcq_du_ka": 0.22,
+      "expected_mcq_mat": 0.15
+    },
+    {
+      "chapter_id": "DU_Kha_GK_Final",
+      "chapter_name": "DU 'Kha' GK Final",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 4.29,
+      "expected_mcq_du_ka": 0.64,
+      "expected_mcq_mat": 0.43
+    },
+    {
+      "chapter_id": "সরলর_খ",
+      "chapter_name": "সরলরেখা",
+      "subject": "Higher Math",
+      "count": 9,
+      "years_hit": 8,
+      "papers_hit": 9,
+      "exams": [
+        "du_ka",
+        "ju",
+        "ru"
+      ],
+      "predicted_pct": 9.77,
+      "expected_mcq_du_ka": 1.47,
+      "expected_mcq_mat": 0.98
+    },
+    {
+      "chapter_id": "জট_ল_স_খ_য",
+      "chapter_name": "জটিল সংখ্যা",
+      "subject": "Higher Math",
+      "count": 4,
+      "years_hit": 4,
+      "papers_hit": 4,
+      "exams": [
+        "du_ka",
+        "ru"
+      ],
+      "predicted_pct": 4.38,
+      "expected_mcq_du_ka": 0.66,
+      "expected_mcq_mat": 0.44
+    },
+    {
+      "chapter_id": "স_য_ক_ত_ক_ণ_র_ত_র_ক_ণম_ত_ক_অন_প_ত",
+      "chapter_name": "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত",
+      "subject": "Higher Math",
+      "count": 31,
+      "years_hit": 5,
+      "papers_hit": 15,
+      "exams": [
+        "du_ka",
+        "gst",
+        "ju",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 7.21,
+      "expected_mcq_du_ka": 1.08,
+      "expected_mcq_mat": 0.72
+    },
+    {
+      "chapter_id": "ব_স_তব_স_খ_য_ও_অসমত",
+      "chapter_name": "বাস্তব সংখ্যা ও অসমতা",
+      "subject": "Higher Math",
+      "count": 6,
+      "years_hit": 2,
+      "papers_hit": 5,
+      "exams": [
+        "du_ka",
+        "ju",
+        "other"
+      ],
+      "predicted_pct": 1.8,
+      "expected_mcq_du_ka": 0.27,
+      "expected_mcq_mat": 0.18
+    },
+    {
+      "chapter_id": "বহ_পদ_ও_বহ_পদ_সম_করণ",
+      "chapter_name": "বহুপদী ও বহুপদী সমীকরণ",
+      "subject": "Higher Math",
+      "count": 4,
+      "years_hit": 4,
+      "papers_hit": 4,
+      "exams": [
+        "du_ka",
+        "other"
+      ],
+      "predicted_pct": 12.37,
+      "expected_mcq_du_ka": 1.86,
+      "expected_mcq_mat": 1.24
+    },
+    {
+      "chapter_id": "math_2nd_04",
+      "chapter_name": "দ্বিঘাত সমীকরণের মূলের সম্পর্ক ও এক মূল অপরটির n গুণ",
+      "subject": "Higher Math",
+      "count": 3,
+      "years_hit": 3,
+      "papers_hit": 3,
+      "exams": [
+        "du_ka",
+        "eng_bridge"
+      ],
+      "predicted_pct": 1.42,
+      "expected_mcq_du_ka": 0.21,
+      "expected_mcq_mat": 0.14
+    },
+    {
+      "chapter_id": "দ_ব_পদ_ব_স_ত_ত",
+      "chapter_name": "দ্বিপদী বিস্তৃতি",
+      "subject": "Higher Math",
+      "count": 5,
+      "years_hit": 3,
+      "papers_hit": 4,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "other"
+      ],
+      "predicted_pct": 1.44,
+      "expected_mcq_du_ka": 0.22,
+      "expected_mcq_mat": 0.14
+    },
+    {
+      "chapter_id": "ব_ন_য_স_ও_সম_ব_শ",
+      "chapter_name": "বিন্যাস ও সমাবেশ",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 5,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 12.82,
+      "expected_mcq_du_ka": 1.92,
+      "expected_mcq_mat": 1.28
+    },
+    {
+      "chapter_id": "math_2nd_10",
+      "chapter_name": "নির্ণায়কের ধর্ম ও ক্রেমারের নিয়ম",
+      "subject": "Higher Math",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "স_খ_য_পদ_ধত",
+      "chapter_name": "সংখ্যা পদ্ধতি",
+      "subject": "ICT",
+      "count": 2,
+      "years_hit": 2,
+      "papers_hit": 2,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 13.36,
+      "expected_mcq_du_ka": 2,
+      "expected_mcq_mat": 1.34
+    },
+    {
+      "chapter_id": "ব_ল_য_ন_অ_য_লজ_বর_ও_লজ_ক_গ_ট",
+      "chapter_name": "বুলিয়ান অ্যালজেবরা ও লজিক গেট",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 3.48,
+      "expected_mcq_du_ka": 0.52,
+      "expected_mcq_mat": 0.35
+    },
+    {
+      "chapter_id": "ড_জ_ট_ল_ড_ভ_ইস",
+      "chapter_name": "ডিজিটাল ডিভাইস",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 6.43,
+      "expected_mcq_du_ka": 0.96,
+      "expected_mcq_mat": 0.64
+    },
+    {
+      "chapter_id": "ওয_ব_ড_জ_ইন_ও_HTML",
+      "chapter_name": "ওয়েব ডিজাইন ও HTML",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 7.48,
+      "expected_mcq_du_ka": 1.12,
+      "expected_mcq_mat": 0.75
+    },
+    {
+      "chapter_id": "ড_ট_কম_উন_ক_শন_ও_ন_টওয_র_ক",
+      "chapter_name": "ডেটা কমিউনিকেশন ও নেটওয়ার্কিং",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 11.06,
+      "expected_mcq_du_ka": 1.66,
+      "expected_mcq_mat": 1.11
+    },
+    {
+      "chapter_id": "C_প_র_গ_র_ম",
+      "chapter_name": "C প্রোগ্রামিং",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 3.48,
+      "expected_mcq_du_ka": 0.52,
+      "expected_mcq_mat": 0.35
+    },
+    {
+      "chapter_id": "ড_ট_ব_স_ম_য_ন_জম_ন_ট",
+      "chapter_name": "ডেটাবেস ম্যানেজমেন্ট",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 6.43,
+      "expected_mcq_du_ka": 0.96,
+      "expected_mcq_mat": 0.64
+    },
+    {
+      "chapter_id": "স_খ_য_পদ_ধত_ও_২-এর_পর_প_রক",
+      "chapter_name": "সংখ্যা পদ্ধতি ও ২-এর পরিপূরক",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 5.06,
+      "expected_mcq_du_ka": 0.76,
+      "expected_mcq_mat": 0.51
+    },
+    {
+      "chapter_id": "ICT_ক_র_ফ_ইন_ল",
+      "chapter_name": "ICT কোর ফাইনাল",
+      "subject": "ICT",
+      "count": 2,
+      "years_hit": 2,
+      "papers_hit": 2,
+      "exams": [
+        "du_ka",
+        "mat"
+      ],
+      "predicted_pct": 9.36,
+      "expected_mcq_du_ka": 1.4,
+      "expected_mcq_mat": 0.94
+    },
+    {
+      "chapter_id": "গত_ব_দ_য_ও_প_রক_ষ_পক",
+      "chapter_name": "গতিবিদ্যা ও প্রক্ষেপক",
+      "subject": "Physics",
+      "count": 9,
+      "years_hit": 6,
+      "papers_hit": 9,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 6.1,
+      "expected_mcq_du_ka": 0.91,
+      "expected_mcq_mat": 1.22
+    },
+    {
+      "chapter_id": "ভ_তজগৎ_ও_পর_ম_প",
+      "chapter_name": "ভৌতজগৎ ও পরিমাপ",
+      "subject": "Physics",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "du_ka"
+      ],
+      "predicted_pct": 0.82,
+      "expected_mcq_du_ka": 0.12,
+      "expected_mcq_mat": 0.16
+    },
+    {
+      "chapter_id": "ত_পগত_ব_দ_য",
+      "chapter_name": "তাপগতিবিদ্যা",
+      "subject": "Physics",
+      "count": 28,
+      "years_hit": 4,
+      "papers_hit": 8,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 2.31,
+      "expected_mcq_du_ka": 0.35,
+      "expected_mcq_mat": 0.46
+    },
+    {
+      "chapter_id": "জ_য_ত_র_ব_জ_ঞ_ন",
+      "chapter_name": "জ্যোতির্বিজ্ঞান",
+      "subject": "Physics",
+      "count": 9,
+      "years_hit": 1,
+      "papers_hit": 4,
+      "exams": [
+        "du_ka",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 1.4,
+      "expected_mcq_du_ka": 0.21,
+      "expected_mcq_mat": 0.28
+    },
+    {
+      "chapter_id": "পর_য_য_ব_ত_ত_গত",
+      "chapter_name": "পর্যায়বৃত্ত গতি",
+      "subject": "Physics",
+      "count": 10,
+      "years_hit": 7,
+      "papers_hit": 10,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "ju",
+        "mat"
+      ],
+      "predicted_pct": 7.41,
+      "expected_mcq_du_ka": 1.11,
+      "expected_mcq_mat": 1.48
+    },
+    {
+      "chapter_id": "তরঙ_গ",
+      "chapter_name": "তরঙ্গ",
+      "subject": "Physics",
+      "count": 10,
+      "years_hit": 6,
+      "papers_hit": 10,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 11.93,
+      "expected_mcq_du_ka": 1.79,
+      "expected_mcq_mat": 2.39
+    },
+    {
+      "chapter_id": "পদ_র_থ_র_গ_ঠন_ক_ধর_ম",
+      "chapter_name": "পদার্থের গাঠনিক ধর্ম",
+      "subject": "Physics",
+      "count": 12,
+      "years_hit": 3,
+      "papers_hit": 6,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat"
+      ],
+      "predicted_pct": 3.16,
+      "expected_mcq_du_ka": 0.47,
+      "expected_mcq_mat": 0.63
+    },
+    {
+      "chapter_id": "আদর_শ_গ_য_স_ও_গ_য_স_র_গত_তত_ত_ব",
+      "chapter_name": "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব",
+      "subject": "Physics",
+      "count": 13,
+      "years_hit": 4,
+      "papers_hit": 9,
+      "exams": [
+        "du_ka",
+        "eng_bridge",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 1.46,
+      "expected_mcq_du_ka": 0.22,
+      "expected_mcq_mat": 0.29
+    },
+    {
+      "chapter_id": "স_ম_কন_ড_ক_টর_ও_ইল_কট_রন_ক_স",
+      "chapter_name": "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স",
+      "subject": "Physics",
+      "count": 16,
+      "years_hit": 0,
+      "papers_hit": 13,
+      "exams": [
+        "du_ka",
+        "gst",
+        "ju",
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ব_স_ত_র_পর_ম_প_ও_সম_ভ_বন",
+      "chapter_name": "বিস্তার পরিমাপ ও সম্ভাবনা",
+      "subject": "Higher Math",
+      "count": 7,
+      "years_hit": 1,
+      "papers_hit": 3,
+      "exams": [
+        "eng_bridge",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "bio_zoo_08",
+      "chapter_name": "ঘাসফড়িং এর পুঞ্জাক্ষি (ওমাটিডিয়াম ও দৃষ্টির প্রকৃতি)",
+      "subject": "Biology",
+      "count": 21,
+      "years_hit": 4,
+      "papers_hit": 13,
+      "exams": [
+        "gst",
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 5.16,
+      "expected_mcq_du_ka": 0.77,
+      "expected_mcq_mat": 1.55
+    },
+    {
+      "chapter_id": "math_2nd_02",
+      "chapter_name": "অক্ষদ্বয় কর্তনকারী রেখা ও উৎপন্ন ত্রিভুজের ক্ষেত্রফল",
+      "subject": "Higher Math",
+      "count": 2,
+      "years_hit": 2,
+      "papers_hit": 2,
+      "exams": [
+        "gst",
+        "ru"
+      ],
+      "predicted_pct": 1.77,
+      "expected_mcq_du_ka": 0.27,
+      "expected_mcq_mat": 0.18
+    },
+    {
+      "chapter_id": "Appropriate_Preposition",
+      "chapter_name": "Appropriate Preposition",
+      "subject": "English",
+      "count": 2,
+      "years_hit": 1,
+      "papers_hit": 2,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 8.59,
+      "expected_mcq_du_ka": 1.29,
+      "expected_mcq_mat": 1.29
+    },
+    {
+      "chapter_id": "Vocabulary_Synonyms",
+      "chapter_name": "Vocabulary & Synonyms",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 2.05,
+      "expected_mcq_du_ka": 0.31,
+      "expected_mcq_mat": 0.31
+    },
+    {
+      "chapter_id": "Grammar_Parallelism",
+      "chapter_name": "Grammar & Parallelism",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 2.05,
+      "expected_mcq_du_ka": 0.31,
+      "expected_mcq_mat": 0.31
+    },
+    {
+      "chapter_id": "Modifiers",
+      "chapter_name": "Modifiers",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 1.76,
+      "expected_mcq_du_ka": 0.26,
+      "expected_mcq_mat": 0.26
+    },
+    {
+      "chapter_id": "Phrases_Clauses",
+      "chapter_name": "Phrases & Clauses",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 1.71,
+      "expected_mcq_du_ka": 0.26,
+      "expected_mcq_mat": 0.26
+    },
+    {
+      "chapter_id": "Idioms_Phrases",
+      "chapter_name": "Idioms & Phrases",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 1.47,
+      "expected_mcq_du_ka": 0.22,
+      "expected_mcq_mat": 0.22
+    },
+    {
+      "chapter_id": "Spelling_Vocabulary",
+      "chapter_name": "Spelling & Vocabulary",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 2.05,
+      "expected_mcq_du_ka": 0.31,
+      "expected_mcq_mat": 0.31
+    },
+    {
+      "chapter_id": "Appropriate_Prepositions",
+      "chapter_name": "Appropriate Prepositions",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 1.76,
+      "expected_mcq_du_ka": 0.26,
+      "expected_mcq_mat": 0.26
+    },
+    {
+      "chapter_id": "Medical_Spelling_Synonym_Trap",
+      "chapter_name": "Medical Spelling & Synonym Trap",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 2.05,
+      "expected_mcq_du_ka": 0.31,
+      "expected_mcq_mat": 0.31
+    },
+    {
+      "chapter_id": "MAT_English_Core_Final",
+      "chapter_name": "MAT English Core Final",
+      "subject": "English",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 4.29,
+      "expected_mcq_du_ka": 0.64,
+      "expected_mcq_mat": 0.64
+    },
+    {
+      "chapter_id": "Bangladesh_Constitution",
+      "chapter_name": "Bangladesh Constitution",
+      "subject": "GK",
+      "count": 2,
+      "years_hit": 2,
+      "papers_hit": 2,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 3.63,
+      "expected_mcq_du_ka": 0.54,
+      "expected_mcq_mat": 0.36
+    },
+    {
+      "chapter_id": "Liberation_War_1971",
+      "chapter_name": "Liberation War 1971",
+      "subject": "GK",
+      "count": 4,
+      "years_hit": 3,
+      "papers_hit": 4,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 6.47,
+      "expected_mcq_du_ka": 0.97,
+      "expected_mcq_mat": 0.65
+    },
+    {
+      "chapter_id": "Megaprojects_of_Bangladesh",
+      "chapter_name": "Megaprojects of Bangladesh",
+      "subject": "GK",
+      "count": 2,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 8.59,
+      "expected_mcq_du_ka": 1.29,
+      "expected_mcq_mat": 0.86
+    },
+    {
+      "chapter_id": "স_ব_স_থ_য_ও_আন_তর_জ_ত_ক_দ_বস",
+      "chapter_name": "স্বাস্থ্য ও আন্তর্জাতিক দিবস",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 1.32,
+      "expected_mcq_du_ka": 0.2,
+      "expected_mcq_mat": 0.13
+    },
+    {
+      "chapter_id": "ব_ল_দ_শ_পর_চ_ত",
+      "chapter_name": "বাংলাদেশ পরিচিতি",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 2.31,
+      "expected_mcq_du_ka": 0.35,
+      "expected_mcq_mat": 0.23
+    },
+    {
+      "chapter_id": "MAT_GK_Core_Final",
+      "chapter_name": "MAT GK Core Final",
+      "subject": "GK",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 4.29,
+      "expected_mcq_du_ka": 0.64,
+      "expected_mcq_mat": 0.43
+    },
+    {
+      "chapter_id": "লজ_ক_গ_ট",
+      "chapter_name": "লজিক গেট",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 5.06,
+      "expected_mcq_du_ka": 0.76,
+      "expected_mcq_mat": 0.51
+    },
+    {
+      "chapter_id": "ব_ইন_র_ক_ড",
+      "chapter_name": "বাইনারি কোড",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 3.48,
+      "expected_mcq_du_ka": 0.52,
+      "expected_mcq_mat": 0.35
+    },
+    {
+      "chapter_id": "HTML_ট_য_গ",
+      "chapter_name": "HTML ট্যাগ",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 5.88,
+      "expected_mcq_du_ka": 0.88,
+      "expected_mcq_mat": 0.59
+    },
+    {
+      "chapter_id": "ন_টওয_র_ক_ও_ব_য_ম_ট_র_ক_স",
+      "chapter_name": "নেটওয়ার্ক ও বায়োমেট্রিক্স",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 5.06,
+      "expected_mcq_du_ka": 0.76,
+      "expected_mcq_mat": 0.51
+    },
+    {
+      "chapter_id": "প_র_গ_র_ম_ও_ফ_ল_চ_র_ট",
+      "chapter_name": "প্রোগ্রামিং ও ফ্লোচার্ট",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 3.48,
+      "expected_mcq_du_ka": 0.52,
+      "expected_mcq_mat": 0.35
+    },
+    {
+      "chapter_id": "ড_ট_ব_স",
+      "chapter_name": "ডেটাবেস",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 5.88,
+      "expected_mcq_du_ka": 0.88,
+      "expected_mcq_mat": 0.59
+    },
+    {
+      "chapter_id": "ট_ল_ম_ড_স_ন_ও_ক_র_য_স_র_জ_র",
+      "chapter_name": "টেলিমেডিসিন ও ক্রায়োসার্জারি",
+      "subject": "ICT",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "mat"
+      ],
+      "predicted_pct": 5.06,
+      "expected_mcq_du_ka": 0.76,
+      "expected_mcq_mat": 0.51
+    },
+    {
+      "chapter_id": "আধ_ন_ক_পদ_র_থব_জ_ঞ_ন_র_স_চন",
+      "chapter_name": "আধুনিক পদার্থবিজ্ঞানের সূচনা",
+      "subject": "Physics",
+      "count": 11,
+      "years_hit": 5,
+      "papers_hit": 11,
+      "exams": [
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 10.18,
+      "expected_mcq_du_ka": 1.53,
+      "expected_mcq_mat": 2.04
+    },
+    {
+      "chapter_id": "স_থ_র_তড_ৎ",
+      "chapter_name": "স্থির তড়িৎ",
+      "subject": "Physics",
+      "count": 8,
+      "years_hit": 2,
+      "papers_hit": 8,
+      "exams": [
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 2.91,
+      "expected_mcq_du_ka": 0.44,
+      "expected_mcq_mat": 0.58
+    },
+    {
+      "chapter_id": "পরম_ণ_র_মড_ল_ও_ন_উক_ল_য_র_পদ_র_থব_জ_ঞ_ন",
+      "chapter_name": "পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
+      "subject": "Physics",
+      "count": 18,
+      "years_hit": 2,
+      "papers_hit": 9,
+      "exams": [
+        "mat",
+        "other",
+        "ru"
+      ],
+      "predicted_pct": 1.02,
+      "expected_mcq_du_ka": 0.15,
+      "expected_mcq_mat": 0.2
+    },
+    {
+      "chapter_id": "অর_থন_ত_ক_রস_য_ন",
+      "chapter_name": "অর্থনৈতিক রসায়ন",
+      "subject": "Chemistry",
+      "count": 15,
+      "years_hit": 0,
+      "papers_hit": 5,
+      "exams": [
+        "mat",
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_1st_01",
+      "chapter_name": "ব্যতিক্রমী ম্যাট্রিক্সের শর্ত ও অজ্ঞাত রাশির মান (DU Repeate",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_1st_02",
+      "chapter_name": "ডট গুণন ও লম্ব হওয়ার শর্ত",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_1st_06",
+      "chapter_name": "বৃত্তচাপ, ব্যাসার্ধ ও কোণ (s = r\\theta)",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_2nd_08",
+      "chapter_name": "দুটি সমান বলের লব্ধি",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_2nd_09",
+      "chapter_name": "প্রক্ষেপকের অনুভূমিক পাল্লা সূত্র",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "অণ_জ_ব",
+      "chapter_name": "অণুজীব",
+      "subject": "Biology",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 10,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "শ_ব_ল_ও_ছত_র_ক",
+      "chapter_name": "শৈবাল ও ছত্রাক",
+      "subject": "Biology",
+      "count": 5,
+      "years_hit": 0,
+      "papers_hit": 5,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ব_র_য_ফ_ইট_ও_ট_র_ড_ফ_ইট",
+      "chapter_name": "ব্রায়োফাইটা ও টেরিডোফাইটা",
+      "subject": "Biology",
+      "count": 4,
+      "years_hit": 0,
+      "papers_hit": 4,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ব_পর_ত_ত_র_ক_ণম_ত_ক_ফ_শন_ও_সম_করণ",
+      "chapter_name": "বিপরীত ত্রিকোণমিতিক ফাংশন ও সমীকরণ",
+      "subject": "Higher Math",
+      "count": 8,
+      "years_hit": 0,
+      "papers_hit": 3,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_2nd_06",
+      "chapter_name": "অধিবৃত্তের উৎকেন্দ্রিকতা ও অসীম তটের সমীকরণ",
+      "subject": "Higher Math",
+      "count": 1,
+      "years_hit": 0,
+      "papers_hit": 1,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ম_য_ট_র_ক_স_ও_ন_র_ণ_য_ক",
+      "chapter_name": "ম্যাট্রিক্স ও নির্ণায়ক",
+      "subject": "Higher Math",
+      "count": 9,
+      "years_hit": 0,
+      "papers_hit": 9,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "স_থ_ত_ব_দ_য",
+      "chapter_name": "স্থিতিবিদ্যা",
+      "subject": "Higher Math",
+      "count": 10,
+      "years_hit": 0,
+      "papers_hit": 10,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "math_1st_07",
+      "chapter_name": "ত্রিভুজের কোণ ও বাহুর সম্পর্ক (সাইন ও কোসাইন সূত্র)",
+      "subject": "Higher Math",
+      "count": 2,
+      "years_hit": 0,
+      "papers_hit": 2,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "তড_ৎ_প_রব_হ_র_চ_ম_বক_ক_র_য_ও_চ_ম_বকত_ব",
+      "chapter_name": "তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব",
+      "subject": "Physics",
+      "count": 12,
+      "years_hit": 0,
+      "papers_hit": 12,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "ত_ড_ৎচ_ম_বক_য_আব_শ_ও_পর_বর_ত_প_রব_হ",
+      "chapter_name": "তাড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ",
+      "subject": "Physics",
+      "count": 7,
+      "years_hit": 0,
+      "papers_hit": 7,
+      "exams": [
+        "other"
+      ],
+      "predicted_pct": 0,
+      "expected_mcq_du_ka": 0,
+      "expected_mcq_mat": 0
+    },
+    {
+      "chapter_id": "য_গ_শ_রয_প_র_গ_র_ম",
+      "chapter_name": "যোগাশ্রয়ী প্রোগ্রাম",
+      "subject": "Higher Math",
+      "count": 1,
+      "years_hit": 1,
+      "papers_hit": 1,
+      "exams": [
+        "ru"
+      ],
+      "predicted_pct": 0.62,
+      "expected_mcq_du_ka": 0.09,
+      "expected_mcq_mat": 0.06
+    }
+  ]
+}

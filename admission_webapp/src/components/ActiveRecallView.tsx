@@ -18,8 +18,6 @@ import {
 } from 'lucide-react';
 import { MathText } from './MathText';
 import type { RecentGKCard, RecentGKMonthMeta, AppMode } from '../types';
-import rawGkData from '../data/recent_gk_monthly.json';
-import rawEnglishData from '../data/sure_shot_english_predictors.json';
 
 export interface ActiveRecallViewProps {
   onSelectMode?: (mode: AppMode) => void;
@@ -68,8 +66,7 @@ interface EnglishBlueprintData {
   predictors: EnglishPredictorItem[];
 }
 
-const gkData = rawGkData as MonthlyGKData;
-const englishData = rawEnglishData as unknown as EnglishBlueprintData;
+// Lazy-loaded inside component so initial bundle stays < 500 KB gzip
 
 const GK_CATEGORIES = [
   'সব ক্যাটাগরি',
@@ -103,6 +100,14 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
   onSelectMode,
   initialMonth = 'all'
 }) => {
+  const [gkData, setGkData] = useState<MonthlyGKData>({ months: [], total_cards: 0, data: {}, cards: [] });
+  const [englishData, setEnglishData] = useState<EnglishBlueprintData>({ total_predictors: 0, clusters: {}, predictors: [] } as unknown as EnglishBlueprintData);
+
+  useEffect(() => {
+    import('../data/recent_gk_monthly.json').then((m) => setGkData(m.default as MonthlyGKData));
+    import('../data/sure_shot_english_predictors.json').then((m) => setEnglishData(m.default as unknown as EnglishBlueprintData));
+  }, []);
+
   // Main Segment Switcher: 'gk' vs 'english'
   const [deckType, setDeckType] = useState<'gk' | 'english'>('gk');
 
@@ -218,7 +223,7 @@ const ActiveRecallViewComponent: React.FC<ActiveRecallViewProps> = ({
     }
 
     return list;
-  }, [selectedEnglishCluster, searchQuery, deckType]);
+  }, [englishData, selectedEnglishCluster, searchQuery, deckType]);
 
   const [engList, setEngList] = useState<EnglishPredictorItem[]>(filteredEnglishPredictors);
 

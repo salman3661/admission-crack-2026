@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import katex from 'katex';
+import DOMPurify from 'dompurify';
 
 interface MathTextProps {
   content?: string;
@@ -213,7 +214,10 @@ const MathTextComponent: React.FC<MathTextProps> = ({ content, text: propText, c
     text = text.replace(/___DISPLAY_MATH_(\d+)___/g, (_, idx) => displayMathBlocks[parseInt(idx)]);
     text = text.replace(/___INLINE_MATH_(\d+)___/g, (_, idx) => inlineMathBlocks[parseInt(idx)]);
 
-    return text;
+    return DOMPurify.sanitize(text, {
+      ADD_TAGS: ['math', 'semantics', 'mrow', 'mi', 'mo', 'mn', 'ms', 'mtext', 'mfrac', 'msup', 'msub', 'msubsup', 'msqrt', 'mroot', 'mtable', 'mtr', 'mtd', 'annotation', 'svg', 'path', 'line'],
+      ADD_ATTR: ['class', 'style', 'xmlns', 'encoding', 'viewBox', 'd', 'x1', 'y1', 'x2', 'y2', 'width', 'height', 'aria-hidden'],
+    });
   }, [content, propText]);
 
   if (block) {

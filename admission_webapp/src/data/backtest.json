@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-11-18T02:07:36.625Z",
+  "overall_top8_coverage_pct": 61.1,
+  "overall_rank1_hit_pct": 24,
+  "total_test_questions": 198,
+  "years": [
+    {
+      "year": 2021,
+      "questions": 110,
+      "top8_coverage_pct": 71.8,
+      "rank1_hit_pct": 50
+    },
+    {
+      "year": 2022,
+      "questions": 52,
+      "top8_coverage_pct": 50,
+      "rank1_hit_pct": 25
+    },
+    {
+      "year": 2023,
+      "questions": 32,
+      "top8_coverage_pct": 46.9,
+      "rank1_hit_pct": 0
+    },
+    {
+      "year": 2024,
+      "questions": 4,
+      "top8_coverage_pct": 25,
+      "rank1_hit_pct": 0
+    }
+  ]
+}

@@ -197,7 +197,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   Google দিয়ে সাইন ইন করুন
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs mx-auto">
-                  রিয়েলটাইম পরীক্ষার মার্কস, নেগেটিভ মার্কিং ট্র্যাকার এবং অ্যানালিটিক্স নিরাপদে ক্লাউডে সংরক্ষণ করুন।
+                  Google দিয়ে প্রোফাইল সেট করুন। তোমার সব স্কোর, এরর লগ ও অগ্রগতি ব্রাউজারের লোকাল স্টোরেজে নিরাপদে সংরক্ষিত থাকে।
                 </p>
               </div>
 
