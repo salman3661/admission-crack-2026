@@ -1023,32 +1023,39 @@ export async function loadChapterQuestionsComplete(
     .map((q) => ({
       ...q,
       __isPredictor:
-        (q.years_hit ?? 0) >= 2 ||
-        (q.likelihood_pct ?? 0) > 0 ||
         q.source_type === 'paper_final' ||
+        q.source_type === 'subject_final' ||
+        q.source_type === 'model_test' ||
         q.id.startsWith('pred_'),
+      __fromPastOrWeekly: q.source_type === 'past_paper' || q.source_type === 'weekly_solve',
     }));
 
-  const extMatches = extPool.filter((q) =>
-    matchesChapter(q.chapter_id, q.__rawChapter || q.chapter_name, q.subject)
-  );
+  const extMatches = extPool
+    .filter((q) => matchesChapter(q.chapter_id, q.__rawChapter || q.chapter_name, q.subject))
+    .map((q) => ({
+      ...q,
+      __fromPastOrWeekly:
+        q.source_type === 'past_paper' ||
+        q.source_type === 'weekly_solve' ||
+        q.source_name === 'Varsity Bank' ||
+        q.source_name === 'Medical Bank',
+    }));
 
-  // Merge and dedupe while preserving __isPredictor if ANY duplicate copy was a predictor
-  const predTexts = new Set<string>();
   const combined = [...bankMatches, ...extMatches];
-  for (const q of combined) {
-    if (q.__isPredictor) {
-      predTexts.add(q.question.replace(/\s+/g, ' ').trim().toLowerCase().slice(0, 140));
-    }
-  }
 
+  // Build each category independently so Varsity, MAT, and Predictor don't collapse into the same list
+  const varsityRaw = combined.filter((q) => q.exam !== 'mat' && q.__fromPastOrWeekly);
+  const matRaw = combined.filter((q) => q.exam === 'mat');
+  const predictorRaw = combined.filter((q) => q.__isPredictor);
+
+  const varsity = dedupe(varsityRaw.length > 0 ? varsityRaw : combined.filter((q) => q.exam !== 'mat'));
+  const mat = dedupe(matRaw);
+  const predictor = dedupe(
+    predictorRaw.length > 0
+      ? predictorRaw
+      : combined.filter((q) => (q.years_hit ?? 0) >= 2 || (q.likelihood_pct ?? 0) > 0)
+  );
   const all = dedupe(combined);
-  const varsity = all.filter((q) => q.exam !== 'mat');
-  const mat = all.filter((q) => q.exam === 'mat');
-  const predictor = all.filter((q) => {
-    const key = q.question.replace(/\s+/g, ' ').trim().toLowerCase().slice(0, 140);
-    return predTexts.has(key) || (q.years_hit ?? 0) >= 2 || (q.likelihood_pct ?? 0) > 0;
-  });
 
   return { all, varsity, mat, predictor };
 }
