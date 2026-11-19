@@ -13,11 +13,15 @@ import {
   Ruler,
   AlertTriangle,
   ChevronRight,
+  Flame,
 } from 'lucide-react';
 import {
   BANK_INDEX,
   loadPapersByFilter,
   loadChapterQuestionsComplete,
+  loadUnifiedMegaTypes,
+  loadTopicQuestionsComplete,
+  type UnifiedMegaTypeEntry,
   type Question,
 } from '../lib/library';
 import { buildCanonicalChapters, type CanonicalChapterGroup } from '../lib/chapterCatalog';
@@ -108,15 +112,34 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
   const [chapterLoading, setChapterLoading] = useState(false);
   const [formulaChapters, setFormulaChapters] = useState<FormulaChapterEntry[] | null>(null);
 
+  const [onlyHighYield, setOnlyHighYield] = useState(false);
+  const [unifiedMegaEntries, setUnifiedMegaEntries] = useState<UnifiedMegaTypeEntry[] | null>(null);
+
   const canonicalChapters = useMemo(() => buildCanonicalChapters(), []);
 
   const megaEntries = useMemo(() => {
+    if (unifiedMegaEntries) return unifiedMegaEntries;
     const map = BANK_INDEX.by_mega_type || {};
     return Object.entries(map).map(([name, meta]) => ({
       name,
-      ...meta,
+      subject: meta.subject as UnifiedMegaTypeEntry['subject'],
+      chapter: meta.chapter,
+      count: meta.count,
+      years_hit: meta.years_hit,
+      isHighYield: meta.years_hit >= 3 || meta.count >= 8,
     }));
-  }, []);
+  }, [unifiedMegaEntries]);
+
+  useEffect(() => {
+    if (viewTab !== 'topics' || unifiedMegaEntries) return;
+    let cancelled = false;
+    loadUnifiedMegaTypes().then((list) => {
+      if (!cancelled) setUnifiedMegaEntries(list);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [viewTab, unifiedMegaEntries]);
 
   useSEO({
     title: 'Chapter & Topic Explorer (অধ্যায়, টপিক ও সপ্তাহভিত্তিক ড্রিল) | Admission Crack 2026',
@@ -124,7 +147,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
     path: '/chapters',
   });
 
-  // Load ALL chapter questions (bank + paper final + subject final + full mock + master + varsity/medical banks) + formulas.json
+  // Load ALL chapter questions (bank + paper final + subject final + full mock + master + synthetic predictors + varsity/medical banks) + formulas.json
   useEffect(() => {
     if (!selectedChapter) return;
     let cancelled = false;
@@ -182,6 +205,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
     return megaEntries
       .filter((t) => {
         if (subject !== 'All' && t.subject !== subject) return false;
+        if (onlyHighYield && !t.isHighYield) return false;
         if (
           q &&
           !t.name.toLowerCase().includes(q) &&
@@ -191,8 +215,27 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
         }
         return true;
       })
-      .sort((a, b) => b.count - a.count || b.years_hit - a.years_hit);
-  }, [megaEntries, query, subject]);
+      .sort((a, b) => (b.years_hit * 3 + b.count) - (a.years_hit * 3 + a.count));
+  }, [megaEntries, query, subject, onlyHighYield]);
+
+  // Group selected chapter questions by mega_type (Important Patterns)
+  const chapterPatterns = useMemo(() => {
+    const map = new Map<string, Question[]>();
+    for (const q of chapterQuestions) {
+      const mt = String(q.mega_type || '').trim();
+      if (!mt) continue;
+      const arr = map.get(mt) || [];
+      arr.push(q);
+      map.set(mt, arr);
+    }
+    return Array.from(map.entries())
+      .map(([name, qs]) => ({
+        name,
+        questions: qs,
+        yearsHit: Math.max(0, ...qs.map((q) => q.years_hit || 0)),
+      }))
+      .sort((a, b) => (b.yearsHit * 2 + b.questions.length) - (a.yearsHit * 2 + a.questions.length));
+  }, [chapterQuestions]);
 
   // Match formulas for selected chapter
   const matchedFormulas = useMemo(() => {
@@ -226,7 +269,7 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
   const handleDrillTopic = async (megaType: string) => {
     setLoading(true);
     try {
-      const qs = await loadPapersByFilter({ megaType });
+      const qs = await loadTopicQuestionsComplete(megaType);
       setDrill({ title: megaType, questions: qs });
     } finally {
       setLoading(false);
@@ -396,6 +439,57 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
             </button>
           )}
         </div>
+
+        {/* Important Patterns in this Chapter */}
+        {!chapterLoading && chapterPatterns.length > 0 && (
+          <div className="bg-white dark:bg-slate-900 border border-amber-200/80 dark:border-amber-900/40 rounded-3xl p-5 space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                <Flame className="w-4 h-4 text-amber-500" /> এই অধ্যায়ের গুরুত্বপূর্ণ প্যাটার্ন (Important Patterns)
+              </h2>
+              <span className="text-[11px] font-bold text-amber-700 dark:text-amber-300">
+                {chapterPatterns.length}টি প্যাটার্ন
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {chapterPatterns.slice(0, 12).map((pat) => {
+                const isHot = pat.yearsHit >= 3 || pat.questions.length >= 4;
+                return (
+                  <div
+                    key={pat.name}
+                    className="p-3 rounded-2xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/70 dark:border-amber-900/40 flex items-center justify-between gap-2.5"
+                  >
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <div className="flex items-center gap-1.5 text-[10px] font-bold">
+                        {isHot && (
+                          <span className="px-1.5 py-0.5 rounded bg-amber-500 text-white">🔥 হাই-ইয়েল্ড</span>
+                        )}
+                        <span className="text-slate-600 dark:text-slate-300">{pat.questions.length} প্রশ্ন</span>
+                        {pat.yearsHit > 0 && (
+                          <span className="text-blue-600 dark:text-blue-400">• {pat.yearsHit} বছর</span>
+                        )}
+                      </div>
+                      <div className="text-xs font-extrabold text-slate-900 dark:text-white truncate">
+                        {pat.name}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() =>
+                        setDrill({
+                          title: `${selectedChapter.chapter_name} — ${pat.name}`,
+                          questions: pat.questions,
+                        })
+                      }
+                      className="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-bold shrink-0 cursor-pointer flex items-center gap-1"
+                    >
+                      <Play className="w-3 h-3" /> ড্রিল
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* At-a-Glance Dimensions & Units (মাত্রা ও একক) */}
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 space-y-3">
@@ -590,7 +684,23 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
       )}
 
       {viewTab === 'topics' && (
-        <div className="space-y-2.5">
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 rounded-2xl px-4 py-2.5">
+            <span className="text-xs font-bold text-amber-900 dark:text-amber-200 flex items-center gap-1.5">
+              <Flame className="w-4 h-4 text-amber-500" />
+              সবচেয়ে বেশি আসা প্যাটার্ন সবার আগে সাজানো আছে ({filteredTopics.length}টি প্যাটার্ন)
+            </span>
+            <button
+              onClick={() => setOnlyHighYield((v) => !v)}
+              className={`px-3 py-1 rounded-xl text-xs font-bold cursor-pointer transition-colors ${
+                onlyHighYield
+                  ? 'bg-amber-600 text-white'
+                  : 'bg-white dark:bg-slate-900 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-800'
+              }`}
+            >
+              {onlyHighYield ? '🔥 শুধু হাই-ইয়েল্ড (চালু)' : '🔥 শুধু হাই-ইয়েল্ড দেখাও'}
+            </button>
+          </div>
           {filteredTopics.map((t) => {
             const barPct = Math.min(100, Math.round((t.count / maxTopicCount) * 100));
             return (
@@ -600,13 +710,20 @@ export const ChapterExplorerView: React.FC<ChapterExplorerViewProps> = ({
               >
                 <div className="space-y-1 flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 text-[11px]">
+                    {t.isHighYield && (
+                      <span className="px-2 py-0.5 rounded-full bg-amber-500 text-white font-black">
+                        🔥 হাই-ইয়েল্ড
+                      </span>
+                    )}
                     <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-bold">
                       {t.subject}
                     </span>
                     <span className="text-slate-500 font-semibold">{t.chapter}</span>
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">
-                      {t.years_hit} বছরে এসেছে
-                    </span>
+                    {t.years_hit > 0 && (
+                      <span className="text-blue-600 dark:text-blue-400 font-bold">
+                        {t.years_hit} বছরে এসেছে
+                      </span>
+                    )}
                   </div>
                   <div className="text-sm font-extrabold text-slate-900 dark:text-white flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />

@@ -1100,15 +1100,80 @@ export async function loadChapterQuestionsComplete(
   const matRaw = combined.filter((q) => q.exam === 'mat');
   const predictorRaw = combined.filter((q) => q.__isPredictor);
 
-  const varsity = dedupe(varsityRaw.length > 0 ? varsityRaw : combined.filter((q) => q.exam !== 'mat'));
-  const mat = dedupe(matRaw);
+  const byImportance = (a: Question, b: Question) => {
+    const score = (q: Question) =>
+      (q.years_hit ?? 0) * 12 +
+      (q.likelihood_pct ?? 0) +
+      (q.mega_type ? 6 : 0) +
+      (q.trap ? 4 : 0);
+    return score(b) - score(a);
+  };
+
+  const varsity = dedupe(varsityRaw.length > 0 ? varsityRaw : combined.filter((q) => q.exam !== 'mat')).sort(byImportance);
+  const mat = dedupe(matRaw).sort(byImportance);
   const predictor = dedupe(
     predictorRaw.length > 0
       ? predictorRaw
       : combined.filter((q) => (q.years_hit ?? 0) >= 2 || (q.likelihood_pct ?? 0) > 0)
-  );
-  const all = dedupe(combined);
+  ).sort(byImportance);
+  const all = dedupe(combined).sort(byImportance);
 
   return { all, varsity, mat, predictor };
 }
+
+export interface UnifiedMegaTypeEntry {
+  name: string;
+  subject: CanonicalSubject;
+  chapter: string;
+  count: number;
+  years_hit: number;
+  isHighYield: boolean;
+}
+
+export async function loadUnifiedMegaTypes(): Promise<UnifiedMegaTypeEntry[]> {
+  const [bankAll, extPool] = await Promise.all([loadAllBankQuestions(), loadExtendedBankPool()]);
+  const all = dedupe([...bankAll, ...extPool]);
+  const indexMega = BANK_INDEX.by_mega_type || {};
+
+  const groups = new Map<string, { subject: CanonicalSubject; chapter: string; count: number; yearsHit: number }>();
+  for (const q of all) {
+    const mt = String(q.mega_type || '').trim();
+    if (!mt) continue;
+    const prev = groups.get(mt);
+    const idxYears = indexMega[mt]?.years_hit || 0;
+    const qYears = Math.max(idxYears, q.years_hit || 0);
+    if (!prev) {
+      groups.set(mt, {
+        subject: q.subject,
+        chapter: indexMega[mt]?.chapter || q.chapter_name || 'অনির্ধারিত',
+        count: 1,
+        yearsHit: qYears,
+      });
+    } else {
+      prev.count += 1;
+      if (qYears > prev.yearsHit) prev.yearsHit = qYears;
+    }
+  }
+
+  return Array.from(groups.entries())
+    .map(([name, g]) => ({
+      name,
+      subject: g.subject,
+      chapter: g.chapter,
+      count: g.count,
+      years_hit: g.yearsHit,
+      isHighYield: g.yearsHit >= 3 || g.count >= 8,
+    }))
+    .sort((a, b) => (b.years_hit * 3 + b.count) - (a.years_hit * 3 + a.count));
+}
+
+export async function loadTopicQuestionsComplete(megaType: string): Promise<Question[]> {
+  const [bankAll, extPool] = await Promise.all([loadAllBankQuestions(), loadExtendedBankPool()]);
+  const target = megaType.trim();
+  const matched = dedupe([...bankAll, ...extPool]).filter(
+    (q) => String(q.mega_type || '').trim() === target
+  );
+  return matched.sort((a, b) => (b.years_hit ?? 0) - (a.years_hit ?? 0));
+}
+
 
