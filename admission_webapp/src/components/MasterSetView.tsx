@@ -86,6 +86,34 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
     }
   };
 
+  const handleOpenPhy1DuHard = async () => {
+    setLoading(true);
+    try {
+      const mod = await import('../data/master/physics_1st_du_hard_booster.json');
+      const raw = (mod.default || []) as Question[];
+      setActiveSet({
+        label: 'Physics 1st — DU Hard & Coaching Pattern Booster (25 MCQ + 10 Written)',
+        questions: raw,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOpenPhy2DuHard = async () => {
+    setLoading(true);
+    try {
+      const mod = await import('../data/master/physics_2nd_du_hard_booster.json');
+      const raw = (mod.default || []) as Question[];
+      setActiveSet({
+        label: 'Physics 2nd — DU Hard & Coaching Pattern Booster (25 MCQ + 10 Written)',
+        questions: raw,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (activeSet) {
     return (
       <DrillRunner
@@ -255,6 +283,42 @@ export const MasterSetView: React.FC<MasterSetViewProps> = ({ activeTrack }) => 
           </button>
         </div>
       )}
+
+      {/* Physics 1st & 2nd DU Hard + Coaching Pattern Booster (Both Tracks) */}
+      <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/30 rounded-3xl border border-amber-200 dark:border-amber-800/60 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-600 text-white">
+              🔥 DU Hard & Coaching Booster 2026
+            </span>
+            <span className="text-xs font-black text-amber-700 dark:text-amber-300">
+              Physics 1st (35Q) + Physics 2nd (35Q)
+            </span>
+          </div>
+          <h2 className="text-base font-extrabold text-slate-900 dark:text-white">
+            ⚡ Physics ১ম ও ২য় পত্র — লাইভ এক্সাম প্যাটার্ন বুস্টার (70 Q)
+          </h2>
+          <p className="text-xs text-slate-600 dark:text-slate-300 max-w-2xl">
+            MAT ও Varsity লাইভ এক্সামের স্টাইল অনুযায়ী % পরিবর্তন, অনুপাত, বইয়ের ট্র্যাপ ও ক্যালকুলেটর-ফ্রি লিখিত (2.5 Marks) কম্বো প্রশ্ন।
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 shrink-0">
+          <button
+            onClick={handleOpenPhy1DuHard}
+            disabled={loading}
+            className="px-4 py-2.5 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+          >
+            <Play className="w-3.5 h-3.5" /> ১ম পত্র (35Q)
+          </button>
+          <button
+            onClick={handleOpenPhy2DuHard}
+            disabled={loading}
+            className="px-4 py-2.5 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+          >
+            <Play className="w-3.5 h-3.5" /> ২য় পত্র (35Q)
+          </button>
+        </div>
+      </div>
       {exam === 'mat' && (
         <div className="bg-gradient-to-r from-rose-50 to-amber-50 dark:from-rose-950/40 dark:to-amber-950/30 rounded-3xl border border-rose-200 dark:border-rose-800/60 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
