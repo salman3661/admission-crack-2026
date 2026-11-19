@@ -872,11 +872,19 @@ function mapLegacyToQuestion(
   idx: number,
   opts: { defaultExam?: ExamSlug; defaultSourceType?: SourceType; sourceName?: string; isPredictor?: boolean }
 ): Question & { __isPredictor?: boolean; __rawChapter?: string } {
-  const questionText = String(raw.question || raw.q || '');
+  const questionText = String(raw.question || raw.stem || raw.q || '');
   const rawOpts = Array.isArray(raw.options) ? raw.options : Array.isArray(raw.opts) ? raw.opts : [];
   const options = rawOpts.map((o) => String(o)).filter((o) => o.trim().length > 0);
   const isWritten = Boolean(raw.is_written) || options.length === 0;
-  const rawAns = typeof raw.correct_index === 'number' ? raw.correct_index : typeof raw.ans === 'number' ? raw.ans : 0;
+  const letterAns = typeof raw.answer === 'string' ? ['A', 'B', 'C', 'D'].indexOf(raw.answer.trim().toUpperCase()) : -1;
+  const rawAns =
+    typeof raw.correct_index === 'number'
+      ? raw.correct_index
+      : typeof raw.ans === 'number'
+        ? raw.ans
+        : letterAns >= 0
+          ? letterAns
+          : 0;
   const correctIndex = isWritten ? null : rawAns >= 0 && rawAns < options.length ? rawAns : 0;
 
   const trackStr = String(raw.track || raw.bank_type || '').toLowerCase();
@@ -893,6 +901,9 @@ function mapLegacyToQuestion(
     (typeof raw.yield_stars === 'number' && raw.yield_stars >= 4) ||
     Boolean(raw.probability);
 
+  const baseExp = String(raw.explanation || raw.exp || '');
+  const speedHack = raw.speed_hack ? `\n⚡ শর্টকাট: ${String(raw.speed_hack)}` : '';
+
   return {
     id,
     source_type: (raw.source_type as SourceType) || opts.defaultSourceType || 'past_paper',
@@ -908,7 +919,7 @@ function mapLegacyToQuestion(
     question: questionText,
     options,
     correct_index: correctIndex,
-    explanation: String(raw.explanation || raw.exp || ''),
+    explanation: `${baseExp}${speedHack}`.trim(),
     trap: String(raw.trap || raw.trap_alert || raw.trap_insight || ''),
     is_written: isWritten,
     marks: typeof raw.marks === 'number' ? raw.marks : isWritten ? 2.5 : 1,
@@ -930,12 +941,13 @@ async function loadExtendedBankPool(): Promise<Array<Question & { __isPredictor?
 
   const collected: Array<Question & { __isPredictor?: boolean; __rawChapter?: string }> = [];
 
-  const [pfMod, sfMod, fmMod, vbMod, mbMod, ...masterMods] = await Promise.all([
+  const [pfMod, sfMod, fmMod, vbMod, mbMod, synthMod, ...masterMods] = await Promise.all([
     import('../data/paper_final_bank.json').catch(() => null),
     import('../data/subject_final_bank.json').catch(() => null),
     import('../data/full_mock_bank.json').catch(() => null),
     import('../data/varsity_bank.json').catch(() => null),
     import('../data/medical_bank.json').catch(() => null),
+    import('../data/chapter_synthetic_predictors.json').catch(() => null),
     ...Object.entries(masterModules).map(async ([k, loader]) => ({ key: k, mod: await loader().catch(() => null) })),
   ]);
 
@@ -981,6 +993,37 @@ async function loadExtendedBankPool(): Promise<Array<Question & { __isPredictor?
 
   pushArray(vbMod, 'du_ka', false, 'Varsity Bank');
   pushArray(mbMod, 'mat', false, 'Medical Bank');
+
+  // Wire all 75 chapters (1,296 synthetic predictors) into the Chapter Hub pool
+  const synthData = (synthMod as {
+    default?: { chapters?: Record<string, { chapter_id?: string; chapter_title?: string; subject?: string; predictors?: Record<string, unknown>[] }> };
+  } | null)?.default || (synthMod as {
+    chapters?: Record<string, { chapter_id?: string; chapter_title?: string; subject?: string; predictors?: Record<string, unknown>[] }>;
+  } | null);
+  if (synthData?.chapters) {
+    Object.values(synthData.chapters).forEach((ch) => {
+      const items = ch.predictors || [];
+      items.forEach((item, idx) => {
+        collected.push(
+          mapLegacyToQuestion(
+            {
+              ...item,
+              subject: item.subject || ch.subject,
+              chapter_id: item.chapter_id || ch.chapter_id,
+              chapter_name: item.chapter_name || ch.chapter_title,
+            },
+            idx,
+            {
+              defaultExam: 'du_ka',
+              defaultSourceType: 'subject_final',
+              sourceName: 'Chapter Synthetic Predictor 2026',
+              isPredictor: true,
+            }
+          )
+        );
+      });
+    });
+  }
 
   for (const entry of masterMods) {
     const isMat = entry.key.includes('mat_');
