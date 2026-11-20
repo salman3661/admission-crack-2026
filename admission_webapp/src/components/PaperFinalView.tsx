@@ -490,7 +490,7 @@ export const PaperFinalView: React.FC<PaperFinalViewProps> = ({ activeTrack }) =
                   {revealed && (
                     <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                       <div className="font-bold text-emerald-700 dark:text-emerald-300">✅ সমাধান:</div>
-                      <MathText content={wp.solution} />
+                      <MathText content={wp.solution} block />
                       {wp.rubric && (
                         <div className="pt-2 border-t border-emerald-500/20 text-[11px] font-bold text-slate-600 dark:text-slate-400">
                           📊 রুব্রিক: {wp.rubric}

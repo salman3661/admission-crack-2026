@@ -131,6 +131,15 @@ const MathTextComponent: React.FC<MathTextProps> = ({ content, text: propText, c
       });
     }
 
+    // Step 2b-bis: When rendering block explanations/solutions, break dense single-line steps cleanly
+    if (block && !text.includes('|')) {
+      text = text
+        .replace(/।\s+(?=[^\n])/g, '।\n')
+        .replace(/\s+(∴|সুতরাং|অতএব|আবার,|তাহলে,|সুতরাং,)\s*/g, '\n$1 ')
+        .replace(/\s*(=>|⇒)\s*/g, '\n⇒ ')
+        .replace(/^(উত্তর\s*:)/gm, '**$1**');
+    }
+
     // Step 2c: Handle markdown table blocks
     const tableBlocks: string[] = [];
     if (text.includes('|')) {
@@ -207,7 +216,8 @@ const MathTextComponent: React.FC<MathTextProps> = ({ content, text: propText, c
     text = text.replace(/^-\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-cyan-600 dark:text-cyan-400 font-bold">-</span><span>$1</span></div>');
 
     // Newlines that aren't already wrapped in div or table placeholders
-    text = text.replace(/\n(?!(?:<div|<\/div|___TABLE_BLOCK_))/g, '<br />');
+    const nlHtml = block ? '<span class="block h-2"></span>' : '<br />';
+    text = text.replace(/\n(?!(?:<div|<\/div|___TABLE_BLOCK_))/g, nlHtml);
 
     // Step 4: Re-insert table & math blocks
     text = text.replace(/___TABLE_BLOCK_(\d+)___/g, (_, idx) => tableBlocks[parseInt(idx)]);
@@ -218,12 +228,12 @@ const MathTextComponent: React.FC<MathTextProps> = ({ content, text: propText, c
       ADD_TAGS: ['math', 'semantics', 'mrow', 'mi', 'mo', 'mn', 'ms', 'mtext', 'mfrac', 'msup', 'msub', 'msubsup', 'msqrt', 'mroot', 'mtable', 'mtr', 'mtd', 'annotation', 'svg', 'path', 'line'],
       ADD_ATTR: ['class', 'style', 'xmlns', 'encoding', 'viewBox', 'd', 'x1', 'y1', 'x2', 'y2', 'width', 'height', 'aria-hidden'],
     });
-  }, [content, propText]);
+  }, [content, propText, block]);
 
   if (block) {
     return (
       <div
-        className={`leading-relaxed ${className || 'text-inherit'}`}
+        className={`leading-7 ${className || 'text-inherit'}`}
         dangerouslySetInnerHTML={{ __html: renderedHtml }}
       />
     );
