@@ -211,6 +211,11 @@ const MathTextComponent: React.FC<MathTextProps> = ({ content, text: propText, c
     // Inline code `code`
     text = text.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-amber-700 dark:text-amber-300 font-mono text-sm border border-slate-300 dark:border-slate-700/60">$1</code>');
 
+    // Plain-text math superscripts (e.g. 10^8, ms^-1, mc^2) & physics subscripts (m0, E0, P1, T2) outside $...$
+    text = text.replace(/([A-Za-z0-9)\]])\^\{([^}]+)\}/g, '$1<sup>$2</sup>');
+    text = text.replace(/([A-Za-z0-9)\]])\^(-?\d+)/g, '$1<sup>$2</sup>');
+    text = text.replace(/([mEVITPQRC])([012])(?![0-9A-Za-z])/g, '$1<sub>$2</sub>');
+
     // Bullet points (leading • or -)
     text = text.replace(/^•\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-brand-600 dark:text-brand-400 font-bold">•</span><span>$1</span></div>');
     text = text.replace(/^-\s*(.*?)$/gm, '<div class="flex items-start gap-2 my-1"><span class="text-cyan-600 dark:text-cyan-400 font-bold">-</span><span>$1</span></div>');
