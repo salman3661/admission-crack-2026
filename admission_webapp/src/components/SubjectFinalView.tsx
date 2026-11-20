@@ -502,7 +502,7 @@ export const SubjectFinalView: React.FC<SubjectFinalViewProps> = ({
                       <MathText content={q.exp} />
                     </div>
                   )}
-                  {q.speed_hack && (
+                  {q.speed_hack && q.speed_hack.trim() !== (q.exp || '').trim() && (
                     <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 flex items-start gap-1.5">
                       <Zap className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                       <span>
